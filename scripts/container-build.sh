@@ -363,6 +363,8 @@ then
 
   PYTHON_WIN_VERSION="2.7.13"
 
+  BINUTILS_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
+
   # ---------------------------------------------------------------------------
 elif [[ "${RELEASE_VERSION}" =~ 7\.3\.0-* ]]
 then
