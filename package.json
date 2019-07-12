@@ -1,0 +1,100 @@
+{
+  "name": "@gnu-mcu-eclipse/riscv-none-gcc",
+  "version": "8.2.0-2.2.1",
+  "description": "An xPack which installs the binary files for GNU MCU Eclipse RISC-V GCC",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnu-mcu-eclipse/riscv-none-gcc-xpack.git"
+  },
+  "keywords": [
+    "xpack",
+    "gcc",
+    "riscv",
+    "toolchain",
+    "embedded"
+  ],
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "http://liviusdotnet.wordpress.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gnu-mcu-eclipse/riscv-none-gcc-xpack/issues"
+  },
+  "homepage": "https://github.com/gnu-mcu-eclipse/riscv-none-gcc-xpack",
+  "config": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {},
+  "bundledDependencies": [],
+  "optionalDependencies": {},
+  "engines": {
+    "node": ">7.7.0"
+  },
+  "xpack": {
+    "binaries": {
+      "destination": "./.content",
+      "baseUrl": "https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases/download/v8.2.0-2.2-20190521/",
+      "skip": 3,
+      "platforms": {
+        "linux-x86": {
+          "sha256": "b36a7633780b98f357ea88b5d80af114b735dd837c9bf74c1d5ba436d2e5def3",
+          "fileName": "gnu-mcu-eclipse-riscv-none-gcc-8.2.0-2.2-20190521-0004-centos32.tgz"
+        },
+        "linux-x64": {
+          "sha256": "3b9d585f6851b137b3938fb288c5e95d13d0580002fa6ca82b754fcffbff508c",
+          "fileName": "gnu-mcu-eclipse-riscv-none-gcc-8.2.0-2.2-20190521-0004-centos64.tgz"
+        },
+        "darwin-x64": {
+          "sha256": "3bc735ff39820e7775b8e64516d1b89e562a6a744dc591519e7200571aa7aa6c",
+          "fileName": "gnu-mcu-eclipse-riscv-none-gcc-8.2.0-2.2-20190521-0004-macos.tgz"
+        },
+        "win32-x86": {
+          "sha256": "cba4a66bebc1cef9c0612254b9c7f50a4ff5f9c4d7ab20904bc8d64ad5acb016",
+          "fileName": "gnu-mcu-eclipse-riscv-none-gcc-8.2.0-2.2-20190521-0004-win32.zip"
+        },
+        "win32-x64": {
+          "sha256": "3997402997d7606ff4f744d9602ec098f269c0df23bcce8117aff29cd46df971",
+          "fileName": "gnu-mcu-eclipse-riscv-none-gcc-8.2.0-2.2-20190521-0004-win64.zip"
+        }
+      }
+    },
+    "bin": {
+      "riscv-none-embed-addr2line": "./.content/bin/riscv-none-embed-addr2line",
+      "riscv-none-embed-ar": "./.content/bin/riscv-none-embed-ar",
+      "riscv-none-embed-as": "./.content/bin/riscv-none-embed-as",
+      "riscv-none-embed-c++": "./.content/bin/riscv-none-embed-c++",
+      "riscv-none-embed-c++filt": "./.content/bin/riscv-none-embed-c++filt",
+      "riscv-none-embed-cpp": "./.content/bin/riscv-none-embed-cpp",
+      "riscv-none-embed-elfedit": "./.content/bin/riscv-none-embed-elfedit",
+      "riscv-none-embed-g++": "./.content/bin/riscv-none-embed-g++",
+      "riscv-none-embed-gcc": "./.content/bin/riscv-none-embed-gcc",
+      "riscv-none-embed-gcc-ar": "./.content/bin/riscv-none-embed-gcc-ar",
+      "riscv-none-embed-gcc-nm": "./.content/bin/riscv-none-embed-gcc-nm",
+      "riscv-none-embed-gcc-ranlib": "./.content/bin/riscv-none-embed-gcc-ranlib",
+      "riscv-none-embed-gcov": "./.content/bin/riscv-none-embed-gcov",
+      "riscv-none-embed-gcov-dump": "./.content/bin/riscv-none-embed-gcov-dump",
+      "riscv-none-embed-gcov-tool": "./.content/bin/riscv-none-embed-gcov-tool",
+      "riscv-none-embed-gdb": "./.content/bin/riscv-none-embed-gdb",
+      "riscv-none-embed-gdb-add-index": "./.content/bin/riscv-none-embed-gdb-add-index",
+      "riscv-none-embed-gdb-add-index-py": "./.content/bin/riscv-none-embed-gdb-add-index-py",
+      "riscv-none-embed-gdb-py": "./.content/bin/riscv-none-embed-gdb-py",
+      "riscv-none-embed-gprof": "./.content/bin/riscv-none-embed-gprof",
+      "riscv-none-embed-ld": "./.content/bin/riscv-none-embed-ld",
+      "riscv-none-embed-ld.bfd": "./.content/bin/riscv-none-embed-ld.bfd",
+      "riscv-none-embed-nm": "./.content/bin/riscv-none-embed-nm",
+      "riscv-none-embed-objcopy": "./.content/bin/riscv-none-embed-objcopy",
+      "riscv-none-embed-objdump": "./.content/bin/riscv-none-embed-objdump",
+      "riscv-none-embed-ranlib": "./.content/bin/riscv-none-embed-ranlib",
+      "riscv-none-embed-readelf": "./.content/bin/riscv-none-embed-readelf",
+      "riscv-none-embed-size": "./.content/bin/riscv-none-embed-size",
+      "riscv-none-embed-strings": "./.content/bin/riscv-none-embed-strings",
+      "riscv-none-embed-strip": "./.content/bin/riscv-none-embed-strip"
+    }
+  }
+}
