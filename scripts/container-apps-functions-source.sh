@@ -206,6 +206,8 @@ function do_binutils()
             --disable-gdb \
             --enable-interwork \
             --enable-plugins \
+            --disable-libdecnumber \
+            --disable-libreadline \
             --with-sysroot="${APP_PREFIX}/${GCC_TARGET}" \
             \
             --enable-build-warnings=no \
@@ -371,7 +373,7 @@ function do_gcc_first()
             --disable-nls \
             --disable-threads \
             --disable-tls \
-            --enable-checking=no \
+            --enable-checking=yes \
             --with-newlib \
             --without-headers \
             --with-gnu-as \
@@ -531,7 +533,8 @@ function do_newlib()
               --enable-lite-exit \
               --enable-newlib-global-atexit \
               --enable-newlib-nano-formatted-io \
-              --disable-nls 
+              --disable-nls \
+              --enable-newlib-register-fini
 
           else
             echo "Unsupported do_newlib arg $1"
@@ -1108,11 +1111,13 @@ function do_gdb()
             --with-pkgversion="${BRANDING}" \
             --with-bugurl="${BUGURL}" \
             \
+            --enable-gdb \
             --disable-nls \
             --disable-sim \
             --disable-gas \
             --disable-binutils \
             --disable-ld \
+            --disable-gold \
             --disable-gprof \
             --with-expat \
             --with-lzma=yes \
