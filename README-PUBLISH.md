@@ -9,7 +9,7 @@ Before starting the build, perform some checks.
 Be sure everything is committed and pushed
 
 - `xpack-dev-tools/riscv-binutils-gdb.git`
-- `xpack-dev-tools/riscv-none-gcc.git`
+- `xpack-dev-tools/riscv-gcc.git`
 - `xpack-dev-tools/riscv-newlib.git`
 
 ### Check tags
