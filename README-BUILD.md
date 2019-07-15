@@ -432,8 +432,8 @@ Although not guaranteed to work, previous versions can be re-built by
 explicitly specifying the version:
 
 ```console
-$ RELEASE_VERSION=6.3.1-1.1 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh
-$ RELEASE_VERSION=7.3.1-1.1 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh
+$ RELEASE_VERSION=8.2.0-2.2 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh
+$ RELEASE_VERSION=8.2.0-3.1 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh
 ```
 
 ## Files cache
