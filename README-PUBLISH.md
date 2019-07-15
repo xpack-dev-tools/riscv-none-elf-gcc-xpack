@@ -1,4 +1,4 @@
-# How to publish the GNU MCU Eclipse RISC-V Embedded GCC binaries?
+# How to publish the xPack GNU RISC-V Embedded GCC binaries?
 
 ## Build
 
@@ -8,26 +8,23 @@ Before starting the build, perform some checks.
 
 Be sure everything is committed and pushed
 
-- `gnu-mcu-eclipse/riscv-binutils-gdb.git`
-- `gnu-mcu-eclipse/riscv-none-gcc.git`
-- `gnu-mcu-eclipse/riscv-newlib.git`
+- `xpack-dev-tools/riscv-binutils-gdb.git`
+- `xpack-dev-tools/riscv-none-gcc.git`
+- `xpack-dev-tools/riscv-newlib.git`
 
 ### Check tags
 
-The names should look like `v8.2.0-2.1`.
+The names should look like `v8.2.0-2.2`.
 
-For the binutils-gdb repo, a separate tag should be present, for the gdb build.
+For the binutils-gdb repo, a separate tag like `v8.2.0-2.2-gdb` should be 
+present, for the gdb build.
 
-### Check the CHANGELOG file
+### Check the `CHANGELOG.md` file
 
-Generally, apart from packing, there should be no local changes compared 
-to the original RISC-V distribution.
-
-Open the `CHANGELOG.txt` file from the
-`gnu-mcu-eclipse/riscv-none-gcc-build.git` project git, and check if 
+Open the `CHANGELOG.txt` file and check if 
 all new entries are in.
 
-Note: if you missed to update the `CHANGELOG.txt` before starting the build, 
+Note: if you missed to update the `CHANGELOG.md` before starting the build, 
 edit the file and rerun the build, it should take only a few minutes to 
 recreate the archives with the correct file.
 
@@ -35,19 +32,18 @@ recreate the archives with the correct file.
 
 The `VERSION` file should refer to the actual release.
 
-### Push the project git
+### Push the build scripts
 
-In `gnu-mcu-eclipse/riscv-none-gcc-build.git`, if necessary, merge 
-the `develop` branch into `master`.
+In this Git repo:
 
-Push it to GitHub.
-
-Possibly push the helper project too.
+- if necessary, merge the `xpack-develop` branch into `xpack`.
+- push it to GitHub.
+- possibly push the helper project too.
 
 ### Run the build scripts
 
-When everything is ready, follow the instructions on the 
-[build](https://github.com/gnu-mcu-eclipse/riscv-none-gcc-build/blob/master/README.md) 
+When everything is ready, follow the instructions from the 
+[build](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-BUILD.md) 
 page.
 
 ## Test
@@ -60,12 +56,12 @@ For this, on each platform:
 - unpack the archive in `Downloads`, and rename the version folder,
   by replacing a dash with a space; this will test paths with spaces;
   on Windows the current paths always use spaces, so renaming is not needed;
-- clone the build repo from https://github.com/gnu-mcu-eclipse/riscv-none-gcc-build.git
+- clone the build repo from https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git
   locally; on Windows use the Git console;
 - in a separate workspace, Import -> General -> Existing Projects into Workspace
   the Eclipse projects available in the 
   `tests/eclipse` folder of the build repo; more details in the 
-  [README.md](https://github.com/gnu-mcu-eclipse/riscv-none-gcc-build/blob/master/tests/eclipse/README.md)
+  [README.md](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/tests/eclipse/README.md)
 - define the **Workspace RISC-V Toolchain path** to use the `Downloads` 
   temporary location
 - to test the compiler: for all projects
@@ -82,14 +78,14 @@ For this, on each platform:
 
 ## Create a new GitHub release
 
-- go to the [GitHub Releases](https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases) page
+- go to the [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc/releases) page
 - click **Draft a new release**
-- name the tag like **v8.2.0-2.1-20190425** (mind the dashes in the middle!)
+- name the tag like **v8.2.0-2.2** (mind the dash in the middle!)
 - select the target branch (like sifive-gcc-8.2.0-gme)
-- name the release like **GNU MCU Eclipse RISC-V Embedded GCC v8.2.0-2.1 20190425** 
+- name the release like **xPack GNU RISC-V Embedded GCC v8.2.0-2.2** 
 (mind the dash and the space)
 - as description
-  - add a downloads badge like `[![Github Releases (by Release)](https://img.shields.io/github/downloads/gnu-mcu-eclipse/riscv-none-gcc/v8.2.0-2.1-20190425/total.svg)]()`; use empty URL for now
+  - add a downloads badge like `[![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc/v8.2.0-2.2/total.svg)]()`; use empty URL for now
   - draft a short paragraph explaining what are the main changes
 - **attach binaries** and SHA (drag and drop from the archives folder will do it)
 - **enable** the **pre-release** button
@@ -101,15 +97,15 @@ watching this project.
 
 ## Prepare a new blog post 
 
-In the `gnu-mcu-eclipse.github.io-source.git` web git:
+In the `xpack.github.io` web Git:
 
-- add a new file to `_posts/riscv-none-gcc/releases`
-- name the file like `2018-05-06-riscv-none-gcc-v8-2-0-2-1-20190425-released.md`
-- name the post like: **GNU MCU Eclipse RISC-V Embedded GCC v8.2.0-2.1 20190425 released**.
-- as `download_url` use the generic `https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases/tag/v8.2.0-2.1/` 
+- add a new file to `_posts/riscv-none-embed-gcc/releases`
+- name the file like `2018-05-06-riscv-none-embed-gcc-v8-2-0-2-2-released.md`
+- name the post like: **xPack GNU RISC-V Embedded GCC v8.2.0-2.2 released**.
+- as `download_url` use the generic `https://github.com/xpack-dev-tools/riscv-none-embed-gcc/releases/tag/v8.2.0-2.2/` 
 - update the `date:` field with the current date
 
-If any, close [issues](https://github.com/gnu-mcu-eclipse/riscv-none-gcc/issues) 
+If any, close [issues](https://github.com/xpack-dev-tools/riscv-none-embed-gcc/issues) 
 on the way. Refer to them as:
 
 - **[Issue:\[#1\]\(...\)]**.
@@ -140,17 +136,25 @@ gnu-mcu-eclipse-riscv-none-gcc-7.2.0-3-20190425-1300-win64.zip
 
 ## Update the Web
 
-- commit the `gnu-mcu-eclipse.github.io-source` project; use a message 
-like **GNU MCU Eclipse RISC-V Embedded GCC v8.2.0-2.1 20190425 released**
-- wait for the Travis build to complete; occasionally links to not work,
- and might need to restart the build
+- commit the `xpack.github.io` web Git; use a message 
+  like **xPack GNU RISC-V Embedded GCC v8.2.0-2.2 released**
+- wait for the GitHub Pages build to complete
 - remember the post URL, since it must be updated in the release page
 
-## Create the xPack release
+## Publish on the npmjs.com server
 
-Follow the instructions from the 
-[gnu-mcu-eclipse/riscv-none-gcc-xpack](https://github.com/gnu-mcu-eclipse/riscv-none-gcc-xpack/blob/xpack/README.md#maintainer-info)
-page.
+- open [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases) 
+  and select the latest release
+- update the `baseUrl:` with the file URLs (including the tag/version)
+- from the release, copy the SHA & file names
+- commit all changes, use a message like `package.json: update urls for 8.2.1-2.2 release` (without `v`)
+- update `CHANGELOG.md`; commit with a message like 
+  _CHANGELOG: prepare npm v8.2.1-2.2.1_
+- `npm version 8.2.1-2.2.1`; the first 5 numbers are the same as the 
+  GitHub release; the sixth number is the npm specific version
+- push all changes to GitHub
+- `npm publish` (use `--access public` when publishing for the first time)
+
 
 ## Test the xPack
 
@@ -162,7 +166,7 @@ On all available platforms:
 - install the new xPack release
 
 ```console
-$ xpm install --global @gnu-mcu-eclipse/riscv-none-gcc
+$ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@latest
 ```
 
 - double check version, to be sure it is the latest release (sometimes 
@@ -174,40 +178,16 @@ $ xpm install --global @gnu-mcu-eclipse/riscv-none-gcc
 
 ## Create a final GitHub release
 
-- go to the [GitHub Releases](https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases) page
+- go to the [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc/releases) page
 - update the link behind the badge with the blog URL
 - add a link to the Web page `[Continue reading »]()`; use an same blog URL
-- copy/paste the **Easy install** section
-- update the current release version
-- copy/paste the **Download analytics** section
-- update the current release version
 - **disable** the **pre-release** button
 - click the **Update Release** button
 
-## Tag the build commit
-
-In the [gnu-mcu-eclipse/riscv-none-gcc-build](https://github.com/gnu-mcu-eclipse/riscv-none-gcc-build)
-project, add a tag with the current version, like `v8.2.1-1.1` (with *v*).
-
-## Update the README.md
-
-List the new release in the `gnu-mcu-eclipse/riscv-none-gcc.git` project
-README.md.
-
-## Share on Facebook
-
-- go to the new post and follow the Share link.
-- DO NOT select **On your own Timeline**, but **On a Page you manage**
-- select GNU MCU Eclipse
-- posting as GNU MCU Eclipse
-- click **Post to Facebook**
-- check the post in the [Facebook page](https://www.facebook.com/gnu-mcu-eclipse)
-
 ## Share on Twitter
 
-* go to the new post and follow the Tweet link
-* copy the content to the clipboard
-* DO NOT click the Tweet button here, it'll not use the right account
-* in a separate browser windows, open [TweetDeck](https://tweetdeck.twitter.com/)
-* using the `@gnu_mcu_eclipse` account, paste the content
-* click the Tweet button
+- in a separate browser windows, open [TweetDeck](https://tweetdeck.twitter.com/)
+- using the `@xpack_project` account
+- paste the release name like **xPack GNU RISC-V Embedded GCC v8.2.0-2.2 released**
+- paste the link to the Github release
+- click the **Tweet** button
