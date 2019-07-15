@@ -206,7 +206,7 @@ CFLAGS_OPTIMIZATIONS_FOR_TARGET="-ffunction-sections -fdata-sections -O2"
 CFLAGS_OPTIMIZATIONS_FOR_TARGET+=" -mcmodel=medany"
 
 BINUTILS_PROJECT_NAME="riscv-binutils-gdb"
-GCC_PROJECT_NAME="riscv-none-gcc"
+GCC_PROJECT_NAME="riscv-gcc"
 NEWLIB_PROJECT_NAME="riscv-newlib"
 GDB_PROJECT_NAME="riscv-binutils-gdb"
 
