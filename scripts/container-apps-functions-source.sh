@@ -198,6 +198,7 @@ function do_binutils()
             --target=${GCC_TARGET} \
             \
             --with-pkgversion="${BRANDING}" \
+            --with-bugurl="${BUGURL}" \
             \
             --disable-nls \
             --disable-werror \
@@ -357,6 +358,7 @@ function do_gcc_first()
             --target=${GCC_TARGET} \
             \
             --with-pkgversion="${BRANDING}" \
+            --with-bugurl="${BUGURL}" \
             \
             --enable-languages=c \
             --disable-decimal-float \
@@ -791,6 +793,7 @@ function do_gcc_final()
               --target=${GCC_TARGET} \
               \
               --with-pkgversion="${BRANDING}" \
+              --with-bugurl="${BUGURL}" \
               \
               --enable-languages=c,c++ \
               ${mingw_wildcard} \
@@ -833,6 +836,7 @@ function do_gcc_final()
               --target=${GCC_TARGET} \
               \
               --with-pkgversion="${BRANDING}" \
+              --with-bugurl="${BUGURL}" \
               \
               --enable-languages=c,c++ \
               --disable-decimal-float \
@@ -1102,6 +1106,7 @@ function do_gdb()
             --target=${GCC_TARGET} \
             \
             --with-pkgversion="${BRANDING}" \
+            --with-bugurl="${BUGURL}" \
             \
             --disable-nls \
             --disable-sim \

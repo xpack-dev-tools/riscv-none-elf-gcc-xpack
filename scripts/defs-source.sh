@@ -30,6 +30,7 @@ DISTRO_TOP_FOLDER=${DISTRO_TOP_FOLDER:-"xPacks"}
 HAS_NAME_ARCH="y"
 
 BRANDING=${BRANDING:-"${DISTRO_UC_NAME} ${APP_NAME}"}
+BUGURL=${BUGURL:-"https://github.com/sifive/freedom-tools/issues"}
 
 GCC_TARGET=${GCC_TARGET:-"riscv-none-embed"}
 GCC_ARCH=${GCC_ARCH:-"rv32imac"}
