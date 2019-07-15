@@ -1,86 +1,98 @@
-[![npm (scoped)](https://img.shields.io/npm/v/@gnu-mcu-eclipse/riscv-none-gcc.svg)](https://www.npmjs.com/package/@gnu-mcu-eclipse/riscv-none-gcc) 
-[![license](https://img.shields.io/github/license/gnu-mcu-eclipse/riscv-none-gcc-xpack.svg)](https://github.com/gnu-mcu-eclipse/riscv-none-gcc-xpack/blob/xpack/LICENSE) 
-[![Standard](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com/)
+[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc) 
+[![npm](https://img.shields.io/npm/dt/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
 
 
-## The GNU MCU Eclipse RISC-V Embedded GCC binary xPack
+## The xPack GNU RISC-V Embedded GCC
 
-This binary xPack installs the platform specific binaries for the
-[GNU MCU Eclipse RISC-V Embedded GCC](https://github.com/gnu-mcu-eclipse/riscv-none-gcc)
-toolchain.
+This open source project is hosted on GitHub as
+[`xpack-dev-tools/riscv-none-embed-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack) 
+and provides the platform specific binaries for the
+[xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-embed-gcc/). 
 
-The source files of the xPack project are publicly available from 
-[GitHub](https://github.com/gnu-mcu-eclipse/riscv-none-gcc-xpack).
+This distribution plans to follow the official 
+[SiFive](https://www.sifive.com) releases.
 
-## How to use
+The binaries can be installed automatically as **binary xPacks** or manually as
+**portable archives**.
 
-This section is intended for developers who plan to use the 
-RISC-V Embedded GCC toolchain.
+In addition to the package meta data, this project also includes
+the build scripts.
 
-### Prerequisites
+## User info
+
+This section is intended as a shortcut for those who plan 
+to use the GNU RISC-V Embedded GCC binaries. For full details please read the 
+[xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-embed-gcc/) pages.
+
+### Easy install
+
+The easiest way to install GNU RISC-V Embedded GCC is using the **binary xPack**, available as 
+[`@xpack-dev-tools/riscv-none-embed-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc)
+from the [`npmjs.com`](https://www.npmjs.com) registry.
+
+#### Prerequisites
 
 The only requirement is a recent 
 `xpm`, which is a portable 
 [Node.js](https://nodejs.org) command line application. To install it,
 follow the instructions from the 
-[`xpm`](https://www.npmjs.com/package/xpm) page.
+[xpm](https://xpack.github.io/xpm/install/) page.
 
-### Easy install
+#### Install
 
-The xPack is available as 
-[`@gnu-mcu-eclipse/riscv-none-gcc`](https://www.npmjs.com/package/gnu-mcu-eclipse/riscv-none-gcc)
-from the public `npmjs.com` repository; with `xpm` available, installing 
+With the `xpm` tool available, installing 
 the latest version of the package is quite easy:
 
 ```console
-$ xpm install @gnu-mcu-eclipse/riscv-none-gcc --global
+$ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@latest
 ```
 
-Global xPacks are always installed in the user home folder, even on GNU/Linux  
-or macOS, and do not require `sudo`.
+This command will always install the latest available version, 
+into the central xPacks repository, which is a platform dependent folder 
+(check the output of the `xpm` command or the actual folder used on 
+your platform).
 
-The GNU MCU Eclipse plug-ins automatically identify binaries installed with
+This location is configurable using the environment variable 
+`XPACKS_REPO_FOLDER`; for more details please check the 
+[xpm folders](https://xpack.github.io/xpm/folders/) page.
+
+xPacks aware tools, like the **GNU MCU Eclipse plug-ins** automatically 
+identify binaries installed with
 `xpm` and provide a convenient method to manage paths.
+
+#### Uninstall
 
 To remove the installed xPack, the command is similar:
 
 ```console
-$ xpm uninstall @gnu-mcu-eclipse/riscv-none-gcc --global
+$ xpm uninstall --global @xpack-dev-tools/riscv-none-embed-gcc
 ```
 
 (Note: not yet implemented. As a temporary workaround, simply remove the 
-`xPacks/@gnu-mcu-eclipse/riscv-none-gcc` folder, or the versions subfolders.)
+`xPacks/@xpack-dev-tools/riscv-none-embed-gcc` folder, or one of the the versioned 
+subfolders.)
 
+### Manual install
 
-## Developer info
+For all platforms, the **xPack GNU RISC-V Embedded GCC** binaries are released as portable 
+archives that can be installed in any location.
 
-### The xPack git repo
+The archives can be downloaded from the
+[GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/) page.
 
-The few xPack source files are available from GitHub:
-
-```console
-$ git clone https://github.com/gnu-mcu-eclipse/riscv-none-gcc-xpack.git riscv-none-gcc-xpack.git
-```
-
-### Binary files
-
-The binaries are not stored on the `npmjs.com` server, but are downloaded from  
-the [releases](https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases) 
-section of the `gnu-mcu-eclipse/riscv-none-gcc` GitHub project.
+For more details please read the [Install](https://xpack.github.io/riscv-none-embed-gcc/install/) page. 
 
 ## Maintainer info
 
-### How to publish
+- [How to build?](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-BUILD.md) 
+- [How to publish?](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-PUBLISH.md)
 
-* open [releases](https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases) 
-and select the latest release
-* update the `baseUrl:` with the file URLs (including the tag/version)
-* from the blog post, copy the SHA & file names
-* commit all changes, use a message like `package.json: update urls for 8.2.0-2.1 release` (without `v`)
-* update `CHANGELOG.md`; commit with a message like _CHANGELOG: prepare v8.2.0-2.1.1_
-* `npm version 8.2.0-2.1.1`
-* push all changes to GitHub
-* `npm publish`
+## Support
+
+The quick answer is to use the [xPack forums](https://www.tapatalk.com/groups/xpack/);
+please select the correct forum.
+
+For more details please read the [Support](https://xpack.github.io/riscv-none-embed-gcc/support/) page.
 
 ## License
 
@@ -89,5 +101,22 @@ The original content is released under the
 reserved to [Liviu Ionescu](https://github.com/ilg-ul).
 
 The binary distributions include several open-source components; the
-corresponding licenses are available in the `gnu-mcu-eclipse/licenses`
-folder.
+corresponding licenses are available in the installed
+`distro-info/licenses` folder.
+
+## Download analytics
+
+- GitHub [`xpack-dev-tools/riscv-none-embed-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/) repo
+  - latest xPack release
+[![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/latest/total.svg)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/)
+  - all xPack releases [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/total.svg)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/)
+  - previous GNU MCU Eclipse all releases [![Github All Releases](https://img.shields.io/github/downloads/gnu-mcu-eclipse/riscv-none-gcc/total.svg)](https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases/)
+- npmjs [`@xpack-dev-tools/riscv-none-embed-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/) xPack
+  - latest release, per month 
+[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
+[![npm](https://img.shields.io/npm/dm/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
+  - all releases [![npm](https://img.shields.io/npm/dt/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
+- GitHub [individual file counters](https://www.somsubhra.com/github-release-stats/?username=xpack-dev-tools&repository=riscv-none-embed-gcc-xpack) (grouped per release)
+  
+Credit to [Shields IO](https://shields.io) and [Somsubhra/github-release-stats](https://github.com/Somsubhra/github-release-stats).
+
