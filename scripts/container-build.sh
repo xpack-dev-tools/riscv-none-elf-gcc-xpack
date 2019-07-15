@@ -232,278 +232,12 @@ then
 fi
 
 # Keep them in sync with combo archive content.
-if [[ "${RELEASE_VERSION}" =~ 7\.2\.0-3-* ]]
+if [[ "${RELEASE_VERSION}" =~ 8\.2\.0-2\.* ]]
 then
+  # This is a repack of
+  # https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases/tag/v8.2.0-2.2-20190521
 
-  # ---------------------------------------------------------------------------
-
-  # The default is:
-  # rv32i-ilp32--c rv32im-ilp32--c rv32iac-ilp32-- rv32imac-ilp32-- rv32imafc-ilp32f-rv32imafdc- rv64imac-lp64-- rv64imafdc-lp64d--
-  # Add 'rv32imaf-ilp32f--'. 
-  GCC_MULTILIB=${GCC_MULTILIB:-"rv32i-ilp32--c rv32im-ilp32--c rv32iac-ilp32-- rv32imac-ilp32-- rv32imaf-ilp32f-- rv32imafc-ilp32f-rv32imafdc- rv64imac-lp64-- rv64imafdc-lp64d--"}
-
-  GCC_MULTILIB_FILE=${GCC_MULTILIB_FILE:-"t-elf-multilib"}
-
-  # ---------------------------------------------------------------------------
-
-  BINUTILS_VERSION="2.29"
-  # From gcc/BASE_VER
-  GCC_VERSION="7.2.0"
-  # From newlib/configure, VERSION=
-  NEWLIB_VERSION="2.5.0"
-  # From gdb/VERSION.in
-  GDB_VERSION="8.0"
-
-  # ---------------------------------------------------------------------------
-
-  if [ "${USE_GITS}" != "y" ]
-  then
-
-    GH_RELEASE="7.2.0-3-20180506"
-    BINUTILS_GH_RELEASE=${BINUTILS_GH_RELEASE:-"${GH_RELEASE}"}
-    GCC_GH_RELEASE=${GCC_GH_RELEASE:-"${GH_RELEASE}"}
-    NEWLIB_GH_RELEASE=${NEWLIB_GH_RELEASE:-"${GH_RELEASE}"}
-    GDB_GH_RELEASE=${GDB_GH_RELEASE:-"${GH_RELEASE}"}
-
-  else
-
-    BINUTILS_GIT_BRANCH=${BINUTILS_GIT_BRANCH:-"riscv-binutils-2.29-gme"}
-    # June 17, 2017
-    BINUTILS_GIT_COMMIT=${BINUTILS_GIT_COMMIT:-"a8d8cd7ff85a945b30ddd484a4d7592af3ed8fbb"}
-
-    GCC_GIT_BRANCH=${GCC_GIT_BRANCH:-"riscv-gcc-7.2.0-gme"}
-    GCC_GIT_COMMIT=${GCC_GIT_COMMIT:-"ea82ccadd6c4906985249c52009deddc6b623b16"}
-
-    NEWLIB_GIT_BRANCH=${NEWLIB_GIT_BRANCH:-"riscv-newlib-2.5.0-gme"}
-    NEWLIB_GIT_COMMIT=${NEWLIB_GIT_COMMIT:-"325bec1e33fb0a1c30ce5a9aeeadd623f559ef1a"}
-
-    GDB_SRC_FOLDER_NAME=${GDB_SRC_FOLDER_NAME:-"${BINUTILS_PROJECT_NAME}.git"}
-    GDB_GIT_BRANCH=${GDB_GIT_BRANCH:-"${BINUTILS_GIT_BRANCH}"}
-    GDB_GIT_COMMIT=${GDB_GIT_COMMIT:-"${BINUTILS_GIT_COMMIT}"}
-
-  fi
-  
-  # ---------------------------------------------------------------------------
-
-  ZLIB_VERSION="1.2.8"
-  GMP_VERSION="6.1.2"
-  MPFR_VERSION="3.1.6"
-  MPC_VERSION="1.0.3"
-  ISL_VERSION="0.18"
-  LIBELF_VERSION="0.8.13"
-  EXPAT_VERSION="2.2.5"
-  LIBICONV_VERSION="1.15"
-  XZ_VERSION="5.2.3"
-
-  PYTHON_WIN_VERSION="2.7.13"
-
-  # ---------------------------------------------------------------------------
-elif [[ "${RELEASE_VERSION}" =~ 7\.2\.0-4* ]]
-then
-
-  # ---------------------------------------------------------------------------
-
-  # The default is:
-  # rv32i-ilp32--c rv32im-ilp32--c rv32iac-ilp32-- rv32imac-ilp32-- rv32imafc-ilp32f-rv32imafdc- rv64imac-lp64-- rv64imafdc-lp64d--
-  # Add 'rv32imaf-ilp32f--'. 
-  GCC_MULTILIB=${GCC_MULTILIB:-"rv32i-ilp32--c rv32im-ilp32--c rv32iac-ilp32-- rv32imac-ilp32-- rv32imaf-ilp32f-- rv32imafc-ilp32f-rv32imafdc- rv64imac-lp64-- rv64imafdc-lp64d--"}
-
-  GCC_MULTILIB_FILE=${GCC_MULTILIB_FILE:-"t-elf-multilib"}
-
-  # ---------------------------------------------------------------------------
-
-  BINUTILS_VERSION="2.29"
-  # From gcc/BASE_VER
-  GCC_VERSION="7.2.0"
-  # From newlib/configure, VERSION=
-  NEWLIB_VERSION="2.5.0"
-  # From gdb/VERSION.in
-  GDB_VERSION="8.0"
-
-  # ---------------------------------------------------------------------------
-
-  if [ "${USE_GITS}" != "y" ]
-  then
-
-    GH_RELEASE="7.2.0-4-20180606"
-    BINUTILS_GH_RELEASE=${BINUTILS_GH_RELEASE:-"${GH_RELEASE}"}
-    GCC_GH_RELEASE=${GCC_GH_RELEASE:-"${GH_RELEASE}"}
-    NEWLIB_GH_RELEASE=${NEWLIB_GH_RELEASE:-"${GH_RELEASE}"}
-    GDB_GH_RELEASE=${GDB_GH_RELEASE:-"${GH_RELEASE}"}
-
-  else
-
-    BINUTILS_GIT_BRANCH=${BINUTILS_GIT_BRANCH:-"riscv-binutils-2.29-gme"}
-    # June 17, 2017
-    BINUTILS_GIT_COMMIT=${BINUTILS_GIT_COMMIT:-"a8d8cd7ff85a945b30ddd484a4d7592af3ed8fbb"}
-
-    GCC_GIT_BRANCH=${GCC_GIT_BRANCH:-"riscv-gcc-7.2.0-gme"}
-    GCC_GIT_COMMIT=${GCC_GIT_COMMIT:-"ea82ccadd6c4906985249c52009deddc6b623b16"}
-
-    NEWLIB_GIT_BRANCH=${NEWLIB_GIT_BRANCH:-"riscv-newlib-2.5.0-gme"}
-    NEWLIB_GIT_COMMIT=${NEWLIB_GIT_COMMIT:-"325bec1e33fb0a1c30ce5a9aeeadd623f559ef1a"}
-
-    GDB_SRC_FOLDER_NAME=${GDB_SRC_FOLDER_NAME:-"${BINUTILS_PROJECT_NAME}.git"}
-    GDB_GIT_BRANCH=${GDB_GIT_BRANCH:-"${BINUTILS_GIT_BRANCH}"}
-    GDB_GIT_COMMIT=${GDB_GIT_COMMIT:-"${BINUTILS_GIT_COMMIT}"}
-
-  fi
-  
-  # ---------------------------------------------------------------------------
-
-  ZLIB_VERSION="1.2.8"
-  GMP_VERSION="6.1.2"
-  MPFR_VERSION="3.1.6"
-  MPC_VERSION="1.0.3"
-  ISL_VERSION="0.18"
-  LIBELF_VERSION="0.8.13"
-  EXPAT_VERSION="2.2.5"
-  LIBICONV_VERSION="1.15"
-  XZ_VERSION="5.2.3"
-
-  PYTHON_WIN_VERSION="2.7.13"
-
-  BINUTILS_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
-
-  # ---------------------------------------------------------------------------
-elif [[ "${RELEASE_VERSION}" =~ 7\.3\.0-* ]]
-then
-
-  # WARNING: Experimental, do not use for releases!
-
-  # ---------------------------------------------------------------------------
-
-  # The default is:
-  # rv32i-ilp32--c rv32im-ilp32--c rv32iac-ilp32-- rv32imac-ilp32-- rv32imafc-ilp32f-rv32imafdc- rv64imac-lp64-- rv64imafdc-lp64d--
-  # Add 'rv32imaf-ilp32f--'. 
-  GCC_MULTILIB=${GCC_MULTILIB:-"rv32i-ilp32--c rv32im-ilp32--c rv32iac-ilp32-- rv32imac-ilp32-- rv32imaf-ilp32f-- rv32imafc-ilp32f-rv32imafdc- rv64imac-lp64-- rv64imafdc-lp64d--"}
-
-  GCC_MULTILIB_FILE=${GCC_MULTILIB_FILE:-"t-elf-multilib"}
-
-  # ---------------------------------------------------------------------------
-
-  BINUTILS_VERSION="2.29"
-  # From gcc/BASE_VER
-  GCC_VERSION="7.3.0"
-  # From newlib/configure, VERSION=
-  NEWLIB_VERSION="2.5.0"
-  # From gdb/VERSION.in
-  GDB_VERSION="8.0"
-
-  # ---------------------------------------------------------------------------
-
-  if [ "${USE_GITS}" != "y" ]
-  then
-
-    GH_RELEASE="7.3.0-1-20180506"
-    BINUTILS_GH_RELEASE=${BINUTILS_GH_RELEASE:-"${GH_RELEASE}"}
-    GCC_GH_RELEASE=${GCC_GH_RELEASE:-"${GH_RELEASE}"}
-    NEWLIB_GH_RELEASE=${NEWLIB_GH_RELEASE:-"${GH_RELEASE}"}
-    GDB_GH_RELEASE=${GDB_GH_RELEASE:-"${GH_RELEASE}"}
-
-  else
-
-    BINUTILS_GIT_BRANCH=${BINUTILS_GIT_BRANCH:-"riscv-binutils-2.29-gme"}
-    # June 17, 2017
-    BINUTILS_GIT_COMMIT=${BINUTILS_GIT_COMMIT:-"a8d8cd7ff85a945b30ddd484a4d7592af3ed8fbb"}
-
-    GCC_GIT_BRANCH=${GCC_GIT_BRANCH:-"riscv-gcc-7.3.0-gme"}
-    GCC_GIT_COMMIT=${GCC_GIT_COMMIT:-"6d6363ebaf0190dc5af3ff09bc5416d4228fdfa2"}
-
-    NEWLIB_GIT_BRANCH=${NEWLIB_GIT_BRANCH:-"riscv-newlib-2.5.0-gme"}
-    NEWLIB_GIT_COMMIT=${NEWLIB_GIT_COMMIT:-"325bec1e33fb0a1c30ce5a9aeeadd623f559ef1a"}
-
-    GDB_SRC_FOLDER_NAME=${GDB_SRC_FOLDER_NAME:-"${BINUTILS_PROJECT_NAME}.git"}
-    GDB_GIT_BRANCH=${GDB_GIT_BRANCH:-"${BINUTILS_GIT_BRANCH}"}
-    GDB_GIT_COMMIT=${GDB_GIT_COMMIT:-"${BINUTILS_GIT_COMMIT}"}
-
-  fi
-  
-  # ---------------------------------------------------------------------------
-
-  ZLIB_VERSION="1.2.8"
-  GMP_VERSION="6.1.2"
-  MPFR_VERSION="3.1.6"
-  MPC_VERSION="1.0.3"
-  ISL_VERSION="0.18"
-  LIBELF_VERSION="0.8.13"
-  EXPAT_VERSION="2.2.5"
-  LIBICONV_VERSION="1.15"
-  XZ_VERSION="5.2.3"
-
-  PYTHON_WIN_VERSION="2.7.13"
-
-  # ---------------------------------------------------------------------------
-elif [[ "${RELEASE_VERSION}" =~ 8\.1\.0-2-* ]]
-then
-  # This is similar to SiFive 20180928 release. (8.1.0-1 was 20180629, skipped)
-  # ---------------------------------------------------------------------------
-
-  # The default is:
-  # rv32i-ilp32--c rv32im-ilp32--c rv32iac-ilp32-- rv32imac-ilp32-- rv32imafc-ilp32f-rv32imafdc- rv64imac-lp64-- rv64imafdc-lp64d--
-  # Add 'rv32imaf-ilp32f--'. 
-  GCC_MULTILIB=${GCC_MULTILIB:-"rv32i-ilp32--c rv32im-ilp32--c rv32iac-ilp32-- rv32imac-ilp32-- rv32imaf-ilp32f-- rv32imafc-ilp32f-rv32imafdc- rv64imac-lp64-- rv64imafdc-lp64d--"}
-
-  GCC_MULTILIB_FILE=${GCC_MULTILIB_FILE:-"t-elf-multilib"}
-
-  # ---------------------------------------------------------------------------
-
-  BINUTILS_VERSION="2.30"
-  # From gcc/BASE_VER
-  GCC_VERSION="8.1.0"
-  # From newlib/configure, VERSION=
-  NEWLIB_VERSION="3.0.0"
-  # From gdb/VERSION.in
-  GDB_VERSION="8.2"
-
-  # ---------------------------------------------------------------------------
-
-  if [ "${USE_GITS}" != "y" ]
-  then
-
-    GH_RELEASE="8.1.0-2-20181019"
-    BINUTILS_GH_RELEASE=${BINUTILS_GH_RELEASE:-"${GH_RELEASE}"}
-    GCC_GH_RELEASE=${GCC_GH_RELEASE:-"${GH_RELEASE}"}
-    NEWLIB_GH_RELEASE=${NEWLIB_GH_RELEASE:-"${GH_RELEASE}"}
-    GDB_GH_RELEASE=${GDB_GH_RELEASE:-"${GH_RELEASE}-gdb"}
-
-  else
-
-    BINUTILS_GIT_BRANCH=${BINUTILS_GIT_BRANCH:-"riscv-binutils-2.30-gme"}
-    # Oct 17, 2018
-    BINUTILS_GIT_COMMIT=${BINUTILS_GIT_COMMIT:-"983075b97fb5e80ae26ac57410245e642f222bda"}
-
-    GCC_GIT_BRANCH=${GCC_GIT_BRANCH:-"riscv-gcc-8.1.0-gme"}
-    GCC_GIT_COMMIT=${GCC_GIT_COMMIT:-"151e02a6d1627f2aabb41e046295ecff387f64f3"}
-
-    NEWLIB_GIT_BRANCH=${NEWLIB_GIT_BRANCH:-"riscv-newlib-3.0.0-gme"}
-    NEWLIB_GIT_COMMIT=${NEWLIB_GIT_COMMIT:-"a6facff93404099561e7d7d5cd6bb37e4a1b698c"}
-
-    GDB_SRC_FOLDER_NAME=${GDB_SRC_FOLDER_NAME:-"binutils-gdb.git"}
-    GDB_GIT_BRANCH=${GDB_GIT_BRANCH:-"gnu-gdb-gme"}
-    GDB_GIT_COMMIT=${GDB_GIT_COMMIT:-"ed0b2b7e2a7ef074b6e08a7035abab539a3bab3d"}
-
-  fi
-  
-
-  # ---------------------------------------------------------------------------
-
-  ZLIB_VERSION="1.2.8"
-  GMP_VERSION="6.1.2"
-  MPFR_VERSION="3.1.6"
-  MPC_VERSION="1.0.3"
-  ISL_VERSION="0.18"
-  LIBELF_VERSION="0.8.13"
-  EXPAT_VERSION="2.2.5"
-  LIBICONV_VERSION="1.15"
-  XZ_VERSION="5.2.3"
-
-  PYTHON_WIN_VERSION="2.7.13"
-
-  # ---------------------------------------------------------------------------
-elif [[ "${RELEASE_VERSION}" =~ 8\.2\.0-2-* ]]
-then
-  # This is similar to SiFive 2019.02.0 release. (8.2.0-1, from 2018-12, was skipped)
+  # It is similar to SiFive 2019.02.0 release. (8.2.0-1, from 2018-12, was skipped)
   # https://github.com/sifive/freedom-tools/releases
 
   # Binutils 2.32 with SiFive CLIC patches
@@ -580,7 +314,6 @@ then
 
   fi
   
-
   # ---------------------------------------------------------------------------
 
   ZLIB_VERSION="1.2.8"
@@ -612,7 +345,7 @@ then
   BINUTILS_SRC_FOLDER_NAME=${BINUTILS_SRC_FOLDER_NAME:-"${BINUTILS_PROJECT_NAME}-${BINUTILS_GH_RELEASE}"}
   BINUTILS_ARCHIVE_NAME=${BINUTILS_ARCHIVE_NAME:-"${BINUTILS_SRC_FOLDER_NAME}.tar.gz"}
 
-  BINUTILS_ARCHIVE_URL=${BINUTILS_ARCHIVE_URL:-"https://github.com/gnu-mcu-eclipse/${BINUTILS_PROJECT_NAME}/archive/v${BINUTILS_GH_RELEASE}.tar.gz"}
+  BINUTILS_ARCHIVE_URL=${BINUTILS_ARCHIVE_URL:-"https://github.com/xpack-dev-tools/${BINUTILS_PROJECT_NAME}/archive/v${BINUTILS_GH_RELEASE}.tar.gz"}
 
   BINUTILS_GIT_URL=""
 
@@ -621,7 +354,7 @@ then
   GCC_SRC_FOLDER_NAME=${GCC_SRC_FOLDER_NAME:-"${GCC_PROJECT_NAME}-${GCC_GH_RELEASE}"}
   GCC_ARCHIVE_NAME=${GCC_ARCHIVE_NAME:-"${GCC_SRC_FOLDER_NAME}.tar.gz"}
 
-  GCC_ARCHIVE_URL=${GCC_ARCHIVE_URL:-"https://github.com/gnu-mcu-eclipse/${GCC_PROJECT_NAME}/archive/v${GCC_GH_RELEASE}.tar.gz"}
+  GCC_ARCHIVE_URL=${GCC_ARCHIVE_URL:-"https://github.com/xpack-dev-tools/${GCC_PROJECT_NAME}/archive/v${GCC_GH_RELEASE}.tar.gz"}
 
   GCC_GIT_URL=""
 
@@ -630,7 +363,7 @@ then
   NEWLIB_SRC_FOLDER_NAME=${NEWLIB_SRC_FOLDER_NAME:-"${NEWLIB_PROJECT_NAME}-${NEWLIB_GH_RELEASE}"}
   NEWLIB_ARCHIVE_NAME=${NEWLIB_ARCHIVE_NAME:-"${NEWLIB_SRC_FOLDER_NAME}.tar.gz"}
 
-  NEWLIB_ARCHIVE_URL=${NEWLIB_ARCHIVE_URL:-"https://github.com/gnu-mcu-eclipse/${NEWLIB_PROJECT_NAME}/archive/v${NEWLIB_GH_RELEASE}.tar.gz"}
+  NEWLIB_ARCHIVE_URL=${NEWLIB_ARCHIVE_URL:-"https://github.com/xpack-dev-tools/${NEWLIB_PROJECT_NAME}/archive/v${NEWLIB_GH_RELEASE}.tar.gz"}
 
   NEWLIB_GIT_URL=""
 
@@ -639,7 +372,7 @@ then
   GDB_SRC_FOLDER_NAME=${GDB_SRC_FOLDER_NAME:-"${GDB_PROJECT_NAME}-${GDB_GH_RELEASE}"}
   GDB_ARCHIVE_NAME=${GDB_ARCHIVE_NAME:-"${GDB_SRC_FOLDER_NAME}.tar.gz"}
 
-  GDB_ARCHIVE_URL=${GDB_ARCHIVE_URL:-"https://github.com/gnu-mcu-eclipse/${GDB_PROJECT_NAME}/archive/v${GDB_GH_RELEASE}.tar.gz"}
+  GDB_ARCHIVE_URL=${GDB_ARCHIVE_URL:-"https://github.com/xpack-dev-tools/${GDB_PROJECT_NAME}/archive/v${GDB_GH_RELEASE}.tar.gz"}
 
   GDB_GIT_URL=""
 
@@ -649,7 +382,7 @@ else
 
   BINUTILS_SRC_FOLDER_NAME=${BINUTILS_SRC_FOLDER_NAME:-"${BINUTILS_PROJECT_NAME}.git"}
 
-  BINUTILS_GIT_URL=${BINUTILS_GIT_URL:-"https://github.com/gnu-mcu-eclipse/riscv-binutils-gdb.git"}
+  BINUTILS_GIT_URL=${BINUTILS_GIT_URL:-"https://github.com/xpack-dev-tools/riscv-binutils-gdb.git"}
 
   BINUTILS_ARCHIVE_URL=""
 
@@ -657,7 +390,7 @@ else
 
   GCC_SRC_FOLDER_NAME=${GCC_SRC_FOLDER_NAME:-"${GCC_PROJECT_NAME}.git"}
 
-  GCC_GIT_URL=${GCC_GIT_URL:-"https://github.com/gnu-mcu-eclipse/riscv-none-gcc.git"}
+  GCC_GIT_URL=${GCC_GIT_URL:-"https://github.com/xpack-dev-tools/riscv-none-gcc.git"}
 
   GCC_ARCHIVE_URL=""
 
@@ -665,7 +398,7 @@ else
 
   NEWLIB_SRC_FOLDER_NAME=${NEWLIB_SRC_FOLDER_NAME:-"${NEWLIB_PROJECT_NAME}.git"}
     
-  NEWLIB_GIT_URL=${NEWLIB_GIT_URL:-"https://github.com/gnu-mcu-eclipse/riscv-newlib.git"}
+  NEWLIB_GIT_URL=${NEWLIB_GIT_URL:-"https://github.com/xpack-dev-tools/riscv-newlib.git"}
 
   NEWLIB_ARCHIVE_URL=""
 
@@ -674,7 +407,7 @@ else
   # Pre 8.x builds define it to reuse the binutils repo.
   GDB_SRC_FOLDER_NAME=${GDB_SRC_FOLDER_NAME:-"binutils-gdb.git"}
 
-  GDB_GIT_URL=${GDB_GIT_URL:-"https://github.com/gnu-mcu-eclipse/riscv-binutils-gdb.git"}
+  GDB_GIT_URL=${GDB_GIT_URL:-"https://github.com/xpack-dev-tools/riscv-binutils-gdb.git"}
 
   GDB_ARCHIVE_URL=""
 
@@ -682,7 +415,6 @@ else
 fi
 
 # -----------------------------------------------------------------------------
-
 
 BINUTILS_FOLDER_NAME="binutils-${BINUTILS_VERSION}"
 GCC_FOLDER_NAME="gcc-${GCC_VERSION}"

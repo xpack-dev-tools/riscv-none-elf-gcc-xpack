@@ -1,20 +1,36 @@
-# GNU MCU Eclipse RISC-V Embedded GCC
+# xPack GNU RISC-V Embedded GCC
 
-This is the **GNU MCU Eclipse** (formerly GNU ARM Eclipse) version of the 
-**RISC-V Embedded GCC** toolchain.
+This is the **xPack** version of the 
+**GNU RISC-V Embedded GCC** toolchain.
+
+For details, see 
+[The xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-embed-gcc/) pages.
+
+## Easy install
+
+The **xPack RISC-V Embedded GCC** toolchain is also available as a 
+binary [xPack](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc) 
+and can be conveniently installed with [xpm](https://www.npmjs.com/package/xpm):
+
+```console
+$ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@8.2.0-2.2.1
+```
+
+For more details on how to install the toolchain, please see 
+[How to install the RISC-V toolchain?](http://xpack.github.io/toolchain/riscv-bone-embed-gcc/install/) page.
 
 ## Compliance
 
-Starting with 8.2.0-2, the GNU MCU Eclipse RISC-V GCC follows
+Starting with 8.2.0-2, the xPack GNU RISC-V Embedded GCC (formerly 
+GNU MCU Eclipse RISC-V GCC) follows
 the official [SiFive releases](https://github.com/sifive/freedom-tools/releases), 
-with as little differences as possible. Previously it followed the generic
-[RISC-V releases](https://github.com/riscv/riscv-gnu-toolchain/releases).
+with as little differences as possible.
 
 This release is based on the 
 [v2019.02.0](https://github.com/sifive/freedom-tools/releases/tag/v2019.02.0) 
 release, and includes the SiFive extensions (like CLIC interrupts).
 
-The following commits were used:
+The following commits (from [sifive/freedom-tools](https://github.com/sifive/freedom-tools/tree/master/src)) were used:
 
 - the [sifive/riscv-gcc](https://github.com/sifive/riscv-gcc) project, 
 branch `sifive-gcc-8.2.0`, commit
