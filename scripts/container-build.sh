@@ -484,7 +484,7 @@ else
 
   GCC_SRC_FOLDER_NAME=${GCC_SRC_FOLDER_NAME:-"${GCC_PROJECT_NAME}.git"}
 
-  GCC_GIT_URL=${GCC_GIT_URL:-"https://github.com/xpack-dev-tools/riscv-none-gcc.git"}
+  GCC_GIT_URL=${GCC_GIT_URL:-"https://github.com/xpack-dev-tools/riscv-gcc.git"}
 
   GCC_ARCHIVE_URL=""
 
