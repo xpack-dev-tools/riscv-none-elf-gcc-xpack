@@ -476,7 +476,7 @@ else
 
   BINUTILS_SRC_FOLDER_NAME=${BINUTILS_SRC_FOLDER_NAME:-"${BINUTILS_PROJECT_NAME}.git"}
 
-  BINUTILS_GIT_URL=${BINUTILS_GIT_URL:-"https://github.com/xpack-dev-tools/riscv-binutils-gdb.git"}
+  BINUTILS_GIT_URL=${BINUTILS_GIT_URL:-"https://github.com/xpack-dev-tools/${BINUTILS_PROJECT_NAME}.git"}
 
   BINUTILS_ARCHIVE_URL=""
 
@@ -484,7 +484,7 @@ else
 
   GCC_SRC_FOLDER_NAME=${GCC_SRC_FOLDER_NAME:-"${GCC_PROJECT_NAME}.git"}
 
-  GCC_GIT_URL=${GCC_GIT_URL:-"https://github.com/xpack-dev-tools/riscv-gcc.git"}
+  GCC_GIT_URL=${GCC_GIT_URL:-"https://github.com/xpack-dev-tools/${GCC_PROJECT_NAME}.git"}
 
   GCC_ARCHIVE_URL=""
 
@@ -492,7 +492,7 @@ else
 
   NEWLIB_SRC_FOLDER_NAME=${NEWLIB_SRC_FOLDER_NAME:-"${NEWLIB_PROJECT_NAME}.git"}
     
-  NEWLIB_GIT_URL=${NEWLIB_GIT_URL:-"https://github.com/xpack-dev-tools/riscv-newlib.git"}
+  NEWLIB_GIT_URL=${NEWLIB_GIT_URL:-"https://github.com/xpack-dev-tools/${NEWLIB_PROJECT_NAME}.git"}
 
   NEWLIB_ARCHIVE_URL=""
 
@@ -501,7 +501,7 @@ else
   # Pre 8.x builds define it to reuse the binutils repo.
   GDB_SRC_FOLDER_NAME=${GDB_SRC_FOLDER_NAME:-"binutils-gdb.git"}
 
-  GDB_GIT_URL=${GDB_GIT_URL:-"https://github.com/xpack-dev-tools/riscv-binutils-gdb.git"}
+  GDB_GIT_URL=${GDB_GIT_URL:-"https://github.com/xpack-dev-tools/${GDB_PROJECT_NAME}.git"}
 
   GDB_ARCHIVE_URL=""
 
