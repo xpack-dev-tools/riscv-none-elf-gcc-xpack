@@ -1,14 +1,14 @@
 {
-  "name": "@gnu-mcu-eclipse/riscv-none-gcc",
+  "name": "@xpack-dev-tools/riscv-none-gcc",
   "version": "8.2.0-2.2.1",
-  "description": "An xPack which installs the binary files for GNU MCU Eclipse RISC-V GCC",
+  "description": "An xPack which installs the binary files for xPack GNU RISC-V Embedded GCC",
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gnu-mcu-eclipse/riscv-none-gcc-xpack.git"
+    "url": "git+https://github.com/xpack-dev-tools/riscv-none-gcc-xpack.git"
   },
   "keywords": [
     "xpack",
@@ -20,13 +20,13 @@
   "author": {
     "name": "Liviu Ionescu",
     "email": "ilg@livius.net",
-    "url": "http://liviusdotnet.wordpress.com"
+    "url": "https://github.com/ilg-ul"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gnu-mcu-eclipse/riscv-none-gcc-xpack/issues"
+    "url": "https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues"
   },
-  "homepage": "https://github.com/gnu-mcu-eclipse/riscv-none-gcc-xpack",
+  "homepage": "https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack",
   "config": {},
   "dependencies": {},
   "devDependencies": {},
@@ -39,28 +39,28 @@
   "xpack": {
     "binaries": {
       "destination": "./.content",
-      "baseUrl": "https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases/download/v8.2.0-2.2-20190521/",
+      "baseUrl": "https://github.com/xpack-dev-tools/riscv-none-embed-gcc/releases/download/v8.2.0-2.2-20190521/",
       "skip": 3,
       "platforms": {
         "linux-x86": {
           "sha256": "b36a7633780b98f357ea88b5d80af114b735dd837c9bf74c1d5ba436d2e5def3",
-          "fileName": "gnu-mcu-eclipse-riscv-none-gcc-8.2.0-2.2-20190521-0004-centos32.tgz"
+          "fileName": "xpack-riscv-none-embed-gcc-8.2.0-3.1-centos32.tgz"
         },
         "linux-x64": {
           "sha256": "3b9d585f6851b137b3938fb288c5e95d13d0580002fa6ca82b754fcffbff508c",
-          "fileName": "gnu-mcu-eclipse-riscv-none-gcc-8.2.0-2.2-20190521-0004-centos64.tgz"
+          "fileName": "xpack-riscv-none-embed-gcc-8.2.0-3.1-centos64.tgz"
         },
         "darwin-x64": {
           "sha256": "3bc735ff39820e7775b8e64516d1b89e562a6a744dc591519e7200571aa7aa6c",
-          "fileName": "gnu-mcu-eclipse-riscv-none-gcc-8.2.0-2.2-20190521-0004-macos.tgz"
+          "fileName": "xpack-riscv-none-embed-gcc-8.2.0-3.1-macos.tgz"
         },
         "win32-x86": {
           "sha256": "cba4a66bebc1cef9c0612254b9c7f50a4ff5f9c4d7ab20904bc8d64ad5acb016",
-          "fileName": "gnu-mcu-eclipse-riscv-none-gcc-8.2.0-2.2-20190521-0004-win32.zip"
+          "fileName": "xpack-riscv-none-embed-gcc-8.2.0-3.1-win32.zip"
         },
         "win32-x64": {
           "sha256": "3997402997d7606ff4f744d9602ec098f269c0df23bcce8117aff29cd46df971",
-          "fileName": "gnu-mcu-eclipse-riscv-none-gcc-8.2.0-2.2-20190521-0004-win64.zip"
+          "fileName": "xpack-riscv-none-embed-gcc-8.2.0-3.1-win64.zip"
         }
       }
     },

@@ -56,8 +56,10 @@ For this, on each platform:
 - unpack the archive in `Downloads`, and rename the version folder,
   by replacing a dash with a space; this will test paths with spaces;
   on Windows the current paths always use spaces, so renaming is not needed;
-- clone the build repo from https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git
-  locally; on Windows use the Git console;
+- clone this repo locally; on Windows use the Git console;
+```
+$ git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git
+```
 - in a separate workspace, Import -> General -> Existing Projects into Workspace
   the Eclipse projects available in the 
   `tests/eclipse` folder of the build repo; more details in the 
@@ -110,7 +112,7 @@ on the way. Refer to them as:
 
 - **[Issue:\[#1\]\(...\)]**.
 
-## Update the SHA sums
+### Update the SHA sums
 
 Copy/paste the build report at the end of the post as:
 
@@ -118,20 +120,20 @@ Copy/paste the build report at the end of the post as:
 ## Checksums
 The SHA-256 hashes for the files are:
 
+5e10320563e49dd31a33a032496547375d0e07191df727d393e26daa14d3f526
+xpack-riscv-none-embed-gcc-8.2.0-3.1-darwin-x64.tgz
+
 fdb6ab5badd0820e0562c288b1ec88566f8589f5fa26d81a0f57a2b95213d0cc
-gnu-mcu-eclipse-riscv-none-gcc-7.2.0-3-20190425-1300-centos32.tgz
+xpack-riscv-none-embed-gcc-8.2.0-3.1-linux-x32.tgz
 
 dd6985729df5c2182cc5ce699013146b4addc80cbe231a7b62ec89d095e81aca
-gnu-mcu-eclipse-riscv-none-gcc-7.2.0-3-20190425-1300-centos64.tgz
-
-5e10320563e49dd31a33a032496547375d0e07191df727d393e26daa14d3f526
-gnu-mcu-eclipse-riscv-none-gcc-7.2.0-3-20190425-1300-macos.tgz
+xpack-riscv-none-embed-gcc-8.2.0-3.1-linux-x64.tgz
 
 737f95fb3129b0e7f67c48fea39b844f574c379768bd0ea5088a6e976f8f7b14
-gnu-mcu-eclipse-riscv-none-gcc-7.2.0-3-20190425-1300-win32.zip
+xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x32.zip
 
 98ac277287d8c51cc1c5f83a5a9945951bd8d5806b4570b41eea2c306e141a3b
-gnu-mcu-eclipse-riscv-none-gcc-7.2.0-3-20190425-1300-win64.zip
+xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x64.zip
 ```
 
 ## Update the Web
@@ -147,39 +149,29 @@ gnu-mcu-eclipse-riscv-none-gcc-7.2.0-3-20190425-1300-win64.zip
   and select the latest release
 - update the `baseUrl:` with the file URLs (including the tag/version)
 - from the release, copy the SHA & file names
+- check the executable names
 - commit all changes, use a message like `package.json: update urls for 8.2.1-2.2 release` (without `v`)
 - update `CHANGELOG.md`; commit with a message like 
   _CHANGELOG: prepare npm v8.2.1-2.2.1_
 - `npm version 8.2.1-2.2.1`; the first 5 numbers are the same as the 
   GitHub release; the sixth number is the npm specific version
+- `npm pack` and check the content of the archive
 - push all changes to GitHub
 - `npm publish` (use `--access public` when publishing for the first time)
 
 
-## Test the xPack
+## Test npm binaries
 
-At minimum, test only if the URLs and SHA sums are correct, but for 
-extra safety also rerun the tests.
-
-On all available platforms:
-
-- install the new xPack release
+Install the binaries on all platforms.
 
 ```console
 $ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@latest
 ```
 
-- double check version, to be sure it is the latest release (sometimes 
-  the NPM server needs some time to propagate the changes)
-- in Eclipse, disable the Workspace RISC-V Toolchains path (**Restore Defaults**)
-- in Eclipse, select the Global RISC-V Toolchains path to the new xPack release
-- remove the toolchain temporarily installed in `Downloads`
-- rerun all build and debug tests, as before
-
 ## Create a final GitHub release
 
 - go to the [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc/releases) page
-- update the link behind the badge with the blog URL
+- check the download counter, it should match the number of tests
 - add a link to the Web page `[Continue reading »]()`; use an same blog URL
 - **disable** the **pre-release** button
 - click the **Update Release** button

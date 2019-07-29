@@ -91,10 +91,10 @@ For support, please read the
 
 For more info, please see the xPack project site:
 
-  http://gnu-mcu-eclipse.github.io
+  http://xpack.github.io/riscv-none-embed-gcc
 
 
-Thank you for using **GNU MCU Eclipse**,
+Thank you for using open source software,
 
 Liviu Ionescu
 

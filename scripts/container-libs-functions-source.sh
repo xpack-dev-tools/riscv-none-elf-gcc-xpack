@@ -1,13 +1,13 @@
 # -----------------------------------------------------------------------------
-# This file is part of the GNU MCU Eclipse distribution.
-#   (https://gnu-mcu-eclipse.github.io)
+# This file is part of the xPacks distribution.
+#   (https://xpack.github.io)
 # Copyright (c) 2019 Liviu Ionescu.
 #
 # Permission to use, copy, modify, and/or distribute this software 
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
-# Helper script used in the second edition of the GNU MCU Eclipse build 
+# Helper script used in the second edition of the xPack build 
 # scripts. As the name implies, it should contain only functions and 
 # should be included with 'source' by the container build scripts.
 
@@ -30,8 +30,7 @@ function do_zlib()
   ZLIB_SRC_FOLDER_NAME="zlib-${ZLIB_VERSION}"
   ZLIB_FOLDER_NAME="${ZLIB_SRC_FOLDER_NAME}"
   local zlib_archive="${ZLIB_SRC_FOLDER_NAME}.tar.gz"
-  # local zlib_url="http://zlib.net/fossils/${zlib_archive}"
-  local zlib_url="https://github.com/gnu-mcu-eclipse/files/raw/master/libs/${zlib_archive}"
+  local zlib_url="http://zlib.net/fossils/${zlib_archive}"
 
   local zlib_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-zlib-${ZLIB_VERSION}-installed"
   if [ ! -f "${zlib_stamp_file_path}" ]
@@ -123,8 +122,7 @@ function do_gmp()
   GMP_SRC_FOLDER_NAME="gmp-${GMP_VERSION}"
   GMP_FOLDER_NAME="${GMP_SRC_FOLDER_NAME}"
   local gmp_archive="${GMP_SRC_FOLDER_NAME}.tar.xz"
-  # local gmp_url="https://gmplib.org/download/gmp/${gmp_archive}"
-  local gmp_url="https://github.com/gnu-mcu-eclipse/files/raw/master/libs/${gmp_archive}"
+  local gmp_url="https://gmplib.org/download/gmp/${gmp_archive}"
 
   local gmp_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-gmp-${GMP_VERSION}-installed"
   if [ ! -f "${gmp_stamp_file_path}" ]
@@ -207,8 +205,7 @@ function do_mpfr()
   MPFR_SRC_FOLDER_NAME="mpfr-${MPFR_VERSION}"
   MPFR_FOLDER_NAME="${MPFR_SRC_FOLDER_NAME}"
   local mpfr_archive="${MPFR_SRC_FOLDER_NAME}.tar.xz"
-  # local mpfr_url="http://www.mpfr.org/${MPFR_SRC_FOLDER_NAME}/${mpfr_archive}"
-  local mpfr_url="https://github.com/gnu-mcu-eclipse/files/raw/master/libs/${mpfr_archive}"
+  local mpfr_url="http://www.mpfr.org/${MPFR_SRC_FOLDER_NAME}/${mpfr_archive}"
 
   local mpfr_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-mpfr-${MPFR_VERSION}-installed"
   if [ ! -f "${mpfr_stamp_file_path}" ]
@@ -321,8 +318,6 @@ function do_mpc()
             --build=${BUILD} \
             --host=${HOST} \
             --target=${TARGET} \
-            \
-            --disable-nls
 
           cp "config.log" "${LOGS_FOLDER_PATH}/config-mpc-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-mpc-output.txt"
@@ -365,8 +360,7 @@ function do_isl()
     isl_archive="${ISL_SRC_FOLDER_NAME}.tar.gz"
   fi
 
-  # local isl_url="http://isl.gforge.inria.fr/${isl_archive}"
-  local isl_url="https://github.com/gnu-mcu-eclipse/files/raw/master/libs/${isl_archive}"
+  local isl_url="http://isl.gforge.inria.fr/${isl_archive}"
 
   local isl_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-isl-${ISL_VERSION}-installed"
   if [ ! -f "${isl_stamp_file_path}" ]
@@ -402,8 +396,6 @@ function do_isl()
             --build=${BUILD} \
             --host=${HOST} \
             --target=${TARGET} \
-            \
-            --disable-nls
 
           cp "config.log" "${LOGS_FOLDER_PATH}/config-isl-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-isl-output.txt"
@@ -438,8 +430,10 @@ function do_libelf()
   LIBELF_SRC_FOLDER_NAME="libelf-${LIBELF_VERSION}"
   LIBELF_FOLDER_NAME="${LIBELF_SRC_FOLDER_NAME}"
   local libelf_archive="${LIBELF_SRC_FOLDER_NAME}.tar.gz"
+
   # local libelf_url="http://www.mr511.de/software/${libelf_archive}"
-  local libelf_url="https://github.com/gnu-mcu-eclipse/files/raw/master/libs/${libelf_archive}"
+  # The original site seems unavailable, use a mirror.
+  local libelf_url="https://fossies.org/linux/misc/old/${libelf_archive}"
 
   local libelf_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-libelf-${LIBELF_VERSION}-installed"
   if [ ! -f "${libelf_stamp_file_path}" ]
@@ -556,8 +550,6 @@ function do_expat()
             --build=${BUILD} \
             --host=${HOST} \
             --target=${TARGET} \
-            \
-            --disable-nls
 
           cp "config.log" "${LOGS_FOLDER_PATH}/config-expat-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-expat-output.txt"
@@ -671,8 +663,7 @@ function do_xz()
   XZ_SRC_FOLDER_NAME="xz-${XZ_VERSION}"
   XZ_FOLDER_NAME="${XZ_SRC_FOLDER_NAME}"
   local xz_archive="${XZ_SRC_FOLDER_NAME}.tar.xz"
-  # local xz_url="https://sourceforge.net/projects/lzmautils/files/${xz_archive}"
-  local xz_url="https://github.com/gnu-mcu-eclipse/files/raw/master/libs/${xz_archive}"
+  local xz_url="https://sourceforge.net/projects/lzmautils/files/${xz_archive}"
 
   local xz_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-xz-${XZ_VERSION}-installed"
   if [ ! -f "${xz_stamp_file_path}" ]

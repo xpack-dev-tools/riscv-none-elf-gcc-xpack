@@ -209,14 +209,14 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l deploy
 total 350108
--rw-r--r-- 1 ilg ilg  61981364 Apr  1 08:27 gnu-mcu-eclipse-riscv-none-embed-gcc-7.2.1-1.1-20180401-0515-centos32.tar.xz
--rw-r--r-- 1 ilg ilg       140 Apr  1 08:27 gnu-mcu-eclipse-riscv-none-embed-gcc-7.2.1-1.1-20180401-0515-centos32.tar.xz.sha
--rw-r--r-- 1 ilg ilg  61144048 Apr  1 08:19 gnu-mcu-eclipse-riscv-none-embed-gcc-7.2.1-1.1-20180401-0515-centos64.tar.xz
--rw-r--r-- 1 ilg ilg       140 Apr  1 08:19 gnu-mcu-eclipse-riscv-none-embed-gcc-7.2.1-1.1-20180401-0515-centos64.tar.xz.sha
--rw-r--r-- 1 ilg ilg 112105889 Apr  1 08:29 gnu-mcu-eclipse-riscv-none-embed-gcc-7.2.1-1.1-20180401-0515-win32.zip
--rw-r--r-- 1 ilg ilg       134 Apr  1 08:29 gnu-mcu-eclipse-riscv-none-embed-gcc-7.2.1-1.1-20180401-0515-win32.zip.sha
--rw-r--r-- 1 ilg ilg 123181226 Apr  1 08:21 gnu-mcu-eclipse-riscv-none-embed-gcc-7.2.1-1.1-20180401-0515-win64.zip
--rw-r--r-- 1 ilg ilg       134 Apr  1 08:21 gnu-mcu-eclipse-riscv-none-embed-gcc-7.2.1-1.1-20180401-0515-win64.zip.sha
+-rw-r--r-- 1 ilg ilg  61981364 Apr  1 08:27 xpack-riscv-none-embed-gcc-8.2.0-3.1-linux-x32.tar.xz
+-rw-r--r-- 1 ilg ilg       140 Apr  1 08:27 xpack-riscv-none-embed-gcc-8.2.0-3.1-linux-x32.tar.xz.sha
+-rw-r--r-- 1 ilg ilg  61144048 Apr  1 08:19 xpack-riscv-none-embed-gcc-8.2.0-3.1-linux-x64.tar.xz
+-rw-r--r-- 1 ilg ilg       140 Apr  1 08:19 xpack-riscv-none-embed-gcc-8.2.0-3.1-linux-x64.tar.xz.sha
+-rw-r--r-- 1 ilg ilg 112105889 Apr  1 08:29 xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x32.zip
+-rw-r--r-- 1 ilg ilg       134 Apr  1 08:29 xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x32.zip.sha
+-rw-r--r-- 1 ilg ilg 123181226 Apr  1 08:21 xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x64.zip
+-rw-r--r-- 1 ilg ilg       134 Apr  1 08:21 xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x64.zip.sha
 ```
 
 To copy the files from the build machine to the current development 
@@ -225,7 +225,7 @@ folder in a terminal and use `scp`:
 
 ```console
 $ cd ~/Work/riscv-none-embed-gcc-*/deploy
-$ scp * ilg@ilg-mbp.local:Downloads/xpack-binaries/arm
+$ scp * ilg@ilg-mbp.local:Downloads/xpack-binaries/riscv
 ```
 
 ### Build the macOS binary
@@ -247,8 +247,8 @@ and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l deploy
 total 216064
--rw-r--r--  1 ilg  staff  110620198 Jul 24 16:35 gnu-mcu-eclipse-riscv-none-embed-gcc-7.3.1-1.1-20180724-0637-macos.tgz
--rw-r--r--  1 ilg  staff        134 Jul 24 16:35 gnu-mcu-eclipse-riscv-none-embed-gcc-7.3.1-1.1-20180724-0637-macos.tgz.sha
+-rw-r--r--  1 ilg  staff  110620198 Jul 24 16:35 xpack-riscv-none-embed-gcc-8.2.0-3.1-darwin-x64.tgz
+-rw-r--r--  1 ilg  staff        134 Jul 24 16:35 xpack-riscv-none-embed-gcc-8.2.0-3.1-darwin-x64.tgz.sha
 ```
 
 To copy the files from the build machine to the current development 
@@ -257,7 +257,7 @@ folder in a terminal and use `scp`:
 
 ```console
 $ cd ~/Work/riscv-none-embed-gcc-*/deploy
-$ scp * ilg@ilg-mbp.local:Downloads/xpack-binaries/arm
+$ scp * ilg@ilg-mbp.local:Downloads/xpack-binaries/riscv
 ```
 
 ## Subsequent runs
@@ -320,7 +320,22 @@ build folder, it might be necessary to run a recursive `chown`.
 Set the release explicitly in the environment:
 
 ```console
-$ RELEASE_VERSION=8.2.0-2.2 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
+$ RELEASE_VERSION=8.2.0-3.1 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
+```
+
+## Test
+
+A simple test is performed by the script at the end, by launching the 
+executables to check if all shared/dynamic libraries are correctly used.
+
+For a true test you need to unpack the archive in a temporary location 
+(like `~/Downloads`) and then run the 
+program from there. For example on macOS the output should 
+look like:
+
+```console
+$ /Users/ilg/Downloads/xPacks/riscv-none-embed-gcc/8.2.0-3.1/bin/riscv-none-embed-gcc --version
+riscv-none-embed-gcc (xPack RISC-V Embedded GCC, 64-bit) 8.2.0
 ```
 
 ## Install
@@ -336,7 +351,7 @@ $ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@latest
 ```
 
 More details are available on the 
-[How to install the ARM toolchain?](https://xpack.github.io/riscv-none-embed-gcc/install/) 
+[How to install the RISC-V toolchain?](https://xpack.github.io/riscv-none-embed-gcc/install/) 
 page.
 
 After install, the package should create a structure like this (only the 
@@ -346,53 +361,52 @@ first two depth levels are shown):
 $ tree -L 2 /Users/ilg/opt/xPacks/riscv-none-embed-gcc/8.2.1-1.1 
 /Users/ilg/opt/gnu-mcu-eclipse/riscv-none-embed-gcc/8.2.1-1.1
 ├── README.md
-├── arm-none-eabi
+├── riscv-none-embed
 │   ├── bin
 │   ├── include
 │   ├── lib
 │   └── share
 ├── bin
-│   ├── arm-none-eabi-addr2line
-│   ├── arm-none-eabi-ar
-│   ├── arm-none-eabi-as
-│   ├── arm-none-eabi-c++
-│   ├── arm-none-eabi-c++filt
-│   ├── arm-none-eabi-cpp
-│   ├── arm-none-eabi-elfedit
-│   ├── arm-none-eabi-g++
+│   ├── riscv-none-embed-addr2line
+│   ├── riscv-none-embed-ar
+│   ├── riscv-none-embed-as
+│   ├── riscv-none-embed-c++
+│   ├── riscv-none-embed-c++filt
+│   ├── riscv-none-embed-cpp
+│   ├── riscv-none-embed-elfedit
+│   ├── riscv-none-embed-g++
 │   ├── riscv-none-embed-gcc
 │   ├── riscv-none-embed-gcc-8.2.1
 │   ├── riscv-none-embed-gcc-ar
 │   ├── riscv-none-embed-gcc-nm
 │   ├── riscv-none-embed-gcc-ranlib
-│   ├── arm-none-eabi-gcov
-│   ├── arm-none-eabi-gcov-dump
-│   ├── arm-none-eabi-gcov-tool
-│   ├── arm-none-eabi-gdb
-│   ├── arm-none-eabi-gdb-add-index
-│   ├── arm-none-eabi-gdb-add-index-py
-│   ├── arm-none-eabi-gdb-py
-│   ├── arm-none-eabi-gprof
-│   ├── arm-none-eabi-ld
-│   ├── arm-none-eabi-ld.bfd
-│   ├── arm-none-eabi-nm
-│   ├── arm-none-eabi-objcopy
-│   ├── arm-none-eabi-objdump
-│   ├── arm-none-eabi-ranlib
-│   ├── arm-none-eabi-readelf
-│   ├── arm-none-eabi-size
-│   ├── arm-none-eabi-strings
-│   └── arm-none-eabi-strip
+│   ├── riscv-none-embed-gcov
+│   ├── riscv-none-embed-gcov-dump
+│   ├── riscv-none-embed-gcov-tool
+│   ├── riscv-none-embed-gdb
+│   ├── riscv-none-embed-gdb-add-index
+│   ├── riscv-none-embed-gdb-add-index-py
+│   ├── riscv-none-embed-gdb-py
+│   ├── riscv-none-embed-gprof
+│   ├── riscv-none-embed-ld
+│   ├── riscv-none-embed-ld.bfd
+│   ├── riscv-none-embed-nm
+│   ├── riscv-none-embed-objcopy
+│   ├── riscv-none-embed-objdump
+│   ├── riscv-none-embed-ranlib
+│   ├── riscv-none-embed-readelf
+│   ├── riscv-none-embed-size
+│   ├── riscv-none-embed-strings
+│   └── riscv-none-embed-strip
 ├── distro-info
 │   ├── CHANGELOG.md
-│   ├── arm-readme.txt
-│   ├── arm-release.txt
 │   ├── licenses
 │   ├── patches
 │   └── scripts
 ├── include
 │   └── gdb
 ├── lib
+│   ├── bfd-plugins
 │   ├── gcc
 │   ├── libcc1.0.so
 │   └── libcc1.so -> libcc1.0.so
@@ -400,7 +414,7 @@ $ tree -L 2 /Users/ilg/opt/xPacks/riscv-none-embed-gcc/8.2.1-1.1
 │   └── gcc
 └── share
     ├── doc
-    └── gcc-arm-none-eabi
+    └── gcc-riscv-none-embed
 
 19 directories, 37 files
 ```
@@ -411,30 +425,6 @@ No other files are installed in any system folders or other locations.
 
 The binaries are distributed as portable archives; thus they do not 
 need to run a setup and do not require an uninstall.
-
-## Test
-
-A simple test is performed by the script at the end, by launching the 
-executables to check if all shared/dynamic libraries are correctly used.
-
-For a true test you need to first install the package and then run the 
-program from the final location. For example on macOS the output should 
-look like:
-
-```console
-$ /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-embed-gcc/7.2.1-1.1/.content/bin/riscv-none-embed-gcc --version
-riscv-none-embed-gcc (xPack GNU RISC-V Embedded GCC, 64-bit) 7.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
-```
-
-## Previous versions
-
-Although not guaranteed to work, previous versions can be re-built by
-explicitly specifying the version:
-
-```console
-$ RELEASE_VERSION=8.2.0-2.2 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh
-$ RELEASE_VERSION=8.2.0-3.1 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh
-```
 
 ## Files cache
 

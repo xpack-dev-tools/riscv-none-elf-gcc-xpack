@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # -----------------------------------------------------------------------------
-# This file is part of the GNU MCU Eclipse distribution.
-#   (https://gnu-mcu-eclipse.github.io)
+# This file is part of the xPacks distribution.
+#   (https://xpack.github.io)
 # Copyright (c) 2019 Liviu Ionescu.
 #
 # Permission to use, copy, modify, and/or distribute this software 
@@ -41,7 +41,7 @@ script_folder_name="$(basename "${script_folder_path}")"
 # =============================================================================
 
 # Inner script to run inside Docker containers to build the 
-# GNU MCU Eclipse RISC-V Embedded GCC distribution packages.
+# xPack GNU RISC-V Embedded GCC distribution packages.
 
 # For native builds, it runs on the host (macOS build cases,
 # and development builds for GNU/Linux).
@@ -231,108 +231,9 @@ then
   LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin-0.dll"
 fi
 
-# Keep them in sync with combo archive content.
-if [[ "${RELEASE_VERSION}" =~ 8\.2\.0-2\.* ]]
-then
-  # This is a repack of
-  # https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases/tag/v8.2.0-2.2-20190521
-
-  # It is similar to SiFive 2019.02.0 release. (8.2.0-1, from 2018-12, was skipped)
-  # https://github.com/sifive/freedom-tools/releases
-
-  # Binutils 2.32 with SiFive CLIC patches
-  # https://github.com/sifive/riscv-binutils-gdb/tree/164267155c96f91472a539ca78ac919993bc5b4e
-
-  # GCC 8.2.0 with SiFive CLIC patches
-  # https://github.com/sifive/riscv-gcc/tree/242abcaff697d0a1ea12dccc975465e1bfeb8331
-
-  # GDB 8.2.90 from FSF 8.3.0 branch
-  # riscv-gdb @ c8aa0bb (28 Feb 2019)
-  # https://sourceware.org/git/?p=binutils-gdb.git
-  # git://sourceware.org/git/binutils-gdb.git
-
-  # Newlib 3.0.0 from SiFive branch
-  # https://github.com/sifive/riscv-newlib/tree/42c2e3fb9f557d59b76d1a64bb6fb32707ff4530
-
-  # ---------------------------------------------------------------------------
-
-  # Inspired from SiFive
-  # MULTILIBS_GEN := rv32e-ilp32e--c rv32em-ilp32e--c rv32eac-ilp32e-- rv32emac-ilp32e-- rv32i-ilp32--c rv32im-ilp32--c rv32iac-ilp32-- rv32imac-ilp32-- rv32imafc-ilp32f-rv32imafdc- rv32imafdc-ilp32d-- rv64imac-lp64-- rv64imafc-lp64f-rv64imafdc- rv64imafdc-lp64d--
-
-  # Minimal list, for tests only. Pass it via the environment.
-  # GCC_MULTILIB=${GCC_MULTILIB:-"rv32imac-ilp32-- rv64imac-lp64--"}
-
-  # Old list.
-  # GCC_MULTILIB=${GCC_MULTILIB:-"rv32i-ilp32--c rv32im-ilp32--c rv32iac-ilp32-- rv32imac-ilp32-- rv32imaf-ilp32f-- rv32imafc-ilp32f-rv32imafdc- rv64imac-lp64-- rv64imafdc-lp64d--"}
-  
-  # New extended list, based on SiFive list.
-  # Added: rv32imaf-ilp32f--
-  GCC_MULTILIB=${GCC_MULTILIB:-"rv32e-ilp32e--c rv32em-ilp32e--c rv32eac-ilp32e-- rv32emac-ilp32e-- rv32i-ilp32--c rv32im-ilp32--c rv32iac-ilp32-- rv32imac-ilp32-- rv32imaf-ilp32f-- rv32imafc-ilp32f-rv32imafdc- rv32imafdc-ilp32d-- rv64imac-lp64-- rv64imafc-lp64f-rv64imafdc- rv64imafdc-lp64d--"}
-
-  GCC_MULTILIB_FILE=${GCC_MULTILIB_FILE:-"t-elf-multilib"}
-
-  # ---------------------------------------------------------------------------
-
-  BINUTILS_VERSION="2.32"
-  # From gcc/BASE_VER
-  GCC_VERSION="8.2.0"
-  # From newlib/configure, VERSION=
-  NEWLIB_VERSION="3.0.0"
-  # From gdb/VERSION.in
-  GDB_VERSION="8.2"
-
-  FIX_LTO_PLUGIN="y"
-
-  # ---------------------------------------------------------------------------
-
-  if [ "${USE_GITS}" != "y" ]
-  then
-
-    # Be sure there is no `v`, it is added in the URL.
-    GH_RELEASE="8.2.0-2"
-    BINUTILS_GH_RELEASE=${BINUTILS_GH_RELEASE:-"${GH_RELEASE}"}
-    GCC_GH_RELEASE=${GCC_GH_RELEASE:-"${GH_RELEASE}"}
-    NEWLIB_GH_RELEASE=${NEWLIB_GH_RELEASE:-"${GH_RELEASE}"}
-    # Same, with a `-gdb` suffix added.
-    GDB_GH_RELEASE=${GDB_GH_RELEASE:-"${GH_RELEASE}-gdb"}
-
-  else
-
-    BINUTILS_GIT_BRANCH=${BINUTILS_GIT_BRANCH:-"sifive-binutils-2.32-gme"}
-    # 16 April 2019
-    BINUTILS_GIT_COMMIT=${BINUTILS_GIT_COMMIT:-"82b51c7b5087ddb77988287cd7a2dd8921331bfd"}
-
-    GCC_GIT_BRANCH=${GCC_GIT_BRANCH:-"sifive-gcc-8.2.0-gme"}
-    GCC_GIT_COMMIT=${GCC_GIT_COMMIT:-"0c7a874f0b6f452eeafde57731646e5f460187e4"}
-
-    NEWLIB_GIT_BRANCH=${NEWLIB_GIT_BRANCH:-"sifive-newlib-3.0.0-gme"}
-    NEWLIB_GIT_COMMIT=${NEWLIB_GIT_COMMIT:-"1975c561730cbd4b93c491eaadeb6c3b01a89447"}
-
-    GDB_SRC_FOLDER_NAME=${GDB_SRC_FOLDER_NAME:-"binutils-gdb.git"}
-    GDB_GIT_BRANCH=${GDB_GIT_BRANCH:-"sifive-gdb-8.2.90-gme"}
-    GDB_GIT_COMMIT=${GDB_GIT_COMMIT:-"4f0bd4dde3c7b10c4f71e0c87d8707281c648671"}
-
-  fi
-  
-  # ---------------------------------------------------------------------------
-
-  ZLIB_VERSION="1.2.8"
-  GMP_VERSION="6.1.2"
-  MPFR_VERSION="3.1.6"
-  MPC_VERSION="1.0.3"
-  ISL_VERSION="0.18"
-  LIBELF_VERSION="0.8.13"
-  EXPAT_VERSION="2.2.5"
-  LIBICONV_VERSION="1.15"
-  XZ_VERSION="5.2.3"
-
-  PYTHON_WIN_VERSION="2.7.13"
-
-  BINUTILS_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
-  GDB_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
-
-  # ---------------------------------------------------------------------------
-elif [[ "${RELEASE_VERSION}" =~ 8\.2\.0-3\.* ]]
+# In reverse chronological order.
+# Keep them in sync with https://github.com/sifive/freedom-tools/releases.
+if [[ "${RELEASE_VERSION}" =~ 8\.2\.0-3\.* ]]
 then
   # This is similar to SiFive 2019.05.0 release.
   # https://github.com/sifive/freedom-tools/releases

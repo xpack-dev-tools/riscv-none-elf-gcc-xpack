@@ -3,6 +3,11 @@
 
 Releases in reverse chronological order.
 
+### 2019-07-30
+
+- v8.2.0-3.1 released 
+- update to follow SiFive May 2019 release
+
 ___
 
 ## Historical GNU MCU Eclipse change log
