@@ -51,7 +51,14 @@ echo
 echo "xPack GNU RISC-V Embedded GCC distribution build script."
 
 host_functions_script_path="${script_folder_path}/helper/host-functions-source.sh"
+echo
+echo "Host helper functions source script: \"${host_functions_script_path}\"."
 source "${host_functions_script_path}"
+
+host_detect
+
+# docker_linux64_image="ilegeul/centos:6-xbb-v2"
+# docker_linux32_image="ilegeul/centos32:6-xbb-v2"
 
 # -----------------------------------------------------------------------------
 
@@ -61,17 +68,7 @@ declare -a rest
 help_message="    bash $0 [--win32] [--win64] [--linux32] [--linux64] [--osx] [--all] [clean|cleanlibs|cleanall|preload-images] [--env-file file] [--disable-strip] [--without-pdf] [--with-html] [--disable-multilib] [--develop] [--debug] [--use-gits] [--jobs N] [--help]"
 host_options "${help_message}" $@
 
-echo
-echo "Host helper functions source script: \"${host_functions_script_path}\"."
-
-host_detect
-
-# docker_linux64_image="ilegeul/centos:6-xbb-v2.1"
-# docker_linux32_image="ilegeul/centos32:6-xbb-v2.1"
-
 host_common
-
-CONTAINER_RUN_AS_ROOT="y"
 
 # -----------------------------------------------------------------------------
 
