@@ -234,12 +234,21 @@ The current platform for macOS production builds is a macOS 10.10.5
 VirtualBox image running on the same macMini with 16 GB of RAM and a 
 fast SSD.
 
+```console
+$ ssh ilg-xbb-mac.local
+```
+
 To build the latest macOS version:
 
 ```console
+$ screen -S arm
+
 $ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
 $ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx
 ```
+
+To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
+`screen -r openocd`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
 Several hours later, the output of the build script is a compressed archive 
 and its SHA signature, created in the `deploy` folder:
