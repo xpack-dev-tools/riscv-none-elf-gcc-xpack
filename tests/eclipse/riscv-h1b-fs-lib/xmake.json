@@ -1,0 +1,139 @@
+{
+    "version": "0.1.0",
+    "name": "h1b-fs",
+    "artefact": {
+        "type": "executable",
+        "outputPrefix": "",
+        "outputSuffix": "",
+        "extension": "elf"
+    },
+    "generator": "make",
+    "commands": {
+        "build": [
+            "make"
+        ]
+    },
+    "addSourceFolders": [
+        "src"
+    ],
+    "addIncludeFolders": [
+        "include"
+    ],
+    "targets": {
+        "hifive1": {
+            "addSymbols": [
+                "SIFIVE_FE310",
+                "SIFIVE_HIFIVE1_BOARD"
+            ],
+            "toolchains": {
+                "riscv-none-gcc": {
+                    "common": {
+                        "addTarget": [
+                            "-march=",
+                            "-mabi=",
+                            "-mcmodel=medany", 
+                            "-msmall-data-limit=8"
+                        ],
+                        "addDebugging": [
+                            "-g3"
+                        ],
+                        "addOptimizations": [
+                            "-fmessage-length=0",
+                            "-fsigned-char",
+                            "-ffunction-sections",
+                            "-fdata-sections"
+                        ],
+                        "addWarnings": [
+                            "-Wall"
+                            ,"-Wextra"
+                            ,"-Werror"
+                            ,"-Wunused"
+                            ,"-Wuninitialized"
+                            ,"-Wmissing-declarations"
+                            ,"-Wconversion"
+                            ,"-Wpointer-arith"
+                            ,"-Wpadded"
+                            ,"-Wshadow"
+                            ,"-Wlogical-op"
+                            ,"-Waggregate-return"
+                            ,"-Wfloat-equal"
+                        ],
+                        "addMiscellaneous": [
+                        ]
+                    },
+                    "tools": {
+                        "c": {
+                            "addOptimizations": [
+                                "-std=gnu11"
+                            ],
+                            "addWarnings": [
+                                "-Wmissing-prototypes",
+                                "-Wstrict-prototypes",
+                                "-Wbad-function-cast"
+                            ]
+                        },
+                        "cpp": {
+                            "addOptimizations": [
+                                "-std=gnu++14",
+                                "-fabi-version=0",
+                                "-fno-exceptions",
+                                "-fno-rtti",
+                                "-fno-use-cxa-atexit",
+                                "-fno-threadsafe-statics"
+                            ],
+                            "addWarnings": [
+                                "-Wabi",
+                                "-Wctor-dtor-privacy",
+                                "-Wnoexcept",
+                                "-Wnon-virtual-dtor",
+                                "-Wstrict-null-sentinel",
+                                "-Wsign-promo"
+                            ]
+                        },
+                        "as": {
+                            "addMiscellaneous": [
+                                "-x assembler-with-cpp"
+                            ]
+                        },
+                        "ld": {
+                            "addMiscellaneous": [
+                                "-nostartfiles"
+                                ,"-Xlinker --gc-sections"
+                                ,"--specs=nano.specs"
+                                ,"-L\"../../ldscripts\""
+                                ,"-T"
+                                ,"mem.ld"
+                                ,"-T"
+                                ,"libs.ld"
+                                ,"-T"
+                                ,"sections.ld"
+                            ]
+                        }
+                    },
+                    "profiles": {
+                        "debug": {
+                            "addSymbols": [
+                                "DEBUG"
+                                ,"OS_USE_CPP_INTERRUPTS"
+                                ,"OS_USE_TRACE_SEMIHOSTING_DEBUG"
+                                ,"TRACE"
+                            ],
+                            "addOptimizations": [
+                                "-Og"
+                            ]
+                        },
+                        "release": {
+                            "addSymbols": [
+                                "NDEBUG"
+                                ,"OS_USE_CPP_INTERRUPTS"
+                            ],
+                            "addOptimizations": [
+                                "-Os"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

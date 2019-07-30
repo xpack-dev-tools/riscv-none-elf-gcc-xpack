@@ -1,4 +1,4 @@
-int f(int x);
+#include <f.h>
 
 int f(int x) {
 	return x+1;

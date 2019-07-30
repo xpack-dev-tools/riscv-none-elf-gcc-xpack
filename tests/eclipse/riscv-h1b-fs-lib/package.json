@@ -1,0 +1,71 @@
+{
+  "name": "h1b-fs",
+  "version": "1.0.0",
+  "description": "An xPack with a blinky application running on HiFive1",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "xmake build -- all",
+    "clean": "xmake build -- clean"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/<user-id>/h1b-fs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/<user-id>/h1b-fs/issues"
+  },
+  "homepage": "https://github.com/<user-id>/h1b-fs",
+  "keywords": [
+    "xpack",
+    "c",
+    "c++",
+    "micro-os-plus",
+    "risc-v",
+    "sifive",
+    "corecomplex"
+  ],
+  "author": {
+    "name": "",
+    "email": "",
+    "url": ""
+  },
+  "contributors": [
+    {
+      "name": "Liviu Ionescu",
+      "email": "ilg@livius.net",
+      "url": "http://liviusdotnet.wordpress.com"
+    }
+  ],
+  "license": "MIT",
+  "config": {
+    "xcdl": {
+      "device": {
+        "id": "fe310",
+        "supplier": {
+          "displayName": "SiFive",
+          "id": "1"
+        }
+      },
+      "board": {
+        "id": "hifive1",
+        "supplier": {
+          "displayName": "SiFive",
+          "id": "1"
+        }
+      }
+    }
+  },
+  "dependencies": {
+      "@micro-os-plus/diag-trace": "~1.0.6"
+      ,"@sifive/hifive1-board": "~1.0.3"
+  },
+  "devDependencies": {
+    "xmake": "~0.3.9",
+    "@gnu-mcu-eclipse/riscv-none-gcc": "~7.2.0-2.1",
+    "@gnu-mcu-eclipse/openocd": "~0.10.0-7.1",
+    "@gnu-mcu-eclipse/windows-build-tools": "~2.10.1"
+  },
+  "xpack": {
+  }
+}

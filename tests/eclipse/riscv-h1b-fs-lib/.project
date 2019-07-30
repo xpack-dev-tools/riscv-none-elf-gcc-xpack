@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>riscv-static-lib-lto</name>
+	<name>riscv-h1b-fs-lib</name>
 	<comment></comment>
 	<projects>
+		<project>riscv-static-lib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
