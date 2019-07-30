@@ -1,0 +1,32 @@
+{
+  "name": "@micro-os-plus/cpp-libs",
+  "version": "1.0.4",
+  "description": "An xPack with complementary C++ library functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micro-os-plus/cpp-libs-xpack.git"
+  },
+  "homepage": "https://github.com/micro-os-plus/cpp-libs-xpack",
+  "keywords": [
+    "xpack",
+    "c++",
+    "micro-os-plus",
+    "library"
+  ],
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "http://liviusdotnet.wordpress.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micro-os-plus/cpp-libs-xpack/issues"
+  },
+  "config": {},
+  "dependencies": {},
+  "xpack": {}
+}

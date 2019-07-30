@@ -1,0 +1,161 @@
+{
+	"schemaVersion": "0.2.0",
+	"mcus": {
+		"families": {
+			"fe": {
+				"displayName": "Freedom Everywhere",
+				"description": "The Freedom Everywhere family is the SiFive family of commercial RISC-V devices.",
+				"supplier": {
+					"displayName": "SiFive",
+					"id": "1"
+				},
+				"devices": {
+					"fe310": {
+						"displayName": "Freedom E310-G000",
+						"description": "The FE310-G000 is the first Freedom E300 SoC, and is the industry's first commercially available RISC-V SoC. The FE310-G000 is built around the E31 Core Complex instantiated in the Freedom E300 platform.",
+						"url": "https://www.sifive.com/products/freedom-e310/",
+						"compiler": {
+							"headers": [
+								"<micro-os-plus/device.h>"
+							],
+							"defines": [
+								"SIFIVE_FE310"
+							],
+							"target": [
+								"-march=rv32imac",
+								"-mabi=ilp32",
+								"-mcmodel=medany",
+								"-msmall-data-limit=8"
+							]
+						},
+						"features": {
+							"arch": "RV32IMAC",
+							"width": "32 bits",
+							"hfosc": "13800 kHz",
+							"lfosc": "32768 Hz",
+							"maxClock": "320 MHz",
+							"package": "qfn",
+							"leads": "48",
+							"vcc": [
+								"1.8 V",
+								"3.3 V"
+							]
+						},
+						"memoryRegions": {
+							"ram": {
+								"onChip": "true",
+								"address": "0x80000000",
+								"size": "16 KiB",
+								"access": "rwx",
+								"description": "On-Chip Volatile Memory - Data Tightly Integrated Memory (DTIM)"
+							},
+							"rom": {
+								"onChip": "false",
+								"address": "0x20000000",
+								"maxSize": "512 MiB",
+								"access": "rx",
+								"description": "Off-Chip Non-Volatile Memory - SPI 0 eXecute-In-Place (XIP)"
+							}
+						},
+						"debug": {
+							"jtag": {
+								"tapindex": "0",
+								"idcode": "0x10e31913",
+								"irlen": "5"
+							},
+							"xsvd": "xsvd/fe310-xsvd.json"
+						}
+					},
+					"e31arty": {
+						"displayName": "Arty E31",
+						"description": "Core Complex IP E31 Arty image.",
+						"url": "https://www.sifive.com/products/risc-v-core-ip/e31/",
+						"compiler": {
+							"headers": [
+								"<micro-os-plus/device.h>"
+							],
+							"defines": [
+								"SIFIVE_E31ARTY"
+							],
+							"target": [
+								"-march=rv32imac",
+								"-mabi=ilp32",
+								"-mcmodel=medany",
+								"-msmall-data-limit=8"
+							]
+						},
+						"features": {
+							"arch": "RV32IMAC",
+							"width": "32 bits",
+							"hfosc": "65 MHz",
+							"lfosc": "32768 Hz"
+						},
+						"memoryRegions": {
+							"ram": {
+								"onChip": "true",
+								"address": "0x80000000",
+								"size": "16 KiB",
+								"access": "rwx",
+								"description": "On-Chip Volatile Memory - Data Tightly Integrated Memory (DTIM)"
+							},
+							"rom": {
+								"onChip": "false",
+								"address": "0x40000000",
+								"maxSize": "512 MiB",
+								"access": "rx",
+								"description": "Off-Chip Non-Volatile Memory - SPI 0 eXecute-In-Place (XIP)"
+							}
+						},
+						"debug": {
+							"xsvd": "xsvd/e31arty-xsvd.json"
+						}
+					},
+					"e51arty": {
+						"displayName": "Arty E51",
+						"description": "Core Complex IP E51 Arty image.",
+						"url": "https://www.sifive.com/products/risc-v-core-ip/e31/",
+						"compiler": {
+							"headers": [
+								"<micro-os-plus/device.h>"
+							],
+							"defines": [
+								"SIFIVE_E51ARTY"
+							],
+							"target": [
+								"-march=rv64imac",
+								"-mabi=lp64",
+								"-mcmodel=medany",
+								"-msmall-data-limit=8"
+							]
+						},
+						"features": {
+							"arch": "RV64IMAC",
+							"width": "64 bits",
+							"hfosc": "65 MHz",
+							"lfosc": "32768 Hz"
+						},
+						"memoryRegions": {
+							"ram": {
+								"onChip": "true",
+								"address": "0x80000000",
+								"size": "16 KiB",
+								"access": "rwx",
+								"description": "On-Chip Volatile Memory - Data Tightly Integrated Memory (DTIM)"
+							},
+							"rom": {
+								"onChip": "false",
+								"address": "0x40000000",
+								"maxSize": "512 MiB",
+								"access": "rx",
+								"description": "Off-Chip Non-Volatile Memory - SPI 0 eXecute-In-Place (XIP)"
+							}
+						},
+						"debug": {
+							"xsvd": "xsvd/e51arty-xsvd.json"
+						}
+					}
+				}
+			}
+		}
+	}
+}

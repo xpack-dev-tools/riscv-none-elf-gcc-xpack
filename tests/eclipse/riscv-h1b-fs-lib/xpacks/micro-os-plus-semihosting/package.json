@@ -1,0 +1,32 @@
+{
+  "name": "@micro-os-plus/semihosting",
+  "version": "2.0.2",
+  "description": "An xPack with the portable semihosting definitions.",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micro-os-plus/semihosting-xpack.git"
+  },
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "http://liviusdotnet.wordpress.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micro-os-plus/semihosting-xpack/issues"
+  },
+  "homepage": "https://github.com/micro-os-plus/semihosting-xpack",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {},
+  "bundledDependencies": [],
+  "optionalDependencies": {},
+  "engines": {
+    "node": ">7.7.0"
+  },
+  "xpack": {}
+}

@@ -1,0 +1,38 @@
+{
+  "name": "@sifive/hifive1-board",
+  "version": "1.0.3",
+  "description": "An xPack with the µOS++ support for the SiFive HiFive1 board",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micro-os-plus/sifive-hifive1-board-xpack.git"
+  },
+  "homepage": "https://github.com/micro-os-plus/sifive-hifive1-board-xpack",
+  "keywords": [
+    "xpack",
+    "c++",
+    "micro-os-plus",
+    "sifive",
+    "hifive1",
+    "risc-v",
+    "riscv",
+    "board"
+  ],
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "http://liviusdotnet.wordpress.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micro-os-plus/sifive-hifive1-board-xpack/issues"
+  },
+  "config": {},
+  "dependencies": {
+    "@sifive/devices": "~1.0.2"
+  },
+  "xpack": {}
+}

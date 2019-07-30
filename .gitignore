@@ -61,7 +61,7 @@ typings/
 .next
 
 # xpm
-xpacks/
+# xpacks/
 
 # Windows
 Thumbs.db

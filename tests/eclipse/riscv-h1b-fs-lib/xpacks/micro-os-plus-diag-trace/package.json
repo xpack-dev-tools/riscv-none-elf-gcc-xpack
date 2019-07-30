@@ -1,0 +1,33 @@
+{
+  "name": "@micro-os-plus/diag-trace",
+  "version": "1.0.6",
+  "description": "An xPack with the µOS++ trace::printf() tracing infrastructure",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micro-os-plus/diag-trace-xpack.git"
+  },
+  "homepage": "https://github.com/micro-os-plus/diag-trace-xpack",
+  "keywords": [
+    "xpack",
+    "c++",
+    "micro-os-plus",
+    "diag",
+    "trace"
+  ],
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "http://liviusdotnet.wordpress.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micro-os-plus/diag-trace-xpack/issues"
+  },
+  "config": {},
+  "dependencies": {},
+  "xpack": {}
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@micro-os-plus/riscv-arch",
+  "version": "1.0.2",
+  "description": "An xPack with µOS++ RISC-V architecture support",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micro-os-plus/riscv-arch-xpack.git"
+  },
+  "homepage": "https://github.com/micro-os-plus/riscv-arch-xpack",
+  "keywords": [
+    "xpack",
+    "c++",
+    "micro-os-plus",
+    "risc-v",
+    "architecture"
+  ],
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "http://liviusdotnet.wordpress.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micro-os-plus/riscv-arch-xpack/issues"
+  },
+  "config": {},
+  "dependencies": {
+    "@micro-os-plus/startup": "~1.0.7"
+  },
+  "xpack": {}
+}

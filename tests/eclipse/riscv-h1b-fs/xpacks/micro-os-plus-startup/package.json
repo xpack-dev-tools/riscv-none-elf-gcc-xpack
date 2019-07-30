@@ -1,0 +1,36 @@
+{
+  "name": "@micro-os-plus/startup",
+  "version": "1.0.7",
+  "description": "An xPack with the µOS++ startup code for bare-metal platforms",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micro-os-plus/startup.git"
+  },
+  "keywords": [
+    "xpack",
+    "c++",
+    "micro-os-plus",
+    "startup"
+  ],
+  "homepage": "https://github.com/micro-os-plus/startup",
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "http://liviusdotnet.wordpress.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micro-os-plus/startup/issues"
+  },
+  "config": {},
+  "dependencies": {
+    "@micro-os-plus/diag-trace": "~1.0.6",
+    "@micro-os-plus/c-libs": "~1.0.6",
+    "@micro-os-plus/cpp-libs": "~1.0.4"
+  },
+  "xpack": {}
+}

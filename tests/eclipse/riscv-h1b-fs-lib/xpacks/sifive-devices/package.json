@@ -1,0 +1,42 @@
+{
+  "name": "@sifive/devices",
+  "version": "1.0.2",
+  "description": "An xPack with the µOS++ support for the SiFive Core Complex devices",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "link": "npm link xsvd",
+    "gen": "xsvd gen-headers --file xsvd/fe310-xsvd.json --dest include/sifive-devices/fe310; xsvd gen-headers --file xsvd/e31arty-xsvd.json --dest include/sifive-devices/arty/e31; xsvd gen-headers --file xsvd/e51arty-xsvd.json --dest include/sifive-devices/arty/e51"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micro-os-plus/sifive-devices-xpack.git"
+  },
+  "homepage": "https://github.com/micro-os-plus/sifive-devices-xpack",
+  "keywords": [
+    "xpack",
+    "c++",
+    "micro-os-plus",
+    "sifive",
+    "corecomplex",
+    "risc-v",
+    "riscv"
+  ],
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "http://liviusdotnet.wordpress.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micro-os-plus/sifive-devices-xpack/issues"
+  },
+  "config": {},
+  "dependencies": {
+    "@micro-os-plus/riscv-arch": "~1.0.2"
+  },
+  "devDependencies": {
+    "xsvd": "~0.2.3"
+  },
+  "xpack": {}
+}
