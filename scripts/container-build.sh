@@ -179,6 +179,8 @@ prepare_xbb_env
 
 prepare_xbb_extras
 
+# -----------------------------------------------------------------------------
+
 function add_linux_install_path()
 {
   # Verify that the compiler is there.
@@ -193,7 +195,6 @@ function add_linux_install_path()
 
 # -----------------------------------------------------------------------------
 
-README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
 
 APP_PREFIX_NANO="${INSTALL_FOLDER_PATH}/${APP_LC_NAME}-nano"
 
@@ -201,6 +202,7 @@ APP_PREFIX_NANO="${INSTALL_FOLDER_PATH}/${APP_LC_NAME}-nano"
 # that processes this string in the Makefile, silently fails and the 
 # bfdver.h file remains empty.
 BRANDING="${BRANDING}\x2C ${TARGET_BITS}-bit"
+
 CFLAGS_OPTIMIZATIONS_FOR_TARGET="-ffunction-sections -fdata-sections -O2"
 # Cannot use medlow with 64 bits, so all must be medany.
 CFLAGS_OPTIMIZATIONS_FOR_TARGET+=" -mcmodel=medany"
@@ -210,10 +212,15 @@ GCC_PROJECT_NAME="riscv-gcc"
 NEWLIB_PROJECT_NAME="riscv-newlib"
 GDB_PROJECT_NAME="riscv-binutils-gdb"
 
+# -----------------------------------------------------------------------------
+# Defaults. Must be present.
+
 MULTILIB_FLAGS=""
 
 BINUTILS_PATCH=""
 GDB_PATCH=""
+
+# -----------------------------------------------------------------------------
 
 # Redefine to "y" to create the LTO plugin links.
 FIX_LTO_PLUGIN=""
@@ -230,6 +237,12 @@ then
   LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin-0.dll"
   LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin-0.dll"
 fi
+
+FIX_LTO_PLUGIN="y"
+
+# -----------------------------------------------------------------------------
+
+README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
 
 # In reverse chronological order.
 # Keep them in sync with https://github.com/sifive/freedom-tools/releases.
@@ -276,7 +289,6 @@ then
   # From gdb/VERSION.in
   GDB_VERSION="8.3"
 
-  FIX_LTO_PLUGIN="y"
 
   # ---------------------------------------------------------------------------
 
