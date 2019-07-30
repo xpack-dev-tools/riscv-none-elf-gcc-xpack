@@ -58,7 +58,8 @@ For this, on each platform:
   on Windows the current paths always use spaces, so renaming is not needed;
 - clone this repo locally; on Windows use the Git console;
 ```
-$ git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git
+$ git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
+~/Downloads/riscv-none-embed-gcc-xpack.git
 ```
 - in a separate workspace, Import -> General -> Existing Projects into Workspace
   the Eclipse projects available in the 
