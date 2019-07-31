@@ -81,14 +81,14 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-e
 
 ## Create a new GitHub release
 
-- go to the [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc/releases) page
+- go to the [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases) page
 - click **Draft a new release**
 - name the tag like **v8.2.0-2.2** (mind the dash in the middle!)
 - select the target branch (like sifive-gcc-8.2.0-gme)
 - name the release like **xPack GNU RISC-V Embedded GCC v8.2.0-2.2** 
 (mind the dash and the space)
 - as description
-  - add a downloads badge like `[![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc/v8.2.0-2.2/total.svg)]()`; use empty URL for now
+  - add a downloads badge like `![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/v8.2.0-2.2/total.svg)`; use empty URL for now
   - draft a short paragraph explaining what are the main changes
 - **attach binaries** and SHA (drag and drop from the archives folder will do it)
 - **enable** the **pre-release** button
@@ -105,10 +105,10 @@ In the `xpack.github.io` web Git:
 - add a new file to `_posts/riscv-none-embed-gcc/releases`
 - name the file like `2018-05-06-riscv-none-embed-gcc-v8-2-0-2-2-released.md`
 - name the post like: **xPack GNU RISC-V Embedded GCC v8.2.0-2.2 released**.
-- as `download_url` use the generic `https://github.com/xpack-dev-tools/riscv-none-embed-gcc/releases/tag/v8.2.0-2.2/` 
+- as `download_url` use the generic `https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/tag/v8.2.0-2.2/` 
 - update the `date:` field with the current date
 
-If any, close [issues](https://github.com/xpack-dev-tools/riscv-none-embed-gcc/issues) 
+If any, close [issues](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues) 
 on the way. Refer to them as:
 
 - **[Issue:\[#1\]\(...\)]**.
@@ -171,7 +171,7 @@ $ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@latest
 
 ## Create a final GitHub release
 
-- go to the [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc/releases) page
+- go to the [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases) page
 - check the download counter, it should match the number of tests
 - add a link to the Web page `[Continue reading »]()`; use an same blog URL
 - **disable** the **pre-release** button
