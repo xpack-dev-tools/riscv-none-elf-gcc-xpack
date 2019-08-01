@@ -90,7 +90,7 @@ IS_DEBUG=""
 LINUX_INSTALL_PATH=""
 USE_GITS=""
 
-JOBS=""
+JOBS="1"
 
 while [ $# -gt 0 ]
 do

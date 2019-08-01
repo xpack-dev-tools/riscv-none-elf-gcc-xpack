@@ -222,7 +222,9 @@ function do_binutils()
         echo
         echo "Running binutils make..."
       
+        # Build
         make -j ${JOBS} 
+
         if [ "${WITH_STRIP}" == "y" ]
         then
           # For -strip, readline needs a patch.
@@ -400,8 +402,9 @@ function do_gcc_first()
 
         # No need to make 'all', 'all-gcc' is enough to compile the libraries.
         # Parallel builds fail.
-        # make -j ${JOBS} all-gcc
-        make all-gcc
+        make -j ${JOBS} all-gcc
+        # make all-gcc
+        
         # No -strip available here.
         make install-gcc
 
@@ -555,7 +558,8 @@ function do_newlib()
         then
           make -j ${JOBS}
         else
-          make
+          make -j ${JOBS}
+          # make
         fi 
 
         # Top make fails with install-strip due to libgloss make.
@@ -885,8 +889,8 @@ function do_gcc_final()
           # CRTSTUFF_T_CFLAGS
 
           # Parallel builds fail.
-          # make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
-          make INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
+          make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
+          # make INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
 
           if [ "${WITH_STRIP}" == "y" ]
           then
@@ -925,8 +929,10 @@ function do_gcc_final()
 
           # For Windows build only the GCC binaries, the libraries were copied 
           # from the Linux build.
-          # make -j ${JOBS} all-gcc
-          make all-gcc
+          # Parallel builds fail.
+          make -j ${JOBS} all-gcc
+          # make all-gcc
+
           # No -strip here.
           make install-gcc
 
@@ -1145,8 +1151,8 @@ function do_gdb()
         echo "Running gdb$1 make..."
 
         # Parallel builds fail.
-        # make -j ${JOBS}
-        make 
+        make -j ${JOBS}
+        # make 
 
         # install-strip fails, not only because of readline has no install-strip
         # but even after patching it tries to strip a non elf file
