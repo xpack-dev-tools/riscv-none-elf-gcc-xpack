@@ -1,9 +1,8 @@
 ### Disclaimer
 
 The xPack GNU RISC-V Embedded GCC is only a binary distribution of
-the SiFive RISC-V GNU Embedded Toolchain,
-and does not intend to add new functionality, or to fix existing
-problems.
+the **SiFive RISC-V GNU Embedded Toolchain**,
+and does not intend to add new functionality, or to fix existing problems.
 
 If you have questions/suggestions related to the procedure used to
 build/publish the binary distribution, continue reading the next sections.
@@ -46,8 +45,8 @@ xPack GNU RISC-V Embedded GCC distribution, continue and register a new issue.
 
 ### Versions
 
-* [RISC-V GCC version]
-* [operating system]
+- [RISC-V GCC version]
+- [operating system]
 
 Please understand that without being able to reproduce the bug we cannot
 identify your problem.
