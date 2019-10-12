@@ -382,6 +382,7 @@ function do_gcc_first()
             --with-gnu-ld \
             --with-python-dir=share/gcc-${GCC_TARGET} \
             --with-sysroot="${APP_PREFIX}/${GCC_TARGET}" \
+            --with-native-system-header-dir="/include" \
             \
             ${MULTILIB_FLAGS} \
             --with-abi="${GCC_ABI}" \
@@ -823,6 +824,7 @@ function do_gcc_final()
               --with-headers=yes \
               --with-python-dir="share/gcc-${GCC_TARGET}" \
               --with-sysroot="${APP_PREFIX}/${GCC_TARGET}" \
+              --with-native-system-header-dir="/include" \
               \
               ${MULTILIB_FLAGS} \
               --with-abi="${GCC_ABI}" \
@@ -863,6 +865,7 @@ function do_gcc_final()
               --with-headers=yes \
               --with-python-dir="share/gcc-${GCC_TARGET}" \
               --with-sysroot="${APP_PREFIX_NANO}/${GCC_TARGET}" \
+              --with-native-system-header-dir="/include" \
               ${MULTILIB_FLAGS} \
               \
               --disable-rpath \
