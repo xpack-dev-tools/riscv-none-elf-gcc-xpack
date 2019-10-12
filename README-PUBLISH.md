@@ -16,16 +16,16 @@ Be sure everything is committed and pushed
 
 The names should look like `v8.2.0-2.2`.
 
-For the binutils-gdb repo, a separate tag like `v8.2.0-2.2-gdb` should be 
+For the binutils-gdb repo, a separate tag like `v8.2.0-2.2-gdb` should be
 present, for the gdb build.
 
 ### Check the `CHANGELOG.md` file
 
-Open the `CHANGELOG.txt` file and check if 
+Open the `CHANGELOG.txt` file and check if
 all new entries are in.
 
-Note: if you missed to update the `CHANGELOG.md` before starting the build, 
-edit the file and rerun the build, it should take only a few minutes to 
+Note: if you missed to update the `CHANGELOG.md` before starting the build,
+edit the file and rerun the build, it should take only a few minutes to
 recreate the archives with the correct file.
 
 ### Check the version
@@ -42,13 +42,13 @@ In this Git repo:
 
 ### Run the build scripts
 
-When everything is ready, follow the instructions from the 
-[build](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-BUILD.md) 
+When everything is ready, follow the instructions from the
+[build](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-BUILD.md)
 page.
 
 ## Test
 
-Install the binaries on all supported platforms and check if they are 
+Install the binaries on all supported platforms and check if they are
 functional.
 
 For this, on each platform:
@@ -62,16 +62,16 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-e
 ~/Downloads/riscv-none-embed-gcc-xpack.git
 ```
 - in a separate workspace, Import -> General -> Existing Projects into Workspace
-  the Eclipse projects available in the 
-  `tests/eclipse` folder of the build repo; more details in the 
+  the Eclipse projects available in the
+  `tests/eclipse` folder of the build repo; more details in the
   [README.md](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/tests/eclipse/README.md)
-- define the **Workspace RISC-V Toolchain path** to use the `Downloads` 
+- define the **Workspace RISC-V Toolchain path** to use the `Downloads`
   temporary location
 - to test the compiler: for all projects
-  - remove all build folders 
+  - remove all build folders
   - build all configs
 - to test the debugger: for all OpenOCD debug configurations
-  - start the OpenOCD debug session, 
+  - start the OpenOCD debug session,
   - single step a few lines (Step Over)
   - start continuous run (Resume)
   - halt (Suspend)
@@ -85,7 +85,7 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-e
 - click **Draft a new release**
 - name the tag like **v8.2.0-2.2** (mind the dash in the middle!)
 - select the target branch (like sifive-gcc-8.2.0-gme)
-- name the release like **xPack GNU RISC-V Embedded GCC v8.2.0-2.2** 
+- name the release like **xPack GNU RISC-V Embedded GCC v8.2.0-2.2**
 (mind the dash and the space)
 - as description
   - add a downloads badge like `![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/v8.2.0-2.2/total.svg)`; use empty URL for now
@@ -94,21 +94,21 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-e
 - **enable** the **pre-release** button
 - click the **Publish Release** button
 
-Note: at this moment the system should send a notification to all clients 
+Note: at this moment the system should send a notification to all clients
 watching this project.
 
 
-## Prepare a new blog post 
+## Prepare a new blog post
 
 In the `xpack.github.io` web Git:
 
 - add a new file to `_posts/riscv-none-embed-gcc/releases`
 - name the file like `2018-05-06-riscv-none-embed-gcc-v8-2-0-2-2-released.md`
 - name the post like: **xPack GNU RISC-V Embedded GCC v8.2.0-2.2 released**.
-- as `download_url` use the generic `https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/tag/v8.2.0-2.2/` 
+- as `download_url` use the generic `https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/tag/v8.2.0-2.2/`
 - update the `date:` field with the current date
 
-If any, close [issues](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues) 
+If any, close [issues](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues)
 on the way. Refer to them as:
 
 - **[Issue:\[#1\]\(...\)]**.
@@ -139,22 +139,22 @@ xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x64.zip
 
 ## Update the Web
 
-- commit the `xpack.github.io` web Git; use a message 
+- commit the `xpack.github.io` web Git; use a message
   like **xPack GNU RISC-V Embedded GCC v8.2.0-2.2 released**
 - wait for the GitHub Pages build to complete
 - remember the post URL, since it must be updated in the release page
 
 ## Publish on the npmjs.com server
 
-- open [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases) 
+- open [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases)
   and select the latest release
 - update the `baseUrl:` with the file URLs (including the tag/version)
 - from the release, copy the SHA & file names
 - check the executable names
 - commit all changes, use a message like `package.json: update urls for 8.2.1-2.2 release` (without `v`)
-- update `CHANGELOG.md`; commit with a message like 
+- update `CHANGELOG.md`; commit with a message like
   _CHANGELOG: prepare npm v8.2.1-2.2.1_
-- `npm version 8.2.1-2.2.1`; the first 5 numbers are the same as the 
+- `npm version 8.2.1-2.2.1`; the first 5 numbers are the same as the
   GitHub release; the sixth number is the npm specific version
 - `npm pack` and check the content of the archive
 - push all changes to GitHub

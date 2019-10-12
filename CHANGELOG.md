@@ -5,8 +5,8 @@ Releases in reverse chronological order.
 
 ### 2019-07-31
 
-- v8.2.0-3.1.1 published on npmjs.com 
-- v8.2.0-3.1 released 
+- v8.2.0-3.1.1 published on npmjs.com
+- v8.2.0-3.1 released
 - update to follow SiFive May 2019 release
 
 ___
@@ -63,7 +63,7 @@ ___
 
 ### 2018-05-04
 
-- update the build scripts to follow the ARM XBB structure 
+- update the build scripts to follow the ARM XBB structure
 
 ### 2018-01-10
 
@@ -74,9 +74,9 @@ ___
 ### 2017-11-09
 
 - v7.2.0-1-20171109 released
-- update to latest SiFive 2017-11-07 released, except newlib, where the 
+- update to latest SiFive 2017-11-07 released, except newlib, where the
 reference was too old, and a recent commit was used
-- in GDB, the list of registers returned by `data-list-register-names` 
+- in GDB, the list of registers returned by `data-list-register-names`
 no longer include the 4096 CSRs
 - the tuple was renamed to `riscv-none-embed-`
 
@@ -92,7 +92,7 @@ no longer include the 4096 CSRs
 
 ### 2017-06-27
 
-- add support for `--specs=nano.specs`; this translates into a separate 
-build for `newlib` with specific configuration options and a separate 
+- add support for `--specs=nano.specs`; this translates into a separate
+build for `newlib` with specific configuration options and a separate
 build of the C++ standard libraries with `-Os`.
 
