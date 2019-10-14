@@ -79,6 +79,7 @@ function do_zlib()
           echo
           echo "Running zlib make..."
 
+          # Build.
           make -j ${JOBS}
 
           make install
@@ -179,7 +180,7 @@ function do_gmp()
         echo "Running gmp make..."
 
         # Build.
-        # Parallel builds fail.
+        # Parallel builds may fail.
         make -j ${JOBS}
         # make
 
@@ -255,7 +256,7 @@ function do_mpfr()
         echo "Running mpfr make..."
 
         # Build.
-        # Parallel builds fail.
+        # Parallel builds may fail.
         make -j ${JOBS}
         # make 
 
@@ -412,7 +413,7 @@ function do_isl()
         echo "Running isl make..."
 
         # Build.
-        # Parallel builds fail.
+        # Parallel builds may fail.
         make -j ${JOBS}
         # make
 

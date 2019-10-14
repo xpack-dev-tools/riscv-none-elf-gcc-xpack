@@ -222,7 +222,7 @@ function do_binutils()
         echo
         echo "Running binutils make..."
       
-        # Build
+        # Build.
         make -j ${JOBS} 
 
         if [ "${WITH_STRIP}" == "y" ]
@@ -402,7 +402,7 @@ function do_gcc_first()
         echo "Running gcc first stage make..."
 
         # No need to make 'all', 'all-gcc' is enough to compile the libraries.
-        # Parallel builds fail.
+        # Parallel builds may fail.
         make -j ${JOBS} all-gcc
         # make all-gcc
         
@@ -554,14 +554,10 @@ function do_newlib()
         echo
         echo "Running newlib$1 make..."
 
-        # Parallel build failed on CentOS XBB
-        if [ "${TARGET_PLATFORM}" == "darwin" ]
-        then
-          make -j ${JOBS}
-        else
-          make -j ${JOBS}
-          # make
-        fi 
+        # Build.
+        # Parallel builds may fail.
+        make -j ${JOBS}
+        # make
 
         # Top make fails with install-strip due to libgloss make.
         make install
@@ -891,7 +887,7 @@ function do_gcc_final()
           # This is a workaround. Better approach is have a t-* to set this flag via
           # CRTSTUFF_T_CFLAGS
 
-          # Parallel builds fail.
+          # Parallel builds may fail.
           make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
           # make INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
 
@@ -932,7 +928,7 @@ function do_gcc_final()
 
           # For Windows build only the GCC binaries, the libraries were copied 
           # from the Linux build.
-          # Parallel builds fail.
+          # Parallel builds may fail.
           make -j ${JOBS} all-gcc
           # make all-gcc
 
@@ -1153,7 +1149,7 @@ function do_gdb()
         echo
         echo "Running gdb$1 make..."
 
-        # Parallel builds fail.
+        # Parallel builds may fail.
         make -j ${JOBS}
         # make 
 
