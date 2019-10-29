@@ -1,5 +1,6 @@
 [![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc)
-[![npm](https://img.shields.io/npm/dt/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
+[![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/total.svg)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/)
+[![npm](https://img.shields.io/npm/dt/@xpack-dev-tools/riscv-none-embed-gcc?label=npm%20downloads)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
 
 ## The xPack GNU RISC-V Embedded GCC
 
