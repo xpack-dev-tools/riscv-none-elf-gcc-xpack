@@ -16,14 +16,14 @@ for GNU/Linux and Windows or a custom folder for MacOS).
 The build scripts use a set of local repositories, to accommodate the
 small changes required by the `riscv-none-embed-` prefix:
 
-- [xpack-dev-tools/riscv-gcc](https://github.com/xpack-dev-tools/riscv-gcc)
 - [xpack-dev-tools/riscv-binutils-gdb](https://github.com/xpack-dev-tools/riscv-binutils-gdb)
+- [xpack-dev-tools/riscv-gcc](https://github.com/xpack-dev-tools/riscv-gcc)
 - [xpack-dev-tools/riscv-newlib](https://github.com/xpack-dev-tools/riscv-newlib)
 
 These repositories were forked from the SiFive repositories:
 
-- [sifive/riscv-gcc](https://github.com/sifive/riscv-gcc)
 - [sifive/riscv-binutils-gdb](https://github.com/sifive/riscv-binutils-gdb)
+- [sifive/riscv-gcc](https://github.com/sifive/riscv-gcc)
 - [sifive/riscv-newlib](https://github.com/sifive/riscv-newlib)
 
 GDB was upstreamed and does not require SiFive specific patches, so the
@@ -43,7 +43,7 @@ Git repo.
 To download them, the following shortcut is available:
 
 ```console
-$ curl -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
+$ curl --fail -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
 ```
 
 This small script issues the following two commands:
@@ -89,40 +89,180 @@ SiFive release.
 
 ## Prepare release
 
-To prepare a new release:
-
-- check the [SiFive Releases](https://github.com/sifive/freedom-tools/releases) for new releases
-- check the [sifive/freedom-tools](https://github.com/sifive/freedom-tools/tree/master/src)
-  for the commit IDs used
-- determine the GCC version (like `8.2.0`) and update the `scripts/VERSION`
-  file; the format is `8.2.0-3.1`. The fourth digit is the number of the
-  SiFive release of the same GCC version, and the fifth digit is the xPack
-  GNU RISC-V Embedded GCC release number of this version.
-- add a new set of definitions in the `scripts/container-build.sh`, with
-  the versions of various components;
-- if newer libraries are used, check if they are available from the local git
-  cache project.
-
-- identify the SiFive branches and branch from them the `-xpack` branches
-- update the prefix code
-- add a tag like `v8.2.0-3.1` to all repos
-- update `GH_RELEASE` (without `v`)
-- for GDB, it is a bit tricky, since it must identify the FSF code in line
-  with what was used by SiFive; create a branch like `sifive-gdb-8.3`
-- branch it into `sifive-gdb-8.3-xpack` and edit the prefix code
-- add a tag like `v8.2.0-3.1-gdb`
-
-
 ### Check `README.md`
 
 Normally `README.md` should not need changes, but better check.
 Information related to the new version should not be included here,
 but in the version specific file (below).
 
+### Identify SiFive commit IDs
+
+- check the [SiFive Releases](https://github.com/sifive/freedom-tools/releases)
+for new releases
+- identify the tag of the latest release (like `v2019.08.0`)
+- switch to Code view and select the tag
+- open the `src` folder to identify the commit IDs used for the linked repos.
+
+### Identify the main GCC version
+
+Determine the GCC version (like `8.3.0`) and update the `scripts/VERSION`
+  file; the format is `8.3.0-1.1`. The fourth digit is the number of the
+  SiFive release of the same GCC version, and the fifth digit is the xPack
+  GNU RISC-V Embedded GCC release number of this version.
+
 ### Create `README-<version>.md`
 
-In the `scripts` folder create a copy of the previous one and update the
-Git commit and possible other details.
+In the `scripts` folder create a copy of the previous version one.
+
+From the the `src` folder, follow the linked module links for 
+binutils/gcc/newlib and copy/paste them.
+Also update the short IDs and dates.
+
+Check the GDB commit ID (not linked, since it points to external repo).
+
+### Update binutils
+
+With Sourcetree in
+[xpack-dev-tools/riscv-binutils-gdb](https://github.com/xpack-dev-tools/riscv-binutils-gdb)
+
+Check if there is a `sifive` remote pointing to
+https://github.com/sifive/riscv-binutils-gdb.
+
+If the changes apply to an existing branch:
+
+- checkout the current SiFive branch (like `sifive-binutils-2.32`)
+- merge the commit with the desired ID from the corresponding branch in
+the `sifive` remote
+- checkout the corresponding xpack branch (like `sifive-binutils-2.32-xpack`)
+- merge the previous merge
+- check the differences from the non-xpack branch; it should be only the
+addition of `embed)` in `config.sub`
+
+- from the `sifive` remote
+checkout the new SiFive branch (like `sifive-binutils-2.32`) into a new local
+branch
+- identify the commit ID and switch to it
+- create a new branch with a similar name, but suffixed by `-xpack`
+(like `sifive-binutils-2.32-xpack`)
+- identify the commit which adds the xPack specific changes
+- cherry pick it; do not commit immediately
+- check the uncommited changes; there should be one file `config.sub` 
+which adds `-embed)`
+- commit as **add support for riscv-none-embed-***
+
+In both cases:
+
+- push the two modified branches (like `sifive-binutils-2.32` and
+`sifive-binutils-2.32-xpack`)
+- add a tag with the current version (like `v8.3.0-1.1`), and push 
+it to `origin`.
+
+### Update gcc
+
+With Sourcetree in
+[xpack-dev-tools/riscv-gcc](https://github.com/xpack-dev-tools/riscv-gcc)
+
+Check if there is a `sifive` remote pointing to
+https://github.com/sifive/riscv-gcc.
+
+If the changes apply to an existing branch:
+
+- checkout the current SiFive branch (like `sifive-gcc-8.3.0`)
+- merge the commit with the desired ID from the corresponding branch in
+the `sifive` remote
+- checkout the corresponding xpack branch (like `sifive-gcc-8.3.0-xpack`)
+- merge the previous merge
+- check the differences from the non-xpack branch; there should be tree files:
+  - `elf-embed.h` with the `LIB_SPEC` definitions without libgloss
+  - `config.gcc` with `tm_file` definition that uses `elf-embed.h`
+  - `config.sub` which adds `riscv0*)` and `-embed)`
+
+If this is a new branch:
+
+- from the `sifive` remote
+checkout the new SiFive branch (like `sifive-gcc-8.3.0`) into a new local
+branch
+- identify the commit ID and switch to it
+- create a new branch with a similar name, but suffixed by `-xpack` 
+(like `sifive-gcc-8.3.0-xpack`)
+- identify the commit which adds the xPaack specific changes
+- cherry pick it; do not commit immediately
+- check the uncommited changes; there should be tree files:
+  - `elf-embed.h` with the `LIB_SPEC` definitions without libgloss
+  - `config.gcc` with `tm_file` definition that uses `elf-embed.h`
+  - `config.sub` which adds `riscv0*)` and `-embed)`
+- commit as **add support for riscv-none-embed-***
+
+In both cases:
+
+- push the two modified branches (like `sifive-gcc-8.3.0` and
+`sifive-gcc-8.3.0-xpack`)
+- add a tag with the current version (like `v8.3.0-1.1`), and push
+it to `origin`.
+
+### Update newlib
+
+With Sourcetree in
+[xpack-dev-tools/riscv-newlib](https://github.com/xpack-dev-tools/riscv-newlib)
+
+Check if there is a `sifive` remote pointing to
+https://github.com/sifive/riscv-newlib.
+
+If the changes apply to an existing branch:
+
+- checkout the current SiFive branch (like `master`)
+- merge the commit with the desired ID from the corresponding branch in
+the `sifive` remote
+- checkout the corresponding xpack branch (like `sifive-binutils-2.32-xpack`)
+- merge the previous merge
+- check the differences from the non-xpack branch; it should be only the
+addition of `embed)` in `config.sub`
+
+- from the `sifive` remote
+checkout the new SiFive branch (like `master`) into a new local
+branch (like `sifive-master`)
+- identify the commit ID and switch to it
+- create a new branch with a similar name, but suffixed by `-xpack`
+(like `sifive-master-xpack`)
+- identify the commit which adds the xPack specific changes
+- cherry pick it; do not commit immediately
+- check the uncommited changes; there should be one file `config.sub` 
+which adds `-embed)`
+- commit as **add support for riscv-none-embed-***
+
+In both cases:
+
+- push the two modified branches (like `sifive--master` and
+`sifive--master-xpack`)
+- add a tag with the current version (like `v8.3.0-1.1`), and push 
+it to `origin`.
+
+### Update gdb
+
+With Sourcetree in
+[xpack-dev-tools/riscv-binutils-gdb](https://github.com/xpack-dev-tools/riscv-binutils-gdb)
+
+Check if there is a `gdb` remote pointing to
+git://sourceware.org/git/binutils-gdb.git.
+
+For GDB, it is a bit tricky, since it must identify the GNU code in line
+with what was used by SiFive; create a branch like `sifive-gdb-8.3`
+
+- branch it into `sifive-gdb-8.3-xpack` and edit the prefix code
+- add a tag like `v8.3.0-1.1-gdb`
+
+### Update container-build.sh
+
+- add a new set of definitions in the `scripts/container-build.sh`, with
+  the versions of various components;
+- update `GH_RELEASE` to the new version (like `8.3.0-1.1`, without `v`)
+- in [SiFive Releases](https://github.com/sifive/freedom-tools/releases)
+for new releases
+- identify the tag of the latest release (like `v2019.08.0`)
+- switch to Code view and select the tag
+- open the `Makefile` file to identify the `MULTILIBS_GEN` definition;
+- copy/paste it into `GCC_MULTILIB`
+- add `rv32imaf-ilp32f--` after `rv32imf-`
 
 ## Update `CHANGELOG.md`
 
@@ -151,6 +291,12 @@ Before starting a multi-platform build, check if Docker is started:
 $ docker info
 ```
 
+Eventually run the test image:
+
+```console
+$ docker run hello-world
+```
+
 Before running a build for the first time, it is recommended to preload the
 docker images.
 
@@ -173,6 +319,12 @@ It is also recommended to Remove unused Docker space. This is mostly useful
 after failed builds, during development, when dangling images may be left
 by Docker.
 
+To check the content of a Docker image:
+
+```console
+$ docker run --interactive --tty ilegeul/centos:6-xbb-v2.2
+```
+
 To remove unused files:
 
 ```console
@@ -182,7 +334,7 @@ $ docker system prune --force
 To download the build scripts:
 
 ```console
-$ curl -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
+$ curl --fail -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
 ```
 
 To build both the 32/64-bit Windows and GNU/Linux versions, use `--all`; to
@@ -197,7 +349,7 @@ network connection or a computer entering sleep.
 $ screen -S riscv
 
 $ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
+$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all --jobs 4
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -244,7 +396,7 @@ To build the latest macOS version:
 $ screen -S arm
 
 $ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx
+$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx --jobs 4
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -268,6 +420,21 @@ folder in a terminal and use `scp`:
 $ cd ~/Work/riscv-none-embed-gcc-*/deploy
 $ scp * ilg@ilg-mbp.local:Downloads/xpack-binaries/riscv
 ```
+
+## Run a test build on macOS
+
+Before starting the builds on the dedicated machines, run a quick test on
+the local development workstation.
+
+```console
+$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx --disable-multilib --develop --jobs 6
+```
+
+This should check the commit IDs and the tag names in all the refered
+repositories, and the build scripts.
+
+It is _quick_ because it does not build the multilibs. Even so, on a
+fast machine, it takes about one hour.
 
 ## Subsequent runs
 
@@ -314,6 +481,22 @@ host file system, and resume an interrupted build.
 For development builds, it is also possible to create everything
 with `-g -O0` and be able to run debug sessions.
 
+### --disable-multilib
+
+For development builds, to save time, it is recommended to build the
+toolchain without multilib.
+
+### --jobs
+
+By default, the build steps use a single job at a time, but for
+recent CPUs with multiple cores it is possible to run multiple jobs
+in parallel.
+
+The setting applies to all steps.
+
+Warning: Parallel builds require significant system resources and occasionally
+may crash the build.
+
 ### Interrupted builds
 
 The Docker scripts run with root privileges. This is generally not a
@@ -329,8 +512,14 @@ build folder, it might be necessary to run a recursive `chown`.
 Set the release explicitly in the environment:
 
 ```console
-$ RELEASE_VERSION=8.2.0-3.1 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
+$ RELEASE_VERSION=8.2.0-3.1 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all --jobs 4
 ```
+
+> Note: This procedure builds a previous release but in the context of
+the latest build environment, which might be different from the one used
+at the time of the release, so the result may be slightly different; to
+obtain exactly the same result, use the commit tagged with the desired
+release.
 
 ## Test
 
@@ -452,9 +641,12 @@ place them in the XBB cache (`Work/cache`) and restart the build.
 
 ### Parallel build
 
-For various reasons, parallel builds for some components
-fail with errors like 'vfork: insufficient resources'. Thus,
-occasionally parallel build are disabled.
+Parallel builds are not only supported, but encouraged. Use a number of
+jobs based on the number of cores, preferably without counting the 
+hyperthreads.
+
+Please note that, for optimum performances, parallel builds require ample
+amounts of RAM (8 GB are know to work, 16 GB are recommended for 4 jobs).
 
 ### Building GDB on macOS
 
