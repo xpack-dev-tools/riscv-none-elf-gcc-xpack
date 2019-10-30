@@ -3,11 +3,16 @@
 
 Releases in reverse chronological order.
 
+### 2019-10-30
+
+- v8.3.0-1.1 prepared
+- update to follow SiFive 2019.08.0 release
+
 ### 2019-07-31
 
 - v8.2.0-3.1.1 published on npmjs.com
 - v8.2.0-3.1 released
-- update to follow SiFive May 2019 release
+- update to follow SiFive May 2019.05.0 release
 
 ___
 

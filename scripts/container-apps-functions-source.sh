@@ -143,6 +143,61 @@ function download_python_win()
   fi
 }
 
+function download_python3_win() 
+{
+  # https://www.python.org/downloads/windows/
+  # https://www.python.org/downloads/release/python-372/
+  # https://www.python.org/ftp/python/3.7.2/python-3.7.2.post1-embed-win32.zip
+  # https://www.python.org/ftp/python/3.7.2/python-3.7.2.post1-embed-amd64.zip
+  # https://www.python.org/ftp/python/3.7.2/python-3.7.2.exe
+  # https://www.python.org/ftp/python/3.7.2/python-3.7.2-amd64.exe
+  # https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz
+
+  PYTHON3_WIN_EMBED_PACK="${PYTHON3_WIN_EMBED_FOLDER_NAME}.zip"
+  PYTHON3_WIN_EMBED_URL="https://www.python.org/ftp/python/${PYTHON3_VERSION}/${PYTHON3_WIN_EMBED_PACK}"
+
+  (
+    xbb_activate
+
+    if [ ! -d "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}" ]
+    then
+      mkdir -p "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}"
+      cd "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}"
+
+      download_and_extract "${PYTHON3_WIN_EMBED_URL}" "${PYTHON3_WIN_EMBED_PACK}" "${PYTHON3_WIN_EMBED_FOLDER_NAME}"
+    else
+      echo "Folder ${PYTHON3_WIN_EMBED_FOLDER_NAME} already present."
+    fi
+      
+    cd "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}"
+    echo "Copying python${PYTHON3_VERSION_MAJOR}${PYTHON3_VERSION_MINOR}.dll..."
+    # From here it'll be copied as dependency.
+    mkdir -p "${LIBS_INSTALL_FOLDER_PATH}/bin/"
+    install -v -c -m 644 "python${PYTHON3_VERSION_MAJOR}.dll" \
+      "${LIBS_INSTALL_FOLDER_PATH}/bin/"
+    install -v -c -m 644 "python${PYTHON3_VERSION_MAJOR}${PYTHON3_VERSION_MINOR}.dll" \
+      "${LIBS_INSTALL_FOLDER_PATH}/bin/"
+  )
+
+  PYTHON3_ARCHIVE="${PYTHON3_SRC_FOLDER_NAME}.tar.xz"
+  PYTHON3_URL="https://www.python.org/ftp/python/${PYTHON3_VERSION}/${PYTHON3_ARCHIVE}"
+
+  PYTHON3_FOLDER_NAME="python-${PYTHON3_VERSION}"
+
+  if [ ! -d "${SOURCES_FOLDER_PATH}/${PYTHON3_SRC_FOLDER_NAME}" ]
+  then
+    cd "${SOURCES_FOLDER_PATH}"
+
+    download_and_extract "${PYTHON3_URL}" "${PYTHON3_ARCHIVE}" \
+      "${PYTHON3_SRC_FOLDER_NAME}"
+
+    # The source archive includes only the pyconfig.h.in, which needs
+    # to be configured, which is not an easy task. Thus add the file copied 
+    # from a Windows install.
+    cp "${BUILD_GIT_PATH}/patches/pyconfig-${PYTHON3_VERSION}.h" Include/pyconfig.h
+  fi
+}
+
 # -----------------------------------------------------------------------------
 
 function do_binutils()
@@ -1043,6 +1098,29 @@ function do_gdb()
       mkdir -p "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
 
+      local platform_python2
+      if [ -x "/usr/bin/python2.7" ]
+      then
+        platform_python2="/usr/bin/python2.7"
+      elif [ -x "/usr/bin/python2.6" ]
+      then
+        platform_python2="/usr/bin/python2.6"
+      else
+        set +e
+        platform_python2="$(which python)"
+        set -e
+      fi
+
+      local platform_python3
+      if [ -x "/usr/bin/python3.6" ]
+      then
+        platform_python3="/usr/bin/python3.6"
+      else
+        set +e
+        platform_python3="$(which python3)"
+        set -e
+      fi
+
       xbb_activate
       xbb_activate_installed_dev
 
@@ -1069,6 +1147,8 @@ function do_gdb()
       
       export CPPFLAGS="${XBB_CPPFLAGS}" 
       export LDFLAGS="${XBB_LDFLAGS_APP}"
+      # libiconv is used by Python3.
+      export LIBS="-liconv"
 
       if [ "${TARGET_PLATFORM}" == "darwin" ]
       then
@@ -1084,13 +1164,23 @@ function do_gdb()
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
           extra_python_opts="--with-python=${BUILD_GIT_PATH}/scripts/python-win-config.sh"
+        elif [ "${USE_PLATFORM_PYTHON}" == "y" ]
+        then
+          extra_python_opts="--with-python=${platform_python2}"
         else
           extra_python_opts="--with-python=$(which python2)"
         fi
       elif [ "$1" == "-py3" ]
       then
-        # Not yet functional, configure fails.
-        extra_python_opts="--with-python=$(which python3)"
+        if [ "${TARGET_PLATFORM}" == "win32" ]
+        then
+          extra_python_opts="--with-python=${BUILD_GIT_PATH}/patches/python3-config.sh"
+        elif [ "${USE_PLATFORM_PYTHON3}" == "y" ]
+        then
+          extra_python_opts="--with-python=${platform_python3}"
+        else
+          extra_python_opts="--with-python=$(which python3)"
+        fi
       fi
 
       if [ ! -f "config.status" ]
