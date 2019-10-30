@@ -284,37 +284,37 @@ then
   # Added: rv32imaf-ilp32f--
   GCC_MULTILIB=${GCC_MULTILIB:-"\
   rv32e-ilp32e--c \
-	rv32ea-ilp32e--m \
-	rv32em-ilp32e--c \
-	rv32eac-ilp32e-- \
-	rv32emac-ilp32e-- \
-	rv32i-ilp32--c \
-	rv32ia-ilp32--m \
-	rv32im-ilp32--c \
-	rv32if-ilp32f-rv32ifd-c \
-	rv32iaf-ilp32f-rv32imaf,rv32iafc-d \
-	rv32imf-ilp32f-rv32imfd-c \
+  rv32ea-ilp32e--m \
+  rv32em-ilp32e--c \
+  rv32eac-ilp32e-- \
+  rv32emac-ilp32e-- \
+  rv32i-ilp32--c \
+  rv32ia-ilp32--m \
+  rv32im-ilp32--c \
+  rv32if-ilp32f-rv32ifd-c \
+  rv32iaf-ilp32f-rv32imaf,rv32iafc-d \
+  rv32imf-ilp32f-rv32imfd-c \
   rv32imaf-ilp32f-- \
-	rv32iac-ilp32-- \
-	rv32imac-ilp32-- \
-	rv32imafc-ilp32f-rv32imafdc- \
-	rv32ifd-ilp32d--c \
-	rv32imfd-ilp32d--c \
-	rv32iafd-ilp32d-rv32imafd,rv32iafdc- \
-	rv32imafdc-ilp32d-- \
-	rv64i-lp64--c \
-	rv64ia-lp64--m \
-	rv64im-lp64--c \
-	rv64if-lp64f-rv64ifd-c \
-	rv64iaf-lp64f-rv64iafc-d \
-	rv64imf-lp64f-rv64imfd-c \
-	rv64imaf-lp64f-- \
-	rv64iac-lp64-- \
-	rv64imac-lp64-- \
-	rv64imafc-lp64f-rv64imafdc- \
-	rv64ifd-lp64d--m,c \
-	rv64iafd-lp64d-rv64imafd,rv64iafdc- \
-	rv64imafdc-lp64d-- \
+  rv32iac-ilp32-- \
+  rv32imac-ilp32-- \
+  rv32imafc-ilp32f-rv32imafdc- \
+  rv32ifd-ilp32d--c \
+  rv32imfd-ilp32d--c \
+  rv32iafd-ilp32d-rv32imafd,rv32iafdc- \
+  rv32imafdc-ilp32d-- \
+  rv64i-lp64--c \
+  rv64ia-lp64--m \
+  rv64im-lp64--c \
+  rv64if-lp64f-rv64ifd-c \
+  rv64iaf-lp64f-rv64iafc-d \
+  rv64imf-lp64f-rv64imfd-c \
+  rv64imaf-lp64f-- \
+  rv64iac-lp64-- \
+  rv64imac-lp64-- \
+  rv64imafc-lp64f-rv64imafdc- \
+  rv64ifd-lp64d--m,c \
+  rv64iafd-lp64d-rv64imafd,rv64iafdc- \
+  rv64imafdc-lp64d-- \
 "}
 
   GCC_MULTILIB_FILE=${GCC_MULTILIB_FILE:-"t-elf-multilib"}
