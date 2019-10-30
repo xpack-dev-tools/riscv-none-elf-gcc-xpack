@@ -78,8 +78,12 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-e
   - start (Resume)
   - stop (Terminate)
   - (don't miss the LTO cases, since in the past they had problems)
+- to test the Python debugger, start it with `--version`; on Windows, to test with different versions, set the path with:
+```
+C:\Users\ilg>set PYTHONHOME=C:\Python27.16
+```
 
-## Create a new GitHub release
+## Create a new GitHub pre-release
 
 - go to the [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases) page
 - click **Draft a new release**
@@ -96,7 +100,6 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-e
 
 Note: at this moment the system should send a notification to all clients
 watching this project.
-
 
 ## Prepare a new blog post
 
@@ -182,5 +185,5 @@ $ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@latest
 - in a separate browser windows, open [TweetDeck](https://tweetdeck.twitter.com/)
 - using the `@xpack_project` account
 - paste the release name like **xPack GNU RISC-V Embedded GCC v8.2.0-2.2 released**
-- paste the link to the Github release
+- paste the link to the Web Page release
 - click the **Tweet** button
