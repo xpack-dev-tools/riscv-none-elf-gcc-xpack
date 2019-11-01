@@ -110,11 +110,13 @@ watching this project.
 
 In the `xpack.github.io` web Git:
 
-- add a new file to `_posts/riscv-none-embed-gcc/releases`
+- add a new file to `_posts/releases/riscv-none-embed-gcc`
 - name the file like `2018-05-06-riscv-none-embed-gcc-v8-2-0-2-2-released.md`
 - name the post like: **xPack GNU RISC-V Embedded GCC v8.2.0-2.2 released**.
-- as `download_url` use the generic `https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/tag/v8.2.0-2.2/`
+- as `download_url` use something like `https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/tag/v8.2.0-2.2/`
 - update the `date:` field with the current date
+- copy the list of commit IDs from the `README-<version>.sh` file
+- generate the list of multilibs and copy/paste
 
 If any, close [issues](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues)
 on the way. Refer to them as:
@@ -156,6 +158,7 @@ $ cat *.sha
 
 - commit the `xpack.github.io` web Git; use a message
   like **xPack GNU RISC-V Embedded GCC v8.2.0-2.2 released**
+- adjust timestamps
 - wait for the GitHub Pages build to complete
 - remember the post URL, since it must be updated in the release page
 

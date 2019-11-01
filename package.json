@@ -39,28 +39,28 @@
   "xpack": {
     "binaries": {
       "destination": "./.content",
-      "baseUrl": "https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/download/v8.2.0-3.1/",
+      "baseUrl": "https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/download/v8.3.0-1.1/",
       "skip": 3,
       "platforms": {
         "darwin-x64": {
-          "sha256": "48ece50b7272a8e49e56e37f54f9962f93dce4ca44f1bb4c8113fab0230fbdf1",
-          "fileName": "xpack-riscv-none-embed-gcc-8.2.0-3.1-darwin-x64.tgz"
+          "sha256": "532f719c11f7311a0103eac6ddd7dd012716a2c3030dd1ee7e64374b1af41d34",
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-1.1-darwin-x64.tgz"
         },
         "linux-x86": {
-          "sha256": "2e856ee33ef544a2405183366cdf299da2cca697e8cc57627dfaad8ab4460a99",
-          "fileName": "xpack-riscv-none-embed-gcc-8.2.0-3.1-linux-x32.tgz"
+          "sha256": "c40d8e74a3f87839131287ecd68be2e691c84af0b75d684c1e47ab60687ff987",
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-1.1-linux-x32.tgz"
         },
         "linux-x64": {
-          "sha256": "3d40fab50ebad8424ff85748f25d2eaee50f86a5d5222abd7a45a2e490f1e4f5",
-          "fileName": "xpack-riscv-none-embed-gcc-8.2.0-3.1-linux-x64.tgz"
+          "sha256": "7b95d397a2bd319892f5c930757f7b3bc47acac633dafcf055b0901172513c00",
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-1.1-linux-x64.tgz"
         },
         "win32-x86": {
-          "sha256": "78bcd52f7b404133de3b2f9568e7101c1de747f98db3a7b0d6251b75a1754867",
-          "fileName": "xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x32.zip"
+          "sha256": "5d608a0438c5f5c4a2c8b6d4eb13499a60a17618da04fb20972eb0f4965ed4bd",
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-1.1-win32-x32.zip"
         },
         "win32-x64": {
-          "sha256": "98b60720607f1400081806d60d70796b30399f8b426e2c790a4abb0bffb9e5ec",
-          "fileName": "xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x64.zip"
+          "sha256": "10443f00627473f08c44fd00c8011b17c67953d1eb4f1609fb00e5653165d5d3",
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-1.1-win32-x64.zip"
         }
       }
     },
