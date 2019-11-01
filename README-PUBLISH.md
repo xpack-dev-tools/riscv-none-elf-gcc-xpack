@@ -36,7 +36,7 @@ The `VERSION` file should refer to the actual release.
 
 In this Git repo:
 
-- if necessary, merge the `xpack-develop` branch into `xpack`.
+- if necessary, merge the `develop` branch into `xpack`
 - push it to GitHub.
 - possibly push the helper project too.
 
@@ -51,25 +51,27 @@ page.
 Install the binaries on all supported platforms and check if they are
 functional.
 
-For this, on each platform:
+For this, on each platform (Mac, GNU/Linux 64/32, Windows 64/32):
 
-- unpack the archive in `Downloads`, and rename the version folder,
-  by replacing a dash with a space; this will test paths with spaces;
+- unpack the archive in `Desktop` or in `Downloads`, and rename the version 
+  folder, by replacing a dash with a space; this will test paths with spaces;
   on Windows the current paths always use spaces, so renaming is not needed;
 - clone this repo locally; on Windows use the Git console;
-```
+```console
 $ git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
 ~/Downloads/riscv-none-embed-gcc-xpack.git
 ```
-- in a separate workspace, Import -> General -> Existing Projects into Workspace
+- in a separate workspace, Import → General → Existing Projects into Workspace
   the Eclipse projects available in the
   `tests/eclipse` folder of the build repo; more details in the
   [README.md](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/tests/eclipse/README.md)
 - define the **Workspace RISC-V Toolchain path** to use the `Downloads`
   temporary location
 - to test the compiler: for all projects
-  - remove all build folders
-  - build all configs
+  - remove all build folders, or **Clean all**
+  - build all configs, with the hammer, in `riscv-h1b-fs`
+  - build all configs, with the hammer, in `riscv-h1b-fs-lib`; this should
+    also run the builds in `riscv-static-lib`
 - to test the debugger: for all OpenOCD debug configurations
   - start the OpenOCD debug session,
   - single step a few lines (Step Over)
@@ -78,13 +80,16 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-e
   - start (Resume)
   - stop (Terminate)
   - (don't miss the LTO cases, since in the past they had problems)
-- to test the Python debugger, start it with `--version`; on Windows, to test with different versions, set the path with:
+- to test the Python debugger, start it with `--version`; on Windows, to
+  test with different versions, set the path with:
 ```
 C:\Users\ilg>set PYTHONHOME=C:\Python27.16
 ```
 
 ## Create a new GitHub pre-release
 
+- in `CHANGELOG.md`, add release date
+- commit and push the repo
 - go to the [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases) page
 - click **Draft a new release**
 - name the tag like **v8.2.0-2.2** (mind the dash in the middle!)
@@ -140,6 +145,13 @@ xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x32.zip
 xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x64.zip
 ```
 
+If you missed this, `cat` the content of the `.sha` files:
+
+```console
+$ cd ~Downloads/xpack-binaries/riscv
+$ cat *.sha
+```
+
 ## Update the Web
 
 - commit the `xpack.github.io` web Git; use a message
@@ -162,7 +174,6 @@ xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x64.zip
 - `npm pack` and check the content of the archive
 - push all changes to GitHub
 - `npm publish` (use `--access public` when publishing for the first time)
-
 
 ## Test npm binaries
 
