@@ -377,7 +377,7 @@ folder in a terminal and use `scp`:
 
 ```console
 $ cd ~/Work/riscv-none-embed-gcc-*/deploy
-$ scp * ilg@ilg-mbp.local:Downloads/xpack-binaries/riscv
+$ scp * ilg@ilg-wks.local:Downloads/xpack-binaries/riscv
 ```
 
 ### Build the macOS binary
@@ -390,13 +390,19 @@ fast SSD.
 $ ssh ilg-xbb-mac.local
 ```
 
+To download them, the following shortcut is available:
+
+```console
+$ curl --fail -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
+```
+
 To build the latest macOS version:
 
 ```console
 $ screen -S arm
 
 $ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx --jobs 4
+$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx --jobs 8
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -418,7 +424,7 @@ folder in a terminal and use `scp`:
 
 ```console
 $ cd ~/Work/riscv-none-embed-gcc-*/deploy
-$ scp * ilg@ilg-mbp.local:Downloads/xpack-binaries/riscv
+$ scp * ilg@ilg-wks.local:Downloads/xpack-binaries/riscv
 ```
 
 ## Run a test build on macOS
@@ -427,7 +433,7 @@ Before starting the builds on the dedicated machines, run a quick test on
 the local development workstation.
 
 ```console
-$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx --disable-multilib --develop --jobs 6
+$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx --disable-multilib --develop --jobs 12
 ```
 
 This should check the commit IDs and the tag names in all the refered
@@ -512,7 +518,8 @@ build folder, it might be necessary to run a recursive `chown`.
 Set the release explicitly in the environment:
 
 ```console
-$ RELEASE_VERSION=8.2.0-3.1 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all --jobs 4
+$ RELEASE_VERSION=8.2.0-3.1 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all --jobs 8
+$ RELEASE_VERSION=8.3.0-1.1 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all --jobs 8
 ```
 
 > Note: This procedure builds a previous release but in the context of
