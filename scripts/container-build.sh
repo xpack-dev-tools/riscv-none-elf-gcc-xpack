@@ -84,13 +84,23 @@ WITH_STRIP="y"
 WITHOUT_MULTILIB=""
 WITH_PDF="y"
 WITH_HTML="n"
+WITH_TESTS="y"
+
 IS_DEVELOP=""
 IS_DEBUG=""
 
 LINUX_INSTALL_PATH=""
 USE_GITS=""
 
-JOBS="1"
+if [ "$(uname)" == "Linux" ]
+then
+  JOBS="$(nproc)"
+elif [ "$(uname)" == "Darwin" ]
+then
+  JOBS="$(sysctl hw.ncpu | sed 's/hw.ncpu: //')"
+else
+  JOBS="1"
+fi
 
 while [ $# -gt 0 ]
 do
@@ -99,6 +109,11 @@ do
 
     --disable-strip)
       WITH_STRIP="n"
+      shift
+      ;;
+
+    --disable-tests)
+      WITH_TESTS="n"
       shift
       ;;
 
@@ -168,6 +183,13 @@ if [ "${IS_DEBUG}" == "y" ]
 then
   WITH_STRIP="n"
 fi
+
+if [ "${TARGET_PLATFORM}" == "win32" ]
+then
+  export WITH_TESTS="n"
+fi
+
+env | sort
 
 # -----------------------------------------------------------------------------
 

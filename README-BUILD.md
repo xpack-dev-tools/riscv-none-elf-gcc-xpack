@@ -6,10 +6,25 @@ This project includes the scripts and additional files required to
 build and publish the
 [xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-embed-gcc/) binaries.
 
+It follows the official
+[SiFive](https://github.com/sifive/freedom-tools)
+releases, and it is planned to make a new release after each future
+SiFive release.
+
 The build scripts use the
 [xPack Build Box (XBB)](https://github.com/xpack/xpack-build-box),
-a set of elaborate build environments based on GCC 7.4 (Docker containers
+a set of elaborate build environments based on a recent GCC (Docker containers
 for GNU/Linux and Windows or a custom folder for MacOS).
+
+There are two types of builds:
+
+- local/native builds, which use the tools available on the
+  host machine; generally the binaries do not run on a different system
+  distribution/version; intended mostly for development purposes.
+- distribution builds, which create the archives distributed as
+  binaries; expected to run on most modern systems.
+
+This page documents the distribution builds.
 
 ## Repository URLs
 
@@ -57,6 +72,21 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-e
 > Note: the repository uses submodules; for a successful build it is
 > mandatory to recurse the submodules.
 
+For development purposes, there is a shortcut to clone the `xpack-develop`
+branch:
+
+```console
+$ curl --fail -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/raw/xpack/scripts/git-clone-develop.sh | bash
+```
+
+which is a shortcut for:
+
+```console
+$ rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git
+$ git clone --recurse-submodules --branch xpack-develop https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
+  ~/Downloads/riscv-none-embed-gcc-xpack.git
+```
+
 ## The `Work` folder
 
 The script creates a temporary build `Work/riscv-none-embed-gcc-${version}`
@@ -73,19 +103,12 @@ either passed to Docker or sourced to shell. The Docker syntax
 **is not** identical to shell, so some files may
 not be accepted by bash.
 
-### Prerequisites
+## Prerequisites
 
 The prerequisites are common to all binary builds. Please follow the
 instructions from the separate
 [Prerequisites for building xPack binaries](https://xpack.github.io/xbb/prerequisites/)
 page and return when ready.
-
-## Update git repos
-
-The xPack GNU RISC-V Embedded GCC distribution follows the official
-[SiFive](https://github.com/sifive/freedom-tools)
-releases, and it is planned to make a new release after each future
-SiFive release.
 
 ## Prepare release
 
@@ -282,7 +305,7 @@ Ubuntu Server 18 LTS, running on an Intel NUC8i7BEH mini PC with 32 GB of RAM
 and 512 GB of fast M.2 SSD.
 
 ```console
-$ ssh ilg-xbb-linux.local
+$ ssh xbbi
 ```
 
 Before starting a multi-platform build, check if Docker is started:
@@ -308,11 +331,10 @@ The result should look similar to:
 
 ```console
 $ docker images
-REPOSITORY TAG IMAGE ID CREATED SIZE
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-ilegeul/centos32    6-xbb-v2.2          956eb2963946        5 weeks ago         3.03GB
-ilegeul/centos      6-xbb-v2.2          6b1234f2ac44        5 weeks ago         3.12GB
-hello-world         latest              fce289e99eb9        5 months ago        1.84kB
+REPOSITORY          TAG                              IMAGE ID            CREATED             SIZE
+ilegeul/ubuntu      i386-12.04-xbb-v3.2              fadc6405b606        2 days ago          4.55GB
+ilegeul/ubuntu      amd64-12.04-xbb-v3.2             3aba264620ea        2 days ago          4.98GB
+hello-world         latest                           bf756fb1ae65        5 months ago        13.3kB
 ```
 
 It is also recommended to Remove unused Docker space. This is mostly useful
@@ -322,7 +344,7 @@ by Docker.
 To check the content of a Docker image:
 
 ```console
-$ docker run --interactive --tty ilegeul/centos:6-xbb-v2.2
+$ docker run --interactive --tty ilegeul/ubuntu:amd64-12.04-xbb-v3.2
 ```
 
 To remove unused files:
@@ -349,7 +371,7 @@ network connection or a computer entering sleep.
 $ screen -S riscv
 
 $ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all --jobs 4
+$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -380,6 +402,87 @@ $ cd ~/Work/riscv-none-embed-gcc-*/deploy
 $ scp * ilg@ilg-wks.local:Downloads/xpack-binaries/riscv
 ```
 
+#### Build the Arm GNU/Linux binaries
+
+The supported Arm architectures are:
+
+- `armhf` for 32-bit devices
+- `arm64` for 64-bit devices
+
+The current platform for Arm GNU/Linux production builds is a
+Debian 9, running on an ROCK Pi 4 SBC with 4 GB of RAM
+and 256 GB of fast M.2 SSD.
+
+```console
+$ ssh xbba
+```
+
+Before starting a multi-platform build, check if Docker is started:
+
+```console
+$ docker info
+```
+
+Before running a build for the first time, it is recommended to preload the
+docker images.
+
+```console
+$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh preload-images
+```
+
+The result should look similar to:
+
+```console
+$ docker images
+REPOSITORY          TAG                                IMAGE ID            CREATED             SIZE
+ilegeul/ubuntu      arm32v7-16.04-xbb-v3.2             b501ae18580a        27 hours ago        3.23GB
+ilegeul/ubuntu      arm64v8-16.04-xbb-v3.2             db95609ffb69        37 hours ago        3.45GB
+hello-world         latest                             a29f45ccde2a        5 months ago        9.14kB
+```
+
+To download the build scripts:
+
+```console
+$ curl -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
+```
+
+Since the build takes a while, use `screen` to isolate the build session
+from unexpected events, like a broken
+network connection or a computer entering sleep.
+
+```console
+$ screen -S riscv
+
+$ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
+```
+
+To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
+`screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
+
+Several hours later, the output of the build script
+is a set of 2
+archives and their SHA signatures, created in the `deploy` folder:
+
+```console
+$ cd ~/Work/riscv-none-embed-gcc-*
+$ ls -l deploy
+total 13076
+-rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm64.tgz
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm64.tgz.sha
+-rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm.tgz
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm.tgz.sha
+```
+
+To copy the files from the build machine to the current development
+machine, either use NFS to mount the entire folder, or open the `deploy`
+folder in a terminal and use `scp`:
+
+```console
+$ cd ~/Work/riscv-none-embed-gcc-*/deploy
+$ scp * ilg@wks:Downloads/xpack-binaries/riscv
+```
+
 ### Build the macOS binary
 
 The current platform for macOS production builds is a macOS 10.10.5
@@ -387,7 +490,7 @@ VirtualBox image running on the same macMini with 16 GB of RAM and a
 fast SSD.
 
 ```console
-$ ssh ilg-xbb-mac.local
+$ ssh xbbm
 ```
 
 To download them, the following shortcut is available:
@@ -399,14 +502,14 @@ $ curl --fail -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/r
 To build the latest macOS version:
 
 ```console
-$ screen -S arm
+$ screen -S riscv
 
 $ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx --jobs 8
+$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
-`screen -r openocd`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
+`screen -r riscv`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
 Several hours later, the output of the build script is a compressed archive
 and its SHA signature, created in the `deploy` folder:
@@ -427,20 +530,26 @@ $ cd ~/Work/riscv-none-embed-gcc-*/deploy
 $ scp * ilg@ilg-wks.local:Downloads/xpack-binaries/riscv
 ```
 
-## Run a test build on macOS
+## Run a test build
 
 Before starting the builds on the dedicated machines, run a quick test on
 the local development workstation.
 
 ```console
-$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx --disable-multilib --develop --jobs 12
+$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --osx
+```
+
+or on the build machine:
+
+```console
+$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --linux64
 ```
 
 This should check the commit IDs and the tag names in all the refered
 repositories, and the build scripts.
 
 It is _quick_ because it does not build the multilibs. Even so, on a
-fast machine, it takes about one hour.
+fast machine, it may take 30-60 minutes.
 
 ## Subsequent runs
 
@@ -494,14 +603,8 @@ toolchain without multilib.
 
 ### --jobs
 
-By default, the build steps use a single job at a time, but for
-recent CPUs with multiple cores it is possible to run multiple jobs
-in parallel.
-
-The setting applies to all steps.
-
-Warning: Parallel builds require significant system resources and occasionally
-may crash the build.
+By default, the build steps use all available cores. If, for any reason,
+parallel builds fail, it is possible to reduce the load.
 
 ### Interrupted builds
 
@@ -543,21 +646,7 @@ $ /Users/ilg/Downloads/xPacks/riscv-none-embed-gcc/8.2.0-3.1/bin/riscv-none-embe
 riscv-none-embed-gcc (xPack RISC-V Embedded GCC, 64-bit) 8.2.0
 ```
 
-## Install
-
-The procedure to install xPack GNU RISC-V Embedded GCC is platform
-specific, but relatively straight forward (a .zip archive on Windows,
-a compressed tar archive on macOS and GNU/Linux).
-
-A portable method is to use [`xpm`](https://www.npmjs.com/package/xpm):
-
-```console
-$ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@latest
-```
-
-More details are available on the
-[How to install the RISC-V toolchain?](https://xpack.github.io/riscv-none-embed-gcc/install/)
-page.
+## Installed folders
 
 After install, the package should create a structure like this (only the
 first two depth levels are shown):
@@ -648,6 +737,8 @@ place them in the XBB cache (`Work/cache`) and restart the build.
 
 ### Parallel build
 
+Note: no longer seen with XBB v3.2.
+
 Parallel builds are not only supported, but encouraged. Use a number of
 jobs based on the number of cores, preferably without counting the 
 hyperthreads.
@@ -656,6 +747,8 @@ Please note that, for optimum performances, parallel builds require ample
 amounts of RAM (8 GB are know to work, 16 GB are recommended for 4 jobs).
 
 ### Building GDB on macOS
+
+Note: no longer seen with XBB v3.2.
 
 GDB uses a complex and custom logic to unwind the stack when processing
 exceptions; macOS also uses a custom logic to organize memory and process

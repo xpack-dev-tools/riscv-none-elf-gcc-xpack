@@ -51,22 +51,32 @@ echo
 echo "xPack GNU RISC-V Embedded GCC distribution build script."
 
 host_functions_script_path="${script_folder_path}/helper/host-functions-source.sh"
-echo
-echo "Host helper functions source script: \"${host_functions_script_path}\"."
 source "${host_functions_script_path}"
+
+defines_script_path="${script_folder_path}/defs-source.sh"
+source "${defines_script_path}"
 
 host_detect
 
-# docker_linux64_image="ilegeul/centos:6-xbb-v2"
-# docker_linux32_image="ilegeul/centos32:6-xbb-v2"
+# For clarity, explicitly define the docker images here.
+docker_linux64_image=${docker_linux64_image:-"ilegeul/ubuntu:amd64-12.04-xbb-v3.2"}
+docker_linux32_image=${docker_linux32_image:-"ilegeul/ubuntu:i386-12.04-xbb-v3.2"}
+docker_linux_arm64_image=${docker_linux_arm64_image:-"ilegeul/ubuntu:arm64v8-16.04-xbb-v3.2"}
+docker_linux_arm32_image=${docker_linux_arm32_image:-"ilegeul/ubuntu:arm32v7-16.04-xbb-v3.2"}
 
 # -----------------------------------------------------------------------------
 
 # Array where the remaining args will be stored.
 declare -a rest
 
-help_message="    bash $0 [--win32] [--win64] [--linux32] [--linux64] [--osx] [--all] [clean|cleanlibs|cleanall|preload-images] [--env-file file] [--disable-strip] [--without-pdf] [--with-html] [--disable-multilib] [--develop] [--debug] [--use-gits] [--jobs N] [--help]"
-host_options "${help_message}" $@
+help_message="    bash $0 [--win32] [--win64] [--linux32] [--linux64] [--arm32] [--arm64] [--osx] [--all] [clean|cleanlibs|cleanall|preload-images] [--env-file file] [--disable-strip] [--without-pdf] [--with-html] [--disable-multilib] [--develop] [--debug] [--use-gits] [--jobs N] [--help]"
+host_options "${help_message}" "$@"
+
+# Intentionally moved after option parsing.
+echo
+echo "Host helper functions source script: \"${host_functions_script_path}\"."
+echo "Common functions source script: \"${common_functions_script_path}\"."
+echo "Definitions source script: \"${defines_script_path}\"."
 
 host_common
 
@@ -79,7 +89,7 @@ fi
 
 # ----- Build the native distribution. ----------------------------------------
 
-if [ -z "${DO_BUILD_OSX}${DO_BUILD_LINUX64}${DO_BUILD_WIN64}${DO_BUILD_LINUX32}${DO_BUILD_WIN32}" ]
+if [ -z "${DO_BUILD_OSX}${DO_BUILD_LINUX64}${DO_BUILD_LINUX_ARM64}${DO_BUILD_WIN64}${DO_BUILD_LINUX32}${DO_BUILD_LINUX_ARM32}${DO_BUILD_WIN32}" ]
 then
 
   host_build_target "Creating the native distribution..." \
@@ -208,6 +218,36 @@ else
       --docker-image "${docker_linux32_image}" \
       -- \
       --linux-install-path "${linux_install_relative_path}" \
+      ${rest[@]-}
+  fi
+
+  # ----- Build the GNU/Linux Arm 64-bit distribution. ---------------------------
+
+  if [ "${DO_BUILD_LINUX_ARM64}" == "y" ]
+  then
+    host_build_target "Creating the GNU/Linux Arm 64-bit distribution..." \
+      --script "${CONTAINER_WORK_FOLDER_PATH}/${CONTAINER_BUILD_SCRIPT_REL_PATH}" \
+      --env-file "${ENV_FILE}" \
+      --target-platform "linux" \
+      --target-arch "arm64" \
+      --target-bits 64 \
+      --docker-image "${docker_linux_arm64_image}" \
+      -- \
+      ${rest[@]-}
+  fi
+
+  # ----- Build the GNU/Linux Arm 32-bit distribution. ---------------------------
+
+  if [ "${DO_BUILD_LINUX_ARM32}" == "y" ]
+  then
+    host_build_target "Creating the GNU/Linux Arm 32-bit distribution..." \
+      --script "${CONTAINER_WORK_FOLDER_PATH}/${CONTAINER_BUILD_SCRIPT_REL_PATH}" \
+      --env-file "${ENV_FILE}" \
+      --target-platform "linux" \
+      --target-arch "arm" \
+      --target-bits 32 \
+      --docker-image "${docker_linux_arm32_image}" \
+      -- \
       ${rest[@]-}
   fi
 

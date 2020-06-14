@@ -8,3 +8,14 @@
  install:
  
  #install:	$(INSTALL_TARGETS)
+--- gdb/configure	2020-06-14 20:40:38.430076716 +0300
++++ gdb/configure-patched	2020-06-14 20:40:29.175000000 +0300
+@@ -9039,7 +9039,7 @@
+     ac_res=-l$ac_lib
+     LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+   fi
+-  if ac_fn_c_try_link "$LINENO"; then :
++  if ac_fn_c_try_run "$LINENO"; then :
+   ac_cv_search_tgetent=$ac_res
+ fi
+ rm -f core conftest.err conftest.$ac_objext \

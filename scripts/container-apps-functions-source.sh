@@ -280,7 +280,7 @@ function do_binutils()
         # Build.
         make -j ${JOBS} 
 
-        if [ "${WITH_STRIP}" == "y" ]
+        if false # [ "${WITH_STRIP}" == "y" ]
         then
           # For -strip, readline needs a patch.
           make install-strip
@@ -1146,7 +1146,7 @@ function do_gdb()
       export CXXFLAGS="${XBB_CXXFLAGS} ${GCC_WARN_CXXFLAGS}"
       
       export CPPFLAGS="${XBB_CPPFLAGS}" 
-      export LDFLAGS="${XBB_LDFLAGS_APP}"
+      export LDFLAGS="${XBB_LDFLAGS_APP} -v"
       # libiconv is used by Python3.
       export LIBS="-liconv"
 
@@ -1229,7 +1229,8 @@ function do_gdb()
             --with-system-zlib \
             --without-guile \
             --without-babeltrace \
-            --without-libunwind-ia64 
+            --without-libunwind-ia64 \
+            --enable-tui=no \
 
           cp "config.log" "${LOGS_FOLDER_PATH}/config-gdb$1-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-gdb$1-output.txt"
