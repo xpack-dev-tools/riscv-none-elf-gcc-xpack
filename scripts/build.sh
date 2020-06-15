@@ -53,6 +53,9 @@ echo "xPack GNU RISC-V Embedded GCC distribution build script."
 host_functions_script_path="${script_folder_path}/helper/host-functions-source.sh"
 source "${host_functions_script_path}"
 
+common_functions_script_path="${script_folder_path}/common-functions-source.sh"
+source "${common_functions_script_path}"
+
 defines_script_path="${script_folder_path}/defs-source.sh"
 source "${defines_script_path}"
 
