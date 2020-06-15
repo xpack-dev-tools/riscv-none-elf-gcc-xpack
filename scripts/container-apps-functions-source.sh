@@ -1438,9 +1438,12 @@ function copy_distro_files()
     copy_license \
       "${SOURCES_FOLDER_PATH}/${ISL_SRC_FOLDER_NAME}" \
       "${ISL_FOLDER_NAME}"
+if false
+then
     copy_license \
       "${SOURCES_FOLDER_PATH}/${LIBELF_SRC_FOLDER_NAME}" \
       "${LIBELF_FOLDER_NAME}"
+fi
     copy_license \
       "${SOURCES_FOLDER_PATH}/${EXPAT_SRC_FOLDER_NAME}" \
       "${EXPAT_FOLDER_NAME}"

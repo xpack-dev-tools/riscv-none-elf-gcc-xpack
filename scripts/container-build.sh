@@ -650,7 +650,8 @@ do_mpc
 do_isl
 
 # More libraries.
-do_libelf
+# Fails on mingw
+## do_libelf
 do_expat
 do_libiconv
 do_xz
