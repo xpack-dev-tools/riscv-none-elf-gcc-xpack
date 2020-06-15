@@ -226,7 +226,7 @@ function do_binutils()
       LDFLAGS="${XBB_LDFLAGS_APP}" 
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
-        LDFLAGS="${LDFLAGS} -Wl,${XBB_FOLDER}/${CROSS_COMPILE_PREFIX}/lib/CRT_glob.o"
+        LDFLAGS+=" -Wl,${XBB_FOLDER_PATH}/mingw/lib/CRT_glob.o"
       fi
       export LDFLAGS
 
@@ -1139,16 +1139,18 @@ function do_gdb()
         GCC_WARN_CFLAGS+=" -Wno-maybe-uninitialized -Wno-int-in-bool-context -Wno-misleading-indentation"
       fi
 
-      export GCC_WARN_CFLAGS
-      export GCC_WARN_CXXFLAGS
-
-      export CFLAGS="${XBB_CFLAGS} ${GCC_WARN_CFLAGS}"
-      export CXXFLAGS="${XBB_CXXFLAGS} ${GCC_WARN_CXXFLAGS}"
+      CFLAGS="${XBB_CFLAGS} ${GCC_WARN_CFLAGS}"
+      CXXFLAGS="${XBB_CXXFLAGS} ${GCC_WARN_CXXFLAGS}"
       
-      export CPPFLAGS="${XBB_CPPFLAGS}" 
-      export LDFLAGS="${XBB_LDFLAGS_APP} -v"
+      CPPFLAGS="${XBB_CPPFLAGS}" 
+      LDFLAGS="${XBB_LDFLAGS_APP} -v"
       # libiconv is used by Python3.
-      export LIBS="-liconv"
+
+      LIBS="-liconv"
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        LIBS+=" -lssp"
+      fi
 
       if [ "${TARGET_PLATFORM}" == "darwin" ]
       then
@@ -1182,6 +1184,16 @@ function do_gdb()
           extra_python_opts="--with-python=$(which python3)"
         fi
       fi
+
+      export GCC_WARN_CFLAGS
+      export GCC_WARN_CXXFLAGS
+
+      export CPPFLAGS
+      export CFLAGS
+      export CXXFLAGS
+          
+      export LDFLAGS
+      export LIBS
 
       if [ ! -f "config.status" ]
       then
