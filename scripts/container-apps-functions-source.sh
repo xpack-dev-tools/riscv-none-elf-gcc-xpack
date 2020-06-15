@@ -1351,6 +1351,9 @@ function strip_binaries()
       echo
       echo "Stripping binaries..."
 
+      # Otherwise `find` may fail.
+      cd "${WORK_FOLDER_PATH}"
+
       local binaries
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
