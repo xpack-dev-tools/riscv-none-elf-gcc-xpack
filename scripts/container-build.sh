@@ -613,11 +613,10 @@ then
   MULTILIB_FLAGS="--disable-multilib"
 fi
 
-if [ "${TARGET_ARCH}" == "x32" ]
+if [ "${TARGET_BITS}" == "32" ]
 then
   PYTHON_WIN=python-"${PYTHON_WIN_VERSION}"
-elif [ "${TARGET_ARCH}" == "x64" ]
-then
+else
   PYTHON_WIN=python-"${PYTHON_WIN_VERSION}".amd64
 fi
 
