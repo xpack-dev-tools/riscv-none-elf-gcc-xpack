@@ -213,6 +213,8 @@ prepare_xbb_env
 
 prepare_xbb_extras
 
+tests_initialize
+
 # -----------------------------------------------------------------------------
 
 function add_linux_install_path()
@@ -249,22 +251,10 @@ fix_ownership
 # Final checks.
 # To keep everything as pristine as possible, run tests
 # only after the archive is packed.
-run_binutils
-run_gcc
-run_gdb
 
-if [  "${TARGET_PLATFORM}" != "win32" ]
-then
-  if [ "${WITH_GDB_PY}" == "y" ]
-  then
-    run_gdb "-py"
-  fi
+prime_wine
 
-  if [ "${WITH_GDB_PY3}" == "y" ]
-  then
-    run_gdb "-py3"
-  fi
-fi
+tests_run
 
 # -----------------------------------------------------------------------------
 

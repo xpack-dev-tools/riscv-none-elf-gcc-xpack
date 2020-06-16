@@ -316,9 +316,11 @@ function do_binutils()
   else
     echo "Component binutils already installed."
   fi
+
+  tests_add "test_binutils"
 }
 
-function run_binutils()
+function test_binutils()
 {
   (
     xbb_activate_installed_bin
@@ -1021,9 +1023,14 @@ function do_gcc_final()
   else
     echo "Component gcc$1 final stage already installed."
   fi
+
+  if [ "$1" == "" ]
+  then
+    tests_add "test_gcc"
+  fi
 }
 
-function run_gcc()
+function test_gcc()
 {
   (
     xbb_activate
@@ -1287,9 +1294,21 @@ function do_gdb()
   else
     echo "Component gdb$1 already installed."
   fi
+
+  tests_add "test_gdb$1"
 }
 
-function run_gdb()
+function test_gdb_py()
+{
+  test_gdb "-py"
+}
+
+function test_gdb_py3()
+{
+  test_gdb "-py3"
+}
+
+function test_gdb()
 {
   local suffix=""
   if [ $# -ge 1 ]
@@ -1313,6 +1332,8 @@ function run_gdb()
       -ex='quit'
   )
 }
+
+# -----------------------------------------------------------------------------
 
 function tidy_up() 
 {
