@@ -310,6 +310,11 @@ function do_binutils()
         copy_dir "${APP_PREFIX}" "${APP_PREFIX_NANO}"
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-binutils-output.txt"
+
+      copy_license \
+        "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" \
+        "${BINUTILS_FOLDER_NAME}"
+
     )
 
     touch "${binutils_stamp_file_path}"
@@ -664,6 +669,14 @@ function do_newlib()
         fi
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-newlib$1-output.txt"
+
+      if [ "$1" == "" ]
+      then
+        copy_license \
+          "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}" \
+          "${NEWLIB_FOLDER_NAME}"
+      fi
+
     )
 
     touch "${newlib_stamp_file_path}"
@@ -1017,6 +1030,13 @@ function do_gcc_final()
         fi
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gcc$1-final-output.txt"
+
+      if [ "$1" == "" ]
+      then
+        copy_license \
+          "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" \
+          "${GCC_FOLDER_NAME}"
+      fi
     )
 
     touch "${gcc_final_stamp_file_path}"
@@ -1288,6 +1308,14 @@ function do_gdb()
         fi
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gdb$1-output.txt"
+
+      if [ "$1" == "" ]
+      then
+        copy_license \
+          "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}/gdb" \
+          "${GDB_FOLDER_NAME}"
+      fi
+
     )
 
     touch "${gdb_stamp_file_path}"
@@ -1453,24 +1481,6 @@ function copy_distro_files()
 
     rm -rf "${APP_PREFIX}/${DISTRO_INFO_NAME}"
     mkdir -p "${APP_PREFIX}/${DISTRO_INFO_NAME}"
-
-    cd "${APP_PREFIX}/${DISTRO_INFO_NAME}"
-
-    echo
-    echo "Copying license files..."
-
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" \
-      "${BINUTILS_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" \
-      "${GCC_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}" \
-      "${NEWLIB_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}/gdb" \
-      "${GDB_FOLDER_NAME}"
 
     copy_build_files
 
