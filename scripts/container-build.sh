@@ -233,7 +233,7 @@ echo
 echo "Here we go..."
 echo
 
-prepare_versions
+build_versions
 
 # -----------------------------------------------------------------------------
 
