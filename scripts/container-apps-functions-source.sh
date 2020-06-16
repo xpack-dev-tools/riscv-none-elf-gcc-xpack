@@ -220,15 +220,26 @@ function build_binutils()
       xbb_activate
       xbb_activate_installed_dev
 
-      export CFLAGS="${XBB_CFLAGS} -Wno-deprecated-declarations -Wno-implicit-function-declaration -Wno-parentheses -Wno-format-nonliteral -Wno-shift-count-overflow -Wno-shift-negative-value -Wno-format -Wno-implicit-fallthrough"
-      export CXXFLAGS="${XBB_CXXFLAGS} -Wno-format-nonliteral -Wno-format-security -Wno-deprecated -Wno-c++11-narrowing"
-      export CPPFLAGS="${XBB_CPPFLAGS}"
+      CPPFLAGS="${XBB_CPPFLAGS}"
+      CFLAGS="${XBB_CFLAGS_NO_W}"
+      CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
+
       LDFLAGS="${XBB_LDFLAGS_APP}" 
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
         LDFLAGS+=" -Wl,${XBB_FOLDER_PATH}/mingw/lib/CRT_glob.o"
       fi
+      if [ "${IS_DEVELOP}" == "y" ]
+      then
+        LDFLAGS+=" -v"
+      fi
+
+      export CPPFLAGS
+      export CFLAGS
+      export CXXFLAGS
       export LDFLAGS
+
+      env | sort
 
       if [ ! -f "config.status" ]
       then
@@ -383,15 +394,27 @@ function build_gcc_first()
       xbb_activate
       xbb_activate_installed_dev
 
-      export GCC_WARN_CFLAGS="-Wno-tautological-compare -Wno-deprecated-declarations -Wno-unused-value -Wno-implicit-fallthrough -Wno-implicit-function-declaration -Wno-unused-but-set-variable -Wno-shift-negative-value -Wno-misleading-indentation -Wno-strict-overflow -Wno-sign-compare"
-      export CFLAGS="${XBB_CFLAGS} ${GCC_WARN_CFLAGS}" 
-      export GCC_WARN_CXXFLAGS="-Wno-format-security -Wno-char-subscripts -Wno-deprecated -Wno-array-bounds -Wno-invalid-offsetof -Wno-implicit-fallthrough -Wno-format-security -Wno-suggest-attribute=format -Wno-format-extra-args -Wno-format -Wno-varargs -Wno-shift-count-overflow -Wno-ignored-attributes -Wno-tautological-compare -Wno-unused-label -Wno-unused-parameter -Wno-literal-suffix -Wno-expansion-to-defined -Wno-maybe-uninitialized -Wno-shift-negative-value -Wno-memset-elt-size -Wno-dangling-else -Wno-sequence-point -Wno-misleading-indentation -Wno-int-in-bool-context"
-      export CXXFLAGS="${XBB_CXXFLAGS} ${GCC_WARN_CXXFLAGS}" 
-      export CPPFLAGS="${XBB_CPPFLAGS}" 
-      export LDFLAGS="${XBB_LDFLAGS_APP}" 
+      CPPFLAGS="${XBB_CPPFLAGS}"
+      CFLAGS="${XBB_CFLAGS_NO_W}"
+      CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
+      LDFLAGS="${XBB_LDFLAGS_APP}" 
+      if [ "${IS_DEVELOP}" == "y" ]
+      then
+        LDFLAGS+=" -v"
+      fi
 
-      export CFLAGS_FOR_TARGET="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}" 
-      export CXXFLAGS_FOR_TARGET="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}" 
+      CFLAGS_FOR_TARGET="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}" 
+      CXXFLAGS_FOR_TARGET="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}" 
+
+      export CPPFLAGS
+      export CFLAGS
+      export CXXFLAGS
+      export LDFLAGS
+
+      export CFLAGS_FOR_TARGET 
+      export CXXFLAGS_FOR_TARGET
+
+      env | sort
 
       if [ ! -f "config.status" ]
       then
@@ -507,16 +530,25 @@ function do_newlib()
       if [ "$1" == "-nano" ]
       then
         # For newlib-nano optimize for size.
-        optimize="$(echo ${optimize} | sed -e 's/-O2/-Os/')"
+        optimize="$(echo ${optimize} | sed -e 's/-O[123]/-Os/')"
       fi
 
-      export CFLAGS="${XBB_CFLAGS}"
-      export CXXFLAGS="${XBB_CXXFLAGS}"
-      export CPPFLAGS="${XBB_CPPFLAGS}" 
+      CPPFLAGS="${XBB_CPPFLAGS}" 
+      CFLAGS="${XBB_CFLAGS_NO_W}"
+      CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
       # Note the intentional `-g`.
-      export CFLAGS_FOR_TARGET="${optimize} -g -Wno-implicit-function-declaration -Wno-incompatible-pointer-types -Wno-int-conversion -Wno-logical-not-parentheses -Wno-implicit-int -Wno-expansion-to-defined" 
-      export CXXFLAGS_FOR_TARGET="${optimize} -g" 
+      CFLAGS_FOR_TARGET="${optimize} -g" 
+      CXXFLAGS_FOR_TARGET="${optimize} -g" 
+
+      export CPPFLAGS
+      export CFLAGS
+      export CXXFLAGS
+
+      export CFLAGS_FOR_TARGET
+      export CXXFLAGS_FOR_TARGET
+
+      env | sort
 
       if [ ! -f "config.status" ]
       then
@@ -796,25 +828,36 @@ function build_gcc_final()
       xbb_activate
       xbb_activate_installed_dev
 
-      export GCC_WARN_CFLAGS="-Wno-tautological-compare -Wno-deprecated-declarations -Wno-unused-value -Wno-implicit-fallthrough -Wno-implicit-function-declaration -Wno-unused-but-set-variable -Wno-shift-negative-value -Wno-expansion-to-defined -Wno-strict-overflow -Wno-sign-compare"
-      export CFLAGS="${XBB_CFLAGS} ${GCC_WARN_CFLAGS}" 
-      export GCC_WARN_CXXFLAGS="-Wno-format-security -Wno-char-subscripts -Wno-deprecated -Wno-array-bounds -Wno-invalid-offsetof -Wno-implicit-fallthrough -Wno-format-security -Wno-suggest-attribute=format -Wno-format-extra-args -Wno-format -Wno-unused-function -Wno-attributes -Wno-maybe-uninitialized -Wno-expansion-to-defined -Wno-misleading-indentation -Wno-literal-suffix -Wno-int-in-bool-context -Wno-memset-elt-size -Wno-shift-negative-value -Wno-dangling-else -Wno-sequence-point -Wno-nonnull -Wno-unused-parameter"
-      export CXXFLAGS="${XBB_CXXFLAGS} ${GCC_WARN_CXXFLAGS}" 
-      export CPPFLAGS="${XBB_CPPFLAGS}" 
-      export LDFLAGS="${XBB_LDFLAGS_APP}" 
+      CPPFLAGS="${XBB_CPPFLAGS}" 
+      CFLAGS="${XBB_CFLAGS_NO_W}"
+      CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
+
+      LDFLAGS="${XBB_LDFLAGS_APP}" 
       # Do not add CRT_glob.o here, it will fail with already defined,
       # since it is already handled by --enable-mingw-wildcard.
+      if [ "${IS_DEVELOP}" == "y" ]
+      then
+        LDFLAGS+=" -v"
+      fi
 
       local optimize="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}"
       if [ "$1" == "-nano" ]
       then
         # For newlib-nano optimize for size.
-        optimize="$(echo ${optimize} | sed -e 's/-O2/-Os/')"
+        optimize="$(echo ${optimize} | sed -e 's/-O[123]/-Os/')"
       fi
 
       # Note the intentional `-g`.
-      export CFLAGS_FOR_TARGET="${optimize} -g" 
-      export CXXFLAGS_FOR_TARGET="${optimize} -fno-exceptions -g" 
+      CFLAGS_FOR_TARGET="${optimize} -g" 
+      CXXFLAGS_FOR_TARGET="${optimize} -fno-exceptions -g" 
+
+      export CPPFLAGS
+      export CFLAGS
+      export CXXFLAGS 
+      export LDFLAGS        
+
+      export CFLAGS_FOR_TARGET
+      export CXXFLAGS_FOR_TARGET
 
       local mingw_wildcard="--disable-mingw-wildcard"
 
@@ -832,6 +875,8 @@ function build_gcc_final()
         export GCC_FOR_TARGET="${GCC_TARGET}-gcc"
         export CXX_FOR_TARGET="${GCC_TARGET}-g++"
       fi
+
+      env | sort
 
       if [ ! -f "config.status" ]
       then
@@ -1149,40 +1194,47 @@ function build_gdb()
       xbb_activate
       xbb_activate_installed_dev
 
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        # Definition required by python-config.sh.
-        export GNURM_PYTHON_WIN_DIR="${SOURCES_FOLDER_PATH}/${PYTHON_WIN}"
-      fi
-
-      GCC_WARN_CFLAGS="-Wno-implicit-function-declaration -Wno-parentheses -Wno-format -Wno-deprecated-declarations -Wno-implicit-fallthrough -Wno-format-nonliteral"
-      GCC_WARN_CXXFLAGS="-Wno-deprecated-declarations"
-      if [ "${TARGET_PLATFORM}" == "darwin" ]
-      then
-        GCC_WARN_CXXFLAGS+=" -Wno-c++11-narrowing"
-      else
-        GCC_WARN_CFLAGS+=" -Wno-maybe-uninitialized -Wno-int-in-bool-context -Wno-misleading-indentation"
-      fi
-
-      CFLAGS="${XBB_CFLAGS} ${GCC_WARN_CFLAGS}"
-      CXXFLAGS="${XBB_CXXFLAGS} ${GCC_WARN_CXXFLAGS}"
-      
-      CPPFLAGS="${XBB_CPPFLAGS}" 
-      LDFLAGS="${XBB_LDFLAGS_APP} -v"
-      # libiconv is used by Python3.
-
-      LIBS="-liconv"
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        LIBS+=" -lssp"
-      fi
-
       if [ "${TARGET_PLATFORM}" == "darwin" ]
       then
         # When compiled with GCC-7 it fails to run, due to
         # some problems with exceptions unwind.
         export CC=clang
         export CXX=clang++
+      fi
+
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        # Definition required by python-config.sh.
+        export GNURM_PYTHON_WIN_DIR="${SOURCES_FOLDER_PATH}/${PYTHON_WIN}"
+      fi
+
+      CPPFLAGS="${XBB_CPPFLAGS}" 
+      CFLAGS="${XBB_CFLAGS_NO_W}"
+      CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
+          
+      # libiconv is used by Python3.
+      # export LIBS="-liconv"
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        # https://stackoverflow.com/questions/44150871/embeded-python3-6-with-mingw-in-c-fail-on-linking
+        # ???
+        CPPFLAGS+=" -DPy_BUILD_CORE_BUILTIN=1"
+
+        # From Arm script.
+        LDFLAGS="${XBB_LDFLAGS_APP} -v -Wl,${XBB_FOLDER_PATH}/mingw/lib/CRT_glob.o"
+        # Workaround for undefined reference to `__strcpy_chk' in GCC 9.
+        # https://sourceforge.net/p/mingw-w64/bugs/818/
+        LIBS="-lssp"
+      else
+        LDFLAGS="${XBB_LDFLAGS_APP} -v"
+        LIBS=""
+      fi
+
+      if [ "${TARGET_PLATFORM}" == "darwin" ]
+      then
+        # Pick some system libraries from XBB, to avoid rebuilding them here.
+        CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include" 
+        LDFLAGS+=" -L${XBB_FOLDER_PATH}/lib"
       fi
 
       local extra_python_opts="--with-python=no"
@@ -1219,6 +1271,8 @@ function build_gdb()
           
       export LDFLAGS
       export LIBS
+
+      env | sort
 
       if [ ! -f "config.status" ]
       then
