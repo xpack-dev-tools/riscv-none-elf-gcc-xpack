@@ -449,6 +449,19 @@ function build_versions()
   build_libiconv "${LIBICONV_VERSION}"
   build_xz "${XZ_VERSION}"
 
+  build_gettext "0.19.8.1"
+
+  if [ "${TARGET_PLATFORM}" != "win32" ]
+  then
+    # Used by ncurses. Fais on macOS.
+    if [ "${TARGET_PLATFORM}" == "linux" ]
+    then
+      build_gpm "1.20.7"
+    fi
+
+    build_ncurses "6.2"
+  fi
+
   # ---------------------------------------------------------------------------
 
   # The task descriptions are from the ARM build script.
