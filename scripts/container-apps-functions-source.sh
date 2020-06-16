@@ -611,6 +611,7 @@ function do_newlib()
             # Extra options to ARM distribution:
             # --enable-newlib-io-long-long
             # --enable-newlib-io-c99-formats
+            # --enable-newlib-reent-check-verify
             run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" \
               --prefix="${APP_PREFIX}"  \
               --infodir="${APP_PREFIX_DOC}/info" \
@@ -637,6 +638,7 @@ function do_newlib()
             # --enable-newlib-io-long-long and --enable-newlib-io-c99-formats
             # are currently ignored if --enable-newlib-nano-formatted-io.
             # --enable-newlib-register-fini is debatable, was removed.
+            # --enable-newlib-reent-check-verify
             run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" \
               --prefix="${APP_PREFIX_NANO}"  \
               \
