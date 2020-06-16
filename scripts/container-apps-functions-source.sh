@@ -450,6 +450,7 @@ function build_gcc_first()
             --with-bugurl="${BUGURL}" \
             \
             --enable-languages=c \
+            --enable-lto \
             --disable-decimal-float \
             --disable-libffi \
             --disable-libgomp \
