@@ -320,6 +320,17 @@ function build_binutils()
         # object files: cannot compile".
         copy_dir "${APP_PREFIX}" "${APP_PREFIX_NANO}"
 
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ar"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-as"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ld"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-nm"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-objcopy"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-objdump"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ranlib"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-size"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strings"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strip"
+
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-binutils-output.txt"
 
       copy_license \
@@ -340,6 +351,17 @@ function test_binutils()
 {
   (
     xbb_activate_installed_bin
+
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ar"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-as"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ld"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-nm"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-objcopy"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-objdump"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ranlib"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-size"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strings"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strip"
 
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-ar" --version
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-as" --version
