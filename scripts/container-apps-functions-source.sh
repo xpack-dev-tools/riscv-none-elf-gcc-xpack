@@ -200,7 +200,7 @@ function download_python3_win()
 
 # -----------------------------------------------------------------------------
 
-function do_binutils()
+function build_binutils()
 {
   # https://ftp.gnu.org/gnu/binutils/
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=binutils-git
@@ -344,7 +344,7 @@ function test_binutils()
   )
 }
 
-function do_gcc_first()
+function build_gcc_first()
 {
   local gcc_first_folder_name="${GCC_FOLDER_NAME}-first"
   local gcc_first_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-gcc-first-${GCC_VERSION}-installed"
@@ -781,7 +781,7 @@ function copy_linux_libs()
 
 # For the nano build, call it with "-nano".
 # $1="" or $1="-nano"
-function do_gcc_final()
+function build_gcc_final()
 {
   local gcc_final_folder_name="${GCC_FOLDER_NAME}-final$1"
   local gcc_final_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-gcc$1-final-${GCC_VERSION}-installed"
@@ -1111,7 +1111,7 @@ __EOF__
 
 # Called multile times, with and without python support.
 # $1="" or $1="-py" or $1="-py3"
-function do_gdb()
+function build_gdb()
 {
   local gdb_folder_name="${GDB_FOLDER_NAME}$1"
   local gdb_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-gdb$1-${GDB_VERSION}-installed"
