@@ -32,7 +32,7 @@ function build_versions()
   NEWLIB_PROJECT_NAME="riscv-newlib"
   GDB_PROJECT_NAME="riscv-binutils-gdb"
 
-  # -----------------------------------------------------------------------------
+  # ---------------------------------------------------------------------------
   # Defaults. Must be present.
 
   MULTILIB_FLAGS=""
@@ -46,7 +46,7 @@ function build_versions()
   USE_PLATFORM_PYTHON3=""
   PYTHON3_VERSION=""
 
-  # -----------------------------------------------------------------------------
+  # ---------------------------------------------------------------------------
 
   # Redefine to "y" to create the LTO plugin links.
   FIX_LTO_PLUGIN=""
@@ -66,7 +66,7 @@ function build_versions()
 
   FIX_LTO_PLUGIN="y"
 
-  # -----------------------------------------------------------------------------
+  # ---------------------------------------------------------------------------
 
   README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
 
@@ -92,7 +92,7 @@ function build_versions()
     # git://sourceware.org/git/binutils-gdb.git
 
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     # Inspired from SiFive
     # MULTILIBS_GEN :=            rv32e-ilp32e--c rv32em-ilp32e--c rv32eac-ilp32e-- rv32emac-ilp32e-- rv32i-ilp32--c rv32im-ilp32--c rv32imf-ilp32f--c rv32iac-ilp32-- rv32imac-ilp32-- rv32imafc-ilp32f-rv32imafdc- rv32imafdc-ilp32d-- rv64i-lp64--c rv64im-lp64--c rv64imf-lp64f--c rv64iac-lp64-- rv64imac-lp64-- rv64imafc-lp64f-rv64imafdc- rv64imafdc-lp64d--
@@ -139,7 +139,7 @@ function build_versions()
 
     GCC_MULTILIB_FILE=${GCC_MULTILIB_FILE:-"t-elf-multilib"}
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     BINUTILS_VERSION="2.32"
     # From gcc/BASE_VER
@@ -149,7 +149,7 @@ function build_versions()
     # From gdb/VERSION.in
     GDB_VERSION="8.3"
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     if [ "${USE_GITS}" != "y" ]
     then
@@ -180,7 +180,7 @@ function build_versions()
 
     fi
     
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     ZLIB_VERSION="1.2.8"
     GMP_VERSION="6.1.2"
@@ -213,7 +213,7 @@ function build_versions()
     BINUTILS_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
     GDB_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
   elif [[ "${RELEASE_VERSION}" =~ 8\.2\.0-3\.* ]]
   then
     # This is similar to SiFive 2019.05.0 release.
@@ -233,7 +233,7 @@ function build_versions()
     # Newlib 3.0.0 from SiFive branch
     # https://github.com/sifive/riscv-newlib/tree/42c2e3fb9f557d59b76d1a64bb6fb32707ff4530
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     # Inspired from SiFive
     # MULTILIBS_GEN :=            rv32e-ilp32e--c rv32em-ilp32e--c rv32eac-ilp32e-- rv32emac-ilp32e-- rv32i-ilp32--c rv32im-ilp32--c rv32imf-ilp32f--c rv32iac-ilp32-- rv32imac-ilp32-- rv32imafc-ilp32f-rv32imafdc- rv32imafdc-ilp32d-- rv64i-lp64--c rv64im-lp64--c rv64imf-lp64f--c rv64iac-lp64-- rv64imac-lp64-- rv64imafc-lp64f-rv64imafdc- rv64imafdc-lp64d--
@@ -247,7 +247,7 @@ function build_versions()
 
     GCC_MULTILIB_FILE=${GCC_MULTILIB_FILE:-"t-elf-multilib"}
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     BINUTILS_VERSION="2.32"
     # From gcc/BASE_VER
@@ -258,7 +258,7 @@ function build_versions()
     GDB_VERSION="8.3"
 
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     if [ "${USE_GITS}" != "y" ]
     then
@@ -289,7 +289,7 @@ function build_versions()
 
     fi
     
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     ZLIB_VERSION="1.2.8"
     GMP_VERSION="6.1.2"
@@ -306,7 +306,7 @@ function build_versions()
     BINUTILS_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
     GDB_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
   else
     echo "Unsupported version ${RELEASE_VERSION}."
     exit 1
@@ -315,7 +315,7 @@ function build_versions()
   if [ "${USE_GITS}" != "y" ]
   then
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     BINUTILS_SRC_FOLDER_NAME=${BINUTILS_SRC_FOLDER_NAME:-"${BINUTILS_PROJECT_NAME}-${BINUTILS_GH_RELEASE}"}
     BINUTILS_ARCHIVE_NAME=${BINUTILS_ARCHIVE_NAME:-"${BINUTILS_SRC_FOLDER_NAME}.tar.gz"}
@@ -324,7 +324,7 @@ function build_versions()
 
     BINUTILS_GIT_URL=""
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     GCC_SRC_FOLDER_NAME=${GCC_SRC_FOLDER_NAME:-"${GCC_PROJECT_NAME}-${GCC_GH_RELEASE}"}
     GCC_ARCHIVE_NAME=${GCC_ARCHIVE_NAME:-"${GCC_SRC_FOLDER_NAME}.tar.gz"}
@@ -333,7 +333,7 @@ function build_versions()
 
     GCC_GIT_URL=""
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     NEWLIB_SRC_FOLDER_NAME=${NEWLIB_SRC_FOLDER_NAME:-"${NEWLIB_PROJECT_NAME}-${NEWLIB_GH_RELEASE}"}
     NEWLIB_ARCHIVE_NAME=${NEWLIB_ARCHIVE_NAME:-"${NEWLIB_SRC_FOLDER_NAME}.tar.gz"}
@@ -342,7 +342,7 @@ function build_versions()
 
     NEWLIB_GIT_URL=""
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     GDB_SRC_FOLDER_NAME=${GDB_SRC_FOLDER_NAME:-"${GDB_PROJECT_NAME}-${GDB_GH_RELEASE}"}
     GDB_ARCHIVE_NAME=${GDB_ARCHIVE_NAME:-"${GDB_SRC_FOLDER_NAME}.tar.gz"}
@@ -351,9 +351,9 @@ function build_versions()
 
     GDB_GIT_URL=""
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
   else
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     BINUTILS_SRC_FOLDER_NAME=${BINUTILS_SRC_FOLDER_NAME:-"${BINUTILS_PROJECT_NAME}.git"}
 
@@ -361,7 +361,7 @@ function build_versions()
 
     BINUTILS_ARCHIVE_URL=""
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     GCC_SRC_FOLDER_NAME=${GCC_SRC_FOLDER_NAME:-"${GCC_PROJECT_NAME}.git"}
 
@@ -369,7 +369,7 @@ function build_versions()
 
     GCC_ARCHIVE_URL=""
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     NEWLIB_SRC_FOLDER_NAME=${NEWLIB_SRC_FOLDER_NAME:-"${NEWLIB_PROJECT_NAME}.git"}
       
@@ -377,7 +377,7 @@ function build_versions()
 
     NEWLIB_ARCHIVE_URL=""
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     # Pre 8.x builds define it to reuse the binutils repo.
     GDB_SRC_FOLDER_NAME=${GDB_SRC_FOLDER_NAME:-"binutils-gdb.git"}
@@ -386,10 +386,10 @@ function build_versions()
 
     GDB_ARCHIVE_URL=""
 
-    # ---------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
   fi
 
-  # -----------------------------------------------------------------------------
+  # ---------------------------------------------------------------------------
 
   BINUTILS_FOLDER_NAME="binutils-${BINUTILS_VERSION}"
   GCC_FOLDER_NAME="gcc-${GCC_VERSION}"
@@ -413,7 +413,7 @@ function build_versions()
   PYTHON_WIN_PACK="${PYTHON_WIN}".msi
   PYTHON_WIN_URL="https://www.python.org/ftp/python/${PYTHON_WIN_VERSION}/${PYTHON_WIN_PACK}"
 
-  # -----------------------------------------------------------------------------
+  # ---------------------------------------------------------------------------
 
   if [ "${TARGET_PLATFORM}" == "win32" ]
   then
@@ -429,7 +429,7 @@ function build_versions()
     fi
   fi
 
-  # -----------------------------------------------------------------------------
+  # ---------------------------------------------------------------------------
   # Build dependent libraries.
 
   # For better control, without it some components pick the lib packed 
@@ -449,7 +449,7 @@ function build_versions()
   build_libiconv "${LIBICONV_VERSION}"
   build_xz "${XZ_VERSION}"
 
-  # -----------------------------------------------------------------------------
+  # ---------------------------------------------------------------------------
 
   # The task descriptions are from the ARM build script.
 
@@ -501,7 +501,7 @@ function build_versions()
   # Task [III-7] /$HOST_NATIVE/build-manual
   # Nope, the build process is different.
 
-  # -----------------------------------------------------------------------------
+  # ---------------------------------------------------------------------------
 
   # Task [III-8] /$HOST_NATIVE/pretidy/
   # Task [IV-5] /$HOST_MINGW/pretidy/
