@@ -1439,37 +1439,6 @@ function copy_distro_files()
     echo "Copying license files..."
 
     copy_license \
-      "${SOURCES_FOLDER_PATH}/${ZLIB_SRC_FOLDER_NAME}" \
-      "${ZLIB_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${GMP_SRC_FOLDER_NAME}" \
-      "${GMP_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${MPFR_SRC_FOLDER_NAME}" \
-      "${MPFR_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${MPC_SRC_FOLDER_NAME}" \
-      "${MPC_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${ISL_SRC_FOLDER_NAME}" \
-      "${ISL_FOLDER_NAME}"
-if false
-then
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${LIBELF_SRC_FOLDER_NAME}" \
-      "${LIBELF_FOLDER_NAME}"
-fi
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${EXPAT_SRC_FOLDER_NAME}" \
-      "${EXPAT_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${LIBICONV_SRC_FOLDER_NAME}" \
-      "${LIBICONV_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${XZ_SRC_FOLDER_NAME}" \
-      "${XZ_FOLDER_NAME}"
-
-    copy_license \
       "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" \
       "${BINUTILS_FOLDER_NAME}"
     copy_license \
