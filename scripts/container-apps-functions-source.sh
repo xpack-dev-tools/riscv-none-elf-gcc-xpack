@@ -435,6 +435,8 @@ function build_gcc_first()
 
           # --enable-checking=no ???
 
+          # --with-native-system-header-dir="/include" \
+
           run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" \
             --prefix="${APP_PREFIX}"  \
             --infodir="${APP_PREFIX_DOC}/info" \
@@ -468,7 +470,6 @@ function build_gcc_first()
             --with-gnu-ld \
             --with-python-dir=share/gcc-${GCC_TARGET} \
             --with-sysroot="${APP_PREFIX}/${GCC_TARGET}" \
-            --with-native-system-header-dir="/include" \
             \
             ${MULTILIB_FLAGS} \
             --with-abi="${GCC_ABI}" \
