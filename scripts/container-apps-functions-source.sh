@@ -1414,12 +1414,18 @@ function build_gdb()
 
 function test_gdb_py()
 {
-  test_gdb "-py"
+  if [ "${TARGET_PLATFORM}" != "win32" ]
+  then
+    test_gdb "-py"
+  fi
 }
 
 function test_gdb_py3()
 {
-  test_gdb "-py3"
+  if [ "${TARGET_PLATFORM}" != "win32" ]
+  then
+    test_gdb "-py3"
+  fi
 }
 
 function test_gdb()
