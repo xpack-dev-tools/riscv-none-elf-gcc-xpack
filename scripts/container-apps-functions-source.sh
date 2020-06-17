@@ -206,12 +206,14 @@ function build_binutils()
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=binutils-git
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=gdb-git
 
-  local binutils_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-binutils-${BINUTILS_VERSION}-installed"
+  local binutils_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${BINUTILS_FOLDER_NAME}-installed"
 
   if [ ! -f "${binutils_stamp_file_path}" ]
   then
 
     download_binutils
+
+    mkdir -pv "${LOGS_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}"
@@ -280,8 +282,8 @@ function build_binutils()
             --disable-rpath \
             --with-system-zlib \
             
-          cp "config.log" "${LOGS_FOLDER_PATH}/config-binutils-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-binutils-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}/config-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}/configure-output.txt"
       fi
 
       (
@@ -331,7 +333,7 @@ function build_binutils()
         show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strings"
         show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strip"
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-binutils-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}/make-output.txt"
 
       copy_license \
         "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" \
@@ -380,12 +382,14 @@ function test_binutils()
 function build_gcc_first()
 {
   local gcc_first_folder_name="${GCC_FOLDER_NAME}-first"
-  local gcc_first_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-gcc-first-${GCC_VERSION}-installed"
+  local gcc_first_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_first_folder_name}-installed"
 
   if [ ! -f "${gcc_first_stamp_file_path}" ]
   then
 
     download_gcc
+
+    mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}"
 
     if [ -n "${GCC_MULTILIB}" ]
     then
@@ -501,8 +505,8 @@ function build_gcc_first()
             --disable-build-format-warnings \
             --with-system-zlib 
 
-          cp "config.log" "${LOGS_FOLDER_PATH}/config-gcc-first-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-gcc-first-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/config-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/configure-output.txt"
       fi
 
       (
@@ -519,7 +523,7 @@ function build_gcc_first()
 
         # Strip?
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gcc-first-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/make-output.txt"
     )
 
     touch "${gcc_first_stamp_file_path}"
@@ -533,12 +537,14 @@ function build_gcc_first()
 function do_newlib()
 {
   local newlib_folder_name="${NEWLIB_FOLDER_NAME}$1"
-  local newlib_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-newlib$1-${NEWLIB_VERSION}-installed"
+  local newlib_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${newlib_folder_name}-installed"
 
   if [ ! -f "${newlib_stamp_file_path}" ]
   then
 
     download_newlib
+
+    mkdir -pv "${LOGS_FOLDER_PATH}/${newlib_folder_name}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${newlib_folder_name}"
@@ -664,8 +670,8 @@ function do_newlib()
             exit 1
           fi
 
-          cp "config.log" "${LOGS_FOLDER_PATH}/config-newlib$1-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-newlib$1-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${newlib_folder_name}/config-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${newlib_folder_name}/configure-output.txt"
       fi
 
       (
@@ -724,7 +730,7 @@ function do_newlib()
 
         fi
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-newlib$1-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${newlib_folder_name}/make-output.txt"
 
       if [ "$1" == "" ]
       then
@@ -840,12 +846,14 @@ function copy_linux_libs()
 function build_gcc_final()
 {
   local gcc_final_folder_name="${GCC_FOLDER_NAME}-final$1"
-  local gcc_final_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-gcc$1-final-${GCC_VERSION}-installed"
+  local gcc_final_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_final_folder_name}-installed"
 
   if [ ! -f "${gcc_final_stamp_file_path}" ]
   then
 
     download_gcc
+
+    mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${gcc_final_folder_name}"
@@ -1009,8 +1017,8 @@ function build_gcc_final()
 
           fi
 
-          cp "config.log" "${LOGS_FOLDER_PATH}/config-gcc$1-final-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-gcc$1-final-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/config-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/configure-output.txt"
       fi
 
       (
@@ -1098,7 +1106,7 @@ function build_gcc_final()
           )
         fi
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gcc$1-final-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/make-output.txt"
 
       if [ "$1" == "" ]
       then
@@ -1183,12 +1191,14 @@ __EOF__
 function build_gdb()
 {
   local gdb_folder_name="${GDB_FOLDER_NAME}$1"
-  local gdb_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-gdb$1-${GDB_VERSION}-installed"
+  local gdb_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gdb_folder_name}-installed"
 
   if [ ! -f "${gdb_stamp_file_path}" ]
   then
 
     download_gdb
+
+    mkdir -pv "${LOGS_FOLDER_PATH}/${gdb_folder_name}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
@@ -1357,8 +1367,8 @@ function build_gdb()
             --without-libunwind-ia64 \
             ${tui_option} \
 
-          cp "config.log" "${LOGS_FOLDER_PATH}/config-gdb$1-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-gdb$1-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${gdb_folder_name}/config-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gdb_folder_name}/configure-output.txt"
       fi
 
       (
@@ -1393,7 +1403,7 @@ function build_gdb()
           )
         fi
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gdb$1-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gdb_folder_name}/make-output.txt"
 
       if [ "$1" == "" ]
       then
