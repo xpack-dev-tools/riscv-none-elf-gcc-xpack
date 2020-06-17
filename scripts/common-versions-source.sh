@@ -35,8 +35,6 @@ function build_versions()
   # ---------------------------------------------------------------------------
   # Defaults. Must be present.
 
-  MULTILIB_FLAGS=""
-
   BINUTILS_PATCH=""
   GDB_PATCH=""
 
@@ -45,6 +43,14 @@ function build_versions()
   USE_PLATFORM_PYTHON=""
   USE_PLATFORM_PYTHON3=""
   PYTHON3_VERSION=""
+
+  if [ "${WITHOUT_MULTILIB}" == "y" ]
+  then
+    MULTILIB_FLAGS="--disable-multilib"
+  else
+    # By default it searches the definitions in "t-elf-multilib"
+    MULTILIB_FLAGS=""
+  fi
 
   # ---------------------------------------------------------------------------
 
@@ -354,7 +360,7 @@ function build_versions()
 
   if [ "${TARGET_PLATFORM}" != "win32" ]
   then
-    # Used by ncurses. Fais on macOS.
+    # Used by ncurses. Fails on macOS.
     if [ "${TARGET_PLATFORM}" == "linux" ]
     then
       build_gpm "1.20.7"
@@ -402,6 +408,7 @@ function build_versions()
   # Task [III-6] /$HOST_NATIVE/gdb/
   # Task [IV-4] /$HOST_MINGW/gdb/
   build_gdb ""
+
   if [ "${WITH_GDB_PY}" == "y" ]
   then
     build_gdb "-py"
@@ -449,7 +456,6 @@ function build_versions()
   # Task [IV-8] /Package toolchain in zip format/
 
   check_binaries
-
 }
 
 # -----------------------------------------------------------------------------
