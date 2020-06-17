@@ -1130,7 +1130,15 @@ function build_gcc_final()
 function test_gcc()
 {
   (
-    xbb_activate
+    xbb_activate_installed_bin
+
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gcc"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-g++"
+    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/cc1"
+    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/cc1plus"
+    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/collect2"
+    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/lto-wrapper"
+    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/lto1"
 
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" --help
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" -dumpversion
