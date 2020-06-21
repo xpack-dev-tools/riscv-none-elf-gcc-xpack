@@ -1197,7 +1197,7 @@ __EOF__
 # Called multile times, with and without python support.
 # $1="" or $1="-py" or $1="-py3"
 function build_gdb()
-{
+{  
   local gdb_folder_name="${GDB_FOLDER_NAME}$1"
   local gdb_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gdb_folder_name}-installed"
 
@@ -1238,18 +1238,16 @@ function build_gdb()
       xbb_activate
       xbb_activate_installed_dev
 
-      if [ "${TARGET_PLATFORM}" == "darwin" ]
+      if false # [ "${TARGET_PLATFORM}" == "darwin" ]
       then
         # When compiled with GCC-7 it fails to run, due to
         # some problems with exceptions unwind.
         export CC=clang
         export CXX=clang++
-      fi
-
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        # Definition required by python-config.sh.
-        export GNURM_PYTHON_WIN_DIR="${SOURCES_FOLDER_PATH}/${PYTHON_WIN}"
+        unset AR
+        unset LD
+        unset NM
+        unset RANLIB
       fi
 
       CPPFLAGS="${XBB_CPPFLAGS}" 
@@ -1264,22 +1262,36 @@ function build_gdb()
         # ???
         CPPFLAGS+=" -DPy_BUILD_CORE_BUILTIN=1"
 
+        # Definition required by python-config.sh.
+        export GNURM_PYTHON_WIN_DIR="${SOURCES_FOLDER_PATH}/${PYTHON_WIN}"
+
         # From Arm script.
-        LDFLAGS="${XBB_LDFLAGS_APP} -v -Wl,${XBB_FOLDER_PATH}/mingw/lib/CRT_glob.o"
+        LDFLAGS="${XBB_LDFLAGS_APP} -Wl,${XBB_FOLDER_PATH}/mingw/lib/CRT_glob.o"
         # Workaround for undefined reference to `__strcpy_chk' in GCC 9.
         # https://sourceforge.net/p/mingw-w64/bugs/818/
         LIBS="-lssp"
-      else
-        LDFLAGS="${XBB_LDFLAGS_APP} -v"
+      elif [ "${TARGET_PLATFORM}" == "darwin" ]
+      then
+        # This makes gdb-py fail!
+        # Pick some system libraries from XBB, to avoid rebuilding them here.
+        #        CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include" 
+        #        LDFLAGS+=" -L${XBB_FOLDER_PATH}/lib"
+        LDFLAGS="${XBB_LDFLAGS_APP}"
+        LIBS="-liconv -lncurses"
+      elif [ "${TARGET_PLATFORM}" == "linux" ]
+      then
+        LDFLAGS="${XBB_LDFLAGS_APP}"
         LIBS=""
       fi
 
-      if [ "${TARGET_PLATFORM}" == "darwin" ]
+      if [ "${IS_DEVELOP}" == "y" ]
       then
-        # Pick some system libraries from XBB, to avoid rebuilding them here.
-        CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include" 
-        LDFLAGS+=" -L${XBB_FOLDER_PATH}/lib"
+        LDFLAGS+=" -v"
       fi
+
+      # Not yet used, requires patching the python-config.py.
+      # See the arm-none-eabi script.
+      CONFIG_PYTHON_PREFIX=""
 
       local extra_python_opts="--with-python=no"
       if [ "$1" == "-py" ]
@@ -1293,6 +1305,15 @@ function build_gdb()
         else
           extra_python_opts="--with-python=$(which python2)"
         fi
+
+        if [ "${TARGET_PLATFORM}" == "darwin" ]
+        then
+          # Use the custom path, 2.7 will be removed from future macOS.
+          CONFIG_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/2.7"
+        elif [ "${TARGET_PLATFORM}" == "linux" ]
+        then
+          CONFIG_PYTHON_PREFIX="/usr/local"
+        fi
       elif [ "$1" == "-py3" ]
       then
         if [ "${TARGET_PLATFORM}" == "win32" ]
@@ -1303,6 +1324,14 @@ function build_gdb()
           extra_python_opts="--with-python=${platform_python3}"
         else
           extra_python_opts="--with-python=$(which python3)"
+        fi
+
+        if [ "${TARGET_PLATFORM}" == "darwin" ]
+        then
+          CONFIG_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/3.7"
+        elif [ "${TARGET_PLATFORM}" == "linux" ]
+        then
+          CONFIG_PYTHON_PREFIX="/usr/local"
         fi
       fi
 
@@ -1323,6 +1352,8 @@ function build_gdb()
           
       export LDFLAGS
       export LIBS
+
+      export CONFIG_PYTHON_PREFIX
 
       env | sort
 
