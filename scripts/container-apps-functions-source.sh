@@ -1111,7 +1111,10 @@ function build_gdb()
       cd "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
 
       local platform_python2
-      if [ -x "/usr/bin/python2.7" ]
+      if [ -x "/Library/Frameworks/Python.framework/Versions/2.7/bin/python" ]
+      then
+        platform_python2="/Library/Frameworks/Python.framework/Versions/2.7/bin/python2"
+      elif [ -x "/usr/bin/python2.7" ]
       then
         platform_python2="/usr/bin/python2.7"
       elif [ -x "/usr/bin/python2.6" ]
@@ -1124,7 +1127,13 @@ function build_gdb()
       fi
 
       local platform_python3
-      if [ -x "/usr/bin/python3.6" ]
+      if [ -x "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3" ]
+      then
+        platform_python3="/Library/Frameworks/Python.framework/Versions/3.7/bin/python3"
+      elif [ -x "/usr/bin/python3.7" ]
+      then
+        platform_python3="/usr/bin/python3.7"
+      elif [ -x "/usr/bin/python3.6" ]
       then
         platform_python3="/usr/bin/python3.6"
       else
@@ -1190,6 +1199,14 @@ function build_gdb()
         LDFLAGS+=" -v"
       fi
 
+      if [ "${TARGET_PLATFORM}" == "darwin" ]
+      then
+        # Pick some system libraries from XBB, to avoid rebuilding them here.
+        # Otherwise configure will not identify that Python is present.
+        CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include" 
+        LDFLAGS+=" -L${XBB_FOLDER_PATH}/lib"
+      fi
+
       # Not yet used, requires patching the python-config.py.
       # See the arm-none-eabi script.
       CONFIG_PYTHON_PREFIX=""
@@ -1199,40 +1216,44 @@ function build_gdb()
       then
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
-          extra_python_opts="--with-python=${BUILD_GIT_PATH}/scripts/python-win-config.sh"
-        elif [ "${USE_PLATFORM_PYTHON2}" == "y" ]
-        then
-          extra_python_opts="--with-python=${platform_python2}"
+          extra_python_opts="--with-python=${SOURCES_FOLDER_PATH}/${GCC_COMBO_FOLDER_NAME}/python-config.sh"
         else
-          extra_python_opts="--with-python=$(which python2)"
-        fi
-
-        if [ "${TARGET_PLATFORM}" == "darwin" ]
-        then
-          # Use the custom path, 2.7 will be removed from future macOS.
-          CONFIG_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/2.7"
-        elif [ "${TARGET_PLATFORM}" == "linux" ]
-        then
-          CONFIG_PYTHON_PREFIX="/usr/local"
+          if [ "${USE_PLATFORM_PYTHON2}" == "y" ]
+          then
+            extra_python_opts="--with-python=${platform_python2}"
+          else
+            extra_python_opts="--with-python=$(which python2)"
+          fi
+          
+          if [ "${TARGET_PLATFORM}" == "darwin" ]
+          then
+            # Use the custom path, 2.7 will be removed from future macOS.
+            CONFIG_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/2.7"
+          elif [ "${TARGET_PLATFORM}" == "linux" ]
+          then
+            CONFIG_PYTHON_PREFIX="/usr/local"
+          fi
         fi
       elif [ "$1" == "-py3" ]
       then
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
           extra_python_opts="--with-python=${BUILD_GIT_PATH}/patches/python3-config.sh"
-        elif [ "${USE_PLATFORM_PYTHON3}" == "y" ]
-        then
-          extra_python_opts="--with-python=${platform_python3}"
         else
-          extra_python_opts="--with-python=$(which python3)"
-        fi
+          if [ "${USE_PLATFORM_PYTHON3}" == "y" ]
+          then
+            extra_python_opts="--with-python=${platform_python3}"
+          else
+            extra_python_opts="--with-python=$(which python3)"
+          fi
 
-        if [ "${TARGET_PLATFORM}" == "darwin" ]
-        then
-          CONFIG_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/3.7"
-        elif [ "${TARGET_PLATFORM}" == "linux" ]
-        then
-          CONFIG_PYTHON_PREFIX="/usr/local"
+          if [ "${TARGET_PLATFORM}" == "darwin" ]
+          then
+            CONFIG_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/3.7"
+          elif [ "${TARGET_PLATFORM}" == "linux" ]
+          then
+            CONFIG_PYTHON_PREFIX="/usr/local"
+          fi
         fi
       fi
 

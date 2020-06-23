@@ -197,7 +197,6 @@ function build_versions()
     LIBICONV_VERSION="1.15"
     XZ_VERSION="5.2.3"
 
-
     # -------------------------------------------------------------------------
 
     if [ "${RELEASE_VERSION}" == "8.3.0-1.1" ]
@@ -212,13 +211,24 @@ function build_versions()
 
       WITH_GDB_PY2="y"
 
-    else # 8.3.0-1.2 and up
+    elif [ "${RELEASE_VERSION}" == "8.3.0-1.2" ]
+    then
 
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
         # On Windows if fails with 
-        # The procedure entry point ClearCommBreak could not be located
-        # in the dynamic link library.
+        # "The procedure entry point ClearCommBreak could not be located
+        # in the dynamic link library." 
+        # It looks like an incompatibility between Python2 and mingw-w64.
+        # Given that Python2 is end-of-life, it is not worth to further
+        # investigate, disable it for now.
+        WITH_GDB_PY2=""
+      elif [ "${TARGET_PLATFORM}" == "darwin" ]
+      then
+        # ImportError: dlopen(/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/operator.so, 2): Symbol not found: __PyUnicodeUCS2_AsDefaultEncodedString
+        #  Referenced from: /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/operator.so
+        #  Expected in: flat namespace
+        # in /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/operator.so
         WITH_GDB_PY2=""
       else
         WITH_GDB_PY2="y"
@@ -229,9 +239,9 @@ function build_versions()
       WITH_GDB_PY3="y" 
       PYTHON3_WIN_VERSION="3.7.6"
 
-      USE_PLATFORM_PYTHON2=""
-      USE_PLATFORM_PYTHON3=""
-
+    else
+      echo "Unsupported version ${RELEASE_VERSION}."
+      exit 1
     fi
 
     BINUTILS_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
