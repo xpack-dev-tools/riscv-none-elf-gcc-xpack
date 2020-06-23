@@ -38,11 +38,10 @@ function build_versions()
   BINUTILS_PATCH=""
   GDB_PATCH=""
 
-  WITH_GDB_PY="y"
+  WITH_GDB_PY2=""
   WITH_GDB_PY3=""
-  USE_PLATFORM_PYTHON=""
+  USE_PLATFORM_PYTHON2=""
   USE_PLATFORM_PYTHON3=""
-  PYTHON3_VERSION=""
 
   if [ "${WITHOUT_MULTILIB}" == "y" ]
   then
@@ -198,22 +197,41 @@ function build_versions()
     LIBICONV_VERSION="1.15"
     XZ_VERSION="5.2.3"
 
-    PYTHON_WIN_VERSION="2.7.13"
 
-    # GDB 8.3 with Python3 not yet functional on Windows.
-    # GDB does not know the Python3 API when compiled with mingw.
-    if [ "${TARGET_PLATFORM}" != "win32" ]
+    # -------------------------------------------------------------------------
+
+    if [ "${RELEASE_VERSION}" == "8.3.0-1.1" ]
     then
-      # checking for python3.7... no
-      # configure: error: no usable python found at /Users/ilg/opt/xbb/bin/python3
 
-      : # WITH_GDB_PY3="y" 
-      : # PYTHON3_VERSION="3.7.2"
-    fi
+      PYTHON_WIN_VERSION="2.7.13"
 
-    if [ "${TARGET_PLATFORM}" == "darwin" ]
-    then
-      USE_PLATFORM_PYTHON="y"
+      if [ "${TARGET_PLATFORM}" == "darwin" ]
+      then
+        USE_PLATFORM_PYTHON2="y"
+      fi
+
+      WITH_GDB_PY2="y"
+
+    else # 8.3.0-1.2 and up
+
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        # On Windows if fails with 
+        # The procedure entry point ClearCommBreak could not be located
+        # in the dynamic link library.
+        WITH_GDB_PY2=""
+      else
+        WITH_GDB_PY2="y"
+      fi
+
+      PYTHON_WIN_VERSION="2.7.18"
+
+      WITH_GDB_PY3="y" 
+      PYTHON3_WIN_VERSION="3.7.6"
+
+      USE_PLATFORM_PYTHON2=""
+      USE_PLATFORM_PYTHON3=""
+
     fi
 
     BINUTILS_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
@@ -263,7 +281,6 @@ function build_versions()
     # From gdb/VERSION.in
     GDB_VERSION="8.3"
 
-
     # -------------------------------------------------------------------------
 
     if [ "${USE_GITS}" != "y" ]
@@ -307,6 +324,7 @@ function build_versions()
     LIBICONV_VERSION="1.15"
     XZ_VERSION="5.2.3"
 
+    WITH_GDB_PY2="y"
     PYTHON_WIN_VERSION="2.7.13"
 
     BINUTILS_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
@@ -319,22 +337,6 @@ function build_versions()
   fi
 
   prepare_variables
-
-  # ---------------------------------------------------------------------------
-
-  if [ "${TARGET_PLATFORM}" == "win32" ]
-  then
-    # The Windows GDB needs some headers from the Python distribution.
-    if [ "${WITH_GDB_PY}" == "y" ]
-    then
-      download_python_win
-    fi
-
-    if [ "${WITH_GDB_PY3}" == "y" ]
-    then
-      download_python3_win
-    fi
-  fi
 
   # ---------------------------------------------------------------------------
   # Build dependent libraries.
@@ -409,13 +411,24 @@ function build_versions()
   # Task [IV-4] /$HOST_MINGW/gdb/
   build_gdb ""
 
-  if [ "${WITH_GDB_PY}" == "y" ]
+  if [ "${WITH_GDB_PY2}" == "y" ]
   then
+    # The Windows GDB needs some headers from the Python distribution.
+    if [ "${TARGET_PLATFORM}" == "win32" ]
+    then
+      download_python2_win "${PYTHON_WIN_VERSION}"
+    fi
+
     build_gdb "-py"
   fi
 
   if [ "${WITH_GDB_PY3}" == "y" ]
   then
+    if [ "${TARGET_PLATFORM}" == "win32" ]
+    then
+      download_python3_win "${PYTHON3_WIN_VERSION}"
+    fi
+
     build_gdb "-py3"
   fi
 

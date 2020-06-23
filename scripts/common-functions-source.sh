@@ -99,15 +99,6 @@ function prepare_variables()
   NEWLIB_FOLDER_NAME="newlib-${NEWLIB_VERSION}"
   GDB_FOLDER_NAME="gdb-${GDB_VERSION}"
 
-  if [ "${TARGET_BITS}" == "32" ]
-  then
-    PYTHON_WIN=python-"${PYTHON_WIN_VERSION}"
-  else
-    PYTHON_WIN=python-"${PYTHON_WIN_VERSION}".amd64
-  fi
-
-  PYTHON_WIN_PACK="${PYTHON_WIN}".msi
-  PYTHON_WIN_URL="https://www.python.org/ftp/python/${PYTHON_WIN_VERSION}/${PYTHON_WIN_PACK}"
 }
 
 # -----------------------------------------------------------------------------

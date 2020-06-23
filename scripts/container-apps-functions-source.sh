@@ -98,108 +98,6 @@ function download_gdb()
 
 # -----------------------------------------------------------------------------
 
-function download_python_win() 
-{
-  # https://www.python.org/downloads/
-  # https://www.python.org/ftp/python/2.7.14/python-2.7.14.msi
-  # https://www.python.org/ftp/python/2.7.14/python-2.7.14.amd64.msi
-
-  cd "${SOURCES_FOLDER_PATH}"
-
-  download "${PYTHON_WIN_URL}" "${PYTHON_WIN_PACK}"
-
-  if [ ! -f "${PYTHON_WIN}/Python.h" ]
-  then
-    (
-      xbb_activate
-
-      cd "${SOURCES_FOLDER_PATH}"
-
-      # Include only the headers and the python library and executable.
-      echo '*.h' >/tmp/included
-      echo 'python*.dll' >>/tmp/included
-      echo 'python*.lib' >>/tmp/included
-      7za x -y -o"${SOURCES_FOLDER_PATH}/${PYTHON_WIN}" "${DOWNLOAD_FOLDER_PATH}/${PYTHON_WIN_PACK}" -i@/tmp/included
-
-      # Patch to disable the macro that renames hypot.
-      local patch_path="${BUILD_GIT_PATH}/patches/${PYTHON_WIN}.patch"
-      if [ -f "${patch_path}" ]
-      then
-        (
-          cd "${PYTHON_WIN}"
-          patch -p0 <"${patch_path}" 
-        )
-      fi
-
-      ls -lL "${SOURCES_FOLDER_PATH}/${PYTHON_WIN}"
-
-      # From here it'll be copied as dependency.
-      mkdir -pv "${LIBS_INSTALL_FOLDER_PATH}/bin/"
-      install -v -c -m 644 "${PYTHON_WIN}"/python*.dll \
-        "${LIBS_INSTALL_FOLDER_PATH}/bin/"
-    )
-  else
-    echo "Folder ${PYTHON_WIN} already present."
-  fi
-}
-
-function download_python3_win() 
-{
-  # https://www.python.org/downloads/windows/
-  # https://www.python.org/downloads/release/python-372/
-  # https://www.python.org/ftp/python/3.7.2/python-3.7.2.post1-embed-win32.zip
-  # https://www.python.org/ftp/python/3.7.2/python-3.7.2.post1-embed-amd64.zip
-  # https://www.python.org/ftp/python/3.7.2/python-3.7.2.exe
-  # https://www.python.org/ftp/python/3.7.2/python-3.7.2-amd64.exe
-  # https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz
-
-  PYTHON3_WIN_EMBED_PACK="${PYTHON3_WIN_EMBED_FOLDER_NAME}.zip"
-  PYTHON3_WIN_EMBED_URL="https://www.python.org/ftp/python/${PYTHON3_VERSION}/${PYTHON3_WIN_EMBED_PACK}"
-
-  (
-    xbb_activate
-
-    if [ ! -d "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}" ]
-    then
-      mkdir -pv "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}"
-      cd "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}"
-
-      download_and_extract "${PYTHON3_WIN_EMBED_URL}" "${PYTHON3_WIN_EMBED_PACK}" "${PYTHON3_WIN_EMBED_FOLDER_NAME}"
-    else
-      echo "Folder ${PYTHON3_WIN_EMBED_FOLDER_NAME} already present."
-    fi
-      
-    cd "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}"
-    echo "Copying python${PYTHON3_VERSION_MAJOR}${PYTHON3_VERSION_MINOR}.dll..."
-    # From here it'll be copied as dependency.
-    mkdir -pv "${LIBS_INSTALL_FOLDER_PATH}/bin/"
-    install -v -c -m 644 "python${PYTHON3_VERSION_MAJOR}.dll" \
-      "${LIBS_INSTALL_FOLDER_PATH}/bin/"
-    install -v -c -m 644 "python${PYTHON3_VERSION_MAJOR}${PYTHON3_VERSION_MINOR}.dll" \
-      "${LIBS_INSTALL_FOLDER_PATH}/bin/"
-  )
-
-  PYTHON3_ARCHIVE="${PYTHON3_SRC_FOLDER_NAME}.tar.xz"
-  PYTHON3_URL="https://www.python.org/ftp/python/${PYTHON3_VERSION}/${PYTHON3_ARCHIVE}"
-
-  PYTHON3_FOLDER_NAME="python-${PYTHON3_VERSION}"
-
-  if [ ! -d "${SOURCES_FOLDER_PATH}/${PYTHON3_SRC_FOLDER_NAME}" ]
-  then
-    cd "${SOURCES_FOLDER_PATH}"
-
-    download_and_extract "${PYTHON3_URL}" "${PYTHON3_ARCHIVE}" \
-      "${PYTHON3_SRC_FOLDER_NAME}"
-
-    # The source archive includes only the pyconfig.h.in, which needs
-    # to be configured, which is not an easy task. Thus add the file copied 
-    # from a Windows install.
-    cp "${BUILD_GIT_PATH}/patches/pyconfig-${PYTHON3_VERSION}.h" Include/pyconfig.h
-  fi
-}
-
-# -----------------------------------------------------------------------------
-
 function build_binutils()
 {
   # https://ftp.gnu.org/gnu/binutils/
@@ -1262,14 +1160,17 @@ function build_gdb()
         # ???
         CPPFLAGS+=" -DPy_BUILD_CORE_BUILTIN=1"
 
-        # Definition required by python-config.sh.
-        export GNURM_PYTHON_WIN_DIR="${SOURCES_FOLDER_PATH}/${PYTHON_WIN}"
+        if [ "$1" == "-py" ]
+        then
+          # Definition required by python-config.sh.
+          export GNURM_PYTHON_WIN_DIR="${SOURCES_FOLDER_PATH}/${PYTHON2_SRC_FOLDER_NAME}"
+        fi
 
         # From Arm script.
         LDFLAGS="${XBB_LDFLAGS_APP} -Wl,${XBB_FOLDER_PATH}/mingw/lib/CRT_glob.o"
         # Workaround for undefined reference to `__strcpy_chk' in GCC 9.
         # https://sourceforge.net/p/mingw-w64/bugs/818/
-        LIBS="-lssp"
+        LIBS="-lssp -liconv"
       elif [ "${TARGET_PLATFORM}" == "darwin" ]
       then
         # This makes gdb-py fail!
@@ -1299,7 +1200,7 @@ function build_gdb()
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
           extra_python_opts="--with-python=${BUILD_GIT_PATH}/scripts/python-win-config.sh"
-        elif [ "${USE_PLATFORM_PYTHON}" == "y" ]
+        elif [ "${USE_PLATFORM_PYTHON2}" == "y" ]
         then
           extra_python_opts="--with-python=${platform_python2}"
         else
@@ -1342,9 +1243,6 @@ function build_gdb()
       else
         tui_option="--enable-tui"
       fi
-
-      export GCC_WARN_CFLAGS
-      export GCC_WARN_CXXFLAGS
 
       export CPPFLAGS
       export CFLAGS
@@ -1463,18 +1361,12 @@ function build_gdb()
 
 function test_gdb_py()
 {
-  if [ "${TARGET_PLATFORM}" != "win32" ]
-  then
-    test_gdb "-py"
-  fi
+  test_gdb "-py"
 }
 
 function test_gdb_py3()
 {
-  if [ "${TARGET_PLATFORM}" != "win32" ]
-  then
-    test_gdb "-py3"
-  fi
+  test_gdb "-py3"
 }
 
 function test_gdb()
@@ -1483,6 +1375,21 @@ function test_gdb()
   if [ $# -ge 1 ]
   then
     suffix="$1"
+  fi
+
+  if [ "${suffix}" != "" -a "${TARGET_PLATFORM}" == "win32" ]
+  then
+    (
+      xbb_activate
+
+      show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}"
+
+      # Fails on Wine
+      # ImportError: No module named site
+      # 007b:fixme:msvcrt:__clean_type_info_names_internal (0x1e31e2e8) stub
+      run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --version || true
+    )
+    return 0
   fi
 
   # error while loading shared libraries: /Host/home/ilg/Work/arm-none-eabi-gcc-8.2.1-1.5/linux-x32/install/arm-none-eabi-gcc/bin/libpython3.7m.so.1.0: unsupported version 0 of Verneed record
