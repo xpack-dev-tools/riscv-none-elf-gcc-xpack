@@ -128,7 +128,7 @@ function run_gdb()
   if [ ! -x "${app_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}${exe}" ]
   then
     echo
-    echo ">>> ${gcc_target_prefix}-gdb${suffix} not present, skipping..."
+    echo ">>> ${gcc_target_prefix}-gdb${suffix} not present, tests skipped."
     return
   fi
 
@@ -167,7 +167,7 @@ function run_gdb()
         export PYTHONHOME="$(${python_name} -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
         echo "PYTHONHOME=${PYTHONHOME}"
         ;;
-        
+
       -py3)
         local python_name
         if [ "${node_platform}" == "win32" ]
