@@ -118,7 +118,7 @@ then
 
   echo
   echo find / -name 'python*'
-  find / -name 'python*'
+  find /c -name 'python*'
 
   # rm -rf /c/ProgramData/chocolatey/bin/python
   echo
