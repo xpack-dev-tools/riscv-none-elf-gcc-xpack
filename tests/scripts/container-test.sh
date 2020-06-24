@@ -81,14 +81,17 @@ if [[ ${image_name} == *ubuntu* ]] || [[ ${image_name} == *debian* ]] || [[ ${im
 then
   apt-get -qq update 
   apt-get -qq install -y git-core curl tar gzip lsb-release binutils
+  apt-get -qq install -y python || true
   apt-get -qq install -y python3 || true
 elif [[ ${image_name} == *centos* ]] || [[ ${image_name} == *fedora* ]]
 then
   yum install -y -q git curl tar gzip redhat-lsb-core binutils
+  yum install -y -q python || true
   yum install -y -q python3 || true
 elif [[ ${image_name} == *opensuse* ]]
 then
   zypper -q in -y git-core curl tar gzip lsb-release binutils
+  zypper -q in -y python || true
   zypper -q in -y python3 || true
 elif [[ ${image_name} == *manjaro* ]]
 then
@@ -98,6 +101,7 @@ then
   # Update even if up to date (-yy) & upgrade (-u).
   # pacman -S -yy -u -q --noconfirm 
   pacman -S -q --noconfirm --noprogressbar git curl tar gzip lsb-release binutils file
+  pacman -S -q --noconfirm --noprogressbar python || true
   pacman -S -q --noconfirm --noprogressbar python3 || true
 elif [[ ${image_name} == *archlinux* ]]
 then
@@ -106,6 +110,7 @@ then
   # Update even if up to date (-yy) & upgrade (-u).
   # pacman -S -yy -u -q --noconfirm 
   pacman -S -q --noconfirm --noprogressbar git curl tar gzip lsb-release binutils file
+  pacman -S -q --noconfirm --noprogressbar python || true
   pacman -S -q --noconfirm --noprogressbar python3 || true
 fi
 
