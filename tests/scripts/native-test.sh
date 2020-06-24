@@ -94,8 +94,12 @@ detect_architecture
 if [ "${node_platform}" == "win32" ]
 then
   # has_gdb_py3="n"
-  choco install python3
-  python3 --version
+  # https://chocolatey.org/docs/commands-reference
+  choco list --local-only
+  # https://chocolatey.org/packages/python3
+  choco install python3 --yes --verbose
+  python3 --version || true
+  python --version || true
 fi
 
 app_lc_name="riscv-none-embed-gcc"
