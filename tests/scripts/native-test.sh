@@ -97,7 +97,7 @@ then
   # https://chocolatey.org/docs/commands-reference
   choco list --local-only
   # https://chocolatey.org/packages/python3
-  choco install python --version=3.7.6 --yes --verbose
+  choco install python --version=3.7.6 --yes
   env | sort
 
   # echo

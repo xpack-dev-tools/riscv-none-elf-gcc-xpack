@@ -135,8 +135,6 @@ function run_gdb()
   (
     case "${suffix}" in
       '')
-        echo
-        echo "Testing if gdb${suffix} starts properly..."
         ;;
 
       -py)
@@ -148,6 +146,9 @@ function run_gdb()
           python_name="python2.7"
         fi
 
+        echo
+        echo "Identifying Python2..."
+
         local which_python
         set +e
         which_python="$(which ${python_name} 2>/dev/null)"
@@ -158,8 +159,9 @@ function run_gdb()
           return
         fi
         set -e
-        echo
-        echo "Testing if gdb${suffix} starts properly..."
+
+        echo "Found as ${which_python}."
+
         echo
         ${python_name} --version
         ${python_name} -c 'import sys; print sys.path'
@@ -172,15 +174,21 @@ function run_gdb()
         local python_name
         if [ "${node_platform}" == "win32" ]
         then
-          if [ -f "/c/Python37/python.exe" ]
+          if [ -f "/c/Python38/python.exe" ]
+          then
+            export PATH="/c/Python38:$PATH"
+          elif [ -f "/c/Python37/python.exe" ]
           then
             export PATH="/c/Python37:$PATH"
           fi
-          python_name="python"
 
+          python_name="python"
         else       
           python_name="python3.7"
         fi
+
+        echo
+        echo "Identifying Python3..."
 
         set +e
         local which_python
@@ -192,9 +200,8 @@ function run_gdb()
           return
         fi
         set -e
+        echo "Found as ${which_python}."
 
-        echo
-        echo "Testing if gdb${suffix} starts properly..."
         echo
         ${python_name} --version
         ${python_name} -c 'import sys; print(sys.path)'
@@ -208,6 +215,9 @@ function run_gdb()
         exit 1
         ;;
     esac
+
+    echo
+    echo "Testing if gdb${suffix} starts properly..."
 
     # rm -rf "${app_folder_path}/bin/python27.dll"
     show_libs "${app_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}"
