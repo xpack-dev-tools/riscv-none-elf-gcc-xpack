@@ -93,38 +93,17 @@ detect_architecture
 
 if [ "${node_platform}" == "win32" ]
 then
-  # has_gdb_py3="n"
   # https://chocolatey.org/docs/commands-reference
   choco list --local-only
   # https://chocolatey.org/packages/python3
   choco install python --version=3.7.6 --yes
   env | sort
 
-  # echo
-  # echo python3 --version
-  # python3 --version || true
-
-  # echo
-  # echo python2 --version
-  # python2 --version || true
-
-  # echo
-  # echo python --version
-  # python --version || true
-
-  # echo
-  # echo which python
-  # which python
-
-  # echo
-  # echo find /c -name 'python*'
-  # find /c -name 'python*'
-
-  # rm -rf /c/ProgramData/chocolatey/bin/python
   echo
   echo ls -l /c/Python*
   ls -l /c/Python*
-  # ls -l /c/Windows
+  
+  echo
 fi
 
 app_lc_name="riscv-none-embed-gcc"
