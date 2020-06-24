@@ -185,7 +185,7 @@ function run_gdb()
           python_name="python"
         elif [ "${node_platform}" == "linux" ]
         then
-          python_name="python3"
+          python_name="python3.7"
         elif [ "${node_platform}" == "darwin" ]
         then
           python_name="python3.7"
