@@ -147,7 +147,7 @@ function run_gdb()
         fi
 
         echo
-        echo "Identifying Python2..."
+        echo "Identifying Python 2..."
 
         local which_python
         set +e
@@ -192,7 +192,7 @@ function run_gdb()
         fi
 
         echo
-        echo "Identifying Python3..."
+        echo "Identifying Python 3..."
 
         set +e
         local which_python
@@ -200,7 +200,7 @@ function run_gdb()
         if [ -z "${which_python}" ]
         then
           echo
-          echo ">>> No python3.7 installed, skipping gdb_py3 test."
+          echo ">>> No ${python_name} installed, skipping gdb_py3 test."
           return
         fi
         set -e

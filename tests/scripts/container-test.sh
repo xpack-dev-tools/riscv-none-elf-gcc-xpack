@@ -79,39 +79,39 @@ done
 # Make sure that the minimum prerequisites are met.
 if [[ ${image_name} == *ubuntu* ]] || [[ ${image_name} == *debian* ]] || [[ ${image_name} == *raspbian* ]]
 then
-  apt-get -qq update 
-  apt-get -qq install -y git-core curl tar gzip lsb-release binutils
-  apt-get -qq install -y python || true
-  apt-get -qq install -y python3 || true
+  run_verbose apt-get -qq update 
+  run_verbose apt-get -qq install -y git-core curl tar gzip lsb-release binutils
+  # run_verbose apt-get -qq install -y python || true
+  run_verbose apt-get -qq install -y python3 || true
 elif [[ ${image_name} == *centos* ]] || [[ ${image_name} == *fedora* ]]
 then
-  yum install -y -q git curl tar gzip redhat-lsb-core binutils
-  yum install -y -q python || true
-  yum install -y -q python3 || true
+  run_verbose yum install -y -q git curl tar gzip redhat-lsb-core binutils
+  # run_verbose yum install -y -q python || true
+  run_verbose yum install -y -q python3 || true
 elif [[ ${image_name} == *opensuse* ]]
 then
-  zypper -q in -y git-core curl tar gzip lsb-release binutils
-  zypper -q in -y python || true
-  zypper -q in -y python3 || true
+  run_verbose zypper -q in -y git-core curl tar gzip lsb-release binutils
+  # run_verbose zypper -q in -y python || true
+  run_verbose zypper -q in -y python3 || true
 elif [[ ${image_name} == *manjaro* ]]
 then
-  pacman-mirrors -g
-  pacman -S -y -q --noconfirm 
+  run_verbose pacman-mirrors -g
+  run_verbose pacman -S -y -q --noconfirm 
 
   # Update even if up to date (-yy) & upgrade (-u).
   # pacman -S -yy -u -q --noconfirm 
-  pacman -S -q --noconfirm --noprogressbar git curl tar gzip lsb-release binutils file
-  pacman -S -q --noconfirm --noprogressbar python || true
-  pacman -S -q --noconfirm --noprogressbar python3 || true
+  run_verbose pacman -S -q --noconfirm --noprogressbar git curl tar gzip lsb-release binutils file
+  # run_verbose pacman -S -q --noconfirm --noprogressbar python || true
+  run_verbose pacman -S -q --noconfirm --noprogressbar python3 || true
 elif [[ ${image_name} == *archlinux* ]]
 then
   pacman -S -y -q --noconfirm 
 
   # Update even if up to date (-yy) & upgrade (-u).
   # pacman -S -yy -u -q --noconfirm 
-  pacman -S -q --noconfirm --noprogressbar git curl tar gzip lsb-release binutils file
-  pacman -S -q --noconfirm --noprogressbar python || true
-  pacman -S -q --noconfirm --noprogressbar python3 || true
+  run_verbose pacman -S -q --noconfirm --noprogressbar git curl tar gzip lsb-release binutils file
+  # run_verbose pacman -S -q --noconfirm --noprogressbar python || true
+  run_verbose pacman -S -q --noconfirm --noprogressbar python3 || true
 fi
 
 # -----------------------------------------------------------------------------
