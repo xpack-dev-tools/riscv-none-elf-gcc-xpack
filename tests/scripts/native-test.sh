@@ -99,11 +99,32 @@ then
   # https://chocolatey.org/packages/python3
   choco install python3 --yes --verbose
   env | sort
+
+  echo
+  echo python3 --version
   python3 --version || true
+
+  echo
+  echo python2 --version
+  python2 --version || true
+
+  echo
+  echo python --version
   python --version || true
+
+  echo
+  echo which python
   which python
+
+  echo
+  echo find / -name 'python*'
+  find / -name 'python*'
+
+  # rm -rf /c/ProgramData/chocolatey/bin/python
+  echo
+  echo ls -l /c/ProgramData/chocolatey/bin
   ls -l /c/ProgramData/chocolatey/bin
-  ls -l /c/Windows
+  # ls -l /c/Windows
 fi
 
 app_lc_name="riscv-none-embed-gcc"
