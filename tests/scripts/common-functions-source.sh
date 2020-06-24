@@ -138,6 +138,7 @@ function run_gdb()
         echo
         echo "Testing if gdb${suffix} starts properly..."
         ;;
+
       -py)
         local python_name
         if [ "${node_platform}" == "win32" ]
@@ -166,6 +167,7 @@ function run_gdb()
         export PYTHONHOME="$(${python_name} -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
         echo "PYTHONHOME=${PYTHONHOME}"
         ;;
+        
       -py3)
         local python_name
         if [ "${node_platform}" == "win32" ]
@@ -265,14 +267,17 @@ function run_tests()
     echo ">>> gdb-py3 tests skipped."
   fi
 
-  echo
-  echo "Checking the Python shared libraries."
+  if [ "${node_platform}" == "linux" ]
+  then
+    echo
+    echo "Checking the Python shared libraries."
 
-  for file_path in $(find "${app_folder_path}" -name 'libpython*so*')
-  do
-    run_app file "${file_path}"
-    run_app ldd -v "${file_path}" || true
-  done
+    for file_path in $(find "${app_folder_path}" -name 'libpython*so*')
+    do
+      run_app file "${file_path}"
+      run_app ldd -v "${file_path}" || true
+    done
+  fi
 
   echo
   echo "All tests completed successfully."
