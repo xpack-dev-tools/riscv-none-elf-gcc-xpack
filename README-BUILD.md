@@ -631,7 +631,7 @@ at the time of the release, so the result may be slightly different; to
 obtain exactly the same result, use the commit tagged with the desired
 release.
 
-## Test
+## Testing
 
 A simple test is performed by the script at the end, by launching the
 executables to check if all shared/dynamic libraries are correctly used.
@@ -645,6 +645,13 @@ look like:
 $ /Users/ilg/Downloads/xPacks/riscv-none-embed-gcc/8.2.0-3.1/bin/riscv-none-embed-gcc --version
 riscv-none-embed-gcc (xPack RISC-V Embedded GCC, 64-bit) 8.2.0
 ```
+
+## Travis tests
+
+A multi-platform validation test for all binary archives can be performed
+using Travis CI.
+
+For details please see `tests/scripts/README.md`.
 
 ## Installed folders
 
