@@ -98,8 +98,12 @@ then
   choco list --local-only
   # https://chocolatey.org/packages/python3
   choco install python3 --yes --verbose
+  env | sort
   python3 --version || true
   python --version || true
+  which python
+  ls -l /c/ProgramData/chocolatey/bin
+  ls -l /c/Windows
 fi
 
 app_lc_name="riscv-none-embed-gcc"
