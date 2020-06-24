@@ -97,33 +97,33 @@ then
   # https://chocolatey.org/docs/commands-reference
   choco list --local-only
   # https://chocolatey.org/packages/python3
-  choco install python3 --yes --verbose
+  choco install python --version=3.7.6 --yes --verbose
   env | sort
 
-  echo
-  echo python3 --version
-  python3 --version || true
+  # echo
+  # echo python3 --version
+  # python3 --version || true
 
-  echo
-  echo python2 --version
-  python2 --version || true
+  # echo
+  # echo python2 --version
+  # python2 --version || true
 
-  echo
-  echo python --version
-  python --version || true
+  # echo
+  # echo python --version
+  # python --version || true
 
-  echo
-  echo which python
-  which python
+  # echo
+  # echo which python
+  # which python
 
-  echo
-  echo find / -name 'python*'
-  find /c -name 'python*'
+  # echo
+  # echo find /c -name 'python*'
+  # find /c -name 'python*'
 
   # rm -rf /c/ProgramData/chocolatey/bin/python
   echo
-  echo ls -l /c/ProgramData/chocolatey/bin
-  ls -l /c/ProgramData/chocolatey/bin
+  echo ls -l /c/Python*
+  ls -l /c/Python*
   # ls -l /c/Windows
 fi
 

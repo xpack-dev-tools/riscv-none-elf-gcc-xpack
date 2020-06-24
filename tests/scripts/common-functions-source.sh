@@ -172,7 +172,12 @@ function run_gdb()
         local python_name
         if [ "${node_platform}" == "win32" ]
         then
+          if [ -f "/c/Python37/python.exe" ]
+          then
+            export PATH="/c/Python37:$PATH"
+          fi
           python_name="python"
+
         else       
           python_name="python3.7"
         fi
