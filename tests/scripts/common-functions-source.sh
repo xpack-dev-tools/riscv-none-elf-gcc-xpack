@@ -17,7 +17,7 @@
 
 # -----------------------------------------------------------------------------
 
-function run_binutils()
+function test_binutils()
 {
   echo
   echo "Testing if binutils start properly..."
@@ -45,7 +45,7 @@ function run_binutils()
   run_app "${app_folder_path}/bin/${gcc_target_prefix}-strip" --version
 }
 
-function run_gcc()
+function test_gcc()
 {
   echo
   echo "Testing if gcc starts properly..."
@@ -111,7 +111,7 @@ __EOF__
   rm -rf "${tmp}"
 }
 
-function run_gdb()
+function test_gdb()
 {
   local suffix=""
   if [ $# -ge 1 ]
@@ -264,15 +264,15 @@ function run_tests()
 {
   local gcc_target_prefix="riscv-none-embed"
 
-  run_binutils
+  test_binutils
 
-  run_gcc
+  test_gcc
 
-  run_gdb
+  test_gdb
 
   if [ "${has_gdb_py}" == "y" ]
   then
-    run_gdb "-py"
+    test_gdb "-py"
   else
     echo
     echo ">>> gdb-py tests skipped."
@@ -280,7 +280,7 @@ function run_tests()
 
   if [ "${has_gdb_py3}" == "y" ]
   then
-    run_gdb "-py3"
+    test_gdb "-py3"
   else
     echo
     echo ">>> gdb-py3 tests skipped."
