@@ -382,15 +382,15 @@ their SHA signatures, created in the `deploy` folder:
 
 ```console
 $ ls -l deploy
-total 350108
--rw-r--r-- 1 ilg ilg  61981364 Apr  1 08:27 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x32.tar.gz
--rw-r--r-- 1 ilg ilg       140 Apr  1 08:27 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x32.tar.gz.sha
--rw-r--r-- 1 ilg ilg  61144048 Apr  1 08:19 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x64.tar.gz
--rw-r--r-- 1 ilg ilg       140 Apr  1 08:19 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x64.tar.gz.sha
--rw-r--r-- 1 ilg ilg 112105889 Apr  1 08:29 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x32.zip
--rw-r--r-- 1 ilg ilg       134 Apr  1 08:29 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x32.zip.sha
--rw-r--r-- 1 ilg ilg 123181226 Apr  1 08:21 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x64.zip
--rw-r--r-- 1 ilg ilg       134 Apr  1 08:21 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x64.zip.sha
+total 1271432
+-rw-rw-r-- 1 ilg ilg 330863900 Jul  3 20:29 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x32.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Jul  3 20:29 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x32.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 326158132 Jul  3 18:10 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x64.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Jul  3 18:10 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 315737045 Jul  3 21:04 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x32.zip
+-rw-rw-r-- 1 ilg ilg       117 Jul  3 21:04 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x32.zip.sha
+-rw-rw-r-- 1 ilg ilg 329159193 Jul  3 18:42 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x64.zip
+-rw-rw-r-- 1 ilg ilg       117 Jul  3 18:42 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x64.zip.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -515,9 +515,9 @@ and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l deploy
-total 216064
--rw-r--r--  1 ilg  staff  110620198 Jul 24 16:35 xpack-riscv-none-embed-gcc-8.3.0-1.2-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        134 Jul 24 16:35 xpack-riscv-none-embed-gcc-8.3.0-1.2-darwin-x64.tar.gz.sha
+total 622720
+-rw-r--r--  1 ilg  staff  318825489 Jul  3 21:27 xpack-riscv-none-embed-gcc-8.3.0-1.2-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        121 Jul  3 21:27 xpack-riscv-none-embed-gcc-8.3.0-1.2-darwin-x64.tar.gz.sha
 ```
 
 To copy the files from the build machine to the current development
