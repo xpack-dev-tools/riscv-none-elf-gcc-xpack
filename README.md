@@ -84,8 +84,8 @@ For more details please read the [Install](https://xpack.github.io/riscv-none-em
 
 ## Maintainer info
 
-- [How to build?](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-BUILD.md)
-- [How to publish?](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-PUBLISH.md)
+- [How to build](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-BUILD.md)
+- [How to publish](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-PUBLISH.md)
 
 ## Support
 

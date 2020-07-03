@@ -1,4 +1,4 @@
-# How to publish the xPack GNU RISC-V Embedded GCC binaries?
+# How to publish the xPack GNU RISC-V Embedded GCC binaries
 
 ## Build
 
@@ -131,7 +131,8 @@ In the `xpack.github.io` web Git:
 - add a new file to `_posts/releases/riscv-none-embed-gcc`
 - name the file like `2020-07-04-riscv-none-embed-gcc-v8-3-0-1-2-released.md`
 - name the post like: **xPack GNU RISC-V Embedded GCC v8.3.0-1.2 released**.
-- as `download_url` use the tagged URL like `https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/tag/v8.3.0-1.2/`
+- as `download_url` use the tagged URL like 
+`https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/tag/v8.3.0-1.2/`
 - update the `date:` field with the current date
 - copy the list of commit IDs from the `README-<version>.sh` file
 - generate the list of multilibs and copy/paste
