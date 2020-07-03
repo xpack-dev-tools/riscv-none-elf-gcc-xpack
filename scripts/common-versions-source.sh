@@ -397,9 +397,9 @@ function build_versions()
     build_gcc_first
 
     # Task [III-2] /$HOST_NATIVE/newlib/
-    do_newlib ""
+    build_newlib ""
     # Task [III-3] /$HOST_NATIVE/newlib-nano/
-    do_newlib "-nano"
+    build_newlib "-nano"
 
     # Task [III-4] /$HOST_NATIVE/gcc-final/
     build_gcc_final ""

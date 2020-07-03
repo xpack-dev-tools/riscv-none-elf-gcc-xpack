@@ -432,7 +432,7 @@ function build_gcc_first()
 
 # For the nano build, call it with "-nano".
 # $1="" or $1="-nano"
-function do_newlib()
+function build_newlib()
 {
   local newlib_folder_name="${NEWLIB_FOLDER_NAME}$1"
   local newlib_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${newlib_folder_name}-installed"
@@ -564,7 +564,7 @@ function do_newlib()
               --enable-newlib-register-fini
 
           else
-            echo "Unsupported do_newlib arg $1"
+            echo "Unsupported build_newlib arg $1"
             exit 1
           fi
 
