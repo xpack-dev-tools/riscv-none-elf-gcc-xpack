@@ -51,7 +51,8 @@ source "${helper_folder_path}/test-functions-source.sh"
 message="Test xPack RISC-V Embed GCC on Windows platforms"
 branch="xpack-develop"
 
-base_url="https://github.com/xpack-dev-tools/pre-releases/releases/download/experimental/"
+# base_url="https://github.com/xpack-dev-tools/pre-releases/releases/download/experimental/"
+base_url="https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/download/v8.3.0-1.2/"
 
 data_file_path="$(mktemp)"
 
