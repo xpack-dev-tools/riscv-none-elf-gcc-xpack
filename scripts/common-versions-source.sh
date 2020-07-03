@@ -202,7 +202,7 @@ function build_versions()
     if [ "${RELEASE_VERSION}" == "8.3.0-1.1" ]
     then
 
-      PYTHON_WIN_VERSION="2.7.13"
+      PYTHON2_WIN_VERSION="2.7.13"
 
       if [ "${TARGET_PLATFORM}" == "darwin" ]
       then
@@ -234,7 +234,7 @@ function build_versions()
         WITH_GDB_PY2="y"
       fi
 
-      PYTHON_WIN_VERSION="2.7.18"
+      PYTHON2_WIN_VERSION="2.7.18"
 
       WITH_GDB_PY3="y" 
       PYTHON3_WIN_VERSION="3.7.6"
@@ -335,7 +335,7 @@ function build_versions()
     XZ_VERSION="5.2.3"
 
     WITH_GDB_PY2="y"
-    PYTHON_WIN_VERSION="2.7.13"
+    PYTHON2_WIN_VERSION="2.7.13"
 
     BINUTILS_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
     GDB_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
@@ -426,7 +426,7 @@ function build_versions()
     # The Windows GDB needs some headers from the Python distribution.
     if [ "${TARGET_PLATFORM}" == "win32" ]
     then
-      download_python2_win "${PYTHON_WIN_VERSION}"
+      download_python2_win "${PYTHON2_WIN_VERSION}"
     fi
 
     build_gdb "-py"
