@@ -41,19 +41,27 @@
     "binaries": {
       "destination": "./.content",
       "baseUrl": "https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/download/v8.3.0-1.1/",
-      "skip": 3,
+      "skip": 1,
       "platforms": {
         "darwin-x64": {
           "sha256": "532f719c11f7311a0103eac6ddd7dd012716a2c3030dd1ee7e64374b1af41d34",
-          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-1.1-darwin-x64.tgz"
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-1.1-darwin-x64.tar.gz"
+        },
+        "linux-arm64": {
+          "sha256": "7b95d397a2bd319892f5c930757f7b3bc47acac633dafcf055b0901172513c00",
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-1.1-linux-arm64.tar.gz"
+        },
+        "linux-arm": {
+          "sha256": "7b95d397a2bd319892f5c930757f7b3bc47acac633dafcf055b0901172513c00",
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-1.1-linux-arm.tar.gz"
         },
         "linux-x86": {
           "sha256": "c40d8e74a3f87839131287ecd68be2e691c84af0b75d684c1e47ab60687ff987",
-          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-1.1-linux-x32.tgz"
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-1.1-linux-x32.tar.gz"
         },
         "linux-x64": {
           "sha256": "7b95d397a2bd319892f5c930757f7b3bc47acac633dafcf055b0901172513c00",
-          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-1.1-linux-x64.tgz"
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-1.1-linux-x64.tar.gz"
         },
         "win32-x86": {
           "sha256": "5d608a0438c5f5c4a2c8b6d4eb13499a60a17618da04fb20972eb0f4965ed4bd",
