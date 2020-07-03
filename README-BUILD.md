@@ -298,10 +298,10 @@ on a macOS system, due to Docker specifics, it is faster to build the
 GNU/Linux and Windows binaries on a GNU/Linux system and the macOS binary
 separately.
 
-### Build the GNU/Linux and Windows binaries
+### Build the Intel GNU/Linux and Windows binaries
 
-The current platform for GNU/Linux and Windows production builds is an
-Ubuntu Server 18 LTS, running on an Intel NUC8i7BEH mini PC with 32 GB of RAM
+The current platform for Intel GNU/Linux and Windows production builds is a
+Debian 10, running on an Intel NUC8i7BEH mini PC with 32 GB of RAM
 and 512 GB of fast M.2 SSD.
 
 ```console
@@ -383,14 +383,14 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l deploy
 total 350108
--rw-r--r-- 1 ilg ilg  61981364 Apr  1 08:27 xpack-riscv-none-embed-gcc-8.2.0-3.1-linux-x32.tar.xz
--rw-r--r-- 1 ilg ilg       140 Apr  1 08:27 xpack-riscv-none-embed-gcc-8.2.0-3.1-linux-x32.tar.xz.sha
--rw-r--r-- 1 ilg ilg  61144048 Apr  1 08:19 xpack-riscv-none-embed-gcc-8.2.0-3.1-linux-x64.tar.xz
--rw-r--r-- 1 ilg ilg       140 Apr  1 08:19 xpack-riscv-none-embed-gcc-8.2.0-3.1-linux-x64.tar.xz.sha
--rw-r--r-- 1 ilg ilg 112105889 Apr  1 08:29 xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x32.zip
--rw-r--r-- 1 ilg ilg       134 Apr  1 08:29 xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x32.zip.sha
--rw-r--r-- 1 ilg ilg 123181226 Apr  1 08:21 xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x64.zip
--rw-r--r-- 1 ilg ilg       134 Apr  1 08:21 xpack-riscv-none-embed-gcc-8.2.0-3.1-win32-x64.zip.sha
+-rw-r--r-- 1 ilg ilg  61981364 Apr  1 08:27 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x32.tar.gz
+-rw-r--r-- 1 ilg ilg       140 Apr  1 08:27 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x32.tar.gz.sha
+-rw-r--r-- 1 ilg ilg  61144048 Apr  1 08:19 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x64.tar.gz
+-rw-r--r-- 1 ilg ilg       140 Apr  1 08:19 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x64.tar.gz.sha
+-rw-r--r-- 1 ilg ilg 112105889 Apr  1 08:29 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x32.zip
+-rw-r--r-- 1 ilg ilg       134 Apr  1 08:29 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x32.zip.sha
+-rw-r--r-- 1 ilg ilg 123181226 Apr  1 08:21 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x64.zip
+-rw-r--r-- 1 ilg ilg       134 Apr  1 08:21 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x64.zip.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -399,7 +399,7 @@ folder in a terminal and use `scp`:
 
 ```console
 $ cd ~/Work/riscv-none-embed-gcc-*/deploy
-$ scp * ilg@ilg-wks.local:Downloads/xpack-binaries/riscv
+$ scp * ilg@wks:Downloads/xpack-binaries/riscv
 ```
 
 #### Build the Arm GNU/Linux binaries
@@ -468,10 +468,10 @@ archives and their SHA signatures, created in the `deploy` folder:
 $ cd ~/Work/riscv-none-embed-gcc-*
 $ ls -l deploy
 total 13076
--rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm64.tgz
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm64.tgz.sha
--rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm.tgz
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm.tgz.sha
+-rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-8.3.0-1.2-linux-arm64.tar.gz
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-8.3.0-1.2-linux-arm64.tar.gz.sha
+-rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-8.3.0-1.2-linux-arm.tar.gz
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-8.3.0-1.2-linux-arm.tar.gz.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -486,8 +486,7 @@ $ scp * ilg@wks:Downloads/xpack-binaries/riscv
 ### Build the macOS binary
 
 The current platform for macOS production builds is a macOS 10.10.5
-VirtualBox image running on the same macMini with 16 GB of RAM and a
-fast SSD.
+running on a MacBookPro with 16 GB of RAM and a fast SSD.
 
 ```console
 $ ssh xbbm
@@ -517,8 +516,8 @@ and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l deploy
 total 216064
--rw-r--r--  1 ilg  staff  110620198 Jul 24 16:35 xpack-riscv-none-embed-gcc-8.2.0-3.1-darwin-x64.tgz
--rw-r--r--  1 ilg  staff        134 Jul 24 16:35 xpack-riscv-none-embed-gcc-8.2.0-3.1-darwin-x64.tgz.sha
+-rw-r--r--  1 ilg  staff  110620198 Jul 24 16:35 xpack-riscv-none-embed-gcc-8.3.0-1.2-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        134 Jul 24 16:35 xpack-riscv-none-embed-gcc-8.3.0-1.2-darwin-x64.tar.gz.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -527,7 +526,7 @@ folder in a terminal and use `scp`:
 
 ```console
 $ cd ~/Work/riscv-none-embed-gcc-*/deploy
-$ scp * ilg@ilg-wks.local:Downloads/xpack-binaries/riscv
+$ scp * ilg@wks:Downloads/xpack-binaries/riscv
 ```
 
 ## Run a test build
@@ -621,7 +620,7 @@ build folder, it might be necessary to run a recursive `chown`.
 Set the release explicitly in the environment:
 
 ```console
-$ RELEASE_VERSION=8.2.0-3.1 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all --jobs 8
+$ RELEASE_VERSION=8.3.0-1.2 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all --jobs 8
 $ RELEASE_VERSION=8.3.0-1.1 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all --jobs 8
 ```
 
@@ -642,8 +641,8 @@ program from there. For example on macOS the output should
 look like:
 
 ```console
-$ /Users/ilg/Downloads/xPacks/riscv-none-embed-gcc/8.2.0-3.1/bin/riscv-none-embed-gcc --version
-riscv-none-embed-gcc (xPack RISC-V Embedded GCC, 64-bit) 8.2.0
+$ /Users/ilg/Downloads/xPacks/riscv-none-embed-gcc/8.3.0-1.2/bin/riscv-none-embed-gcc --version
+riscv-none-embed-gcc (xPack RISC-V Embedded GCC, 64-bit) 8.3.0
 ```
 
 ## Travis tests
@@ -659,8 +658,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/opt/xPacks/riscv-none-embed-gcc/8.2.1-1.1
-/Users/ilg/opt/gnu-mcu-eclipse/riscv-none-embed-gcc/8.2.1-1.1
+$ tree -L 2 /Users/ilg/opt/xPacks/riscv-none-embed-gcc/8.3.0-1.2
+/Users/ilg/opt/gnu-mcu-eclipse/riscv-none-embed-gcc/8.3.0-1.2
 ├── README.md
 ├── riscv-none-embed
 │   ├── bin
