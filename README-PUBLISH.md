@@ -149,19 +149,19 @@ Copy/paste the build report at the end of the post as:
 ## Checksums
 The SHA-256 hashes for the files are:
 
-5e10320563e49dd31a33a032496547375d0e07191df727d393e26daa14d3f526
-xpack-riscv-none-embed-gcc-8.3.0-1.2-darwin-x64.tgz
+2009f256e59291e1025cc099e4300d7662dda040b304fe3462b4cb7c35c71378  
+xpack-riscv-none-embed-gcc-8.3.0-1.2-darwin-x64.tar.gz
 
-fdb6ab5badd0820e0562c288b1ec88566f8589f5fa26d81a0f57a2b95213d0cc
-xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x32.tgz
+1d99730d6e1e5d3a60fa0ccfbbcf0276e77dd83d58b6d8d1543cef40a1dd96ca  
+xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x32.tar.gz
 
-dd6985729df5c2182cc5ce699013146b4addc80cbe231a7b62ec89d095e81aca
-xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x64.tgz
+079a88d7f7c18cfd735a9ed1f0eefa28ab28d3007b5f7591920ab25225c89248  
+xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x64.tar.gz
 
-737f95fb3129b0e7f67c48fea39b844f574c379768bd0ea5088a6e976f8f7b14
+8e7e98117900f3eed717b20555b346c2473dcbb9090e05c456412008f39fb62d  
 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x32.zip
 
-98ac277287d8c51cc1c5f83a5a9945951bd8d5806b4570b41eea2c306e141a3b
+5b7a4e3a2bb22566fed951972d726d10ff43bc35db17f9287eed52766e80ecee  
 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x64.zip
 ```
 
