@@ -4,7 +4,8 @@
   "description": "An xPack which installs the binary files for xPack GNU RISC-V Embedded GCC",
   "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "git-log": "git log --pretty='%cd * %h %s' --date=short"
   },
   "repository": {
     "type": "git",
