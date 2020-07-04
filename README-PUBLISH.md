@@ -153,6 +153,12 @@ The SHA-256 hashes for the files are:
 2009f256e59291e1025cc099e4300d7662dda040b304fe3462b4cb7c35c71378  
 xpack-riscv-none-embed-gcc-8.3.0-1.2-darwin-x64.tar.gz
 
+751f28a28148ddaec8cfcbf7eb794a70d24ee6650dc29da91e6aa672b9deae52  
+xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-arm64.tar.gz
+
+63f232cbeddbe968130f4c8386cca24c5e1410cc2551738d071b279a94cd8b75  
+xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-arm.tar.gz
+
 1d99730d6e1e5d3a60fa0ccfbbcf0276e77dd83d58b6d8d1543cef40a1dd96ca  
 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x32.tar.gz
 

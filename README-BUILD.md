@@ -467,11 +467,11 @@ archives and their SHA signatures, created in the `deploy` folder:
 ```console
 $ cd ~/Work/riscv-none-embed-gcc-*
 $ ls -l deploy
-total 13076
--rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-8.3.0-1.2-linux-arm64.tar.gz
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-8.3.0-1.2-linux-arm64.tar.gz.sha
--rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-8.3.0-1.2-linux-arm.tar.gz
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-8.3.0-1.2-linux-arm.tar.gz.sha
+total 631032
+-rw-rw-r-- 1 ilg ilg 324558658 Jul  3 20:50 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-arm64.tar.gz
+-rw-rw-r-- 1 ilg ilg       122 Jul  3 20:50 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-arm64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 321600234 Jul  4 03:30 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-arm.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Jul  4 03:30 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-arm.tar.gz.sha
 ```
 
 To copy the files from the build machine to the current development
