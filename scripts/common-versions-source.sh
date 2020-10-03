@@ -75,6 +75,8 @@ function build_versions()
 
   README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
 
+  GCC_VERSION="$(echo "${RELEASE_VERSION}" | sed -e 's|-[0-9]*||')"
+
   # In reverse chronological order.
   # Keep them in sync with https://github.com/sifive/freedom-tools/releases.
   if [[ "${RELEASE_VERSION}" =~ 8\.3\.0-* ]]
