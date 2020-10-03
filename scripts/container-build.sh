@@ -101,7 +101,7 @@ WITH_TESTS="y"
 IS_DEVELOP=""
 IS_DEBUG=""
 
-LINUX_INSTALL_PATH=""
+LINUX_INSTALL_RELATIVE_PATH=""
 USE_GITS=""
 
 if [ "$(uname)" == "Linux" ]
@@ -165,12 +165,12 @@ do
       shift
       ;;
 
-    # --- specific
-
-    --linux-install-path)
-      LINUX_INSTALL_PATH="$2"
+    --linux-install-relative-path)
+      LINUX_INSTALL_RELATIVE_PATH="$2"
       shift 2
       ;;
+
+    # --- specific
 
     --disable-multilib)
       WITHOUT_MULTILIB="y"
