@@ -177,7 +177,6 @@ function build_binutils()
             --with-sysroot="${APP_PREFIX}/${GCC_TARGET}" \
             \
             --enable-build-warnings=no \
-            --disable-rpath \
             --with-system-zlib \
             
           cp "config.log" "${LOGS_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}/config-log.txt"
@@ -399,7 +398,6 @@ function build_gcc_first()
             --with-abi="${GCC_ABI}" \
             --with-arch="${GCC_ARCH}" \
             \
-            --disable-rpath \
             --disable-build-format-warnings \
             --with-system-zlib 
 
@@ -871,7 +869,6 @@ function build_gcc_final()
               --with-abi="${GCC_ABI}" \
               --with-arch="${GCC_ARCH}" \
               \
-              --disable-rpath \
               --disable-build-format-warnings \
               --with-system-zlib
 
@@ -909,7 +906,6 @@ function build_gcc_final()
               --with-native-system-header-dir="/include" \
               ${MULTILIB_FLAGS} \
               \
-              --disable-rpath \
               --disable-build-format-warnings \
               --with-system-zlib
 
@@ -1318,7 +1314,6 @@ function build_gdb()
             \
             --disable-werror \
             --enable-build-warnings=no \
-            --disable-rpath \
             --with-system-zlib \
             --without-guile \
             --without-babeltrace \
