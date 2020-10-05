@@ -128,6 +128,9 @@ function build_binutils()
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
         LDFLAGS+=" -Wl,${XBB_FOLDER_PATH}/mingw/lib/CRT_glob.o"
+      elif [ "${TARGET_PLATFORM}" == "linux" ]
+      then
+        LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
       fi
       if [ "${IS_DEVELOP}" == "y" ]
       then
@@ -321,6 +324,10 @@ function build_gcc_first()
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
       LDFLAGS="${XBB_LDFLAGS_APP}" 
+      if [ "${TARGET_PLATFORM}" == "linux" ]
+      then
+        LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
+      fi      
       if [ "${IS_DEVELOP}" == "y" ]
       then
         LDFLAGS+=" -v"
@@ -763,6 +770,10 @@ function build_gcc_final()
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
       LDFLAGS="${XBB_LDFLAGS_APP}" 
+      if [ "${TARGET_PLATFORM}" == "linux" ]
+      then
+        LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
+      fi      
       # Do not add CRT_glob.o here, it will fail with already defined,
       # since it is already handled by --enable-mingw-wildcard.
       if [ "${IS_DEVELOP}" == "y" ]
@@ -1183,6 +1194,7 @@ function build_gdb()
         #        CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include" 
         #        LDFLAGS+=" -L${XBB_FOLDER_PATH}/lib"
         LDFLAGS="${XBB_LDFLAGS_APP}"
+        LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
         LIBS="-liconv -lncurses"
       elif [ "${TARGET_PLATFORM}" == "linux" ]
       then
