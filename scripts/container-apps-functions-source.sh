@@ -19,7 +19,12 @@ function build_binutils()
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=binutils-git
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=gdb-git
 
-  local binutils_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${BINUTILS_FOLDER_NAME}-installed"
+  local binutils_version="$1"
+  # No versioning here, the inner archives use simple names.
+  local binutils_folder_name="binutils-${binutils_version}"
+  local binutils_patch="${binutils_folder_name}.patch"
+
+  local binutils_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${binutils_folder_name}-installed"
 
   if [ ! -f "${binutils_stamp_file_path}" ]
   then
@@ -43,11 +48,11 @@ function build_binutils()
       )
     fi
 
-    mkdir -pv "${LOGS_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}"
+    mkdir -pv "${LOGS_FOLDER_PATH}/${binutils_folder_name}"
 
     (
-      mkdir -pv "${BUILD_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}"
-      cd "${BUILD_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}"
+      mkdir -pv "${BUILD_FOLDER_PATH}/${binutils_folder_name}"
+      cd "${BUILD_FOLDER_PATH}/${binutils_folder_name}"
 
       xbb_activate
       xbb_activate_installed_dev
@@ -107,6 +112,7 @@ function build_binutils()
             --disable-gdb \
             --enable-interwork \
             --enable-plugins \
+            \
             --disable-libdecnumber \
             --disable-libreadline \
             --with-sysroot="${APP_PREFIX}/${GCC_TARGET}" \
@@ -114,8 +120,8 @@ function build_binutils()
             --enable-build-warnings=no \
             --with-system-zlib \
             
-          cp "config.log" "${LOGS_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}/config-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}/configure-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${binutils_folder_name}/config-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${binutils_folder_name}/configure-output.txt"
       fi
 
       (
@@ -165,11 +171,11 @@ function build_binutils()
         show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strings"
         show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strip"
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}/make-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${binutils_folder_name}/make-output.txt"
 
       copy_license \
         "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" \
-        "${BINUTILS_FOLDER_NAME}"
+        "${binutils_folder_name}"
 
     )
 
