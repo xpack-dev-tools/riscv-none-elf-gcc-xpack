@@ -131,6 +131,11 @@ function build_binutils()
         # Build.
         run_verbose make -j ${JOBS} 
 
+        if [ "${WITH_TESTS}" == "y" ]
+        then
+          run_verbose make check
+        fi
+
         if false # [ "${WITH_STRIP}" == "y" ]
         then
           # For -strip, readline needs a patch.
