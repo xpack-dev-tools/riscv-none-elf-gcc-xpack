@@ -23,7 +23,7 @@ function build_versions()
   # bfdver.h file remains empty.
   BRANDING="${BRANDING}\x2C ${TARGET_BITS}-bit"
 
-  CFLAGS_OPTIMIZATIONS_FOR_TARGET="-ffunction-sections -fdata-sections -O2"
+  CFLAGS_OPTIMIZATIONS_FOR_TARGET="-ffunction-sections -fdata-sections -O2 -w"
   # Cannot use medlow with 64 bits, so all must be medany.
   CFLAGS_OPTIMIZATIONS_FOR_TARGET+=" -mcmodel=medany"
 
