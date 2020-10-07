@@ -201,17 +201,14 @@ function build_versions()
 
     # -------------------------------------------------------------------------
 
-    if [ "${RELEASE_VERSION}" == "8.3.0-1.1" ]
+    if [ "${RELEASE_VERSION}" == "8.3.0-2.1" ]
     then
 
-      PYTHON2_WIN_VERSION="2.7.13"
-
-      if [ "${TARGET_PLATFORM}" == "darwin" ]
-      then
-        USE_PLATFORM_PYTHON2="y"
-      fi
-
       WITH_GDB_PY2="y"
+      PYTHON2_VERSION="2.7.18"
+
+      WITH_GDB_PY3="y" 
+      PYTHON3_VERSION="3.7.9"
 
     elif [ "${RELEASE_VERSION}" == "8.3.0-1.2" ]
     then
@@ -236,10 +233,22 @@ function build_versions()
         WITH_GDB_PY2="y"
       fi
 
-      PYTHON2_WIN_VERSION="2.7.18"
+      PYTHON2_VERSION="2.7.18"
 
       WITH_GDB_PY3="y" 
-      PYTHON3_WIN_VERSION="3.7.6"
+      PYTHON3_VERSION="3.7.6"
+
+    elif [ "${RELEASE_VERSION}" == "8.3.0-1.1" ]
+    then
+
+      PYTHON2_VERSION="2.7.13"
+
+      if [ "${TARGET_PLATFORM}" == "darwin" ]
+      then
+        USE_PLATFORM_PYTHON2="y"
+      fi
+
+      WITH_GDB_PY2="y"
 
     else
       echo "Unsupported version ${RELEASE_VERSION}."
@@ -248,6 +257,159 @@ function build_versions()
 
     BINUTILS_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
     GDB_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
+
+    prepare_variables
+
+    # ---------------------------------------------------------------------------
+    # Build dependent libraries.
+
+    # For better control, without it some components pick the lib packed 
+    # inside the archive.
+    build_zlib "${ZLIB_VERSION}"
+
+    # The classical GCC libraries.
+    build_gmp "${GMP_VERSION}"
+    build_mpfr "${MPFR_VERSION}"
+    build_mpc "${MPC_VERSION}"
+    build_isl "${ISL_VERSION}"
+
+    # More libraries.
+    # Fails on mingw
+    ## do_libelf
+    build_expat "${EXPAT_VERSION}"
+    build_libiconv "${LIBICONV_VERSION}"
+    build_xz "${XZ_VERSION}"
+
+    build_gettext "0.19.8.1"
+
+    if [ "${TARGET_PLATFORM}" != "win32" ]
+    then
+      # Used by ncurses. Fails on macOS.
+      if [ "${TARGET_PLATFORM}" == "linux" ]
+      then
+        build_gpm "1.20.7"
+      fi
+
+      if [ "${RELEASE_VERSION}" == "8.3.0-2.1" ]
+      then
+        build_bzip2 "1.0.8"
+        build_libffi "3.3"
+
+        build_ncurses "6.2"
+        build_readline "8.0" # requires ncurses
+
+        # Required by a Python 3 module.
+        build_sqlite "3.32.3"
+
+        # We cannot rely on a python shared library in the system, even
+        # the custom build from sources does not have one.
+
+        # For libssl & libcrypto; required by Python 2.
+        build_openssl "1.1.1h"
+        build_python2 "${PYTHON2_VERSION}"
+
+        # Replacement for the old libcrypt.so.1; required by Python 3.
+        build_libxcrypt "4.4.17"
+        build_python3 "${PYTHON3_VERSION}"
+      fi
+    fi
+
+    # ---------------------------------------------------------------------------
+
+    # The task descriptions are from the ARM build script.
+
+    # Task [III-0] /$HOST_NATIVE/binutils/
+    # Task [IV-1] /$HOST_MINGW/binutils/
+    build_binutils
+    # copy_dir to libs included above
+
+    if [ "${TARGET_PLATFORM}" != "win32" ]
+    then
+
+      # Task [III-1] /$HOST_NATIVE/gcc-first/
+      build_gcc_first
+
+      # Task [III-2] /$HOST_NATIVE/newlib/
+      build_newlib ""
+      # Task [III-3] /$HOST_NATIVE/newlib-nano/
+      build_newlib "-nano"
+
+      # Task [III-4] /$HOST_NATIVE/gcc-final/
+      build_gcc_final ""
+
+      # Task [III-5] /$HOST_NATIVE/gcc-size-libstdcxx/
+      build_gcc_final "-nano"
+
+    else
+
+      # Task [IV-2] /$HOST_MINGW/copy_libs/
+      copy_linux_libs
+
+      # Task [IV-3] /$HOST_MINGW/gcc-final/
+      build_gcc_final ""
+
+    fi
+
+    # Task [III-6] /$HOST_NATIVE/gdb/
+    # Task [IV-4] /$HOST_MINGW/gdb/
+    build_gdb ""
+
+    if [ "${WITH_GDB_PY2}" == "y" ]
+    then
+      # The Windows GDB needs some headers from the Python distribution.
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        download_python2_win "${PYTHON2_VERSION}"
+      fi
+
+      build_gdb "-py"
+    fi
+
+    if [ "${WITH_GDB_PY3}" == "y" ]
+    then
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        download_python3_win "${PYTHON3_VERSION}"
+      fi
+
+      build_gdb "-py3"
+    fi
+
+    # Task [III-7] /$HOST_NATIVE/build-manual
+    # Nope, the build process is different.
+
+    # ---------------------------------------------------------------------------
+
+    # Task [III-8] /$HOST_NATIVE/pretidy/
+    # Task [IV-5] /$HOST_MINGW/pretidy/
+    tidy_up
+
+    # Task [III-9] /$HOST_NATIVE/strip_host_objects/
+    # Task [IV-6] /$HOST_MINGW/strip_host_objects/
+    if [ "${WITH_STRIP}" == "y" ]
+    then
+      strip_binaries
+    fi
+
+    # Must be done after gcc 2 make install, otherwise some wrong links
+    # are created in libexec.
+    # Must also be done after strip binaries, since strip after patchelf
+    # damages the binaries.
+    prepare_app_folder_libraries
+
+    if [ "${WITH_STRIP}" == "y" -a "${TARGET_PLATFORM}" != "win32" ]
+    then
+      # Task [III-10] /$HOST_NATIVE/strip_target_objects/
+      strip_libs
+    fi
+
+    final_tunings
+
+    # Task [IV-7] /$HOST_MINGW/installation/
+    # Nope, no setup.exe.
+
+    # Task [III-11] /$HOST_NATIVE/package_tbz2/
+    # Task [IV-8] /Package toolchain in zip format/
 
     # -------------------------------------------------------------------------
   elif [[ "${RELEASE_VERSION}" =~ 8\.2\.0-3\.* ]]
@@ -337,148 +499,147 @@ function build_versions()
     XZ_VERSION="5.2.3"
 
     WITH_GDB_PY2="y"
-    PYTHON2_WIN_VERSION="2.7.13"
+    PYTHON2_VERSION="2.7.13"
 
     BINUTILS_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
     GDB_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
+
+    prepare_variables
+
+    # ---------------------------------------------------------------------------
+    # Build dependent libraries.
+
+    # For better control, without it some components pick the lib packed 
+    # inside the archive.
+    build_zlib "${ZLIB_VERSION}"
+
+    # The classical GCC libraries.
+    build_gmp "${GMP_VERSION}"
+    build_mpfr "${MPFR_VERSION}"
+    build_mpc "${MPC_VERSION}"
+    build_isl "${ISL_VERSION}"
+
+    # More libraries.
+    # Fails on mingw
+    ## do_libelf
+    build_expat "${EXPAT_VERSION}"
+    build_libiconv "${LIBICONV_VERSION}"
+    build_xz "${XZ_VERSION}"
+
+    build_gettext "0.19.8.1"
+
+    if [ "${TARGET_PLATFORM}" != "win32" ]
+    then
+      # Used by ncurses. Fails on macOS.
+      if [ "${TARGET_PLATFORM}" == "linux" ]
+      then
+        build_gpm "1.20.7"
+      fi
+    fi
+
+
+    # ---------------------------------------------------------------------------
+
+    # The task descriptions are from the ARM build script.
+
+    # Task [III-0] /$HOST_NATIVE/binutils/
+    # Task [IV-1] /$HOST_MINGW/binutils/
+    build_binutils
+    # copy_dir to libs included above
+
+    if [ "${TARGET_PLATFORM}" != "win32" ]
+    then
+
+      # Task [III-1] /$HOST_NATIVE/gcc-first/
+      build_gcc_first
+
+      # Task [III-2] /$HOST_NATIVE/newlib/
+      build_newlib ""
+      # Task [III-3] /$HOST_NATIVE/newlib-nano/
+      build_newlib "-nano"
+
+      # Task [III-4] /$HOST_NATIVE/gcc-final/
+      build_gcc_final ""
+
+      # Task [III-5] /$HOST_NATIVE/gcc-size-libstdcxx/
+      build_gcc_final "-nano"
+
+    else
+
+      # Task [IV-2] /$HOST_MINGW/copy_libs/
+      copy_linux_libs
+
+      # Task [IV-3] /$HOST_MINGW/gcc-final/
+      build_gcc_final ""
+
+    fi
+
+    # Task [III-6] /$HOST_NATIVE/gdb/
+    # Task [IV-4] /$HOST_MINGW/gdb/
+    build_gdb ""
+
+    if [ "${WITH_GDB_PY2}" == "y" ]
+    then
+      # The Windows GDB needs some headers from the Python distribution.
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        download_python2_win "${PYTHON2_VERSION}"
+      fi
+
+      build_gdb "-py"
+    fi
+
+    if [ "${WITH_GDB_PY3}" == "y" ]
+    then
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        download_python3_win "${PYTHON3_VERSION}"
+      fi
+
+      build_gdb "-py3"
+    fi
+
+    # Task [III-7] /$HOST_NATIVE/build-manual
+    # Nope, the build process is different.
+
+    # ---------------------------------------------------------------------------
+
+    # Task [III-8] /$HOST_NATIVE/pretidy/
+    # Task [IV-5] /$HOST_MINGW/pretidy/
+    tidy_up
+
+    # Task [III-9] /$HOST_NATIVE/strip_host_objects/
+    # Task [IV-6] /$HOST_MINGW/strip_host_objects/
+    if [ "${WITH_STRIP}" == "y" ]
+    then
+      strip_binaries
+    fi
+
+    # Must be done after gcc 2 make install, otherwise some wrong links
+    # are created in libexec.
+    # Must also be done after strip binaries, since strip after patchelf
+    # damages the binaries.
+    prepare_app_folder_libraries
+
+    if [ "${WITH_STRIP}" == "y" -a "${TARGET_PLATFORM}" != "win32" ]
+    then
+      # Task [III-10] /$HOST_NATIVE/strip_target_objects/
+      strip_libs
+    fi
+
+    final_tunings
+
+    # Task [IV-7] /$HOST_MINGW/installation/
+    # Nope, no setup.exe.
+
+    # Task [III-11] /$HOST_NATIVE/package_tbz2/
+    # Task [IV-8] /Package toolchain in zip format/
 
     # -------------------------------------------------------------------------
   else
     echo "Unsupported version ${RELEASE_VERSION}."
     exit 1
   fi
-
-  prepare_variables
-
-  # ---------------------------------------------------------------------------
-  # Build dependent libraries.
-
-  # For better control, without it some components pick the lib packed 
-  # inside the archive.
-  build_zlib "${ZLIB_VERSION}"
-
-  # The classical GCC libraries.
-  build_gmp "${GMP_VERSION}"
-  build_mpfr "${MPFR_VERSION}"
-  build_mpc "${MPC_VERSION}"
-  build_isl "${ISL_VERSION}"
-
-  # More libraries.
-  # Fails on mingw
-  ## do_libelf
-  build_expat "${EXPAT_VERSION}"
-  build_libiconv "${LIBICONV_VERSION}"
-  build_xz "${XZ_VERSION}"
-
-  build_gettext "0.19.8.1"
-
-  if [ "${TARGET_PLATFORM}" != "win32" ]
-  then
-    # Used by ncurses. Fails on macOS.
-    if [ "${TARGET_PLATFORM}" == "linux" ]
-    then
-      build_gpm "1.20.7"
-    fi
-
-    build_ncurses "6.2"
-  fi
-
-  # ---------------------------------------------------------------------------
-
-  # The task descriptions are from the ARM build script.
-
-  # Task [III-0] /$HOST_NATIVE/binutils/
-  # Task [IV-1] /$HOST_MINGW/binutils/
-  build_binutils
-  # copy_dir to libs included above
-
-  if [ "${TARGET_PLATFORM}" != "win32" ]
-  then
-
-    # Task [III-1] /$HOST_NATIVE/gcc-first/
-    build_gcc_first
-
-    # Task [III-2] /$HOST_NATIVE/newlib/
-    build_newlib ""
-    # Task [III-3] /$HOST_NATIVE/newlib-nano/
-    build_newlib "-nano"
-
-    # Task [III-4] /$HOST_NATIVE/gcc-final/
-    build_gcc_final ""
-
-    # Task [III-5] /$HOST_NATIVE/gcc-size-libstdcxx/
-    build_gcc_final "-nano"
-
-  else
-
-    # Task [IV-2] /$HOST_MINGW/copy_libs/
-    copy_linux_libs
-
-    # Task [IV-3] /$HOST_MINGW/gcc-final/
-    build_gcc_final ""
-
-  fi
-
-  # Task [III-6] /$HOST_NATIVE/gdb/
-  # Task [IV-4] /$HOST_MINGW/gdb/
-  build_gdb ""
-
-  if [ "${WITH_GDB_PY2}" == "y" ]
-  then
-    # The Windows GDB needs some headers from the Python distribution.
-    if [ "${TARGET_PLATFORM}" == "win32" ]
-    then
-      download_python2_win "${PYTHON2_WIN_VERSION}"
-    fi
-
-    build_gdb "-py"
-  fi
-
-  if [ "${WITH_GDB_PY3}" == "y" ]
-  then
-    if [ "${TARGET_PLATFORM}" == "win32" ]
-    then
-      download_python3_win "${PYTHON3_WIN_VERSION}"
-    fi
-
-    build_gdb "-py3"
-  fi
-
-  # Task [III-7] /$HOST_NATIVE/build-manual
-  # Nope, the build process is different.
-
-  # ---------------------------------------------------------------------------
-
-  # Task [III-8] /$HOST_NATIVE/pretidy/
-  # Task [IV-5] /$HOST_MINGW/pretidy/
-  tidy_up
-
-  # Task [III-9] /$HOST_NATIVE/strip_host_objects/
-  # Task [IV-6] /$HOST_MINGW/strip_host_objects/
-  if [ "${WITH_STRIP}" == "y" ]
-  then
-    strip_binaries
-  fi
-
-  # Must be done after gcc 2 make install, otherwise some wrong links
-  # are created in libexec.
-  # Must also be done after strip binaries, since strip after patchelf
-  # damages the binaries.
-  prepare_app_folder_libraries
-
-  if [ "${WITH_STRIP}" == "y" -a "${TARGET_PLATFORM}" != "win32" ]
-  then
-    # Task [III-10] /$HOST_NATIVE/strip_target_objects/
-    strip_libs
-  fi
-
-  final_tunings
-
-  # Task [IV-7] /$HOST_MINGW/installation/
-  # Nope, no setup.exe.
-
-  # Task [III-11] /$HOST_NATIVE/package_tbz2/
-  # Task [IV-8] /Package toolchain in zip format/
 
 }
 
