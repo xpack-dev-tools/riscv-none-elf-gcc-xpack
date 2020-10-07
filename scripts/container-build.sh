@@ -210,7 +210,6 @@ start_timer
 detect_container
 
 prepare_xbb_env
-
 prepare_xbb_extras
 
 tests_initialize
