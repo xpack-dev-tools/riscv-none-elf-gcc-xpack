@@ -1331,6 +1331,8 @@ function build_gdb()
 
         rm -rfv "${LIBS_INSTALL_FOLDER_PATH}/include/pyconfig.h"
 
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb$1"
+
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gdb_folder_name}/make-output.txt"
 
       if [ "$1" == "" ]
