@@ -363,7 +363,7 @@ function build_gcc_first()
             --with-arch="${GCC_ARCH}" \
             \
             --disable-build-format-warnings \
-            --with-system-zlib 
+            --with-system-zlib \
 
           cp "config.log" "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/config-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/configure-output.txt"
@@ -1122,18 +1122,6 @@ function build_gdb()
 
       xbb_activate
       xbb_activate_installed_dev
-
-      if false # [ "${TARGET_PLATFORM}" == "darwin" ]
-      then
-        # When compiled with GCC-7 it fails to run, due to
-        # some problems with exceptions unwind.
-        export CC=clang
-        export CXX=clang++
-        unset AR
-        unset LD
-        unset NM
-        unset RANLIB
-      fi
 
       CPPFLAGS="${XBB_CPPFLAGS}" 
       CFLAGS="${XBB_CFLAGS_NO_W}"
