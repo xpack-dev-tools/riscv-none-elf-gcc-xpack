@@ -374,6 +374,12 @@ $ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
 $ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
 ```
 
+or, for development builds:
+
+```console
+$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --linux64 --linux32 --win64 --win32
+```
+
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r riscv`; to kill the session use `Ctrl-a` `Ctrl-\` and confirm.
 
@@ -381,7 +387,7 @@ Several hours later, the output of the build script is a set of 4 files and
 their SHA signatures, created in the `deploy` folder:
 
 ```console
-$ ls -l deploy
+$ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 1271432
 -rw-rw-r-- 1 ilg ilg 330863900 Jul  3 20:29 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x32.tar.gz
 -rw-rw-r-- 1 ilg ilg       120 Jul  3 20:29 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x32.tar.gz.sha
@@ -398,8 +404,7 @@ machine, either use NFS to mount the entire folder, or open the `deploy`
 folder in a terminal and use `scp`:
 
 ```console
-$ cd ~/Work/riscv-none-embed-gcc-*/deploy
-$ scp * ilg@wks:Downloads/xpack-binaries/riscv
+$ (cd ~/Work/riscv-none-embed-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/riscv)
 ```
 
 #### Build the Arm GNU/Linux binaries
@@ -446,6 +451,12 @@ To download the build scripts:
 $ curl -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
 ```
 
+or, for development builds:
+
+```console
+$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --arm32 --arm64
+```
+
 Since the build takes a while, use `screen` to isolate the build session
 from unexpected events, like a broken
 network connection or a computer entering sleep.
@@ -457,6 +468,11 @@ $ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
 $ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
 ```
 
+or, for development builds:
+
+```console
+$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --arm32 --arm64
+
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
@@ -465,8 +481,7 @@ is a set of 2
 archives and their SHA signatures, created in the `deploy` folder:
 
 ```console
-$ cd ~/Work/riscv-none-embed-gcc-*
-$ ls -l deploy
+$ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 631032
 -rw-rw-r-- 1 ilg ilg 324558658 Jul  3 20:50 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-arm64.tar.gz
 -rw-rw-r-- 1 ilg ilg       122 Jul  3 20:50 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-arm64.tar.gz.sha
@@ -479,8 +494,7 @@ machine, either use NFS to mount the entire folder, or open the `deploy`
 folder in a terminal and use `scp`:
 
 ```console
-$ cd ~/Work/riscv-none-embed-gcc-*/deploy
-$ scp * ilg@wks:Downloads/xpack-binaries/riscv
+$ (cd ~/Work/riscv-none-embed-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/riscv)
 ```
 
 ### Build the macOS binary
@@ -507,6 +521,12 @@ $ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
 $ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx
 ```
 
+or, for development builds:
+
+```console
+$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --osx
+```
+
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r riscv`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
@@ -514,7 +534,7 @@ Several hours later, the output of the build script is a compressed archive
 and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l deploy
+$ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 622720
 -rw-r--r--  1 ilg  staff  318825489 Jul  3 21:27 xpack-riscv-none-embed-gcc-8.3.0-1.2-darwin-x64.tar.gz
 -rw-r--r--  1 ilg  staff        121 Jul  3 21:27 xpack-riscv-none-embed-gcc-8.3.0-1.2-darwin-x64.tar.gz.sha
@@ -525,8 +545,7 @@ machine, either use NFS to mount the entire folder, or open the `deploy`
 folder in a terminal and use `scp`:
 
 ```console
-$ cd ~/Work/riscv-none-embed-gcc-*/deploy
-$ scp * ilg@wks:Downloads/xpack-binaries/riscv
+$ (cd ~/Work/riscv-none-embed-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/riscv)
 ```
 
 ## Run a test build
@@ -557,13 +576,15 @@ fast machine, it may take 30-60 minutes.
 Instead of `--all`, you can use any combination of:
 
 ```
---win32 --win64 --linux32 --linux64
+--linux32 --linux64
+--arm32 --arm64
+--win32 --win64 
 ```
 
 Please note that, due to the specifics of the GCC build process, the
 Windows build requires the corresponding GNU/Linux build, so `--win32`
-alone is equivalent to `--linux32 --win32` and `--win64` alone is
-equivalent to `--linux64 --win64`.
+should be run after or together with `--linux32` and `--win64` after
+or together with `--linux64`.
 
 ### clean
 
@@ -614,21 +635,6 @@ to the actual user.
 However, for an interrupted build, this step is skipped, and files in
 the install folder will remain owned by root. Thus, before removing the
 build folder, it might be necessary to run a recursive `chown`.
-
-### Rebuild previous releases
-
-Set the release explicitly in the environment:
-
-```console
-$ RELEASE_VERSION=8.3.0-1.2 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all --jobs 8
-$ RELEASE_VERSION=8.3.0-1.1 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all --jobs 8
-```
-
-> Note: This procedure builds a previous release but in the context of
-the latest build environment, which might be different from the one used
-at the time of the release, so the result may be slightly different; to
-obtain exactly the same result, use the commit tagged with the desired
-release.
 
 ## Testing
 
@@ -738,33 +744,6 @@ The workaround is to manually download the files from an alternate
 location (like
 https://github.com/xpack-dev-tools/files-cache/tree/master/libs),
 place them in the XBB cache (`Work/cache`) and restart the build.
-
-## Pitfalls
-
-### Parallel build
-
-Note: no longer seen with XBB v3.2.
-
-Parallel builds are not only supported, but encouraged. Use a number of
-jobs based on the number of cores, preferably without counting the 
-hyperthreads.
-
-Please note that, for optimum performances, parallel builds require ample
-amounts of RAM (8 GB are know to work, 16 GB are recommended for 4 jobs).
-
-### Building GDB on macOS
-
-Note: no longer seen with XBB v3.2.
-
-GDB uses a complex and custom logic to unwind the stack when processing
-exceptions; macOS also uses a custom logic to organize memory and process
-exceptions; the result is that when compiling GDB with GCC on older macOS
-systems (like 10.10), some details do not match and the resulting GDB
-crashes with an assertion on the first `set language` command (most
-probably many other commands).
-
-The workaround was to compile GDB with Apple clang, which resulted in
-functional binaries, even on the old macOS 10.10.
 
 ## More build details
 
