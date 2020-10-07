@@ -13,91 +13,6 @@
 
 # -----------------------------------------------------------------------------
 
-function download_binutils() 
-{
-  if [ ! -d "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" ]
-  then
-    (
-      cd "${SOURCES_FOLDER_PATH}"
-      if [ -n "${BINUTILS_GIT_URL}" ]
-      then
-        git_clone "${BINUTILS_GIT_URL}" "${BINUTILS_GIT_BRANCH}" \
-          "${BINUTILS_GIT_COMMIT}" "${BINUTILS_SRC_FOLDER_NAME}"
-        cd "${BINUTILS_SRC_FOLDER_NAME}"
-        do_patch "${BINUTILS_PATCH}"
-      elif [ -n "${BINUTILS_ARCHIVE_URL}" ]
-      then
-        download_and_extract "${BINUTILS_ARCHIVE_URL}" \
-          "${BINUTILS_ARCHIVE_NAME}" "${BINUTILS_SRC_FOLDER_NAME}" \
-          "${BINUTILS_PATCH}"
-      fi
-    )
-  fi
-}
-
-function download_gcc() 
-{
-  if [ ! -d "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" ]
-  then
-    (
-      cd "${SOURCES_FOLDER_PATH}"
-      if [ -n "${GCC_GIT_URL}" ]
-      then
-        git_clone "${GCC_GIT_URL}" "${GCC_GIT_BRANCH}" \
-          "${GCC_GIT_COMMIT}" "${GCC_SRC_FOLDER_NAME}"
-      elif [ -n "${GCC_ARCHIVE_URL}" ]
-      then
-        download_and_extract "${GCC_ARCHIVE_URL}" \
-          "${GCC_ARCHIVE_NAME}" "${GCC_SRC_FOLDER_NAME}"
-      fi
-    )
-  fi
-}
-
-function download_newlib() 
-{
-  if [ ! -d "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}" ]
-  then
-    (
-      cd "${SOURCES_FOLDER_PATH}"
-      if [ -n "${NEWLIB_GIT_URL}" ]
-      then
-        git_clone "${NEWLIB_GIT_URL}" "${NEWLIB_GIT_BRANCH}" \
-          "${NEWLIB_GIT_COMMIT}" "${NEWLIB_SRC_FOLDER_NAME}"
-      elif [ -n "${NEWLIB_ARCHIVE_URL}" ]
-      then
-        download_and_extract "${NEWLIB_ARCHIVE_URL}" \
-          "${NEWLIB_ARCHIVE_NAME}" "${NEWLIB_SRC_FOLDER_NAME}" 
-      fi
-    )
-  fi
-}
-
-function download_gdb() 
-{
-  # Same package as binutils.
-  if [ ! -d "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}" ]
-  then
-    (
-      cd "${SOURCES_FOLDER_PATH}"
-      if [ -n "${GDB_GIT_URL}" ]
-      then
-        git_clone "${GDB_GIT_URL}" "${GDB_GIT_BRANCH}" \
-          "${GDB_GIT_COMMIT}" "${GDB_SRC_FOLDER_NAME}"
-        cd "${GDB_SRC_FOLDER_NAME}"
-        do_patch "${GDB_PATCH}"
-      elif [ -n "${GDB_ARCHIVE_URL}" ]
-      then
-        download_and_extract "${GDB_ARCHIVE_URL}" \
-          "${GDB_ARCHIVE_NAME}" "${GDB_SRC_FOLDER_NAME}" \
-          "${GDB_PATCH}"
-      fi
-    )
-  fi
-}
-
-# -----------------------------------------------------------------------------
-
 function build_binutils()
 {
   # https://ftp.gnu.org/gnu/binutils/
@@ -109,7 +24,24 @@ function build_binutils()
   if [ ! -f "${binutils_stamp_file_path}" ]
   then
 
-    download_binutils
+    if [ ! -d "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" ]
+    then
+      (
+        cd "${SOURCES_FOLDER_PATH}"
+        if [ -n "${BINUTILS_GIT_URL}" ]
+        then
+          git_clone "${BINUTILS_GIT_URL}" "${BINUTILS_GIT_BRANCH}" \
+            "${BINUTILS_GIT_COMMIT}" "${BINUTILS_SRC_FOLDER_NAME}"
+          cd "${BINUTILS_SRC_FOLDER_NAME}"
+          do_patch "${BINUTILS_PATCH}"
+        elif [ -n "${BINUTILS_ARCHIVE_URL}" ]
+        then
+          download_and_extract "${BINUTILS_ARCHIVE_URL}" \
+            "${BINUTILS_ARCHIVE_NAME}" "${BINUTILS_SRC_FOLDER_NAME}" \
+            "${BINUTILS_PATCH}"
+        fi
+      )
+    fi
 
     mkdir -pv "${LOGS_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}"
 
@@ -287,7 +219,21 @@ function build_gcc_first()
   if [ ! -f "${gcc_first_stamp_file_path}" ]
   then
 
-    download_gcc
+    if [ ! -d "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" ]
+    then
+      (
+        cd "${SOURCES_FOLDER_PATH}"
+        if [ -n "${GCC_GIT_URL}" ]
+        then
+          git_clone "${GCC_GIT_URL}" "${GCC_GIT_BRANCH}" \
+            "${GCC_GIT_COMMIT}" "${GCC_SRC_FOLDER_NAME}"
+        elif [ -n "${GCC_ARCHIVE_URL}" ]
+        then
+          download_and_extract "${GCC_ARCHIVE_URL}" \
+            "${GCC_ARCHIVE_NAME}" "${GCC_SRC_FOLDER_NAME}"
+        fi
+      )
+    fi
 
     mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}"
 
@@ -445,7 +391,21 @@ function build_newlib()
   if [ ! -f "${newlib_stamp_file_path}" ]
   then
 
-    download_newlib
+    if [ ! -d "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}" ]
+    then
+      (
+        cd "${SOURCES_FOLDER_PATH}"
+        if [ -n "${NEWLIB_GIT_URL}" ]
+        then
+          git_clone "${NEWLIB_GIT_URL}" "${NEWLIB_GIT_BRANCH}" \
+            "${NEWLIB_GIT_COMMIT}" "${NEWLIB_SRC_FOLDER_NAME}"
+        elif [ -n "${NEWLIB_ARCHIVE_URL}" ]
+        then
+          download_and_extract "${NEWLIB_ARCHIVE_URL}" \
+            "${NEWLIB_ARCHIVE_NAME}" "${NEWLIB_SRC_FOLDER_NAME}" 
+        fi
+      )
+    fi
 
     mkdir -pv "${LOGS_FOLDER_PATH}/${newlib_folder_name}"
 
@@ -754,7 +714,21 @@ function build_gcc_final()
   if [ ! -f "${gcc_final_stamp_file_path}" ]
   then
 
-    download_gcc
+    if [ ! -d "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" ]
+    then
+      (
+        cd "${SOURCES_FOLDER_PATH}"
+        if [ -n "${GCC_GIT_URL}" ]
+        then
+          git_clone "${GCC_GIT_URL}" "${GCC_GIT_BRANCH}" \
+            "${GCC_GIT_COMMIT}" "${GCC_SRC_FOLDER_NAME}"
+        elif [ -n "${GCC_ARCHIVE_URL}" ]
+        then
+          download_and_extract "${GCC_ARCHIVE_URL}" \
+            "${GCC_ARCHIVE_NAME}" "${GCC_SRC_FOLDER_NAME}"
+        fi
+      )
+    fi
 
     mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}"
 
@@ -1109,7 +1083,25 @@ function build_gdb()
   if [ ! -f "${gdb_stamp_file_path}" ]
   then
 
-    download_gdb
+    # Same package as binutils.
+    if [ ! -d "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}" ]
+    then
+      (
+        cd "${SOURCES_FOLDER_PATH}"
+        if [ -n "${GDB_GIT_URL}" ]
+        then
+          git_clone "${GDB_GIT_URL}" "${GDB_GIT_BRANCH}" \
+            "${GDB_GIT_COMMIT}" "${GDB_SRC_FOLDER_NAME}"
+          cd "${GDB_SRC_FOLDER_NAME}"
+          do_patch "${GDB_PATCH}"
+        elif [ -n "${GDB_ARCHIVE_URL}" ]
+        then
+          download_and_extract "${GDB_ARCHIVE_URL}" \
+            "${GDB_ARCHIVE_NAME}" "${GDB_SRC_FOLDER_NAME}" \
+            "${GDB_PATCH}"
+        fi
+      )
+    fi
 
     mkdir -pv "${LOGS_FOLDER_PATH}/${gdb_folder_name}"
 
