@@ -290,13 +290,13 @@ function build_versions()
         build_gpm "1.20.7"
       fi
 
+      build_ncurses "6.2"
+      build_readline "8.0" # requires ncurses
+
       if [ "${RELEASE_VERSION}" == "8.3.0-2.1" ]
       then
         build_bzip2 "1.0.8"
         build_libffi "3.3"
-
-        build_ncurses "6.2"
-        build_readline "8.0" # requires ncurses
 
         # Required by a Python 3 module.
         build_sqlite "3.32.3"
