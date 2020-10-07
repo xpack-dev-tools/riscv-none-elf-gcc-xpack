@@ -480,7 +480,6 @@ function build_versions()
   # Task [III-11] /$HOST_NATIVE/package_tbz2/
   # Task [IV-8] /Package toolchain in zip format/
 
-  check_binaries
 }
 
 # -----------------------------------------------------------------------------
