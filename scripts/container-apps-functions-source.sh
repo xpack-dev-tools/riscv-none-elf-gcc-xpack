@@ -824,8 +824,8 @@ function build_gcc_final()
           # --with-newlib Specifies that ‘newlib’ is being used as the target C library. This causes `__eprintf`` to be omitted from `libgcc.a`` on the assumption that it will be provided by newlib.
           # --enable-languages=c,c++ Support only C/C++, ignore all other.
 
-          # SiFive uses --enable-tls
-          
+          # SiFive uses --enable-tls; I don't think it is necessary.
+
           if [ "$1" == "" ]
           then
 
