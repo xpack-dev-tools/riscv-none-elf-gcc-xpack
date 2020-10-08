@@ -26,6 +26,15 @@ git clone --recurse-submodules -b xpack-develop \
 The scripts are in the `tests/scripts` folder, and there is also a
 common script in `helper/scripts/test-functions-source.sh`.
 
+## Enable Travis
+
+To enable the travis tests:
+
+- login to https://travis-ci.org/ with the GitHub credentials
+- in the user settings, select the **3rd Party xpack Dev Tools** organization
+- enable the **riscv-none-embed-gcc-xpack** project
+- in Setting, disable **Build pushed branches** and **Build pull requests**
+
 ## Test work flow
 
 The first step is one of the top `trigger-travis-*.sh` scripts,
@@ -53,6 +62,12 @@ located.
 When running native tests, the flow is significantly shorter,
 the `tests/scripts/native-test.sh` can directly include
 `tests/scripts/common-functions-source.sh` and call the test functions.
+
+## Travis test results
+
+The test results will be available at
+
+- https://travis-ci.org/github/xpack-dev-tools/riscv-none-embed-gcc-xpack
 
 ## `common-functions-source.sh`
 
