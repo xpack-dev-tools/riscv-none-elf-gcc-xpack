@@ -293,7 +293,7 @@ for new releases
 - identify the tag of the latest release (like `v2019.08.0`)
 - switch to Code view and select the tag
 - open the `Makefile` file to identify the `MULTILIBS_GEN` definition;
-- copy/paste it into `GCC_MULTILIB`
+- copy/paste it into `GCC_MULTILIB` (mind the tabs!)
 - add `rv32imaf-ilp32f--` after `rv32imf-` (already in for recent versions)
 
 ## Update `CHANGELOG.md`
