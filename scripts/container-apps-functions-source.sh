@@ -492,6 +492,9 @@ function build_newlib()
             # --enable-newlib-io-long-long
             # --enable-newlib-io-c99-formats
             # --enable-newlib-reent-check-verify
+
+            # Used in a previous version --enable-newlib-retargetable-locking \
+
             run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" \
               --prefix="${APP_PREFIX}"  \
               --infodir="${APP_PREFIX_DOC}/info" \
@@ -504,13 +507,13 @@ function build_newlib()
               --target="${GCC_TARGET}" \
               \
               --enable-newlib-io-long-double \
+              --enable-newlib-io-long-long \
+              --enable-newlib-io-c99-formats 
               --enable-newlib-register-fini \
-              --enable-newlib-retargetable-locking \
+              \
               --disable-newlib-supplied-syscalls \
               --disable-nls \
               \
-              --enable-newlib-io-long-long \
-              --enable-newlib-io-c99-formats 
 
           elif [ "$1" == "-nano" ]
           then
@@ -526,7 +529,6 @@ function build_newlib()
               --host=${HOST} \
               --target="${GCC_TARGET}" \
               \
-              --disable-newlib-supplied-syscalls \
               --enable-newlib-reent-small \
               --disable-newlib-fvwrite-in-streamio \
               --disable-newlib-fseek-optimization \
@@ -536,8 +538,9 @@ function build_newlib()
               --enable-lite-exit \
               --enable-newlib-global-atexit \
               --enable-newlib-nano-formatted-io \
+              --disable-newlib-supplied-syscalls \
               --disable-nls \
-              --enable-newlib-register-fini
+              --enable-newlib-register-fini \
 
           else
             echo "Unsupported build_newlib arg $1"
@@ -821,6 +824,8 @@ function build_gcc_final()
           # --with-newlib Specifies that ‘newlib’ is being used as the target C library. This causes `__eprintf`` to be omitted from `libgcc.a`` on the assumption that it will be provided by newlib.
           # --enable-languages=c,c++ Support only C/C++, ignore all other.
 
+          # SiFive uses --enable-tls
+          
           if [ "$1" == "" ]
           then
 
@@ -842,6 +847,9 @@ function build_gcc_final()
               ${mingw_wildcard} \
               --enable-plugins \
               --enable-lto \
+              --enable-checking=yes \
+              \
+              --disable-tls \
               --disable-decimal-float \
               --disable-libffi \
               --disable-libgomp \
@@ -851,8 +859,7 @@ function build_gcc_final()
               --disable-libstdcxx-pch \
               --disable-nls \
               --disable-threads \
-              --disable-tls \
-              --enable-checking=yes \
+              \
               --with-gnu-as \
               --with-gnu-ld \
               --with-newlib \
@@ -882,6 +889,8 @@ function build_gcc_final()
               --with-bugurl="${BUGURL}" \
               \
               --enable-languages=c,c++ \
+              \
+              --disable-tls \
               --disable-decimal-float \
               --disable-libffi \
               --disable-libgomp \
@@ -892,7 +901,7 @@ function build_gcc_final()
               --disable-libstdcxx-verbose \
               --disable-nls \
               --disable-threads \
-              --disable-tls \
+              \
               --with-gnu-as \
               --with-gnu-ld \
               --with-newlib \
