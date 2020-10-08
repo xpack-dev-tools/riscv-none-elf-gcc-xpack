@@ -83,6 +83,9 @@ function build_versions()
   then
     # This is similar to SiFive 2020.04.0 release.
     # https://github.com/sifive/freedom-tools/releases
+    # https://github.com/sifive/freedom-tools/releases/tag/v2020.04.0-Toolchain.Only
+    # https://github.com/sifive/freedom-tools/
+    # https://github.com/sifive/freedom-tools/tree/v2020.04.0-Toolchain.Only
 
     # Binutils 2.32 with SiFive CLIC patches
     # https://github.com/sifive/riscv-binutils-gdb/tree/ac7ecc464d0b0466c056a29e357da0f38aec4705

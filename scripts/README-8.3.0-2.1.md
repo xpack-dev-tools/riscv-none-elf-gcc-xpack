@@ -30,7 +30,7 @@ This release is based on the
 [v2020.04.0-Toolchain.Only](https://github.com/sifive/freedom-tools/releases/tag/v2020.04.0-Toolchain.Only)
 release, and includes the SiFive extensions.
 
-The following commits (from [sifive/freedom-tools](https://github.com/sifive/freedom-tools/tree/master/src)) were used:
+The following commits (from [sifive/freedom-tools](https://github.com/sifive/freedom-tools/tree/v2020.04.0-Toolchain.Only)) were used:
 
 - the [sifive/riscv-binutils-gdb](https://github.com/sifive/riscv-binutils-gdb)
 project, branch `sifive-binutils-2.32`, commit
