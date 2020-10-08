@@ -508,7 +508,7 @@ function build_newlib()
               \
               --enable-newlib-io-long-double \
               --enable-newlib-io-long-long \
-              --enable-newlib-io-c99-formats 
+              --enable-newlib-io-c99-formats \
               --enable-newlib-register-fini \
               \
               --disable-newlib-supplied-syscalls \
