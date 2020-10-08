@@ -164,10 +164,11 @@ function test_gdb()
 
         echo
         ${python_name} --version
-        ${python_name} -c 'import sys; print sys.path'
 
-        export PYTHONHOME="$(${python_name} -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
+        export PYTHONHOME="$(${python_name} -c 'import sys; print(sys.prefix)')"
+        export PYTHONPATH="$(${python_name} -c 'import sys; import os; print(os.pathsep.join(sys.path))')"
         echo "PYTHONHOME=${PYTHONHOME}"
+        echo "PYTHONPATH=${PYTHONPATH}"
         ;;
 
       -py3)
@@ -208,10 +209,11 @@ function test_gdb()
 
         echo
         ${python_name} --version
-        ${python_name} -c 'import sys; print(sys.path)'
 
-        export PYTHONHOME="$(${python_name} -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
+        export PYTHONHOME="$(${python_name} -c 'import sys; print(sys.prefix)')"
+        export PYTHONPATH="$(${python_name} -c 'import sys; import os; print(os.pathsep.join(sys.path))')"
         echo "PYTHONHOME=${PYTHONHOME}"
+        echo "PYTHONPATH=${PYTHONPATH}"
         ;;
 
       *)
