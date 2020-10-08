@@ -42,6 +42,8 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
+source "${script_folder_path}/app-defs.sh"
+
 helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/scripts/helper"
 
 source "${helper_folder_path}/test-functions-source.sh"
@@ -128,8 +130,6 @@ case "${image_name}" in
     ;;
 
 esac
-
-app_lc_name="riscv-none-embed-gcc"
 
 prepare_env
 
