@@ -3,6 +3,15 @@
 
 Releases in reverse chronological order.
 
+### 2020-10-08
+
+- v8.3.0-1.2 prepared
+- update to follow SiFive 2020.04.0 release
+
+### 2020-10-06
+
+- update for new Python tricks
+
 ### 2020-07-04
 
 - v8.3.0-1.2.1 published on npmjs.com

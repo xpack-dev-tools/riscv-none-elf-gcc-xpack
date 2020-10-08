@@ -124,12 +124,17 @@ but in the version specific file (below).
 for new releases
 - identify the tag of the latest release (like `v2019.08.0`)
 - switch to Code view and select the tag
-- open the `src` folder to identify the commit IDs used for the linked repos.
+- open the `src` folder to identify the commit IDs used for the linked repos
+- copy/paste the submodule links to common-versions-sources.sh
+- get binutils version from binutils/CHANGELOG
+- get gcc version from gcc/BASE_VER (gcc/ChangeLog)
+- get newlib version from newlib/configure, VERSION= (newlib/README)
+- get gdb version from gdb/VERSION.in (gdb/ChangeLog)
 
 ### Identify the main GCC version
 
 Determine the GCC version (like `8.3.0`) and update the `scripts/VERSION`
-  file; the format is `8.3.0-1.1`. The fourth digit is the number of the
+  file; the format is `8.3.0-2.1`. The fourth digit is the number of the
   SiFive release of the same GCC version, and the fifth digit is the xPack
   GNU RISC-V Embedded GCC release number of this version.
 
@@ -137,7 +142,7 @@ Determine the GCC version (like `8.3.0`) and update the `scripts/VERSION`
 
 In the `scripts` folder create a copy of the previous version one.
 
-From the the `src` folder, follow the linked module links for 
+From the the `src` folder, follow the linked module links for
 binutils/gcc/newlib and copy/paste them.
 Also update the short IDs and dates.
 
@@ -161,6 +166,8 @@ the `sifive` remote
 - check the differences from the non-xpack branch; it should be only the
 addition of `embed)` in `config.sub`
 
+If the changes are on a new branch (most likely):
+
 - from the `sifive` remote
 checkout the new SiFive branch (like `sifive-binutils-2.32`) into a new local
 branch
@@ -169,7 +176,7 @@ branch
 (like `sifive-binutils-2.32-xpack`)
 - identify the commit which adds the xPack specific changes
 - cherry pick it; do not commit immediately
-- check the uncommited changes; there should be one file `config.sub` 
+- check the uncommited changes; there should be one file `config.sub`
 which adds `-embed)`
 - commit as **add support for riscv-none-embed-***
 
@@ -177,8 +184,10 @@ In both cases:
 
 - push the two modified branches (like `sifive-binutils-2.32` and
 `sifive-binutils-2.32-xpack`)
-- add a tag with the current version (like `v8.3.0-1.1`), and push 
-it to `origin`.
+- add a tag with the current version (like `v8.3.0-2.1`), and push
+it to `origin`
+
+- copy/paste the branch name and commit id tp common-versions-source.sh
 
 ### Update gcc
 
@@ -206,7 +215,7 @@ If this is a new branch:
 checkout the new SiFive branch (like `sifive-gcc-8.3.0`) into a new local
 branch
 - identify the commit ID and switch to it
-- create a new branch with a similar name, but suffixed by `-xpack` 
+- create a new branch with a similar name, but suffixed by `-xpack`
 (like `sifive-gcc-8.3.0-xpack`)
 - identify the commit which adds the xPaack specific changes
 - cherry pick it; do not commit immediately
@@ -220,7 +229,7 @@ In both cases:
 
 - push the two modified branches (like `sifive-gcc-8.3.0` and
 `sifive-gcc-8.3.0-xpack`)
-- add a tag with the current version (like `v8.3.0-1.1`), and push
+- add a tag with the current version (like `v8.3.0-2.1`), and push
 it to `origin`.
 
 ### Update newlib
@@ -249,7 +258,7 @@ branch (like `sifive-master`)
 (like `sifive-master-xpack`)
 - identify the commit which adds the xPack specific changes
 - cherry pick it; do not commit immediately
-- check the uncommited changes; there should be one file `config.sub` 
+- check the uncommited changes; there should be one file `config.sub`
 which adds `-embed)`
 - commit as **add support for riscv-none-embed-***
 
@@ -257,7 +266,7 @@ In both cases:
 
 - push the two modified branches (like `sifive--master` and
 `sifive--master-xpack`)
-- add a tag with the current version (like `v8.3.0-1.1`), and push 
+- add a tag with the current version (like `v8.3.0-2.1`), and push
 it to `origin`.
 
 ### Update gdb
@@ -272,20 +281,20 @@ For GDB, it is a bit tricky, since it must identify the GNU code in line
 with what was used by SiFive; create a branch like `sifive-gdb-8.3`
 
 - branch it into `sifive-gdb-8.3-xpack` and edit the prefix code
-- add a tag like `v8.3.0-1.1-gdb`
+- add a tag like `v8.3.0-2.1-gdb`
 
 ### Update container-build.sh
 
 - add a new set of definitions in the `scripts/container-build.sh`, with
   the versions of various components;
-- update `GH_RELEASE` to the new version (like `8.3.0-1.1`, without `v`)
+- update `GH_RELEASE` to the new version (like `8.3.0-2.1`, without `v`)
 - in [SiFive Releases](https://github.com/sifive/freedom-tools/releases)
 for new releases
 - identify the tag of the latest release (like `v2019.08.0`)
 - switch to Code view and select the tag
 - open the `Makefile` file to identify the `MULTILIBS_GEN` definition;
 - copy/paste it into `GCC_MULTILIB`
-- add `rv32imaf-ilp32f--` after `rv32imf-`
+- add `rv32imaf-ilp32f--` after `rv32imf-` (already in for recent versions)
 
 ## Update `CHANGELOG.md`
 
@@ -389,14 +398,14 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 1271432
--rw-rw-r-- 1 ilg ilg 330863900 Jul  3 20:29 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x32.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Jul  3 20:29 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x32.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 326158132 Jul  3 18:10 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Jul  3 18:10 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 315737045 Jul  3 21:04 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x32.zip
--rw-rw-r-- 1 ilg ilg       117 Jul  3 21:04 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x32.zip.sha
--rw-rw-r-- 1 ilg ilg 329159193 Jul  3 18:42 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x64.zip
--rw-rw-r-- 1 ilg ilg       117 Jul  3 18:42 xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x64.zip.sha
+-rw-rw-r-- 1 ilg ilg 330863900 Jul  3 20:29 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x32.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Jul  3 20:29 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x32.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 326158132 Jul  3 18:10 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x64.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Jul  3 18:10 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 315737045 Jul  3 21:04 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x32.zip
+-rw-rw-r-- 1 ilg ilg       117 Jul  3 21:04 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x32.zip.sha
+-rw-rw-r-- 1 ilg ilg 329159193 Jul  3 18:42 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x64.zip
+-rw-rw-r-- 1 ilg ilg       117 Jul  3 18:42 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x64.zip.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -483,10 +492,10 @@ archives and their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 631032
--rw-rw-r-- 1 ilg ilg 324558658 Jul  3 20:50 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg       122 Jul  3 20:50 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 321600234 Jul  4 03:30 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Jul  4 03:30 xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-arm.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 324558658 Jul  3 20:50 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm64.tar.gz
+-rw-rw-r-- 1 ilg ilg       122 Jul  3 20:50 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 321600234 Jul  4 03:30 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Jul  4 03:30 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm.tar.gz.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -536,8 +545,8 @@ and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 622720
--rw-r--r--  1 ilg  staff  318825489 Jul  3 21:27 xpack-riscv-none-embed-gcc-8.3.0-1.2-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        121 Jul  3 21:27 xpack-riscv-none-embed-gcc-8.3.0-1.2-darwin-x64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  318825489 Jul  3 21:27 xpack-riscv-none-embed-gcc-8.3.0-2.1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        121 Jul  3 21:27 xpack-riscv-none-embed-gcc-8.3.0-2.1-darwin-x64.tar.gz.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -578,7 +587,7 @@ Instead of `--all`, you can use any combination of:
 ```
 --linux32 --linux64
 --arm32 --arm64
---win32 --win64 
+--win32 --win64
 ```
 
 Please note that, due to the specifics of the GCC build process, the
@@ -647,7 +656,7 @@ program from there. For example on macOS the output should
 look like:
 
 ```console
-$ /Users/ilg/Downloads/xPacks/riscv-none-embed-gcc/8.3.0-1.2/bin/riscv-none-embed-gcc --version
+$ /Users/ilg/Downloads/xPacks/riscv-none-embed-gcc/8.3.0-2.1/bin/riscv-none-embed-gcc --version
 riscv-none-embed-gcc (xPack RISC-V Embedded GCC, 64-bit) 8.3.0
 ```
 
@@ -664,8 +673,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/opt/xPacks/riscv-none-embed-gcc/8.3.0-1.2
-/Users/ilg/opt/gnu-mcu-eclipse/riscv-none-embed-gcc/8.3.0-1.2
+$ tree -L 2 /Users/ilg/opt/xPacks/riscv-none-embed-gcc/8.3.0-2.1
+/Users/ilg/opt/gnu-mcu-eclipse/riscv-none-embed-gcc/8.3.0-2.1
 ├── README.md
 ├── riscv-none-embed
 │   ├── bin
