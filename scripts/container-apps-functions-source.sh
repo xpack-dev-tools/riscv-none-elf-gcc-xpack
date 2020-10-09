@@ -1477,25 +1477,6 @@ function strip_libs()
   fi
 }
 
-function copy_distro_files()
-{
-  (
-    xbb_activate
-
-    rm -rf "${APP_PREFIX}/${DISTRO_INFO_NAME}"
-    mkdir -pv "${APP_PREFIX}/${DISTRO_INFO_NAME}"
-
-    copy_build_files
-
-    echo
-    echo "Copying distro files..."
-
-    cd "${BUILD_GIT_PATH}"
-    install -v -c -m 644 "scripts/${README_OUT_FILE_NAME}" \
-      "${APP_PREFIX}/README.md"
-  )
-}
-
 function final_tunings()
 {
   # Create the missing LTO plugin links.
