@@ -3,6 +3,10 @@
 
 Releases in reverse chronological order.
 
+### 2020-10-09
+
+- Python2 support discontinued (building it with mingw-w64 is not possible)
+
 ### 2020-10-08
 
 - v8.3.0-1.2 prepared

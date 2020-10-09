@@ -192,9 +192,6 @@ function build_versions()
     
     # -------------------------------------------------------------------------
 
-    WITH_GDB_PY2="y"
-    PYTHON2_VERSION="2.7.18"
-
     WITH_GDB_PY3="y" 
     PYTHON3_VERSION="3.7.9"
 
@@ -245,13 +242,6 @@ function build_versions()
       # We cannot rely on a python shared library in the system, even
       # the custom build from sources does not have one.
 
-      if [ "${WITH_GDB_PY2}" == "y" ]
-      then
-        # For libssl & libcrypto; required by Python 2.
-        build_openssl "1.1.1h"
-        build_python2 "${PYTHON2_VERSION}"
-      fi
-
       if [ "${WITH_GDB_PY3}" == "y" ]
       then
         # Replacement for the old libcrypt.so.1; required by Python 3.
@@ -299,17 +289,6 @@ function build_versions()
     # Task [III-6] /$HOST_NATIVE/gdb/
     # Task [IV-4] /$HOST_MINGW/gdb/
     build_gdb ""
-
-    if [ "${WITH_GDB_PY2}" == "y" ]
-    then
-      # The Windows GDB needs some headers from the Python distribution.
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        download_python2_win "${PYTHON2_VERSION}"
-      fi
-
-      build_gdb "-py"
-    fi
 
     if [ "${WITH_GDB_PY3}" == "y" ]
     then
