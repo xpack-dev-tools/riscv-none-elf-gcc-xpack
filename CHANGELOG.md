@@ -5,7 +5,7 @@ Releases in reverse chronological order.
 
 ### 2020-10-09
 
-- Python2 support discontinued (building it with mingw-w64 is not possible)
+- Python2 support discontinued (building with recent mingw-w64 is not possible)
 
 ### 2020-10-08
 
