@@ -19,9 +19,9 @@ Be sure everything is committed and pushed
 
 ### Check tags
 
-The names should look like `v8.3.0-1.2`.
+The names should look like `v8.3.0-2.1`.
 
-For the binutils-gdb repo, a separate tag like `v8.3.0-1.2-gdb` should be
+For the binutils-gdb repo, a separate tag like `v8.3.0-2.1-gdb` should be
 present, for the gdb build.
 
 ### Check the `CHANGELOG.md` file
@@ -41,7 +41,7 @@ The `VERSION` file should refer to the actual release.
 
 In this Git repo:
 
-- if necessary, merge the `develop` branch into `xpack`
+- if necessary, merge the `xpack-develop` branch into `xpack`
 - push it to GitHub.
 - possibly push the helper project too.
 
@@ -90,22 +90,18 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-e
 - to test the Python debugger, start it with `--version`; on Windows, to
   test with different versions, set the path with:
 
-```
-C:\Users\ilg>set PYTHONHOME=C:\Python27.16
-```
-
 ## Create a new GitHub pre-release
 
 - in `CHANGELOG.md`, add release date
 - commit and push the repo
 - go to the [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases) page
 - click **Draft a new release**
-- name the tag like **v8.3.0-1.2** (mind the dash in the middle!)
+- name the tag like **v8.3.0-2.1** (mind the dash in the middle!)
 - select the target branch (like sifive-gcc-8.3.0-gme)
-- name the release like **xPack GNU RISC-V Embedded GCC v8.3.0-1.2**
+- name the release like **xPack GNU RISC-V Embedded GCC v8.3.0-2.1**
 (mind the dash and the space)
 - as description
-  - add a downloads badge like `![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/v8.3.0-1.2/total.svg)`; use empty URL for now
+  - add a downloads badge like `![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/v8.3.0-2.1/total.svg)`; use empty URL for now
   - draft a short paragraph explaining what are the main changes
 - **attach binaries** and SHA (drag and drop from the archives folder will do it)
 - **enable** the **pre-release** button
@@ -116,11 +112,11 @@ watching this project.
 
 ## Run the Travis tests
 
-As URL, use something like
+Run the tests on **stable** and **latest** platforms. This may take about 30
+minutes.
 
-```
-base_url="https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/download/v8.3.0-1.2/"
-```
+The test results are available at
+[Travis](https://travis-ci.org/github/xpack-dev-tools/riscv-none-embed-gcc-xpack/builds/).
 
 For more details, see `tests/scripts/README.md`.
 
@@ -129,10 +125,10 @@ For more details, see `tests/scripts/README.md`.
 In the `xpack.github.io` web Git:
 
 - add a new file to `_posts/releases/riscv-none-embed-gcc`
-- name the file like `2020-07-04-riscv-none-embed-gcc-v8-3-0-1-2-released.md`
-- name the post like: **xPack GNU RISC-V Embedded GCC v8.3.0-1.2 released**.
+- name the file like `2020-10-10-riscv-none-embed-gcc-v8-3-0-2-1-released.md`
+- name the post like: **xPack GNU RISC-V Embedded GCC v8.3.0-2.1 released**.
 - as `download_url` use the tagged URL like 
-`https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/tag/v8.3.0-1.2/`
+`https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/tag/v8.3.0-2.1/`
 - update the `date:` field with the current date
 - copy the list of commit IDs from the `README-<version>.sh` file
 - generate the list of multilibs and copy/paste
@@ -151,25 +147,25 @@ Copy/paste the build report at the end of the post as:
 The SHA-256 hashes for the files are:
 
 2009f256e59291e1025cc099e4300d7662dda040b304fe3462b4cb7c35c71378  
-xpack-riscv-none-embed-gcc-8.3.0-1.2-darwin-x64.tar.gz
+xpack-riscv-none-embed-gcc-8.3.0-2.1-darwin-x64.tar.gz
 
 751f28a28148ddaec8cfcbf7eb794a70d24ee6650dc29da91e6aa672b9deae52  
-xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-arm64.tar.gz
+xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm64.tar.gz
 
 63f232cbeddbe968130f4c8386cca24c5e1410cc2551738d071b279a94cd8b75  
-xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-arm.tar.gz
+xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm.tar.gz
 
 1d99730d6e1e5d3a60fa0ccfbbcf0276e77dd83d58b6d8d1543cef40a1dd96ca  
-xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x32.tar.gz
+xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x32.tar.gz
 
 079a88d7f7c18cfd735a9ed1f0eefa28ab28d3007b5f7591920ab25225c89248  
-xpack-riscv-none-embed-gcc-8.3.0-1.2-linux-x64.tar.gz
+xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x64.tar.gz
 
 8e7e98117900f3eed717b20555b346c2473dcbb9090e05c456412008f39fb62d  
-xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x32.zip
+xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x32.zip
 
 5b7a4e3a2bb22566fed951972d726d10ff43bc35db17f9287eed52766e80ecee  
-xpack-riscv-none-embed-gcc-8.3.0-1.2-win32-x64.zip
+xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x64.zip
 ```
 
 If you missed this, `cat` the content of the `.sha` files:
@@ -182,7 +178,7 @@ $ cat *.sha
 ## Update the Web
 
 - commit the `xpack.github.io` web Git; use a message
-  like **xPack GNU RISC-V Embedded GCC v8.3.0-1.2 released**
+  like **xPack GNU RISC-V Embedded GCC v8.3.0-2.1 released**
 - adjust timestamps
 - wait for the GitHub Pages build to complete
 - remember the post URL, since it must be updated in the release page
@@ -194,21 +190,16 @@ $ cat *.sha
 - update the `baseUrl:` with the file URLs (including the tag/version)
 - from the release, copy the SHA & file names
 - check the executable names
-- commit all changes, use a message like `package.json: update urls for 8.3.0-1.2 release` (without `v`)
+- commit all changes, use a message like `package.json: update urls for 8.3.0-2.1 release` (without `v`)
 - check the latest commits `npm run git-log`
 - update `CHANGELOG.md`; commit with a message like
-  _CHANGELOG: prepare npm v8.3.0-1.2.1_
-- `npm version 8.3.0-1.2.1`; the first 5 numbers are the same as the
+  _CHANGELOG: prepare npm v8.3.0-2.1.1_
+- `npm version 8.3.0-2.1.1`; the first 5 numbers are the same as the
   GitHub release; the sixth number is the npm specific version
 - `npm pack` and check the content of the archive
 - push all changes to GitHub
 - `npm publish --tag next` (use `--access public` when publishing for the first time)
 
-When the release is considered stable, promote it as `latest`:
-
-- `npm dist-tag ls @xpack-dev-tools/riscv-none-embed-gcc`
-- `npm dist-tag add @xpack-dev-tools/riscv-none-embed-gcc@8.3.0-1.2.1 latest`
-- `npm dist-tag ls @xpack-dev-tools/riscv-none-embed-gcc`
 
 ## Test npm binaries
 
@@ -217,6 +208,17 @@ Install the binaries on all platforms.
 ```console
 $ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@next
 ```
+
+As a shortcut, there is Travis test that checks the package on 
+Intel Ubuntu, macOS and Windows.
+
+## Tag the npm package as `latest`
+
+When the release is considered stable, promote it as `latest`:
+
+- `npm dist-tag ls @xpack-dev-tools/riscv-none-embed-gcc`
+- `npm dist-tag add @xpack-dev-tools/riscv-none-embed-gcc@8.3.0-2.1.1 latest`
+- `npm dist-tag ls @xpack-dev-tools/riscv-none-embed-gcc`
 
 ## Create a final GitHub release
 
@@ -230,7 +232,7 @@ $ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@next
 
 - in a separate browser windows, open [TweetDeck](https://tweetdeck.twitter.com/)
 - using the `@xpack_project` account
-- paste the release name like **xPack GNU RISC-V Embedded GCC v8.3.0-1.2 released**
+- paste the release name like **xPack GNU RISC-V Embedded GCC v8.3.0-2.1 released**
 - paste the link to the Web Page release
 - click the **Tweet** button
 
