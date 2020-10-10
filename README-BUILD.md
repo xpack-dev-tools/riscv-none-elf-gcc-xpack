@@ -392,20 +392,20 @@ $ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-mul
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r riscv`; to kill the session use `Ctrl-a` `Ctrl-\` and confirm.
 
-Several hours later, the output of the build script is a set of 4 files and
+About 4h45' later, the output of the build script is a set of 4 files and
 their SHA signatures, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
-total 1271432
--rw-rw-r-- 1 ilg ilg 330863900 Jul  3 20:29 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x32.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Jul  3 20:29 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x32.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 326158132 Jul  3 18:10 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Jul  3 18:10 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 315737045 Jul  3 21:04 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x32.zip
--rw-rw-r-- 1 ilg ilg       117 Jul  3 21:04 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x32.zip.sha
--rw-rw-r-- 1 ilg ilg 329159193 Jul  3 18:42 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x64.zip
--rw-rw-r-- 1 ilg ilg       117 Jul  3 18:42 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x64.zip.sha
+total 1346668
+-rw-rw-r-- 1 ilg ilg 347985751 Oct 10 14:22 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x32.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 10 14:22 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x32.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 343458303 Oct 10 11:55 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x64.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 10 11:55 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 337016277 Oct 10 14:58 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x32.zip
+-rw-rw-r-- 1 ilg ilg       117 Oct 10 14:58 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x32.zip.sha
+-rw-rw-r-- 1 ilg ilg 350502092 Oct 10 12:28 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x64.zip
+-rw-rw-r-- 1 ilg ilg       117 Oct 10 12:28 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x64.zip.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -485,7 +485,7 @@ $ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-mul
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
-Several hours later, the output of the build script
+About 9 hours later, the output of the build script
 is a set of 2
 archives and their SHA signatures, created in the `deploy` folder:
 
@@ -539,14 +539,14 @@ $ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r riscv`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
-Several hours later, the output of the build script is a compressed archive
+About 4h10' later, the output of the build script is a compressed archive
 and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
-total 622720
--rw-r--r--  1 ilg  staff  318825489 Jul  3 21:27 xpack-riscv-none-embed-gcc-8.3.0-2.1-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        121 Jul  3 21:27 xpack-riscv-none-embed-gcc-8.3.0-2.1-darwin-x64.tar.gz.sha
+total 666560
+-rw-r--r--  1 ilg  staff  341272214 Oct 10 14:23 xpack-riscv-none-embed-gcc-8.3.0-2.1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        121 Oct 10 14:23 xpack-riscv-none-embed-gcc-8.3.0-2.1-darwin-x64.tar.gz.sha
 ```
 
 To copy the files from the build machine to the current development
