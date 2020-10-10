@@ -76,6 +76,16 @@ compiled with `-Os -mcmodel=medany`.
 > Important: It is mandatory for the applications to be compiled with
 `-mcmodel=medany`, otherwise the link will fail.
 
+## Python
+
+Support for Python in GDB is provided via a separate binary,
+`riscv-none-embed-gdb-py3`. It requires a Python 3.7 installed
+on the development machine.
+
+For more details, please see the
+[GDB with Python support](https://xpack.github.io/arm-none-eabi-gcc/python/)
+page.
+
 ## Documentation
 
 The original PDF documentation is available in the `share/doc` folder.
@@ -87,10 +97,9 @@ For support, please read the
 
 ## More info
 
-For more info, please see the xPack project site:
+For more details, please read the corresponding release page:
 
-  http://xpack.github.io/riscv-none-embed-gcc
-
+- https://xpack.github.io/riscv-none-embed-gcc/releases/
 
 Thank you for using open source software,
 
