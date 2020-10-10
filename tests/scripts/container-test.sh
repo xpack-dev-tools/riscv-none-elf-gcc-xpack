@@ -120,17 +120,6 @@ fi
 
 detect_architecture
 
-case "${image_name}" in
-
-  ubuntu:12.04 | \
-  debian:jessie | \
-  i386/debian:jessie | \
-  raspbian/jessie)
-    has_gdb_py="n"
-    ;;
-
-esac
-
 prepare_env
 
 install_archive
