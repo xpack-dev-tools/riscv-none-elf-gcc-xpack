@@ -485,17 +485,16 @@ $ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-mul
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
-About 9 hours later, the output of the build script
-is a set of 2
+About 15 hours later, the output of the build script is a set of 2
 archives and their SHA signatures, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
-total 631032
--rw-rw-r-- 1 ilg ilg 324558658 Jul  3 20:50 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg       122 Jul  3 20:50 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 321600234 Jul  4 03:30 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Jul  4 03:30 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm.tar.gz.sha
+total 667980
+-rw-rw-r-- 1 ilg ilg 343409720 Oct 10 14:55 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm64.tar.gz
+-rw-rw-r-- 1 ilg ilg       122 Oct 10 14:55 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 340579759 Oct 10 22:10 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 10 22:10 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm.tar.gz.sha
 ```
 
 To copy the files from the build machine to the current development
