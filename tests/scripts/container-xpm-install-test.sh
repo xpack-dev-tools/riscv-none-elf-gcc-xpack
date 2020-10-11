@@ -76,7 +76,7 @@ if [[ ${image_name} == *ubuntu* ]] || [[ ${image_name} == *debian* ]] || [[ ${im
 then
   run_verbose apt-get -qq update 
   run_verbose apt-get -qq install -y git-core curl tar gzip lsb-release binutils
-  run_verbose apt-get -qq install -y g++ gcc
+  run_verbose apt-get -qq install -y build-essential 
   run_verbose apt-get -qq install -y python || true
   # run_verbose apt-get -qq install -y python3 || true
 elif [[ ${image_name} == *centos* ]] || [[ ${image_name} == *fedora* ]]
