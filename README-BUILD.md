@@ -386,7 +386,7 @@ $ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
 or, for development builds:
 
 ```console
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --linux64 --linux32 --win64 --win32
+$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --linux64 --linux32 --win64 --win32
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -460,12 +460,6 @@ To download the build scripts:
 $ curl -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
 ```
 
-or, for development builds:
-
-```console
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --arm32 --arm64
-```
-
 Since the build takes a while, use `screen` to isolate the build session
 from unexpected events, like a broken
 network connection or a computer entering sleep.
@@ -480,7 +474,7 @@ $ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
 or, for development builds:
 
 ```console
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --arm32 --arm64
+$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --arm32 --arm64
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
@@ -532,7 +526,7 @@ $ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --
 or, for development builds:
 
 ```console
-$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --osx
+$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --osx
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -562,13 +556,13 @@ Before starting the builds on the dedicated machines, run a quick test on
 the local development workstation.
 
 ```console
-$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --osx
+$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --osx
 ```
 
 or on the build machine:
 
 ```console
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --linux64
+$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --linux64
 ```
 
 This should check the commit IDs and the tag names in all the refered
