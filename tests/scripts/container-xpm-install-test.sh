@@ -57,10 +57,6 @@ image_name="$1"
 echo "${image_name}"
 shift
 
-base_url="$1"
-echo "${base_url}"
-shift
-
 while [ $# -gt 0 ]
 do
   case "$1" in
