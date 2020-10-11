@@ -200,7 +200,6 @@ $ cat *.sha
 - push all changes to GitHub
 - `npm publish --tag next` (use `--access public` when publishing for the first time)
 
-
 ## Test npm binaries
 
 Install the binaries on all platforms.
@@ -209,8 +208,10 @@ Install the binaries on all platforms.
 $ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@next
 ```
 
-As a shortcut, there is Travis test that checks the package on 
+As a shortcut, there is Travis test that checks the package on 64-bit
 Intel Ubuntu, macOS and Windows.
+
+For 32-bit Windows, 32-bit Intel GNU/Linux and 32-bit Arm, install manually.
 
 ## Tag the npm package as `latest`
 
