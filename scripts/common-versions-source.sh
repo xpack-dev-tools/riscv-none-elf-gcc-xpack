@@ -107,6 +107,11 @@ function build_versions()
     # From gdb/VERSION.in
     GDB_VERSION="8.3"
 
+    if [ "${RELEASE_VERSION}" == "8.3.0-2.1" ]
+    then
+      README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
+    fi
+
     # -------------------------------------------------------------------------
 
     # Inspired from SiFive
@@ -165,7 +170,12 @@ function build_versions()
 
       # Be sure there is no `v`, it is added in the URL.
       GH_RELEASE="8.3.0-2.1"
-      BINUTILS_GH_RELEASE=${BINUTILS_GH_RELEASE:-"${GH_RELEASE}"}
+      if [ "${RELEASE_VERSION}" == "8.3.0-2.2" ]
+      then
+        BINUTILS_GH_RELEASE=${BINUTILS_GH_RELEASE:-"8.3.0-2.2"}
+      else
+        BINUTILS_GH_RELEASE=${BINUTILS_GH_RELEASE:-"${GH_RELEASE}"}
+      fi
       GCC_GH_RELEASE=${GCC_GH_RELEASE:-"${GH_RELEASE}"}
       NEWLIB_GH_RELEASE=${NEWLIB_GH_RELEASE:-"${GH_RELEASE}"}
       # Same, with a `-gdb` suffix added.
@@ -174,7 +184,12 @@ function build_versions()
     else
 
       BINUTILS_GIT_BRANCH=${BINUTILS_GIT_BRANCH:-"sifive-binutils-2.32-cache-control-patch-xpack"}
-      BINUTILS_GIT_COMMIT=${BINUTILS_GIT_COMMIT:-"d005a513ac8469bf23a1a7655a6d372a7f470dd3"}
+      if [ "${RELEASE_VERSION}" == "8.3.0-2.2" ]
+      then
+        BINUTILS_GIT_COMMIT=${BINUTILS_GIT_COMMIT:-"c46d3912cd901db4bdc331bd394aa97d85ac1746"}
+      else
+        BINUTILS_GIT_COMMIT=${BINUTILS_GIT_COMMIT:-"d005a513ac8469bf23a1a7655a6d372a7f470dd3"}
+      fi
 
       GCC_GIT_BRANCH=${GCC_GIT_BRANCH:-"sifive-gcc-8.3.0-xpack"}
       GCC_GIT_COMMIT=${GCC_GIT_COMMIT:-"e195042babe2dc30d9fabb88d336d8c8679b3702"}
