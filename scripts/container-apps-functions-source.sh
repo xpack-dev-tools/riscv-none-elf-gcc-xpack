@@ -1156,11 +1156,11 @@ function build_gdb()
         #        CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include" 
         #        LDFLAGS+=" -L${XBB_FOLDER_PATH}/lib"
         LDFLAGS="${XBB_LDFLAGS_APP}"
-        LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
         LIBS="-liconv -lncurses"
       elif [ "${TARGET_PLATFORM}" == "linux" ]
       then
         LDFLAGS="${XBB_LDFLAGS_APP}"
+        LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
         LIBS=""
       fi
 
