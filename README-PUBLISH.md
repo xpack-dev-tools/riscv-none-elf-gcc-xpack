@@ -200,18 +200,16 @@ $ cat *.sha
 - push all changes to GitHub
 - `npm publish --tag next` (use `--access public` when publishing for the first time)
 
-## Test npm binaries
+## Test the npm binaries with xpm
 
-Install the binaries on all platforms.
+Run the `tests/scripts/trigger-travis-xpm-install.sh` file, this
+will install the package on Intel Linux 64-bit, macOS and Windows 64-bit.
+
+For 32-bit Windows, 32-bit Intel GNU/Linux and 32-bit Arm, install manually.
 
 ```console
 $ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@next
 ```
-
-As a shortcut, there is Travis test that checks the package on 64-bit
-Intel Ubuntu, macOS and Windows.
-
-For 32-bit Windows, 32-bit Intel GNU/Linux and 32-bit Arm, install manually.
 
 ## Tag the npm package as `latest`
 
