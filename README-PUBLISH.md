@@ -125,7 +125,7 @@ For more details, see `tests/scripts/README.md`.
 In the `xpack.github.io` web Git:
 
 - add a new file to `_posts/releases/riscv-none-embed-gcc`
-- name the file like `2020-10-10-riscv-none-embed-gcc-v8-3-0-2-1-released.md`
+- name the file like `2020-10-13-riscv-none-embed-gcc-v8-3-0-2-2-released.md`
 - name the post like: **xPack GNU RISC-V Embedded GCC v8.3.0-2.2 released**.
 - as `download_url` use the tagged URL like 
 `https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/tag/v8.3.0-2.2/`
