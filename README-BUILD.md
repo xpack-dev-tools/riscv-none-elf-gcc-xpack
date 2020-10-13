@@ -134,7 +134,7 @@ for new releases
 ### Identify the main GCC version
 
 Determine the GCC version (like `8.3.0`) and update the `scripts/VERSION`
-  file; the format is `8.3.0-2.1`. The fourth digit is the number of the
+  file; the format is `8.3.0-2.2`. The fourth digit is the number of the
   SiFive release of the same GCC version, and the fifth digit is the xPack
   GNU RISC-V Embedded GCC release number of this version.
 
@@ -184,7 +184,7 @@ In both cases:
 
 - push the two modified branches (like `sifive-binutils-2.32` and
 `sifive-binutils-2.32-xpack`)
-- add a tag with the current version (like `v8.3.0-2.1`), and push
+- add a tag with the current version (like `v8.3.0-2.2`), and push
 it to `origin`
 
 - copy/paste the branch name and commit id tp common-versions-source.sh
@@ -229,7 +229,7 @@ In both cases:
 
 - push the two modified branches (like `sifive-gcc-8.3.0` and
 `sifive-gcc-8.3.0-xpack`)
-- add a tag with the current version (like `v8.3.0-2.1`), and push
+- add a tag with the current version (like `v8.3.0-2.2`), and push
 it to `origin`.
 
 ### Update newlib
@@ -266,7 +266,7 @@ In both cases:
 
 - push the two modified branches (like `sifive--master` and
 `sifive--master-xpack`)
-- add a tag with the current version (like `v8.3.0-2.1`), and push
+- add a tag with the current version (like `v8.3.0-2.2`), and push
 it to `origin`.
 
 ### Update gdb
@@ -281,13 +281,13 @@ For GDB, it is a bit tricky, since it must identify the GNU code in line
 with what was used by SiFive; create a branch like `sifive-gdb-8.3`
 
 - branch it into `sifive-gdb-8.3-xpack` and edit the prefix code
-- add a tag like `v8.3.0-2.1-gdb`
+- add a tag like `v8.3.0-2.2-gdb`
 
 ### Update container-build.sh
 
 - add a new set of definitions in the `scripts/container-build.sh`, with
   the versions of various components;
-- update `GH_RELEASE` to the new version (like `8.3.0-2.1`, without `v`)
+- update `GH_RELEASE` to the new version (like `8.3.0-2.2`, without `v`)
 - in [SiFive Releases](https://github.com/sifive/freedom-tools/releases)
 for new releases
 - identify the tag of the latest release (like `v2019.08.0`)
@@ -398,14 +398,14 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 1346668
--rw-rw-r-- 1 ilg ilg 347985751 Oct 10 14:22 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x32.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 10 14:22 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x32.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 343458303 Oct 10 11:55 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 10 11:55 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 337016277 Oct 10 14:58 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x32.zip
--rw-rw-r-- 1 ilg ilg       117 Oct 10 14:58 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x32.zip.sha
--rw-rw-r-- 1 ilg ilg 350502092 Oct 10 12:28 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x64.zip
--rw-rw-r-- 1 ilg ilg       117 Oct 10 12:28 xpack-riscv-none-embed-gcc-8.3.0-2.1-win32-x64.zip.sha
+-rw-rw-r-- 1 ilg ilg 347985751 Oct 10 14:22 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-x32.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 10 14:22 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-x32.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 343458303 Oct 10 11:55 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-x64.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 10 11:55 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-x64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 337016277 Oct 10 14:58 xpack-riscv-none-embed-gcc-8.3.0-2.2-win32-x32.zip
+-rw-rw-r-- 1 ilg ilg       117 Oct 10 14:58 xpack-riscv-none-embed-gcc-8.3.0-2.2-win32-x32.zip.sha
+-rw-rw-r-- 1 ilg ilg 350502092 Oct 10 12:28 xpack-riscv-none-embed-gcc-8.3.0-2.2-win32-x64.zip
+-rw-rw-r-- 1 ilg ilg       117 Oct 10 12:28 xpack-riscv-none-embed-gcc-8.3.0-2.2-win32-x64.zip.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -485,10 +485,10 @@ archives and their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 667980
--rw-rw-r-- 1 ilg ilg 343409720 Oct 10 14:55 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg       122 Oct 10 14:55 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 340579759 Oct 10 22:10 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 10 22:10 xpack-riscv-none-embed-gcc-8.3.0-2.1-linux-arm.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 343409720 Oct 10 14:55 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-arm64.tar.gz
+-rw-rw-r-- 1 ilg ilg       122 Oct 10 14:55 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-arm64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 340579759 Oct 10 22:10 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-arm.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 10 22:10 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-arm.tar.gz.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -538,8 +538,8 @@ and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 666560
--rw-r--r--  1 ilg  staff  341272214 Oct 10 14:23 xpack-riscv-none-embed-gcc-8.3.0-2.1-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        121 Oct 10 14:23 xpack-riscv-none-embed-gcc-8.3.0-2.1-darwin-x64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  341272214 Oct 10 14:23 xpack-riscv-none-embed-gcc-8.3.0-2.2-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        121 Oct 10 14:23 xpack-riscv-none-embed-gcc-8.3.0-2.2-darwin-x64.tar.gz.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -649,7 +649,7 @@ program from there. For example on macOS the output should
 look like:
 
 ```console
-$ /Users/ilg/Downloads/xPacks/riscv-none-embed-gcc/8.3.0-2.1/bin/riscv-none-embed-gcc --version
+$ /Users/ilg/Downloads/xPacks/riscv-none-embed-gcc/8.3.0-2.2/bin/riscv-none-embed-gcc --version
 riscv-none-embed-gcc (xPack RISC-V Embedded GCC, 64-bit) 8.3.0
 ```
 
@@ -666,8 +666,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/opt/xPacks/riscv-none-embed-gcc/8.3.0-2.1
-/Users/ilg/opt/gnu-mcu-eclipse/riscv-none-embed-gcc/8.3.0-2.1
+$ tree -L 2 /Users/ilg/opt/xPacks/riscv-none-embed-gcc/8.3.0-2.2
+/Users/ilg/opt/gnu-mcu-eclipse/riscv-none-embed-gcc/8.3.0-2.2
 ├── README.md
 ├── riscv-none-embed
 │   ├── bin
@@ -693,8 +693,8 @@ $ tree -L 2 /Users/ilg/opt/xPacks/riscv-none-embed-gcc/8.3.0-2.1
 │   ├── riscv-none-embed-gcov-tool
 │   ├── riscv-none-embed-gdb
 │   ├── riscv-none-embed-gdb-add-index
-│   ├── riscv-none-embed-gdb-add-index-py
-│   ├── riscv-none-embed-gdb-py
+│   ├── riscv-none-embed-gdb-add-index-py3
+│   ├── riscv-none-embed-gdb-py3
 │   ├── riscv-none-embed-gprof
 │   ├── riscv-none-embed-ld
 │   ├── riscv-none-embed-ld.bfd
