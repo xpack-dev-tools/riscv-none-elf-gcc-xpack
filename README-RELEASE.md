@@ -45,6 +45,14 @@ In this Git repo:
 - push it to GitHub.
 - possibly push the helper project too.
 
+### Clean the destination folder
+
+Clear the folder where the binaries from all build machines will be collected.
+
+```console
+$ rm -f ~/Downloads/xpack-binaries/riscv/*
+```
+
 ### Run the build scripts
 
 When everything is ready, follow the instructions from the
