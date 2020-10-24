@@ -158,7 +158,7 @@ function build_versions()
     rv64imfd-lp64d--c \
     rv64iafd-lp64d-rv64imafd,rv64iafdc- \
     rv64imafdc-lp64d-- \
-  "}
+    "}
 
     GCC_MULTILIB_FILE=${GCC_MULTILIB_FILE:-"t-elf-multilib"}
 
@@ -170,11 +170,11 @@ function build_versions()
 
       # Be sure there is no `v`, it is added in the URL.
       GH_RELEASE="8.3.0-2.1"
-      if [ "${RELEASE_VERSION}" == "8.3.0-2.2" ]
+      if [[ "${RELEASE_VERSION}" =~ 8\.3\.0-2\.[1] ]]
       then
-        BINUTILS_GH_RELEASE=${BINUTILS_GH_RELEASE:-"8.3.0-2.2"}
-      else
         BINUTILS_GH_RELEASE=${BINUTILS_GH_RELEASE:-"${GH_RELEASE}"}
+      else
+        BINUTILS_GH_RELEASE=${BINUTILS_GH_RELEASE:-"8.3.0-2.2"}
       fi
       GCC_GH_RELEASE=${GCC_GH_RELEASE:-"${GH_RELEASE}"}
       NEWLIB_GH_RELEASE=${NEWLIB_GH_RELEASE:-"${GH_RELEASE}"}
@@ -184,11 +184,11 @@ function build_versions()
     else
 
       BINUTILS_GIT_BRANCH=${BINUTILS_GIT_BRANCH:-"sifive-binutils-2.32-cache-control-patch-xpack"}
-      if [ "${RELEASE_VERSION}" == "8.3.0-2.2" ]
+      if [[ "${RELEASE_VERSION}" =~ 8\.3\.0-2\.[1] ]]
       then
-        BINUTILS_GIT_COMMIT=${BINUTILS_GIT_COMMIT:-"c46d3912cd901db4bdc331bd394aa97d85ac1746"}
-      else
         BINUTILS_GIT_COMMIT=${BINUTILS_GIT_COMMIT:-"d005a513ac8469bf23a1a7655a6d372a7f470dd3"}
+      else
+        BINUTILS_GIT_COMMIT=${BINUTILS_GIT_COMMIT:-"c46d3912cd901db4bdc331bd394aa97d85ac1746"}
       fi
 
       GCC_GIT_BRANCH=${GCC_GIT_BRANCH:-"sifive-gcc-8.3.0-xpack"}
@@ -229,14 +229,27 @@ function build_versions()
     # More libraries.
     # Fails on mingw
     ## build_libelf "0.8.13"
+    build_libmpdec "2.5.0" # Used by Python
     build_expat "2.2.5"
     build_libiconv "1.15"
     build_xz "5.2.3"
 
     build_gettext "0.19.8.1"
 
-    if [ "${TARGET_PLATFORM}" != "win32" ]
+    if [ "${TARGET_PLATFORM}" == "win32" ]
     then
+      if [ "${WITH_GDB_PY3}" == "y" ]
+      then
+        if [[ "${RELEASE_VERSION}" =~ 8\.3\.0-2\.[3] ]]
+        then
+          # Shortcut, use the existing pyton.exe instead of building
+          # if from sources. It also downloads the sources.
+          download_python3_win "${PYTHON3_VERSION}"
+
+          add_python3_win_syslibs
+        fi
+      fi
+    else # linux or darwin
       # Used by ncurses. Fails on macOS.
       if [ "${TARGET_PLATFORM}" == "linux" ]
       then
@@ -244,22 +257,34 @@ function build_versions()
       fi
 
       build_ncurses "6.2"
-      build_readline "8.0" # requires ncurses
 
-      build_bzip2 "1.0.8"
-      build_libffi "3.3"
-
-      # Required by a Python 3 module.
-      build_sqlite "3.32.3"
-
-      # We cannot rely on a python shared library in the system, even
-      # the custom build from sources does not have one.
-
-      if [ "${WITH_GDB_PY3}" == "y" ]
+      if [[ "${RELEASE_VERSION}" =~ 8\.3\.0-2\.[3] ]]
       then
-        # Replacement for the old libcrypt.so.1; required by Python 3.
-        build_libxcrypt "4.4.17"
-        build_python3 "${PYTHON3_VERSION}"
+        build_readline "8.0" # requires ncurses
+
+        build_bzip2 "1.0.8"
+        build_libffi "3.3"
+
+
+        # We cannot rely on a python shared library in the system, even
+        # the custom build from sources does not have one.
+
+        if [ "${WITH_GDB_PY3}" == "y" ]
+        then
+          # Required by a Python 3 module.
+          build_sqlite "3.32.3"
+
+          # Replacement for the old libcrypt.so.1; required by Python 3.
+          build_libxcrypt "4.4.17"
+          build_openssl "1.1.1h"
+
+          build_python3 "${PYTHON3_VERSION}"
+
+          if [[ "${RELEASE_VERSION}" =~ 8\.3\.0-2\.[3] ]]
+          then
+            add_python3_syslibs
+          fi
+        fi
       fi
     fi
 
@@ -305,11 +330,6 @@ function build_versions()
 
     if [ "${WITH_GDB_PY3}" == "y" ]
     then
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        download_python3_win "${PYTHON3_VERSION}"
-      fi
-
       build_gdb "-py3"
     fi
 
@@ -728,15 +748,7 @@ function build_versions()
     
     # -------------------------------------------------------------------------
 
-    ZLIB_VERSION="1.2.8"
-    GMP_VERSION="6.1.2"
-    MPFR_VERSION="3.1.6"
-    MPC_VERSION="1.0.3"
-    ISL_VERSION="0.18"
-    LIBELF_VERSION="0.8.13"
-    EXPAT_VERSION="2.2.5"
-    LIBICONV_VERSION="1.15"
-    XZ_VERSION="5.2.3"
+    # LIBELF_VERSION="0.8.13"
 
     WITH_GDB_PY2="y"
     PYTHON2_VERSION="2.7.13"
@@ -751,20 +763,20 @@ function build_versions()
 
     # For better control, without it some components pick the lib packed 
     # inside the archive.
-    build_zlib "${ZLIB_VERSION}"
+    build_zlib "1.2.8"
 
     # The classical GCC libraries.
-    build_gmp "${GMP_VERSION}"
-    build_mpfr "${MPFR_VERSION}"
-    build_mpc "${MPC_VERSION}"
-    build_isl "${ISL_VERSION}"
+    build_gmp "6.1.2"
+    build_mpfr "3.1.6"
+    build_mpc "1.0.3"
+    build_isl "0.18"
 
     # More libraries.
     # Fails on mingw
     ## do_libelf
-    build_expat "${EXPAT_VERSION}"
-    build_libiconv "${LIBICONV_VERSION}"
-    build_xz "${XZ_VERSION}"
+    build_expat "2.2.5"
+    build_libiconv "1.15"
+    build_xz "5.2.3"
 
     build_gettext "0.19.8.1"
 

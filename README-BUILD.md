@@ -1,4 +1,4 @@
-# How to build the xPack GNU RISC-V Embedded GCC
+# How to build the xPack GNU RISC-V Embedded GCC binaries
 
 ## Introduction
 
@@ -49,6 +49,21 @@ original FSF repository is used:
 However, to accommodate the custom prefix, a separate branch is created
 in `xpack-dev-tools/riscv-binutils-gdb`.
 
+## Branches
+
+- `xpack` - the updated content, used during builds
+- `xpack-develop` - the updated content, used during development
+- `master` - empty, not used.
+
+## Prerequisites
+
+The prerequisites are common to all binary builds. Please follow the
+instructions from the separate
+[Prerequisites for building xPack binaries](https://xpack.github.io/xbb/prerequisites/)
+page and return when ready.
+
+Note: Building the Arm binaries requires an Arm machine.
+
 ## Download the build scripts repo
 
 The build scripts are available in the `scripts` folder of the
@@ -64,8 +79,8 @@ $ curl --fail -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/r
 This small script issues the following two commands:
 
 ```console
-$ rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git
-$ git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
+$ rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git; \
+  git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
   ~/Downloads/riscv-none-embed-gcc-xpack.git
 ```
 
@@ -82,8 +97,8 @@ $ curl --fail -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/r
 which is a shortcut for:
 
 ```console
-$ rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git
-$ git clone --recurse-submodules --branch xpack-develop https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
+$ rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git; \
+  git clone --recurse-submodules --branch xpack-develop https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
   ~/Downloads/riscv-none-embed-gcc-xpack.git
 ```
 
@@ -94,6 +109,15 @@ folder in the user home. Although not recommended, if for any reasons
 you need to change the location of the `Work` folder,
 you can redefine `WORK_FOLDER_PATH` variable before invoking the script.
 
+## Spaces in folder names
+
+Due to the limitations of `make`, builds started in folders with
+spaces in names are known to fail.
+
+If on your system the work folder is in such a location, redefine it in a
+folder without spaces and set the `WORK_FOLDER_PATH` variable before invoking
+the script.
+
 ## Customizations
 
 There are many other settings that can be redefined via
@@ -103,202 +127,33 @@ either passed to Docker or sourced to shell. The Docker syntax
 **is not** identical to shell, so some files may
 not be accepted by bash.
 
-## Prerequisites
+## Versioning
 
-The prerequisites are common to all binary builds. Please follow the
-instructions from the separate
-[Prerequisites for building xPack binaries](https://xpack.github.io/xbb/prerequisites/)
-page and return when ready.
+The version string is an extension to semver, the format looks like `8.3.0-2.3`.
+It includes the three digits with the original GCC version, a fourth
+digit with the SiFive release, a fifth digit with the xPack release number.
 
-## Prepare release
+When publishing on the **npmjs.com** server, a sixth digit is appended.
 
-### Check `README.md`
+## Changes
 
-Normally `README.md` should not need changes, but better check.
-Information related to the new version should not be included here,
-but in the version specific file (below).
+Compared to the original SiFive distribution, there should be no
+major functional changes, perhaps only bug fixes.
 
-### Identify SiFive commit IDs
+The actual changes for each version are documented in the corresponding
+release pages:
 
-- check the [SiFive Releases](https://github.com/sifive/freedom-tools/releases)
-for new releases
-- identify the tag of the latest release (like `v2019.08.0`)
-- switch to Code view and select the tag
-- open the `src` folder to identify the commit IDs used for the linked repos
-- copy/paste the submodule links to common-versions-sources.sh
-- get binutils version from binutils/CHANGELOG
-- get gcc version from gcc/BASE_VER (gcc/ChangeLog)
-- get newlib version from newlib/configure, VERSION= (newlib/README)
-- get gdb version from gdb/VERSION.in (gdb/ChangeLog)
+- https://xpack.github.io/arm-none-eabi-gcc/releases/
 
-### Identify the main GCC version
+## How to build local/native binaries
 
-Determine the GCC version (like `8.3.0`) and update the `scripts/VERSION`
-  file; the format is `8.3.0-2.2`. The fourth digit is the number of the
-  SiFive release of the same GCC version, and the fifth digit is the xPack
-  GNU RISC-V Embedded GCC release number of this version.
+### README-DEVELOP.md
 
-### Create `README-<version>.md`
+The details on how to prepare the development environment for native build
+are in the
+[`README-DEVELOP.md`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-DEVELOP.md) file.
 
-In the `scripts` folder create a copy of the previous version one.
-
-From the the `src` folder, follow the linked module links for
-binutils/gcc/newlib and copy/paste them.
-Also update the short IDs and dates.
-
-Check the GDB commit ID (not linked, since it points to external repo).
-
-### Update binutils
-
-With Sourcetree in
-[xpack-dev-tools/riscv-binutils-gdb](https://github.com/xpack-dev-tools/riscv-binutils-gdb)
-
-Check if there is a `sifive` remote pointing to
-https://github.com/sifive/riscv-binutils-gdb.
-
-If the changes apply to an existing branch:
-
-- checkout the current SiFive branch (like `sifive-binutils-2.32`)
-- merge the commit with the desired ID from the corresponding branch in
-the `sifive` remote
-- checkout the corresponding xpack branch (like `sifive-binutils-2.32-xpack`)
-- merge the previous merge
-- check the differences from the non-xpack branch; it should be only the
-addition of `embed)` in `config.sub`
-
-If the changes are on a new branch (most likely):
-
-- from the `sifive` remote
-checkout the new SiFive branch (like `sifive-binutils-2.32`) into a new local
-branch
-- identify the commit ID and switch to it
-- create a new branch with a similar name, but suffixed by `-xpack`
-(like `sifive-binutils-2.32-xpack`)
-- identify the commit which adds the xPack specific changes
-- cherry pick it; do not commit immediately
-- check the uncommited changes; there should be one file `config.sub`
-which adds `-embed)`
-- commit as **add support for riscv-none-embed-***
-
-In both cases:
-
-- push the two modified branches (like `sifive-binutils-2.32` and
-`sifive-binutils-2.32-xpack`)
-- add a tag with the current version (like `v8.3.0-2.2`), and push
-it to `origin`
-
-- copy/paste the branch name and commit id tp common-versions-source.sh
-
-### Update gcc
-
-With Sourcetree in
-[xpack-dev-tools/riscv-gcc](https://github.com/xpack-dev-tools/riscv-gcc)
-
-Check if there is a `sifive` remote pointing to
-https://github.com/sifive/riscv-gcc.
-
-If the changes apply to an existing branch:
-
-- checkout the current SiFive branch (like `sifive-gcc-8.3.0`)
-- merge the commit with the desired ID from the corresponding branch in
-the `sifive` remote
-- checkout the corresponding xpack branch (like `sifive-gcc-8.3.0-xpack`)
-- merge the previous merge
-- check the differences from the non-xpack branch; there should be tree files:
-  - `elf-embed.h` with the `LIB_SPEC` definitions without libgloss
-  - `config.gcc` with `tm_file` definition that uses `elf-embed.h`
-  - `config.sub` which adds `riscv0*)` and `-embed)`
-
-If this is a new branch:
-
-- from the `sifive` remote
-checkout the new SiFive branch (like `sifive-gcc-8.3.0`) into a new local
-branch
-- identify the commit ID and switch to it
-- create a new branch with a similar name, but suffixed by `-xpack`
-(like `sifive-gcc-8.3.0-xpack`)
-- identify the commit which adds the xPaack specific changes
-- cherry pick it; do not commit immediately
-- check the uncommited changes; there should be tree files:
-  - `elf-embed.h` with the `LIB_SPEC` definitions without libgloss
-  - `config.gcc` with `tm_file` definition that uses `elf-embed.h`
-  - `config.sub` which adds `riscv0*)` and `-embed)`
-- commit as **add support for riscv-none-embed-***
-
-In both cases:
-
-- push the two modified branches (like `sifive-gcc-8.3.0` and
-`sifive-gcc-8.3.0-xpack`)
-- add a tag with the current version (like `v8.3.0-2.2`), and push
-it to `origin`.
-
-### Update newlib
-
-With Sourcetree in
-[xpack-dev-tools/riscv-newlib](https://github.com/xpack-dev-tools/riscv-newlib)
-
-Check if there is a `sifive` remote pointing to
-https://github.com/sifive/riscv-newlib.
-
-If the changes apply to an existing branch:
-
-- checkout the current SiFive branch (like `master`)
-- merge the commit with the desired ID from the corresponding branch in
-the `sifive` remote
-- checkout the corresponding xpack branch (like `sifive-binutils-2.32-xpack`)
-- merge the previous merge
-- check the differences from the non-xpack branch; it should be only the
-addition of `embed)` in `config.sub`
-
-- from the `sifive` remote
-checkout the new SiFive branch (like `master`) into a new local
-branch (like `sifive-master`)
-- identify the commit ID and switch to it
-- create a new branch with a similar name, but suffixed by `-xpack`
-(like `sifive-master-xpack`)
-- identify the commit which adds the xPack specific changes
-- cherry pick it; do not commit immediately
-- check the uncommited changes; there should be one file `config.sub`
-which adds `-embed)`
-- commit as **add support for riscv-none-embed-***
-
-In both cases:
-
-- push the two modified branches (like `sifive--master` and
-`sifive--master-xpack`)
-- add a tag with the current version (like `v8.3.0-2.2`), and push
-it to `origin`.
-
-### Update gdb
-
-With Sourcetree in
-[xpack-dev-tools/riscv-binutils-gdb](https://github.com/xpack-dev-tools/riscv-binutils-gdb)
-
-Check if there is a `gdb` remote pointing to
-git://sourceware.org/git/binutils-gdb.git.
-
-For GDB, it is a bit tricky, since it must identify the GNU code in line
-with what was used by SiFive; create a branch like `sifive-gdb-8.3`
-
-- branch it into `sifive-gdb-8.3-xpack` and edit the prefix code
-- add a tag like `v8.3.0-2.2-gdb`
-
-### Update container-build.sh
-
-- add a new set of definitions in the `scripts/container-build.sh`, with
-  the versions of various components;
-- update `GH_RELEASE` to the new version (like `8.3.0-2.2`, without `v`)
-- in [SiFive Releases](https://github.com/sifive/freedom-tools/releases)
-for new releases
-- identify the tag of the latest release (like `v2019.08.0`)
-- switch to Code view and select the tag
-- open the `Makefile` file to identify the `MULTILIBS_GEN` definition;
-- copy/paste it into `GCC_MULTILIB` (mind the tabs!)
-- add `rv32imaf-ilp32f--` after `rv32imf-` (already in for recent versions)
-
-## Update `CHANGELOG.md`
-
-Check `CHANGELOG.md` and add the new release.
+## How to build distributions
 
 ## Build
 
@@ -311,7 +166,7 @@ separately.
 
 The current platform for Intel GNU/Linux and Windows production builds is a
 Debian 10, running on an Intel NUC8i7BEH mini PC with 32 GB of RAM
-and 512 GB of fast M.2 SSD.
+and 512 GB of fast M.2 SSD. The machine name is `xbbi`.
 
 ```console
 $ ssh xbbi
@@ -330,7 +185,7 @@ $ docker run hello-world
 ```
 
 Before running a build for the first time, it is recommended to preload the
-docker images.
+docker images, since they are pretty large.
 
 ```console
 $ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh preload-images
@@ -362,31 +217,25 @@ To remove unused files:
 $ docker system prune --force
 ```
 
-To download the build scripts:
-
-```console
-$ curl --fail -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
-```
-
-To build both the 32/64-bit Windows and GNU/Linux versions, use `--all`; to
-build selectively, use `--linux64 --win64` or `--linux32 --win32` (GNU/Linux
-can be built alone; Windows also requires the GNU/Linux build).
-
 Since the build takes a while, use `screen` to isolate the build session
 from unexpected events, like a broken
 network connection or a computer entering sleep.
 
 ```console
 $ screen -S riscv
-
-$ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
 ```
 
-or, for development builds:
+Run the development builds on the development machine (`wks`):
 
 ```console
 $ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --linux64 --linux32 --win64 --win32
+```
+
+When ready, run the build on the production machine (`xbbi`):
+
+```console
+$ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -398,22 +247,14 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 1346668
--rw-rw-r-- 1 ilg ilg 347985751 Oct 10 14:22 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-x32.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 10 14:22 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-x32.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 343458303 Oct 10 11:55 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 10 11:55 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 337016277 Oct 10 14:58 xpack-riscv-none-embed-gcc-8.3.0-2.2-win32-x32.zip
--rw-rw-r-- 1 ilg ilg       117 Oct 10 14:58 xpack-riscv-none-embed-gcc-8.3.0-2.2-win32-x32.zip.sha
--rw-rw-r-- 1 ilg ilg 350502092 Oct 10 12:28 xpack-riscv-none-embed-gcc-8.3.0-2.2-win32-x64.zip
--rw-rw-r-- 1 ilg ilg       117 Oct 10 12:28 xpack-riscv-none-embed-gcc-8.3.0-2.2-win32-x64.zip.sha
-```
-
-To copy the files from the build machine to the current development
-machine, either use NFS to mount the entire folder, or open the `deploy`
-folder in a terminal and use `scp`:
-
-```console
-$ (cd ~/Work/riscv-none-embed-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/riscv)
+-rw-rw-r-- 1 ilg ilg 347985751 Oct 10 14:22 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-x32.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 10 14:22 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-x32.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 343458303 Oct 10 11:55 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-x64.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 10 11:55 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-x64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 337016277 Oct 10 14:58 xpack-riscv-none-embed-gcc-8.3.0-2.3-win32-x32.zip
+-rw-rw-r-- 1 ilg ilg       117 Oct 10 14:58 xpack-riscv-none-embed-gcc-8.3.0-2.3-win32-x32.zip.sha
+-rw-rw-r-- 1 ilg ilg 350502092 Oct 10 12:28 xpack-riscv-none-embed-gcc-8.3.0-2.3-win32-x64.zip
+-rw-rw-r-- 1 ilg ilg       117 Oct 10 12:28 xpack-riscv-none-embed-gcc-8.3.0-2.3-win32-x64.zip.sha
 ```
 
 #### Build the Arm GNU/Linux binaries
@@ -425,7 +266,7 @@ The supported Arm architectures are:
 
 The current platform for Arm GNU/Linux production builds is a
 Debian 9, running on an ROCK Pi 4 SBC with 4 GB of RAM
-and 256 GB of fast M.2 SSD.
+and 256 GB of fast M.2 SSD. The machine name is `xbba`.
 
 ```console
 $ ssh xbba
@@ -438,7 +279,7 @@ $ docker info
 ```
 
 Before running a build for the first time, it is recommended to preload the
-docker images.
+docker images, since they are pretty large.
 
 ```console
 $ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh preload-images
@@ -454,27 +295,27 @@ ilegeul/ubuntu      arm64v8-16.04-xbb-v3.2             db95609ffb69        37 ho
 hello-world         latest                             a29f45ccde2a        5 months ago        9.14kB
 ```
 
-To download the build scripts:
-
-```console
-$ curl -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
-```
-
 Since the build takes a while, use `screen` to isolate the build session
 from unexpected events, like a broken
 network connection or a computer entering sleep.
 
 ```console
 $ screen -S riscv
+```
 
+Run the development builds on the development machine (`wks`):
+
+```console
+$ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --arm32 --arm64
+```
+
+When ready, run the build on the production machine (`xbba`):
+
+```console
 $ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
 $ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
 ```
-
-or, for development builds:
-
-```console
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --arm32 --arm64
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
@@ -485,48 +326,42 @@ archives and their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 667980
--rw-rw-r-- 1 ilg ilg 343409720 Oct 10 14:55 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg       122 Oct 10 14:55 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 340579759 Oct 10 22:10 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 10 22:10 xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-arm.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 343409720 Oct 10 14:55 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-arm64.tar.gz
+-rw-rw-r-- 1 ilg ilg       122 Oct 10 14:55 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-arm64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 340579759 Oct 10 22:10 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-arm.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 10 22:10 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-arm.tar.gz.sha
 ```
 
-To copy the files from the build machine to the current development
-machine, either use NFS to mount the entire folder, or open the `deploy`
-folder in a terminal and use `scp`:
-
-```console
-$ (cd ~/Work/riscv-none-embed-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/riscv)
-```
-
-### Build the macOS binary
+### Build the macOS binaries
 
 The current platform for macOS production builds is a macOS 10.10.5
-running on a MacBookPro with 16 GB of RAM and a fast SSD.
+running on a MacBookPro with 16 GB of RAM and a fast SSD. The machine
+name is `xbbm`.
 
 ```console
 $ ssh xbbm
 ```
 
-To download them, the following shortcut is available:
-
-```console
-$ curl --fail -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
-```
-
-To build the latest macOS version:
+Since the build takes a while, use `screen` to isolate the build session
+from unexpected events, like a broken
+network connection or a computer entering sleep.
 
 ```console
 $ screen -S riscv
-
-$ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx
 ```
 
-or, for development builds:
+Run the development builds on the development machine (`wks`):
 
 ```console
+$ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
 $ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --osx
+```
+
+When ready, run the build on the production machine (`xbbm`):
+
+```console
+$ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -538,38 +373,9 @@ and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 666560
--rw-r--r--  1 ilg  staff  341272214 Oct 10 14:23 xpack-riscv-none-embed-gcc-8.3.0-2.2-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        121 Oct 10 14:23 xpack-riscv-none-embed-gcc-8.3.0-2.2-darwin-x64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  341272214 Oct 10 14:23 xpack-riscv-none-embed-gcc-8.3.0-2.3-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        121 Oct 10 14:23 xpack-riscv-none-embed-gcc-8.3.0-2.3-darwin-x64.tar.gz.sha
 ```
-
-To copy the files from the build machine to the current development
-machine, either use NFS to mount the entire folder, or open the `deploy`
-folder in a terminal and use `scp`:
-
-```console
-$ (cd ~/Work/riscv-none-embed-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/riscv)
-```
-
-## Run a test build
-
-Before starting the builds on the dedicated machines, run a quick test on
-the local development workstation.
-
-```console
-$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --osx
-```
-
-or on the build machine:
-
-```console
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --linux64
-```
-
-This should check the commit IDs and the tag names in all the refered
-repositories, and the build scripts.
-
-It is _quick_ because it does not build the multilibs. Even so, on a
-fast machine, it may take 30-60 minutes.
 
 ## Subsequent runs
 
@@ -649,7 +455,7 @@ program from there. For example on macOS the output should
 look like:
 
 ```console
-$ /Users/ilg/Downloads/xPacks/riscv-none-embed-gcc/8.3.0-2.2/bin/riscv-none-embed-gcc --version
+$ /Users/ilg/Downloads/xPacks/riscv-none-embed-gcc/8.3.0-2.3/bin/riscv-none-embed-gcc --version
 riscv-none-embed-gcc (xPack RISC-V Embedded GCC, 64-bit) 8.3.0
 ```
 
@@ -666,8 +472,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/opt/xPacks/riscv-none-embed-gcc/8.3.0-2.2
-/Users/ilg/opt/gnu-mcu-eclipse/riscv-none-embed-gcc/8.3.0-2.2
+$ tree -L 2 /Users/ilg/opt/xPacks/riscv-none-embed-gcc/8.3.0-2.3
+/Users/ilg/opt/gnu-mcu-eclipse/riscv-none-embed-gcc/8.3.0-2.3
 ├── README.md
 ├── riscv-none-embed
 │   ├── bin

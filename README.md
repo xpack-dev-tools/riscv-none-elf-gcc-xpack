@@ -78,14 +78,14 @@ For all platforms, the **xPack GNU RISC-V Embedded GCC** binaries are
 released as portable archives that can be installed in any location.
 
 The archives can be downloaded from the
-[GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/) page.
+GitHub [releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/) page.
 
 For more details please read the [Install](https://xpack.github.io/riscv-none-embed-gcc/install/) page.
 
 ## Maintainer info
 
 - [How to build](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-BUILD.md)
-- [How to publish](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-PUBLISH.md)
+- [How to make new releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-RELEASE.md)
 
 ## Support
 
