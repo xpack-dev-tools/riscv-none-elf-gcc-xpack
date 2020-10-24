@@ -133,95 +133,6 @@ function test_gdb()
   fi
 
   (
-    case "${suffix}" in
-      '')
-        ;;
-
-      -py)
-        local python_name
-        if [ "${node_platform}" == "win32" ]
-        then
-          python_name="python"
-        else       
-          python_name="python2.7"
-        fi
-
-        echo
-        echo "Identifying Python 2..."
-
-        local which_python
-        set +e
-        which_python="$(which ${python_name} 2>/dev/null)"
-        if [ -z "${which_python}" ]
-        then
-          echo
-          echo ">>> No ${python_name} installed, skipping gdb_py test."
-          return
-        fi
-        set -e
-
-        echo "Found as ${which_python}."
-
-        echo
-        ${python_name} --version
-
-        export PYTHONHOME="$(${python_name} -c 'import sys; print(sys.prefix)')"
-        export PYTHONPATH="$(${python_name} -c 'import sys; import os; print(os.pathsep.join(sys.path))')"
-        echo "PYTHONHOME=${PYTHONHOME}"
-        echo "PYTHONPATH=${PYTHONPATH}"
-        ;;
-
-      -py3)
-        local python_name
-        if [ "${node_platform}" == "win32" ]
-        then
-          if [ -f "/c/Python38/python.exe" ]
-          then
-            export PATH="/c/Python38:$PATH"
-          elif [ -f "/c/Python37/python.exe" ]
-          then
-            export PATH="/c/Python37:$PATH"
-          fi
-
-          python_name="python"
-        elif [ "${node_platform}" == "linux" ]
-        then
-          python_name="python3.7"
-        elif [ "${node_platform}" == "darwin" ]
-        then
-          python_name="python3.7"
-        fi
-
-        echo
-        echo "Identifying Python 3..."
-
-        set +e
-        local which_python
-        which_python="$(which ${python_name} 2>/dev/null)"
-        if [ -z "${which_python}" ]
-        then
-          echo
-          echo ">>> No ${python_name} installed, skipping gdb_py3 test."
-          return
-        fi
-        set -e
-        echo "Found as ${which_python}."
-
-        echo
-        ${python_name} --version
-
-        export PYTHONHOME="$(${python_name} -c 'import sys; print(sys.prefix)')"
-        export PYTHONPATH="$(${python_name} -c 'import sys; import os; print(os.pathsep.join(sys.path))')"
-        echo "PYTHONHOME=${PYTHONHOME}"
-        echo "PYTHONPATH=${PYTHONPATH}"
-        ;;
-
-      *)
-        echo "Unsupported gdb-${suffix}"
-        exit 1
-        ;;
-    esac
-
     echo
     echo "Testing if gdb${suffix} starts properly..."
 
@@ -240,11 +151,24 @@ function test_gdb()
       -ex='set language auto' \
       -ex='quit'
     
+    if [ "${suffix}" == "-py3" ]
+    then
+      # Show Python paths.
+      run_app "${app_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}" \
+        --nh \
+        --nx \
+        -ex='set pagination off' \
+        -ex='python import sys; print(sys.prefix)' \
+        -ex='python import sys; import os; print(os.pathsep.join(sys.path))' \
+        -ex='quit'
+    fi
+
     if [ ! -z "${suffix}" ]
     then
       local out=$("${app_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}" \
         --nh \
         --nx \
+        -ex='set pagination off' \
         -ex='python print("babu"+"riba")' \
         -ex='quit' | grep 'baburiba')
       if [ "${out}" == "baburiba" ]
@@ -290,20 +214,6 @@ function run_tests()
       run_app file "${file_path}"
       run_app ldd -v "${file_path}" || true
     done
-  fi
-
-  echo
-  echo "All tests completed successfully."
-
-  echo
-  run_app uname -a
-  if [ "${node_platform}" == "linux" ]
-  then
-    run_app lsb_release -a
-    run_app ldd --version
-  elif [ "${node_platform}" == "darwin" ]
-  then
-    run_app sw_vers
   fi
 }
 
