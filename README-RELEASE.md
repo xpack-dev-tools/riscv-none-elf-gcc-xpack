@@ -312,7 +312,7 @@ On the development machine (`wks`) clear the folder where binaries from all
 build machines will be collected.
 
 ```bash
-rm -f ~/Downloads/xpack-binaries/riscv*
+rm -f ~/Downloads/xpack-binaries/riscv/*
 ```
 
 Note: this step is very important, to avoid using test binaries!
@@ -380,7 +380,7 @@ On the macOS machine (`xbbm`):
 caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx
 ```
 
-A typical run takes about 225 minutes.
+A typical run takes about 250 minutes.
 
 On both Linux machines (`xbbi` and `xbba`):
 
@@ -388,8 +388,8 @@ On both Linux machines (`xbbi` and `xbba`):
 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
 ```
 
-A typical run on the Intel machine takes about 290 minutes;
-on the Arm machine it takes about 875 minutes.
+A typical run on the Intel machine takes about 300 minutes;
+on the Arm machine it takes about 945 minutes.
 
 ### Clean the destination folder
 
@@ -397,7 +397,7 @@ On the development machine (`wks`) clear the folder where binaries from all
 build machines will be collected.
 
 ```bash
-rm -f ~/Downloads/xpack-binaries/riscv*
+rm -f ~/Downloads/xpack-binaries/riscv/*
 ```
 
 ### Copy the binaries to the development machine
