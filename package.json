@@ -40,36 +40,36 @@
   "xpack": {
     "binaries": {
       "destination": "./.content",
-      "baseUrl": "https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/download/v8.3.0-2.2/",
+      "baseUrl": "https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/download/v8.3.0-2.3/",
       "skip": 1,
       "platforms": {
         "darwin-x64": {
-          "sha256": "b6da62479b647224e766a1a9012280893b38f8df9511976c3ed0702fb9ffb517",
-          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-2.2-darwin-x64.tar.gz"
+          "sha256": "2b138c630e85535d254ea4e2a9147859ba15fff90b9b0f0451035100cb2cd752",
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-2.3-darwin-x64.tar.gz"
         },
         "linux-arm64": {
-          "sha256": "1e396808c101f8814efe9e24111fb19c6aaa27356851e8dac45ba59711e37260",
-          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-arm64.tar.gz"
+          "sha256": "7bd7fdeb93481f60271f7d3fb39e41ed7599c9a2f7d03cd1313585ca1f75952d",
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-arm64.tar.gz"
         },
         "linux-arm": {
-          "sha256": "6ffa467e0b5fb6e6e8ab3eea5b0b0b9a469800da7ca09413a00f58f386472e88",
-          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-arm.tar.gz"
+          "sha256": "c541d610b6d32d462e828d3e7fc98cbbf42e06df9292107bcea26007dcabfc2d",
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-arm.tar.gz"
         },
         "linux-x86": {
-          "sha256": "eae41c21f4b85e110deabad602b6ef2ad3e69812054b21c77b85a4e01ec4be02",
-          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-x32.tar.gz"
+          "sha256": "8ebcebf9bd7088a866085be30ca1007bd950d9a1a837b04cc2b9238677fc745c",
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-x32.tar.gz"
         },
         "linux-x64": {
-          "sha256": "7c9fab87c6ef4e029e6a562ff30620cbb2b23573620c32b7c24f61192868dfe1",
-          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-2.2-linux-x64.tar.gz"
+          "sha256": "708d0cb5ff12eb5ad070153594c4f7771cd86d4b6721a77b23f8fe695c8f9402",
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-x64.tar.gz"
         },
         "win32-x86": {
-          "sha256": "d0834c35ae2212d5051dc5f147d90881d4aae4f27ec858a841c4dd6649917641",
-          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-2.2-win32-x32.zip"
+          "sha256": "778d4cf3389a07f9209f5c1d91ae324dea8ca59ae141b406598a82e34edd6493",
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-2.3-win32-x32.zip"
         },
         "win32-x64": {
-          "sha256": "7e0e6a84b42104698dd6ddcbf725da59ef6e20c36ac1643b210e93764c7a95c6",
-          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-2.2-win32-x64.zip"
+          "sha256": "59d62abc7585ba76a69da5f4ba0254cf2301ef897d47ad8e5a94468f38449db8",
+          "fileName": "xpack-riscv-none-embed-gcc-8.3.0-2.3-win32-x64.zip"
         }
       }
     },
@@ -91,8 +91,8 @@
       "riscv-none-embed-gcov-tool": "./.content/bin/riscv-none-embed-gcov-tool",
       "riscv-none-embed-gdb": "./.content/bin/riscv-none-embed-gdb",
       "riscv-none-embed-gdb-add-index": "./.content/bin/riscv-none-embed-gdb-add-index",
-      "riscv-none-embed-gdb-add-index-py": "./.content/bin/riscv-none-embed-gdb-add-index-py3",
-      "riscv-none-embed-gdb-py": "./.content/bin/riscv-none-embed-gdb-py3",
+      "riscv-none-embed-gdb-add-index-py3": "./.content/bin/riscv-none-embed-gdb-add-index-py3",
+      "riscv-none-embed-gdb-py3": "./.content/bin/riscv-none-embed-gdb-py3",
       "riscv-none-embed-gprof": "./.content/bin/riscv-none-embed-gprof",
       "riscv-none-embed-ld": "./.content/bin/riscv-none-embed-ld",
       "riscv-none-embed-ld.bfd": "./.content/bin/riscv-none-embed-ld.bfd",
