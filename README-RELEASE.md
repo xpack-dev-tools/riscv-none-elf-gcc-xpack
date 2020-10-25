@@ -489,15 +489,15 @@ For more details, see `tests/scripts/README.md`.
 
 In the `xpack/web-jekyll` GitHub repo:
 
-- select the `xpack-develop` branch
+- select the `develop` branch
 - add a new file to `_posts/riscv-none-embed-gcc/releases`
-- name the file like `2020-07-03-riscv-none-embed-gcc-v8-3-0-2-2-released.md`
+- name the file like `2020-07-03-riscv-none-embed-gcc-v8-3-0-2-3-released.md`
 - name the post like: **xPack GNU RISC-V Embedded GCC v8.3.0-2.3 released**
 - as `download_url` use the tagged URL like `https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/tag/v8.3.0-2.3/`
 - update the `date:` field with the current date
 - update the Travis URLs using the actual test pages
 - update the SHA sums via copy/paste from the original build machines
-(it is very important to use the originals!)
+  (it is very important to use the originals!)
 
 If any, refer to closed
 [issues](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues)
@@ -548,7 +548,6 @@ cat *.sha
 
 - commit the `develop` branch of `xpack/web-jekyll` GitHub repo; use a message
   like **xPack GNU RISC-V Embedded GCC v8.3.0-2.3 released**
-- adjust timestamps
 - wait for the GitHub Pages build to complete
 - the preview web is https://xpack.github.io/web-preview/
 
