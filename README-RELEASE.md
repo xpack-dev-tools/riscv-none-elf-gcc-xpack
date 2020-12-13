@@ -582,7 +582,7 @@ The version is visible at:
 
 ## Test if the npm binaries can be installed with xpm
 
-Run the `tests/scripts/trigger-travis-xpm-install.sh` file, this
+Run the `tests/scripts/trigger-travis-xpm-install.sh` script, this
 will install the package on Intel Linux 64-bit, macOS and Windows 64-bit.
 
 The test results are available from:
