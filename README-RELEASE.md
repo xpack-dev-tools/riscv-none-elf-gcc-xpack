@@ -288,7 +288,7 @@ On the development machine (`wks`) clear the folder where binaries from all
 build machines will be collected.
 
 ```bash
-rm -f ~/Downloads/xpack-binaries/riscv/*
+rm -f ~/Downloads/xpack-binaries/riscv-none-embed-gcc/*
 ```
 
 Note: this step is very important, to avoid using test binaries!
@@ -298,7 +298,7 @@ Note: this step is very important, to avoid using test binaries!
 On all three machines:
 
 ```console
-(cd ~/Work/riscv-none-embed-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/riscv)
+(cd ~/Work/riscv-none-embed-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/riscv-none-embed-gcc)
 ```
 
 ## Publish the binaries as pre-release/experimental
@@ -373,7 +373,7 @@ On the development machine (`wks`) clear the folder where binaries from all
 build machines will be collected.
 
 ```bash
-rm -f ~/Downloads/xpack-binaries/riscv/*
+rm -f ~/Downloads/xpack-binaries/riscv-none-embed-gcc/*
 ```
 
 ### Copy the binaries to the development machine
@@ -381,7 +381,7 @@ rm -f ~/Downloads/xpack-binaries/riscv/*
 On all three machines:
 
 ```console
-(cd ~/Work/riscv-none-embed-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/riscv)
+(cd ~/Work/riscv-none-embed-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/riscv-none-embed-gcc)
 ```
 
 ## Testing
@@ -516,7 +516,7 @@ xpack-riscv-none-embed-gcc-10.1.0-1.1-win32-x64.zip
 On the development machine (`wks`):
 
 ```bash
-cd ~Downloads/xpack-binaries/riscv
+cd ~Downloads/xpack-binaries/riscv-none-embed-gcc
 cat *.sha
 ```
 
