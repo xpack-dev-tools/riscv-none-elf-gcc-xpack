@@ -252,7 +252,7 @@ On all machines, clone the `xpack-develop` branch:
 
 ```bash
 rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git; \
-  git clone \
+git clone \
   --recurse-submodules \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
@@ -344,7 +344,7 @@ On all machines, clone the `xpack-develop` branch:
 
 ```bash
 rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git; \
-  git clone \
+git clone \
   --recurse-submodules \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
@@ -517,13 +517,13 @@ xpack-riscv-none-embed-gcc-10.1.0-1.1-linux-arm64.tar.gz
 xpack-riscv-none-embed-gcc-10.1.0-1.1-linux-arm.tar.gz
 
 1d99730d6e1e5d3a60fa0ccfbbcf0276e77dd83d58b6d8d1543cef40a1dd96ca  
-xpack-riscv-none-embed-gcc-10.1.0-1.1-linux-x32.tar.gz
+xpack-riscv-none-embed-gcc-10.1.0-1.1-linux-ia32.tar.gz
 
 079a88d7f7c18cfd735a9ed1f0eefa28ab28d3007b5f7591920ab25225c89248  
 xpack-riscv-none-embed-gcc-10.1.0-1.1-linux-x64.tar.gz
 
 8e7e98117900f3eed717b20555b346c2473dcbb9090e05c456412008f39fb62d  
-xpack-riscv-none-embed-gcc-10.1.0-1.1-win32-x32.zip
+xpack-riscv-none-embed-gcc-10.1.0-1.1-win32-ia32.zip
 
 5b7a4e3a2bb22566fed951972d726d10ff43bc35db17f9287eed52766e80ecee  
 xpack-riscv-none-embed-gcc-10.1.0-1.1-win32-x64.zip
