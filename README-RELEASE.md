@@ -273,14 +273,23 @@ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --os
 
 A typical run takes about 80 minutes.
 
+On `xbbi`:
+
+```bash
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --linux64 --windows64 --disable-multilib
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --linux32 --windows32 --disable-multilib
+```
+
+A typical run on takes about 105 minutes.
+
 On both Linux machines (`xbbi` and `xbba`):
 
 ```bash
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all --disable-multilib
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --arm64 --disable-multilib
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --arm32 --disable-multilib
 ```
 
-A typical run on the Intel machine takes about 105 minutes;
-on the Arm machine it takes about 370 minutes.
+A typical run takes about 370 minutes.
 
 ### Clean the destination folder for the test binaries
 
@@ -358,14 +367,23 @@ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --os
 
 A typical run takes about 250 minutes.
 
-On both Linux machines (`xbbi` and `xbba`):
+On `xbbi`:
 
 ```bash
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --linux64 --win64
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --linux32 --win32
 ```
 
-A typical run on the Intel machine takes about 300 minutes;
-on the Arm machine it takes about 945 minutes.
+A typical run takes about 300 minutes.
+
+On `xbba`:
+
+```bash
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --arm64
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --arm32
+```
+
+A typical run takes about 945 minutes.
 
 ### Clean the destination folder
 
