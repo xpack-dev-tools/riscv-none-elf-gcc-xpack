@@ -129,7 +129,7 @@ not be accepted by bash.
 
 ## Versioning
 
-The version string is an extension to semver, the format looks like `8.3.0-2.3`.
+The version string is an extension to semver, the format looks like `10.1.0-1.1`.
 It includes the three digits with the original GCC version, a fourth
 digit with the SiFive release, a fifth digit with the xPack release number.
 
@@ -247,14 +247,14 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 1429180
--rw-rw-r-- 1 ilg ilg 366111034 Oct 24 23:03 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-x32.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 24 23:03 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-x32.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 361419776 Oct 24 20:30 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 24 20:30 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 360858795 Oct 24 23:40 xpack-riscv-none-embed-gcc-8.3.0-2.3-win32-x32.zip
--rw-rw-r-- 1 ilg ilg       117 Oct 24 23:40 xpack-riscv-none-embed-gcc-8.3.0-2.3-win32-x32.zip.sha
--rw-rw-r-- 1 ilg ilg 375055827 Oct 24 21:04 xpack-riscv-none-embed-gcc-8.3.0-2.3-win32-x64.zip
--rw-rw-r-- 1 ilg ilg       117 Oct 24 21:04 xpack-riscv-none-embed-gcc-8.3.0-2.3-win32-x64.zip.sha
+-rw-rw-r-- 1 ilg ilg 366111034 Oct 24 23:03 xpack-riscv-none-embed-gcc-10.1.0-1.1-linux-x32.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 24 23:03 xpack-riscv-none-embed-gcc-10.1.0-1.1-linux-x32.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 361419776 Oct 24 20:30 xpack-riscv-none-embed-gcc-10.1.0-1.1-linux-x64.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 24 20:30 xpack-riscv-none-embed-gcc-10.1.0-1.1-linux-x64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 360858795 Oct 24 23:40 xpack-riscv-none-embed-gcc-10.1.0-1.1-win32-x32.zip
+-rw-rw-r-- 1 ilg ilg       117 Oct 24 23:40 xpack-riscv-none-embed-gcc-10.1.0-1.1-win32-x32.zip.sha
+-rw-rw-r-- 1 ilg ilg 375055827 Oct 24 21:04 xpack-riscv-none-embed-gcc-10.1.0-1.1-win32-x64.zip
+-rw-rw-r-- 1 ilg ilg       117 Oct 24 21:04 xpack-riscv-none-embed-gcc-10.1.0-1.1-win32-x64.zip.sha
 ```
 
 #### Build the Arm GNU/Linux binaries
@@ -326,10 +326,10 @@ archives and their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 702592
--rw-rw-r-- 1 ilg ilg 361351380 Oct 24 23:42 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg       122 Oct 24 23:42 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 358086677 Oct 25 07:31 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 25 07:31 xpack-riscv-none-embed-gcc-8.3.0-2.3-linux-arm.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 361351380 Oct 24 23:42 xpack-riscv-none-embed-gcc-10.1.0-1.1-linux-arm64.tar.gz
+-rw-rw-r-- 1 ilg ilg       122 Oct 24 23:42 xpack-riscv-none-embed-gcc-10.1.0-1.1-linux-arm64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 358086677 Oct 25 07:31 xpack-riscv-none-embed-gcc-10.1.0-1.1-linux-arm.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 25 07:31 xpack-riscv-none-embed-gcc-10.1.0-1.1-linux-arm.tar.gz.sha
 ```
 
 ### Build the macOS binaries
@@ -373,8 +373,8 @@ and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 698240
--rw-r--r--  1 ilg  staff  357492352 Oct 24 22:51 xpack-riscv-none-embed-gcc-8.3.0-2.3-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        121 Oct 24 22:51 xpack-riscv-none-embed-gcc-8.3.0-2.3-darwin-x64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  357492352 Oct 24 22:51 xpack-riscv-none-embed-gcc-10.1.0-1.1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        121 Oct 24 22:51 xpack-riscv-none-embed-gcc-10.1.0-1.1-darwin-x64.tar.gz.sha
 ```
 
 ## Subsequent runs
@@ -455,8 +455,8 @@ program from there. For example on macOS the output should
 look like:
 
 ```console
-$ /Users/ilg/Downloads/xPacks/riscv-none-embed-gcc/8.3.0-2.3/bin/riscv-none-embed-gcc --version
-riscv-none-embed-gcc (xPack RISC-V Embedded GCC, 64-bit) 8.3.0
+$ /Users/ilg/Downloads/xPacks/riscv-none-embed-gcc/10.1.0-1.1/bin/riscv-none-embed-gcc --version
+riscv-none-embed-gcc (xPack RISC-V Embedded GCC, 64-bit) 10.1.0
 ```
 
 ## Travis tests
@@ -472,8 +472,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/opt/xPacks/riscv-none-embed-gcc/8.3.0-2.3
-/Users/ilg/opt/gnu-mcu-eclipse/riscv-none-embed-gcc/8.3.0-2.3
+$ tree -L 2 /Users/ilg/opt/xPacks/riscv-none-embed-gcc/10.1.0-1.1
+/Users/ilg/opt/gnu-mcu-eclipse/riscv-none-embed-gcc/10.1.0-1.1
 ├── README.md
 ├── riscv-none-embed
 │   ├── bin
