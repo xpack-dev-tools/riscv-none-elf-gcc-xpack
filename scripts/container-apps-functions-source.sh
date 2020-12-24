@@ -754,8 +754,13 @@ function build_gcc_final()
       xbb_activate_installed_dev
 
       CPPFLAGS="${XBB_CPPFLAGS}" 
-      CFLAGS="${XBB_CFLAGS_NO_W}"
-      CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
+
+      # The gcc/emit_insn.c is huge (>62 MB), so give up on using -pipe
+      # and multiple sections, in order to save memory.
+      CFLAGS="$(echo "${XBB_CFLAGS_NO_W}" | sed -e 's|-ffunction-sections||' | sed -e 's|-fdata-sections||' | sed -e 's|-pipe||')"
+      CXXFLAGS="$(echo "${XBB_CXXFLAGS_NO_W}" | sed -e 's|-ffunction-sections||' | sed -e 's|-fdata-sections||' | sed -e 's|-pipe||')"
+
+      # Attempts to use `-Wa,-mbig-obj` failed on Windows.
 
       LDFLAGS="${XBB_LDFLAGS_APP}" 
       if [ "${TARGET_PLATFORM}" == "linux" ]
@@ -773,7 +778,7 @@ function build_gcc_final()
       if [ "$1" == "-nano" ]
       then
         # For newlib-nano optimize for size.
-        optimize="$(echo ${optimize} | sed -e 's/-O[123]/-Os/')"
+        optimize="$(echo ${optimize} | sed -e 's|-O[123]|-Os|')"
       fi
 
       # Note the intentional `-g`.
