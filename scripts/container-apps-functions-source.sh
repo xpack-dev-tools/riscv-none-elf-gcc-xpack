@@ -378,7 +378,8 @@ function build_gcc_first()
 
         # Build.
         # No need to make 'all', 'all-gcc' is enough to compile the libraries.
-        run_verbose make -j ${JOBS} all-gcc
+        # Disable parallel build to accomodate for the huge files.
+        run_verbose make -j 1 all-gcc
         
         # No -strip available here.
         run_verbose make install-gcc
@@ -940,7 +941,11 @@ function build_gcc_final()
           # This is a workaround. Better approach is have a t-* to set this flag via
           # CRTSTUFF_T_CFLAGS
 
-          # Parallel builds may fail.
+          # Disable parallel build for the compiler itself,
+          # to accomodate for the huge files.
+          run_verbose make -j 1 INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0" all-gcc
+
+          # Compile the libraries.
           run_verbose make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
           # make INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
 
@@ -982,8 +987,8 @@ function build_gcc_final()
           # Build.
           # For Windows build only the GCC binaries, the libraries were copied 
           # from the Linux build.
-          run_verbose make -j ${JOBS} all-gcc
-          # make all-gcc
+          # Disable parallel build to accomodate for the huge files.
+          run_verbose make -j 1 all-gcc
 
           # No -strip here.
           run_verbose make install-gcc
