@@ -280,10 +280,8 @@ function build_gcc_first()
       CPPFLAGS="${XBB_CPPFLAGS}"
       # The gcc/emit_insn.c is huge (>62 MB), so give up on using -pipe
       # and multiple sections, in order to save memory.
-      # CFLAGS="$(echo "${XBB_CFLAGS_NO_W}" | sed -e 's|-ffunction-sections||' | sed -e 's|-fdata-sections||' | sed -e 's|-pipe||')"
-      # CXXFLAGS="$(echo "${XBB_CXXFLAGS_NO_W}" | sed -e 's|-ffunction-sections||' | sed -e 's|-fdata-sections||' | sed -e 's|-pipe||')"
-      CFLAGS="${XBB_CFLAGS_NO_W}"
-      CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
+      CFLAGS="$(echo "${XBB_CFLAGS_NO_W}" | sed -e 's|-ffunction-sections||' | sed -e 's|-fdata-sections||' | sed -e 's|-pipe||')"
+      CXXFLAGS="$(echo "${XBB_CXXFLAGS_NO_W}" | sed -e 's|-ffunction-sections||' | sed -e 's|-fdata-sections||' | sed -e 's|-pipe||')"
       LDFLAGS="${XBB_LDFLAGS_APP}" 
       if [ "${TARGET_PLATFORM}" == "linux" ]
       then
@@ -378,9 +376,6 @@ function build_gcc_first()
         echo
         echo "Running gcc first stage make..."
 
-        # Pre-cook the very large files.
-        pre_build_insn
-
         # Build.
         # No need to make 'all', 'all-gcc' is enough to compile the libraries.
         run_verbose make -j ${JOBS} all-gcc
@@ -397,31 +392,6 @@ function build_gcc_first()
   else
     echo "Component gcc first stage already installed."
   fi
-}
-
-function pre_build_insn()
-{
-  (
-    cd gcc
-
-    # The gcc/emit_insn.c is huge (>62 MB), so give up on using -pipe
-    # and multiple sections, in order to save memory.
-
-    cp Makefile Makefile-patched
-    sed -i.bak \
-      -e 's|-ffunction-sections||' \
-      -e 's|-fdata-sections||' \
-      -e 's|-pipe||' \
-      Makefile-patched
-
-    for file_name in insn-*.c
-    do
-      target=$(echo ${file_name} | sed -e 's|\.c|\.o|') 
-
-      # Build the huge files separately, without parallel build.
-      run_verbose make -j 1 -f Makefile-patched ${target}
-    done
-  )
 }
 
 # For the nano build, call it with "-nano".
@@ -789,10 +759,8 @@ function build_gcc_final()
 
       # The gcc/emit_insn.c is huge (>62 MB), so give up on using -pipe
       # and multiple sections, in order to save memory.
-      # CFLAGS="$(echo "${XBB_CFLAGS_NO_W}" | sed -e 's|-ffunction-sections||' | sed -e 's|-fdata-sections||' | sed -e 's|-pipe||')"
-      # CXXFLAGS="$(echo "${XBB_CXXFLAGS_NO_W}" | sed -e 's|-ffunction-sections||' | sed -e 's|-fdata-sections||' | sed -e 's|-pipe||')"
-      CFLAGS="${XBB_CFLAGS_NO_W}"
-      CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
+      CFLAGS="$(echo "${XBB_CFLAGS_NO_W}" | sed -e 's|-ffunction-sections||' | sed -e 's|-fdata-sections||' | sed -e 's|-pipe||')"
+      CXXFLAGS="$(echo "${XBB_CXXFLAGS_NO_W}" | sed -e 's|-ffunction-sections||' | sed -e 's|-fdata-sections||' | sed -e 's|-pipe||')"
 
       # Attempts to use `-Wa,-mbig-obj` failed on Windows.
 
@@ -963,9 +931,6 @@ function build_gcc_final()
         # Partial build, without documentation.
         echo
         echo "Running gcc$1 final stage make..."
-
-        # Pre-cook the very large files.
-        pre_build_insn
 
         if [ "${TARGET_PLATFORM}" != "win32" ]
         then
