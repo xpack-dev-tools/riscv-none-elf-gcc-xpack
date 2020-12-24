@@ -242,10 +242,10 @@ Connect to the Intel Linux (`xbbi`):
 caffeinate ssh xbbi
 ```
 
-Connect to the Arm Linux (`xbba`):
+Connect to the Arm Linux (`berry`):
 
 ```bash
-caffeinate ssh xbba
+caffeinate ssh berry
 ```
 
 On all machines, clone the `xpack-develop` branch:
@@ -276,20 +276,23 @@ A typical run takes about 80 minutes.
 On `xbbi`:
 
 ```bash
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all --disable-multilib
+
 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --linux64 --windows64 --disable-multilib
 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --linux32 --windows32 --disable-multilib
 ```
 
-A typical run on takes about 105 minutes.
+A typical run takes about 160+150 minutes.
 
-On both Linux machines (`xbbi` and `xbba`):
+On `berry`:
 
 ```bash
 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --arm64 --disable-multilib
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --arm32 --disable-multilib
 ```
 
 A typical run takes about 370 minutes.
+
+Please note that the 32-bit build fails with out of memory.
 
 ### Clean the destination folder for the test binaries
 
@@ -370,20 +373,20 @@ A typical run takes about 250 minutes.
 On `xbbi`:
 
 ```bash
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --linux64 --win64
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --linux32 --win32
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
 ```
 
 A typical run takes about 300 minutes.
 
-On `xbba`:
+On `berry`:
 
 ```bash
 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --arm64
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --arm32
 ```
 
 A typical run takes about 945 minutes.
+
+Please note that the 32-bit build fails.
 
 ### Clean the destination folder
 

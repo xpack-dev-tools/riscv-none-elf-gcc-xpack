@@ -265,11 +265,11 @@ The supported Arm architectures are:
 - `arm64` for 64-bit devices
 
 The current platform for Arm GNU/Linux production builds is a
-Debian 9, running on an ROCK Pi 4 SBC with 4 GB of RAM
-and 256 GB of fast M.2 SSD. The machine name is `xbba`.
+Debian 9, running on an Raspberry Pi 4 SBC with 8 GB of RAM
+and 256 GB of fast SSD. The machine name is `berry`.
 
 ```console
-$ ssh xbba
+$ ssh berry
 ```
 
 Before starting a multi-platform build, check if Docker is started:
@@ -310,7 +310,7 @@ $ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
 $ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --arm32 --arm64
 ```
 
-When ready, run the build on the production machine (`xbba`):
+When ready, run the build on the production machine (`berry`):
 
 ```console
 $ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
