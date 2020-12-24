@@ -3,6 +3,10 @@
 
 Releases in reverse chronological order.
 
+### 2020-12-25
+
+- v10.1.0-1.1 released
+
 ### 2020-12-23
 
 - v10.1.0-1.1 prepared
