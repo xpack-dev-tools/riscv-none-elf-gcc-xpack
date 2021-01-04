@@ -271,7 +271,7 @@ On the macOS machine (`xbbm`):
 caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx --disable-multilib
 ```
 
-A typical run takes about 80 minutes.
+A typical run takes about 215 minutes (was 80 without rvv).
 
 On `xbbi`:
 
@@ -290,9 +290,9 @@ On `berry`:
 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --arm64 --disable-multilib
 ```
 
-A typical run takes about 370 minutes.
+A typical run takes about 545 minutes (was 374 without rvv).
 
-Please note that the 32-bit build fails with out of memory.
+Please note that the 32-bit build fails with 'out of memory'.
 
 ### Clean the destination folder for the test binaries
 
@@ -368,7 +368,7 @@ On the macOS machine (`xbbm`):
 caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx
 ```
 
-A typical run takes about 250 minutes.
+A typical run takes about 410 minutes (was 250 minutes without rvv).
 
 On `xbbi`:
 
@@ -376,7 +376,7 @@ On `xbbi`:
 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
 ```
 
-A typical run takes about 300 minutes.
+A typical run takes about 500 minutes (was 300 minutes without rvv).
 
 On `berry`:
 
@@ -384,7 +384,7 @@ On `berry`:
 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --arm64
 ```
 
-A typical run takes about 945 minutes.
+A typical run takes about 900 minutes.
 
 Please note that the 32-bit build fails.
 
