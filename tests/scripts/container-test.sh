@@ -88,6 +88,7 @@ then
 elif [[ ${image_name} == *opensuse* ]]
 then
   run_verbose zypper -q refresh
+  # libopenssl1_1 requires reboot
   run_verbose zypper -q update -y
   run_verbose zypper -q in -y git-core curl tar gzip lsb-release binutils
 elif [[ ${image_name} == *manjaro* ]]

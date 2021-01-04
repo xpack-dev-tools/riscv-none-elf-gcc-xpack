@@ -17,6 +17,311 @@
 
 # -----------------------------------------------------------------------------
 
+# Without Arm 32-bit, without opensuse/leap:15
+function create_stable_data_file()
+{
+  local message="$1"
+  local branch="$2"
+  local base_url="$3"
+  local data_file_path="$4"
+
+# Note: __EOF__ is NOT quoted to allow substitutions.
+cat <<__EOF__ > "${data_file_path}"
+{
+  "request": {
+    "message": "${message}",
+    "branch": "${branch}",
+    "config": {
+      "merge_mode": "replace",
+      "jobs": [
+        {
+          "name": "Ubuntu 12, 14, 16, 18, 20 (Intel 64-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh ubuntu:20.04 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh ubuntu:18.04 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh ubuntu:16.04 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh ubuntu:14.04 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh ubuntu:12.04 ${base_url} "
+          ]
+        },
+        {
+          "name": "Ubuntu 14, 16, 18 (Intel 32-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh --32 i386/ubuntu:18.04 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh --32 i386/ubuntu:16.04 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh --32 i386/ubuntu:14.04 ${base_url} "
+          ]
+        },
+        {
+          "name": "Ubuntu 16, 18, 20 (Arm 64-bit)",
+          "os": "linux",
+          "arch": "arm64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh ubuntu:20.04 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh ubuntu:18.04 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh ubuntu:16.04 ${base_url} "
+          ]
+        },
+        {
+          "name": "Debian 8, 9, 10 (Intel 64-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh debian:buster ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh debian:stretch ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh debian:jessie ${base_url} "
+          ]
+        },
+        {
+          "name": "Debian 8, 9, 10 (Intel 32-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh --32 i386/debian:buster ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh --32 i386/debian:stretch ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh --32 i386/debian:jessie ${base_url} "
+          ]
+        },
+        {
+          "name": "Debian 9, 10 (Arm 64-bit)",
+          "os": "linux",
+          "arch": "arm64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh debian:buster ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh debian:stretch ${base_url} "
+          ]
+        },
+        {
+          "name": "CentOS 7, 8 (Intel 64-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh centos:8 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh centos:7 ${base_url} "
+          ]
+        },
+        {
+          "name": "CentOS 7 (Intel 32-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh --32 i386/centos:7 ${base_url} "
+          ]
+        },
+        {
+          "name": "CentOS 7, 8 (Arm 64-bit)",
+          "os": "linux",
+          "arch": "arm64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh centos:8 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh centos:7 ${base_url} "
+          ]
+        },
+        {
+          "name": "OpenSUSE 13, 15 (Intel 64-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh opensuse/leap:15 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh opensuse/amd64:13.2 ${base_url} "
+          ]
+        },
+        {
+          "name": "Fedora 20, 25, 27, 29, 31 (Intel 64-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh fedora:31 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh fedora:29 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh fedora:27 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh fedora:25 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh fedora:20 ${base_url} "
+          ]
+        },
+        {
+          "name": "Fedora 27, 29, 31 (Arm 64-bit)",
+          "os": "linux",
+          "arch": "arm64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh fedora:31 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh fedora:29 ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh fedora:27 ${base_url} "
+          ]
+        },
+        {
+          "name": "macOS 10.15 Intel",
+          "os": "osx",
+          "arch": "amd64",
+          "osx_image": "xcode11.5",
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/native-test.sh ${base_url}" 
+          ]
+        },
+        {
+          "name": "macOS 10.14 Intel",
+          "os": "osx",
+          "arch": "amd64",
+          "osx_image": "xcode11.3",
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/native-test.sh ${base_url}" 
+          ]
+        },
+        {
+          "name": "macOS 10.13 Intel",
+          "os": "osx",
+          "arch": "amd64",
+          "osx_image": "xcode10.1",
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/native-test.sh ${base_url}" 
+          ]
+        },
+        {
+          "name": "macOS 10.12 Intel",
+          "os": "osx",
+          "arch": "amd64",
+          "osx_image": "xcode9.2",
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/native-test.sh ${base_url}" 
+          ]
+        },
+        {
+          "name": "macOS 10.11 Intel",
+          "os": "osx",
+          "arch": "amd64",
+          "osx_image": "xcode8",
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/native-test.sh ${base_url}" 
+          ]
+        },
+        {
+          "name": "macOS 10.10 Intel",
+          "os": "osx",
+          "arch": "amd64",
+          "osx_image": "xcode6.4",
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/native-test.sh ${base_url}" 
+          ]
+        },
+        {
+          "name": "Windows 10 (Intel 64-bit)",
+          "os": "windows",
+          "arch": "amd64",
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/native-test.sh ${base_url} " 
+          ]
+        },
+        {
+          "name": "Windows 10 (Intel 32-bit)",
+          "os": "windows",
+          "arch": "amd64",
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/native-test.sh --32 ${base_url} " 
+          ]
+        }
+      ],
+      "notifications": {
+        "email": {
+          "on_success": "always",
+          "on_failure": "always"
+        }
+      }
+    }
+  }
+}
+__EOF__
+
+}
+
+# -----------------------------------------------------------------------------
+
 function test_binutils()
 {
   echo
