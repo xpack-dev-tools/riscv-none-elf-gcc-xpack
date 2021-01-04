@@ -368,7 +368,7 @@ On the macOS machine (`xbbm`):
 caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx
 ```
 
-A typical run takes about 410 minutes (was 250 minutes without rvv).
+A typical run takes about 500 minutes (was 250 minutes without rvv).
 
 On `xbbi`:
 
@@ -376,7 +376,7 @@ On `xbbi`:
 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
 ```
 
-A typical run takes about 500 minutes (was 300 minutes without rvv).
+A typical run takes about 570 minutes (was 300 minutes without rvv).
 
 On `berry`:
 
