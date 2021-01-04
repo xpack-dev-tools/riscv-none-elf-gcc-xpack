@@ -3,7 +3,7 @@
 
 Releases in reverse chronological order.
 
-### 2021-01-04
+### 2021-01-05
 
 - v10.1.0-1.1 released
 
