@@ -320,6 +320,241 @@ __EOF__
 
 }
 
+
+# --32 i386/ubuntu:rolling fails during update
+# Arm 32-bit removed
+function create_latest_data_file()
+{
+  local message="$1"
+  local branch="$2"
+  local base_url="$3"
+  local data_file_path="$4"
+
+# Note: __EOF__ is NOT quoted to allow substitutions.
+cat <<__EOF__ > "${data_file_path}"
+{
+  "request": {
+    "message": "${message}",
+    "branch": "${branch}",
+    "config": {
+      "merge_mode": "replace",
+      "jobs": [
+        {
+          "name": "Ubuntu rolling, latest (Intel 64-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh ubuntu:latest ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh ubuntu:rolling ${base_url} "
+          ]
+        },
+        {
+          "name": "Ubuntu rolling, latest (Intel 32-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh --32 i386/ubuntu:latest ${base_url} "
+          ]
+        },
+        {
+          "name": "Ubuntu rolling, latest (Arm 64-bit)",
+          "os": "linux",
+          "arch": "arm64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh ubuntu:latest ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh ubuntu:rolling ${base_url} "
+          ]
+        },
+        {
+          "name": "Debian latest, testing (Intel 64-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh debian:testing ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh debian:latest ${base_url} "
+          ]
+        },
+        {
+          "name": "Debian testing (Intel 32-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh --32 i386/debian:testing ${base_url} "
+          ]
+        },
+        {
+          "name": "Debian latest, testing (Arm 64-bit)",
+          "os": "linux",
+          "arch": "arm64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh debian:testing ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh debian:latest ${base_url} "
+          ]
+        },
+        {
+          "name": "CentOS latest (Intel 64-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh centos:latest ${base_url} "
+          ]
+        },
+        {
+          "name": "CentOS latest (Intel 32-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh --32 i386/centos:latest ${base_url} "
+          ]
+        },
+        {
+          "name": "CentOS latest (Arm 64-bit)",
+          "os": "linux",
+          "arch": "arm64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh centos:latest ${base_url} "
+          ]
+        },
+        {
+          "name": "OpenSUSE tumbleweed (Intel 64-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh opensuse/tumbleweed ${base_url} "
+          ]
+        },
+        {
+          "name": "OpenSUSE tumbleweed (Arm 64-bit)",
+          "os": "linux",
+          "arch": "arm64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh opensuse/tumbleweed ${base_url} "
+          ]
+        },
+        {
+          "name": "Fedora latest, rawhide (Intel 64-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh fedora:rawhide ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh fedora:latest ${base_url} "
+          ]
+        },
+        {
+          "name": "Fedora latest, rawhide (Arm 64-bit)",
+          "os": "linux",
+          "arch": "arm64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh fedora:rawhide ${base_url} ",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh fedora:latest ${base_url} "
+          ]
+        },
+        {
+          "name": "Arch latest (Intel 64-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh archlinux:latest ${base_url} "
+          ]
+        },
+        {
+          "name": "Manjaro base (Intel 64-bit)",
+          "os": "linux",
+          "arch": "amd64",
+          "dist": "bionic",
+          "services": [ "docker" ],
+          "language": "minimal",
+          "script": [
+            "env | sort",
+            "pwd",
+            "DEBUG=${DEBUG} bash tests/scripts/docker-test.sh manjarolinux/base ${base_url} "
+          ]
+        },
+        {}
+      ],
+      "notifications": {
+        "email": {
+          "on_success": "always",
+          "on_failure": "always"
+        }
+      }
+    }
+  }
+}
+__EOF__
+
+}
+
 # -----------------------------------------------------------------------------
 
 function test_binutils()
