@@ -384,7 +384,7 @@ On `berry`:
 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --arm64
 ```
 
-A typical run takes about 900 minutes.
+A typical run takes about 1100 minutes.
 
 Please note that the 32-bit build fails.
 
@@ -457,11 +457,16 @@ git clone \
 - select the target branch (like sifive-gcc-10.1.0-gme)
 - name the release like **xPack GNU RISC-V Embedded GCC v10.1.0-1.1**
 (mind the dash and the space)
-- as description
-  - add a downloads badge like `![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/v10.1.0-1.1/total.svg)`; use empty URL for now
-  - draft a short paragraph explaining what are the main changes, like
-    Version v10.1.0-1.1 is a new release of the **xPack GNU RISC-V Embedded GCC** package, following the SiFive release v2020.08.0 from Dec 19th, 2020.
-    _For the moment these binaries are provided only for testing purposes!_
+- as description, use:
+
+```
+![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/v10.1.0-1.1/total.svg)
+
+Version v10.1.0-1.1 is a new release of the **xPack GNU RISC-V Embedded GCC** package, following the SiFive release v2020.08.0 from Dec 19th, 2020.
+
+_For the moment these binaries are provided only for testing purposes!_
+```
+
 - **attach binaries** and SHA (drag and drop from the archives folder will do it)
 - **enable** the **pre-release** button
 - click the **Publish Release** button
