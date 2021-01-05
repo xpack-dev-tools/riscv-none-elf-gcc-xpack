@@ -554,20 +554,31 @@ cat *.sha
 - wait for the GitHub Pages build to complete
 - the preview web is https://xpack.github.io/web-preview/
 
-## Publish on the npmjs.com server
+## Update package.json binaries
 
 - select the `xpack-develop` branch
-- open the `package.json` file
+- run `xpm-dev binaries-update`
+
+```
+xpm-dev binaries-update -C ~/Downloads/riscv-none-embed-gcc-xpack.git '10.1.0-1.1' "${HOME}/Downloads/xpack-binaries/riscv-none-embed-gcc"
+```
+
 - open the GitHub [releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases)
   page and select the latest release
 - check the download counter, it should match the number of tests
+- open the `package.json` file
 - update the `baseUrl:` with the file URLs (including the tag/version);
   no terminating `/` is required
-- from the release, copy the SHA & file names
+- from the release, check the SHA & file names
 - compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
 - commit all changes, use a message like
   `package.json: update urls for 10.1.0-1.1 release` (without `v`)
+
+## Publish on the npmjs.com server
+
+- select the `xpack-develop` branch
+- open the `package.json` file
 - check the latest commits `npm run git-log`
 - update `CHANGELOG.md`; commit with a message like
   _CHANGELOG: prepare npm v10.1.0-1.1.1_
