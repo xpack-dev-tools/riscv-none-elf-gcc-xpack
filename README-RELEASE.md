@@ -622,7 +622,8 @@ On GNU/Linux systems, including Raspberry Pi, use the following commands:
 ```bash
 ~/opt/xPacks/@xpack-dev-tools/riscv-none-embed-gcc/10.1.0-1.1.1/.content/bin/riscv-none-embed-gcc --version
 
-TODO
+riscv-none-embed-gcc (xPack GNU RISC-V Embedded GCC, 64-bit) 10.1.0
+Copyright (C) 2020 Free Software Foundation, Inc.
 ```
 
 On macOS, use:
@@ -630,7 +631,8 @@ On macOS, use:
 ```bash
 ~/Library/xPacks/@xpack-dev-tools/riscv-none-embed-gcc/10.1.0-1.1.1/.content/bin/riscv-none-embed-gcc --version
 
-TODO
+riscv-none-embed-gcc (xPack GNU RISC-V Embedded GCC, 64-bit) 10.1.0
+Copyright (C) 2020 Free Software Foundation, Inc.
 ```
 
 On Windows use:
@@ -638,7 +640,9 @@ On Windows use:
 ```
 %HOMEPATH%\AppData\Roaming\xPacks\@xpack-dev-tools\riscv-none-embed-gcc\10.1.0-1.1.1\.content\bin\riscv-none-embed-gcc --version
 
-TODO
+riscv-none-embed-gcc (xPack GNU RISC-V Embedded GCC, 64-bit) 10.1.0
+Copyright (C) 2020 Free Software Foundation, Inc.
+...
 ```
 
 ## Update the repo
@@ -680,6 +684,12 @@ When the release is considered stable, promote it as `latest`:
 ## Announce to RISC-V community
 
 Add a new topic in the **Announcements** category of the
-[SiFive forums](https://forums.sifive.com/c/announcements).
+[RISC-V forums]https://groups.google.com/a/groups.riscv.org/g/sw-dev).
 
-Send an email to <sw-dev@groups.riscv.org>.
+```
+Subject: xPack GNU RISC-V Embedded GCC v10.1.0-1.1 released
+
+Version 10.1.0-1.1 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the SiFive release 2020-08.0 from Dec 19th, 2020.
+
+https://xpack.github.io/blog/2021/01/05/riscv-none-embed-gcc-v10-1-0-1-1-released/
+```
