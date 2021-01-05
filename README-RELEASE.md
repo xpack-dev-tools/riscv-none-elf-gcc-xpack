@@ -494,7 +494,7 @@ In the `xpack/web-jekyll` GitHub repo:
 
 - select the `develop` branch
 - add a new file to `_posts/riscv-none-embed-gcc/releases`
-- name the file like `2020-07-03-riscv-none-embed-gcc-v8-3-0-2-3-released.md`
+- name the file like `021-01-05-riscv-none-embed-gcc-v10-1-0-1-1-released.md`
 - name the post like: **xPack GNU RISC-V Embedded GCC v10.1.0-1.1 released**
 - as `download_url` use the tagged URL like `https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/tag/v10.1.0-1.1/`
 - update the `date:` field with the current date
