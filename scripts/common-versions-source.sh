@@ -169,7 +169,12 @@ function build_versions()
     then
 
       # Be sure there is no `v`, it is added in the URL.
-      GH_RELEASE="${RELEASE_VERSION}"
+      if [ "${RELEASE_VERSION}" == "10.1.0-1.2" ]
+      then
+        GH_RELEASE="10.1.0-1.1"
+      else
+        GH_RELEASE="${RELEASE_VERSION}"
+      fi
 
       BINUTILS_GH_RELEASE=${BINUTILS_GH_RELEASE:-"${GH_RELEASE}"}
       GCC_GH_RELEASE=${GCC_GH_RELEASE:-"${GH_RELEASE}"}
