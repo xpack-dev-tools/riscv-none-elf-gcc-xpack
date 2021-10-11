@@ -15,6 +15,12 @@
 
 function build_versions()
 {
+  if [ "${TARGET_PLATFORM}" == "linux" -a "${TARGET_ARCH}" == "x64" ]
+  then
+    echo
+    echo "No Arm 32-bit image, due to memory contraints."
+    exit 1
+  fi
 
   APP_PREFIX_NANO="${INSTALL_FOLDER_PATH}/${APP_LC_NAME}-nano"
 

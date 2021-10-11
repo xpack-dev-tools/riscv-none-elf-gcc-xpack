@@ -19,7 +19,7 @@
 
 # -----------------------------------------------------------------------------
 
-name: 'Test xPack GNU RISC-V Embedded GCC on supported platforms'
+name: 'Test xPack {{ APP_NAME }} on supported platforms'
 
 on:
   workflow_dispatch:
@@ -35,7 +35,7 @@ on:
 
 jobs:
   linux-x64:
-    name: 'x64 Linux GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'x64 Linux {{ APP_NAME }} {% raw %}${{ github.event.inputs.version }}{% endraw %} test'
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout'
@@ -43,11 +43,11 @@ jobs:
         with:
           fetch-depth: 3
           submodules: true
-      - name: 'Run ${{ github.event.inputs.version }} native test'
-        run: bash scripts/helper/tests/native-test.sh --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+      - name: 'Run {% raw %}${{ github.event.inputs.version }}{% endraw %} native test'
+        run: bash scripts/helper/tests/native-test.sh --version {% raw %}${{ github.event.inputs.version }}{% endraw %} --base-url {% raw %}${{ github.event.inputs.base_url }}{% endraw %}
 
   linux-ia32:
-    name: 'ia32 Linux GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'ia32 Linux {{ APP_NAME }} {% raw %}${{ github.event.inputs.version }}{% endraw %} test'
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout'
@@ -55,14 +55,14 @@ jobs:
         with:
           fetch-depth: 3
           submodules: true
-      - name: 'Run ${{ github.event.inputs.version }} docker test'
+      - name: 'Run {% raw %}${{ github.event.inputs.version }}{% endraw %} docker test'
         uses: docker://i386/debian:buster
         with:
           entrypoint: /usr/bin/linux32
-          args: /bin/bash /github/workspace/scripts/helper/tests/native-test.sh --image i386/debian:buster --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /bin/bash /github/workspace/scripts/helper/tests/native-test.sh --image i386/debian:buster --version {% raw %}${{ github.event.inputs.version }}{% endraw %} --base-url {% raw %}${{ github.event.inputs.base_url }}{% endraw %}
 
   linux-arm64:
-    name: 'arm64 Linux GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'arm64 Linux {{ APP_NAME }} {% raw %}${{ github.event.inputs.version }}{% endraw %} test'
     runs-on: [self-hosted, Linux, Arm64]
     steps:
       - name: 'Checkout'
@@ -70,11 +70,11 @@ jobs:
         with:
           fetch-depth: 3
           submodules: true
-      - name: 'Run ${{ github.event.inputs.version }} native test'
-        run: bash scripts/helper/tests/native-test.sh --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+      - name: 'Run {% raw %}${{ github.event.inputs.version }}{% endraw %} native test'
+        run: bash scripts/helper/tests/native-test.sh --version {% raw %}${{ github.event.inputs.version }}{% endraw %} --base-url {% raw %}${{ github.event.inputs.base_url }}{% endraw %}
 
   macos-x64:
-    name: 'x64 macOS GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'x64 macOS {{ APP_NAME }} {% raw %}${{ github.event.inputs.version }}{% endraw %} test'
     runs-on: macos-latest
     steps:
       - name: 'Checkout'
@@ -82,11 +82,11 @@ jobs:
         with:
           fetch-depth: 3
           submodules: true
-      - name: 'Run ${{ github.event.inputs.version }} native test'
-        run: bash scripts/helper/tests/native-test.sh --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+      - name: 'Run {% raw %}${{ github.event.inputs.version }}{% endraw %} native test'
+        run: bash scripts/helper/tests/native-test.sh --version {% raw %}${{ github.event.inputs.version }}{% endraw %} --base-url {% raw %}${{ github.event.inputs.base_url }}{% endraw %}
 
   windows-x64:
-    name: 'x64 Windows GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'x64 Windows {{ APP_NAME }} {% raw %}${{ github.event.inputs.version }}{% endraw %} test'
     runs-on: windows-latest
     steps:
       - name: 'Checkout'
@@ -94,11 +94,11 @@ jobs:
         with:
           fetch-depth: 3
           submodules: true
-      - name: 'Run ${{ github.event.inputs.version }} native test'
-        run: bash scripts/helper/tests/native-test.sh --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+      - name: 'Run {% raw %}${{ github.event.inputs.version }}{% endraw %} native test'
+        run: bash scripts/helper/tests/native-test.sh --version {% raw %}${{ github.event.inputs.version }}{% endraw %} --base-url {% raw %}${{ github.event.inputs.base_url }}{% endraw %}
 
   windows-ia32:
-    name: 'ia32 Windows GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'ia32 Windows {{ APP_NAME }} {% raw %}${{ github.event.inputs.version }}{% endraw %} test'
     runs-on: windows-latest
     steps:
       - name: 'Checkout'
@@ -106,7 +106,7 @@ jobs:
         with:
           fetch-depth: 3
           submodules: true
-      - name: 'Run ${{ github.event.inputs.version }} native test'
-        run: bash scripts/helper/tests/native-test.sh --32 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+      - name: 'Run {% raw %}${{ github.event.inputs.version }}{% endraw %} native test'
+        run: bash scripts/helper/tests/native-test.sh --32 --version {% raw %}${{ github.event.inputs.version }}{% endraw %} --base-url {% raw %}${{ github.event.inputs.base_url }}{% endraw %}
 
 # -----------------------------------------------------------------------------

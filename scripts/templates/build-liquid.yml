@@ -18,7 +18,7 @@
 
 # -----------------------------------------------------------------------------
 
-name: 'Build xPack GNU RISC-V Embedded GCC'
+name: 'Build xPack {{ APP_NAME }}'
 
 on:
   workflow_dispatch:
@@ -30,7 +30,7 @@ on:
 
 jobs:
   linux-x64:
-    name: 'Intel Linux GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} build'
+    name: 'Intel Linux {{ APP_NAME }} {% raw %}${{ github.event.inputs.version }}{% endraw %} build'
     timeout-minutes: 5760 # 4 days
     runs-on: [self-hosted, Linux, X64]
     steps:
@@ -40,25 +40,25 @@ jobs:
           fetch-depth: 3
           submodules: true
       - name: 'Clean working area'
-        run: rm -rf ~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}*
+        run: rm -rf ~/Work/{{ APP_LC_NAME }}-{% raw %}${{ github.event.inputs.version }}{% endraw %}*
       - name: 'Build Linux x64 binary'
         timeout-minutes: 1440
-        run: bash scripts/helper/build.sh --version "${{ github.event.inputs.version }}" --linux64
+        run: bash scripts/helper/build.sh --version "{% raw %}${{ github.event.inputs.version }}{% endraw %}" --linux64
       - name: 'Build Windows x64 binary'
         timeout-minutes: 1440
-        run: bash scripts/helper/build.sh --version "${{ github.event.inputs.version }}" --win64
+        run: bash scripts/helper/build.sh --version "{% raw %}${{ github.event.inputs.version }}{% endraw %}" --win64
       - name: 'Build Linux ia32 binary'
         timeout-minutes: 1440
-        run: bash scripts/helper/build.sh --version "${{ github.event.inputs.version }}" --linux32
+        run: bash scripts/helper/build.sh --version "{% raw %}${{ github.event.inputs.version }}{% endraw %}" --linux32
       - name: 'Build Windows ia32 binary'
         timeout-minutes: 1440
-        run: bash scripts/helper/build.sh --version "${{ github.event.inputs.version }}" --win32
+        run: bash scripts/helper/build.sh --version "{% raw %}${{ github.event.inputs.version }}{% endraw %}" --win32
       - name: 'Publish pre-release'
         # https://github.com/ncipollo/release-action
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          artifacts: '~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}/deploy/*'
+          artifacts: '~/Work/{{ APP_LC_NAME }}-{% raw %}${{ github.event.inputs.version }}{% endraw %}/deploy/*'
           bodyFile: '.github/workflows/body-github-pre-releases-test.md'
           commit: 'master'
           draft: false
@@ -70,10 +70,10 @@ jobs:
           replacesArtifacts: true
           repo: 'pre-releases'
           tag: 'test'
-          token: ${{ secrets.PUBLISH_TOKEN }}
+          token: {% raw %}${{ secrets.PUBLISH_TOKEN }}{% endraw %}
 
   linux-arm64:
-    name: 'Arm Linux GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} build'
+    name: 'Arm Linux {{ APP_NAME }} {% raw %}${{ github.event.inputs.version }}{% endraw %} build'
     timeout-minutes: 2880 # 2 days
     runs-on: [self-hosted, Linux, ARM64]
     steps:
@@ -83,16 +83,16 @@ jobs:
           fetch-depth: 3
           submodules: true
       - name: 'Clean working area'
-        run: rm -rf ~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}*
+        run: rm -rf ~/Work/{{ APP_LC_NAME }}-{% raw %}${{ github.event.inputs.version }}{% endraw %}*
       - name: 'Build Linux arm64 binary'
         timeout-minutes: 1440
-        run: bash scripts/helper/build.sh --version "${{ github.event.inputs.version }}" --arm64
+        run: bash scripts/helper/build.sh --version "{% raw %}${{ github.event.inputs.version }}{% endraw %}" --arm64
       - name: 'Publish pre-release'
         # https://github.com/ncipollo/release-action
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          artifacts: '~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}/deploy/*'
+          artifacts: '~/Work/{{ APP_LC_NAME }}-{% raw %}${{ github.event.inputs.version }}{% endraw %}/deploy/*'
           bodyFile: '.github/workflows/body-github-pre-releases-test.md'
           commit: 'master'
           draft: false
@@ -104,10 +104,10 @@ jobs:
           replacesArtifacts: true
           repo: 'pre-releases'
           tag: 'test'
-          token: ${{ secrets.PUBLISH_TOKEN }}
+          token: {% raw %}${{ secrets.PUBLISH_TOKEN }}{% endraw %}
 
   macos-x64:
-    name: 'Intel macOS GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} build'
+    name: 'Intel macOS {{ APP_NAME }} {% raw %}${{ github.event.inputs.version }}{% endraw %} build'
     timeout-minutes: 2880 # 2 days
     runs-on: [self-hosted, macOS, X64]
     steps:
@@ -117,16 +117,16 @@ jobs:
           fetch-depth: 3
           submodules: true
       - name: 'Clean working area'
-        run: rm -rf ~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}*
+        run: rm -rf ~/Work/{{ APP_LC_NAME }}-{% raw %}${{ github.event.inputs.version }}{% endraw %}*
       - name: 'Build macOS x64 binary'
         timeout-minutes: 1440
-        run: bash scripts/helper/build.sh --version "${{ github.event.inputs.version }}" --osx
+        run: bash scripts/helper/build.sh --version "{% raw %}${{ github.event.inputs.version }}{% endraw %}" --osx
       - name: 'Publish pre-release'
         # https://github.com/ncipollo/release-action
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          artifacts: '~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}/deploy/*'
+          artifacts: '~/Work/{{ APP_LC_NAME }}-{% raw %}${{ github.event.inputs.version }}{% endraw %}/deploy/*'
           bodyFile: '.github/workflows/body-github-pre-releases-test.md'
           commit: 'master'
           draft: false
@@ -138,5 +138,5 @@ jobs:
           replacesArtifacts: true
           repo: 'pre-releases'
           tag: 'test'
-          token: ${{ secrets.PUBLISH_TOKEN }}
+          token: {% raw %}${{ secrets.PUBLISH_TOKEN }}{% endraw %}
 
