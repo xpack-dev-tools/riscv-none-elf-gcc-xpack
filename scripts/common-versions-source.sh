@@ -15,7 +15,7 @@
 
 function build_versions()
 {
-  if [ "${TARGET_PLATFORM}" == "linux" -a "${TARGET_ARCH}" == "x64" ]
+  if [ "${TARGET_PLATFORM}" == "linux" -a "${TARGET_ARCH}" == "arm" ]
   then
     echo
     echo "No Arm 32-bit image, due to memory contraints."
