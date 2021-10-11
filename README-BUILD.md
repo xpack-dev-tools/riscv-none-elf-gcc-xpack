@@ -73,7 +73,7 @@ Git repo.
 To download them, issue the following commands:
 
 ```sh
-rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git \
+rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git; \
 git clone \
   https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
   ~/Downloads/riscv-none-embed-gcc-xpack.git; \
@@ -87,7 +87,7 @@ For development purposes, clone the `xpack-develop`
 branch:
 
 ```sh
-rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git \
+rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git; \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
