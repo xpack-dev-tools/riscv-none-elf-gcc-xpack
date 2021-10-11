@@ -12,8 +12,8 @@ The **xPack RISC-V Embedded GCC** toolchain is also available as a
 binary [xPack](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc)
 and can be conveniently installed with [xpm](https://www.npmjs.com/package/xpm):
 
-```console
-$ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@8.3.0-1.1.1
+```sh
+xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@8.3.0-1.1.1
 ```
 
 For more details on how to install the toolchain, please see
@@ -23,7 +23,7 @@ For more details on how to install the toolchain, please see
 
 Starting with 8.2.0-2, the xPack GNU RISC-V Embedded GCC (formerly
 GNU MCU Eclipse RISC-V GCC) follows
-the official [SiFive releases](https://github.com/sifive/freedom-tools/releases),
+the official [SiFive releases](https://github.com/sifive/freedom-tools/releases/),
 with as little differences as possible.
 
 This release is based on the

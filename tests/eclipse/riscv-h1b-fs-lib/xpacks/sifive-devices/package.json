@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/micro-os-plus/sifive-devices-xpack.git"
+    "url": "https://github.com/micro-os-plus/sifive-devices-xpack.git/"
   },
   "homepage": "https://github.com/micro-os-plus/sifive-devices-xpack",
   "keywords": [
@@ -29,7 +29,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/micro-os-plus/sifive-devices-xpack/issues"
+    "url": "https://github.com/micro-os-plus/sifive-devices-xpack/issues/"
   },
   "config": {},
   "dependencies": {

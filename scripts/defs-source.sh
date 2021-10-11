@@ -19,25 +19,33 @@
 APP_NAME=${APP_NAME:-"GNU RISC-V Embedded GCC"}
 
 # Used as part of file/folder paths.
-APP_UC_NAME=${APP_UC_NAME:-"RISC-V Embedded GCC"}
 APP_LC_NAME=${APP_LC_NAME:-"riscv-none-embed-gcc"}
 
-DISTRO_UC_NAME=${DISTRO_UC_NAME:-"xPack"}
+DISTRO_NAME=${DISTRO_NAME:-"xPack"}
 DISTRO_LC_NAME=${DISTRO_LC_NAME:-"xpack"}
 DISTRO_TOP_FOLDER=${DISTRO_TOP_FOLDER:-"xPacks"}
 
-# Use the new xPack naming convention.
-HAS_NAME_ARCH="y"
+APP_DESCRIPTION="${DISTRO_NAME} ${APP_NAME}"
 
-BRANDING=${BRANDING:-"${DISTRO_UC_NAME} ${APP_NAME}"}
-BUGURL=${BUGURL:-"https://github.com/sifive/freedom-tools/issues"}
+# -----------------------------------------------------------------------------
+
+# Normally should be commented out. Enable it only for tests.
+WITHOUT_MULTILIB="y"
+
+# -----------------------------------------------------------------------------
+
+BUGURL=${BUGURL:-"https://github.com/sifive/freedom-tools/issues/"}
 
 GCC_TARGET=${GCC_TARGET:-"riscv-none-embed"}
 GCC_ARCH=${GCC_ARCH:-"rv32imac"}
 GCC_ABI=${GCC_ABI:-"ilp32"}
 
-CONTAINER_SCRIPT_NAME=${CONTAINER_SCRIPT_NAME:-"container-build.sh"}
-CONTAINER_LIBS_FUNCTIONS_SCRIPT_NAME=${CONTAINER_LIBS_FUNCTIONS_SCRIPT_NAME:-"container-libs-functions-source.sh"}
-CONTAINER_APP_FUNCTIONS_SCRIPT_NAME=${CONTAINER_APP_FUNCTIONS_SCRIPT_NAME:-"container-apps-functions-source.sh"}
+# -----------------------------------------------------------------------------
+
+GITHUB_ORG="${GITHUB_ORG:-"xpack-dev-tools"}"
+GITHUB_REPO="${GITHUB_REPO:-"${APP_LC_NAME}-xpack"}"
+GITHUB_PRE_RELEASES="${GITHUB_PRE_RELEASES:-"pre-releases"}"
+
+NPM_PACKAGE="${NPM_PACKAGE:-"@xpack-dev-tools/${APP_LC_NAME}@next"}"
 
 # -----------------------------------------------------------------------------

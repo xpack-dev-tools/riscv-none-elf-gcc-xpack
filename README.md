@@ -1,6 +1,5 @@
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xpack-dev-tools/riscv-none-embed-gcc-xpack)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases)
 [![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc)
-[![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/total.svg)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/)
-[![npm](https://img.shields.io/npm/dt/@xpack-dev-tools/riscv-none-embed-gcc?label=npm%20downloads)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
 
 ## The xPack GNU RISC-V Embedded GCC
 
@@ -43,12 +42,12 @@ follow the instructions from the
 With the `xpm` tool available, installing
 the latest version of the package is quite easy:
 
-```console
-$ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@latest
+```sh
+xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@latest
 ```
 
 This command will always install the latest available version,
-into the central xPacks repository, which is a platform dependent folder
+into the central xPacks store, which is a platform dependent folder
 (check the output of the `xpm` command for the actual folder used on
 your platform).
 
@@ -64,13 +63,9 @@ identify binaries installed with
 
 To remove the installed xPack, the command is similar:
 
-```console
-$ xpm uninstall --global @xpack-dev-tools/riscv-none-embed-gcc
+```sh
+xpm uninstall --global @xpack-dev-tools/riscv-none-embed-gcc
 ```
-
-(Note: not yet implemented. As a temporary workaround, simply remove the
-`xPacks/@xpack-dev-tools/riscv-none-embed-gcc` folder, or one of
-the the versioned subfolders.)
 
 ### Manual install
 
@@ -98,7 +93,7 @@ For more details please read the [Support](https://xpack.github.io/riscv-none-em
 
 The original content is released under the
 [MIT License](https://opensource.org/licenses/MIT), with all rights
-reserved to [Liviu Ionescu](https://github.com/ilg-ul).
+reserved to [Liviu Ionescu](https://github.com/ilg-ul/).
 
 The binary distributions include several open-source components; the
 corresponding licenses are available in the installed
@@ -116,6 +111,6 @@ corresponding licenses are available in the installed
 [![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
 [![npm](https://img.shields.io/npm/dm/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
   - all releases [![npm](https://img.shields.io/npm/dt/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
-- GitHub [individual file counters](https://www.somsubhra.com/github-release-stats/?username=xpack-dev-tools&repository=riscv-none-embed-gcc-xpack) (grouped per release)
+- GitHub [individual file counters](https://somsubhra.github.io/github-release-stats/?username=xpack-dev-tools&repository=riscv-none-embed-gcc-xpack) (grouped per release)
 
 Credit to [Shields IO](https://shields.io) and [Somsubhra/github-release-stats](https://github.com/Somsubhra/github-release-stats).

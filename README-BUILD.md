@@ -26,7 +26,7 @@ There are two types of builds:
 
 This page documents the distribution builds.
 
-## Repository URLs
+## Repositories
 
 The build scripts use a set of local repositories, to accommodate the
 small changes required by the `riscv-none-embed-` prefix:
@@ -49,7 +49,7 @@ original FSF repository is used:
 However, to accommodate the custom prefix, a separate branch is created
 in `xpack-dev-tools/riscv-binutils-gdb`.
 
-## Branches
+### Branches
 
 - `xpack` - the updated content, used during builds
 - `xpack-develop` - the updated content, used during development
@@ -70,36 +70,29 @@ The build scripts are available in the `scripts` folder of the
 [`xpack-dev-tools/riscv-none-embed-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack)
 Git repo.
 
-To download them, the following shortcut is available:
+To download them, issue the following commands:
 
-```console
-$ curl --fail -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
-```
-
-This small script issues the following two commands:
-
-```console
-$ rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git; \
-  git clone --recurse-submodules https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
-  ~/Downloads/riscv-none-embed-gcc-xpack.git
+```sh
+rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git \
+git clone \
+  https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
+  ~/Downloads/riscv-none-embed-gcc-xpack.git; \
+git -C ~/Downloads/riscv-none-embed-gcc-xpack.git submodule update --init --recursive
 ```
 
 > Note: the repository uses submodules; for a successful build it is
 > mandatory to recurse the submodules.
 
-For development purposes, there is a shortcut to clone the `xpack-develop`
+For development purposes, clone the `xpack-develop`
 branch:
 
-```console
-$ curl --fail -L https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/raw/xpack/scripts/git-clone-develop.sh | bash
-```
-
-which is a shortcut for:
-
-```console
-$ rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git; \
-  git clone --recurse-submodules --branch xpack-develop https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
-  ~/Downloads/riscv-none-embed-gcc-xpack.git
+```sh
+rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git \
+git clone \
+  --branch xpack-develop \
+  https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
+  ~/Downloads/riscv-none-embed-gcc-xpack.git; \
+git -C ~/Downloads/riscv-none-embed-gcc-xpack.git submodule update --init --recursive
 ```
 
 ## The `Work` folder
@@ -143,7 +136,7 @@ major functional changes, perhaps only bug fixes.
 The actual changes for each version are documented in the corresponding
 release pages:
 
-- https://xpack.github.io/arm-none-eabi-gcc/releases/
+- <https://xpack.github.io/arm-none-eabi-gcc/releases/>
 
 ## How to build local/native binaries
 
@@ -168,27 +161,27 @@ The current platform for Intel GNU/Linux and Windows production builds is a
 Debian 10, running on an Intel NUC8i7BEH mini PC with 32 GB of RAM
 and 512 GB of fast M.2 SSD. The machine name is `xbbi`.
 
-```console
-$ ssh xbbi
+```sh
+caffeinate ssh xbbi
 ```
 
 Before starting a multi-platform build, check if Docker is started:
 
-```console
-$ docker info
+```sh
+docker info
 ```
 
 Eventually run the test image:
 
-```console
-$ docker run hello-world
+```sh
+docker run hello-world
 ```
 
 Before running a build for the first time, it is recommended to preload the
-docker images, since they are pretty large.
+docker images.
 
-```console
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh preload-images
+```sh
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh preload-images
 ```
 
 The result should look similar to:
@@ -196,8 +189,8 @@ The result should look similar to:
 ```console
 $ docker images
 REPOSITORY          TAG                              IMAGE ID            CREATED             SIZE
-ilegeul/ubuntu      i386-12.04-xbb-v3.2              fadc6405b606        2 days ago          4.55GB
-ilegeul/ubuntu      amd64-12.04-xbb-v3.2             3aba264620ea        2 days ago          4.98GB
+ilegeul/ubuntu      i386-12.04-xbb-v3.3              fadc6405b606        2 days ago          4.55GB
+ilegeul/ubuntu      amd64-12.04-xbb-v3.3             3aba264620ea        2 days ago          4.98GB
 hello-world         latest                           bf756fb1ae65        5 months ago        13.3kB
 ```
 
@@ -207,35 +200,35 @@ by Docker.
 
 To check the content of a Docker image:
 
-```console
-$ docker run --interactive --tty ilegeul/ubuntu:amd64-12.04-xbb-v3.2
+```sh
+docker run --interactive --tty ilegeul/ubuntu:amd64-12.04-xbb-v3.3
 ```
 
 To remove unused files:
 
-```console
-$ docker system prune --force
+```sh
+docker system prune --force
 ```
 
 Since the build takes a while, use `screen` to isolate the build session
 from unexpected events, like a broken
 network connection or a computer entering sleep.
 
-```console
-$ screen -S riscv
+```sh
+screen -S riscv
 ```
 
 Run the development builds on the development machine (`wks`):
 
-```console
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --linux64 --linux32 --win64 --win32
+```sh
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --disable-multilib --develop --disable-tests --without-pdf --linux64 --linux32 --win64 --win32
 ```
 
 When ready, run the build on the production machine (`xbbi`):
 
-```console
-$ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
+```sh
+sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --all
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -257,32 +250,32 @@ total 1429180
 -rw-rw-r-- 1 ilg ilg       117 Oct 24 21:04 xpack-riscv-none-embed-gcc-10.1.0-1.1-win32-x64.zip.sha
 ```
 
-#### Build the Arm GNU/Linux binaries
+### Build the Arm GNU/Linux binaries
 
 The supported Arm architectures are:
 
 - `armhf` for 32-bit devices
-- `arm64` for 64-bit devices
+- `aarch64` for 64-bit devices
 
 The current platform for Arm GNU/Linux production builds is a
-Debian 9, running on an Raspberry Pi 4 SBC with 8 GB of RAM
-and 256 GB of fast SSD. The machine name is `berry`.
+Raspberry Pi OS 10, running on a Raspberry Pi Compute Module 4, with
+8 GB of RAM and 256 GB of fast M.2 SSD. The machine name is `xbba`.
 
-```console
-$ ssh berry
+```sh
+caffeinate ssh xbba
 ```
 
 Before starting a multi-platform build, check if Docker is started:
 
-```console
-$ docker info
+```sh
+docker info
 ```
 
 Before running a build for the first time, it is recommended to preload the
-docker images, since they are pretty large.
+docker images.
 
-```console
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh preload-images
+```sh
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh preload-images
 ```
 
 The result should look similar to:
@@ -290,8 +283,8 @@ The result should look similar to:
 ```console
 $ docker images
 REPOSITORY          TAG                                IMAGE ID            CREATED             SIZE
-ilegeul/ubuntu      arm32v7-16.04-xbb-v3.2             b501ae18580a        27 hours ago        3.23GB
-ilegeul/ubuntu      arm64v8-16.04-xbb-v3.2             db95609ffb69        37 hours ago        3.45GB
+ilegeul/ubuntu      arm32v7-16.04-xbb-v3.3             b501ae18580a        27 hours ago        3.23GB
+ilegeul/ubuntu      arm64v8-16.04-xbb-v3.3             db95609ffb69        37 hours ago        3.45GB
 hello-world         latest                             a29f45ccde2a        5 months ago        9.14kB
 ```
 
@@ -299,22 +292,22 @@ Since the build takes a while, use `screen` to isolate the build session
 from unexpected events, like a broken
 network connection or a computer entering sleep.
 
-```console
-$ screen -S riscv
+```sh
+screen -S riscv
 ```
 
 Run the development builds on the development machine (`wks`):
 
-```console
-$ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --arm32 --arm64
+```sh
+sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --disable-multilib --develop --disable-tests --without-pdf --arm32 --arm64
 ```
 
 When ready, run the build on the production machine (`berry`):
 
-```console
-$ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
+```sh
+sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --all
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -334,34 +327,34 @@ total 702592
 
 ### Build the macOS binaries
 
-The current platform for macOS production builds is a macOS 10.10.5
-running on a MacBookPro with 16 GB of RAM and a fast SSD. The machine
-name is `xbbm`.
+The current platform for macOS production builds is a macOS 10.13.6
+running on a MacBook Pro 2011 with 32 GB of RAM and a fast SSD.
+The machine name is `xbbm`.
 
-```console
-$ ssh xbbm
+```sh
+caffeinate ssh xbbm
 ```
 
 Since the build takes a while, use `screen` to isolate the build session
 from unexpected events, like a broken
 network connection or a computer entering sleep.
 
-```console
-$ screen -S riscv
+```sh
+screen -S riscv
 ```
 
 Run the development builds on the development machine (`wks`):
 
-```console
-$ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --osx
+```sh
+sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --disable-multilib --develop --disable-tests --without-pdf --osx
 ```
 
 When ready, run the build on the production machine (`xbbm`):
 
-```console
-$ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-$ caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx
+```sh
+sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --osx
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -383,7 +376,7 @@ total 698240
 
 Instead of `--all`, you can use any combination of:
 
-```
+```console
 --linux32 --linux64
 --arm32 --arm64
 --win32 --win64
@@ -398,14 +391,14 @@ or together with `--linux64`.
 
 To remove most build files, use:
 
-```console
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh clean
+```sh
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh clean
 ```
 
 To also remove the repository and the output files, use:
 
-```console
-$ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh cleanall
+```sh
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh cleanall
 ```
 
 For production builds it is recommended to completely remove the build folder.
@@ -550,7 +543,7 @@ may fail.
 
 The workaround is to manually download the files from an alternate
 location (like
-https://github.com/xpack-dev-tools/files-cache/tree/master/libs),
+<https://github.com/xpack-dev-tools/files-cache/tree/master/libs>),
 place them in the XBB cache (`Work/cache`) and restart the build.
 
 ## More build details

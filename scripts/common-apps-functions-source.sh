@@ -22,10 +22,11 @@ function build_binutils()
   local binutils_version="$1"
   # No versioning here, the inner archives use simple names.
   local binutils_folder_name="binutils-${binutils_version}"
+
+  mkdir -pv "${LOGS_FOLDER_PATH}/${binutils_folder_name}"
+
   local binutils_patch="${binutils_folder_name}.patch"
-
   local binutils_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${binutils_folder_name}-installed"
-
   if [ ! -f "${binutils_stamp_file_path}" ]
   then
 
@@ -48,13 +49,10 @@ function build_binutils()
       )
     fi
 
-    mkdir -pv "${LOGS_FOLDER_PATH}/${binutils_folder_name}"
-
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${binutils_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${binutils_folder_name}"
 
-      xbb_activate
       xbb_activate_installed_dev
 
       CPPFLAGS="${XBB_CPPFLAGS}"
@@ -225,8 +223,10 @@ function test_binutils()
 function build_gcc_first()
 {
   local gcc_first_folder_name="${GCC_FOLDER_NAME}-first"
-  local gcc_first_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_first_folder_name}-installed"
 
+  mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}"
+
+  local gcc_first_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_first_folder_name}-installed"
   if [ ! -f "${gcc_first_stamp_file_path}" ]
   then
 
@@ -246,8 +246,6 @@ function build_gcc_first()
       )
     fi
 
-    mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}"
-
     if [ -n "${GCC_MULTILIB}" ]
     then
       (
@@ -256,7 +254,6 @@ function build_gcc_first()
 
         cd "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/gcc/config/riscv"
 
-        xbb_activate
         xbb_activate_installed_dev
 
         # Be sure the ${GCC_MULTILIB} has no quotes, since it defines 
@@ -274,7 +271,6 @@ function build_gcc_first()
       mkdir -pv "${BUILD_FOLDER_PATH}/${gcc_first_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${gcc_first_folder_name}"
 
-      xbb_activate
       xbb_activate_installed_dev
 
       CPPFLAGS="${XBB_CPPFLAGS}"
@@ -400,8 +396,10 @@ function build_gcc_first()
 function build_newlib()
 {
   local newlib_folder_name="${NEWLIB_FOLDER_NAME}$1"
-  local newlib_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${newlib_folder_name}-installed"
 
+  mkdir -pv "${LOGS_FOLDER_PATH}/${newlib_folder_name}"
+
+  local newlib_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${newlib_folder_name}-installed"
   if [ ! -f "${newlib_stamp_file_path}" ]
   then
 
@@ -421,13 +419,10 @@ function build_newlib()
       )
     fi
 
-    mkdir -pv "${LOGS_FOLDER_PATH}/${newlib_folder_name}"
-
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${newlib_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${newlib_folder_name}"
 
-      xbb_activate
       xbb_activate_installed_dev
 
       # Add the gcc first stage binaries to the path.
@@ -726,8 +721,10 @@ function copy_linux_libs()
 function build_gcc_final()
 {
   local gcc_final_folder_name="${GCC_FOLDER_NAME}-final$1"
-  local gcc_final_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_final_folder_name}-installed"
 
+  mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}"
+
+  local gcc_final_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_final_folder_name}-installed"
   if [ ! -f "${gcc_final_stamp_file_path}" ]
   then
 
@@ -747,13 +744,10 @@ function build_gcc_final()
       )
     fi
 
-    mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}"
-
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${gcc_final_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${gcc_final_folder_name}"
 
-      xbb_activate
       xbb_activate_installed_dev
 
       CPPFLAGS="${XBB_CPPFLAGS}" 
@@ -1110,8 +1104,10 @@ __EOF__
 function build_gdb()
 {  
   local gdb_folder_name="${GDB_FOLDER_NAME}$1"
-  local gdb_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gdb_folder_name}-installed"
 
+  mkdir -pv "${LOGS_FOLDER_PATH}/${gdb_folder_name}"
+
+  local gdb_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gdb_folder_name}-installed"
   if [ ! -f "${gdb_stamp_file_path}" ]
   then
 
@@ -1135,13 +1131,10 @@ function build_gdb()
       )
     fi
 
-    mkdir -pv "${LOGS_FOLDER_PATH}/${gdb_folder_name}"
-
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
 
-      xbb_activate
       xbb_activate_installed_dev
 
       CPPFLAGS="${XBB_CPPFLAGS}" 

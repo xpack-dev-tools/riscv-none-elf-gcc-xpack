@@ -10,10 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<user-id>/h1b-fs.git"
+    "url": "https://github.com/<user-id>/h1b-fs.git"
   },
   "bugs": {
-    "url": "https://github.com/<user-id>/h1b-fs/issues"
+    "url": "https://github.com/<user-id>/h1b-fs/issues/"
   },
   "homepage": "https://github.com/<user-id>/h1b-fs",
   "keywords": [

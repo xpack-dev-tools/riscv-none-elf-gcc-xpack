@@ -3,7 +3,7 @@
 ## Release schedule
 
 The xPack GNU RISC-V Embedded GCC release schedule generally follows the
-[SiFive Releases](https://github.com/sifive/freedom-tools/releases)
+[SiFive Releases](https://github.com/sifive/freedom-tools/releases/)
 release schedule, which, although not fixed, is about one-two releases
 per year.
 
@@ -18,7 +18,7 @@ Before starting the build, perform some checks and tweaks.
 
 ### Identify SiFive commit IDs
 
-- check the [SiFive Releases](https://github.com/sifive/freedom-tools/releases)
+- check the [SiFive Releases](https://github.com/sifive/freedom-tools/releases/)
 for new releases
 - identify the tag of the latest release (like `v2020.08.0`)
 - switch to Code view and select the tag
@@ -46,7 +46,7 @@ With Sourcetree in
 [xpack-dev-tools/riscv-binutils-gdb](https://github.com/xpack-dev-tools/riscv-binutils-gdb)
 
 Check if there is a `sifive` remote pointing to
-https://github.com/sifive/riscv-binutils-gdb.
+<https://github.com/sifive/riscv-binutils-gdb>.
 
 - in the Search View, identify the commit id
 - tag it with the SiFive release name (`v2020.08.0`)
@@ -70,7 +70,7 @@ With Sourcetree in
 [xpack-dev-tools/riscv-gcc](https://github.com/xpack-dev-tools/riscv-gcc)
 
 Check if there is a `sifive` remote pointing to
-https://github.com/sifive/riscv-gcc.
+<https://github.com/sifive/riscv-gcc>.
 
 - in the Search View, identify the commit id
 - tag it with the SiFive release name (`v2020.08.0`)
@@ -96,7 +96,7 @@ With Sourcetree in
 [xpack-dev-tools/riscv-newlib](https://github.com/xpack-dev-tools/riscv-newlib)
 
 Check if there is a `sifive` remote pointing to
-https://github.com/sifive/riscv-newlib.
+<https://github.com/sifive/riscv-newlib>.
 
 - in the Search View, identify the commit id
 - tag it with the SiFive release name (`v2020.08.0`)
@@ -149,7 +149,7 @@ the package on the `npm` server.
 
 Check GitHub issues and pull requests:
 
-- https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues
+- <https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues/>
 
 and fix them; assign them to a milestone (like `10.1.0-1.1`).
 
@@ -157,14 +157,14 @@ and fix them; assign them to a milestone (like `10.1.0-1.1`).
 
 Normally `README.md` should not need changes, but better check.
 Information related to the new version should not be included here,
-but in the version specific file (below).
+but in the version specific release page.
 
 ## Update `CHANGELOG.md`
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
 - add a new entry like _v10.1.0-1.1 prepared_
-- commit commit with a message like _CHANGELOG: prepare v10.1.0-1.1_
+- commit with a message like _prepare v10.1.0-1.1_
 
 Note: if you missed to update the `CHANGELOG.md` before starting the build,
 edit the file and rerun the build, it should take only a few minutes to
@@ -175,7 +175,7 @@ recreate the archives with the correct file.
 - open the `common-versions-source.sh` file
 - add a new `if` with the new version before the existing code
 - update `GH_RELEASE` to the new version (like `10.1.0-1.1`, without `v`)
-- in SiFive [releases](https://github.com/sifive/freedom-tools/releases)
+- in SiFive [releases](https://github.com/sifive/freedom-tools/releases/)
 for new releases
 - identify the tag of the latest release (like `v2020.08.0`)
 - switch to Code view and select the tag
@@ -208,19 +208,20 @@ present, for the GDB build.
 
 ### Development run the build scripts
 
-Before the real build, run a test build on the development machine (`wks`):
+Before the real build, run a test build on the development machine (`wks`)
+or the production machine (`xbbm`):
 
-```bash
+```sh
 sudo rm -rf ~/Work/riscv-none-embed-gcc-*
 
-caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --develop --without-pdf --disable-tests --disable-multilib --osx
-caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --win64
-caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux32 --win32
+caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --osx
+caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --win64
+caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux32 --win32
 ```
 
-Work on the scripts until all 4 platforms pass the build.
+Work on the scripts until all platforms pass the build.
 
-### Push the build scripts
+### Push the build scriptss
 
 - push the `xpack-develop` branch to GitHub
 - possibly push the helper project too
@@ -229,65 +230,51 @@ From here it'll be cloned on the production machines.
 
 ### Run the build scripts without multilibs
 
-Move to the three production machines.
+On the macOS machine (`xbbm`) open ssh sessions to both Linux machines
+(`xbbi` and `xbba`):
 
-On the macOS build machine (`xbbm`):
-
-- empty the trash bin
-- create three new terminals
-
-Connect to the Intel Linux (`xbbi`):
-
-```bash
+```sh
 caffeinate ssh xbbi
+
+caffeinate ssh xbba
 ```
 
-Connect to the Arm Linux (`berry`):
+On all machines, clone the `xpack-develop` branch and remove previous builds
 
-```bash
-caffeinate ssh berry
-```
-
-On all machines, clone the `xpack-develop` branch:
-
-```bash
-rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git; \
+```sh
+rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git \
 git clone \
-  --recurse-submodules \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
-  ~/Downloads/riscv-none-embed-gcc-xpack.git
-```
+  ~/Downloads/riscv-none-embed-gcc-xpack.git; \
+git -C ~/Downloads/riscv-none-embed-gcc-xpack.git submodule update --init --recursive
 
-On all machines, remove any previous build:
-
-```bash
 sudo rm -rf ~/Work/riscv-none-embed-gcc-*
 ```
 
 On the macOS machine (`xbbm`):
 
-```bash
-caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx --disable-multilib
+```sh
+caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --osx --disable-multilib
 ```
 
 A typical run takes about 215 minutes (was 80 without rvv).
 
 On `xbbi`:
 
-```bash
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all --disable-multilib
+```sh
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --all --disable-multilib
 
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --linux64 --windows64 --disable-multilib
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --linux32 --windows32 --disable-multilib
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --linux64 --windows64 --disable-multilib
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --linux32 --windows32 --disable-multilib
 ```
 
 A typical run takes about 160+150 minutes.
 
 On `berry`:
 
-```bash
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --arm64 --disable-multilib
+```sh
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --arm64 --disable-multilib
 ```
 
 A typical run takes about 545 minutes (was 374 without rvv).
@@ -299,7 +286,7 @@ Please note that the 32-bit build fails with 'out of memory'.
 On the development machine (`wks`) clear the folder where binaries from all
 build machines will be collected.
 
-```bash
+```sh
 rm -f ~/Downloads/xpack-binaries/riscv-none-embed-gcc/*
 ```
 
@@ -309,7 +296,7 @@ Note: this step is very important, to avoid using test binaries!
 
 On all three machines:
 
-```console
+```sh
 (cd ~/Work/riscv-none-embed-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/riscv-none-embed-gcc)
 ```
 
@@ -326,7 +313,7 @@ others to test them.
 In the `tests/scripts/trigger-travis-*.sh` files, check and update the
 URL to use something like
 
-```
+```console
 base_url="https://github.com/xpack-dev-tools/pre-releases/releases/download/experimental/"
 ```
 
@@ -339,24 +326,21 @@ on the command scripts):
 
 The test results are available from:
 
-- https://travis-ci.org/github/xpack-dev-tools/riscv-none-embed-gcc-xpack
+- <https://travis-ci.com/github/xpack-dev-tools/riscv-none-embed-gcc-xpack/>
 
 ### Run the build scripts with multilibs
 
 On all machines, clone the `xpack-develop` branch:
 
-```bash
-rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git; \
+```sh
+rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git \
+
 git clone \
-  --recurse-submodules \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
-  ~/Downloads/riscv-none-embed-gcc-xpack.git
-```
+  ~/Downloads/riscv-none-embed-gcc-xpack.git; \
+git -C ~/Downloads/riscv-none-embed-gcc-xpack.git submodule update --init --recursive
 
-On all machines, remove any previous build:
-
-```bash
 sudo rm -rf ~/Work/riscv-none-embed-gcc-*
 ```
 
@@ -364,24 +348,24 @@ Empty trash.
 
 On the macOS machine (`xbbm`):
 
-```bash
-caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --osx
+```sh
+caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --osx
 ```
 
 A typical run takes about 500 minutes (was 250 minutes without rvv).
 
 On `xbbi`:
 
-```bash
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --all
+```sh
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --all
 ```
 
 A typical run takes about 570 minutes (was 300 minutes without rvv).
 
 On `berry`:
 
-```bash
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/build.sh --arm64
+```sh
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --arm64
 ```
 
 A typical run takes about 1100 minutes.
@@ -393,7 +377,7 @@ Please note that the 32-bit build fails.
 On the development machine (`wks`) clear the folder where binaries from all
 build machines will be collected.
 
-```bash
+```sh
 rm -f ~/Downloads/xpack-binaries/riscv-none-embed-gcc/*
 ```
 
@@ -401,7 +385,7 @@ rm -f ~/Downloads/xpack-binaries/riscv-none-embed-gcc/*
 
 On all three machines:
 
-```console
+```sh
 (cd ~/Work/riscv-none-embed-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/riscv-none-embed-gcc)
 ```
 
@@ -417,12 +401,12 @@ For this, on each platform (Mac, GNU/Linux 64/32, Windows 64/32):
   on Windows the current paths always use spaces, so renaming is not needed;
 - clone this repo locally; on Windows use the Git console;
 
-```bash
+```sh
 git clone \
-  --recurse-submodules \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
-  ~/Downloads/riscv-none-embed-gcc-xpack.git
+  ~/Downloads/riscv-none-embed-gcc-xpack.git; \
+git -C ~/Downloads/riscv-none-embed-gcc-xpack.git submodule update --init --recursive
 ```
 
 - in a separate workspace, Import → General → Existing Projects into Workspace
@@ -451,7 +435,7 @@ git clone \
 
 - in `CHANGELOG.md`, add release date
 - commit and push the `xpack-develop` branch
-- go to the GitHub [releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases) page
+- go to the GitHub [releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/) page
 - click **Draft a new release**
 - name the tag like **v10.1.0-1.1** (mind the dash in the middle!)
 - select the target branch (like sifive-gcc-10.1.0-gme)
@@ -459,22 +443,51 @@ git clone \
 (mind the dash and the space)
 - as description, use:
 
-```
+```markdown
 ![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/v10.1.0-1.1/total.svg)
 
 Version v10.1.0-1.1 is a new release of the **xPack GNU RISC-V Embedded GCC** package, following the SiFive release v2020.08.0 from Dec 19th, 2020.
 
-_For the moment these binaries are provided only for testing purposes!_
+_At this moment these binaries are provided for tests only!_
 ```
 
-- **attach binaries** and SHA (drag and drop from the archives folder will do it)
+- **attach binaries** and SHA (drag and drop from the
+  `~/Downloads/xpack-binaries/*` folder will do it)
 - **enable** the **pre-release** button
 - click the **Publish Release** button
 
 Note: at this moment the system should send a notification to all clients
 watching this project.
 
-## Run the release Travis tests
+## Run the native tests
+
+Run the native tests on all platforms:
+
+```sh
+rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git; \
+git clone \
+  --branch xpack-develop \
+  https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git  \
+  ~/Downloads/riscv-none-embed-gcc-xpack.git; \
+git -C ~/Downloads/riscv-none-embed-gcc-xpack.git submodule update --init --recursive
+
+rm -rf ~/Work/cache/xpack-riscv-none-embed-gcc-*
+
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/tests/scripts/native-test.sh \
+  "https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/download/v10.1.0-1.1/"
+```
+
+## Run the release CI tests
+
+Using the scripts in `tests/scripts/`, start:
+
+TODO:
+
+The test results are available from:
+
+- TODO
+
+For more details, see `tests/scripts/README.md`.
 
 Using the scripts in `tests/scripts/`, start:
 
@@ -484,7 +497,7 @@ Using the scripts in `tests/scripts/`, start:
 
 The test results are available from:
 
-- https://travis-ci.org/github/xpack-dev-tools/riscv-none-embed-gcc-xpack
+- <https://travis-ci.com/github/xpack-dev-tools/riscv-none-embed-gcc-xpack/>
 
 For more details, see `tests/scripts/README.md`.
 
@@ -503,12 +516,18 @@ In the `xpack/web-jekyll` GitHub repo:
   (it is very important to use the originals!)
 
 If any, refer to closed
-[issues](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues)
+[issues](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues/)
 as:
 
 - **[Issue:\[#1\]\(...\)]**.
 
 ### Update the SHA sums
+
+On the development machine (`wks`):
+
+```sh
+cat ~/Downloads/xpack-binaries/riscv-none-embed-gcc/*.sha
+```
 
 Copy/paste the build report at the end of the post as:
 
@@ -538,32 +557,27 @@ xpack-riscv-none-embed-gcc-10.1.0-1.1-win32-ia32.zip
 xpack-riscv-none-embed-gcc-10.1.0-1.1-win32-x64.zip
 ```
 
-## Check the SHA sums
-
-On the development machine (`wks`):
-
-```bash
-cd ~Downloads/xpack-binaries/riscv-none-embed-gcc
-cat *.sha
-```
-
 ## Update the preview Web
 
 - commit the `develop` branch of `xpack/web-jekyll` GitHub repo; use a message
   like **xPack GNU RISC-V Embedded GCC v10.1.0-1.1 released**
+- push
 - wait for the GitHub Pages build to complete
-- the preview web is https://xpack.github.io/web-preview/
+- the preview web is <https://xpack.github.io/web-preview/news/>
 
 ## Update package.json binaries
 
 - select the `xpack-develop` branch
 - run `xpm-dev binaries-update`
 
-```
-xpm-dev binaries-update -C ~/Downloads/riscv-none-embed-gcc-xpack.git '10.1.0-1.1' "${HOME}/Downloads/xpack-binaries/riscv-none-embed-gcc"
+```sh
+xpm-dev binaries-update \
+  -C "${HOME}/Downloads/riscv-none-embed-gcc-xpack.git" \
+  '10.1.0-1.1' \
+  "${HOME}/Downloads/xpack-binaries/riscv-none-embed-gcc"
 ```
 
-- open the GitHub [releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases)
+- open the GitHub [releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/)
   page and select the latest release
 - check the download counter, it should match the number of tests
 - open the `package.json` file
@@ -581,18 +595,19 @@ xpm-dev binaries-update -C ~/Downloads/riscv-none-embed-gcc-xpack.git '10.1.0-1.
 - open the `package.json` file
 - check the latest commits `npm run git-log`
 - update `CHANGELOG.md`; commit with a message like
-  _CHANGELOG: prepare npm v10.1.0-1.1.1_
+  _CHANGELOG: publish npm v10.1.0-1.1.1_
 - `npm version 10.1.0-1.1.1`; the first 5 numbers are the same as the
   GitHub release; the sixth number is the npm specific version
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`
 - push the `xpack-develop` branch to GitHub
+- push tags with `git push origin --tags`
 - `npm publish --tag next` (use `--access public` when publishing for
   the first time)
 
-The version is visible at:
+After a few moments the version will be visible at:
 
-- https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc?activeTab=versions
+- <https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc?activeTab=versions>
 
 ## Test if the npm binaries can be installed with xpm
 
@@ -601,25 +616,25 @@ will install the package on Intel Linux 64-bit, macOS and Windows 64-bit.
 
 The test results are available from:
 
-- https://travis-ci.org/github/xpack-dev-tools/riscv-none-embed-gcc-xpack
+- <https://travis-ci.com/github/xpack-dev-tools/riscv-none-embed-gcc-xpack/>
 
 For 32-bit Windows, 32-bit Intel GNU/Linux and 32-bit Arm, install manually.
 
-```console
-$ xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@next
+```sh
+xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@next
 ```
 
 ## Test the npm binaries
 
 Install the binaries on all platforms.
 
-```bash
+```sh
 xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@next
 ```
 
 On GNU/Linux systems, including Raspberry Pi, use the following commands:
 
-```bash
+```sh
 ~/opt/xPacks/@xpack-dev-tools/riscv-none-embed-gcc/10.1.0-1.1.1/.content/bin/riscv-none-embed-gcc --version
 
 riscv-none-embed-gcc (xPack GNU RISC-V Embedded GCC, 64-bit) 10.1.0
@@ -628,7 +643,7 @@ Copyright (C) 2020 Free Software Foundation, Inc.
 
 On macOS, use:
 
-```bash
+```sh
 ~/Library/xPacks/@xpack-dev-tools/riscv-none-embed-gcc/10.1.0-1.1.1/.content/bin/riscv-none-embed-gcc --version
 
 riscv-none-embed-gcc (xPack GNU RISC-V Embedded GCC, 64-bit) 10.1.0
@@ -637,8 +652,8 @@ Copyright (C) 2020 Free Software Foundation, Inc.
 
 On Windows use:
 
-```
-%HOMEPATH%\AppData\Roaming\xPacks\@xpack-dev-tools\riscv-none-embed-gcc\10.1.0-1.1.1\.content\bin\riscv-none-embed-gcc --version
+```doscon
+%USERPROFILE%\AppData\Roaming\xPacks\@xpack-dev-tools\riscv-none-embed-gcc\10.1.0-1.1.1\.content\bin\riscv-none-embed-gcc --version
 
 riscv-none-embed-gcc (xPack GNU RISC-V Embedded GCC, 64-bit) 10.1.0
 Copyright (C) 2020 Free Software Foundation, Inc.
@@ -662,12 +677,12 @@ When the release is considered stable, promote it as `latest`:
 
 - in the `master` branch, merge the `develop` branch
 - wait for the GitHub Pages build to complete
-- the result is in https://xpack.github.io/news/
+- the result is in <https://xpack.github.io/news/>
 - remember the post URL, since it must be updated in the release page
 
 ## Create the final GitHub release
 
-- go to the GitHub [releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases) page
+- go to the GitHub [releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/) page
 - check the download counter, it should match the number of tests
 - add a link to the Web page `[Continue reading »]()`; use an same blog URL
 - **disable** the **pre-release** button
@@ -681,12 +696,17 @@ When the release is considered stable, promote it as `latest`:
 - paste the link to the Web Page release
 - click the **Tweet** button
 
+## Remove pre-release binaries
+
+- got to <https://github.com/xpack-dev-tools/pre-releases/releases/tag/test>
+- remove the test binaries
+
 ## Announce to RISC-V community
 
 Add a new topic in the **Announcements** category of the
-[RISC-V forums]https://groups.google.com/a/groups.riscv.org/g/sw-dev).
+[RISC-V forums]<https://groups.google.com/a/groups.riscv.org/g/sw-dev>).
 
-```
+```console
 Subject: xPack GNU RISC-V Embedded GCC v10.1.0-1.1 released
 
 Version 10.1.0-1.1 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the SiFive release 2020-08.0 from Dec 19th, 2020.

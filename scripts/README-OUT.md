@@ -6,8 +6,8 @@ maintained by **SiFive**.
 
 For more details, please read the corresponding release pages:
 
-- https://xpack.github.io/riscv-none-embed-gcc/releases/
-- https://github.com/sifive/freedom-tools/releases
+- <https://xpack.github.io/riscv-none-embed-gcc/releases/>
+- <https://github.com/sifive/freedom-tools/releases>
 
 Thank you for using open source software,
 

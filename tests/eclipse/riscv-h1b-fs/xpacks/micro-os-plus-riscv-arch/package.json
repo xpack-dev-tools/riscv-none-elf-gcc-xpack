@@ -8,9 +8,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/micro-os-plus/riscv-arch-xpack.git"
+    "url": "https://github.com/micro-os-plus/riscv-arch-xpack.git/"
   },
-  "homepage": "https://github.com/micro-os-plus/riscv-arch-xpack",
+  "homepage": "https://github.com/micro-os-plus/riscv-arch-xpack#readme",
   "keywords": [
     "xpack",
     "c++",
@@ -25,7 +25,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/micro-os-plus/riscv-arch-xpack/issues"
+    "url": "https://github.com/micro-os-plus/riscv-arch-xpack/issues/"
   },
   "config": {},
   "dependencies": {

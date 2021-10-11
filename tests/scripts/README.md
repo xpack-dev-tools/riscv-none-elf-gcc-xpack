@@ -9,18 +9,21 @@ various scripts.
 The location of the binaries can be either the final release or one of
 the pre-release locations:
 
-- https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases
-- https://github.com/xpack-dev-tools/pre-releases/releases
+- <https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases>
+- <https://github.com/xpack-dev-tools/pre-releases/releases>
 
 ## GitHub repo
 
 The test scripts are part of the `riscv-none-embed-gcc` xPack:
 
-```
-rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git
-git clone --recurse-submodules -b xpack-develop \
+```sh
+rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git \
+
+git clone \
+  --branch xpack-develop \
   https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
-  ~/Downloads/riscv-none-embed-gcc-xpack.git
+  ~/Downloads/riscv-none-embed-gcc-xpack.git; \
+git -C ~/Downloads/riscv-none-embed-gcc-xpack.git submodule update --init --recursive
 ```
 
 The scripts are in the `tests/scripts` folder, and there is also a
@@ -30,7 +33,7 @@ common script in `helper/scripts/test-functions-source.sh`.
 
 To enable the travis tests:
 
-- login to https://travis-ci.org/ with the GitHub credentials
+- login to <https://travis-ci.com/> with the GitHub credentials
 - in the user settings, select the **3rd Party xpack Dev Tools** organization
 - enable the **riscv-none-embed-gcc-xpack** project
 - in Setting, disable **Build pushed branches** and **Build pull requests**
@@ -67,7 +70,7 @@ the `tests/scripts/native-test.sh` can directly include
 
 The test results will be available at
 
-- https://travis-ci.org/github/xpack-dev-tools/riscv-none-embed-gcc-xpack
+- <https://travis-ci.com/github/xpack-dev-tools/riscv-none-embed-gcc-xpack>
 
 ## `common-functions-source.sh`
 
@@ -79,7 +82,7 @@ Both the native and container scripts call the public function
 The script to run the test as native on the current host mainly requires
 the URL of the folder where the archives are stored:
 
-```
+```sh
 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/tests/scripts/native-test.sh \
   https://github.com/xpack-dev-tools/pre-releases/releases/download/experimental/
 ```
@@ -94,8 +97,8 @@ the archive is not downloaded each time.
 
 To force a new download, remove the cached archive:
 
-```console
-rm ~/Work/cache/xpack-riscv-none-embed-gcc-*
+```sh
+rm -rf ~/Work/cache/xpack-riscv-none-embed-gcc-*
 ```
 
 ## GCC tests
@@ -122,9 +125,9 @@ exit 0.
 
 Programatic access to GitHub is done via the v3 API:
 
-- https://developer.github.com/v3/
+- <https://developer.github.com/v3/>
 
-```
+```sh
 curl -i https://api.github.com/users/ilg-ul/orgs
 
 curl -i https://api.github.com/repos/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases
@@ -135,16 +138,16 @@ curl -v -X GET https://api.github.com/repos/xpack-dev-tools/riscv-none-embed-gcc
 For authenticated requests, preferably create a new token and pass it
 via the environment.
 
-- https://developer.github.com/v3/#authentication
+- <https://developer.github.com/v3/#authentication>
 
 ## Trigger GitHub action
 
 To trigger a GitHub action it is necessary to send an authenticated POST
 at a specific URL:
 
-- https://developer.github.com/v3/repos/#create-a-repository-dispatch-event
+- <https://developer.github.com/v3/repos/#create-a-repository-dispatch-event>
 
-```
+```sh
 curl \
   --include \
   --header "Authorization: token ${GITHUB_API_DISPATCH_TOKEN}" \
