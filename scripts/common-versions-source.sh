@@ -228,12 +228,12 @@ function build_versions()
 
       # The classical GCC libraries.
       (
-        if [ "${TARGET_PLATFORM}" == "linux" -a 
+        if [ "${TARGET_PLATFORM}" == "linux" -a \
           \( "${TARGET_ARCH}" == "arm" -o "${TARGET_ARCH}" == "arm64" \) ]
         then
           WITH_TESTS="n"
         fi
-        
+
         build_gmp "6.1.2"
       )
       build_mpfr "3.1.6"
