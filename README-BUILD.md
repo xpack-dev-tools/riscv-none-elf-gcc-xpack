@@ -287,7 +287,7 @@ network connection or a computer entering sleep.
 screen -S arm
 
 sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm64 --arm32
 ```
 
 or, for development builds:
@@ -296,7 +296,7 @@ or, for development builds:
 screen -S arm
 
 sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --arm32 --arm64
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --arm64 --arm32
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -313,6 +313,8 @@ total 702592
 -rw-rw-r-- 1 ilg ilg 358086677 Oct 25 07:31 xpack-riscv-none-embed-gcc-10.1.0-1.2-linux-arm.tar.gz
 -rw-rw-r-- 1 ilg ilg       120 Oct 25 07:31 xpack-riscv-none-embed-gcc-10.1.0-1.2-linux-arm.tar.gz.sha
 ```
+
+Note: on some versions, the 32-bit Arm binaries could not be built, since the RVV support requires more than 4 GB or RAM.
 
 ### Build the macOS binaries
 
