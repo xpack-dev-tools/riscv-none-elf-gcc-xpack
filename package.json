@@ -99,7 +99,7 @@
     "properties": {
       "appName": "GNU RISC-V Embedded GCC",
       "appLCName": "riscv-none-embed-gcc",
-      "platforms": "all",
+      "platforms": "linux-x64,linux-ia32,linux-arm64,darwin-x64,win32-x64,win32-ia32",
       "LIQUIDJS": "liquidjs '{ \"APP_NAME\": \"{{ properties.appName }}\", \"APP_LC_NAME\": \"{{ properties.appLCName }}\", \"platforms\": \"{{ properties.platforms }}\" }'"
     },
     "actions": {

@@ -81,22 +81,6 @@ jobs:
           args: /github/workspace/scripts/helper/tests/native-test.sh --image debian:buster --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
   
-  linux-arm32:
-    name: 'arm32 Linux GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
-    runs-on: [self-hosted, Linux, Arm64]
-    steps:
-      - name: 'Checkout'
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 3
-          submodules: true
-      - name: 'Run ${{ github.event.inputs.version }} docker test'
-        uses: docker://arm32v7/debian:buster
-        with:
-          entrypoint: /usr/bin/linux32
-          args: /bin/bash /github/workspace/scripts/helper/tests/native-test.sh --image arm32v7/debian:buster --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
-
-  
   macos-x64:
     name: 'x64 macOS GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
     runs-on: macos-latest
