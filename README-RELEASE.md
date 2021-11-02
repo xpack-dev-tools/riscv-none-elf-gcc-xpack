@@ -244,7 +244,7 @@ Work on the scripts until all platforms pass the build.
 
 Possibly add binutils & gdb patches.
 
-### Push the build scriptss
+### Push the build scripts
 
 - push the `xpack-develop` branch to GitHub
 - possibly push the helper project too
