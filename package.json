@@ -117,6 +117,9 @@
         "cat scripts/helper/templates/test-xpm-liquid.yml | {{ properties.LIQUIDJS }} > .github/workflows/test-xpm.yml"
         ],
       "trigger-workflow-build": "bash scripts/helper/trigger-workflow-build.sh",
+      "trigger-workflow-build-xbbi": "bash scripts/helper/trigger-workflow-build.sh --machine xbbi",
+      "trigger-workflow-build-xbba": "bash scripts/helper/trigger-workflow-build.sh --machine xbba",
+      "trigger-workflow-build-xbbm": "bash scripts/helper/trigger-workflow-build.sh --machine xbbm",
       "trigger-workflow-test-prime": "bash scripts/helper/tests/trigger-workflow-test-prime.sh",
       "trigger-workflow-test-docker-linux-intel": "bash scripts/helper/tests/trigger-workflow-test-docker-linux-intel.sh",
       "trigger-workflow-test-docker-linux-arm": "bash scripts/helper/tests/trigger-workflow-test-docker-linux-arm.sh",
