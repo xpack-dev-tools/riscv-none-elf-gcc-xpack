@@ -730,6 +730,9 @@ function run_tests()
 {
   local gcc_target_prefix="riscv-none-embed"
 
+  echo
+  env | sort
+  
   test_binutils
 
   test_gcc

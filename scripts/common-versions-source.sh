@@ -79,7 +79,7 @@ function build_versions()
 
   # ---------------------------------------------------------------------------
 
-  GCC_VERSION="$(echo "${RELEASE_VERSION}" | sed -e 's|-[0-9]*||')"
+  GCC_VERSION="$(echo "${RELEASE_VERSION}" | sed -e 's|-.*||')"
 
   if [ "${TARGET_PLATFORM}" == "win32" ]
   then
