@@ -947,9 +947,25 @@ function build_gcc_final()
           # to accomodate for the huge files.
           run_verbose make -j 1 INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0" all-gcc
 
-          # Compile the libraries.
-          run_verbose make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
-          # make INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
+          if [ "${TARGET_PLATFORM}" == "darwin" ]
+          then
+            if [ "${IS_DEVELOP}" == "y" ]
+            then
+              # Compile the libraries.
+              run_verbose make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
+            else
+              # Retry, parallel builds do fail, headers are probably
+              # used before being installed. For example:
+              # libstdc++-v3/include/chrono:43:10: fatal error: bits/parse_numbers.h: No such file or directory
+              run_verbose make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0" \
+              || run_verbose make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0" \
+              || run_verbose make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0" \
+              || run_verbose make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
+            fi
+          else
+            # Compile the libraries.
+            run_verbose make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
+          fi
 
           if [ "${WITH_STRIP}" == "y" ]
           then
