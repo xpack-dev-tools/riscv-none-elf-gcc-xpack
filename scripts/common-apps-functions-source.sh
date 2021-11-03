@@ -67,10 +67,6 @@ function build_binutils()
       then
         LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
       fi
-      if [ "${IS_DEVELOP}" == "y" ]
-      then
-        LDFLAGS+=" -v"
-      fi
 
       export CPPFLAGS
       export CFLAGS
@@ -296,10 +292,6 @@ function build_gcc_first()
       then
         LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
       fi      
-      if [ "${IS_DEVELOP}" == "y" ]
-      then
-        LDFLAGS+=" -v"
-      fi
 
       CFLAGS_FOR_TARGET="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}" 
       CXXFLAGS_FOR_TARGET="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}" 
@@ -765,10 +757,6 @@ function build_gcc_final()
       fi      
       # Do not add CRT_glob.o here, it will fail with already defined,
       # since it is already handled by --enable-mingw-wildcard.
-      if [ "${IS_DEVELOP}" == "y" ]
-      then
-        LDFLAGS+=" -v"
-      fi
 
       local optimize="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}"
       if [ "$1" == "-nano" ]
@@ -1192,11 +1180,6 @@ function build_gdb()
         LDFLAGS="${XBB_LDFLAGS_APP}"
         LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
         LIBS=""
-      fi
-
-      if [ "${IS_DEVELOP}" == "y" ]
-      then
-        LDFLAGS+=" -v"
       fi
 
       if [ "${TARGET_PLATFORM}" == "darwin" ]
