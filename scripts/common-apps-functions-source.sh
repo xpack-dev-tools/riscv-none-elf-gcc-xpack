@@ -228,31 +228,22 @@ function test_binutils()
   )
 }
 
-function build_gcc_first()
+function download_gcc()
 {
-  local gcc_first_folder_name="${GCC_FOLDER_NAME}-first"
-
-  mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}"
-
-  local gcc_first_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_first_folder_name}-installed"
-  if [ ! -f "${gcc_first_stamp_file_path}" ]
+  if [ ! -d "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" ]
   then
-
-    if [ ! -d "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" ]
-    then
-      (
-        cd "${SOURCES_FOLDER_PATH}"
-        if [ -n "${GCC_GIT_URL}" ]
-        then
-          git_clone "${GCC_GIT_URL}" "${GCC_GIT_BRANCH}" \
-            "${GCC_GIT_COMMIT}" "${GCC_SRC_FOLDER_NAME}"
-        elif [ -n "${GCC_ARCHIVE_URL}" ]
-        then
-          download_and_extract "${GCC_ARCHIVE_URL}" \
-            "${GCC_ARCHIVE_NAME}" "${GCC_SRC_FOLDER_NAME}"
-        fi
-      )
-    fi
+    (
+      cd "${SOURCES_FOLDER_PATH}"
+      if [ -n "${GCC_GIT_URL}" ]
+      then
+        git_clone "${GCC_GIT_URL}" "${GCC_GIT_BRANCH}" \
+          "${GCC_GIT_COMMIT}" "${GCC_SRC_FOLDER_NAME}"
+      elif [ -n "${GCC_ARCHIVE_URL}" ]
+      then
+        download_and_extract "${GCC_ARCHIVE_URL}" \
+          "${GCC_ARCHIVE_NAME}" "${GCC_SRC_FOLDER_NAME}"
+      fi
+    )
 
     if [ -n "${GCC_MULTILIB}" ]
     then
@@ -270,10 +261,24 @@ function build_gcc_first()
         # Change IFS temporarily so that we can pass a simple string of
         # whitespace delimited multilib tokens to multilib-generator
         local IFS=$' '
-        ./multilib-generator ${GCC_MULTILIB} > "${GCC_MULTILIB_FILE}"
+        run_verbose ./multilib-generator ${GCC_MULTILIB} > "${GCC_MULTILIB_FILE}"
         cat "${GCC_MULTILIB_FILE}"
       )
     fi
+  fi
+}
+
+function build_gcc_first()
+{
+  local gcc_first_folder_name="${GCC_FOLDER_NAME}-first"
+
+  mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}"
+
+  local gcc_first_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_first_folder_name}-installed"
+  if [ ! -f "${gcc_first_stamp_file_path}" ]
+  then
+
+    download_gcc
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${gcc_first_folder_name}"
@@ -736,21 +741,7 @@ function build_gcc_final()
   if [ ! -f "${gcc_final_stamp_file_path}" ]
   then
 
-    if [ ! -d "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" ]
-    then
-      (
-        cd "${SOURCES_FOLDER_PATH}"
-        if [ -n "${GCC_GIT_URL}" ]
-        then
-          git_clone "${GCC_GIT_URL}" "${GCC_GIT_BRANCH}" \
-            "${GCC_GIT_COMMIT}" "${GCC_SRC_FOLDER_NAME}"
-        elif [ -n "${GCC_ARCHIVE_URL}" ]
-        then
-          download_and_extract "${GCC_ARCHIVE_URL}" \
-            "${GCC_ARCHIVE_NAME}" "${GCC_SRC_FOLDER_NAME}"
-        fi
-      )
-    fi
+    download_gcc
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${gcc_final_folder_name}"
