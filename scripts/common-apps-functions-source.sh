@@ -1068,7 +1068,7 @@ function test_gcc()
     run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -dumpmachine
     run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -print-multi-lib
     run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -print-multi-lib | wc -l | sed -e 's| ||g'
-    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -dumpspecs
+    # run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -dumpspecs
     run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -dumpspecs | wc -l | sed -e 's| ||g'
 
     local tmp=$(mktemp /tmp/gcc-test.XXXXX)
