@@ -224,6 +224,8 @@ function test_binutils()
   )
 }
 
+# -----------------------------------------------------------------------------
+
 function download_gcc()
 {
   if [ ! -d "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" ]
@@ -395,6 +397,8 @@ function build_gcc_first()
     echo "Component gcc first stage already installed."
   fi
 }
+
+# -----------------------------------------------------------------------------
 
 # For the nano build, call it with "-nano".
 # $1="" or $1="-nano"
@@ -1112,6 +1116,8 @@ __EOF__
     rm -rf "${tmp}"
   )
 }
+
+# -----------------------------------------------------------------------------
 
 # Called multile times, with and without python support.
 # $1="" or $1="-py" or $1="-py3"
