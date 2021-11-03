@@ -259,7 +259,9 @@ function download_gcc()
         # Change IFS temporarily so that we can pass a simple string of
         # whitespace delimited multilib tokens to multilib-generator
         local IFS=$' '
-        run_verbose ./multilib-generator ${GCC_MULTILIB} > "${GCC_MULTILIB_FILE}"
+        echo
+        echo "[./multilib-generator ${GCC_MULTILIB}]"
+        ./multilib-generator ${GCC_MULTILIB} > "${GCC_MULTILIB_FILE}"
         cat "${GCC_MULTILIB_FILE}"
       )
     fi
