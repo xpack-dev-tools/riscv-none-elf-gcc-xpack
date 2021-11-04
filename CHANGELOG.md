@@ -3,7 +3,7 @@
 
 Entries in this file are in reverse chronological order.
 
-## 2021-11-03
+## 2021-11-04
 
 - v10.1.0-1.2 released
 
