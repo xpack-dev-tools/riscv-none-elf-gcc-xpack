@@ -298,8 +298,8 @@ in the environment.
 
 These commands use the `xpack-develop` branch of this repo.
 
-The full builds take about 18-19 hours
-to complete.
+The Arm build take about 16-17 hours
+to complete, and the other about 11 hours.
 
 The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/actions/) page.
