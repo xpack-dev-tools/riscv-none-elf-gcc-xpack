@@ -366,7 +366,8 @@ For this, on each platform (Mac, GNU/Linux 64/32, Windows 64/32):
 - download archive from
   [pre-releases](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test);
 - unpack the archive in `Desktop` or in `Downloads`;
-- on macOS, remove the `com.apple.quarantine` attribute
+- on macOS it is necessarry to remove the `com.apple.quarantine`
+  attribute of archive and possibly the expanded folder:
 
 ```sh
 xattr -dr com.apple.quarantine xpack-riscv-none-embed-gcc-*
