@@ -1,38 +1,45 @@
 ---
-title:  xPack OpenOCD {{ RELEASE_VERSION }} released
+title:  xPack GNU RISC-V Embedded GCC {{ RELEASE_VERSION }} released
 
 TODO: select one summary
 
-summary: "Version **{{ RELEASE_VERSION }}** is a maintenance release; it updates to
-the latest upstream master."
+summary: "Version **{{ RELEASE_VERSION }}** is a maintenance release; it ...."
 
-summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the upstream release."
+summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the upstream Sifive release."
 
+sifive_version: v2020.12.0
+sifive_date: April 7, 2021
 version: {{ RELEASE_VERSION }}
 npm_subversion: 1
-download_url: https://github.com/xpack-dev-tools/openocd-xpack/releases/tag/v{{ RELEASE_VERSION }}/
+download_url: https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/tag/v{{ RELEASE_VERSION }}/
 
 date:   {{ RELEASE_DATE }}
 
 categories:
   - releases
-  - openocd
+  - riscv-none-embed-gcc
 
 tags:
   - releases
-  - openocd
+  - riscv
+  - riscv-none-embed-gcc
+  - gcc
+  - binaries
+  - c++
 
 ---
 
-[The xPack OpenOCD](https://xpack.github.io/openocd/)
-is a standalone cross-platform binary distribution of
-[OpenOCD](http://openocd.org).
+[The xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-embed-gcc/)
+is a standalone cross-platform binary distribution of the
+[SiFive RISC-V GCC](https://github.com/sifive/freedom-tools/releases).
 
 There are separate binaries for **Windows** (Intel 32/64-bit),
-**macOS** (Intel 64-bit) and **GNU/Linux** (Intel 32/64-bit, Arm 32/64-bit).
+**macOS** (Intel 64-bit) and **GNU/Linux** (Intel 32/64-bit, Arm 64-bit).
 
 {% raw %}{% include note.html content="The main targets for the Arm binaries
 are the **Raspberry Pi** class devices." %}{% endraw %}
+
+{% raw %}{% include note.html content="Due to memory limitations during the build, there is no Arm 32-bit image." %}{% endraw %}
 
 ## Download
 
@@ -43,9 +50,9 @@ The binary files are available from GitHub [Releases]({% raw %}{{ page.download_
 - Intel GNU/Linux 32/64-bit: any system with **GLIBC 2.15** or higher
   (like Ubuntu 12 or later, Debian 8 or later, RedHat/CentOS 7 later,
   Fedora 20 or later, etc)
-- Arm GNU/Linux 32/64-bit: any system with **GLIBC 2.23** or higher
+- Arm GNU/Linux 64-bit: any system with **GLIBC 2.23** or higher
   (like Ubuntu 16 or later, Debian 9 or later, RedHat/CentOS 8 or later,
-  Fedora 24 or later, etc)
+  Fedora 24 or later, etc); (there is no Arm 32-bit image!);
 - Intel Windows 32/64-bit: Windows 7 with the Universal C Runtime
   ([UCRT](https://support.microsoft.com/en-us/topic/update-for-universal-c-runtime-in-windows-c0514201-7fe6-95a3-b0a5-287930f3560c)),
   Windows 8, Windows 10
@@ -53,16 +60,16 @@ The binary files are available from GitHub [Releases]({% raw %}{{ page.download_
 
 ## Install
 
-The full details of installing the **xPack OpenOCD** on various platforms
+The full details of installing the **xPack GNU RISC-V Embedded GCC** on various platforms
 are presented in the separate
-[Install]({% raw %}{{ site.baseurl }}{% endraw %}/openocd/install/) page.
+[Install]({% raw %}{{ site.baseurl }}{% endraw %}/riscv-none-embed-gcc/install/) page.
 
 ### Easy install
 
-The easiest way to install OpenOCD is with
+The easiest way to install GNU RISC-V Embedded GCC is with
 [`xpm`]({% raw %}{{ site.baseurl }}{% endraw %}/xpm/)
 by using the **binary xPack**, available as
-[`@xpack-dev-tools/openocd`](https://www.npmjs.com/package/@xpack-dev-tools/openocd)
+[`@xpack-dev-tools/riscv-none-embed-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc)
 from the [`npmjs.com`](https://www.npmjs.com) registry.
 
 With the `xpm` tool available, installing
@@ -73,7 +80,7 @@ a dependency for a project is quite easy:
 cd my-project
 xpm init # Only at first use.
 
-xpm install @xpack-dev-tools/openocd@latest
+xpm install @xpack-dev-tools/riscv-none-embed-gcc@latest
 
 ls -l xpacks/.bin
 ```
@@ -81,14 +88,14 @@ ls -l xpacks/.bin
 To install this specific version, use:
 
 ```sh
-xpm install @xpack-dev-tools/openocd@{% raw %}{{ page.version }}.{{ page.npm_subversion }}{% endraw %}
+xpm install @xpack-dev-tools/riscv-none-embed-gcc@{% raw %}{{ page.version }}.{{ page.npm_subversion }}{% endraw %}
 ```
 
 For xPacks aware tools, like the **Eclipse Embedded C/C++ plug-ins**,
-it is also possible to install OpenOCD globally, in the user home folder.
+it is also possible to install GNU RISC-V Embedded GCC globally, in the user home folder.
 
 ```sh
-xpm install --global @xpack-dev-tools/openocd@latest
+xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@latest
 ```
 
 Eclipse will automatically
@@ -102,38 +109,77 @@ To remove the links from the current project:
 ```sh
 cd my-project
 
-xpm uninstall @xpack-dev-tools/openocd
+xpm uninstall @xpack-dev-tools/riscv-none-embed-gcc
 ```
 
 To completely remove the package from the global store:
 
 ```sh
-xpm uninstall --global @xpack-dev-tools/openocd
+xpm uninstall --global @xpack-dev-tools/riscv-none-embed-gcc
 ```
 
 ## Compliance
 
-The xPack OpenOCD generally follows the official
-[OpenOCD](http://openocd.org) releases.
+The xPack GNU RISC-V Embedded GCC generally follows the official
+SiFive RISC-V GCC [releases](https://github.com/sifive/freedom-tools/releases)),
+with as little differences as possible.
 
 The current version is based on:
 
-TODO: update commit id and date.
-
-- OpenOCD version 0.11.0, the development commit
-[<xxxxxxx>](https://github.com/xpack-dev-tools/openocd/commit/<xxxxxxxxxxxxx>)
-from <ddddddddd>.
+- SiFive RISC-V GCC release **{% raw %}{{ page.sifive_version }}{% endraw %}** from {% raw %}{{ page.sifive_date }}{% endraw %},
+and includes the SiFive extensions, including the RVV vector support.
 
 ## Changes
 
 There are no functional changes.
 
-Compared to the upstream, the following changes were applied:
+### Improvements
 
-- a configure option was added to configure branding (`--enable-branding`)
-- the `src/openocd.c` file was edited to display the branding string
-- the `contrib/60-openocd.rules` file was simplified to avoid protection
-  related issues.
+Compared to the original SiFive version, the **same architecture and API**
+options are supported, and there are minimal functional changes
+
+- `libgloss` was removed from the list of libraries always linked to the
+  application, since it issues `ECALL`
+  instructions that fail in bare metal environments
+
+### newlib-nano
+
+Support for **newlib-nano** is available using the
+`--specs=nano.specs` option. For better results, this option must be
+added to both compile and link time.
+
+### nosys.specs
+
+If no syscalls are needed, `--specs=nosys.specs` can be used at link
+time to provide empty implementations for the POSIX system calls.
+
+### Compile options
+
+The libraries are compiled with `-O2 -mcmodel=medany`. The nano version is
+compiled with `-Os -mcmodel=medany`.
+
+{% raw %}{% include important.html content="It is mandatory for the applications to
+be compiled with
+`-mcmodel=medany`, otherwise the link will fail." %}{% endraw %}
+
+### Python
+
+Support for Python scripting was added to GDB. This distribution provides
+a separate binary, `riscv-none-embed-gdb-py3` with
+support for **Python 3.7**.
+
+The Python 3 run-time is included, so GDB does not need any version of
+Python to be installed, and is insensitive to the presence of other
+versions.
+
+Support for Python 2 was discontinued.
+
+### Text User Interface (TUI)
+
+Support for TUI was added to GDB. The `ncurses` library (v6.2) was added to
+the distribution.
+
+{% raw %}{% include note.html content="TUI is not available on Windows." %}{% endraw %}
 
 ## Bug fixes
 
@@ -145,7 +191,12 @@ Compared to the upstream, the following changes were applied:
 
 ## Known problems
 
-- none
+- due to the very large number of instructions added by the vector support
+  (~70K), the compiler sources became too large and it was not possible to build the Arm 32-bit image
+  ([#229](https://github.com/riscv/riscv-gcc/issues/229))
+- the archive size got too big for the Windows 32-bit node to handle, and
+  `xpm install` may fail with _RangeError: Array buffer allocation failed_;
+  the 64-bit systems are not affected.
 
 ## Shared libraries
 
@@ -194,35 +245,21 @@ The scripts used to build this distribution are in:
 - `distro-info/scripts`
 
 For the prerequisites and more details on the build procedure, please see the
-[How to build](https://github.com/xpack-dev-tools/openocd-xpack/blob/xpack/README-BUILD.md) page.
+[How to build](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-BUILD.md) page.
 
 ## CI tests
 
 Before publishing, a set of simple tests were performed on an exhaustive
 set of platforms. The results are available from:
 
-- [GitHub Actions](https://github.com/xpack-dev-tools/openocd-xpack/actions/)
-- [travis-ci.com](https://app.travis-ci.com/github/xpack-dev-tools/openocd-xpack/builds/)
+- [GitHub Actions](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/actions/)
+- [travis-ci.com](https://app.travis-ci.com/github/xpack-dev-tools/riscv-none-embed-gcc-xpack/builds/)
 
 ## Tests
 
-The binaries were testes on Windows 10 Pro 32/64-bit, Intel Ubuntu 18
-LTS 64-bit, Intel Xubuntu 18 LTS 32-bit and macOS 10.15.
-
-Install the package with xpm.
-
-The simple test, consists in starting the binaries
-only to identify the STM32F4DISCOVERY board.
-
-```sh
-.../xpack-openocd-{{ RELEASE_VERSION }}/bin/openocd -f board/stm32f4discovery.cfg
-```
-
-A more complex test consist in programming and debugging a simple blinky
-application on the STM32F4DISCOVERY board. The binaries were
-those generated by
-[simple Eclipse projects](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/tree/xpack/tests/eclipse)
-available in the **xPack GNU Arm Embedded GCC** project.
+The binaries were tested on a variety of platforms,
+but mainly to check the integrity of the
+build, not the compiler functionality.
 
 ## Checksums
 
