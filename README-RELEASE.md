@@ -363,7 +363,16 @@ functional.
 
 For this, on each platform (Mac, GNU/Linux 64/32, Windows 64/32):
 
-- unpack the archive in `Desktop` or in `Downloads`, and rename the version
+- download archive from
+  [pre-releases](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test);
+- unpack the archive in `Desktop` or in `Downloads`;
+- on macOS, remove the `com.apple.quarantine` attribute
+
+```sh
+xattr -dr com.apple.quarantine xpack-riscv-none-embed-gcc-*
+```
+
+- rename the version
   folder, by replacing a dash with a space; this will test paths with spaces;
   on Windows the current paths always use spaces, so renaming is not needed;
 - clone this repo locally; on Windows use the Git console;
@@ -380,7 +389,8 @@ git -C ~/Downloads/riscv-none-embed-gcc-xpack.git submodule update --init --recu
   the Eclipse projects available in the
   `tests/eclipse` folder of the build repo; more details in the
   [README.md](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/tests/eclipse/README.md)
-- define the **Workspace RISC-V Toolchain path** to use the `Downloads`
+- define the **Eclipse** → **Preferences...** → **MCU** →
+  **Workspace RISC-V Toolchain path** to use the `Downloads`
   temporary location
 - to test the compiler: for all projects
   - remove all build folders, or **Clean all**
@@ -395,15 +405,7 @@ git -C ~/Downloads/riscv-none-embed-gcc-xpack.git submodule update --init --recu
   - start (Resume)
   - stop (Terminate)
   - (don't miss the LTO cases, since in the past they had problems)
-- to test the Python debugger, start it with `--version`; on Windows, to
-  test with different versions, set the path with:
-
-Note: on macOS it is necessarry to remove the `com.apple.quarantine`
-attribute of archive and possibly the expanded folder:
-
-```sh
-xattr -dr com.apple.quarantine xpack-riscv-none-embed-gcc-*
-```
+- to test the Python debugger, start it with `--version`
 
 ## Create a new GitHub pre-release draft
 
