@@ -43,6 +43,7 @@ function build_versions()
 
   BINUTILS_PATCH=""
   GDB_PATCH=""
+  GCC_PATCH=""
 
   WITH_GDB_PY2=""
   WITH_GDB_PY3=""

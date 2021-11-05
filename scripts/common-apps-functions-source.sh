@@ -239,7 +239,8 @@ function download_gcc()
       elif [ -n "${GCC_ARCHIVE_URL}" ]
       then
         download_and_extract "${GCC_ARCHIVE_URL}" \
-          "${GCC_ARCHIVE_NAME}" "${GCC_SRC_FOLDER_NAME}"
+          "${GCC_ARCHIVE_NAME}" "${GCC_SRC_FOLDER_NAME}" \
+          "${GCC_PATCH}"
       fi
     )
 
