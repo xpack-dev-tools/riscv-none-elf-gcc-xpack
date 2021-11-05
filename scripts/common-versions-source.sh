@@ -89,7 +89,301 @@ function build_versions()
 
   # In reverse chronological order.
   # Keep them in sync with https://github.com/sifive/freedom-tools/releases.
-  if [[ "${RELEASE_VERSION}" =~ 10\.1\.0-1\.* ]]
+  if [[ "${RELEASE_VERSION}" =~ 10\.2\.0-1\.* ]]
+  then
+    # This is similar to SiFive 2020.12.0 release.
+    # https://github.com/sifive/freedom-tools/releases
+    # https://github.com/sifive/freedom-tools/releases/tag/v2020.12.0
+    # https://github.com/sifive/freedom-tools/
+    # https://github.com/sifive/freedom-tools/tree/v2020.12.0
+
+    SIFIVE_RELEASE="v2020.12.0"
+
+    # Binutils 2.35.0 with SiFive CLIC patches (--branch sifive-rvv-1.0.x-zfh-rvb)
+    # https://github.com/sifive/riscv-binutils-gdb/tree/75d2236ce26a3048f52bbd5186602e27bd635e2b
+
+    # GCC 10.2.0 with SiFive CLIC patches (--branch sifive-gcc-10.2.0)
+    # https://github.com/sifive/riscv-gcc/tree/37e9e5efeda593e0ff594105c83da67d2d2832e5
+
+    # GDB 10.1 from SiFive branch (--branch sifive-gdb-rvv-1.0.x-zfh-rvb-with-sim)
+    # https://github.com/sifive/riscv-binutils-gdb/tree/1ac8c2ffcb4a0a98d0597e71f9313352bda11ee3
+
+    # Newlib 4.1.0 from SiFive branch (--branch sifive-newlib-4.1.0-rvv)
+    # https://github.com/sifive/riscv-newlib/tree/aa755e658de9fc74678bd63a6ae556e66f636c6c
+
+    # -------------------------------------------------------------------------
+
+    BINUTILS_VERSION="2.35.0"
+    # From gcc/BASE_VER
+    GCC_VERSION="10.2.0"
+    # From gdb/VERSION.in
+    GDB_VERSION="10.1.0"
+    # From newlib/configure, VERSION=
+    NEWLIB_VERSION="4.1.0"
+
+    # -------------------------------------------------------------------------
+
+    if [ "${WITHOUT_MULTILIB}" == "y" ]
+    then
+      MULTILIB_FLAGS="--disable-multilib"
+      # MULTILIB_FLAGS=""
+
+      # Minimal list, for tests only.
+      GCC_MULTILIB=${GCC_MULTILIB:-"rv32imac-ilp32-- rv64imac-lp64--"}
+    else
+      # By default it searches the definitions in "t-elf-multilib"
+      MULTILIB_FLAGS=""
+
+      # SiFive list in `modules/freedom-gcc-metal/Makefile`.
+      # Note: previous versions manually added rv32imaf-ilp32f--; not any more.
+      GCC_MULTILIB=${GCC_MULTILIB:-"\
+        rv32ec-ilp32e-- \
+        rv32ec_zba_zbb-ilp32e-- \
+        rv32eac-ilp32e-- \
+        rv32eac_zba_zbb-ilp32e-- \
+        rv32emc-ilp32e-- \
+        rv32emc_zba_zbb-ilp32e-- \
+        rv32emac-ilp32e-- \
+        rv32emac_zba_zbb-ilp32e-- \
+        rv32ic-ilp32-- \
+        rv32ic_zba_zbb-ilp32-- \
+        rv32iac-ilp32-- \
+        rv32iac_zba_zbb-ilp32-- \
+        rv32imc-ilp32-- \
+        rv32imc_zba_zbb-ilp32-- \
+        rv32imac-ilp32-- \
+        rv32imac_zba_zbb-ilp32-- \
+        rv32imfc-ilp32f-- \
+        rv32imfc_zba_zbb-ilp32f-- \
+        rv32imafc-ilp32f-- \
+        rv32imafc_zba_zbb-ilp32f-- \
+        rv32imfdc-ilp32d-- \
+        rv32imfdc_zba_zbb-ilp32d-- \
+        rv32imafdc-ilp32d-- \
+        rv32imafdc_zba_zbb-ilp32d-- \
+        rv64ic-lp64-- \
+        rv64ic_zba_zbb-lp64-- \
+        rv64iac-lp64-- \
+        rv64iac_zba_zbb-lp64-- \
+        rv64imc-lp64-- \
+        rv64imc_zba_zbb-lp64-- \
+        rv64imac-lp64-- \
+        rv64imac_zba_zbb-lp64-- \
+        rv64imfc-lp64f-- \
+        rv64imfc_zba_zbb-lp64f-- \
+        rv64imafc-lp64f-- \
+        rv64imafc_zba_zbb-lp64f-- \
+        rv64imfdc-lp64d-- \
+        rv64imfdc_zba_zbb-lp64d-- \
+        rv64imafdc-lp64d-- \
+        rv64imafdc_zba_zbb-lp64d-- \
+        --cmodel=compact \
+      "}
+    fi
+
+    GCC_MULTILIB_FILE=${GCC_MULTILIB_FILE:-"t-elf-multilib"}
+
+    # -------------------------------------------------------------------------
+
+    if [ "${USE_GITS}" != "y" ]
+    then
+
+      GH_RELEASE="${RELEASE_VERSION}"
+
+      BINUTILS_GH_RELEASE=${BINUTILS_GH_RELEASE:-"${GH_RELEASE}"}
+      GCC_GH_RELEASE=${GCC_GH_RELEASE:-"${GH_RELEASE}"}
+      NEWLIB_GH_RELEASE=${NEWLIB_GH_RELEASE:-"${GH_RELEASE}"}
+      # Same, with a `-gdb` suffix added.
+      GDB_GH_RELEASE=${GDB_GH_RELEASE:-"${GH_RELEASE}-gdb"}
+
+    else
+
+      BINUTILS_GIT_BRANCH=${BINUTILS_GIT_BRANCH:-"${SIFIVE_RELEASE}-xpack"}
+      BINUTILS_GIT_COMMIT=${BINUTILS_GIT_COMMIT:-"f2d8362c0e7233487df2b5868e7f98f0c88cf6d7"}
+
+      GCC_GIT_BRANCH=${GCC_GIT_BRANCH:-"${SIFIVE_RELEASE}-xpack"}
+      GCC_GIT_COMMIT=${GCC_GIT_COMMIT:-"a17546d996eedc6dab69ea6f5e984fd058a07a31"}
+
+      NEWLIB_GIT_BRANCH=${NEWLIB_GIT_BRANCH:-"${SIFIVE_RELEASE}-xpack"}
+      NEWLIB_GIT_COMMIT=${NEWLIB_GIT_COMMIT:-"7062f2cdac9982a89c8d4245ff9cb8ad097120f5"}
+
+      GDB_SRC_FOLDER_NAME=${GDB_SRC_FOLDER_NAME:-"binutils-gdb.git"}
+      GDB_GIT_BRANCH=${GDB_GIT_BRANCH:-"${SIFIVE_RELEASE}-gdb-xpack"}
+      GDB_GIT_COMMIT=${GDB_GIT_COMMIT:-"cf068aa4aedee1ea37cb12522708bff18e0b9db7"}
+
+    fi
+    
+    # -------------------------------------------------------------------------
+
+    WITH_GDB_PY3="y"
+
+    PYTHON3_VERSION="3.7.9"
+
+    BINUTILS_PATCH="binutils-${BINUTILS_VERSION}.patch"
+    GDB_PATCH="gdb-${GDB_VERSION}.patch"
+    GCC_PATCH="gcc-${GCC_VERSION}.patch"
+
+    (
+      xbb_activate
+
+      prepare_variables
+
+      # ---------------------------------------------------------------------------
+      # Build dependent libraries.
+
+      # For better control, without it some components pick the lib packed 
+      # inside the archive.
+      build_zlib "1.2.8"
+
+      # The classical GCC libraries.
+      (
+        if [ "${TARGET_PLATFORM}" == "linux" -a \
+          \( "${TARGET_ARCH}" == "arm" -o "${TARGET_ARCH}" == "arm64" \) ]
+        then
+          WITH_TESTS="n"
+        fi
+
+        build_gmp "6.1.2"
+      )
+      build_mpfr "3.1.6"
+      build_mpc "1.0.3"
+      build_isl "0.18"
+
+      # More libraries.
+      # Fails on mingw
+      ## build_libelf "0.8.13"
+      build_libmpdec "2.5.0" # Used by Python
+      build_expat "2.2.5"
+      build_libiconv "1.15"
+      build_xz "5.2.3"
+
+      build_gettext "0.19.8.1"
+
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        if [ "${WITH_GDB_PY3}" == "y" ]
+        then
+          # Shortcut, use the existing pyton.exe instead of building
+          # if from sources. It also downloads the sources.
+          download_python3_win "${PYTHON3_VERSION}"
+
+          add_python3_win_syslibs
+        fi
+      else # linux or darwin
+        # Used by ncurses. Fails on macOS.
+        if [ "${TARGET_PLATFORM}" == "linux" ]
+        then
+          build_gpm "1.20.7"
+        fi
+
+        build_ncurses "6.2"
+
+        build_readline "8.0" # requires ncurses
+
+        build_bzip2 "1.0.8"
+        build_libffi "3.3"
+
+        # We cannot rely on a python shared library in the system, even
+        # the custom build from sources does not have one.
+
+        if [ "${WITH_GDB_PY3}" == "y" ]
+        then
+          # Required by a Python 3 module.
+          build_sqlite "3.32.3"
+
+          # Replacement for the old libcrypt.so.1; required by Python 3.
+          build_libxcrypt "4.4.17"
+          build_openssl "1.1.1h"
+
+          build_python3 "${PYTHON3_VERSION}"
+
+          add_python3_syslibs
+        fi
+      fi
+
+      # ---------------------------------------------------------------------------
+
+      # The task descriptions are from the ARM build script.
+
+      # Task [III-0] /$HOST_NATIVE/binutils/
+      # Task [IV-1] /$HOST_MINGW/binutils/
+      build_binutils "${BINUTILS_VERSION}"
+      # copy_dir to libs included above
+
+      if [ "${TARGET_PLATFORM}" != "win32" ]
+      then
+
+        # Task [III-1] /$HOST_NATIVE/gcc-first/
+        build_gcc_first
+
+        # Task [III-2] /$HOST_NATIVE/newlib/
+        build_newlib ""
+        # Task [III-3] /$HOST_NATIVE/newlib-nano/
+        build_newlib "-nano"
+
+        # Task [III-4] /$HOST_NATIVE/gcc-final/
+        build_gcc_final ""
+
+        # Task [III-5] /$HOST_NATIVE/gcc-size-libstdcxx/
+        build_gcc_final "-nano"
+
+      else
+
+        # Task [IV-2] /$HOST_MINGW/copy_libs/
+        copy_linux_libs
+
+        # Task [IV-3] /$HOST_MINGW/gcc-final/
+        build_gcc_final ""
+
+      fi
+
+      # Task [III-6] /$HOST_NATIVE/gdb/
+      # Task [IV-4] /$HOST_MINGW/gdb/
+      build_gdb ""
+
+      if [ "${WITH_GDB_PY3}" == "y" ]
+      then
+        build_gdb "-py3"
+      fi
+    )
+
+    # Task [III-7] /$HOST_NATIVE/build-manual
+    # Nope, the build process is different.
+
+    # ---------------------------------------------------------------------------
+
+    # Task [III-8] /$HOST_NATIVE/pretidy/
+    # Task [IV-5] /$HOST_MINGW/pretidy/
+    tidy_up
+
+    # Task [III-9] /$HOST_NATIVE/strip_host_objects/
+    # Task [IV-6] /$HOST_MINGW/strip_host_objects/
+
+    # strip_binaries # In common code.
+
+    # Must be done after gcc 2 make install, otherwise some wrong links
+    # are created in libexec.
+    # Must also be done after strip binaries, since strip after patchelf
+    # damages the binaries.
+
+    # prepare_app_folder_libraries # In common code.
+
+    if [ "${TARGET_PLATFORM}" != "win32" ]
+    then
+      # Task [III-10] /$HOST_NATIVE/strip_target_objects/
+      strip_libs
+    fi
+
+    final_tunings
+
+    # Task [IV-7] /$HOST_MINGW/installation/
+    # Nope, no setup.exe.
+
+    # Task [III-11] /$HOST_NATIVE/package_tbz2/
+    # Task [IV-8] /Package toolchain in zip format/
+
+    # -------------------------------------------------------------------------
+  elif [[ "${RELEASE_VERSION}" =~ 10\.1\.0-1\.* ]]
   then
     # This is similar to SiFive 2020.08.0 release.
     # https://github.com/sifive/freedom-tools/releases

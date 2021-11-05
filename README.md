@@ -117,17 +117,17 @@ For more details please read the
 ### Versioning
 
 The version strings used by the GCC project are three number string
-like `10.1.0`; to this string the xPack distribution adds a four number,
+like `10.2.0`; to this string the xPack distribution adds a four number,
 as the SiFive version,
 but since semver allows only three numbers, all additional ones can
 be added only as pre-release strings, separated by a dash,
-like `10.1.0-1.2`. The fifth number is the xPack release.
+like `10.2.0-1.1`. The fifth number is the xPack release.
 When published as a npm package, the version gets
-a sixth number, like `10.1.0-1.2.1`.
+a sixth number, like `10.2.0-1.1.1`.
 
 Since adherance of third party packages to semver is not guaranteed,
-it is recommended to use semver expressions like `^10.1.0` and `~10.1.0`
-with caution, and prefer exact matches, like `10.1.0-1.2.1`.
+it is recommended to use semver expressions like `^10.2.0` and `~10.2.0`
+with caution, and prefer exact matches, like `10.2.0-1.1.1`.
 
 ## Maintainer info
 

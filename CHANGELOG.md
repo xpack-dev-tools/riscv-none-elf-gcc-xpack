@@ -3,6 +3,10 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2021-11-05
+
+- v10.2.0-1.1 prepared, based on SiFive v2020.12.0
+
 ## 2021-11-04
 
 - v10.1.0-1.2 published on npmjs.com
