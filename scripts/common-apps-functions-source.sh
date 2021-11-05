@@ -1172,6 +1172,11 @@ function build_gdb()
         # ???
         CPPFLAGS+=" -DPy_BUILD_CORE_BUILTIN=1"
 
+        # Hack to place the bcrypt library at the end of the list of libraries,
+        # to avoid 'undefined reference to BCryptGenRandom'.
+        # Using LIBS does not work, the order is important.
+        export DEBUGINFOD_LIBS="-lbcrypt"
+
         # From Arm script.
         LDFLAGS="${XBB_LDFLAGS_APP} -Wl,${XBB_FOLDER_PATH}/mingw/lib/CRT_glob.o"
         # Workaround for undefined reference to `__strcpy_chk' in GCC 9.
