@@ -529,7 +529,7 @@ Add a new topic in the **Announcements** category of the
 ```console
 Subject: xPack GNU RISC-V Embedded GCC v10.2.0-1.1 released
 
-Version 10.2.0-1.1 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the SiFive release 2020-08.0 from Dec 19th, 2020.
+Version 10.2.0-1.1 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the SiFive release v2020.12.0 from April 7, 2021.
 
-https://xpack.github.io/blog/2021/01/05/riscv-none-embed-gcc-v10-1-0-1-1-released/
+https://xpack.github.io/blog/2021/11/06/riscv-none-embed-gcc-v10-2-0-1-1-released/
 ```
