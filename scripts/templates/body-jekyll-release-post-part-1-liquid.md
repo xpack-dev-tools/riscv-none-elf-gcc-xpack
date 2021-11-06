@@ -5,7 +5,7 @@ TODO: select one summary
 
 summary: "Version **{{ RELEASE_VERSION }}** is a maintenance release; it ...."
 
-summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the upstream Sifive release."
+summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the upstream Sifive release VERSION from DATE."
 
 sifive_version: v2020.12.0
 sifive_date: April 7, 2021
