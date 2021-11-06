@@ -3,6 +3,10 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2021-11-06
+
+- v10.2.0-1.1 released
+
 ## 2021-11-05
 
 - v10.2.0-1.1 prepared, based on SiFive v2020.12.0
