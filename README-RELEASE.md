@@ -450,8 +450,8 @@ watching this project.
 
 - select the `xpack-develop` branch
 - check the latest commits `npm run git-log`
-- update `CHANGELOG.md`, add a line like _- v10.2.0-1.1 published on npmjs.com_
-- commit with a message like _CHANGELOG: publish npm v10.2.0-1.1_
+- update `CHANGELOG.md`, add a line like _- v10.2.0-1.1.1 published on npmjs.com_
+- commit with a message like _CHANGELOG: publish npm v10.2.0-1.1.1_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
