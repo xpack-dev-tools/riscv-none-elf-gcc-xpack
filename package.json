@@ -35,32 +35,32 @@
     "minimumXpmRequired": "0.10.2",
     "binaries": {
       "destination": "./.content",
-      "baseUrl": "https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/download/v10.1.0-1.2",
+      "baseUrl": "https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/download/v10.2.0-1.1",
       "skip": 1,
       "platforms": {
         "darwin-x64": {
-          "fileName": "xpack-riscv-none-embed-gcc-10.1.0-1.2-darwin-x64.tar.gz",
-          "sha256": "b69805483983cf5d3f2f54e8417b29b7eb95dc0981b26bff50cedfa75a7f1d03"
+          "fileName": "xpack-riscv-none-embed-gcc-10.2.0-1.1-darwin-x64.tar.gz",
+          "sha256": "361eddbb7e5af900a49d1de8e2be37e8bdbb82acf1ca7729a4c8a967d110a95d"
         },
         "linux-arm64": {
-          "fileName": "xpack-riscv-none-embed-gcc-10.1.0-1.2-linux-arm64.tar.gz",
-          "sha256": "addf51c9e73f0869ce6211969f21c51ad42743db86af9d9e0c201118f417d598"
+          "fileName": "xpack-riscv-none-embed-gcc-10.2.0-1.1-linux-arm64.tar.gz",
+          "sha256": "26a7bca59b93eab7c9adef485660c46cbfa24099ff7ca3aec0da50b621802973"
         },
         "linux-ia32": {
-          "fileName": "xpack-riscv-none-embed-gcc-10.1.0-1.2-linux-ia32.tar.gz",
-          "sha256": "3f8d510a36e7a45ba60702e7fd165159967a8344d5662fe2b82e5e0cf1252f10"
+          "fileName": "xpack-riscv-none-embed-gcc-10.2.0-1.1-linux-ia32.tar.gz",
+          "sha256": "f11eebf0761b1c054ec8ba88bde5398cc6ca2ded6f540c77c5859a52928a3524"
         },
         "linux-x64": {
-          "fileName": "xpack-riscv-none-embed-gcc-10.1.0-1.2-linux-x64.tar.gz",
-          "sha256": "c60de8880cea9df207b2df820d37ceab8e02b48783e739c2c8cfe1f2a06fe310"
+          "fileName": "xpack-riscv-none-embed-gcc-10.2.0-1.1-linux-x64.tar.gz",
+          "sha256": "9596a0cca454384d5ec7d56250ca2e91c435941f10ff54ebdaf60e63421d85eb"
         },
         "win32-ia32": {
-          "fileName": "xpack-riscv-none-embed-gcc-10.1.0-1.2-win32-ia32.zip",
-          "sha256": "049336b548e33e374a27e1e8c1f63e621fc22b7140a2d5e2f5980dddafb397ed"
+          "fileName": "xpack-riscv-none-embed-gcc-10.2.0-1.1-win32-ia32.zip",
+          "sha256": "6b026ba05dd3c8123a03014df47f13e3b1a17005a6f825569b587c1ad0462330"
         },
         "win32-x64": {
-          "fileName": "xpack-riscv-none-embed-gcc-10.1.0-1.2-win32-x64.zip",
-          "sha256": "e2c88c768d0ef82265bb4a2dc59c80ae6f01788080f7999afbaa415103744e62"
+          "fileName": "xpack-riscv-none-embed-gcc-10.2.0-1.1-win32-x64.zip",
+          "sha256": "e95cf9075dd03dd15d9020d0ae05542bd8079c41f990e4d29519c1fea7b32f03"
         }
       }
     },
