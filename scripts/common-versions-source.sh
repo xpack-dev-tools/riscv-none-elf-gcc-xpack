@@ -136,49 +136,126 @@ function build_versions()
 
       # SiFive list in `modules/freedom-gcc-metal/Makefile`.
       # Note: previous versions manually added rv32imaf-ilp32f--; not any more.
-      GCC_MULTILIB=${GCC_MULTILIB:-"\
-        rv32ec-ilp32e-- \
-        rv32ec_zba_zbb-ilp32e-- \
-        rv32eac-ilp32e-- \
-        rv32eac_zba_zbb-ilp32e-- \
-        rv32emc-ilp32e-- \
-        rv32emc_zba_zbb-ilp32e-- \
-        rv32emac-ilp32e-- \
-        rv32emac_zba_zbb-ilp32e-- \
-        rv32ic-ilp32-- \
-        rv32ic_zba_zbb-ilp32-- \
-        rv32iac-ilp32-- \
-        rv32iac_zba_zbb-ilp32-- \
-        rv32imc-ilp32-- \
-        rv32imc_zba_zbb-ilp32-- \
-        rv32imac-ilp32-- \
-        rv32imac_zba_zbb-ilp32-- \
-        rv32imfc-ilp32f-- \
-        rv32imfc_zba_zbb-ilp32f-- \
-        rv32imafc-ilp32f-- \
-        rv32imafc_zba_zbb-ilp32f-- \
-        rv32imfdc-ilp32d-- \
-        rv32imfdc_zba_zbb-ilp32d-- \
-        rv32imafdc-ilp32d-- \
-        rv32imafdc_zba_zbb-ilp32d-- \
-        rv64ic-lp64-- \
-        rv64ic_zba_zbb-lp64-- \
-        rv64iac-lp64-- \
-        rv64iac_zba_zbb-lp64-- \
-        rv64imc-lp64-- \
-        rv64imc_zba_zbb-lp64-- \
-        rv64imac-lp64-- \
-        rv64imac_zba_zbb-lp64-- \
-        rv64imfc-lp64f-- \
-        rv64imfc_zba_zbb-lp64f-- \
-        rv64imafc-lp64f-- \
-        rv64imafc_zba_zbb-lp64f-- \
-        rv64imfdc-lp64d-- \
-        rv64imfdc_zba_zbb-lp64d-- \
-        rv64imafdc-lp64d-- \
-        rv64imafdc_zba_zbb-lp64d-- \
-        --cmodel=compact \
-      "}
+      if [ "${RELEASE_VERSION}" == "10.2.0-1.2" ]
+      then
+        # The SiFive list with a lot of non-c extras.
+        GCC_MULTILIB=${GCC_MULTILIB:-"\
+          rv32e-ilp32e-- \
+          rv32ea-ilp32e-- \
+          rv32em-ilp32e-- \
+          rv32ema-ilp32e-- \
+          rv32i-ilp32-- \
+          rv32ia-ilp32-- \
+          rv32im-ilp32-- \
+          rv32ima-ilp32-- \
+          rv32if-ilp32f-- \
+          rv32ifd-ilp32d-- \
+          rv32iaf-ilp32f-- \
+          rv32iafd-ilp32d-- \
+          rv32imf-ilp32f-- \
+          rv32imfd-ilp32d-- \
+          rv32imaf-ilp32f-- \
+          rv32imafd-ilp32d-- \
+          rv64i-lp64-- \
+          rv64ia-lp64-- \
+          rv64im-lp64-- \
+          rv64ima-lp64-- \
+          rv64if-lp64f-- \
+          rv64ifd-lp64d-- \
+          rv64iaf-lp64f-- \
+          rv64iafd-lp64d-- \
+          rv64imf-lp64f-- \
+          rv64imfd-lp64d-- \
+          rv64imaf-lp64f-- \
+          rv64imafd-lp64d-- \
+          \
+          rv32ec-ilp32e-- \
+          rv32ec_zba_zbb-ilp32e-- \
+          rv32eac-ilp32e-- \
+          rv32eac_zba_zbb-ilp32e-- \
+          rv32emc-ilp32e-- \
+          rv32emc_zba_zbb-ilp32e-- \
+          rv32emac-ilp32e-- \
+          rv32emac_zba_zbb-ilp32e-- \
+          rv32ic-ilp32-- \
+          rv32ic_zba_zbb-ilp32-- \
+          rv32iac-ilp32-- \
+          rv32iac_zba_zbb-ilp32-- \
+          rv32imc-ilp32-- \
+          rv32imc_zba_zbb-ilp32-- \
+          rv32imac-ilp32-- \
+          rv32imac_zba_zbb-ilp32-- \
+          rv32imfc-ilp32f-- \
+          rv32imfc_zba_zbb-ilp32f-- \
+          rv32imafc-ilp32f-- \
+          rv32imafc_zba_zbb-ilp32f-- \
+          rv32imfdc-ilp32d-- \
+          rv32imfdc_zba_zbb-ilp32d-- \
+          rv32imafdc-ilp32d-- \
+          rv32imafdc_zba_zbb-ilp32d-- \
+          rv64ic-lp64-- \
+          rv64ic_zba_zbb-lp64-- \
+          rv64iac-lp64-- \
+          rv64iac_zba_zbb-lp64-- \
+          rv64imc-lp64-- \
+          rv64imc_zba_zbb-lp64-- \
+          rv64imac-lp64-- \
+          rv64imac_zba_zbb-lp64-- \
+          rv64imfc-lp64f-- \
+          rv64imfc_zba_zbb-lp64f-- \
+          rv64imafc-lp64f-- \
+          rv64imafc_zba_zbb-lp64f-- \
+          rv64imfdc-lp64d-- \
+          rv64imfdc_zba_zbb-lp64d-- \
+          rv64imafdc-lp64d-- \
+          rv64imafdc_zba_zbb-lp64d-- \
+          --cmodel=compact \
+        "}
+      else
+        GCC_MULTILIB=${GCC_MULTILIB:-"\
+          rv32ec-ilp32e-- \
+          rv32ec_zba_zbb-ilp32e-- \
+          rv32eac-ilp32e-- \
+          rv32eac_zba_zbb-ilp32e-- \
+          rv32emc-ilp32e-- \
+          rv32emc_zba_zbb-ilp32e-- \
+          rv32emac-ilp32e-- \
+          rv32emac_zba_zbb-ilp32e-- \
+          rv32ic-ilp32-- \
+          rv32ic_zba_zbb-ilp32-- \
+          rv32iac-ilp32-- \
+          rv32iac_zba_zbb-ilp32-- \
+          rv32imc-ilp32-- \
+          rv32imc_zba_zbb-ilp32-- \
+          rv32imac-ilp32-- \
+          rv32imac_zba_zbb-ilp32-- \
+          rv32imfc-ilp32f-- \
+          rv32imfc_zba_zbb-ilp32f-- \
+          rv32imafc-ilp32f-- \
+          rv32imafc_zba_zbb-ilp32f-- \
+          rv32imfdc-ilp32d-- \
+          rv32imfdc_zba_zbb-ilp32d-- \
+          rv32imafdc-ilp32d-- \
+          rv32imafdc_zba_zbb-ilp32d-- \
+          rv64ic-lp64-- \
+          rv64ic_zba_zbb-lp64-- \
+          rv64iac-lp64-- \
+          rv64iac_zba_zbb-lp64-- \
+          rv64imc-lp64-- \
+          rv64imc_zba_zbb-lp64-- \
+          rv64imac-lp64-- \
+          rv64imac_zba_zbb-lp64-- \
+          rv64imfc-lp64f-- \
+          rv64imfc_zba_zbb-lp64f-- \
+          rv64imafc-lp64f-- \
+          rv64imafc_zba_zbb-lp64f-- \
+          rv64imfdc-lp64d-- \
+          rv64imfdc_zba_zbb-lp64d-- \
+          rv64imafdc-lp64d-- \
+          rv64imafdc_zba_zbb-lp64d-- \
+          --cmodel=compact \
+        "}
+      fi
     fi
 
     GCC_MULTILIB_FILE=${GCC_MULTILIB_FILE:-"t-elf-multilib"}
