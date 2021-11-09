@@ -265,7 +265,12 @@ function build_versions()
     if [ "${USE_GITS}" != "y" ]
     then
 
-      GH_RELEASE="${RELEASE_VERSION}"
+      if [[ "${RELEASE_VERSION}" =~ 10\.2\.0-1\.[12] ]]
+      then
+        GH_RELEASE="10.2.0-1.1"
+      else
+        GH_RELEASE="${RELEASE_VERSION}"
+      fi
 
       BINUTILS_GH_RELEASE=${BINUTILS_GH_RELEASE:-"${GH_RELEASE}"}
       GCC_GH_RELEASE=${GCC_GH_RELEASE:-"${GH_RELEASE}"}

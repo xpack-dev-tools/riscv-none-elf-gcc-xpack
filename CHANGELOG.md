@@ -3,6 +3,12 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2021-11-09
+
+- v10.2.0-1.2 prepared
+- [#12] - add non-C libraries
+- [#11] - avoid `-g` for libraries
+
 ## 2021-11-06
 
 - v10.2.0-1.1.1 published on npmjs.com
