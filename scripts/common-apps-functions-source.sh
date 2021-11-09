@@ -451,9 +451,14 @@ function build_newlib()
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
-      # Note the intentional `-g`.
-      CFLAGS_FOR_TARGET="${optimize} -g" 
-      CXXFLAGS_FOR_TARGET="${optimize} -g" 
+      CFLAGS_FOR_TARGET="${optimize}" 
+      CXXFLAGS_FOR_TARGET="${optimize}" 
+      if [ "${IS_DEBUG}" == "y" ]
+      then
+        # Avoid `-g`, many local symbols cannot be removed by strip.
+        CFLAGS_FOR_TARGET+=" -g"
+        CXXFLAGS_FOR_TARGET+=" -g"
+      fi
 
       export CPPFLAGS
       export CFLAGS
@@ -772,9 +777,14 @@ function build_gcc_final()
         optimize="$(echo ${optimize} | sed -e 's|-O[123]|-Os|')"
       fi
 
-      # Note the intentional `-g`.
-      CFLAGS_FOR_TARGET="${optimize} -g" 
-      CXXFLAGS_FOR_TARGET="${optimize} -fno-exceptions -g" 
+      CFLAGS_FOR_TARGET="${optimize}" 
+      CXXFLAGS_FOR_TARGET="${optimize} -fno-exceptions" 
+      if [ "${IS_DEBUG}" == "y" ]
+      then
+        # Avoid `-g`, many local symbols cannot be removed by strip.
+        CFLAGS_FOR_TARGET+=" -g"
+        CXXFLAGS_FOR_TARGET+=" -g"
+      fi
 
       export CPPFLAGS
       export CFLAGS
