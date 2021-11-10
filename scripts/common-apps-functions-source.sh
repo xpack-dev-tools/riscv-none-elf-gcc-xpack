@@ -953,7 +953,7 @@ function build_gcc_final()
               # Retry, parallel builds do fail, headers are probably
               # used before being installed. For example:
               # libstdc++-v3/include/chrono:43:10: fatal error: bits/parse_numbers.h: No such file or directory
-              for i in 1 2 3 4 5 6
+              for i in 1 2 3 4 5 6 7
               do
                 if run_verbose make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0" 
                 then
