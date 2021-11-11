@@ -42,8 +42,8 @@ jobs:
           fetch-depth: 3
           submodules: true
 
-      # - name: 'Clean working area'
-      #   run: rm -rf ~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}*
+      - name: 'Clean working area'
+        run: rm -rf ~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}*
 
       - name: 'Build macOS x64 binary'
         timeout-minutes: 1440
