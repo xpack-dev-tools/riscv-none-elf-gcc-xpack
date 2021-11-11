@@ -129,6 +129,15 @@ The current version is based on:
 - SiFive RISC-V GCC release **{% raw %}{{ page.sifive_version }}{% endraw %}** from {% raw %}{{ page.sifive_date }}{% endraw %},
 and includes the SiFive extensions, including the RVV vector support.
 
+## Supported libraries
+
+The supported libraries are:
+
+```console
+$ riscv-none-embed-gcc -print-multi-lib
+...
+```
+
 ## Changes
 
 There are no functional changes.
