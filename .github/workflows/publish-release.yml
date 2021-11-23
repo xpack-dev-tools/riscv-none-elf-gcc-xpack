@@ -5,7 +5,7 @@
 #   (https://xpack.github.io)
 # Copyright (c) 2021 Liviu Ionescu.
 #
-# Permission to use, copy, modify, and/or distribute this software 
+# Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
@@ -32,9 +32,11 @@ on:
 jobs:
 
   linux-x64:
-    name: 'Intel Linux GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} publish release'
-    runs-on: [self-hosted, Linux, X64]
+    name: 'Linux Intel GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} publish release'
+    runs-on: [self-hosted, linux, x64]
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -69,9 +71,11 @@ jobs:
 
 
   linux-arm64:
-    name: 'Arm Linux GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} publish release'
-    runs-on: [self-hosted, Linux, ARM64]
+    name: 'Linux Arm GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} publish release'
+    runs-on: [self-hosted, linux, arm64]
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -106,9 +110,11 @@ jobs:
 
 
   macos-x64:
-    name: 'Intel macOS GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} publish release'
-    runs-on: [self-hosted, macOS, X64]
+    name: 'macOS Intel GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} publish release'
+    runs-on: [self-hosted, macos, intel]
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -139,4 +145,6 @@ jobs:
           token: ${{ secrets.PUBLISH_TOKEN }}
       - name: 'Show SHA'
         run: cat ~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}/deploy/*.sha
+
+
 

@@ -6,7 +6,7 @@
 #   (https://xpack.github.io)
 # Copyright (c) 2021 Liviu Ionescu.
 #
-# Permission to use, copy, modify, and/or distribute this software 
+# Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
@@ -37,9 +37,11 @@ on:
 jobs:
 
   linux-x64:
-    name: 'x64 Linux GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'Linux x64 GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
     runs-on: ubuntu-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -50,9 +52,11 @@ jobs:
 
   
   linux-ia32:
-    name: 'ia32 Linux GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'Linux ia32 GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
     runs-on: ubuntu-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -66,9 +70,11 @@ jobs:
 
   
   linux-arm64:
-    name: 'arm64 Linux GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
-    runs-on: [self-hosted, Linux, Arm64]
+    name: 'Linux arm64 GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
+    runs-on: [self-hosted, linux, arm64]
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -82,9 +88,11 @@ jobs:
 
   
   macos-x64:
-    name: 'x64 macOS GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'macOS x64 GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
     runs-on: macos-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -95,9 +103,11 @@ jobs:
 
   
   windows-x64:
-    name: 'x64 Windows GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'Windows x64 GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
     runs-on: windows-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -108,9 +118,11 @@ jobs:
 
   
   windows-ia32:
-    name: 'ia32 Windows GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'Windows ia32 GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
     runs-on: windows-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
