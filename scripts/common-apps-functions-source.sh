@@ -3,12 +3,12 @@
 #   (https://xpack.github.io)
 # Copyright (c) 2019 Liviu Ionescu.
 #
-# Permission to use, copy, modify, and/or distribute this software 
+# Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
-# Helper script used in the second edition of the xPack build 
-# scripts. As the name implies, it should contain only functions and 
+# Helper script used in the second edition of the xPack build
+# scripts. As the name implies, it should contain only functions and
 # should be included with 'source' by the container build scripts.
 
 # -----------------------------------------------------------------------------
@@ -59,7 +59,7 @@ function build_binutils()
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
-      LDFLAGS="${XBB_LDFLAGS_APP}" 
+      LDFLAGS="${XBB_LDFLAGS_APP}"
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
         LDFLAGS+=" -Wl,${XBB_FOLDER_PATH}/mingw/lib/CRT_glob.o"
@@ -80,11 +80,11 @@ function build_binutils()
         (
           echo
           echo "Running binutils configure..."
-        
+
           bash "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}/configure" --help
 
           # ? --without-python --without-curses, --with-expat
-          # Note that GDB is disabled here, will be build later, possibly from 
+          # Note that GDB is disabled here, will be build later, possibly from
           # different sources.
           run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}/configure" \
             --prefix="${APP_PREFIX}" \
@@ -113,7 +113,7 @@ function build_binutils()
             \
             --enable-build-warnings=no \
             --with-system-zlib \
-            
+
           cp "config.log" "${LOGS_FOLDER_PATH}/${binutils_folder_name}/config-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${binutils_folder_name}/configure-output.txt"
       fi
@@ -121,9 +121,9 @@ function build_binutils()
       (
         echo
         echo "Running binutils make..."
-      
+
         # Build.
-        run_verbose make -j ${JOBS} 
+        run_verbose make -j ${JOBS}
 
         if [ "${WITH_TESTS}" == "y" ]
         then
@@ -154,8 +154,8 @@ function build_binutils()
           fi
         )
 
-        # Without this copy, the build for the nano version of the GCC second 
-        # step fails with unexpected errors, like "cannot compute suffix of 
+        # Without this copy, the build for the nano version of the GCC second
+        # step fails with unexpected errors, like "cannot compute suffix of
         # object files: cannot compile".
         copy_dir "${APP_PREFIX}" "${APP_PREFIX_NANO}"
 
@@ -254,7 +254,7 @@ function download_gcc()
 
         xbb_activate_installed_dev
 
-        # Be sure the ${GCC_MULTILIB} has no quotes, since it defines 
+        # Be sure the ${GCC_MULTILIB} has no quotes, since it defines
         # multiple strings.
 
         # Change IFS temporarily so that we can pass a simple string of
@@ -292,21 +292,21 @@ function build_gcc_first()
       # and multiple sections, in order to save memory.
       CFLAGS="$(echo "${XBB_CFLAGS_NO_W}" | sed -e 's|-ffunction-sections||' | sed -e 's|-fdata-sections||' | sed -e 's|-pipe||')"
       CXXFLAGS="$(echo "${XBB_CXXFLAGS_NO_W}" | sed -e 's|-ffunction-sections||' | sed -e 's|-fdata-sections||' | sed -e 's|-pipe||')"
-      LDFLAGS="${XBB_LDFLAGS_APP}" 
+      LDFLAGS="${XBB_LDFLAGS_APP}"
       if [ "${TARGET_PLATFORM}" == "linux" ]
       then
         LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
-      fi      
+      fi
 
-      CFLAGS_FOR_TARGET="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}" 
-      CXXFLAGS_FOR_TARGET="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}" 
+      CFLAGS_FOR_TARGET="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}"
+      CXXFLAGS_FOR_TARGET="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}"
 
       export CPPFLAGS
       export CFLAGS
       export CXXFLAGS
       export LDFLAGS
 
-      export CFLAGS_FOR_TARGET 
+      export CFLAGS_FOR_TARGET
       export CXXFLAGS_FOR_TARGET
 
       env | sort
@@ -316,12 +316,12 @@ function build_gcc_first()
         (
           echo
           echo "Running gcc first stage configure..."
-        
+
           bash "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" --help
 
           # https://gcc.gnu.org/install/configure.html
           # --enable-shared[=package[,…]] build shared versions of libraries
-          # --enable-tls specify that the target supports TLS (Thread Local Storage). 
+          # --enable-tls specify that the target supports TLS (Thread Local Storage).
           # --enable-nls enables Native Language Support (NLS)
           # --enable-checking=list the compiler is built to perform internal consistency checks of the requested complexity. ‘yes’ (most common checks)
           # --with-headers=dir specify that target headers are available when building a cross compiler
@@ -386,7 +386,7 @@ function build_gcc_first()
         # No need to make 'all', 'all-gcc' is enough to compile the libraries.
         # Disable parallel build to accomodate for the huge files.
         run_verbose make -j 1 all-gcc
-        
+
         # No -strip available here.
         run_verbose make install-gcc
 
@@ -426,7 +426,7 @@ function build_newlib()
         elif [ -n "${NEWLIB_ARCHIVE_URL}" ]
         then
           download_and_extract "${NEWLIB_ARCHIVE_URL}" \
-            "${NEWLIB_ARCHIVE_NAME}" "${NEWLIB_SRC_FOLDER_NAME}" 
+            "${NEWLIB_ARCHIVE_NAME}" "${NEWLIB_SRC_FOLDER_NAME}"
         fi
       )
     fi
@@ -447,12 +447,12 @@ function build_newlib()
         optimize="$(echo ${optimize} | sed -e 's/-O[123]/-Os/')"
       fi
 
-      CPPFLAGS="${XBB_CPPFLAGS}" 
+      CPPFLAGS="${XBB_CPPFLAGS}"
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
-      CFLAGS_FOR_TARGET="${optimize}" 
-      CXXFLAGS_FOR_TARGET="${optimize}" 
+      CFLAGS_FOR_TARGET="${optimize}"
+      CXXFLAGS_FOR_TARGET="${optimize}"
       if [ "${IS_DEBUG}" == "y" ]
       then
         # Avoid `-g`, many local symbols cannot be removed by strip.
@@ -493,7 +493,7 @@ function build_newlib()
 
           echo
           echo "Running newlib$1 configure..."
-        
+
           bash "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" --help
 
           # I still did not figure out how to define a variable with
@@ -641,7 +641,7 @@ function build_newlib()
 
 # -----------------------------------------------------------------------------
 
-function copy_nano_libs() 
+function copy_nano_libs()
 {
   local src_folder="$1"
   local dst_folder="$2"
@@ -716,7 +716,7 @@ function copy_linux_libs()
       copy_dir "${linux_path}/include" "${APP_PREFIX}/include"
       copy_dir "${linux_path}/lib" "${APP_PREFIX}/lib"
       copy_dir "${linux_path}/share" "${APP_PREFIX}/share"
-    ) 
+    )
 
     (
       cd "${APP_PREFIX}"
@@ -753,7 +753,7 @@ function build_gcc_final()
 
       xbb_activate_installed_dev
 
-      CPPFLAGS="${XBB_CPPFLAGS}" 
+      CPPFLAGS="${XBB_CPPFLAGS}"
 
       # The gcc/emit_insn.c is huge (>62 MB), so give up on using -pipe
       # and multiple sections, in order to save memory.
@@ -762,11 +762,11 @@ function build_gcc_final()
 
       # Attempts to use `-Wa,-mbig-obj` failed on Windows.
 
-      LDFLAGS="${XBB_LDFLAGS_APP}" 
+      LDFLAGS="${XBB_LDFLAGS_APP}"
       if [ "${TARGET_PLATFORM}" == "linux" ]
       then
         LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
-      fi      
+      fi
       # Do not add CRT_glob.o here, it will fail with already defined,
       # since it is already handled by --enable-mingw-wildcard.
 
@@ -777,8 +777,8 @@ function build_gcc_final()
         optimize="$(echo ${optimize} | sed -e 's|-O[123]|-Os|')"
       fi
 
-      CFLAGS_FOR_TARGET="${optimize}" 
-      CXXFLAGS_FOR_TARGET="${optimize} -fno-exceptions" 
+      CFLAGS_FOR_TARGET="${optimize}"
+      CXXFLAGS_FOR_TARGET="${optimize} -fno-exceptions"
       if [ "${IS_DEBUG}" == "y" ]
       then
         # Avoid `-g`, many local symbols cannot be removed by strip.
@@ -788,8 +788,8 @@ function build_gcc_final()
 
       export CPPFLAGS
       export CFLAGS
-      export CXXFLAGS 
-      export LDFLAGS        
+      export CXXFLAGS
+      export LDFLAGS
 
       export CFLAGS_FOR_TARGET
       export CXXFLAGS_FOR_TARGET
@@ -818,12 +818,12 @@ function build_gcc_final()
         (
           echo
           echo "Running gcc$1 final stage configure..."
-        
+
           bash "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" --help
 
           # https://gcc.gnu.org/install/configure.html
           # --enable-shared[=package[,…]] build shared versions of libraries
-          # --enable-tls specify that the target supports TLS (Thread Local Storage). 
+          # --enable-tls specify that the target supports TLS (Thread Local Storage).
           # --enable-nls enables Native Language Support (NLS)
           # --enable-checking=list the compiler is built to perform internal consistency checks of the requested complexity. ‘yes’ (most common checks)
           # --with-headers=dir specify that target headers are available when building a cross compiler
@@ -955,7 +955,7 @@ function build_gcc_final()
               # libstdc++-v3/include/chrono:43:10: fatal error: bits/parse_numbers.h: No such file or directory
               for i in 1 2 3 4 5 6 7
               do
-                if run_verbose make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0" 
+                if run_verbose make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
                 then
                   break
                 fi
@@ -1003,7 +1003,7 @@ function build_gcc_final()
         else
 
           # Build.
-          # For Windows build only the GCC binaries, the libraries were copied 
+          # For Windows build only the GCC binaries, the libraries were copied
           # from the Linux build.
           # Disable parallel build to accomodate for the huge files.
           run_verbose make -j 1 all-gcc
@@ -1119,7 +1119,7 @@ main(int argc, char* argv[])
 
 extern "C" void __sync_synchronize();
 
-void 
+void
 __sync_synchronize()
 {
 }
@@ -1139,7 +1139,7 @@ __EOF__
 # Called multile times, with and without python support.
 # $1="" or $1="-py" or $1="-py3"
 function build_gdb()
-{  
+{
   local gdb_folder_name="${GDB_FOLDER_NAME}$1"
 
   mkdir -pv "${LOGS_FOLDER_PATH}/${gdb_folder_name}"
@@ -1174,10 +1174,10 @@ function build_gdb()
 
       xbb_activate_installed_dev
 
-      CPPFLAGS="${XBB_CPPFLAGS}" 
+      CPPFLAGS="${XBB_CPPFLAGS}"
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
-          
+
       # libiconv is used by Python3.
       # export LIBS="-liconv"
       if [ "${TARGET_PLATFORM}" == "win32" ]
@@ -1200,7 +1200,7 @@ function build_gdb()
       then
         # This makes gdb-py fail!
         # Pick some system libraries from XBB, to avoid rebuilding them here.
-        #        CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include" 
+        #        CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include"
         #        LDFLAGS+=" -L${XBB_FOLDER_PATH}/lib"
         LDFLAGS="${XBB_LDFLAGS_APP}"
         LIBS="-liconv -lncurses"
@@ -1215,7 +1215,7 @@ function build_gdb()
       then
         # Pick some system libraries from XBB, to avoid rebuilding them here.
         # Otherwise configure will not identify that Python is present.
-        CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include" 
+        CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include"
         LDFLAGS+=" -L${XBB_FOLDER_PATH}/lib"
       fi
 
@@ -1229,7 +1229,7 @@ function build_gdb()
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
           # The source archive includes only the pyconfig.h.in, which needs
-          # to be configured, which is not an easy task. Thus add the file copied 
+          # to be configured, which is not an easy task. Thus add the file copied
           # from a Windows install.
           cp -v "${BUILD_GIT_PATH}/patches/pyconfig-win-${PYTHON3_VERSION}.h" \
             "${LIBS_INSTALL_FOLDER_PATH}/include/pyconfig.h"
@@ -1253,7 +1253,7 @@ function build_gdb()
       export CPPFLAGS
       export CFLAGS
       export CXXFLAGS
-          
+
       export LDFLAGS
       export LIBS
 
@@ -1266,7 +1266,7 @@ function build_gdb()
         (
           echo
           echo "Running gdb$1 configure..."
-        
+
           bash "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}/configure" --help
 
           # Note that all components are disabled, except GDB.
@@ -1319,7 +1319,7 @@ function build_gdb()
 
         # Build.
         run_verbose make -j ${JOBS}
-        # make 
+        # make
 
         # install-strip fails, not only because of readline has no install-strip
         # but even after patching it tries to strip a non elf file
@@ -1339,8 +1339,8 @@ function build_gdb()
 
             if [ "${WITH_HTML}" == "y" ]
             then
-              run_verbose make html 
-              run_verbose make install-html 
+              run_verbose make html
+              run_verbose make install-html
             fi
           )
         fi
@@ -1428,7 +1428,7 @@ function test_gdb()
 
 # -----------------------------------------------------------------------------
 
-function tidy_up() 
+function tidy_up()
 {
   (
     xbb_activate
