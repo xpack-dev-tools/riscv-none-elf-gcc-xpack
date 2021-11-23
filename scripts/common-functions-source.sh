@@ -3,12 +3,12 @@
 #   (https://xpack.github.io)
 # Copyright (c) 2020 Liviu Ionescu.
 #
-# Permission to use, copy, modify, and/or distribute this software 
+# Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
-# Helper script used in the second edition of the GNU MCU Eclipse build 
-# scripts. As the name implies, it should contain only functions and 
+# Helper script used in the second edition of the GNU MCU Eclipse build
+# scripts. As the name implies, it should contain only functions and
 # should be included with 'source' by the container build scripts.
 
 # -----------------------------------------------------------------------------
@@ -75,7 +75,7 @@ function prepare_variables()
     # -------------------------------------------------------------------------
 
     NEWLIB_SRC_FOLDER_NAME=${NEWLIB_SRC_FOLDER_NAME:-"${NEWLIB_PROJECT_NAME}.git"}
-      
+
     NEWLIB_GIT_URL=${NEWLIB_GIT_URL:-"https://github.com/xpack-dev-tools/${NEWLIB_PROJECT_NAME}.git"}
 
     NEWLIB_ARCHIVE_URL=""

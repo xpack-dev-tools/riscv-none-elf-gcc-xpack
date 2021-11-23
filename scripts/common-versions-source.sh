@@ -3,12 +3,12 @@
 #   (https://xpack.github.io)
 # Copyright (c) 2020 Liviu Ionescu.
 #
-# Permission to use, copy, modify, and/or distribute this software 
+# Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
-# Helper script used in the second edition of the GNU MCU Eclipse build 
-# scripts. As the name implies, it should contain only functions and 
+# Helper script used in the second edition of the GNU MCU Eclipse build
+# scripts. As the name implies, it should contain only functions and
 # should be included with 'source' by the container build scripts.
 
 # -----------------------------------------------------------------------------
@@ -25,7 +25,7 @@ function build_versions()
   APP_PREFIX_NANO="${INSTALL_FOLDER_PATH}/${APP_LC_NAME}-nano"
 
   # Don't use a comma since the regular expression
-  # that processes this string in the Makefile, silently fails and the 
+  # that processes this string in the Makefile, silently fails and the
   # bfdver.h file remains empty.
   BRANDING="${DISTRO_NAME} ${APP_NAME} ${TARGET_MACHINE}"
 
@@ -298,7 +298,7 @@ function build_versions()
       GDB_GIT_COMMIT=${GDB_GIT_COMMIT:-"cf068aa4aedee1ea37cb12522708bff18e0b9db7"}
 
     fi
-    
+
     # -------------------------------------------------------------------------
 
     WITH_GDB_PY3="y"
@@ -317,7 +317,7 @@ function build_versions()
       # ---------------------------------------------------------------------------
       # Build dependent libraries.
 
-      # For better control, without it some components pick the lib packed 
+      # For better control, without it some components pick the lib packed
       # inside the archive.
       build_zlib "1.2.8"
 
@@ -585,7 +585,7 @@ function build_versions()
       GDB_GIT_COMMIT=${GDB_GIT_COMMIT:-"b3302ee671beb2ea9ea80528c7c779cfd765dd00"}
 
     fi
-    
+
     # -------------------------------------------------------------------------
 
     WITH_GDB_PY3="y"
@@ -603,7 +603,7 @@ function build_versions()
       # ---------------------------------------------------------------------------
       # Build dependent libraries.
 
-      # For better control, without it some components pick the lib packed 
+      # For better control, without it some components pick the lib packed
       # inside the archive.
       build_zlib "1.2.8"
 
@@ -880,10 +880,10 @@ function build_versions()
       GDB_GIT_COMMIT=${GDB_GIT_COMMIT:-"ee1f38cc20612d5a570cab0e818ee40fc31b148a"}
 
     fi
-    
+
     # -------------------------------------------------------------------------
 
-    WITH_GDB_PY3="y" 
+    WITH_GDB_PY3="y"
     PYTHON3_VERSION="3.7.9"
 
     BINUTILS_PATCH="binutils-gdb-${BINUTILS_VERSION}.patch"
@@ -894,7 +894,7 @@ function build_versions()
     # ---------------------------------------------------------------------------
     # Build dependent libraries.
 
-    # For better control, without it some components pick the lib packed 
+    # For better control, without it some components pick the lib packed
     # inside the archive.
     build_zlib "1.2.8"
 
@@ -940,7 +940,7 @@ function build_versions()
 
       if [[ "${RELEASE_VERSION}" =~ 8\.3\.0-2\.[12] ]]
       then
-        : 
+        :
       else # [34]
         build_readline "8.0" # requires ncurses
 
@@ -1160,7 +1160,7 @@ function build_versions()
       GDB_GIT_COMMIT=${GDB_GIT_COMMIT:-"9b8cecd18313807ac0cc4d2b1871603279b94244"}
 
     fi
-    
+
     # -------------------------------------------------------------------------
 
     ZLIB_VERSION="1.2.8"
@@ -1180,9 +1180,9 @@ function build_versions()
 
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
-        # On Windows if fails with 
+        # On Windows if fails with
         # "The procedure entry point ClearCommBreak could not be located
-        # in the dynamic link library." 
+        # in the dynamic link library."
         # It looks like an incompatibility between Python2 and mingw-w64.
         # Given that Python2 is end-of-life, it is not worth to further
         # investigate, disable it for now.
@@ -1200,7 +1200,7 @@ function build_versions()
 
       PYTHON2_VERSION="2.7.18"
 
-      WITH_GDB_PY3="y" 
+      WITH_GDB_PY3="y"
       PYTHON3_VERSION="3.7.6"
 
     elif [ "${RELEASE_VERSION}" == "8.3.0-1.1" ]
@@ -1228,7 +1228,7 @@ function build_versions()
     # ---------------------------------------------------------------------------
     # Build dependent libraries.
 
-    # For better control, without it some components pick the lib packed 
+    # For better control, without it some components pick the lib packed
     # inside the archive.
     build_zlib "${ZLIB_VERSION}"
 
@@ -1429,7 +1429,7 @@ function build_versions()
       GDB_GIT_COMMIT=${GDB_GIT_COMMIT:-"9b8cecd18313807ac0cc4d2b1871603279b94244"}
 
     fi
-    
+
     # -------------------------------------------------------------------------
 
     # LIBELF_VERSION="0.8.13"
@@ -1445,7 +1445,7 @@ function build_versions()
     # ---------------------------------------------------------------------------
     # Build dependent libraries.
 
-    # For better control, without it some components pick the lib packed 
+    # For better control, without it some components pick the lib packed
     # inside the archive.
     build_zlib "1.2.8"
 
