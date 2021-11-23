@@ -3,6 +3,10 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2021-11-23
+
+- v10.2.0-1.3 prepared, try to add support for Apple Silicon
+
 ## 2021-11-11
 
 - v10.2.0-1.2.1 published on npmjs.com
