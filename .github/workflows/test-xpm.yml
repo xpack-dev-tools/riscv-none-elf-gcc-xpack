@@ -101,6 +101,26 @@ jobs:
         run: bash scripts/helper/tests/xpm-test.sh --version ${{ github.event.inputs.version }}
 
   
+  macos-arm64:
+    name: 'macOS Arm 64-bit GNU RISC-V Embedded GCC@${{ github.event.inputs.version }} test'
+    runs-on: [self-hosted, macos, apple]
+    defaults:
+      run:
+        shell: "/usr/bin/arch -arch arm64e /bin/bash -l {0}"
+
+    steps:
+      - name: 'Machine'
+        run: uname -a
+
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+          submodules: true
+      - name: 'Run ${{ github.event.inputs.version }} xpm test'
+        run: bash scripts/helper/tests/xpm-test.sh --version ${{ github.event.inputs.version }}
+
+  
   windows-x64:
     name: 'Windows 64-bit GNU RISC-V Embedded GCC@${{ github.event.inputs.version }} test'
     runs-on: windows-latest

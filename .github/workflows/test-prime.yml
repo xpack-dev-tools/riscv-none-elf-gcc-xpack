@@ -102,6 +102,25 @@ jobs:
         run: bash scripts/helper/tests/native-test.sh --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
   
+  macos-arm64:
+    name: 'macOS arm64 GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
+    runs-on: [self-hosted, macos, apple]
+    defaults:
+      run:
+        shell: "/usr/bin/arch -arch arm64e /bin/bash -l {0}"
+
+    steps:
+      - name: 'Machine'
+        run: uname -a
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+          submodules: true
+      - name: 'Run ${{ github.event.inputs.version }} native test'
+        run: bash scripts/helper/tests/native-test.sh --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+
+  
   windows-x64:
     name: 'Windows x64 GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} test'
     runs-on: windows-latest

@@ -169,4 +169,48 @@ jobs:
 
 
 
+  macos-arm64:
+    name: 'macOS Arm GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} build'
+    timeout-minutes: 2880 # 2 days
+    runs-on: [self-hosted, macos, apple]
+    defaults:
+      run:
+        shell: "/usr/bin/arch -arch arm64e /bin/bash -l {0}"
+
+    steps:
+      - name: 'Machine'
+        run: uname -a
+
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+          submodules: true
+
+      - name: 'Clean working area'
+        run: rm -rf ~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}*
+
+      - name: 'Build macOS arm64 binary'
+        timeout-minutes: 1440
+        run: bash scripts/helper/build.sh --version "${{ github.event.inputs.version }}" --osx
+  
+      - name: 'Publish pre-release'
+        # https://github.com/ncipollo/release-action
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: '~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}/deploy/*'
+          bodyFile: '.github/workflows/body-github-pre-releases-test.md'
+          commit: 'master'
+          draft: false
+          name: 'Test binaries'
+          omitBodyDuringUpdate: true
+          omitNameDuringUpdate: true
+          owner: 'xpack-dev-tools'
+          prerelease: true
+          replacesArtifacts: true
+          repo: 'pre-releases'
+          tag: 'test'
+          token: ${{ secrets.PUBLISH_TOKEN }}
+
 
