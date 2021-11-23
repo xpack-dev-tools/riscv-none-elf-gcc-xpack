@@ -136,7 +136,7 @@ function build_versions()
 
       # SiFive list in `modules/freedom-gcc-metal/Makefile`.
       # Note: previous versions manually added rv32imaf-ilp32f--; not any more.
-      if [ "${RELEASE_VERSION}" == "10.2.0-1.2" ]
+      if [[ "${RELEASE_VERSION}" =~ 10\.2\.0-1\.[23] ]]
       then
         # The SiFive list with a lot of non-c extras.
         GCC_MULTILIB=${GCC_MULTILIB:-"\
@@ -211,7 +211,8 @@ function build_versions()
           rv64imafdc_zba_zbb-lp64d-- \
           --cmodel=compact \
         "}
-      else
+      elif [[ "${RELEASE_VERSION}" =~ 10\.2\.0-1\.[1] ]]
+      then
         GCC_MULTILIB=${GCC_MULTILIB:-"\
           rv32ec-ilp32e-- \
           rv32ec_zba_zbb-ilp32e-- \
@@ -255,6 +256,9 @@ function build_versions()
           rv64imafdc_zba_zbb-lp64d-- \
           --cmodel=compact \
         "}
+      else
+        echo "Unsupported version ${RELEASE_VERSION} multi-libs."
+        exit 1
       fi
     fi
 
@@ -265,7 +269,7 @@ function build_versions()
     if [ "${USE_GITS}" != "y" ]
     then
 
-      if [[ "${RELEASE_VERSION}" =~ 10\.2\.0-1\.[12] ]]
+      if [[ "${RELEASE_VERSION}" =~ 10\.2\.0-1\.[123] ]]
       then
         GH_RELEASE="10.2.0-1.1"
       else
