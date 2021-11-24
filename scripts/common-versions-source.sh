@@ -329,7 +329,16 @@ function build_versions()
           WITH_TESTS="n"
         fi
 
-        build_gmp "6.1.2"
+        if [[ "${RELEASE_VERSION}" =~ 10\.2\.0-1\.[3] ]]
+        then
+          build_gmp "6.2.1"
+        elif [[ "${RELEASE_VERSION}" =~ 10\.2\.0-1\.[12] ]]
+        then
+          build_gmp "6.1.2"
+        else
+          echo "Unsupported version ${RELEASE_VERSION} gmp"
+          exit 1
+        fi
       )
       build_mpfr "3.1.6"
       build_mpc "1.0.3"
@@ -343,7 +352,16 @@ function build_versions()
       build_libiconv "1.15"
       build_xz "5.2.3"
 
-      build_gettext "0.19.8.1"
+      if [[ "${RELEASE_VERSION}" =~ 10\.2\.0-1\.[3] ]]
+      then
+        build_gettext "0.21" # "0.19.8.1"
+      elif [[ "${RELEASE_VERSION}" =~ 10\.2\.0-1\.[12] ]]
+      then
+        build_gettext "0.19.8.1"
+      else
+        echo "Unsupported version ${RELEASE_VERSION} gettext"
+        exit 1
+      fi
 
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
@@ -379,7 +397,17 @@ function build_versions()
 
           # Replacement for the old libcrypt.so.1; required by Python 3.
           build_libxcrypt "4.4.17"
-          build_openssl "1.1.1h"
+
+          if [[ "${RELEASE_VERSION}" =~ 10\.2\.0-1\.[3] ]]
+          then
+            build_openssl "1.1.1l"
+          elif [[ "${RELEASE_VERSION}" =~ 10\.2\.0-1\.[12] ]]
+          then
+            build_openssl "1.1.1h"
+          else
+            echo "Unsupported version ${RELEASE_VERSION} gettext"
+            exit 1
+          fi
 
           build_python3 "${PYTHON3_VERSION}"
 
