@@ -33,6 +33,9 @@ APP_DESCRIPTION="${DISTRO_NAME} ${APP_NAME}"
 # to save some build time.
 WITHOUT_MULTILIB="y"
 
+# Always update the config.sub, to be sure the `embed*)` patch is used.
+WITH_UPDATE_CONFIG_SUB="y"
+
 # -----------------------------------------------------------------------------
 
 BUGURL=${BUGURL:-"https://github.com/sifive/freedom-tools/issues/"}
