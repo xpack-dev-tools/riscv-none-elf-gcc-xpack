@@ -232,7 +232,7 @@ Please note that previous versions, up to mid-2020, used `DT_RUNPATH`, which
 has a priority lower than `LD_LIBRARY_PATH`, and does not tolerate setting
 it in the environment.
 
-### `@executable_path`
+### `@rpath` and `@loader_path`
 
 Similarly, on macOS, the dynamic libraries are adjusted with `otool` to use a
 relative path.
