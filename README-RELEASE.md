@@ -258,16 +258,18 @@ Check that both the project Git and the submodule are pushed to GitHub.
 
 To trigger the GitHub Actions build, use the xPack actions:
 
-- `trigger-workflow-build-xbbi`
-- `trigger-workflow-build-xbba`
-- `trigger-workflow-build-xbbm`
+- `trigger-workflow-build-xbbli`
+- `trigger-workflow-build-xbbla`
+- `trigger-workflow-build-xbbmi`
+- `trigger-workflow-build-xbbma`
 
 This is equivalent to:
 
 ```sh
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbi
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbba
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbm
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbli
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbla
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbmi
+bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbma
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -429,6 +431,7 @@ If any, refer to closed
 - temporarily fill in the _Continue Reading »_ with the URL of the
   web-preview release
 - keep the pre-release button enabled
+- do not enable Discussions yet
 - publish the release
 
 Note: at this moment the system should send a notification to all clients
