@@ -332,14 +332,14 @@ To build the latest macOS version:
 screen -S arm
 
 sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop  --disable-multilib --osx
+caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop  --disable-multilib --macos
 ```
 
 or, for development builds:
 
 ```sh
 sudo rm -rf ~/Work/riscv-none-embed-gcc-*
-caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --osx
+caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --macos
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use

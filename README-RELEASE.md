@@ -197,7 +197,7 @@ or the production machine (`xbbm`):
 ```sh
 sudo rm -rf ~/Work/riscv-none-embed-gcc-*
 
-caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --osx
+caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --macos
 ```
 
 Similarly on the Intel Linux (`xbbi`):
