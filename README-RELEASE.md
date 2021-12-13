@@ -192,7 +192,7 @@ present, for the GDB build.
 ### Development run the build scripts
 
 Before the real build, run a test build on the development machine (`wks`)
-or the production machine (`xbbm`):
+or the production machines (`xbbma`, `xbbmi`):
 
 ```sh
 sudo rm -rf ~/Work/riscv-none-embed-gcc-*
@@ -200,7 +200,7 @@ sudo rm -rf ~/Work/riscv-none-embed-gcc-*
 caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --macos
 ```
 
-Similarly on the Intel Linux (`xbbi`):
+Similarly on the Intel Linux (`xbbli`):
 
 ```sh
 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --linux64
@@ -210,7 +210,7 @@ bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develo
 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --win32
 ```
 
-And on the RISC-V Linux (`xbba`):
+And on the Arm Linux (`xbbla`):
 
 ```sh
 bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm64
@@ -239,13 +239,13 @@ and, when ready, rerun the full build.
 Run the `generate-workflows` to re-generate the
 GitHub workflow files; commit and push if necessary.
 
-- on the macOS machine (`xbbm`) open ssh sessions to both Linux
-machines (`xbbi` and `xbba`):
+- on the macOS machine (`xbbmi`) open ssh sessions to both Linux
+machines (`xbbli` and `xbbla`):
 
 ```sh
-caffeinate ssh xbbi
+caffeinate ssh xbbli
 
-caffeinate ssh xbba
+caffeinate ssh xbbla
 ```
 
 Start the runner on all three machines:
