@@ -1,5 +1,5 @@
 ---
-title:  xPack GNU RISC-V Embedded GCC {{ RELEASE_VERSION }} released
+title:  xPack GNU RISC-V Embedded GCC v{{ RELEASE_VERSION }} released
 
 TODO: select one summary
 
