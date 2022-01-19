@@ -197,23 +197,23 @@ or the production machines (`xbbma`, `xbbmi`):
 ```sh
 sudo rm -rf ~/Work/riscv-none-embed-gcc-*
 
-caffeinate bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --macos
+caffeinate bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --macos
 ```
 
 Similarly on the Intel Linux (`xbbli`):
 
 ```sh
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --linux64
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --linux64
 
 
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --win64
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --win64
 ```
 
 And on the Arm Linux (`xbbla`):
 
 ```sh
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm64
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm32
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm64
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm32
 ```
 
 Work on the scripts until all platforms pass the build.
@@ -265,10 +265,10 @@ To trigger the GitHub Actions build, use the xPack actions:
 This is equivalent to:
 
 ```sh
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbli
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbla
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbmi
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbma
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbli
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbla
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbmi
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbma
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -300,9 +300,9 @@ To trigger the GitHub Actions tests, use the xPack actions:
 These are equivalent to:
 
 ```sh
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-prime.sh
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-intel.sh
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-arm.sh
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-prime.sh
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-intel.sh
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-arm.sh
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -325,7 +325,7 @@ To trigger the Travis test, use the xPack action:
 This is equivalent to:
 
 ```sh
-bash ~/Downloads/riscv-none-embed-gcc-xpack.git/scripts/helper/tests/trigger-travis-macos.sh
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/tests/trigger-travis-macos.sh
 ```
 
 This script requires the `TRAVIS_COM_TOKEN` variable to be present
@@ -357,12 +357,12 @@ xattr -dr com.apple.quarantine xpack-riscv-none-embed-gcc-*
 - clone this repo locally; on Windows use the Git console;
 
 ```sh
-rm -rf ~/Downloads/riscv-none-embed-gcc-xpack.git; \
+rm -rf ${HOME}/Work/riscv-none-embed-gcc-xpack.git; \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
-  ~/Downloads/riscv-none-embed-gcc-xpack.git; \
-git -C ~/Downloads/riscv-none-embed-gcc-xpack.git submodule update --init --recursive
+  ${HOME}/Work/riscv-none-embed-gcc-xpack.git; \
+git -C ${HOME}/Work/riscv-none-embed-gcc-xpack.git submodule update --init --recursive
 ```
 
 - in a separate workspace, Import → General → Existing Projects into Workspace
