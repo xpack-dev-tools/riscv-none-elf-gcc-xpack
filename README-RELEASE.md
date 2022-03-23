@@ -60,7 +60,7 @@ To easily find commits by id, enable the Search View, and search in Commit SHA.
 
 ### Update binutils
 
-With Sourcetree in
+With a git client in
 [xpack-dev-tools/riscv-binutils-gdb](https://github.com/xpack-dev-tools/riscv-binutils-gdb):
 
 - check if there is a `sifive` remote pointing to
@@ -81,7 +81,7 @@ Copy/paste the branch name and commit id to `common-versions-source.sh`
 
 ### Update gcc
 
-With Sourcetree in
+With a git client in
 [xpack-dev-tools/riscv-gcc](https://github.com/xpack-dev-tools/riscv-gcc)
 
 - check if there is a `sifive` remote pointing to
@@ -104,7 +104,7 @@ Copy/paste the branch name and commit id to `common-versions-source.sh`
 
 ### Update newlib
 
-With Sourcetree in
+With a git client in
 [xpack-dev-tools/riscv-newlib](https://github.com/xpack-dev-tools/riscv-newlib)
 
 - check if there is a `sifive` remote pointing to
@@ -125,10 +125,10 @@ Copy/paste the branch name and commit id to `common-versions-source.sh`
 
 ### Update gdb
 
-With Sourcetree in
+With a git client in
 [xpack-dev-tools/riscv-binutils-gdb](https://github.com/xpack-dev-tools/riscv-binutils-gdb)
 
-With Sourcetree in
+With a git client in
 [xpack-dev-tools/riscv-binutils-gdb](https://github.com/xpack-dev-tools/riscv-binutils-gdb):
 
 - check if there is a `sifive` remote pointing to
@@ -172,7 +172,7 @@ recreate the archives with the correct file.
 
 ### Update helper
 
-With Sourcetree, go to the helper repo and update to the latest master commit.
+With a git client, go to the helper repo and update to the latest master commit.
 
 ## Build
 
