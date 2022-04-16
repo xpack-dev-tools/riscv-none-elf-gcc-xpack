@@ -195,7 +195,7 @@ Before the real build, run a test build on the development machine (`wks`)
 or the production machines (`xbbma`, `xbbmi`):
 
 ```sh
-sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
 
 caffeinate bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --macos
 ```

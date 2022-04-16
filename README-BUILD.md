@@ -209,14 +209,14 @@ network connection or a computer entering sleep.
 ```sh
 screen -S arm
 
-sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
 bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
 ```
 
 or, for development builds:
 
 ```sh
-sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
 bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --win64
 ```
 
@@ -282,7 +282,7 @@ network connection or a computer entering sleep.
 ```sh
 screen -S arm
 
-sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
 bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm64 --arm32
 ```
 
@@ -291,7 +291,7 @@ or, for development builds:
 ```sh
 screen -S arm
 
-sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
 bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --arm64 --arm32
 ```
 
@@ -332,14 +332,14 @@ To build the latest macOS version:
 ```sh
 screen -S arm
 
-sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
 caffeinate bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop  --disable-multilib --macos
 ```
 
 or, for development builds:
 
 ```sh
-sudo rm -rf ~/Work/riscv-none-embed-gcc-*
+sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
 caffeinate bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --macos
 ```
 
