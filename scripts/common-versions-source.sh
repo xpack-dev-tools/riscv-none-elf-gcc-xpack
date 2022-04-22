@@ -69,6 +69,7 @@ function build_versions()
   # ---------------------------------------------------------------------------
 
   GCC_VERSION="$(echo "${RELEASE_VERSION}" | sed -e 's|-.*||')"
+  GCC_VERSION_MAJOR=$(echo ${GCC_VERSION} | sed -e 's|\([0-9][0-9]*\)\..*|\1|')
 
   if [ "${TARGET_PLATFORM}" == "win32" ]
   then
@@ -76,14 +77,8 @@ function build_versions()
   fi
 
   # In reverse chronological order.
-  if [[ "${RELEASE_VERSION}" =~ 11\.3\.0-.* ]]
+  if [[ ${RELEASE_VERSION} =~ 11\.3\.0-.* ]]
   then
-    # https://ftp.gnu.org/gnu/binutils/
-    BINUTILS_VERSION="2.38"
-    # https://ftp.gnu.org/gnu/gdb/
-    GDB_VERSION="11.2"
-    # https://www.sourceware.org/ftp/newlib/index.html
-    NEWLIB_VERSION="4.2.0.20211231"
 
     # -------------------------------------------------------------------------
 
@@ -164,7 +159,6 @@ function build_versions()
           rv64imfc-lp64f-- \
           rv64imfd-lp64d-- \
           rv64imfdc-lp64d-- \
-          --cmodel=compact \
         "}
       else
         # Short list used during development to save time.
@@ -174,7 +168,6 @@ function build_versions()
           rv32imac-ilp32-- \
           rv64ima-lp64-- \
           rv64imac-lp64-- \
-           --cmodel=compact \
         "}
       fi
     fi
@@ -182,10 +175,6 @@ function build_versions()
     GCC_MULTILIB_FILE=${GCC_MULTILIB_FILE:-"t-elf-multilib"}
 
     # -------------------------------------------------------------------------
-
-    WITH_GDB_PY3="y"
-
-    PYTHON3_VERSION="3.7.9"
 
     (
       xbb_activate
@@ -196,7 +185,7 @@ function build_versions()
       # For better control, without it some components pick the lib packed
       # inside the archive.
       # http://zlib.net/fossils/
-      build_zlib "1.2.8"
+      build_zlib "1.2.12"
 
       # The classical GCC libraries.
       # https://gmplib.org/download/gmp/
@@ -211,12 +200,22 @@ function build_versions()
       # More libraries.
       # Fails on mingw
       ## build_libelf "0.8.13"
-      build_libmpdec "2.5.0" # Used by Python
+      # https://www.bytereef.org/mpdecimal/download.html
+      build_libmpdec "2.5.1" # Used by Python
+
+      # https://github.com/libexpat/libexpat/releases
       build_expat "2.4.8"
+      # https://ftp.gnu.org/pub/gnu/libiconv/
       build_libiconv "1.16"
+      # https://sourceforge.net/projects/lzmautils/files/
       build_xz "5.2.5"
 
-      build_gettext "0.21" # "0.19.8.1"
+      # http://ftp.gnu.org/pub/gnu/gettext/
+      build_gettext "0.21"
+
+      # https://www.python.org/ftp/python/
+      PYTHON3_VERSION="3.10.4"
+      WITH_GDB_PY3="y"
 
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
@@ -232,15 +231,20 @@ function build_versions()
         # Used by ncurses. Fails on macOS.
         if [ "${TARGET_PLATFORM}" == "linux" ]
         then
+          # https://github.com/telmich/gpm/tags
           build_gpm "1.20.7"
         fi
 
-        build_ncurses "6.2"
+        # https://ftp.gnu.org/gnu/ncurses/
+        build_ncurses "6.3"
 
-        build_readline "8.0" # requires ncurses
+        # https://ftp.gnu.org/gnu/readline/
+        build_readline "8.1" # requires ncurses
 
+        # https://sourceware.org/pub/bzip2/
         build_bzip2 "1.0.8"
-        build_libffi "3.3"
+        # https://github.com/libffi/libffi/releases
+        build_libffi "3.4.2"
 
         # We cannot rely on a python shared library in the system, even
         # the custom build from sources does not have one.
@@ -248,12 +252,15 @@ function build_versions()
         if [ "${WITH_GDB_PY3}" == "y" ]
         then
           # Required by a Python 3 module.
-          build_sqlite "3.32.3"
+          # https://www.sqlite.org/download.html
+          build_sqlite "3380200"
 
           # Replacement for the old libcrypt.so.1; required by Python 3.
-          build_libxcrypt "4.4.17"
+          # https://github.com/besser82/libxcrypt/releases
+          build_libxcrypt "4.4.28"
 
-          build_openssl "1.1.1l"
+          # https://www.openssl.org/source/
+          build_openssl "1.1.1n"
 
           build_python3 "${PYTHON3_VERSION}"
 
@@ -266,25 +273,31 @@ function build_versions()
 
       # Task [III-0] /$HOST_NATIVE/binutils/
       # Task [IV-1] /$HOST_MINGW/binutils/
-      build_binutils "${BINUTILS_VERSION}"
+      # https://ftp.gnu.org/gnu/binutils/
+      build_binutils "2.38"
       # copy_dir to libs included above
+
+      prepare_gcc_variables "${GCC_VERSION}"
 
       if [ "${TARGET_PLATFORM}" != "win32" ]
       then
 
         # Task [III-1] /$HOST_NATIVE/gcc-first/
-        build_gcc_first
+        build_gcc_first "${GCC_VERSION}"
+
+        # https://www.sourceware.org/ftp/newlib/index.html
+        NEWLIB_VERSION="4.2.0.20211231"
 
         # Task [III-2] /$HOST_NATIVE/newlib/
-        build_newlib ""
+        build_newlib "${NEWLIB_VERSION}" ""
         # Task [III-3] /$HOST_NATIVE/newlib-nano/
-        build_newlib "-nano"
+        build_newlib "${NEWLIB_VERSION}" "-nano"
 
         # Task [III-4] /$HOST_NATIVE/gcc-final/
-        build_gcc_final ""
+        build_gcc_final "${GCC_VERSION}" ""
 
         # Task [III-5] /$HOST_NATIVE/gcc-size-libstdcxx/
-        build_gcc_final "-nano"
+        build_gcc_final "${GCC_VERSION}" "-nano"
 
       else
 
@@ -292,17 +305,20 @@ function build_versions()
         copy_linux_libs
 
         # Task [IV-3] /$HOST_MINGW/gcc-final/
-        build_gcc_final ""
+        build_gcc_final "${GCC_VERSION}" ""
 
       fi
 
+      # https://ftp.gnu.org/gnu/gdb/
+      GDB_VERSION="11.2"
+
       # Task [III-6] /$HOST_NATIVE/gdb/
       # Task [IV-4] /$HOST_MINGW/gdb/
-      build_gdb ""
+      build_gdb "${GDB_VERSION}" ""
 
       if [ "${WITH_GDB_PY3}" == "y" ]
       then
-        build_gdb "-py3"
+        build_gdb "${GDB_VERSION}" "-py3"
       fi
     )
 

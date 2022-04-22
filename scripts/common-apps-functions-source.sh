@@ -746,7 +746,8 @@ function copy_linux_libs()
 # $1="" or $1="-nano"
 function build_gcc_final()
 {
-  local name_suffix=${1-''}
+  local gcc_version="$1"
+  local name_suffix=${2-''}
 
   local gcc_final_folder_name="${GCC_FOLDER_NAME}-final${name_suffix}"
 
@@ -756,7 +757,7 @@ function build_gcc_final()
   if [ ! -f "${gcc_final_stamp_file_path}" ]
   then
 
-    download_gcc
+    download_gcc "${gcc_version}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${gcc_final_folder_name}"
