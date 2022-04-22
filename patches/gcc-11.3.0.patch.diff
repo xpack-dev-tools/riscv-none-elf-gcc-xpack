@@ -1,0 +1,107 @@
+From c56e2cb56cd6bc0633bfc3ea263b69770723432e Mon Sep 17 00:00:00 2001
+From: Liviu Ionescu <ilg@livius.net>
+Date: Fri, 22 Apr 2022 10:28:26 +0300
+Subject: [PATCH] add support for riscv-none-embed-*
+
+---
+ config.sub                   |  3 +++
+ gcc/config.gcc               | 14 ++++++++++---
+ gcc/config/riscv/elf-embed.h | 40 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 54 insertions(+), 3 deletions(-)
+ create mode 100644 gcc/config/riscv/elf-embed.h
+
+diff --git a/config.sub b/config.sub
+index 63c1f1c8b5e..412c83f07c0 100755
+--- a/config.sub
++++ b/config.sub
+@@ -1727,6 +1727,9 @@ case $os in
+ 	     | midnightbsd* | amdhsa* | unleashed* | emscripten* | wasi* \
+ 	     | nsk* | powerunix* | genode* | zvmoe* | qnx* | emx*)
+ 		;;
++	# xPack GNU RISC-V Embed GCC uses riscv-none-embed-*.
++	embed)
++		;;
+ 	# This one is extra strict with allowed versions
+ 	sco3.2v2 | sco3.2v[4-9]* | sco5v6*)
+ 		# Don't forget version if it is 3.2v4 or newer.
+diff --git a/gcc/config.gcc b/gcc/config.gcc
+index 5636acc2270..a37d0f52e1b 100644
+--- a/gcc/config.gcc
++++ b/gcc/config.gcc
+@@ -180,7 +180,7 @@
+ #			the --with-sysroot configure option or the
+ #			--sysroot command line option is used this
+ #			will be relative to the sysroot.
+-# target_type_format_char 
++# target_type_format_char
+ # 			The default character to be used for formatting
+ #			the attribute in a
+ #			.type symbol_name, ${t_t_f_c}<property>
+@@ -2487,8 +2487,16 @@ riscv*-*-linux*)
+ 	# automatically detect that GAS supports it, yet we require it.
+ 	gcc_cv_initfini_array=yes
+ 	;;
+-riscv*-*-elf* | riscv*-*-rtems*)
+-	tm_file="elfos.h newlib-stdint.h ${tm_file} riscv/elf.h"
++riscv*-*-elf* | riscv*-*-rtems* | riscv-none-embed)
++	# xPack GNU RISC-V Embed GCC.
++	case ${target} in
++	riscv-none-embed)
++		tm_file="elfos.h newlib-stdint.h ${tm_file} riscv/elf-embed.h"
++		;;
++	*)
++		tm_file="elfos.h newlib-stdint.h ${tm_file} riscv/elf.h"
++		;;
++	esac
+ 	case ${target} in
+ 	*-*-rtems*)
+ 	  tm_file="${tm_file} riscv/rtems.h rtems.h"
+diff --git a/gcc/config/riscv/elf-embed.h b/gcc/config/riscv/elf-embed.h
+new file mode 100644
+index 00000000000..52b75a58243
+--- /dev/null
++++ b/gcc/config/riscv/elf-embed.h
+@@ -0,0 +1,40 @@
++/* Target macros for riscv*-elf targets.
++   Copyright (C) 1994-2021 Free Software Foundation, Inc.
++
++This file is part of GCC.
++
++GCC is free software; you can redistribute it and/or modify
++it under the terms of the GNU General Public License as published by
++the Free Software Foundation; either version 3, or (at your option)
++any later version.
++
++GCC is distributed in the hope that it will be useful,
++but WITHOUT ANY WARRANTY; without even the implied warranty of
++MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++GNU General Public License for more details.
++
++You should have received a copy of the GNU General Public License
++along with GCC; see the file COPYING3.  If not see
++<http://www.gnu.org/licenses/>.  */
++
++#define LINK_SPEC "\
++-melf" XLEN_SPEC DEFAULT_ENDIAN_SPEC "riscv \
++%{mno-relax:--no-relax} \
++%{mbig-endian:-EB} \
++%{mlittle-endian:-EL} \
++%{shared}"
++
++/* Link against Newlib libraries, because the ELF backend assumes Newlib.
++   Handle the circular dependence between libc and libgloss. */
++#undef  LIB_SPEC
++
++// xPack GNU RISC-V Embed GCC.
++// #define LIB_SPEC "--start-group -lc %{!specs=nosys.specs:-lgloss} --end-group"
++// The sequence is copied from arm-none-eabi, might not be exactly right.
++#define LIB_SPEC "--start-group -lgcc -lg -lc --end-group"
++
++#undef  STARTFILE_SPEC
++#define STARTFILE_SPEC "crt0%O%s crtbegin%O%s"
++
++#undef  ENDFILE_SPEC
++#define ENDFILE_SPEC "crtend%O%s"
+-- 
+2.31.1
+

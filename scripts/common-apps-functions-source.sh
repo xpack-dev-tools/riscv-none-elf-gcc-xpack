@@ -20,32 +20,27 @@ function build_binutils()
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=gdb-git
 
   local binutils_version="$1"
-  # No versioning here, the inner archives use simple names.
-  local binutils_folder_name="binutils-${binutils_version}"
+
+  local binutils_src_folder_name="binutils-${binutils_version}"
+  local binutils_folder_name="${binutils_src_folder_name}"
+
+  local binutils_archive="${binutils_src_folder_name}.tar.xz"
+  local binutils_url="https://ftp.gnu.org/gnu/binutils/${binutils_archive}"
 
   mkdir -pv "${LOGS_FOLDER_PATH}/${binutils_folder_name}"
 
-  local binutils_patch="${binutils_folder_name}.patch"
+  local binutils_patch="${binutils_folder_name}.patch.diff"
   local binutils_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${binutils_folder_name}-installed"
   if [ ! -f "${binutils_stamp_file_path}" ]
   then
 
-    if [ ! -d "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" ]
+    if [ ! -d "${SOURCES_FOLDER_PATH}/${binutils_src_folder_name}" ]
     then
       (
         cd "${SOURCES_FOLDER_PATH}"
-        if [ -n "${BINUTILS_GIT_URL}" ]
-        then
-          git_clone "${BINUTILS_GIT_URL}" "${BINUTILS_GIT_BRANCH}" \
-            "${BINUTILS_GIT_COMMIT}" "${BINUTILS_SRC_FOLDER_NAME}"
-          cd "${BINUTILS_SRC_FOLDER_NAME}"
-          do_patch "${BINUTILS_PATCH}"
-        elif [ -n "${BINUTILS_ARCHIVE_URL}" ]
-        then
-          download_and_extract "${BINUTILS_ARCHIVE_URL}" \
-            "${BINUTILS_ARCHIVE_NAME}" "${BINUTILS_SRC_FOLDER_NAME}" \
-            "${BINUTILS_PATCH}"
-        fi
+        download_and_extract "${binutils_url}" \
+          "${binutils_archive}" "${binutils_src_folder_name}" \
+          "${binutils_patch}"
       )
     fi
 
@@ -81,12 +76,12 @@ function build_binutils()
           echo
           echo "Running binutils configure..."
 
-          bash "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}/configure" --help
+          bash "${SOURCES_FOLDER_PATH}/${binutils_src_folder_name}/configure" --help
 
           # ? --without-python --without-curses, --with-expat
           # Note that GDB is disabled here, will be build later, possibly from
           # different sources.
-          run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}/configure" \
+          run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${binutils_src_folder_name}/configure" \
             --prefix="${APP_PREFIX}" \
             --infodir="${APP_PREFIX_DOC}/info" \
             --mandir="${APP_PREFIX_DOC}/man" \
@@ -173,7 +168,7 @@ function build_binutils()
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${binutils_folder_name}/make-output.txt"
 
       copy_license \
-        "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" \
+        "${SOURCES_FOLDER_PATH}/${binutils_src_folder_name}" \
         "${binutils_folder_name}"
 
     )
@@ -228,20 +223,18 @@ function test_binutils()
 
 function download_gcc()
 {
+  local gcc_archive="${GCC_SRC_FOLDER_NAME}.tar.xz"
+  local gcc_url="https://ftp.gnu.org/gnu/gcc/gcc-${GCC_VERSION}/${gcc_archive}"
+  local gcc_patch_file_name="gcc-${GCC_VERSION}.patch.diff"
+
   if [ ! -d "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" ]
   then
     (
       cd "${SOURCES_FOLDER_PATH}"
-      if [ -n "${GCC_GIT_URL}" ]
-      then
-        git_clone "${GCC_GIT_URL}" "${GCC_GIT_BRANCH}" \
-          "${GCC_GIT_COMMIT}" "${GCC_SRC_FOLDER_NAME}"
-      elif [ -n "${GCC_ARCHIVE_URL}" ]
-      then
-        download_and_extract "${GCC_ARCHIVE_URL}" \
-          "${GCC_ARCHIVE_NAME}" "${GCC_SRC_FOLDER_NAME}" \
-          "${GCC_PATCH}"
-      fi
+
+      download_and_extract "${gcc_url}" \
+        "${gcc_archive}" "${GCC_SRC_FOLDER_NAME}" \
+        "${gcc_patch_file_name}"
     )
 
     if [ -n "${GCC_MULTILIB}" ]
@@ -261,8 +254,8 @@ function download_gcc()
         # whitespace delimited multilib tokens to multilib-generator
         local IFS=$' '
         echo
-        echo "[./multilib-generator ${GCC_MULTILIB}]"
-        ./multilib-generator ${GCC_MULTILIB} > "${GCC_MULTILIB_FILE}"
+        echo "[python3 ./multilib-generator ${GCC_MULTILIB}]"
+        python3 ./multilib-generator ${GCC_MULTILIB} > "${GCC_MULTILIB_FILE}"
         cat "${GCC_MULTILIB_FILE}"
       )
     fi
@@ -271,6 +264,8 @@ function download_gcc()
 
 function build_gcc_first()
 {
+  GCC_SRC_FOLDER_NAME="gcc-${GCC_VERSION}"
+  GCC_FOLDER_NAME="${GCC_SRC_FOLDER_NAME}"
   local gcc_first_folder_name="${GCC_FOLDER_NAME}-first"
 
   mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}"
@@ -407,27 +402,29 @@ function build_gcc_first()
 # $1="" or $1="-nano"
 function build_newlib()
 {
-  local newlib_folder_name="${NEWLIB_FOLDER_NAME}$1"
+  # https://sourceware.org/newlib/
+  # https://www.sourceware.org/ftp/newlib/index.html
+
+  # ftp://sourceware.org/pub/newlib/newlib-4.2.0.20211231.tar.gz
+
+  local newlib_src_folder_name="newlib-${NEWLIB_VERSION}"
+  local newlib_folder_name="${newlib_src_folder_name}$1"
 
   mkdir -pv "${LOGS_FOLDER_PATH}/${newlib_folder_name}"
+
+  local newlib_archive="${newlib_src_folder_name}.tar.gz"
+  local newlib_url="ftp://sourceware.org/pub/newlib/${newlib_archive}"
 
   local newlib_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${newlib_folder_name}-installed"
   if [ ! -f "${newlib_stamp_file_path}" ]
   then
 
-    if [ ! -d "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}" ]
+    if [ ! -d "${SOURCES_FOLDER_PATH}/${newlib_src_folder_name}" ]
     then
       (
         cd "${SOURCES_FOLDER_PATH}"
-        if [ -n "${NEWLIB_GIT_URL}" ]
-        then
-          git_clone "${NEWLIB_GIT_URL}" "${NEWLIB_GIT_BRANCH}" \
-            "${NEWLIB_GIT_COMMIT}" "${NEWLIB_SRC_FOLDER_NAME}"
-        elif [ -n "${NEWLIB_ARCHIVE_URL}" ]
-        then
-          download_and_extract "${NEWLIB_ARCHIVE_URL}" \
-            "${NEWLIB_ARCHIVE_NAME}" "${NEWLIB_SRC_FOLDER_NAME}"
-        fi
+        download_and_extract "${newlib_url}" \
+          "${newlib_archive}" "${newlib_src_folder_name}"
       )
     fi
 
@@ -494,7 +491,7 @@ function build_newlib()
           echo
           echo "Running newlib$1 configure..."
 
-          bash "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" --help
+          bash "${SOURCES_FOLDER_PATH}/${newlib_src_folder_name}/configure" --help
 
           # I still did not figure out how to define a variable with
           # the list of options, such that it can be extended, so the
@@ -510,7 +507,7 @@ function build_newlib()
 
             # Used in a previous version --enable-newlib-retargetable-locking \
 
-            run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" \
+            run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${newlib_src_folder_name}/configure" \
               --prefix="${APP_PREFIX}"  \
               --infodir="${APP_PREFIX_DOC}/info" \
               --mandir="${APP_PREFIX_DOC}/man" \
@@ -537,7 +534,7 @@ function build_newlib()
             # are currently ignored if --enable-newlib-nano-formatted-io.
             # --enable-newlib-register-fini is debatable, was removed.
             # --enable-newlib-reent-check-verify
-            run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" \
+            run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${newlib_src_folder_name}/configure" \
               --prefix="${APP_PREFIX_NANO}"  \
               \
               --build=${BUILD} \
@@ -627,8 +624,8 @@ function build_newlib()
       if [ "$1" == "" ]
       then
         copy_license \
-          "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}" \
-          "${NEWLIB_FOLDER_NAME}"
+          "${SOURCES_FOLDER_PATH}/${newlib_src_folder_name}" \
+          "${newlib_folder_name}"
       fi
 
     )
@@ -1140,7 +1137,21 @@ __EOF__
 # $1="" or $1="-py" or $1="-py3"
 function build_gdb()
 {
-  local gdb_folder_name="${GDB_FOLDER_NAME}$1"
+  # https://www.gnu.org/software/gdb/
+  # https://ftp.gnu.org/gnu/gdb/
+  # https://ftp.gnu.org/gnu/gdb/gdb-11.2.tar.xz
+
+  # GDB Text User Interface
+  # https://ftp.gnu.org/old-gnu/Manuals/gdb/html_chapter/gdb_19.html#SEC197
+
+  local gdb_src_folder_name="gdb-${GDB_VERSION}"
+
+  local gdb_archive="${gdb_src_folder_name}.tar.xz"
+  local gdb_url="https://ftp.gnu.org/gnu/gdb/${gdb_archive}"
+
+  local gdb_folder_name="${gdb_src_folder_name}$1"
+
+  local gdb_patch_file_name="gdb-${GDB_VERSION}.patch.diff"
 
   mkdir -pv "${LOGS_FOLDER_PATH}/${gdb_folder_name}"
 
@@ -1149,22 +1160,13 @@ function build_gdb()
   then
 
     # Same package as binutils.
-    if [ ! -d "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}" ]
+    if [ ! -d "${SOURCES_FOLDER_PATH}/${gdb_src_folder_name}" ]
     then
       (
         cd "${SOURCES_FOLDER_PATH}"
-        if [ -n "${GDB_GIT_URL}" ]
-        then
-          git_clone "${GDB_GIT_URL}" "${GDB_GIT_BRANCH}" \
-            "${GDB_GIT_COMMIT}" "${GDB_SRC_FOLDER_NAME}"
-          cd "${GDB_SRC_FOLDER_NAME}"
-          do_patch "${GDB_PATCH}"
-        elif [ -n "${GDB_ARCHIVE_URL}" ]
-        then
-          download_and_extract "${GDB_ARCHIVE_URL}" \
-            "${GDB_ARCHIVE_NAME}" "${GDB_SRC_FOLDER_NAME}" \
-            "${GDB_PATCH}"
-        fi
+        download_and_extract "${gdb_url}" \
+          "${gdb_archive}" "${gdb_src_folder_name}" \
+          "${gdb_patch_file_name}"
       )
     fi
 
@@ -1267,10 +1269,10 @@ function build_gdb()
           echo
           echo "Running gdb$1 configure..."
 
-          bash "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}/configure" --help
+          bash "${SOURCES_FOLDER_PATH}/${gdb_src_folder_name}/configure" --help
 
           # Note that all components are disabled, except GDB.
-          run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}/configure" \
+          run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${gdb_src_folder_name}/configure" \
             --prefix="${APP_PREFIX}"  \
             --infodir="${APP_PREFIX_DOC}/info" \
             --mandir="${APP_PREFIX_DOC}/man" \
@@ -1354,8 +1356,8 @@ function build_gdb()
       if [ "$1" == "" ]
       then
         copy_license \
-          "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}/gdb" \
-          "${GDB_FOLDER_NAME}"
+          "${SOURCES_FOLDER_PATH}/${gdb_src_folder_name}/gdb" \
+          "${gdb_folder_name}"
       fi
 
     )

@@ -1,0 +1,26 @@
+From 8beae9a05526683417e7364808f5e62248944060 Mon Sep 17 00:00:00 2001
+From: Liviu Ionescu <ilg@livius.net>
+Date: Thu, 21 Apr 2022 23:40:54 +0300
+Subject: [PATCH] add support for riscv-none-embed-
+
+---
+ config.sub | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/config.sub b/config.sub
+index dba16e84c77..5e19f90a693 100755
+--- a/config.sub
++++ b/config.sub
+@@ -1756,6 +1756,9 @@ case $os in
+ 	     | nsk* | powerunix* | genode* | zvmoe* | qnx* | emx* | zephyr* \
+ 	     | fiwix* )
+ 		;;
++	# xPack GNU RISC-V Embed GCC uses riscv-none-embed-*.
++	embed)
++		;;
+ 	# This one is extra strict with allowed versions
+ 	sco3.2v2 | sco3.2v[4-9]* | sco5v6*)
+ 		# Don't forget version if it is 3.2v4 or newer.
+-- 
+2.31.1
+
