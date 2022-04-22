@@ -221,11 +221,20 @@ function test_binutils()
 
 # -----------------------------------------------------------------------------
 
+function prepare_gcc_variables()
+{
+  local gcc_version="$1"
+  GCC_SRC_FOLDER_NAME="gcc-${gcc_version}"
+  GCC_FOLDER_NAME="${GCC_SRC_FOLDER_NAME}"
+}
+
 function download_gcc()
 {
+  local gcc_version="$1"
+
   local gcc_archive="${GCC_SRC_FOLDER_NAME}.tar.xz"
-  local gcc_url="https://ftp.gnu.org/gnu/gcc/gcc-${GCC_VERSION}/${gcc_archive}"
-  local gcc_patch_file_name="gcc-${GCC_VERSION}.patch.diff"
+  local gcc_url="https://ftp.gnu.org/gnu/gcc/gcc-${gcc_version}/${gcc_archive}"
+  local gcc_patch_file_name="gcc-${gcc_version}.patch.diff"
 
   if [ ! -d "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" ]
   then
@@ -264,8 +273,8 @@ function download_gcc()
 
 function build_gcc_first()
 {
-  GCC_SRC_FOLDER_NAME="gcc-${GCC_VERSION}"
-  GCC_FOLDER_NAME="${GCC_SRC_FOLDER_NAME}"
+  local gcc_version="$1"
+
   local gcc_first_folder_name="${GCC_FOLDER_NAME}-first"
 
   mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}"
@@ -274,7 +283,7 @@ function build_gcc_first()
   if [ ! -f "${gcc_first_stamp_file_path}" ]
   then
 
-    download_gcc
+    download_gcc "${gcc_version}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${gcc_first_folder_name}"
@@ -407,8 +416,11 @@ function build_newlib()
 
   # ftp://sourceware.org/pub/newlib/newlib-4.2.0.20211231.tar.gz
 
-  local newlib_src_folder_name="newlib-${NEWLIB_VERSION}"
-  local newlib_folder_name="${newlib_src_folder_name}$1"
+  local newlib_version="$1"
+  local name_suffix=${2-''}
+
+  local newlib_src_folder_name="newlib-${newlib_version}"
+  local newlib_folder_name="${newlib_src_folder_name}${name_suffix}"
 
   mkdir -pv "${LOGS_FOLDER_PATH}/${newlib_folder_name}"
 
@@ -438,7 +450,7 @@ function build_newlib()
       PATH="${APP_PREFIX}/bin:${PATH}"
 
       local optimize="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}"
-      if [ "$1" == "-nano" ]
+      if [ "${name_suffix}" == "-nano" ]
       then
         # For newlib-nano optimize for size.
         optimize="$(echo ${optimize} | sed -e 's/-O[123]/-Os/')"
@@ -489,7 +501,7 @@ function build_newlib()
           # --enable-newlib-retargetable-locking ???
 
           echo
-          echo "Running newlib$1 configure..."
+          echo "Running newlib${name_suffix} configure..."
 
           bash "${SOURCES_FOLDER_PATH}/${newlib_src_folder_name}/configure" --help
 
@@ -497,7 +509,7 @@ function build_newlib()
           # the list of options, such that it can be extended, so the
           # brute force approach is to duplicate the entire call.
 
-          if [ "$1" == "" ]
+          if [ "${name_suffix}" == "" ]
           then
 
             # Extra options to ARM distribution:
@@ -527,7 +539,7 @@ function build_newlib()
               --disable-nls \
               \
 
-          elif [ "$1" == "-nano" ]
+          elif [ "${name_suffix}" == "-nano" ]
           then
 
             # --enable-newlib-io-long-long and --enable-newlib-io-c99-formats
@@ -555,7 +567,7 @@ function build_newlib()
               --enable-newlib-register-fini \
 
           else
-            echo "Unsupported build_newlib arg $1"
+            echo "Unsupported build_newlib arg ${name_suffix}"
             exit 1
           fi
 
@@ -566,7 +578,7 @@ function build_newlib()
       (
         # Partial build, without documentation.
         echo
-        echo "Running newlib$1 make..."
+        echo "Running newlib${name_suffix} make..."
 
         # Build.
         run_verbose make -j ${JOBS}
@@ -575,7 +587,7 @@ function build_newlib()
         # Top make fails with install-strip due to libgloss make.
         run_verbose make install
 
-        if [ "$1" == "" ]
+        if [ "${name_suffix}" == "" ]
         then
 
           if [ "${WITH_PDF}" == "y" ]
@@ -584,7 +596,7 @@ function build_newlib()
             # Warning, parallel build failed on Debian 32-bit.
 
             (
-              if [[ "${RELEASE_VERSION}" =~ 5\.4\.1-* ]]
+              if [[ ${RELEASE_VERSION} =~ 5\.4\.1-* ]]
               then
                 hack_pdfetex
               fi
@@ -621,7 +633,7 @@ function build_newlib()
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${newlib_folder_name}/make-output.txt"
 
-      if [ "$1" == "" ]
+      if [ "${name_suffix}" == "" ]
       then
         copy_license \
           "${SOURCES_FOLDER_PATH}/${newlib_src_folder_name}" \
@@ -632,7 +644,7 @@ function build_newlib()
 
     touch "${newlib_stamp_file_path}"
   else
-    echo "Component newlib$1 already installed."
+    echo "Component newlib${name_suffix} already installed."
   fi
 }
 
@@ -734,7 +746,9 @@ function copy_linux_libs()
 # $1="" or $1="-nano"
 function build_gcc_final()
 {
-  local gcc_final_folder_name="${GCC_FOLDER_NAME}-final$1"
+  local name_suffix=${1-''}
+
+  local gcc_final_folder_name="${GCC_FOLDER_NAME}-final${name_suffix}"
 
   mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}"
 
@@ -768,7 +782,7 @@ function build_gcc_final()
       # since it is already handled by --enable-mingw-wildcard.
 
       local optimize="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}"
-      if [ "$1" == "-nano" ]
+      if [ "${name_suffix}" == "-nano" ]
       then
         # For newlib-nano optimize for size.
         optimize="$(echo ${optimize} | sed -e 's|-O[123]|-Os|')"
@@ -814,7 +828,7 @@ function build_gcc_final()
       then
         (
           echo
-          echo "Running gcc$1 final stage configure..."
+          echo "Running gcc${name_suffix} final stage configure..."
 
           bash "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" --help
 
@@ -829,7 +843,7 @@ function build_gcc_final()
 
           # SiFive uses --enable-tls; I don't think it is necessary.
 
-          if [ "$1" == "" ]
+          if [ "${name_suffix}" == "" ]
           then
 
             run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" \
@@ -878,7 +892,7 @@ function build_gcc_final()
               --disable-build-format-warnings \
               --with-system-zlib
 
-          elif [ "$1" == "-nano" ]
+          elif [ "${name_suffix}" == "-nano" ]
           then
 
             run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" \
@@ -926,7 +940,7 @@ function build_gcc_final()
       (
         # Partial build, without documentation.
         echo
-        echo "Running gcc$1 final stage make..."
+        echo "Running gcc${name_suffix} final stage make..."
 
         if [ "${TARGET_PLATFORM}" != "win32" ]
         then
@@ -971,7 +985,7 @@ function build_gcc_final()
             run_verbose make install
           fi
 
-          if [ "$1" == "-nano" ]
+          if [ "${name_suffix}" == "-nano" ]
           then
 
             local target_gcc=""
@@ -1012,7 +1026,7 @@ function build_gcc_final()
 
         fi
 
-        if [ "$1" == "" ]
+        if [ "${name_suffix}" == "" ]
         then
           (
             xbb_activate_tex
@@ -1034,7 +1048,7 @@ function build_gcc_final()
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/make-output.txt"
 
-      if [ "$1" == "" ]
+      if [ "${name_suffix}" == "" ]
       then
         copy_license \
           "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" \
@@ -1044,10 +1058,10 @@ function build_gcc_final()
 
     touch "${gcc_final_stamp_file_path}"
   else
-    echo "Component gcc$1 final stage already installed."
+    echo "Component gcc${name_suffix} final stage already installed."
   fi
 
-  if [ "$1" == "" ]
+  if [ "${name_suffix}" == "" ]
   then
     tests_add "test_gcc"
   fi
@@ -1144,14 +1158,17 @@ function build_gdb()
   # GDB Text User Interface
   # https://ftp.gnu.org/old-gnu/Manuals/gdb/html_chapter/gdb_19.html#SEC197
 
-  local gdb_src_folder_name="gdb-${GDB_VERSION}"
+  local gdb_version="$1"
+  local name_suffix=${2-''}
+
+  local gdb_src_folder_name="gdb-${gdb_version}"
 
   local gdb_archive="${gdb_src_folder_name}.tar.xz"
   local gdb_url="https://ftp.gnu.org/gnu/gdb/${gdb_archive}"
 
-  local gdb_folder_name="${gdb_src_folder_name}$1"
+  local gdb_folder_name="${gdb_src_folder_name}${name_suffix}"
 
-  local gdb_patch_file_name="gdb-${GDB_VERSION}.patch.diff"
+  local gdb_patch_file_name="gdb-${gdb_version}.patch.diff"
 
   mkdir -pv "${LOGS_FOLDER_PATH}/${gdb_folder_name}"
 
@@ -1226,7 +1243,7 @@ function build_gdb()
       CONFIG_PYTHON_PREFIX=""
 
       local extra_python_opts="--with-python=no"
-      if [ "$1" == "-py3" ]
+      if [ "${name_suffix}" == "-py3" ]
       then
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
@@ -1267,7 +1284,7 @@ function build_gdb()
       then
         (
           echo
-          echo "Running gdb$1 configure..."
+          echo "Running gdb${name_suffix} configure..."
 
           bash "${SOURCES_FOLDER_PATH}/${gdb_src_folder_name}/configure" --help
 
@@ -1301,7 +1318,7 @@ function build_gdb()
             \
             ${extra_python_opts} \
             --program-prefix="${GCC_TARGET}-" \
-            --program-suffix="$1" \
+            --program-suffix="${name_suffix}" \
             \
             --disable-werror \
             --enable-build-warnings=no \
@@ -1317,7 +1334,7 @@ function build_gdb()
 
       (
         echo
-        echo "Running gdb$1 make..."
+        echo "Running gdb${name_suffix} make..."
 
         # Build.
         run_verbose make -j ${JOBS}
@@ -1328,7 +1345,7 @@ function build_gdb()
         # strip:.../install/riscv-none-gcc/bin/_inst.672_: file format not recognized
         run_verbose make install
 
-        if [ "$1" == "" ]
+        if [ "${name_suffix}" == "" ]
         then
           (
             xbb_activate_tex
@@ -1349,11 +1366,11 @@ function build_gdb()
 
         rm -rfv "${LIBS_INSTALL_FOLDER_PATH}/include/pyconfig.h"
 
-        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb$1"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${name_suffix}"
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gdb_folder_name}/make-output.txt"
 
-      if [ "$1" == "" ]
+      if [ "${name_suffix}" == "" ]
       then
         copy_license \
           "${SOURCES_FOLDER_PATH}/${gdb_src_folder_name}/gdb" \
@@ -1364,10 +1381,10 @@ function build_gdb()
 
     touch "${gdb_stamp_file_path}"
   else
-    echo "Component gdb$1 already installed."
+    echo "Component gdb${name_suffix} already installed."
   fi
 
-  tests_add "test_gdb$1"
+  tests_add "test_gdb${name_suffix}"
 }
 
 function test_gdb_py()
