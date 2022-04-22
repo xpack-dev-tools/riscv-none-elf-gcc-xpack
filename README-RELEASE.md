@@ -2,10 +2,9 @@
 
 ## Release schedule
 
-The xPack GNU RISC-V Embedded GCC release schedule generally follows the
-[SiFive Releases](https://github.com/sifive/freedom-tools/releases/)
-release schedule, which, although not fixed, is about one-two releases
-per year.
+Starting with 2022, SiFive no longer offers GCC releases; as a consequence,
+the xPack GNU RISC-V Embedded GCC release schedule will follow the
+[GNU](https://gcc.gnu.org/releases.html) release schedule.
 
 ## Prepare the build
 
@@ -16,22 +15,11 @@ Before starting the build, perform some checks and tweaks.
 - switch to the `xpack-develop` branch
 - if needed, merge the `xpack` branch
 
-### Identify SiFive commit IDs
-
-- check the [SiFive Releases](https://github.com/sifive/freedom-tools/releases/)
-for new releases
-- identify the tag of the latest release (like `v2020.12.0`)
-- switch to Code view and select the tag
-- open the `scripts` folder to identify the definitions used for the build
-  (the `base_*_metadata.mk` files)
-
 ### Identify the main GCC version
 
-From the `RISCV_GCC_VERSION` variable in the `base_gcc_metadata.mk` file,
-determine the GCC version (like `10.2.0`) and update the `scripts/VERSION`
-file; the format is `10.2.0-1.3`. The fourth digit is the number of the
-SiFive release of the same GCC version, and the fifth digit is the xPack
-GNU RISC-V Embedded GCC release number of this version.
+Determine the GCC version (like `11.3.0`) and update the `scripts/VERSION`
+file; the format is `11.3.0-1`. The fourth digit is the number of the
+the xPack GNU RISC-V Embedded GCC release number of this version.
 
 ### Update versions in `README` files
 
@@ -43,107 +31,74 @@ GNU RISC-V Embedded GCC release number of this version.
 
 - open the `common-versions-source.sh` file
 - add a new `if` with the new version before the existing code
-- update `SIFIVE_RELEASE` to the new version (like `v2020.12.0`)
 - update the versions, branch names and commit ids
-
-- download the archive and identify the multi-lib configuration:
-
-```sh
-riscv64-unknown-elf-gcc --print-multi-lib
-```
-
-- update the `GCC_MULTILIB` variable
-
-### Enable Sourcetree Search View
-
-To easily find commits by id, enable the Search View, and search in Commit SHA.
 
 ### Update binutils
 
 With a git client in
-[xpack-dev-tools/riscv-binutils-gdb](https://github.com/xpack-dev-tools/riscv-binutils-gdb):
+[xpack-dev-tools/binutils-gdb](https://github.com/xpack-dev-tools/binutils-gdb):
 
-- check if there is a `sifive` remote pointing to
-  <https://github.com/sifive/riscv-binutils-gdb>
-- checkout the branch specified by `RISCV_BINUTILS_BRANCH`
-  (like `sifive-rvv-1.0.x-zfh-rvb`)
-- create a new branch with name suffixed with `-xpack`
-  (like `v2020.12.0-xpack`
+- identify the tag with the latest release (like `binutils-2.38`)
+- create a new branch with the same name as the tag (like `binutils-2.38`)
+- create a new branch with name suffixed with `-riscv-none-embed-xpack`
+  (like `binutils-2.38-riscv-none-embed-xpack`
 - identify the commit which adds the xPack specific changes
 - cherry pick it; do not commit immediately
-- check the uncommited changes; there should be one file `config.sub`
+- check the uncommitted changes; there should be one file `config.sub`
   which adds `-embed)`
 - commit as **add support for riscv-none-embed-***
 - push both new branches to `origin`
-- add a tag with the current version (like `v10.2.0-1.3`); enable push to origin
-
-Copy/paste the branch name and commit id to `common-versions-source.sh`
+- checkout the `binutils-2.38` tag as HEAD
+- create patch from the commit
+- rename as `binutils-2.38.patch.diff`
+- copy to `patches`
 
 ### Update gcc
 
 With a git client in
-[xpack-dev-tools/riscv-gcc](https://github.com/xpack-dev-tools/riscv-gcc)
+[xpack-dev-tools/gcc](https://github.com/xpack-dev-tools/gcc)
 
-- check if there is a `sifive` remote pointing to
-<https://github.com/sifive/riscv-gcc>
-- checkout the branch specified by `RISCV_GCC_BRANCH`
-  (like `sifive-gcc-10.2.0`)
-- create a new branch with name suffixed with `-xpack`
-  (like `v2020.12.0-xpack`
+- identify the tag with the latest release (like `gcc-11.3.0`)
+- create a new branch with the same name as the tag (like `gcc-11.3.0`)
+- create a new branch with name suffixed with `-riscv-none-embed-xpack`
+  (like `gcc-11.3.0-riscv-none-embed-xpack`
 - identify the commit which adds the xPack specific changes
 - cherry pick it; do not commit immediately
-- check the differences from the non-xpack branch; there should be tree files:
+- check the differences from the non-xpack branch; there should be three files:
   - `elf-embed.h` with the `LIB_SPEC` definitions without libgloss
   - `config.gcc` with `tm_file` definition that uses `elf-embed.h`
   - `config.sub` which adds `*-embed)`
 - commit as **add support for riscv-none-embed-***
 - push both new branches to `origin`
-- add a tag with the current version (like `v10.2.0-1.3`); enable push to origin
-
-Copy/paste the branch name and commit id to `common-versions-source.sh`
+- checkout the `gcc-11.3.0` tag as HEAD
+- create patch from the commit
+- rename as `gcc-11.3.0.patch.diff`
+- copy to `patches`
 
 ### Update newlib
 
-With a git client in
-[xpack-dev-tools/riscv-newlib](https://github.com/xpack-dev-tools/riscv-newlib)
-
-- check if there is a `sifive` remote pointing to
-<https://github.com/sifive/riscv-newlib>
-- checkout the branch specified by `RISCV_NEWLIB_BRANCH`
-  (like `sifive-newlib-4.1.0-rvv`)
-- create a new branch with name suffixed with `-xpack`
-  (like `v2020.12.0-xpack`
-- identify the commit which adds the xPack specific changes
-- cherry pick it; do not commit immediately
-- check the uncommited changes; there should be one file `config.sub`
-  which adds `-embed)` and the `nano.specs` which removes libgloss
-- commit as **add support for riscv-none-embed-***
-- push both new branches to `origin`
-- add a tag with the current version (like `v10.2.0-1.3`); enable push to origin
-
-Copy/paste the branch name and commit id to `common-versions-source.sh`
+Not needed, replacing the `config.sub` is enough.
 
 ### Update gdb
 
 With a git client in
-[xpack-dev-tools/riscv-binutils-gdb](https://github.com/xpack-dev-tools/riscv-binutils-gdb)
+[xpack-dev-tools/binutils-gdb](https://github.com/xpack-dev-tools/binutils-gdb)
 
-With a git client in
-[xpack-dev-tools/riscv-binutils-gdb](https://github.com/xpack-dev-tools/riscv-binutils-gdb):
-
-- check if there is a `sifive` remote pointing to
-  <https://github.com/sifive/riscv-binutils-gdb>
-- checkout the branch specified by `RISCV_GDB_BRANCH`
-  (like `sifive-gdb-rvv-1.0.x-zfh-rvb-with-sim`)
-- create a new branch with name suffixed with `-xpack`
-  (like `v2020.12.0-gdb-xpack`
+- identify the tag with the latest release (like `gdb-11.2-release`)
+- create a new branch with the same name as the tag (like `gdb-11.2`)
+- create a new branch with name suffixed with `-riscv-none-embed-xpack`
+  (like `gdb-11.2-riscv-none-embed-xpack`
 - identify the commit which adds the xPack specific changes
 - cherry pick it; do not commit immediately
-- check the uncommited changes; there should be one file `config.sub`
-  which adds `-embed)`
+- check the uncommitted changes; there should be two files
+  - `config.sub` which adds `-embed)`
+  - `python-config.py`
 - commit as **add support for riscv-none-embed-***
 - push both new branches to `origin`
-- add a tag with the current version (like `v10.2.0-1.3-gdb`); enable push to origin
+- checkout the `gdb-11.2` branch
+- create patch from the commit
+- rename as `gdb-11.2.patch.diff`
+- copy to `patches`
 
 ### Fix possible open issues
 
@@ -151,7 +106,7 @@ Check GitHub issues and pull requests:
 
 - <https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues/>
 
-and fix them; assign them to a milestone (like `10.2.0-1.3`).
+and fix them; assign them to a milestone (like `11.3.0-1`).
 
 ### Check `README.md`
 
@@ -163,8 +118,8 @@ but in the version specific release page.
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
-- add a new entry like _- v10.2.0-1.3 prepared_
-- commit with a message like _prepare v10.2.0-1.3_
+- add a new entry like _- v11.3.0-1 prepared_
+- commit with a message like _prepare v11.3.0-1_
 
 Note: if you missed to update the `CHANGELOG.md` before starting the build,
 edit the file and rerun the build, it should take only a few minutes to
@@ -180,9 +135,9 @@ Before starting the build, perform some checks.
 
 ### Check tags
 
-The names should look like `v10.2.0-1.3`.
+The names should look like `v11.3.0-1`.
 
-For the binutils-gdb repo, a separate tag like `v10.2.0-1.3-gdb` should be
+For the binutils-gdb repo, a separate tag like `v11.3.0-1-gdb` should be
 present, for the GDB build.
 
 - <https://github.com/xpack-dev-tools/riscv-binutils-gdb/tags>
@@ -396,14 +351,14 @@ git -C ${HOME}/Work/riscv-none-embed-gcc-xpack.git submodule update --init --rec
 
 ## Create a new GitHub pre-release draft
 
-- in `CHANGELOG.md`, add the release date and a message like _- v10.2.0-1.3 released_
+- in `CHANGELOG.md`, add the release date and a message like _- v11.3.0-1 released_
 - commit and push the `xpack-develop` branch
 - run the xPack action `trigger-workflow-publish-release`
 
 The result is a
 [draft pre-release](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/)
-tagged like **v10.2.0-1.3** (mind the dash in the middle!) and
-named like **xPack GNU RISC-V Embedded GCC v10.2.0-1.3** (mind the dash),
+tagged like **v11.3.0-1** (mind the dash in the middle!) and
+named like **xPack GNU RISC-V Embedded GCC v11.3.0-1** (mind the dash),
 with all binaries attached.
 
 - edit the draft and attach it to the `xpack-develop` branch (important!)
@@ -425,7 +380,7 @@ If any, refer to closed
 ## Update the preview Web
 
 - commit the `develop` branch of `xpack/web-jekyll` GitHub repo;
-  use a message like **xPack GNU RISC-V Embedded GCC v10.2.0-1.3 released**
+  use a message like **xPack GNU RISC-V Embedded GCC v11.3.0-1 released**
 - push to GitHub
 - wait for the GitHub Pages build to complete
 - the preview web is <https://xpack.github.io/web-preview/news/>
@@ -454,18 +409,18 @@ watching this project.
 - compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
 - commit all changes, use a message like
-  `package.json: update urls for 10.2.0-1.3 release` (without `v`)
+  `package.json: update urls for 11.3.0-1 release` (without `v`)
 
 ## Publish on the npmjs.com server
 
 - select the `xpack-develop` branch
 - check the latest commits `npm run git-log`
-- update `CHANGELOG.md`, add a line like _- v10.2.0-1.3.1 published on npmjs.com_
-- commit with a message like _CHANGELOG: publish npm v10.2.0-1.3.1_
+- update `CHANGELOG.md`, add a line like _- v11.3.0-1.1 published on npmjs.com_
+- commit with a message like _CHANGELOG: publish npm v11.3.0-1.1_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
-- `npm version 10.2.0-1.3.1`; the first 5 numbers are the same as the
+- `npm version 11.3.0-1.1`; the first 5 numbers are the same as the
   GitHub release; the sixth number is the npm specific version
 - the commits and the tag should have beed pushed by the `postversion` script;
   if not, push them with `git push origin --tags`
@@ -494,12 +449,12 @@ The tests results are available from the
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-dev-tools/riscv-none-embed-gcc`
-- `npm dist-tag add @xpack-dev-tools/riscv-none-embed-gcc@10.2.0-1.3.1 latest`
+- `npm dist-tag add @xpack-dev-tools/riscv-none-embed-gcc@11.3.0-1.1 latest`
 - `npm dist-tag ls @xpack-dev-tools/riscv-none-embed-gcc`
 
 In case the previous version is not functional and needs to be unpublished:
 
-- `npm unpublish @xpack-dev-tools/riscv-none-embed-gcc@10.2.0-1.3.X`
+- `npm unpublish @xpack-dev-tools/riscv-none-embed-gcc@11.3.0-1.X`
 
 ## Update the Web
 
@@ -521,7 +476,7 @@ In case the previous version is not functional and needs to be unpublished:
 
 - in a separate browser windows, open [TweetDeck](https://tweetdeck.twitter.com/)
 - using the `@xpack_project` account
-- paste the release name like **xPack GNU RISC-V Embedded GCC v10.2.0-1.3 released**
+- paste the release name like **xPack GNU RISC-V Embedded GCC v11.3.0-1 released**
 - paste the link to the Web page
   [release](https://xpack.github.io/riscv-none-embed-gcc/releases/)
 - click the **Tweet** button
@@ -537,9 +492,9 @@ Add a new topic in the **Announcements** category of the
 [RISC-V forums]<https://groups.google.com/a/groups.riscv.org/g/sw-dev>).
 
 ```console
-Subject: xPack GNU RISC-V Embedded GCC v10.2.0-1.3 released
+Subject: xPack GNU RISC-V Embedded GCC v11.3.0-1 released
 
-Version 10.2.0-1.3 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the SiFive release v2020.12.0 from April 7, 2021.
+Version 11.3.0-1 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the SiFive release v2020.12.0 from April 7, 2021.
 
 https://xpack.github.io/blog/2021/11/06/riscv-none-embed-gcc-v10-2-0-1-1-released/
 ```

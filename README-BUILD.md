@@ -124,7 +124,7 @@ not be accepted by bash.
 
 ## Versioning
 
-The version string is an extension to semver, the format looks like `10.2.0-1.3`.
+The version string is an extension to semver, the format looks like `11.3.0-1`.
 It includes the three digits with the original GCC version, a fourth
 digit with the SiFive release, a fifth digit with the xPack release number.
 
@@ -231,10 +231,10 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 1429180
--rw-rw-r-- 1 ilg ilg 361419776 Oct 24 20:30 xpack-riscv-none-embed-gcc-10.2.0-1.3-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 24 20:30 xpack-riscv-none-embed-gcc-10.2.0-1.3-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 375055827 Oct 24 21:04 xpack-riscv-none-embed-gcc-10.2.0-1.3-win32-x64.zip
--rw-rw-r-- 1 ilg ilg       117 Oct 24 21:04 xpack-riscv-none-embed-gcc-10.2.0-1.3-win32-x64.zip.sha
+-rw-rw-r-- 1 ilg ilg 361419776 Oct 24 20:30 xpack-riscv-none-embed-gcc-11.3.0-1-linux-x64.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 24 20:30 xpack-riscv-none-embed-gcc-11.3.0-1-linux-x64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 375055827 Oct 24 21:04 xpack-riscv-none-embed-gcc-11.3.0-1-win32-x64.zip
+-rw-rw-r-- 1 ilg ilg       117 Oct 24 21:04 xpack-riscv-none-embed-gcc-11.3.0-1-win32-x64.zip.sha
 ```
 
 ### Build the Arm GNU/Linux binaries
@@ -304,10 +304,10 @@ archives and their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 702592
--rw-rw-r-- 1 ilg ilg 361351380 Oct 24 23:42 xpack-riscv-none-embed-gcc-10.2.0-1.3-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg       122 Oct 24 23:42 xpack-riscv-none-embed-gcc-10.2.0-1.3-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 358086677 Oct 25 07:31 xpack-riscv-none-embed-gcc-10.2.0-1.3-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 25 07:31 xpack-riscv-none-embed-gcc-10.2.0-1.3-linux-arm.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 361351380 Oct 24 23:42 xpack-riscv-none-embed-gcc-11.3.0-1-linux-arm64.tar.gz
+-rw-rw-r-- 1 ilg ilg       122 Oct 24 23:42 xpack-riscv-none-embed-gcc-11.3.0-1-linux-arm64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 358086677 Oct 25 07:31 xpack-riscv-none-embed-gcc-11.3.0-1-linux-arm.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 25 07:31 xpack-riscv-none-embed-gcc-11.3.0-1-linux-arm.tar.gz.sha
 ```
 
 Note: on some versions, the 32-bit Arm binaries could not be built, since the RVV support requires more than 4 GB or RAM.
@@ -352,8 +352,8 @@ and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
 total 698240
--rw-r--r--  1 ilg  staff  357492352 Oct 24 22:51 xpack-riscv-none-embed-gcc-10.2.0-1.3-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        121 Oct 24 22:51 xpack-riscv-none-embed-gcc-10.2.0-1.3-darwin-x64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  357492352 Oct 24 22:51 xpack-riscv-none-embed-gcc-11.3.0-1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        121 Oct 24 22:51 xpack-riscv-none-embed-gcc-11.3.0-1-darwin-x64.tar.gz.sha
 ```
 
 ## Subsequent runs
@@ -438,7 +438,7 @@ look like:
 
 ```console
 $ .../xpack-riscv-none-embed-gcc/bin/riscv-none-embed-gcc --version
-riscv-none-embed-gcc (xPack RISC-V Embedded GCC, 64-bit) 10.2.0
+riscv-none-embed-gcc (xPack RISC-V Embedded GCC, 64-bit) 11.3.0
 ```
 
 ## Installed folders
@@ -447,8 +447,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-embed-gcc/10.2.0-1.3/.content/
-/Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-embed-gcc/10.2.0-1.3/.content/
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-embed-gcc/11.3.0-1/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-embed-gcc/11.3.0-1/.content/
 ├── README.md
 ├── bin
 │   ├── riscv-none-embed-addr2line
@@ -460,7 +460,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-embed-gcc/10.
 │   ├── riscv-none-embed-elfedit
 │   ├── riscv-none-embed-g++
 │   ├── riscv-none-embed-gcc
-│   ├── riscv-none-embed-gcc-10.2.0
+│   ├── riscv-none-embed-gcc-11.3.0
 │   ├── riscv-none-embed-gcc-ar
 │   ├── riscv-none-embed-gcc-nm
 │   ├── riscv-none-embed-gcc-ranlib
