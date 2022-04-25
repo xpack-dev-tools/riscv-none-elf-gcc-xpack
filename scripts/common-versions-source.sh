@@ -54,7 +54,7 @@ function build_versions()
     LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin.so"
   elif [ "${TARGET_PLATFORM}" == "linux" ]
   then
-    LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin.so.0.0.0"
+    LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin.so"
     LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin.so"
   elif [ "${TARGET_PLATFORM}" == "win32" ]
   then
