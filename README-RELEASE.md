@@ -152,27 +152,27 @@ or the production machines (`xbbma`, `xbbmi`):
 ```sh
 sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
 
-caffeinate bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --macos
+caffeinate bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --macos --disable-multilib
 ```
 
 Similarly on the Intel Linux (`xbbli`):
 
 ```sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --linux64
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --linux64 --disable-multilib
 
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --win64
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --win64 --disable-multilib
 ```
 
 ... on the Arm Linux 64-bit (`xbbla64`):
 
 ```sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm64
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --arm64 --disable-multilib
 ```
 
 ... and on the Arm Linux (`xbbla32`):
 
 ```sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm32
+bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --arm32 --disable-multilib
 ```
 
 Work on the scripts until all platforms pass the build.
