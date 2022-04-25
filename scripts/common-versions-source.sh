@@ -234,7 +234,8 @@ function build_versions()
         if [ "${TARGET_PLATFORM}" == "linux" ]
         then
           # https://github.com/telmich/gpm/tags
-          build_gpm "1.20.7"
+          # https://github.com/xpack-dev-tools/gpm/tags
+          build_gpm "1.20.7-1"
         fi
 
         # https://ftp.gnu.org/gnu/ncurses/
