@@ -656,16 +656,18 @@ function copy_nano_libs()
   local src_folder="$1"
   local dst_folder="$2"
 
-  cp -v -f "${src_folder}/libstdc++.a" "${dst_folder}/libstdc++_nano.a"
-  cp -v -f "${src_folder}/libsupc++.a" "${dst_folder}/libsupc++_nano.a"
+  # Copy the nano variants with a distinct name, as used in nano.specs.
   cp -v -f "${src_folder}/libc.a" "${dst_folder}/libc_nano.a"
   cp -v -f "${src_folder}/libg.a" "${dst_folder}/libg_nano.a"
-  cp -v -f "${src_folder}/librdimon.a" "${dst_folder}/librdimon_nano.a"
 
-  cp -v -f "${src_folder}/nano.specs" "${dst_folder}/"
-  cp -v -f "${src_folder}/rdimon.specs" "${dst_folder}/"
-  cp -v -f "${src_folder}/nosys.specs" "${dst_folder}/"
-  cp -v -f "${src_folder}"/*crt0.o "${dst_folder}/"
+  cp -v -f "${src_folder}/libgloss.a" "${dst_folder}/libgloss_nano.a"
+
+  # TODO: Check if really used.
+  if true
+  then
+    cp -v -f "${src_folder}/libstdc++.a" "${dst_folder}/libstdc++_nano.a"
+    cp -v -f "${src_folder}/libsupc++.a" "${dst_folder}/libsupc++_nano.a"
+  fi
 }
 
 # Copy target libraries from each multilib folders.
