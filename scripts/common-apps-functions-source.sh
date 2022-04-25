@@ -38,6 +38,7 @@ function build_binutils()
     then
       (
         cd "${SOURCES_FOLDER_PATH}"
+
         download_and_extract "${binutils_url}" \
           "${binutils_archive}" "${binutils_src_folder_name}" \
           "${binutils_patch}"
@@ -436,6 +437,7 @@ function build_newlib()
     then
       (
         cd "${SOURCES_FOLDER_PATH}"
+
         download_and_extract "${newlib_url}" \
           "${newlib_archive}" "${newlib_src_folder_name}"
       )
@@ -1180,6 +1182,7 @@ function build_gdb()
     then
       (
         cd "${SOURCES_FOLDER_PATH}"
+        
         download_and_extract "${gdb_url}" \
           "${gdb_archive}" "${gdb_src_folder_name}" \
           "${gdb_patch_file_name}"
