@@ -659,11 +659,12 @@ function copy_nano_libs()
   # Copy the nano variants with a distinct name, as used in nano.specs.
   cp -v -f "${src_folder}/libc.a" "${dst_folder}/libc_nano.a"
   cp -v -f "${src_folder}/libg.a" "${dst_folder}/libg_nano.a"
+  cp -v -f "${src_folder}/libm.a" "${dst_folder}/libm_nano.a"
 
   cp -v -f "${src_folder}/libgloss.a" "${dst_folder}/libgloss_nano.a"
 
   # TODO: Check if really used.
-  if true
+  if false
   then
     cp -v -f "${src_folder}/libstdc++.a" "${dst_folder}/libstdc++_nano.a"
     cp -v -f "${src_folder}/libsupc++.a" "${dst_folder}/libsupc++_nano.a"
@@ -1105,10 +1106,13 @@ main(int argc, char* argv[])
   printf("Hello World\n");
 }
 __EOF__
-    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -o hello-c.elf -specs=nosys.specs hello.c
+
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -o hello-c.elf -specs=nosys.specs -v hello.c
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -o hello-c-nano.elf -specs=nosys.specs -specs=nano.specs -v hello.c
 
     run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -o hello.c.o -c -flto hello.c
     run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -o hello-c-lto.elf -specs=nosys.specs -flto -v hello.c.o
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -o hello-c-lto-nano.elf -specs=nosys.specs -specs=nano.specs -flto -v hello.c.o
 
     # Note: __EOF__ is quoted to prevent substitutions here.
     cat <<'__EOF__' > hello.cpp
@@ -1127,10 +1131,13 @@ __sync_synchronize()
 {
 }
 __EOF__
-    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-g++" -o hello-cpp.elf -specs=nosys.specs hello.cpp
+
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-g++" -o hello-cpp.elf -specs=nosys.specs -v hello.cpp
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-g++" -o hello-cpp-nano.elf -specs=nosys.specs -specs=nano.specs -v hello.cpp
 
     run_app "${TEST_BIN_PATH}/${GCC_TARGET}-g++" -o hello.cpp.o -c -flto hello.cpp
     run_app "${TEST_BIN_PATH}/${GCC_TARGET}-g++" -o hello-cpp-lto.elf -specs=nosys.specs -flto -v hello.cpp.o
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-g++" -o hello-cpp-lto-nano.elf -specs=nosys.specs -specs=nano.specs -flto -v hello.cpp.o
 
     cd ..
     rm -rf "${tmp}"
