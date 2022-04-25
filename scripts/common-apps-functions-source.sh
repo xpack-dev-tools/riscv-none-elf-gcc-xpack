@@ -1182,7 +1182,7 @@ function build_gdb()
     then
       (
         cd "${SOURCES_FOLDER_PATH}"
-        
+
         download_and_extract "${gdb_url}" \
           "${gdb_archive}" "${gdb_src_folder_name}" \
           "${gdb_patch_file_name}"
@@ -1249,13 +1249,13 @@ function build_gdb()
       then
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
-          # The source archive includes only the pyconfig.h.in, which needs
-          # to be configured, which is not an easy task. Thus add the file copied
-          # from a Windows install.
-          cp -v "${BUILD_GIT_PATH}/patches/pyconfig-win-${PYTHON3_VERSION}.h" \
+          # The source archive includes only the pyconfig.h.in, that needs
+          # to be configured, which is not an easy task. The simple
+          # workaround is to add the file copied from a Windows install.
+          cp -v "${helper_folder_path}/extras/python/pyconfig-win-${PYTHON3_VERSION}.h" \
             "${LIBS_INSTALL_FOLDER_PATH}/include/pyconfig.h"
 
-          extra_python_opts="--with-python=${BUILD_GIT_PATH}/patches/python${PYTHON3_VERSION_MAJOR_MINOR}-config.sh"
+          extra_python_opts="--with-python=${helper_folder_path}/extras/python/python3-config.sh"
         else
           extra_python_opts="--with-python=${LIBS_INSTALL_FOLDER_PATH}/bin/python3.${PYTHON3_VERSION_MINOR}"
 
