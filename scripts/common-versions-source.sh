@@ -15,13 +15,6 @@
 
 function build_versions()
 {
-  if [ "${TARGET_PLATFORM}" == "linux" -a "${TARGET_ARCH}" == "arm" ]
-  then
-    echo
-    echo "No Arm 32-bit image, due to memory contraints."
-    exit 1
-  fi
-
   APP_PREFIX_NANO="${INSTALL_FOLDER_PATH}/${APP_LC_NAME}-nano"
 
   # Don't use a comma since the regular expression
