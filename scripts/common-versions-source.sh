@@ -89,7 +89,7 @@ function build_versions()
 
       # Minimal list, for tests only.
       GCC_MULTILIB=${GCC_MULTILIB:-"\
-        rv32imac-ilp32-- \
+        rv32ima-ilp32-- \
         rv64imac-lp64-- \
       "}
     else
@@ -100,6 +100,10 @@ function build_versions()
       # (including `rv32imaf-ilp32f--`).
       if [ "${IS_DEVELOP}" != "y" ]
       then
+
+        # DO NOT add the combination that is already given as the default!
+        # rv32imac-ilp32-- \
+
         GCC_MULTILIB=${GCC_MULTILIB:-"\
           rv32e-ilp32e-- \
           rv32ea-ilp32e-- \
@@ -124,7 +128,6 @@ function build_versions()
           rv32ifdc-ilp32d-- \
           rv32im-ilp32-- \
           rv32ima-ilp32-- \
-          rv32imac-ilp32-- \
           rv32imaf-ilp32f-- \
           rv32imafc-ilp32f-- \
           rv32imafd-ilp32d-- \
@@ -162,11 +165,10 @@ function build_versions()
         "}
       else
         # Short list used during development to save time.
+        # Skip: rv32imac-ilp32-- (see above).
         GCC_MULTILIB=${GCC_MULTILIB:-"\
           rv32emac-ilp32e-- \
           rv32ima-ilp32-- \
-          rv32imac-ilp32-- \
-          rv64ima-lp64-- \
           rv64imac-lp64-- \
         "}
       fi
