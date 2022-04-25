@@ -245,29 +245,30 @@ function download_gcc()
         "${gcc_archive}" "${GCC_SRC_FOLDER_NAME}" \
         "${gcc_patch_file_name}"
     )
+  fi
 
-    if [ -n "${GCC_MULTILIB}" ]
-    then
-      (
-        echo
-        echo "Running the multilib generator..."
+  # Not inside the previous if to allow multilib changes after download.
+  if [ -n "${GCC_MULTILIB}" ]
+  then
+    (
+      echo
+      echo "Running the multilib generator..."
 
-        cd "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/gcc/config/riscv"
+      cd "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/gcc/config/riscv"
 
-        xbb_activate_installed_dev
+      xbb_activate_installed_dev
 
-        # Be sure the ${GCC_MULTILIB} has no quotes, since it defines
-        # multiple strings.
+      # Be sure the ${GCC_MULTILIB} has no quotes, since it defines
+      # multiple strings.
 
-        # Change IFS temporarily so that we can pass a simple string of
-        # whitespace delimited multilib tokens to multilib-generator
-        local IFS=$' '
-        echo
-        echo "[python3 ./multilib-generator ${GCC_MULTILIB}]"
-        python3 ./multilib-generator ${GCC_MULTILIB} > "${GCC_MULTILIB_FILE}"
-        cat "${GCC_MULTILIB_FILE}"
-      )
-    fi
+      # Change IFS temporarily so that we can pass a simple string of
+      # whitespace delimited multilib tokens to multilib-generator
+      local IFS=$' '
+      echo
+      echo "[python3 ./multilib-generator ${GCC_MULTILIB}]"
+      python3 ./multilib-generator ${GCC_MULTILIB} > "${GCC_MULTILIB_FILE}"
+      cat "${GCC_MULTILIB_FILE}"
+    )
   fi
 }
 
