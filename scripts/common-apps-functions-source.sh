@@ -656,26 +656,14 @@ function copy_nano_libs()
   local src_folder="$1"
   local dst_folder="$2"
 
-  if [ -f "${src_folder}/libstdc++.a" ]
-  then
-    cp -v -f "${src_folder}/libstdc++.a" "${dst_folder}/libstdc++_nano.a"
-  fi
-  if [ -f "${src_folder}/libsupc++.a" ]
-  then
-    cp -v -f "${src_folder}/libsupc++.a" "${dst_folder}/libsupc++_nano.a"
-  fi
+  cp -v -f "${src_folder}/libstdc++.a" "${dst_folder}/libstdc++_nano.a"
+  cp -v -f "${src_folder}/libsupc++.a" "${dst_folder}/libsupc++_nano.a"
   cp -v -f "${src_folder}/libc.a" "${dst_folder}/libc_nano.a"
   cp -v -f "${src_folder}/libg.a" "${dst_folder}/libg_nano.a"
-  if [ -f "${src_folder}/librdimon.a" ]
-  then
-    cp -v -f "${src_folder}/librdimon.a" "${dst_folder}/librdimon_nano.a"
-  fi
+  cp -v -f "${src_folder}/librdimon.a" "${dst_folder}/librdimon_nano.a"
 
   cp -v -f "${src_folder}/nano.specs" "${dst_folder}/"
-  if [ -f "${src_folder}/rdimon.specs" ]
-  then
-    cp -v -f "${src_folder}/rdimon.specs" "${dst_folder}/"
-  fi
+  cp -v -f "${src_folder}/rdimon.specs" "${dst_folder}/"
   cp -v -f "${src_folder}/nosys.specs" "${dst_folder}/"
   cp -v -f "${src_folder}"/*crt0.o "${dst_folder}/"
 }
