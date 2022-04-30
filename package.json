@@ -41,6 +41,10 @@
       "baseUrl": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v10.2.0-1.2",
       "skip": 1,
       "platforms": {
+        "darwin-arm64": {
+          "fileName": "xpack-riscv-none-elf-gcc-10.2.0-1.2-darwin-x64.tar.gz",
+          "sha256": "62637b65ba5f57b88ee32ebf329164cbd9b2fa1d4531915950f707499a7efa2a"
+        },
         "darwin-x64": {
           "fileName": "xpack-riscv-none-elf-gcc-10.2.0-1.2-darwin-x64.tar.gz",
           "sha256": "62637b65ba5f57b88ee32ebf329164cbd9b2fa1d4531915950f707499a7efa2a"
@@ -49,17 +53,13 @@
           "fileName": "xpack-riscv-none-elf-gcc-10.2.0-1.2-linux-arm64.tar.gz",
           "sha256": "8d516bc593144935d844e1a34f113cde4b9e0ee0046c1f0228e9924f35b4dd30"
         },
-        "linux-ia32": {
-          "fileName": "xpack-riscv-none-elf-gcc-10.2.0-1.2-linux-ia32.tar.gz",
-          "sha256": "2e3f947403404359c8996a8b8c50dc61e8ee0f720da561d354f74b57f2fd4d53"
+        "linux-arm": {
+          "fileName": "xpack-riscv-none-elf-gcc-10.2.0-1.2-linux-arm64.tar.gz",
+          "sha256": "8d516bc593144935d844e1a34f113cde4b9e0ee0046c1f0228e9924f35b4dd30"
         },
         "linux-x64": {
           "fileName": "xpack-riscv-none-elf-gcc-10.2.0-1.2-linux-x64.tar.gz",
           "sha256": "d72bdcd1eee41dc5a208a8a03976b70d014510deb5890c9e8738e804ba23f985"
-        },
-        "win32-ia32": {
-          "fileName": "xpack-riscv-none-elf-gcc-10.2.0-1.2-win32-ia32.zip",
-          "sha256": "f9d25d057d69e3d460fd15f422b533ae315e6ecdcd389bbd784cc2e083ba64b3"
         },
         "win32-x64": {
           "fileName": "xpack-riscv-none-elf-gcc-10.2.0-1.2-win32-x64.zip",
