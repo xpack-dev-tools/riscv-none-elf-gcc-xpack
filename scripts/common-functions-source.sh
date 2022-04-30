@@ -7,19 +7,43 @@
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
-# Helper script used in the second edition of the GNU MCU Eclipse build
-# scripts. As the name implies, it should contain only functions and
+# Helper script used in the xPack Dev Tools build scripts.
+# As the name implies, it should contain only functions and
 # should be included with 'source' by the container build scripts.
 
 # -----------------------------------------------------------------------------
 
-function add_linux_install_path()
+function generate_multilib_file()
 {
-  # Verify that the compiler is there.
-  "${WORK_FOLDER_PATH}/${LINUX_INSTALL_RELATIVE_PATH}/${APP_LC_NAME}/bin/${GCC_TARGET}-gcc" --version
+  # Not inside the previous if to allow multilib changes after download.
+  if [ "${WITHOUT_MULTILIB}" != "y" ]
+  then
+    (
+      echo
+      echo "Running the multilib generator..."
 
-  export PATH="${WORK_FOLDER_PATH}/${LINUX_INSTALL_RELATIVE_PATH}/${APP_LC_NAME}/bin:${PATH}"
-  echo ${PATH}
+      cd "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/gcc/config/riscv"
+
+      xbb_activate_installed_dev
+
+      GCC_MULTILIB_FILE=${GCC_MULTILIB_FILE:-"t-elf-multilib"}
+
+      # Be sure the ${GCC_MULTILIB} has no quotes, since it defines
+      # multiple strings.
+
+      # Change IFS temporarily so that we can pass a simple string of
+      # whitespace delimited multilib tokens to multilib-generator
+      local IFS=$' '
+      echo
+      echo "[python3 ./multilib-generator ${GCC_MULTILIB}]"
+      python3 ./multilib-generator ${GCC_MULTILIB} > "${GCC_MULTILIB_FILE}"
+
+      echo "----------------------------------------------------------------"
+      cat "${GCC_MULTILIB_FILE}"
+      echo "----------------------------------------------------------------"
+    )
+  fi
 }
+
 
 # -----------------------------------------------------------------------------
