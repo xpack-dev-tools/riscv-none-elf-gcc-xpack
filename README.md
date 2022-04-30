@@ -19,10 +19,16 @@ and provides the platform specific binaries for the
 The binaries can be installed automatically as **binary xPacks** or manually as
 **portable archives**.
 
+## Deprecation notice
+
+This project replaces the now deprecated
+[`xpack-dev-tools/riscv-none-embed-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack)
+project, which followed the SiFive releases.
+
 ## Release schedule
 
 This distribution plans to follow the official
-[SiFive](https://www.sifive.com/software) releases.
+[GNU](https://gcc.gnu.org/releases.html) release schedule.
 
 ## User info
 
@@ -125,7 +131,7 @@ like `11.3.0-1`. The fifth number is the xPack release.
 When published as a npm package, the version gets
 a sixth number, like `11.3.0-1.1`.
 
-Since adherance of third party packages to semver is not guaranteed,
+Since adherence of third party packages to semver is not guaranteed,
 it is recommended to use semver expressions like `^11.3.0` and `~11.3.0`
 with caution, and prefer exact matches, like `11.3.0-1.1`.
 

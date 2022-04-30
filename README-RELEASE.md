@@ -2,8 +2,7 @@
 
 ## Release schedule
 
-Starting with 2022, SiFive no longer offers GCC releases; as a consequence,
-the xPack GNU RISC-V Embedded GCC release schedule will follow the
+The xPack GNU RISC-V Embedded GCC release schedule will follow the
 [GNU](https://gcc.gnu.org/releases.html) release schedule.
 
 ## Prepare the build
@@ -32,73 +31,6 @@ the xPack GNU RISC-V Embedded GCC release number of this version.
 - open the `common-versions-source.sh` file
 - add a new `if` with the new version before the existing code
 - update the versions, branch names and commit ids
-
-### Update binutils
-
-With a git client in
-[xpack-dev-tools/binutils-gdb](https://github.com/xpack-dev-tools/binutils-gdb):
-
-- identify the tag with the latest release (like `binutils-2.38`)
-- create a new branch with the same name as the tag (like `binutils-2.38`)
-- create a new branch with name suffixed with `-riscv-none-elf-xpack`
-  (like `binutils-2.38-riscv-none-elf-xpack`
-- identify the commit which adds the xPack specific changes
-- cherry pick it; do not commit immediately
-- check the uncommitted changes; there should be one file `config.sub`
-  which adds `-embed)`
-- commit as **add support for riscv-none-elf-***
-- push both new branches to `origin`
-- checkout the `binutils-2.38` tag as HEAD
-- create patch from the commit
-- rename as `binutils-2.38.patch.diff`
-- copy to `patches`
-
-### Update gcc
-
-With a git client in
-[xpack-dev-tools/gcc](https://github.com/xpack-dev-tools/gcc)
-
-- identify the tag with the latest release (like `gcc-11.3.0`)
-- create a new branch with the same name as the tag (like `gcc-11.3.0`)
-- create a new branch with name suffixed with `-riscv-none-elf-xpack`
-  (like `gcc-11.3.0-riscv-none-elf-xpack`
-- identify the commit which adds the xPack specific changes
-- cherry pick it; do not commit immediately
-- check the differences from the non-xpack branch; there should be three files:
-  - `elf-embed.h` with the `LIB_SPEC` definitions without libgloss
-  - `config.gcc` with `tm_file` definition that uses `elf-embed.h`
-  - `config.sub` which adds `*-embed)`
-- commit as **add support for riscv-none-elf-***
-- push both new branches to `origin`
-- checkout the `gcc-11.3.0` tag as HEAD
-- create patch from the commit
-- rename as `gcc-11.3.0.patch.diff`
-- copy to `patches`
-
-### Update newlib
-
-Not needed, replacing the `config.sub` is enough.
-
-### Update gdb
-
-With a git client in
-[xpack-dev-tools/binutils-gdb](https://github.com/xpack-dev-tools/binutils-gdb)
-
-- identify the tag with the latest release (like `gdb-11.2-release`)
-- create a new branch with the same name as the tag (like `gdb-11.2`)
-- create a new branch with name suffixed with `-riscv-none-elf-xpack`
-  (like `gdb-11.2-riscv-none-elf-xpack`
-- identify the commit which adds the xPack specific changes
-- cherry pick it; do not commit immediately
-- check the uncommitted changes; there should be two files
-  - `config.sub` which adds `-embed)`
-  - `python-config.py`
-- commit as **add support for riscv-none-elf-***
-- push both new branches to `origin`
-- checkout the `gdb-11.2` branch
-- create patch from the commit
-- rename as `gdb-11.2.patch.diff`
-- copy to `patches`
 
 ### Fix possible open issues
 
@@ -132,17 +64,6 @@ With a git client, go to the helper repo and update to the latest master commit.
 ## Build
 
 Before starting the build, perform some checks.
-
-### Check tags
-
-The names should look like `v11.3.0-1`.
-
-For the binutils-gdb repo, a separate tag like `v11.3.0-1-gdb` should be
-present, for the GDB build.
-
-- <https://github.com/xpack-dev-tools/riscv-binutils-gdb/tags>
-- <https://github.com/xpack-dev-tools/riscv-gcc/tags>
-- <https://github.com/xpack-dev-tools/riscv-newlib/tags>
 
 ### Development run the build scripts
 
