@@ -175,9 +175,15 @@ bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop
 bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --arm32 --disable-multilib
 ```
 
-Work on the scripts until all platforms pass the build.
+The builds may take up to 3.5h:
 
-Possibly add binutils & gdb patches.
+- `xbbmi`: 143 min
+- `xbbma`: 37 min
+- `xbbli`: 42 min for Linux, 16 min for Windows
+- `xbbla64`: 204 min
+- `xbbla32`: 218 min
+
+Work on the scripts until all platforms pass the build.
 
 ### Push the build scripts
 
