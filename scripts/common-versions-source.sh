@@ -29,18 +29,12 @@ function build_versions()
   # ---------------------------------------------------------------------------
   # Defaults. Must be present.
 
-  if [ "${WITHOUT_MULTILIB}" == "y" ]
-  then
-    MULTILIB_FLAGS="--disable-multilib"
-  else
-    # By default it searches the definitions in "t-elf-multilib"
-    MULTILIB_FLAGS=""
-  fi
+  GCC_PATCH_FILE_NAME=""
+  GDB_PATCH_FILE_NAME=""
 
   # ---------------------------------------------------------------------------
 
   # Redefine to "y" to create the LTO plugin links.
-  FIX_LTO_PLUGIN=""
   if [ "${TARGET_PLATFORM}" == "darwin" ]
   then
     LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin.so"
@@ -75,20 +69,8 @@ function build_versions()
 
     # -------------------------------------------------------------------------
 
-    if [ "${WITHOUT_MULTILIB}" == "y" ]
+    if [ "${WITHOUT_MULTILIB}" != "y" ]
     then
-      MULTILIB_FLAGS="--disable-multilib"
-      # MULTILIB_FLAGS=""
-
-      # Minimal list, for tests only.
-      GCC_MULTILIB=${GCC_MULTILIB:-"\
-        rv32ima-ilp32-- \
-        rv64imac-lp64-- \
-      "}
-    else
-      # By default it searches the definitions in "t-elf-multilib"
-      MULTILIB_FLAGS=""
-
       # The SiFive list from 10.2 with a lot of non-c extras.
       # (including `rv32imaf-ilp32f--`).
       if [ "${IS_DEVELOP}" != "y" ]
@@ -167,7 +149,6 @@ function build_versions()
       fi
     fi
 
-    GCC_MULTILIB_FILE=${GCC_MULTILIB_FILE:-"t-elf-multilib"}
 
     # -------------------------------------------------------------------------
 
@@ -193,8 +174,6 @@ function build_versions()
       build_isl "0.24"
 
       # More libraries.
-      # Fails on mingw
-      ## build_libelf "0.8.13"
       # https://www.bytereef.org/mpdecimal/download.html
       build_libmpdec "2.5.1" # Used by Python
 
@@ -209,6 +188,8 @@ function build_versions()
       build_gettext "0.21"
 
       # https://www.python.org/ftp/python/
+      # Requires `scripts/helper/extras/python/pyconfig-win-3.10.4.h` &
+      # `python3-config.sh`
       PYTHON3_VERSION="3.10.4"
       WITH_GDB_PY3="y"
 
@@ -263,58 +244,97 @@ function build_versions()
           add_python3_syslibs
         fi
       fi
+      # exit 1
 
       # ---------------------------------------------------------------------------
       # The task descriptions are from the ARM build script.
 
       # Task [III-0] /$HOST_NATIVE/binutils/
       # Task [IV-1] /$HOST_MINGW/binutils/
-      # https://ftp.gnu.org/gnu/binutils/
-      build_binutils "2.38"
-      # copy_dir to libs included above
 
-      prepare_gcc_variables "${GCC_VERSION}"
+      # https://ftp.gnu.org/gnu/binutils/
+      # https://ftp.gnu.org/gnu/binutils/binutils-2.38.tar.xz
+
+      BINUTILS_VERSION="2.38"
+
+      BINUTILS_SRC_FOLDER_NAME="binutils-${BINUTILS_VERSION}"
+      BINUTILS_ARCHIVE_NAME="binutils-${BINUTILS_VERSION}.tar.xz"
+      BINUTILS_ARCHIVE_URL="https://ftp.gnu.org/gnu/binutils/${BINUTILS_ARCHIVE_NAME}"
+
+      build_cross_binutils
+      # copy_dir to libs included above
+      # exit 1
+
+      # prepare_gcc_variables "${GCC_VERSION}"
+
+      # GCC_VERSION computer from RELEASE_VERSION
+      GCC_SRC_FOLDER_NAME="gcc-${GCC_VERSION}"
+      GCC_ARCHIVE_NAME="${GCC_SRC_FOLDER_NAME}.tar.xz"
+      GCC_ARCHIVE_URL="https://ftp.gnu.org/gnu/gcc/gcc-${GCC_VERSION}/${GCC_ARCHIVE_NAME}"
+
+      GCC_PATCH_FILE_NAME="gcc-${GCC_VERSION}.patch.diff"
+
+      # Download GCC earlier, to have time to run the multilib generator.
+      download_cross_gcc
+      generate_multilib_file
 
       if [ "${TARGET_PLATFORM}" != "win32" ]
       then
 
         # Task [III-1] /$HOST_NATIVE/gcc-first/
-        build_gcc_first "${GCC_VERSION}"
+        build_cross_gcc_first
+        # exit 1
 
         # https://www.sourceware.org/ftp/newlib/index.html
+        # ftp://sourceware.org/pub/newlib/newlib-4.2.0.20211231.tar.gz
         NEWLIB_VERSION="4.2.0.20211231"
 
+        NEWLIB_SRC_FOLDER_NAME="newlib-${NEWLIB_VERSION}"
+        NEWLIB_ARCHIVE_NAME="newlib-${NEWLIB_VERSION}.tar.gz"
+        NEWLIB_ARCHIVE_URL="ftp://sourceware.org/pub/newlib/${NEWLIB_ARCHIVE_NAME}"
+
         # Task [III-2] /$HOST_NATIVE/newlib/
-        build_newlib "${NEWLIB_VERSION}" ""
-        # Task [III-3] /$HOST_NATIVE/newlib-nano/
-        build_newlib "${NEWLIB_VERSION}" "-nano"
+        build_cross_newlib ""
+        # exit 1
 
         # Task [III-4] /$HOST_NATIVE/gcc-final/
-        build_gcc_final "${GCC_VERSION}" ""
+        build_cross_gcc_final ""
+        # exit 1
+
+        # Once again, for the -nano variant.
+        # Task [III-3] /$HOST_NATIVE/newlib-nano/
+        build_cross_newlib "-nano"
 
         # Task [III-5] /$HOST_NATIVE/gcc-size-libstdcxx/
-        build_gcc_final "${GCC_VERSION}" "-nano"
+        build_cross_gcc_final "-nano"
+        # exit 1
 
       else
 
         # Task [IV-2] /$HOST_MINGW/copy_libs/
-        copy_linux_libs
+        copy_cross_linux_libs
 
         # Task [IV-3] /$HOST_MINGW/gcc-final/
-        build_gcc_final "${GCC_VERSION}" ""
+        build_cross_gcc_final "${GCC_VERSION}" ""
+        # exit 1
 
       fi
 
       # https://ftp.gnu.org/gnu/gdb/
+      # https://ftp.gnu.org/gnu/gdb/gdb-11.2.tar.xz
+
       GDB_VERSION="11.2"
+      GDB_SRC_FOLDER_NAME="gdb-${GDB_VERSION}"
+      GDB_ARCHIVE_NAME="${GDB_SRC_FOLDER_NAME}.tar.xz"
+      GDB_ARCHIVE_URL="https://ftp.gnu.org/gnu/gdb/${GDB_ARCHIVE_NAME}"
 
       # Task [III-6] /$HOST_NATIVE/gdb/
       # Task [IV-4] /$HOST_MINGW/gdb/
-      build_gdb "${GDB_VERSION}" ""
+      build_cross_gdb ""
 
       if [ "${WITH_GDB_PY3}" == "y" ]
       then
-        build_gdb "${GDB_VERSION}" "-py3"
+        build_cross_gdb "-py3"
       fi
     )
 
