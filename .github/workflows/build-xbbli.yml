@@ -46,35 +46,28 @@ jobs:
           submodules: true
 
       - name: 'Clean working area'
-        run: rm -rf ~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}*
+        run: rm -rf ~/Work/riscv-none-elf-gcc-${{ github.event.inputs.version }}*
 
       - name: 'Build Linux x64 binary'
         timeout-minutes: 1440
         run: bash scripts/helper/build.sh --version "${{ github.event.inputs.version }}" --linux64
     
-      - name: 'Build Linux ia32 binary'
-        timeout-minutes: 1440
-        run: bash scripts/helper/build.sh --version "${{ github.event.inputs.version }}" --linux32
-    
       - name: 'Build Windows x64 binary'
         timeout-minutes: 1440
         run: bash scripts/helper/build.sh --version "${{ github.event.inputs.version }}" --win64
     
-      - name: 'Build Windows ia32 binary'
-        timeout-minutes: 1440
-        run: bash scripts/helper/build.sh --version "${{ github.event.inputs.version }}" --win32
-  
       - name: 'Publish pre-release'
         # https://github.com/ncipollo/release-action
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          artifacts: '~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}/deploy/*'
+          artifacts: '~/Work/riscv-none-elf-gcc-${{ github.event.inputs.version }}/deploy/*'
           bodyFile: '.github/workflows/body-github-pre-releases-test.md'
           commit: 'master'
           draft: false
           name: 'Test binaries'
           omitBodyDuringUpdate: true
+          omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
           owner: 'xpack-dev-tools'
           prerelease: true

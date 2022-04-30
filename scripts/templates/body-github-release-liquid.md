@@ -1,4 +1,4 @@
-![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/v{{ RELEASE_VERSION }}/total.svg)
+![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-elf-gcc-xpack/v{{ RELEASE_VERSION }}/total.svg)
 
 Version **{{ RELEASE_VERSION }}** is a maintenance release of the **xPack RISC-V Embedded GCC** package; it updates to the latest upstream master.
 

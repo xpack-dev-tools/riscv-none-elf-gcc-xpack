@@ -1,5 +1,5 @@
 {
-  "name": "@xpack-dev-tools/riscv-none-embed-gcc",
+  "name": "@xpack-dev-tools/riscv-none-elf-gcc",
   "version": "10.2.0-1.2.1",
   "description": "A binary xPack with the GNU RISC-V Embedded GCC executables",
   "main": "",
@@ -18,9 +18,9 @@
     "url": "https://github.com/xpack-dev-tools/riscv-none-gcc-xpack.git/"
   },
   "bugs": {
-    "url": "https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues/"
+    "url": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/issues/"
   },
-  "homepage": "https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/#readme",
+  "homepage": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/#readme",
   "keywords": [
     "xpack",
     "gcc",
@@ -38,71 +38,71 @@
     "minimumXpmRequired": "0.10.2",
     "binaries": {
       "destination": "./.content",
-      "baseUrl": "https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/download/v10.2.0-1.2",
+      "baseUrl": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v10.2.0-1.2",
       "skip": 1,
       "platforms": {
         "darwin-x64": {
-          "fileName": "xpack-riscv-none-embed-gcc-10.2.0-1.2-darwin-x64.tar.gz",
+          "fileName": "xpack-riscv-none-elf-gcc-10.2.0-1.2-darwin-x64.tar.gz",
           "sha256": "62637b65ba5f57b88ee32ebf329164cbd9b2fa1d4531915950f707499a7efa2a"
         },
         "linux-arm64": {
-          "fileName": "xpack-riscv-none-embed-gcc-10.2.0-1.2-linux-arm64.tar.gz",
+          "fileName": "xpack-riscv-none-elf-gcc-10.2.0-1.2-linux-arm64.tar.gz",
           "sha256": "8d516bc593144935d844e1a34f113cde4b9e0ee0046c1f0228e9924f35b4dd30"
         },
         "linux-ia32": {
-          "fileName": "xpack-riscv-none-embed-gcc-10.2.0-1.2-linux-ia32.tar.gz",
+          "fileName": "xpack-riscv-none-elf-gcc-10.2.0-1.2-linux-ia32.tar.gz",
           "sha256": "2e3f947403404359c8996a8b8c50dc61e8ee0f720da561d354f74b57f2fd4d53"
         },
         "linux-x64": {
-          "fileName": "xpack-riscv-none-embed-gcc-10.2.0-1.2-linux-x64.tar.gz",
+          "fileName": "xpack-riscv-none-elf-gcc-10.2.0-1.2-linux-x64.tar.gz",
           "sha256": "d72bdcd1eee41dc5a208a8a03976b70d014510deb5890c9e8738e804ba23f985"
         },
         "win32-ia32": {
-          "fileName": "xpack-riscv-none-embed-gcc-10.2.0-1.2-win32-ia32.zip",
+          "fileName": "xpack-riscv-none-elf-gcc-10.2.0-1.2-win32-ia32.zip",
           "sha256": "f9d25d057d69e3d460fd15f422b533ae315e6ecdcd389bbd784cc2e083ba64b3"
         },
         "win32-x64": {
-          "fileName": "xpack-riscv-none-embed-gcc-10.2.0-1.2-win32-x64.zip",
+          "fileName": "xpack-riscv-none-elf-gcc-10.2.0-1.2-win32-x64.zip",
           "sha256": "2ec9f651dc349da0672edf6d26542e85c7c8068c8eab11b88b99b0edbd2260fc"
         }
       }
     },
     "bin": {
-      "riscv-none-embed-addr2line": "./.content/bin/riscv-none-embed-addr2line",
-      "riscv-none-embed-ar": "./.content/bin/riscv-none-embed-ar",
-      "riscv-none-embed-as": "./.content/bin/riscv-none-embed-as",
-      "riscv-none-embed-c++": "./.content/bin/riscv-none-embed-c++",
-      "riscv-none-embed-c++filt": "./.content/bin/riscv-none-embed-c++filt",
-      "riscv-none-embed-cpp": "./.content/bin/riscv-none-embed-cpp",
-      "riscv-none-embed-elfedit": "./.content/bin/riscv-none-embed-elfedit",
-      "riscv-none-embed-g++": "./.content/bin/riscv-none-embed-g++",
-      "riscv-none-embed-gcc": "./.content/bin/riscv-none-embed-gcc",
-      "riscv-none-embed-gcc-ar": "./.content/bin/riscv-none-embed-gcc-ar",
-      "riscv-none-embed-gcc-nm": "./.content/bin/riscv-none-embed-gcc-nm",
-      "riscv-none-embed-gcc-ranlib": "./.content/bin/riscv-none-embed-gcc-ranlib",
-      "riscv-none-embed-gcov": "./.content/bin/riscv-none-embed-gcov",
-      "riscv-none-embed-gcov-dump": "./.content/bin/riscv-none-embed-gcov-dump",
-      "riscv-none-embed-gcov-tool": "./.content/bin/riscv-none-embed-gcov-tool",
-      "riscv-none-embed-gdb": "./.content/bin/riscv-none-embed-gdb",
-      "riscv-none-embed-gdb-add-index": "./.content/bin/riscv-none-embed-gdb-add-index",
-      "riscv-none-embed-gdb-add-index-py3": "./.content/bin/riscv-none-embed-gdb-add-index-py3",
-      "riscv-none-embed-gdb-py3": "./.content/bin/riscv-none-embed-gdb-py3",
-      "riscv-none-embed-gprof": "./.content/bin/riscv-none-embed-gprof",
-      "riscv-none-embed-ld": "./.content/bin/riscv-none-embed-ld",
-      "riscv-none-embed-ld.bfd": "./.content/bin/riscv-none-embed-ld.bfd",
-      "riscv-none-embed-nm": "./.content/bin/riscv-none-embed-nm",
-      "riscv-none-embed-objcopy": "./.content/bin/riscv-none-embed-objcopy",
-      "riscv-none-embed-objdump": "./.content/bin/riscv-none-embed-objdump",
-      "riscv-none-embed-ranlib": "./.content/bin/riscv-none-embed-ranlib",
-      "riscv-none-embed-readelf": "./.content/bin/riscv-none-embed-readelf",
-      "riscv-none-embed-size": "./.content/bin/riscv-none-embed-size",
-      "riscv-none-embed-strings": "./.content/bin/riscv-none-embed-strings",
-      "riscv-none-embed-strip": "./.content/bin/riscv-none-embed-strip"
+      "riscv-none-elf-addr2line": "./.content/bin/riscv-none-elf-addr2line",
+      "riscv-none-elf-ar": "./.content/bin/riscv-none-elf-ar",
+      "riscv-none-elf-as": "./.content/bin/riscv-none-elf-as",
+      "riscv-none-elf-c++": "./.content/bin/riscv-none-elf-c++",
+      "riscv-none-elf-c++filt": "./.content/bin/riscv-none-elf-c++filt",
+      "riscv-none-elf-cpp": "./.content/bin/riscv-none-elf-cpp",
+      "riscv-none-elf-elfedit": "./.content/bin/riscv-none-elf-elfedit",
+      "riscv-none-elf-g++": "./.content/bin/riscv-none-elf-g++",
+      "riscv-none-elf-gcc": "./.content/bin/riscv-none-elf-gcc",
+      "riscv-none-elf-gcc-ar": "./.content/bin/riscv-none-elf-gcc-ar",
+      "riscv-none-elf-gcc-nm": "./.content/bin/riscv-none-elf-gcc-nm",
+      "riscv-none-elf-gcc-ranlib": "./.content/bin/riscv-none-elf-gcc-ranlib",
+      "riscv-none-elf-gcov": "./.content/bin/riscv-none-elf-gcov",
+      "riscv-none-elf-gcov-dump": "./.content/bin/riscv-none-elf-gcov-dump",
+      "riscv-none-elf-gcov-tool": "./.content/bin/riscv-none-elf-gcov-tool",
+      "riscv-none-elf-gdb": "./.content/bin/riscv-none-elf-gdb",
+      "riscv-none-elf-gdb-add-index": "./.content/bin/riscv-none-elf-gdb-add-index",
+      "riscv-none-elf-gdb-add-index-py3": "./.content/bin/riscv-none-elf-gdb-add-index-py3",
+      "riscv-none-elf-gdb-py3": "./.content/bin/riscv-none-elf-gdb-py3",
+      "riscv-none-elf-gprof": "./.content/bin/riscv-none-elf-gprof",
+      "riscv-none-elf-ld": "./.content/bin/riscv-none-elf-ld",
+      "riscv-none-elf-ld.bfd": "./.content/bin/riscv-none-elf-ld.bfd",
+      "riscv-none-elf-nm": "./.content/bin/riscv-none-elf-nm",
+      "riscv-none-elf-objcopy": "./.content/bin/riscv-none-elf-objcopy",
+      "riscv-none-elf-objdump": "./.content/bin/riscv-none-elf-objdump",
+      "riscv-none-elf-ranlib": "./.content/bin/riscv-none-elf-ranlib",
+      "riscv-none-elf-readelf": "./.content/bin/riscv-none-elf-readelf",
+      "riscv-none-elf-size": "./.content/bin/riscv-none-elf-size",
+      "riscv-none-elf-strings": "./.content/bin/riscv-none-elf-strings",
+      "riscv-none-elf-strip": "./.content/bin/riscv-none-elf-strip"
     },
     "properties": {
       "appName": "GNU RISC-V Embedded GCC",
-      "appLCName": "riscv-none-embed-gcc",
-      "platforms": "linux-x64,linux-ia32,linux-arm64,darwin-x64,darwin-arm64,win32-x64,win32-ia32",
+      "appLCName": "riscv-none-elf-gcc",
+      "platforms": "all",
       "LIQUIDJS": "liquidjs '{ \"APP_NAME\": \"{{ properties.appName }}\", \"APP_LC_NAME\": \"{{ properties.appLCName }}\", \"platforms\": \"{{ properties.platforms }}\" }'"
     },
     "actions": {

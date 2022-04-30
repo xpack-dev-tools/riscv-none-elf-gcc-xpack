@@ -4,7 +4,7 @@
 
 This project includes the scripts and additional files required to
 build and publish the
-[xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-embed-gcc/) binaries.
+[xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-elf-gcc/) binaries.
 
 It follows the official
 [SiFive](https://github.com/sifive/freedom-tools)
@@ -31,7 +31,7 @@ For native builds, see the `build-native.sh` script.
 ## Repositories
 
 The build scripts use a set of local repositories, to accommodate the
-small changes required by the `riscv-none-embed-` prefix:
+small changes required by the `riscv-none-elf-` prefix:
 
 - [xpack-dev-tools/riscv-binutils-gdb](https://github.com/xpack-dev-tools/riscv-binutils-gdb)
 - [xpack-dev-tools/riscv-gcc](https://github.com/xpack-dev-tools/riscv-gcc)
@@ -69,17 +69,17 @@ Note: Building the Arm binaries requires an Arm machine.
 ## Download the build scripts repo
 
 The build scripts are available in the `scripts` folder of the
-[`xpack-dev-tools/riscv-none-embed-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack)
+[`xpack-dev-tools/riscv-none-elf-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack)
 Git repo.
 
 To download them, issue the following commands:
 
 ```sh
-rm -rf ${HOME}/Work/riscv-none-embed-gcc-xpack.git; \
+rm -rf ${HOME}/Work/riscv-none-elf-gcc-xpack.git; \
 git clone \
-  https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
-  ${HOME}/Work/riscv-none-embed-gcc-xpack.git; \
-git -C ${HOME}/Work/riscv-none-embed-gcc-xpack.git submodule update --init --recursive
+  https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git \
+  ${HOME}/Work/riscv-none-elf-gcc-xpack.git; \
+git -C ${HOME}/Work/riscv-none-elf-gcc-xpack.git submodule update --init --recursive
 ```
 
 > Note: the repository uses submodules; for a successful build it is
@@ -89,17 +89,17 @@ For development purposes, clone the `xpack-develop`
 branch:
 
 ```sh
-rm -rf ${HOME}/Work/riscv-none-embed-gcc-xpack.git; \
+rm -rf ${HOME}/Work/riscv-none-elf-gcc-xpack.git; \
 git clone \
   --branch xpack-develop \
-  https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
-  ${HOME}/Work/riscv-none-embed-gcc-xpack.git; \
-git -C ${HOME}/Work/riscv-none-embed-gcc-xpack.git submodule update --init --recursive
+  https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git \
+  ${HOME}/Work/riscv-none-elf-gcc-xpack.git; \
+git -C ${HOME}/Work/riscv-none-elf-gcc-xpack.git submodule update --init --recursive
 ```
 
 ## The `Work` folder
 
-The script creates a temporary build `Work/riscv-none-embed-gcc-${version}`
+The script creates a temporary build `Work/riscv-none-elf-gcc-${version}`
 folder in the user home. Although not recommended, if for any reasons
 you need to change the location of the `Work` folder,
 you can redefine `WORK_FOLDER_PATH` variable before invoking the script.
@@ -138,7 +138,7 @@ major functional changes, perhaps only bug fixes.
 The actual changes for each version are documented in the corresponding
 release pages:
 
-- <https://xpack.github.io/riscv-none-embed-gcc/releases/>
+- <https://xpack.github.io/riscv-none-elf-gcc/releases/>
 
 ## How to build local/native binaries
 
@@ -146,7 +146,7 @@ release pages:
 
 The details on how to prepare the development environment for native build
 are in the
-[`README-DEVELOP.md`](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-DEVELOP.md) file.
+[`README-DEVELOP.md`](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/blob/xpack/README-DEVELOP.md) file.
 
 ## How to build distributions
 
@@ -175,7 +175,7 @@ Before running a build for the first time, it is recommended to preload the
 docker images.
 
 ```sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh preload-images
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh preload-images
 ```
 
 The result should look similar to:
@@ -209,15 +209,15 @@ network connection or a computer entering sleep.
 ```sh
 screen -S arm
 
-sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
+sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
 ```
 
 or, for development builds:
 
 ```sh
-sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --win64
+sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --win64
 ```
 
 When ready, run the build on the production machine (`xbbli`):
@@ -229,12 +229,12 @@ About 5 hours later, the output of the build script is a set of 4 files and
 their SHA signatures, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
+$ ls -l ~/Work/riscv-none-elf-gcc-*/deploy
 total 1429180
--rw-rw-r-- 1 ilg ilg 361419776 Oct 24 20:30 xpack-riscv-none-embed-gcc-11.3.0-1-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 24 20:30 xpack-riscv-none-embed-gcc-11.3.0-1-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 375055827 Oct 24 21:04 xpack-riscv-none-embed-gcc-11.3.0-1-win32-x64.zip
--rw-rw-r-- 1 ilg ilg       117 Oct 24 21:04 xpack-riscv-none-embed-gcc-11.3.0-1-win32-x64.zip.sha
+-rw-rw-r-- 1 ilg ilg 361419776 Oct 24 20:30 xpack-riscv-none-elf-gcc-11.3.0-1-linux-x64.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 24 20:30 xpack-riscv-none-elf-gcc-11.3.0-1-linux-x64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 375055827 Oct 24 21:04 xpack-riscv-none-elf-gcc-11.3.0-1-win32-x64.zip
+-rw-rw-r-- 1 ilg ilg       117 Oct 24 21:04 xpack-riscv-none-elf-gcc-11.3.0-1-win32-x64.zip.sha
 ```
 
 ### Build the Arm GNU/Linux binaries
@@ -263,7 +263,7 @@ Before running a build for the first time, it is recommended to preload the
 docker images.
 
 ```sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh preload-images
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh preload-images
 ```
 
 The result should look similar to:
@@ -282,8 +282,8 @@ network connection or a computer entering sleep.
 ```sh
 screen -S arm
 
-sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm64 --arm32
+sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm64 --arm32
 ```
 
 or, for development builds:
@@ -291,8 +291,8 @@ or, for development builds:
 ```sh
 screen -S arm
 
-sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --arm64 --arm32
+sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --arm64 --arm32
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -302,12 +302,12 @@ About 15 hours later, the output of the build script is a set of 2
 archives and their SHA signatures, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
+$ ls -l ~/Work/riscv-none-elf-gcc-*/deploy
 total 702592
--rw-rw-r-- 1 ilg ilg 361351380 Oct 24 23:42 xpack-riscv-none-embed-gcc-11.3.0-1-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg       122 Oct 24 23:42 xpack-riscv-none-embed-gcc-11.3.0-1-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 358086677 Oct 25 07:31 xpack-riscv-none-embed-gcc-11.3.0-1-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 25 07:31 xpack-riscv-none-embed-gcc-11.3.0-1-linux-arm.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 361351380 Oct 24 23:42 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm64.tar.gz
+-rw-rw-r-- 1 ilg ilg       122 Oct 24 23:42 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 358086677 Oct 25 07:31 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm.tar.gz
+-rw-rw-r-- 1 ilg ilg       120 Oct 25 07:31 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm.tar.gz.sha
 ```
 
 Note: on some versions, the 32-bit Arm binaries could not be built, since the RVV support requires more than 4 GB or RAM.
@@ -332,15 +332,15 @@ To build the latest macOS version:
 ```sh
 screen -S arm
 
-sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
-caffeinate bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop  --disable-multilib --macos
+sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
+caffeinate bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop  --disable-multilib --macos
 ```
 
 or, for development builds:
 
 ```sh
-sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
-caffeinate bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --macos
+sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
+caffeinate bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --macos
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -350,10 +350,10 @@ In about 4 hours, the output of the build script is a compressed archive
 and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/riscv-none-embed-gcc-*/deploy
+$ ls -l ~/Work/riscv-none-elf-gcc-*/deploy
 total 698240
--rw-r--r--  1 ilg  staff  357492352 Oct 24 22:51 xpack-riscv-none-embed-gcc-11.3.0-1-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        121 Oct 24 22:51 xpack-riscv-none-embed-gcc-11.3.0-1-darwin-x64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  357492352 Oct 24 22:51 xpack-riscv-none-elf-gcc-11.3.0-1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        121 Oct 24 22:51 xpack-riscv-none-elf-gcc-11.3.0-1-darwin-x64.tar.gz.sha
 ```
 
 ## Subsequent runs
@@ -381,13 +381,13 @@ should be run after or together with `--linux64`.
 To remove most build files, use:
 
 ```sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh clean
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh clean
 ```
 
 To also remove the repository and the output files, use:
 
 ```sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh cleanall
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh cleanall
 ```
 
 For production builds it is recommended to completely remove the build folder.
@@ -437,8 +437,8 @@ program from there. For example on macOS the output should
 look like:
 
 ```console
-$ .../xpack-riscv-none-embed-gcc/bin/riscv-none-embed-gcc --version
-riscv-none-embed-gcc (xPack RISC-V Embedded GCC, 64-bit) 11.3.0
+$ .../xpack-riscv-none-elf-gcc/bin/riscv-none-elf-gcc --version
+riscv-none-elf-gcc (xPack RISC-V Embedded GCC, 64-bit) 11.3.0
 ```
 
 ## Installed folders
@@ -447,42 +447,42 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-embed-gcc/11.3.0-1/.content/
-/Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-embed-gcc/11.3.0-1/.content/
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/11.3.0-1/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/11.3.0-1/.content/
 ├── README.md
 ├── bin
-│   ├── riscv-none-embed-addr2line
-│   ├── riscv-none-embed-ar
-│   ├── riscv-none-embed-as
-│   ├── riscv-none-embed-c++
-│   ├── riscv-none-embed-c++filt
-│   ├── riscv-none-embed-cpp
-│   ├── riscv-none-embed-elfedit
-│   ├── riscv-none-embed-g++
-│   ├── riscv-none-embed-gcc
-│   ├── riscv-none-embed-gcc-11.3.0
-│   ├── riscv-none-embed-gcc-ar
-│   ├── riscv-none-embed-gcc-nm
-│   ├── riscv-none-embed-gcc-ranlib
-│   ├── riscv-none-embed-gcov
-│   ├── riscv-none-embed-gcov-dump
-│   ├── riscv-none-embed-gcov-tool
-│   ├── riscv-none-embed-gdb
-│   ├── riscv-none-embed-gdb-add-index
-│   ├── riscv-none-embed-gdb-add-index-py3
-│   ├── riscv-none-embed-gdb-py3
-│   ├── riscv-none-embed-gprof
-│   ├── riscv-none-embed-ld
-│   ├── riscv-none-embed-ld.bfd
-│   ├── riscv-none-embed-lto-dump
-│   ├── riscv-none-embed-nm
-│   ├── riscv-none-embed-objcopy
-│   ├── riscv-none-embed-objdump
-│   ├── riscv-none-embed-ranlib
-│   ├── riscv-none-embed-readelf
-│   ├── riscv-none-embed-size
-│   ├── riscv-none-embed-strings
-│   └── riscv-none-embed-strip
+│   ├── riscv-none-elf-addr2line
+│   ├── riscv-none-elf-ar
+│   ├── riscv-none-elf-as
+│   ├── riscv-none-elf-c++
+│   ├── riscv-none-elf-c++filt
+│   ├── riscv-none-elf-cpp
+│   ├── riscv-none-elf-elfedit
+│   ├── riscv-none-elf-g++
+│   ├── riscv-none-elf-gcc
+│   ├── riscv-none-elf-gcc-11.3.0
+│   ├── riscv-none-elf-gcc-ar
+│   ├── riscv-none-elf-gcc-nm
+│   ├── riscv-none-elf-gcc-ranlib
+│   ├── riscv-none-elf-gcov
+│   ├── riscv-none-elf-gcov-dump
+│   ├── riscv-none-elf-gcov-tool
+│   ├── riscv-none-elf-gdb
+│   ├── riscv-none-elf-gdb-add-index
+│   ├── riscv-none-elf-gdb-add-index-py3
+│   ├── riscv-none-elf-gdb-py3
+│   ├── riscv-none-elf-gprof
+│   ├── riscv-none-elf-ld
+│   ├── riscv-none-elf-ld.bfd
+│   ├── riscv-none-elf-lto-dump
+│   ├── riscv-none-elf-nm
+│   ├── riscv-none-elf-objcopy
+│   ├── riscv-none-elf-objdump
+│   ├── riscv-none-elf-ranlib
+│   ├── riscv-none-elf-readelf
+│   ├── riscv-none-elf-size
+│   ├── riscv-none-elf-strings
+│   └── riscv-none-elf-strip
 ├── distro-info
 │   ├── CHANGELOG.md
 │   ├── licenses
@@ -520,14 +520,14 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-embed-gcc/11.
 │   ├── libstdc++.6.dylib
 │   ├── libz.1.2.8.dylib
 │   └── libz.1.dylib -> libz.1.2.8.dylib
-├── riscv-none-embed
+├── riscv-none-elf
 │   ├── bin
 │   ├── include
 │   ├── lib
 │   └── share
 └── share
     ├── doc
-    └── gcc-riscv-none-embed
+    └── gcc-riscv-none-elf
 
 21 directories, 58 files
 ```

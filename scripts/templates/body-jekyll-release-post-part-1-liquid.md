@@ -11,25 +11,25 @@ sifive_version: v2020.12.0
 sifive_date: April 7, 2021
 version: {{ RELEASE_VERSION }}
 npm_subversion: 1
-download_url: https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/tag/v{{ RELEASE_VERSION }}/
+download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v{{ RELEASE_VERSION }}/
 
 date:   {{ RELEASE_DATE }}
 
 categories:
   - releases
-  - riscv-none-embed-gcc
+  - riscv-none-elf-gcc
 
 tags:
   - releases
   - riscv
-  - riscv-none-embed-gcc
+  - riscv-none-elf-gcc
   - gcc
   - binaries
   - c++
 
 ---
 
-[The xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-embed-gcc/)
+[The xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-elf-gcc/)
 is a standalone cross-platform binary distribution of the
 [SiFive RISC-V GCC](https://github.com/sifive/freedom-tools/releases).
 
@@ -64,14 +64,14 @@ The binary files are available from GitHub [Releases]({% raw %}{{ page.download_
 
 The full details of installing the **xPack GNU RISC-V Embedded GCC** on various platforms
 are presented in the separate
-[Install]({% raw %}{{ site.baseurl }}{% endraw %}/riscv-none-embed-gcc/install/) page.
+[Install]({% raw %}{{ site.baseurl }}{% endraw %}/riscv-none-elf-gcc/install/) page.
 
 ### Easy install
 
 The easiest way to install GNU RISC-V Embedded GCC is with
 [`xpm`]({% raw %}{{ site.baseurl }}{% endraw %}/xpm/)
 by using the **binary xPack**, available as
-[`@xpack-dev-tools/riscv-none-embed-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc)
+[`@xpack-dev-tools/riscv-none-elf-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc)
 from the [`npmjs.com`](https://www.npmjs.com) registry.
 
 With the `xpm` tool available, installing
@@ -82,7 +82,7 @@ a dependency for a project is quite easy:
 cd my-project
 xpm init # Only at first use.
 
-xpm install @xpack-dev-tools/riscv-none-embed-gcc@latest
+xpm install @xpack-dev-tools/riscv-none-elf-gcc@latest
 
 ls -l xpacks/.bin
 ```
@@ -90,14 +90,14 @@ ls -l xpacks/.bin
 To install this specific version, use:
 
 ```sh
-xpm install @xpack-dev-tools/riscv-none-embed-gcc@{% raw %}{{ page.version }}.{{ page.npm_subversion }}{% endraw %}
+xpm install @xpack-dev-tools/riscv-none-elf-gcc@{% raw %}{{ page.version }}.{{ page.npm_subversion }}{% endraw %}
 ```
 
 For xPacks aware tools, like the **Eclipse Embedded C/C++ plug-ins**,
 it is also possible to install GNU RISC-V Embedded GCC globally, in the user home folder.
 
 ```sh
-xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@latest
+xpm install --global @xpack-dev-tools/riscv-none-elf-gcc@latest
 ```
 
 Eclipse will automatically
@@ -111,13 +111,13 @@ To remove the links from the current project:
 ```sh
 cd my-project
 
-xpm uninstall @xpack-dev-tools/riscv-none-embed-gcc
+xpm uninstall @xpack-dev-tools/riscv-none-elf-gcc
 ```
 
 To completely remove the package from the global store:
 
 ```sh
-xpm uninstall --global @xpack-dev-tools/riscv-none-embed-gcc
+xpm uninstall --global @xpack-dev-tools/riscv-none-elf-gcc
 ```
 
 ## Compliance
@@ -136,7 +136,7 @@ and includes the SiFive extensions, including the RVV vector support.
 The supported libraries are:
 
 ```console
-$ riscv-none-embed-gcc -print-multi-lib
+$ riscv-none-elf-gcc -print-multi-lib
 ...
 ```
 
@@ -176,7 +176,7 @@ be compiled with
 ### Python
 
 Support for Python scripting was added to GDB. This distribution provides
-a separate binary, `riscv-none-embed-gdb-py3` with
+a separate binary, `riscv-none-elf-gdb-py3` with
 support for **Python 3.7**.
 
 The Python 3 run-time is included, so GDB does not need any version of
@@ -256,15 +256,15 @@ The scripts used to build this distribution are in:
 - `distro-info/scripts`
 
 For the prerequisites and more details on the build procedure, please see the
-[How to build](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-BUILD.md) page.
+[How to build](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/blob/xpack/README-BUILD.md) page.
 
 ## CI tests
 
 Before publishing, a set of simple tests were performed on an exhaustive
 set of platforms. The results are available from:
 
-- [GitHub Actions](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/actions/)
-- [travis-ci.com](https://app.travis-ci.com/github/xpack-dev-tools/riscv-none-embed-gcc-xpack/builds/)
+- [GitHub Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/)
+- [travis-ci.com](https://app.travis-ci.com/github/xpack-dev-tools/riscv-none-elf-gcc-xpack/builds/)
 
 ## Tests
 

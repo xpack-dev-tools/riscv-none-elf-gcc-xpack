@@ -1,41 +1,27 @@
 From bfda4e99c4e0428ed2cb516bf65ca167501113e5 Mon Sep 17 00:00:00 2001
 From: Liviu Ionescu <ilg@livius.net>
 Date: Fri, 22 Apr 2022 12:57:56 +0300
-Subject: [PATCH] add support for riscv-none-embed-*
+Subject: [PATCH] add support for riscv-none-elf-*
 
 ---
  config.sub                  |  3 +++
  gdb/python/python-config.py | 22 +++++++++++++++++++---
  2 files changed, 22 insertions(+), 3 deletions(-)
 
-diff --git a/config.sub b/config.sub
-index 7384e9198b4..b42d6db784d 100755
---- a/config.sub
-+++ b/config.sub
-@@ -1731,6 +1731,9 @@ case $os in
- 	     | midnightbsd* | amdhsa* | unleashed* | emscripten* | wasi* \
- 	     | nsk* | powerunix* | genode* | zvmoe* | qnx* | emx*)
- 		;;
-+	# xPack GNU RISC-V Embed GCC uses riscv-none-embed-*.
-+	embed)
-+		;;
- 	# This one is extra strict with allowed versions
- 	sco3.2v2 | sco3.2v[4-9]* | sco5v6*)
- 		# Don't forget version if it is 3.2v4 or newer.
 diff --git a/gdb/python/python-config.py b/gdb/python/python-config.py
 index 027d80dcc86..ef734abd465 100644
 --- a/gdb/python/python-config.py
 +++ b/gdb/python/python-config.py
 @@ -3,6 +3,7 @@
- 
+
  import sys
  import os
 +import platform
  import getopt
  from distutils import sysconfig
- 
+
 @@ -49,10 +50,22 @@ def to_unix_path(path):
- 
+
  for opt in opt_flags:
      if opt == "--prefix":
 -        print(to_unix_path(sysconfig.PREFIX))
@@ -46,7 +32,7 @@ index 027d80dcc86..ef734abd465 100644
 +        else:
 +            sys.stderr.write ("%s -> [%s]\n" % (opt, to_unix_path(sysconfig.PREFIX)))
 +            print (to_unix_path(sysconfig.PREFIX))
- 
+
      elif opt == "--exec-prefix":
 -        print(to_unix_path(sysconfig.EXEC_PREFIX))
 +        prefix=os.environ.get('CONFIG_PYTHON_PREFIX')
@@ -56,7 +42,7 @@ index 027d80dcc86..ef734abd465 100644
 +        else:
 +            sys.stderr.write ("%s -> [%s]\n" % (opt, to_unix_path(sysconfig.EXEC_PREFIX)))
 +            print (to_unix_path(sysconfig.EXEC_PREFIX))
- 
+
      elif opt in ("--includes", "--cflags"):
          flags = [
 @@ -61,6 +74,7 @@ for opt in opt_flags:
@@ -65,7 +51,7 @@ index 027d80dcc86..ef734abd465 100644
              flags.extend(getvar("CFLAGS").split())
 +        sys.stderr.write ("%s -> [%s]\n" % (opt, to_unix_path(' '.join(flags))))
          print(to_unix_path(" ".join(flags)))
- 
+
      elif opt in ("--libs", "--ldflags"):
 @@ -79,4 +93,6 @@ for opt in opt_flags:
                      libs.insert(0, "-L" + sysconfig.PREFIX + "/libs")
@@ -75,6 +61,6 @@ index 027d80dcc86..ef734abd465 100644
 +        tmp = to_unix_path(' '.join(libs))
 +        sys.stderr.write ("%s -> [%s]\n" % (opt, tmp))
 +        print (tmp)
--- 
+--
 2.31.1
 

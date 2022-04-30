@@ -40,13 +40,13 @@ With a git client in
 
 - identify the tag with the latest release (like `binutils-2.38`)
 - create a new branch with the same name as the tag (like `binutils-2.38`)
-- create a new branch with name suffixed with `-riscv-none-embed-xpack`
-  (like `binutils-2.38-riscv-none-embed-xpack`
+- create a new branch with name suffixed with `-riscv-none-elf-xpack`
+  (like `binutils-2.38-riscv-none-elf-xpack`
 - identify the commit which adds the xPack specific changes
 - cherry pick it; do not commit immediately
 - check the uncommitted changes; there should be one file `config.sub`
   which adds `-embed)`
-- commit as **add support for riscv-none-embed-***
+- commit as **add support for riscv-none-elf-***
 - push both new branches to `origin`
 - checkout the `binutils-2.38` tag as HEAD
 - create patch from the commit
@@ -60,15 +60,15 @@ With a git client in
 
 - identify the tag with the latest release (like `gcc-11.3.0`)
 - create a new branch with the same name as the tag (like `gcc-11.3.0`)
-- create a new branch with name suffixed with `-riscv-none-embed-xpack`
-  (like `gcc-11.3.0-riscv-none-embed-xpack`
+- create a new branch with name suffixed with `-riscv-none-elf-xpack`
+  (like `gcc-11.3.0-riscv-none-elf-xpack`
 - identify the commit which adds the xPack specific changes
 - cherry pick it; do not commit immediately
 - check the differences from the non-xpack branch; there should be three files:
   - `elf-embed.h` with the `LIB_SPEC` definitions without libgloss
   - `config.gcc` with `tm_file` definition that uses `elf-embed.h`
   - `config.sub` which adds `*-embed)`
-- commit as **add support for riscv-none-embed-***
+- commit as **add support for riscv-none-elf-***
 - push both new branches to `origin`
 - checkout the `gcc-11.3.0` tag as HEAD
 - create patch from the commit
@@ -86,14 +86,14 @@ With a git client in
 
 - identify the tag with the latest release (like `gdb-11.2-release`)
 - create a new branch with the same name as the tag (like `gdb-11.2`)
-- create a new branch with name suffixed with `-riscv-none-embed-xpack`
-  (like `gdb-11.2-riscv-none-embed-xpack`
+- create a new branch with name suffixed with `-riscv-none-elf-xpack`
+  (like `gdb-11.2-riscv-none-elf-xpack`
 - identify the commit which adds the xPack specific changes
 - cherry pick it; do not commit immediately
 - check the uncommitted changes; there should be two files
   - `config.sub` which adds `-embed)`
   - `python-config.py`
-- commit as **add support for riscv-none-embed-***
+- commit as **add support for riscv-none-elf-***
 - push both new branches to `origin`
 - checkout the `gdb-11.2` branch
 - create patch from the commit
@@ -104,7 +104,7 @@ With a git client in
 
 Check GitHub issues and pull requests:
 
-- <https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues/>
+- <https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/issues/>
 
 and fix them; assign them to a milestone (like `11.3.0-1`).
 
@@ -150,29 +150,29 @@ Before the real build, run a test build on the development machine (`wks`)
 or the production machines (`xbbma`, `xbbmi`):
 
 ```sh
-sudo rm -rf ~/Work/riscv-none-embed-gcc-*-*
+sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
 
-caffeinate bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --macos --disable-multilib
+caffeinate bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --macos --disable-multilib
 ```
 
 Similarly on the Intel Linux (`xbbli`):
 
 ```sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --linux64 --disable-multilib
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --linux64 --disable-multilib
 
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --win64 --disable-multilib
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --win64 --disable-multilib
 ```
 
 ... on the Arm Linux 64-bit (`xbbla64`):
 
 ```sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --arm64 --disable-multilib
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --arm64 --disable-multilib
 ```
 
 ... and on the Arm Linux (`xbbla32`):
 
 ```sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/build.sh --develop --arm32 --disable-multilib
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --arm32 --disable-multilib
 ```
 
 Work on the scripts until all platforms pass the build.
@@ -226,11 +226,11 @@ To trigger the GitHub Actions build, use the xPack actions:
 This is equivalent to:
 
 ```sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbli
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbla32
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbla64
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbmi
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbma
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbli
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbla32
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbla64
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbmi
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbma
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -242,7 +242,7 @@ The Arm build takes about 20-21 hours
 to complete, and the other about 14 hours.
 
 The workflows results and logs are available from the
-[Actions](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/actions/) page.
+[Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
 
 The resulting binaries are available for testing from
 [pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/).
@@ -262,9 +262,9 @@ To trigger the GitHub Actions tests, use the xPack actions:
 These are equivalent to:
 
 ```sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-prime.sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-intel.sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-arm.sh
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-prime.sh
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-intel.sh
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-arm.sh
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -275,7 +275,7 @@ These actions use the `xpack-develop` branch of this repo and the
 binaries.
 
 The tests results are available from the
-[Actions](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/actions/) page.
+[Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
 
 Since GitHub Actions provides a single version of macOS, the
 multi-version macOS tests run on Travis.
@@ -287,14 +287,14 @@ To trigger the Travis test, use the xPack action:
 This is equivalent to:
 
 ```sh
-bash ${HOME}/Work/riscv-none-embed-gcc-xpack.git/scripts/helper/tests/trigger-travis-macos.sh
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/tests/trigger-travis-macos.sh
 ```
 
 This script requires the `TRAVIS_COM_TOKEN` variable to be present
 in the environment.
 
 The test results are available from
-[travis-ci.com](https://app.travis-ci.com/github/xpack-dev-tools/riscv-none-embed-gcc-xpack/builds/).
+[travis-ci.com](https://app.travis-ci.com/github/xpack-dev-tools/riscv-none-elf-gcc-xpack/builds/).
 
 ### Manual tests
 
@@ -306,11 +306,11 @@ For this, on each platform (Mac, GNU/Linux 64/32, Windows 64/32):
 - download archive from
   [pre-releases](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test);
 - unpack the archive in `Desktop` or in `Downloads`;
-- on macOS it is necessarry to remove the `com.apple.quarantine`
+- on macOS it is necessary to remove the `com.apple.quarantine`
   attribute of archive and possibly the expanded folder:
 
 ```sh
-xattr -dr com.apple.quarantine xpack-riscv-none-embed-gcc-*
+xattr -dr com.apple.quarantine xpack-riscv-none-elf-gcc-*
 ```
 
 - rename the version
@@ -319,18 +319,18 @@ xattr -dr com.apple.quarantine xpack-riscv-none-embed-gcc-*
 - clone this repo locally; on Windows use the Git console;
 
 ```sh
-rm -rf ${HOME}/Work/riscv-none-embed-gcc-xpack.git; \
+rm -rf ${HOME}/Work/riscv-none-elf-gcc-xpack.git; \
 git clone \
   --branch xpack-develop \
-  https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
-  ${HOME}/Work/riscv-none-embed-gcc-xpack.git; \
-git -C ${HOME}/Work/riscv-none-embed-gcc-xpack.git submodule update --init --recursive
+  https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git \
+  ${HOME}/Work/riscv-none-elf-gcc-xpack.git; \
+git -C ${HOME}/Work/riscv-none-elf-gcc-xpack.git submodule update --init --recursive
 ```
 
 - in a separate workspace, Import → General → Existing Projects into Workspace
   the Eclipse projects available in the
   `tests/eclipse` folder of the build repo; more details in the
-  [README.md](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/tests/eclipse/README.md)
+  [README.md](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/blob/xpack/tests/eclipse/README.md)
 - define the **Eclipse** → **Preferences...** → **MCU** →
   **Workspace RISC-V Toolchain path** to use the `Downloads`
   temporary location
@@ -356,7 +356,7 @@ git -C ${HOME}/Work/riscv-none-embed-gcc-xpack.git submodule update --init --rec
 - run the xPack action `trigger-workflow-publish-release`
 
 The result is a
-[draft pre-release](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/)
+[draft pre-release](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
 tagged like **v11.3.0-1** (mind the dash in the middle!) and
 named like **xPack GNU RISC-V Embedded GCC v11.3.0-1** (mind the dash),
 with all binaries attached.
@@ -372,10 +372,10 @@ on the Desktop.
 In the `xpack/web-jekyll` GitHub repo:
 
 - select the `develop` branch
-- copy the new file to `_posts/releases/riscv-none-embed-gcc`
+- copy the new file to `_posts/releases/riscv-none-elf-gcc`
 
 If any, refer to closed
-[issues](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues/).
+[issues](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/issues/).
 
 ## Update the preview Web
 
@@ -387,7 +387,7 @@ If any, refer to closed
 
 ## Create the pre-release
 
-- go to the GitHub [Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/) page
+- go to the GitHub [Releases](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/) page
 - perform the final edits and check if everything is fine
 - temporarily fill in the _Continue Reading »_ with the URL of the
   web-preview release
@@ -422,14 +422,14 @@ watching this project.
   possibly adjust `.npmignore`
 - `npm version 11.3.0-1.1`; the first 5 numbers are the same as the
   GitHub release; the sixth number is the npm specific version
-- the commits and the tag should have beed pushed by the `postversion` script;
+- the commits and the tag should have been pushed by the `postversion` script;
   if not, push them with `git push origin --tags`
 - `npm publish --tag next` (use `--access public` when publishing for
   the first time)
 
 After a few moments the version will be visible at:
 
-- <https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc?activeTab=versions>
+- <https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc?activeTab=versions>
 
 ## Test if the binaries can be installed with xpm
 
@@ -437,7 +437,7 @@ Run the xPack action `trigger-workflow-test-xpm`, this
 will install the package via `xpm install` on all supported platforms.
 
 The tests results are available from the
-[Actions](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/actions/) page.
+[Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
 
 ## Update the repo
 
@@ -448,13 +448,13 @@ The tests results are available from the
 
 When the release is considered stable, promote it as `latest`:
 
-- `npm dist-tag ls @xpack-dev-tools/riscv-none-embed-gcc`
-- `npm dist-tag add @xpack-dev-tools/riscv-none-embed-gcc@11.3.0-1.1 latest`
-- `npm dist-tag ls @xpack-dev-tools/riscv-none-embed-gcc`
+- `npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc`
+- `npm dist-tag add @xpack-dev-tools/riscv-none-elf-gcc@11.3.0-1.1 latest`
+- `npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc`
 
 In case the previous version is not functional and needs to be unpublished:
 
-- `npm unpublish @xpack-dev-tools/riscv-none-embed-gcc@11.3.0-1.X`
+- `npm unpublish @xpack-dev-tools/riscv-none-elf-gcc@11.3.0-1.X`
 
 ## Update the Web
 
@@ -465,7 +465,7 @@ In case the previous version is not functional and needs to be unpublished:
 
 ## Create the final GitHub release
 
-- go to the GitHub [Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/) page
+- go to the GitHub [Releases](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/) page
 - check the download counter, it should match the number of tests
 - add a link to the Web page `[Continue reading »]()`; use an same blog URL
 - remove the _tests only_ notice
@@ -478,7 +478,7 @@ In case the previous version is not functional and needs to be unpublished:
 - using the `@xpack_project` account
 - paste the release name like **xPack GNU RISC-V Embedded GCC v11.3.0-1 released**
 - paste the link to the Web page
-  [release](https://xpack.github.io/riscv-none-embed-gcc/releases/)
+  [release](https://xpack.github.io/riscv-none-elf-gcc/releases/)
 - click the **Tweet** button
 
 ## Remove pre-release binaries
@@ -496,5 +496,5 @@ Subject: xPack GNU RISC-V Embedded GCC v11.3.0-1 released
 
 Version 11.3.0-1 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the SiFive release v2020.12.0 from April 7, 2021.
 
-https://xpack.github.io/blog/2021/11/06/riscv-none-embed-gcc-v10-2-0-1-1-released/
+https://xpack.github.io/blog/2021/11/06/riscv-none-elf-gcc-v10-2-0-1-1-released/
 ```

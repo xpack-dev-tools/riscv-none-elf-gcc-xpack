@@ -1,5 +1,5 @@
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xpack-dev-tools/riscv-none-embed-gcc-xpack)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases)
-[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xpack-dev-tools/riscv-none-elf-gcc-xpack)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases)
+[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/riscv-none-elf-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc)
 
 ## The xPack GNU RISC-V Embedded GCC
 
@@ -12,9 +12,9 @@ this project also includes the build scripts.
 ## Overview
 
 This open source project is hosted on GitHub as
-[`xpack-dev-tools/riscv-none-embed-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack)
+[`xpack-dev-tools/riscv-none-elf-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack)
 and provides the platform specific binaries for the
-[xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-embed-gcc/).
+[xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-elf-gcc/).
 
 The binaries can be installed automatically as **binary xPacks** or manually as
 **portable archives**.
@@ -28,12 +28,12 @@ This distribution plans to follow the official
 
 This section is intended as a shortcut for those who plan
 to use the GNU RISC-V Embedded GCC binaries. For full details please read the
-[xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-embed-gcc/) pages.
+[xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-elf-gcc/) pages.
 
 ### Easy install
 
 The easiest way to install GNU RISC-V Embedded GCC is using the **binary xPack**, available as
-[`@xpack-dev-tools/riscv-none-embed-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc)
+[`@xpack-dev-tools/riscv-none-elf-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc)
 from the [`npmjs.com`](https://www.npmjs.com) registry.
 
 #### Prerequisites
@@ -54,7 +54,7 @@ a dependency for a project is quite easy:
 cd my-project
 xpm init # Only at first use.
 
-xpm install @xpack-dev-tools/riscv-none-embed-gcc@latest
+xpm install @xpack-dev-tools/riscv-none-elf-gcc@latest
 
 ls -l xpacks/.bin
 ```
@@ -78,7 +78,7 @@ For xPacks aware tools, like the **Eclipse Embedded C/C++ plug-ins**,
 it is also possible to install GNU RISC-V Embedded GCC globally, in the user home folder:
 
 ```sh
-xpm install --global @xpack-dev-tools/riscv-none-embed-gcc@latest
+xpm install --global @xpack-dev-tools/riscv-none-elf-gcc@latest
 ```
 
 Eclipse will automatically
@@ -92,13 +92,13 @@ To remove the links from the current project:
 ```sh
 cd my-project
 
-xpm uninstall @xpack-dev-tools/riscv-none-embed-gcc
+xpm uninstall @xpack-dev-tools/riscv-none-elf-gcc
 ```
 
 To completely remove the package from the global store:
 
 ```sh
-xpm uninstall --global @xpack-dev-tools/riscv-none-embed-gcc
+xpm uninstall --global @xpack-dev-tools/riscv-none-elf-gcc
 ```
 
 ### Manual install
@@ -108,11 +108,11 @@ binaries are released as portable
 archives that can be installed in any location.
 
 The archives can be downloaded from the
-GitHub [Releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/)
+GitHub [Releases](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
 page.
 
 For more details please read the
-[Install](https://xpack.github.io/riscv-none-embed-gcc/install/) page.
+[Install](https://xpack.github.io/riscv-none-elf-gcc/install/) page.
 
 ### Versioning
 
@@ -131,9 +131,9 @@ with caution, and prefer exact matches, like `11.3.0-1.1`.
 
 ## Maintainer info
 
-- [How to build](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-BUILD.md)
-- [How to make new releases](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-RELEASE.md)
-- [Developer info](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-DEVELOP.md)
+- [How to build](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/blob/xpack/README-BUILD.md)
+- [How to make new releases](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/blob/xpack/README-RELEASE.md)
+- [Developer info](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/blob/xpack/README-DEVELOP.md)
 
 ## Support
 
@@ -142,7 +142,7 @@ The quick answer is to use the
 please select the correct forum.
 
 For more details please read the
-[Support](https://xpack.github.io/riscv-none-embed-gcc/support/) page.
+[Support](https://xpack.github.io/riscv-none-elf-gcc/support/) page.
 
 ## License
 
@@ -156,17 +156,17 @@ corresponding licenses are available in the installed
 
 ## Download analytics
 
-- GitHub [`xpack-dev-tools/riscv-none-embed-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/) repo
+- GitHub [`xpack-dev-tools/riscv-none-elf-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/) repo
   - latest xPack release
-[![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/latest/total.svg)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/)
-  - all xPack releases [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/total.svg)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/)
-  - previous GNU MCU Eclipse all releases [![Github All Releases](https://img.shields.io/github/downloads/gnu-mcu-eclipse/riscv-none-embed-gcc/total.svg)](https://github.com/gnu-mcu-eclipse/riscv-none-embed-gcc/releases/)
-  - [individual file counters](https://somsubhra.github.io/github-release-stats/?username=xpack-dev-tools&repository=riscv-none-embed-gcc-xpack) (grouped per release)
-- npmjs.com [`@xpack-dev-tools/riscv-none-embed-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/) xPack
+[![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-elf-gcc-xpack/latest/total.svg)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
+  - all xPack releases [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-elf-gcc-xpack/total.svg)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
+  - previous GNU MCU Eclipse all releases [![Github All Releases](https://img.shields.io/github/downloads/gnu-mcu-eclipse/riscv-none-elf-gcc/total.svg)](https://github.com/gnu-mcu-eclipse/riscv-none-elf-gcc/releases/)
+  - [individual file counters](https://somsubhra.github.io/github-release-stats/?username=xpack-dev-tools&repository=riscv-none-elf-gcc-xpack) (grouped per release)
+- npmjs.com [`@xpack-dev-tools/riscv-none-elf-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc/) xPack
   - latest release, per month
-[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
-[![npm](https://img.shields.io/npm/dm/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
-  - all releases [![npm](https://img.shields.io/npm/dt/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
+[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/riscv-none-elf-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc/)
+[![npm](https://img.shields.io/npm/dm/@xpack-dev-tools/riscv-none-elf-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc/)
+  - all releases [![npm](https://img.shields.io/npm/dt/@xpack-dev-tools/riscv-none-elf-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc/)
 
 Credit to [Shields IO](https://shields.io) for the badges and to
 [Somsubhra/github-release-stats](https://github.com/Somsubhra/github-release-stats)

@@ -19,7 +19,7 @@
 # -----------------------------------------------------------------------------
 
 
-name: 'Build xPack GNU RISC-V Embedded GCC xbbla'
+name: 'Build xPack GNU RISC-V Embedded GCC xbbla64'
 
 on:
   workflow_dispatch:
@@ -32,9 +32,9 @@ on:
 jobs:
 
   linux-arm64:
-    name: 'Linux Arm - GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} build'
+    name: 'Linux Arm 64 - GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} build'
     timeout-minutes: 2880 # 2 days
-    runs-on: [self-hosted, linux, arm64]
+    runs-on: [self-hosted, linux, arm64, xbbla64]
     steps:
       - name: 'Machine'
         run: uname -a
@@ -47,7 +47,6 @@ jobs:
 
       - name: 'Clean working area'
         run: rm -rf ~/Work/riscv-none-elf-gcc-${{ github.event.inputs.version }}*
-
       - name: 'Build Linux arm64 binary'
         timeout-minutes: 1440
         run: bash scripts/helper/build.sh --version "${{ github.event.inputs.version }}" --arm64
@@ -63,6 +62,7 @@ jobs:
           draft: false
           name: 'Test binaries'
           omitBodyDuringUpdate: true
+          omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
           owner: 'xpack-dev-tools'
           prerelease: true

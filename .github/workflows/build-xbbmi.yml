@@ -34,7 +34,9 @@ jobs:
   macos-x64:
     name: 'macOS Intel - GNU RISC-V Embedded GCC ${{ github.event.inputs.version }} build'
     timeout-minutes: 2880 # 2 days
+
     runs-on: [self-hosted, macos, intel]
+
     steps:
       - name: 'Machine'
         run: uname -a
@@ -46,7 +48,7 @@ jobs:
           submodules: true
 
       - name: 'Clean working area'
-        run: rm -rf ~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}*
+        run: rm -rf ~/Work/riscv-none-elf-gcc-${{ github.event.inputs.version }}*
 
       - name: 'Build macOS x64 binary'
         timeout-minutes: 1440
@@ -57,12 +59,13 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          artifacts: '~/Work/riscv-none-embed-gcc-${{ github.event.inputs.version }}/deploy/*'
+          artifacts: '~/Work/riscv-none-elf-gcc-${{ github.event.inputs.version }}/deploy/*'
           bodyFile: '.github/workflows/body-github-pre-releases-test.md'
           commit: 'master'
           draft: false
           name: 'Test binaries'
           omitBodyDuringUpdate: true
+          omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
           owner: 'xpack-dev-tools'
           prerelease: true
