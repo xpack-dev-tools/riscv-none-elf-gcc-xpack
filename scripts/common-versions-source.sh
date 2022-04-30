@@ -315,7 +315,7 @@ function build_versions()
         copy_cross_linux_libs
 
         # Task [IV-3] /$HOST_MINGW/gcc-final/
-        build_cross_gcc_final "${GCC_VERSION}" ""
+        build_cross_gcc_final ""
         # exit 1
 
       fi
