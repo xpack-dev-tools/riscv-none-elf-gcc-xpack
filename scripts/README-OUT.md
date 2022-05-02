@@ -1,6 +1,6 @@
 # xPack GNU RISC-V Embedded GCC
 
-The **xPack GNU RISC-V Embedded GCC** (formely GNU MCU Eclipse RISC-V GCC)
+The **xPack GNU RISC-V Embedded GCC** (formerly GNU MCU Eclipse RISC-V GCC)
 is the **xPack** version of the **GNU RISC-V Embedded GCC** toolchain
 maintained by **SiFive**.
 

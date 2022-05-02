@@ -67,7 +67,7 @@ Before starting the build, perform some checks.
 
 ### Development run the build scripts
 
-Before the real build, run a test build on the development machine (`wks`)
+Before the real build, run a test build on the development machine (`wksi`)
 or the production machines (`xbbma`, `xbbmi`):
 
 ```sh
@@ -124,12 +124,12 @@ and, when ready, rerun the full build.
 Run the `generate-workflows` to re-generate the
 GitHub workflow files; commit and push if necessary.
 
-- on the macOS machine (`xbbmi`) open ssh sessions to the Linux
-machines (`xbbli`, `xbbla64` and `xbbla32`):
+- on the macOS machine (`xbbmi`) open ssh sessions to the build
+machines (`xbbma`, `xbbli`, `xbbla64` and `xbbla32`):
 
 ```sh
+caffeinate ssh xbbma
 caffeinate ssh xbbli
-
 caffeinate ssh xbbla64
 caffeinate ssh xbbla32
 ```

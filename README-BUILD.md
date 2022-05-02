@@ -152,8 +152,8 @@ are in the
 
 ## Build
 
-The builds currently run on 3 dedicated machines (Intel GNU/Linux,
-Arm GNU/Linux and Intel macOS). A fourth machine for Arm macOS is planned.
+The builds currently run on 5 dedicated machines (Intel GNU/Linux,
+Arm 32 GNU/Linux, Arm 64 GNU/Linux, Intel macOS and Arm macOS.
 
 ### Build the Intel GNU/Linux and Windows binaries
 
@@ -210,14 +210,14 @@ network connection or a computer entering sleep.
 screen -S arm
 
 sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
-bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --linux64 --win64
 ```
 
 or, for development builds:
 
 ```sh
 sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
-bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --win64
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --disable-tests --disable-multilib --linux64 --win64
 ```
 
 When ready, run the build on the production machine (`xbbli`):
@@ -271,8 +271,9 @@ The result should look similar to:
 ```console
 $ docker images
 REPOSITORY       TAG                      IMAGE ID       CREATED          SIZE
-ilegeul/ubuntu   arm32v7-16.04-xbb-v3.3   a0ceaa6dad05   57 minutes ago   3.34GB
-ilegeul/ubuntu   arm64v8-16.04-xbb-v3.3   1b0b4a94de6d   13 hours ago     3.6GB
+hello-world      latest                   46331d942d63   6 weeks ago     9.14kB
+ilegeul/ubuntu   arm64v8-18.04-xbb-v3.4   4e7f14f6c886   4 months ago    3.29GB
+ilegeul/ubuntu   arm32v7-18.04-xbb-v3.4   a3718a8e6d0f   4 months ago    2.92GB
 ```
 
 Since the build takes a while, use `screen` to isolate the build session
@@ -292,7 +293,7 @@ or, for development builds:
 screen -S arm
 
 sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
-bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --arm64 --arm32
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --disable-tests --disable-multilib --arm64 --arm32
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -323,7 +324,6 @@ The current platforms for macOS production builds are:
 
 ```sh
 caffeinate ssh xbbmi
-
 caffeinate ssh xbbma
 ```
 
@@ -333,14 +333,14 @@ To build the latest macOS version:
 screen -S arm
 
 sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
-caffeinate bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop  --disable-multilib --macos
+caffeinate bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --macos
 ```
 
 or, for development builds:
 
 ```sh
 sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
-caffeinate bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --macos
+caffeinate bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --disable-tests --disable-multilib --macos
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -369,7 +369,7 @@ Instead of `--all`, you can use any combination of:
 On Arm, instead of `--all`, you can use any combination of:
 
 ```console
---arm32 --arm64
+--arm64 --arm32
 ```
 
 Please note that, due to the specifics of the GCC build process, the
