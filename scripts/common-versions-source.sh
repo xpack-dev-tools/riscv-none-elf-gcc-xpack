@@ -323,7 +323,7 @@ function build_versions()
       # https://ftp.gnu.org/gnu/gdb/
       # https://ftp.gnu.org/gnu/gdb/gdb-11.2.tar.xz
 
-      GDB_VERSION="11.2"
+      GDB_VERSION="12.1"
       GDB_SRC_FOLDER_NAME="gdb-${GDB_VERSION}"
       GDB_ARCHIVE_NAME="${GDB_SRC_FOLDER_NAME}.tar.xz"
       GDB_ARCHIVE_URL="https://ftp.gnu.org/gnu/gdb/${GDB_ARCHIVE_NAME}"
