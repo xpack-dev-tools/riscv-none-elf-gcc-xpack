@@ -143,9 +143,8 @@ with caution, and prefer exact matches, like `11.3.0-1.1`.
 
 ## Support
 
-The quick answer is to use the
-[xPack forums](https://www.tapatalk.com/groups/xpack/);
-please select the correct forum.
+The quick answer is to use the GitHub
+[Discussions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/discussions/).
 
 For more details please read the
 [Support](https://xpack.github.io/riscv-none-elf-gcc/support/) page.
@@ -166,6 +165,7 @@ corresponding licenses are available in the installed
   - latest xPack release
 [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-elf-gcc-xpack/latest/total.svg)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
   - all xPack releases [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-elf-gcc-xpack/total.svg)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
+  - previous `riscv-none-embed-gcc` releases [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/total.svg)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/)
   - [individual file counters](https://somsubhra.github.io/github-release-stats/?username=xpack-dev-tools&repository=riscv-none-elf-gcc-xpack) (grouped per release)
 - npmjs.com [`@xpack-dev-tools/riscv-none-elf-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc/) xPack
   - latest release, per month
