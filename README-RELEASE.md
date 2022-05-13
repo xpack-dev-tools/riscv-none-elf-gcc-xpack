@@ -96,7 +96,7 @@ bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop
 bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --arm32 --disable-multilib
 ```
 
-The builds may take up to 3.5h:
+The builds (without multi-lib) may take up to 3h30:
 
 - `xbbmi`: 143 min
 - `xbbma`: 37 min
@@ -134,7 +134,7 @@ caffeinate ssh xbbla64
 caffeinate ssh xbbla32
 ```
 
-Start the runner on all three machines:
+Start the runner on all machines:
 
 ```sh
 ~/actions-runners/xpack-dev-tools/run.sh &
@@ -168,7 +168,7 @@ page.
 
 These commands use the `xpack-develop` branch of this repo.
 
-The builds may more than 13 hours:
+The builds may take more than 13 hours:
 
 - `xbbmi`: 10h45
 - `xbbma`: 2h35
