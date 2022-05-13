@@ -161,12 +161,20 @@ bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/trigger-workflow-b
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
-in the environment.
+in the environment, and the organization `PUBLISH_TOKEN` to be visible in the
+Settings → Action →
+[Secrets](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/settings/secrets/actions)
+page.
 
 These commands use the `xpack-develop` branch of this repo.
 
-The Arm build takes about 20-21 hours
-to complete, and the other about 14 hours.
+The builds may more than 13 hours:
+
+- `xbbmi`: 10h45
+- `xbbma`: 2h35
+- `xbbli`: 3h55 (including Windows)
+- `xbbla64`: 12h20
+- `xbbla32`: 13h10
 
 The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
@@ -179,6 +187,20 @@ The resulting binaries are available for testing from
 ### CI tests
 
 The automation is provided by GitHub Actions.
+
+On the macOS machine (`xbbmi`) open a ssh sessions to the Arm/Linux
+test machine `xbbla`:
+
+```sh
+caffeinate ssh xbbla
+```
+
+Start both runners (to allow the 32/64-bit tests to run in parallel):
+
+```sh
+~/actions-runners/xpack-dev-tools/1/run.sh &
+~/actions-runners/xpack-dev-tools/2/run.sh &
+```
 
 To trigger the GitHub Actions tests, use the xPack actions:
 
@@ -324,6 +346,19 @@ If any, refer to closed
 
 Note: at this moment the system should send a notification to all clients
 watching this project.
+
+## Update the README listings and examples
+
+- check and possibly update the `ls -l` output
+- check and possibly update the output of the `--version` runs
+watching this project.
+- commit changes
+
+## Check the list of links
+
+- open the `package.json` file
+- check if the links in the `bin` property cover the actual binaries
+- if necessary, also check on Windows
 
 ## Update package.json binaries
 
