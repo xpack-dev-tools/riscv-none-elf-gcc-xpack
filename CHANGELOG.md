@@ -3,9 +3,10 @@
 
 Entries in this file are in reverse chronological order.
 
-## 2022-05-13
+## 2022-05-14
 
 - v11.3.0-1 released
+- bump gdb to 12.1, with patch
 
 ## 2022-04-22
 
