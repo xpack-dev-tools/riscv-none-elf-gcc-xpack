@@ -189,7 +189,7 @@ function build_versions()
 
       # https://www.python.org/ftp/python/
       # Requires `scripts/helper/extras/python/pyconfig-win-3.10.4.h` &
-      # `python3-config.sh`
+      # `python3-config-win.sh`
       PYTHON3_VERSION="3.10.4"
       WITH_GDB_PY3="y"
 
@@ -322,11 +322,15 @@ function build_versions()
 
       # https://ftp.gnu.org/gnu/gdb/
       # https://ftp.gnu.org/gnu/gdb/gdb-11.2.tar.xz
+      # https://ftp.gnu.org/gnu/gdb/gdb-12.1.tar.xz
 
-      GDB_VERSION="12.1"
+      GDB_VERSION="12.1" # "11.2"
       GDB_SRC_FOLDER_NAME="gdb-${GDB_VERSION}"
       GDB_ARCHIVE_NAME="${GDB_SRC_FOLDER_NAME}.tar.xz"
       GDB_ARCHIVE_URL="https://ftp.gnu.org/gnu/gdb/${GDB_ARCHIVE_NAME}"
+
+      # Mandatory, otherwise gdb-py3 is not relocatable.
+      GDB_PATCH_FILE_NAME="gdb-${GDB_VERSION}.patch.diff"
 
       # Task [III-6] /$HOST_NATIVE/gdb/
       # Task [IV-4] /$HOST_MINGW/gdb/
