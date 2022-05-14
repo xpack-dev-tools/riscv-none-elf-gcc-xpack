@@ -243,7 +243,7 @@ This script requires the `TRAVIS_COM_TOKEN` variable to be present
 in the environment.
 
 The test results are available from
-[travis-ci.com](https://app.travis-ci.com/github/xpack-dev-tools/riscv-none-elf-gcc-xpack/builds/).
+[Travis CI](https://app.travis-ci.com/github/xpack-dev-tools/riscv-none-elf-gcc-xpack/builds/).
 
 ### Manual tests
 
@@ -304,6 +304,9 @@ git -C ${HOME}/Work/riscv-none-elf-gcc-xpack.git submodule update --init --recur
 - commit and push the `xpack-develop` branch
 - run the xPack action `trigger-workflow-publish-release`
 
+The workflows results and logs are available from the
+[Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
+
 The result is a
 [draft pre-release](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
 tagged like **v11.3.0-1** (mind the dash in the middle!) and
@@ -349,9 +352,9 @@ watching this project.
 
 ## Update the README listings and examples
 
-- check and possibly update the `ls -l` output
+- check and possibly update the `ls -l` output in `README-BUILD.md`
 - check and possibly update the output of the `--version` runs
-watching this project.
+- check and possibly update the output of `tree -L 2`
 - commit changes
 
 ## Check the list of links

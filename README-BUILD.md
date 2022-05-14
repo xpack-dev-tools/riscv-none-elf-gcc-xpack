@@ -7,9 +7,8 @@ build and publish the
 [xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-elf-gcc/) binaries.
 
 It follows the official
-[SiFive](https://github.com/sifive/freedom-tools)
-releases, and it is planned to make a new release after each future
-SiFive release.
+[GNU GCC](https://gcc.gnu.org/releases.html)
+releases.
 
 The build scripts use the
 [xPack Build Box (XBB)](https://xpack.github.io/xbb/),
@@ -30,26 +29,10 @@ For native builds, see the `build-native.sh` script.
 
 ## Repositories
 
-The build scripts use a set of local repositories, to accommodate the
-small changes required by the `riscv-none-elf-` prefix:
-
-- [xpack-dev-tools/riscv-binutils-gdb](https://github.com/xpack-dev-tools/riscv-binutils-gdb)
-- [xpack-dev-tools/riscv-gcc](https://github.com/xpack-dev-tools/riscv-gcc)
-- [xpack-dev-tools/riscv-newlib](https://github.com/xpack-dev-tools/riscv-newlib)
-
-These repositories were forked from the SiFive repositories:
-
-- [sifive/riscv-binutils-gdb](https://github.com/sifive/riscv-binutils-gdb)
-- [sifive/riscv-gcc](https://github.com/sifive/riscv-gcc)
-- [sifive/riscv-newlib](https://github.com/sifive/riscv-newlib)
-
-GDB was upstreamed and does not require SiFive specific patches, so the
-original FSF repository is used:
-
-- `git://sourceware.org/git/binutils-gdb.git`
-
-However, to accommodate the custom prefix, a separate branch is created
-in `xpack-dev-tools/riscv-binutils-gdb`.
+- <https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git> -
+  the URL of the xPack build scripts repository
+- <https://github.com/xpack-dev-tools/build-helper> - the URL of the
+  xPack build helper, used as the `scripts/helper` submodule
 
 ### Branches
 
@@ -126,19 +109,14 @@ not be accepted by bash.
 
 The version string is an extension to semver, the format looks like `11.3.0-1`.
 It includes the three digits with the original GCC version, a fourth
-digit with the SiFive release, a fifth digit with the xPack release number.
+digit with the xPack release number.
 
-When publishing on the **npmjs.com** server, a sixth digit is appended.
+When publishing on the **npmjs.com** server, a fifth digit is appended.
 
 ## Changes
 
-Compared to the original SiFive distribution, there should be no
-major functional changes, perhaps only bug fixes.
-
-The actual changes for each version are documented in the corresponding
-release pages:
-
-- <https://xpack.github.io/riscv-none-elf-gcc/releases/>
+Compared to the original GNU GCC distribution, there should be no
+functional changes.
 
 ## How to build local/native binaries
 
@@ -230,11 +208,11 @@ their SHA signatures, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-*/deploy
-total 1429180
--rw-rw-r-- 1 ilg ilg 361419776 Oct 24 20:30 xpack-riscv-none-elf-gcc-11.3.0-1-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 24 20:30 xpack-riscv-none-elf-gcc-11.3.0-1-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 375055827 Oct 24 21:04 xpack-riscv-none-elf-gcc-11.3.0-1-win32-x64.zip
--rw-rw-r-- 1 ilg ilg       117 Oct 24 21:04 xpack-riscv-none-elf-gcc-11.3.0-1-win32-x64.zip.sha
+total 940080
+-rw-rw-rw- 1 ilg ilg 476486985 May 13 18:05 xpack-riscv-none-elf-gcc-11.3.0-1-linux-x64.tar.gz
+-rw-rw-rw- 1 ilg ilg       117 May 13 18:05 xpack-riscv-none-elf-gcc-11.3.0-1-linux-x64.tar.gz.sha
+-rw-rw-rw- 1 ilg ilg 486134774 May 13 18:29 xpack-riscv-none-elf-gcc-11.3.0-1-win32-x64.zip
+-rw-rw-rw- 1 ilg ilg       114 May 13 18:29 xpack-riscv-none-elf-gcc-11.3.0-1-win32-x64.zip.sha
 ```
 
 ### Build the Arm GNU/Linux binaries
@@ -304,14 +282,19 @@ archives and their SHA signatures, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-*/deploy
-total 702592
--rw-rw-r-- 1 ilg ilg 361351380 Oct 24 23:42 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg       122 Oct 24 23:42 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 358086677 Oct 25 07:31 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg       120 Oct 25 07:31 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm.tar.gz.sha
+total 462200
+-rw-rw-rw- 1 ilg ilg 473282190 May 14 03:11 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm64.tar.gz
+-rw-rw-rw- 1 ilg ilg       119 May 14 03:11 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm64.tar.gz.sha
 ```
 
-Note: on some versions, the 32-bit Arm binaries could not be built, since the RVV support requires more than 4 GB or RAM.
+and:
+
+```console
+$ ls -l ~/Work/riscv-none-elf-gcc-*/deploy
+total 457292
+-rw-rw-rw- 1 ilg ilg 468260455 May 14 04:00 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm.tar.gz
+-rw-rw-rw- 1 ilg ilg       117 May 14 04:00 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm.tar.gz.sha
+```
 
 ### Build the macOS binaries
 
@@ -351,9 +334,18 @@ and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-*/deploy
-total 698240
--rw-r--r--  1 ilg  staff  357492352 Oct 24 22:51 xpack-riscv-none-elf-gcc-11.3.0-1-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        121 Oct 24 22:51 xpack-riscv-none-elf-gcc-11.3.0-1-darwin-x64.tar.gz.sha
+total 951048
+-rw-r--r--  1 ilg  staff  472518625 May 14 02:20 xpack-riscv-none-elf-gcc-11.3.0-1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        118 May 14 02:20 xpack-riscv-none-elf-gcc-11.3.0-1-darwin-x64.tar.gz.sha
+```
+
+and:
+
+```console
+$ ls -l ~/Work/riscv-none-elf-gcc-*/deploy
+total 951816
+-rw-r--r--  1 ilg  staff  471723612 May 13 17:37 xpack-riscv-none-elf-gcc-11.3.0-1-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff        120 May 13 17:37 xpack-riscv-none-elf-gcc-11.3.0-1-darwin-arm64.tar.gz.sha
 ```
 
 ## Subsequent runs
@@ -438,7 +430,8 @@ look like:
 
 ```console
 $ .../xpack-riscv-none-elf-gcc/bin/riscv-none-elf-gcc --version
-riscv-none-elf-gcc (xPack RISC-V Embedded GCC, 64-bit) 11.3.0
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 11.3.0
+...
 ```
 
 ## Installed folders
@@ -471,6 +464,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/11.3.
 │   ├── riscv-none-elf-gdb-add-index
 │   ├── riscv-none-elf-gdb-add-index-py3
 │   ├── riscv-none-elf-gdb-py3
+│   ├── riscv-none-elf-gfortran
 │   ├── riscv-none-elf-gprof
 │   ├── riscv-none-elf-ld
 │   ├── riscv-none-elf-ld.bfd
@@ -495,31 +489,29 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/11.3.
 │   ├── gcc
 │   ├── libcc1.0.so
 │   ├── libcc1.so -> libcc1.0.so
-│   └── python3.7
+│   └── python3.10
 ├── libexec
 │   ├── gcc
 │   ├── libcrypt.2.dylib
 │   ├── libcrypto.1.1.dylib
-│   ├── libexpat.1.6.7.dylib
-│   ├── libexpat.1.dylib -> libexpat.1.6.7.dylib
+│   ├── libffi.8.dylib
 │   ├── libgcc_s.1.dylib
 │   ├── libgmp.10.dylib
 │   ├── libiconv.2.dylib
-│   ├── libintl.8.dylib
-│   ├── libisl.15.dylib
+│   ├── libisl.23.dylib
 │   ├── liblzma.5.dylib
 │   ├── libmpc.3.dylib
-│   ├── libmpfr.4.dylib
+│   ├── libmpfr.6.dylib
 │   ├── libncurses.6.dylib
 │   ├── libpanel.6.dylib
-│   ├── libpython3.7m.dylib
-│   ├── libreadline.8.0.dylib
-│   ├── libreadline.8.dylib -> libreadline.8.0.dylib
+│   ├── libpython3.10.dylib
+│   ├── libreadline.8.1.dylib
+│   ├── libreadline.8.dylib -> libreadline.8.1.dylib
 │   ├── libsqlite3.0.dylib
 │   ├── libssl.1.1.dylib
 │   ├── libstdc++.6.dylib
-│   ├── libz.1.2.8.dylib
-│   └── libz.1.dylib -> libz.1.2.8.dylib
+│   ├── libz.1.2.12.dylib
+│   └── libz.1.dylib -> libz.1.2.12.dylib
 ├── riscv-none-elf
 │   ├── bin
 │   ├── include
@@ -527,9 +519,9 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/11.3.
 │   └── share
 └── share
     ├── doc
-    └── gcc-riscv-none-elf
+    └── gcc-11.3.0
 
-21 directories, 58 files
+21 directories, 57 files
 ```
 
 No other files are installed in any system folders or other locations.
