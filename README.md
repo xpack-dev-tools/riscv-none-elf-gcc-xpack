@@ -9,6 +9,12 @@ binary distribution, intended for reproducible builds.
 In addition to the the binary archives and the package meta data,
 this project also includes the build scripts.
 
+### Deprecation notice
+
+This project replaces the now deprecated
+[`xpack-dev-tools/riscv-none-embed-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack)
+project, which followed the SiFive releases.
+
 ## Overview
 
 This open source project is hosted on GitHub as
@@ -18,12 +24,6 @@ and provides the platform specific binaries for the
 
 The binaries can be installed automatically as **binary xPacks** or manually as
 **portable archives**.
-
-## Deprecation notice
-
-This project replaces the now deprecated
-[`xpack-dev-tools/riscv-none-embed-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack)
-project, which followed the SiFive releases.
 
 ## Release schedule
 
