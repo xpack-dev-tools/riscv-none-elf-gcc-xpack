@@ -350,9 +350,9 @@ If any, refer to closed
 Note: at this moment the system should send a notification to all clients
 watching this project.
 
-## Update the README listings and examples
+## Update the README-BUILD listings and examples
 
-- check and possibly update the `ls -l` output in `README-BUILD.md`
+- check and possibly update the `ls -l` output
 - check and possibly update the output of the `--version` runs
 - check and possibly update the output of `tree -L 2`
 - commit changes

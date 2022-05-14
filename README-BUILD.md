@@ -277,7 +277,7 @@ bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
-About 15 hours later, the output of the build script is a set of 2
+About 13 hours later, the output of the build script is a set of
 archives and their SHA signatures, created in the `deploy` folder:
 
 ```console
