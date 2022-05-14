@@ -11,7 +11,7 @@ this project also includes the build scripts.
 
 ### Deprecation notice
 
-This project replaces the now deprecated
+This project replaces the deprecated
 [`xpack-dev-tools/riscv-none-embed-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack)
 project, which followed the SiFive releases.
 
