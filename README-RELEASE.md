@@ -451,6 +451,14 @@ In case the previous version is not functional and needs to be unpublished:
 - go to <https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/>
 - remove the test binaries
 
+## Clean the work area
+
+Run the xPack action `trigger-workflow-deep-clean`, this
+will remove the build folders on all supported platforms.
+
+The tests results are available from the
+[Actions](https://github.com/xpack-dev-tools/qemu-arm-xpack/actions/) page.
+
 ## Announce to RISC-V community
 
 Add a new topic in the **Announcements** category of the
