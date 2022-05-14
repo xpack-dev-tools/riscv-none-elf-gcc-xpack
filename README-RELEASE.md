@@ -32,6 +32,28 @@ the xPack GNU RISC-V Embedded GCC release number of this version.
 - add a new `if` with the new version before the existing code
 - update the versions, branch names and commit ids
 
+### Update gcc
+
+With a git client in
+[xpack-dev-tools/gcc](https://github.com/xpack-dev-tools/gcc)
+
+- identify the tag with the latest release (like `gcc-12.1.0`)
+- create a new branch with the same name as the tag (like `gcc-12.1.0`)
+- create a new branch with name suffixed with `-riscv-none-elf-xpack`
+  (like `gcc-12.1.0-riscv-none-elf-xpack`
+- identify the commit which adds the xPack specific changes
+- cherry pick it; do not commit immediately
+- check the differences from the non-xpack branch; there should be three files:
+  - `elf-embed.h` with the `LIB_SPEC` definitions without libgloss
+  - `config.gcc` with `tm_file` definition that uses `elf-embed.h`
+  - `config.sub` which adds `*-embed)`
+- commit as **add support for riscv-none-embed-***
+- push both new branches to `origin`
+- checkout the `gcc-12.1.0` tag as HEAD
+- create patch from the commit
+- rename as `gcc-12.1.0.patch.diff`
+- copy to `patches`
+
 ### Fix possible open issues
 
 Check GitHub issues and pull requests:
@@ -98,11 +120,11 @@ bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop
 
 The builds (without multi-lib) may take up to 3h30:
 
-- `xbbmi`: 143 min
-- `xbbma`: 37 min
-- `xbbli`: 42 min for Linux, 16 min for Windows
-- `xbbla64`: 204 min
-- `xbbla32`: 218 min
+- `xbbmi`: 141 min
+- `xbbma`: 30 min
+- `xbbli`: 35 min for Linux, 16 min for Windows
+- `xbbla64`: 182 min
+- `xbbla32`: 189 min
 
 Work on the scripts until all platforms pass the build.
 
