@@ -4,7 +4,7 @@ Version **{{ RELEASE_VERSION }}** is a maintenance release of the **xPack RISC-V
 
 Or (TODO: edit!):
 
-Version **{{ RELEASE_VERSION }}** is a new release of the **xPack RISC-V Embedded GCC** package, following the upstream GNU release.
+Version **{{ RELEASE_VERSION }}** is a new release of the **xPack RISC-V Embedded GCC** package, following the upstream GNU GCC release.
 
 [Continue reading »](TODO: edit, add URL!)
 
