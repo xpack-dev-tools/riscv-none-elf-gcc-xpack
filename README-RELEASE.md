@@ -459,7 +459,7 @@ Add a new topic in the **Announcements** category of the
 ```console
 Subject: xPack GNU RISC-V Embedded GCC v11.3.0-1 released
 
-Version 11.3.0-1 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the SiFive release v2020.12.0 from April 7, 2021.
+Version 11.3.0-1 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the GNU GCC release.
 
-https://xpack.github.io/blog/2021/11/06/riscv-none-elf-gcc-v10-2-0-1-1-released/
+https://xpack.github.io/blog/2022/05/14/riscv-none-elf-gcc-v11-3-0-1-released/
 ```
