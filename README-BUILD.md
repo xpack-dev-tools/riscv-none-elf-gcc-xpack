@@ -107,7 +107,7 @@ not be accepted by bash.
 
 ## Versioning
 
-The version string is an extension to semver, the format looks like `11.3.0-1`.
+The version string is an extension to semver, the format looks like `12.1.0-1`.
 It includes the three digits with the original GCC version, a fourth
 digit with the xPack release number.
 
@@ -209,10 +209,10 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-*/deploy
 total 940080
--rw-rw-rw- 1 ilg ilg 476486985 May 13 18:05 xpack-riscv-none-elf-gcc-11.3.0-1-linux-x64.tar.gz
--rw-rw-rw- 1 ilg ilg       117 May 13 18:05 xpack-riscv-none-elf-gcc-11.3.0-1-linux-x64.tar.gz.sha
--rw-rw-rw- 1 ilg ilg 486134774 May 13 18:29 xpack-riscv-none-elf-gcc-11.3.0-1-win32-x64.zip
--rw-rw-rw- 1 ilg ilg       114 May 13 18:29 xpack-riscv-none-elf-gcc-11.3.0-1-win32-x64.zip.sha
+-rw-rw-rw- 1 ilg ilg 476486985 May 13 18:05 xpack-riscv-none-elf-gcc-12.1.0-1-linux-x64.tar.gz
+-rw-rw-rw- 1 ilg ilg       117 May 13 18:05 xpack-riscv-none-elf-gcc-12.1.0-1-linux-x64.tar.gz.sha
+-rw-rw-rw- 1 ilg ilg 486134774 May 13 18:29 xpack-riscv-none-elf-gcc-12.1.0-1-win32-x64.zip
+-rw-rw-rw- 1 ilg ilg       114 May 13 18:29 xpack-riscv-none-elf-gcc-12.1.0-1-win32-x64.zip.sha
 ```
 
 ### Build the Arm GNU/Linux binaries
@@ -283,8 +283,8 @@ archives and their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-*/deploy
 total 462200
--rw-rw-rw- 1 ilg ilg 473282190 May 14 03:11 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm64.tar.gz
--rw-rw-rw- 1 ilg ilg       119 May 14 03:11 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm64.tar.gz.sha
+-rw-rw-rw- 1 ilg ilg 473282190 May 14 03:11 xpack-riscv-none-elf-gcc-12.1.0-1-linux-arm64.tar.gz
+-rw-rw-rw- 1 ilg ilg       119 May 14 03:11 xpack-riscv-none-elf-gcc-12.1.0-1-linux-arm64.tar.gz.sha
 ```
 
 and:
@@ -292,8 +292,8 @@ and:
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-*/deploy
 total 457292
--rw-rw-rw- 1 ilg ilg 468260455 May 14 04:00 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm.tar.gz
--rw-rw-rw- 1 ilg ilg       117 May 14 04:00 xpack-riscv-none-elf-gcc-11.3.0-1-linux-arm.tar.gz.sha
+-rw-rw-rw- 1 ilg ilg 468260455 May 14 04:00 xpack-riscv-none-elf-gcc-12.1.0-1-linux-arm.tar.gz
+-rw-rw-rw- 1 ilg ilg       117 May 14 04:00 xpack-riscv-none-elf-gcc-12.1.0-1-linux-arm.tar.gz.sha
 ```
 
 ### Build the macOS binaries
@@ -335,8 +335,8 @@ and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-*/deploy
 total 951048
--rw-r--r--  1 ilg  staff  472518625 May 14 02:20 xpack-riscv-none-elf-gcc-11.3.0-1-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        118 May 14 02:20 xpack-riscv-none-elf-gcc-11.3.0-1-darwin-x64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  472518625 May 14 02:20 xpack-riscv-none-elf-gcc-12.1.0-1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        118 May 14 02:20 xpack-riscv-none-elf-gcc-12.1.0-1-darwin-x64.tar.gz.sha
 ```
 
 and:
@@ -344,8 +344,8 @@ and:
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-*/deploy
 total 951816
--rw-r--r--  1 ilg  staff  471723612 May 13 17:37 xpack-riscv-none-elf-gcc-11.3.0-1-darwin-arm64.tar.gz
--rw-r--r--  1 ilg  staff        120 May 13 17:37 xpack-riscv-none-elf-gcc-11.3.0-1-darwin-arm64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  471723612 May 13 17:37 xpack-riscv-none-elf-gcc-12.1.0-1-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff        120 May 13 17:37 xpack-riscv-none-elf-gcc-12.1.0-1-darwin-arm64.tar.gz.sha
 ```
 
 ## Subsequent runs
@@ -430,7 +430,7 @@ look like:
 
 ```console
 $ .../xpack-riscv-none-elf-gcc/bin/riscv-none-elf-gcc --version
-riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 11.3.0
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 12.1.0
 ...
 ```
 
@@ -440,8 +440,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/11.3.0-1/.content/
-/Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/11.3.0-1/.content/
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/12.1.0-1/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/12.1.0-1/.content/
 ├── README.md
 ├── bin
 │   ├── riscv-none-elf-addr2line
@@ -453,7 +453,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/11.3.
 │   ├── riscv-none-elf-elfedit
 │   ├── riscv-none-elf-g++
 │   ├── riscv-none-elf-gcc
-│   ├── riscv-none-elf-gcc-11.3.0
+│   ├── riscv-none-elf-gcc-12.1.0
 │   ├── riscv-none-elf-gcc-ar
 │   ├── riscv-none-elf-gcc-nm
 │   ├── riscv-none-elf-gcc-ranlib
@@ -519,7 +519,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/11.3.
 │   └── share
 └── share
     ├── doc
-    └── gcc-11.3.0
+    └── gcc-12.1.0
 
 21 directories, 57 files
 ```
