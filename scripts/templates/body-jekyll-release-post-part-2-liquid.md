@@ -24,7 +24,7 @@ with Ubuntu 18, Debian 10 and RedHat 8.
 - npmjs.com [@xpack-dev-tools/riscv-none-elf-gcc](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc)
   - latest releases [![npm](https://img.shields.io/npm/dw/@xpack-dev-tools/riscv-none-elf-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc/)
   - all @xpack-dev-tools releases [![npm](https://img.shields.io/npm/dt/@xpack-dev-tools/riscv-none-elf-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc/)
-  - all @xpack-dev-tools deprecated releases [![npm](https://img.shields.io/npm/dt/@xpack-dev-tools/riscv-none-elf-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
+  - all @xpack-dev-tools deprecated releases [![npm](https://img.shields.io/npm/dt/@xpack-dev-tools/riscv-none-embed-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
   - all @gnu-mcu-eclipse releases [![npm](https://img.shields.io/npm/dt/@gnu-mcu-eclipse/riscv-none-gcc.svg)](https://www.npmjs.com/package/@gnu-mcu-eclipse/riscv-none-gcc/)
 
 Credit to [Shields IO](https://shields.io) for the badges and to

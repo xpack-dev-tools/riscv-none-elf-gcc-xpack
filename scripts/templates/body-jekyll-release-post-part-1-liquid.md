@@ -5,10 +5,8 @@ TODO: select one summary
 
 summary: "Version **{{ RELEASE_VERSION }}** is a maintenance release; it ...."
 
-summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the upstream Sifive release VERSION from DATE."
+summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the GNU release."
 
-sifive_version: v2020.12.0
-sifive_date: April 7, 2021
 version: {{ RELEASE_VERSION }}
 npm_subversion: 1
 download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v{{ RELEASE_VERSION }}/
@@ -31,7 +29,7 @@ tags:
 
 [The xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-elf-gcc/)
 is a standalone cross-platform binary distribution of the
-[SiFive RISC-V GCC](https://github.com/sifive/freedom-tools/releases).
+[GNU GCC](https://gcc.gnu.org/releases.html).
 
 There are separate binaries for **Windows** (Intel 64-bit),
 **macOS** (Intel 64-bit)
@@ -40,8 +38,6 @@ and **GNU/Linux** (Intel 64-bit, Arm 32/64-bit).
 {% raw %}{% include note.html content="The main targets for the Arm binaries
 are the **Raspberry Pi** class devices (armv7l and aarch64;
 armv6 is not supported)." %}{% endraw %}
-
-{% raw %}{% include note.html content="Due to memory limitations during the build, there is no Arm 32-bit image." %}{% endraw %}
 
 ## Download
 
@@ -52,18 +48,19 @@ The binary files are available from GitHub [Releases]({% raw %}{{ page.download_
 - GNU/Linux Intel 64-bit: any system with **GLIBC 2.27** or higher
   (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
   Fedora 29 or later, etc)
-- Arm GNU/Linux 64-bit: any system with **GLIBC 2.23** or higher
-  (like Ubuntu 16 or later, Debian 9 or later, RedHat/CentOS 8 or later,
-  Fedora 24 or later, etc); (there is no Arm 32-bit image!);
+- GNU/Linux Arm 32/64-bit: any system with **GLIBC 2.27** or higher
+  (like Raspberry Pi OS, Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
+  Fedora 29 or later, etc)
 - Intel Windows 64-bit: Windows 7 with the Universal C Runtime
   ([UCRT](https://support.microsoft.com/en-us/topic/update-for-universal-c-runtime-in-windows-c0514201-7fe6-95a3-b0a5-287930f3560c)),
   Windows 8, Windows 10
 - Intel macOS 64-bit: 10.13 or later
+- Apple Silicon macOS 64-bit: 11.6 or later
 
 ## Install
 
-The full details of installing the **xPack GNU RISC-V Embedded GCC** on various platforms
-are presented in the separate
+The full details of installing the **xPack GNU RISC-V Embedded GCC**
+on various platforms are presented in the separate
 [Install]({% raw %}{{ site.baseurl }}{% endraw %}/riscv-none-elf-gcc/install/) page.
 
 ### Easy install
@@ -123,35 +120,78 @@ xpm uninstall --global @xpack-dev-tools/riscv-none-elf-gcc
 ## Compliance
 
 The xPack GNU RISC-V Embedded GCC generally follows the official
-SiFive RISC-V GCC [releases](https://github.com/sifive/freedom-tools/releases)),
+GNU GCC [releases](https://gcc.gnu.org/releases.html)),
 with as little differences as possible.
-
-The current version is based on:
-
-- SiFive RISC-V GCC release **{% raw %}{{ page.sifive_version }}{% endraw %}** from {% raw %}{{ page.sifive_date }}{% endraw %},
-and includes the SiFive extensions, including the RVV vector support.
 
 ## Supported libraries
 
-The supported libraries are:
+The default architecture/ABI pair is `rv32imac/ilp32`.
+
+The other supported libraries are:
 
 ```console
 $ riscv-none-elf-gcc -print-multi-lib
-...
+.;
+rv32e/ilp32e;@march=rv32e@mabi=ilp32e
+rv32ea/ilp32e;@march=rv32ea@mabi=ilp32e
+rv32eac/ilp32e;@march=rv32eac@mabi=ilp32e
+rv32ec/ilp32e;@march=rv32ec@mabi=ilp32e
+rv32em/ilp32e;@march=rv32em@mabi=ilp32e
+rv32ema/ilp32e;@march=rv32ema@mabi=ilp32e
+rv32emac/ilp32e;@march=rv32emac@mabi=ilp32e
+rv32emc/ilp32e;@march=rv32emc@mabi=ilp32e
+rv32i/ilp32;@march=rv32i@mabi=ilp32
+rv32ia/ilp32;@march=rv32ia@mabi=ilp32
+rv32iac/ilp32;@march=rv32iac@mabi=ilp32
+rv32iaf_zicsr/ilp32f;@march=rv32iaf_zicsr@mabi=ilp32f
+rv32iafc_zicsr/ilp32f;@march=rv32iafc_zicsr@mabi=ilp32f
+rv32iafd_zicsr/ilp32d;@march=rv32iafd_zicsr@mabi=ilp32d
+rv32iafdc_zicsr/ilp32d;@march=rv32iafdc_zicsr@mabi=ilp32d
+rv32ic/ilp32;@march=rv32ic@mabi=ilp32
+rv32if_zicsr/ilp32f;@march=rv32if_zicsr@mabi=ilp32f
+rv32ifc_zicsr/ilp32f;@march=rv32ifc_zicsr@mabi=ilp32f
+rv32ifd_zicsr/ilp32d;@march=rv32ifd_zicsr@mabi=ilp32d
+rv32ifdc_zicsr/ilp32d;@march=rv32ifdc_zicsr@mabi=ilp32d
+rv32im/ilp32;@march=rv32im@mabi=ilp32
+rv32ima/ilp32;@march=rv32ima@mabi=ilp32
+rv32imaf_zicsr/ilp32f;@march=rv32imaf_zicsr@mabi=ilp32f
+rv32imafc_zicsr/ilp32f;@march=rv32imafc_zicsr@mabi=ilp32f
+rv32imafd_zicsr/ilp32d;@march=rv32imafd_zicsr@mabi=ilp32d
+rv32imafdc_zicsr/ilp32d;@march=rv32imafdc_zicsr@mabi=ilp32d
+rv32imc/ilp32;@march=rv32imc@mabi=ilp32
+rv32imf_zicsr/ilp32f;@march=rv32imf_zicsr@mabi=ilp32f
+rv32imfc_zicsr/ilp32f;@march=rv32imfc_zicsr@mabi=ilp32f
+rv32imfd_zicsr/ilp32d;@march=rv32imfd_zicsr@mabi=ilp32d
+rv32imfdc_zicsr/ilp32d;@march=rv32imfdc_zicsr@mabi=ilp32d
+rv64i/lp64;@march=rv64i@mabi=lp64
+rv64ia/lp64;@march=rv64ia@mabi=lp64
+rv64iac/lp64;@march=rv64iac@mabi=lp64
+rv64iaf_zicsr/lp64f;@march=rv64iaf_zicsr@mabi=lp64f
+rv64iafc_zicsr/lp64f;@march=rv64iafc_zicsr@mabi=lp64f
+rv64iafd_zicsr/lp64d;@march=rv64iafd_zicsr@mabi=lp64d
+rv64iafdc_zicsr/lp64d;@march=rv64iafdc_zicsr@mabi=lp64d
+rv64ic/lp64;@march=rv64ic@mabi=lp64
+rv64if_zicsr/lp64f;@march=rv64if_zicsr@mabi=lp64f
+rv64ifc_zicsr/lp64f;@march=rv64ifc_zicsr@mabi=lp64f
+rv64ifd_zicsr/lp64d;@march=rv64ifd_zicsr@mabi=lp64d
+rv64ifdc_zicsr/lp64d;@march=rv64ifdc_zicsr@mabi=lp64d
+rv64im/lp64;@march=rv64im@mabi=lp64
+rv64ima/lp64;@march=rv64ima@mabi=lp64
+rv64imac/lp64;@march=rv64imac@mabi=lp64
+rv64imaf_zicsr/lp64f;@march=rv64imaf_zicsr@mabi=lp64f
+rv64imafc_zicsr/lp64f;@march=rv64imafc_zicsr@mabi=lp64f
+rv64imafd_zicsr/lp64d;@march=rv64imafd_zicsr@mabi=lp64d
+rv64imafdc_zicsr/lp64d;@march=rv64imafdc_zicsr@mabi=lp64d
+rv64imc/lp64;@march=rv64imc@mabi=lp64
+rv64imf_zicsr/lp64f;@march=rv64imf_zicsr@mabi=lp64f
+rv64imfc_zicsr/lp64f;@march=rv64imfc_zicsr@mabi=lp64f
+rv64imfd_zicsr/lp64d;@march=rv64imfd_zicsr@mabi=lp64d
+rv64imfdc_zicsr/lp64d;@march=rv64imfdc_zicsr@mabi=lp64d
 ```
 
 ## Changes
 
-There are no functional changes.
-
-### Improvements
-
-Compared to the original SiFive version, the **same architecture and API**
-options are supported, and there are minimal functional changes
-
-- `libgloss` was removed from the list of libraries always linked to the
-  application, since it issues `ECALL`
-  instructions that fail in bare metal environments
+Compared to the upstream GNU release, there are no functional changes.
 
 ### newlib-nano
 
@@ -177,17 +217,15 @@ be compiled with
 
 Support for Python scripting was added to GDB. This distribution provides
 a separate binary, `riscv-none-elf-gdb-py3` with
-support for **Python 3.7**.
+support for **Python 3**.
 
 The Python 3 run-time is included, so GDB does not need any version of
 Python to be installed, and is insensitive to the presence of other
 versions.
 
-Support for Python 2 was discontinued.
-
 ### Text User Interface (TUI)
 
-Support for TUI was added to GDB. The `ncurses` library (v6.2) was added to
+Support for TUI was added to GDB. The `ncurses` library was added to
 the distribution.
 
 {% raw %}{% include note.html content="TUI is not available on Windows." %}{% endraw %}
@@ -202,12 +240,7 @@ the distribution.
 
 ## Known problems
 
-- due to the very large number of instructions added by the vector support
-  (~70K), the compiler sources became too large and it was not possible to build the Arm 32-bit image
-  ([#229](https://github.com/riscv/riscv-gcc/issues/229))
-- the archive size got too big for the Windows 32-bit node to handle, and
-  `xpm install` may fail with _RangeError: Array buffer allocation failed_;
-  the 64-bit systems are not affected.
+- due to the large number of libraries, the archive is >400 MB.
 
 ## Shared libraries
 
@@ -241,7 +274,8 @@ relative path.
 
 ## Documentation
 
-The original documentation is available in the `share/doc` folder.
+The original documentation is available
+[online](https://gcc.gnu.org/onlinedocs/).
 
 ## Build
 
@@ -264,7 +298,7 @@ Before publishing, a set of simple tests were performed on an exhaustive
 set of platforms. The results are available from:
 
 - [GitHub Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/)
-- [travis-ci.com](https://app.travis-ci.com/github/xpack-dev-tools/riscv-none-elf-gcc-xpack/builds/)
+- [Travis CI](https://app.travis-ci.com/github/xpack-dev-tools/riscv-none-elf-gcc-xpack/builds/)
 
 ## Tests
 
