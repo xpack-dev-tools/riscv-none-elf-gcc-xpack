@@ -33,6 +33,7 @@
     "endraw",
     "filt",
     "gcov",
+    "gfortran",
     "gprof",
     "ilegeul",
     "imac",
