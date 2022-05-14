@@ -5,6 +5,7 @@ Entries in this file are in reverse chronological order.
 
 ## 2022-05-14
 
+- v11.3.0-1.1 published on npmjs.com
 - v11.3.0-1 released
 - bump gdb to 12.1, with patch
 
