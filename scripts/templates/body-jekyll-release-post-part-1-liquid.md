@@ -5,7 +5,7 @@ TODO: select one summary
 
 summary: "Version **{{ RELEASE_VERSION }}** is a maintenance release; it ...."
 
-summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the GNU release."
+summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the GNU GCC release."
 
 version: {{ RELEASE_VERSION }}
 npm_subversion: 1
