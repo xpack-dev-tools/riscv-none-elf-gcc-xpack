@@ -86,6 +86,7 @@
     "xbbla64",
     "xbbli",
     "xbbma",
-    "xbbmi"
+    "xbbmi",
+    "zicsr"
   ]
 }
