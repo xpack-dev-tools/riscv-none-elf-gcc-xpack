@@ -190,13 +190,13 @@ page.
 
 These commands use the `xpack-develop` branch of this repo.
 
-The builds may take more than 13 hours:
+The builds may take almost 14 hours:
 
-- `xbbmi`: 10h45
-- `xbbma`: 2h35
-- `xbbli`: 3h55 (including Windows)
-- `xbbla64`: 12h20
-- `xbbla32`: 13h10
+- `xbbmi`: 11h50
+- `xbbma`: 2h40
+- `xbbli`: 3h43 (including Windows)
+- `xbbla64`: 12h57
+- `xbbla32`: 13h39
 
 The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
