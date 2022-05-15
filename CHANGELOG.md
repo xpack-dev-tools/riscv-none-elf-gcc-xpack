@@ -5,6 +5,7 @@ Entries in this file are in reverse chronological order.
 
 ## 2022-05-15
 
+- v12.1.0-1.1 published on npmjs.com
 - v12.1.0-1 released
 - tests/eclipse update -march=rv32imac_zicsr
 
