@@ -119,9 +119,32 @@ xpm uninstall --global @xpack-dev-tools/riscv-none-elf-gcc
 
 ## Compliance
 
-The xPack GNU RISC-V Embedded GCC generally follows the official
-GNU GCC [releases](https://gcc.gnu.org/releases.html)),
-with as little differences as possible.
+The xPack GNU RISC-V Embedded GCC use the official sources,
+with no functional changes:
+
+- GCC 12.1.0
+- binutils 2.38
+- gdb 12.1
+- newlib 4.2.0.20211231
+- python 3.10.4
+
+## ISA updates
+
+Compared to previous releases, starting from 12.x, the compiler
+implements the new RISC-V ISA, which introduces an incompatibility issue,
+and builds might throw error messages like _unrecognized opcode `csrr`_.
+
+The reason is that csr read/write (`csrr*`/`csrw*`)
+instructions and `fence.i` instruction were separated from the `I`
+extension, becoming two standalone extensions: `Zicsr` and `Zifencei`.
+
+The solution is to add `_zicsr` and/or `_zifencei` to the
+`-march` option, e.g. `-march=rv32imac` becomes
+`-march=rv32imac_zicsr_zifencei`.
+
+In Eclipse, until the GUI will be updated, select the *Toolchain Default*
+for _Architecture_ and
+enter the new string separately as _Other target flags_.
 
 ## Supported libraries
 
