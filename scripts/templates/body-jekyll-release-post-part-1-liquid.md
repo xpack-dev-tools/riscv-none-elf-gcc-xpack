@@ -128,24 +128,6 @@ with no functional changes:
 - newlib 4.2.0.20211231
 - python 3.10.4
 
-## ISA updates
-
-Compared to previous releases, starting from 12.x, the compiler
-implements the new RISC-V ISA, which introduces an incompatibility issue,
-and builds might throw error messages like _unrecognized opcode `csrr`_.
-
-The reason is that csr read/write (`csrr*`/`csrw*`)
-instructions and `fence.i` instruction were separated from the `I`
-extension, becoming two standalone extensions: `Zicsr` and `Zifencei`.
-
-The solution is to add `_zicsr` and/or `_zifencei` to the
-`-march` option, e.g. `-march=rv32imac` becomes
-`-march=rv32imac_zicsr_zifencei`.
-
-In Eclipse, until the GUI will be updated, select the *Toolchain Default*
-for _Architecture_ and
-enter the new string separately as _Other target flags_.
-
 ## Supported libraries
 
 The default architecture/ABI pair is `rv32imac/ilp32`.
@@ -216,6 +198,29 @@ rv64imfdc_zicsr/lp64d;@march=rv64imfdc_zicsr@mabi=lp64d
 
 Compared to the upstream GNU release, there are no functional changes.
 
+### risc-none-elf-gcc
+
+For compliance reasons, starting with 11.x, the name of the toolchain
+was updated to `risc-none-elf-gcc`.
+
+### RISC-V ISA updates
+
+Compared to previous releases, starting from 12.x, the compiler
+implements the new RISC-V ISA, which introduces an incompatibility issue,
+and builds might throw error messages like _unrecognized opcode `csrr`_.
+
+The reason is that csr read/write (`csrr*`/`csrw*`)
+instructions and `fence.i` instruction were separated from the `I`
+extension, becoming two standalone extensions: `Zicsr` and `Zifencei`.
+
+The solution is to add `_zicsr` and/or `_zifencei` to the
+`-march` option, e.g. `-march=rv32imac` becomes
+`-march=rv32imac_zicsr_zifencei`.
+
+In Eclipse, until the GUI will be updated, select the *Toolchain Default*
+for _Architecture_ and
+enter the new string separately as _Other target flags_.
+
 ### newlib-nano
 
 Support for **newlib-nano** is available using the
@@ -264,6 +269,9 @@ the distribution.
 ## Known problems
 
 - due to the large number of libraries, the archive is >400 MB.
+- due to the large size, installing via xpm on 32-bit Arm fails with
+  _error: RangeError: Array buffer allocation failed_; as a workaround,
+  unpack the archive manually
 
 ## Shared libraries
 
