@@ -262,7 +262,8 @@ network connection or a computer entering sleep.
 screen -S arm
 
 sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
-bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm64 --arm32
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm64
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm32
 ```
 
 or, for development builds:
@@ -271,7 +272,8 @@ or, for development builds:
 screen -S arm
 
 sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
-bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --disable-tests --disable-multilib --arm64 --arm32
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --disable-tests --disable-multilib --arm64
+bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --disable-tests --disable-multilib --arm64
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
