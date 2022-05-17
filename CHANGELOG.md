@@ -3,6 +3,11 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2022-05-17
+
+- v12.1.0-2 prepared
+- patch nano.specs to use C++ nano libraries
+
 ## 2022-05-15
 
 - v12.1.0-1.1 published on npmjs.com

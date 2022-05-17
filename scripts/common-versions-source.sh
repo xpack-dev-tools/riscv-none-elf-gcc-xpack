@@ -64,7 +64,7 @@ function build_versions()
   fi
 
   # In reverse chronological order.
-  if [[ ${RELEASE_VERSION} =~ 12\.1\.0-.* ]]
+  if [[ ${RELEASE_VERSION} =~ 12\.1\.0-[12] ]]
   then
 
     # -------------------------------------------------------------------------
@@ -291,6 +291,11 @@ function build_versions()
         NEWLIB_SRC_FOLDER_NAME="newlib-${NEWLIB_VERSION}"
         NEWLIB_ARCHIVE_NAME="newlib-${NEWLIB_VERSION}.tar.gz"
         NEWLIB_ARCHIVE_URL="ftp://sourceware.org/pub/newlib/${NEWLIB_ARCHIVE_NAME}"
+
+        if [ "${RELEASE_VERSION}" != "12.1.0-1" ]
+        then
+          ENABLE_NEWLIB_RISCV_NANO_CXX_PATCH="y"
+        fi
 
         # Task [III-2] /$HOST_NATIVE/newlib/
         build_cross_newlib ""
