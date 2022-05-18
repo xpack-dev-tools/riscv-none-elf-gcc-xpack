@@ -232,14 +232,14 @@ added to both compile and link time.
 If no syscalls are needed, `--specs=nosys.specs` can be used at link
 time to provide empty implementations for the POSIX system calls.
 
-### Compile options
+### -mcmodel=medany
 
 The libraries are compiled with `-O2 -mcmodel=medany`. The nano version is
 compiled with `-Os -mcmodel=medany`.
 
 {% raw %}{% include important.html content="It is mandatory for the applications to
 be compiled with
-`-mcmodel=medany`, otherwise the link will fail." %}{% endraw %}
+`-mcmodel=medany`, otherwise the link might fail." %}{% endraw %}
 
 ### Python
 
