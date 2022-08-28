@@ -13,7 +13,9 @@
     "DT_RPATH",
     "DT_RUNPATH",
     "ECALL",
+    "Ionescu",
     "Linaro",
+    "Liviu",
     "PYTHONHOME",
     "PYTHONPATH",
     "RPATH",
@@ -86,6 +88,7 @@
     "objcopy",
     "objdump",
     "platlibdir",
+    "plugins",
     "postversion",
     "prerelease",
     "pyconfig",
@@ -103,6 +106,8 @@
     "xbbli",
     "xbbma",
     "xbbmi",
+    "xpack",
+    "xpacks",
     "zicsr"
   ]
 }
