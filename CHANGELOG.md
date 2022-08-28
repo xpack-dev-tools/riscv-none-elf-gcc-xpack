@@ -3,6 +3,10 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2022-08-28
+
+- v12.2.0-1 prepared
+
 ## 2022-05-18
 
 - v12.1.0-2.1 published on npmjs.com
