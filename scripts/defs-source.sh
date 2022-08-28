@@ -31,7 +31,7 @@ APP_DESCRIPTION="${DISTRO_NAME} ${APP_NAME}"
 
 # Normally should be commented out. Enable it only during tests,
 # to save some build time.
-WITHOUT_MULTILIB="y"
+# WITHOUT_MULTILIB="y"
 
 # -----------------------------------------------------------------------------
 
