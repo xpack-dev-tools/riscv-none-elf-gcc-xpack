@@ -166,6 +166,7 @@ function build_versions()
     GCC_ARCHIVE_URL="https://ftp.gnu.org/gnu/gcc/gcc-${GCC_VERSION}/${GCC_ARCHIVE_NAME}"
 
     GCC_PATCH_FILE_NAME="gcc-${GCC_VERSION}-cross.patch.diff"
+    check_patch "${GCC_PATCH_FILE_NAME}"
 
     # https://www.sourceware.org/ftp/newlib/index.html
     # ftp://sourceware.org/pub/newlib/newlib-4.2.0.20211231.tar.gz
@@ -191,6 +192,7 @@ function build_versions()
 
     # Mandatory, otherwise gdb-py3 is not relocatable.
     GDB_PATCH_FILE_NAME="gdb-${GDB_VERSION}-cross.patch.diff"
+    check_patch "${GDB_PATCH_FILE_NAME}"
 
     # -------------------------------------------------------------------------
 
