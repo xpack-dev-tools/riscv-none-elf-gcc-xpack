@@ -190,7 +190,7 @@ function build_versions()
     GDB_ARCHIVE_URL="https://ftp.gnu.org/gnu/gdb/${GDB_ARCHIVE_NAME}"
 
     # Mandatory, otherwise gdb-py3 is not relocatable.
-    GDB_PATCH_FILE_NAME="gdb-${GDB_VERSION}.patch.diff"
+    GDB_PATCH_FILE_NAME="gdb-${GDB_VERSION}-cross.patch.diff"
 
     # -------------------------------------------------------------------------
 
