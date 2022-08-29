@@ -165,8 +165,9 @@ function build_versions()
     GCC_ARCHIVE_NAME="${GCC_SRC_FOLDER_NAME}.tar.xz"
     GCC_ARCHIVE_URL="https://ftp.gnu.org/gnu/gcc/gcc-${GCC_VERSION}/${GCC_ARCHIVE_NAME}"
 
-    GCC_PATCH_FILE_NAME="gcc-${GCC_VERSION}-cross.patch.diff"
-    check_patch "${GCC_PATCH_FILE_NAME}"
+    # The Apple Silicon host patches are already in for 12.x.
+    # GCC_PATCH_FILE_NAME="gcc-${GCC_VERSION}-cross.patch.diff"
+    # check_patch "${GCC_PATCH_FILE_NAME}"
 
     # https://www.sourceware.org/ftp/newlib/index.html
     # ftp://sourceware.org/pub/newlib/newlib-4.2.0.20211231.tar.gz
