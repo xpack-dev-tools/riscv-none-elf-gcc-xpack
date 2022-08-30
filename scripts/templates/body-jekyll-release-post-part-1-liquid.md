@@ -122,7 +122,7 @@ xpm uninstall --global @xpack-dev-tools/riscv-none-elf-gcc
 The xPack GNU RISC-V Embedded GCC use the official sources,
 with no functional changes:
 
-- GCC 12.1.0
+- GCC 12.2.0
 - binutils 2.38
 - gdb 12.1
 - newlib 4.2.0.20211231
