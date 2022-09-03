@@ -68,8 +68,7 @@ git -C ${HOME}/Work/riscv-none-elf-gcc-xpack.git submodule update --init --recur
 > Note: the repository uses submodules; for a successful build it is
 > mandatory to recurse the submodules.
 
-For development purposes, clone the `xpack-develop`
-branch:
+For development purposes, clone the `xpack-develop` branch:
 
 ```sh
 rm -rf ${HOME}/Work/riscv-none-elf-gcc-xpack.git; \

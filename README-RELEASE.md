@@ -9,10 +9,34 @@ The xPack GNU RISC-V Embedded GCC release schedule will follow the
 
 Before starting the build, perform some checks and tweaks.
 
+### Download the build scripts repo
+
+The build scripts are available in the `scripts` folder of the
+[`xpack-dev-tools/riscv-none-elf-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack)
+Git repo.
+
+To download them on a new machine, clone the `xpack-develop` branch:
+
+```sh
+rm -rf ${HOME}/Work/riscv-none-elf-gcc-xpack.git; \
+git clone \
+  --branch xpack-develop \
+  https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git \
+  ${HOME}/Work/riscv-none-elf-gcc-xpack.git; \
+git -C ${HOME}/Work/riscv-none-elf-gcc-xpack.git submodule update --init --recursive
+```
+
+> Note: the repository uses submodules; for a successful build it is
+> mandatory to recurse the submodules.
+
 ### Check Git
 
 - switch to the `xpack-develop` branch
 - if needed, merge the `xpack` branch
+
+### Update helper
+
+With a git client, go to the helper repo and update to the latest master commit.
 
 ### Identify the main GCC version
 
@@ -57,10 +81,6 @@ recreate the archives with the correct file.
 - add a new `if` with the new version before the existing code
 - update the versions, branch names and commit ids
 
-### Update helper
-
-With a git client, go to the helper repo and update to the latest master commit.
-
 ## Build
 
 Before starting the build, perform some checks.
@@ -71,7 +91,7 @@ Before the real build, run a test build on the development machine (`wksi`)
 or the production machines (`xbbma`, `xbbmi`):
 
 ```sh
-sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
+rm -rf ~/Work/riscv-none-elf-gcc-*-*
 
 caffeinate bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --macos --disable-multilib
 ```
@@ -79,6 +99,8 @@ caffeinate bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.s
 Similarly on the Intel Linux (`xbbli`):
 
 ```sh
+sudo rm -rf ~/Work/riscv-none-elf-gcc-*-*
+
 bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --linux64 --disable-multilib
 
 bash ${HOME}/Work/riscv-none-elf-gcc-xpack.git/scripts/helper/build.sh --develop --win64 --disable-multilib
@@ -168,7 +190,7 @@ page.
 
 These commands use the `xpack-develop` branch of this repo.
 
-The builds may take almost 14 hours (3h10 without multilib):
+The full builds take about 14 hours (3h10 without multilib):
 
 - `xbbmi`: 6h20 (1h10)
 - `xbbma`: 2h41 (30m)
