@@ -1,0 +1,113 @@
+diff --git a/gcc/config/riscv/riscv.cc b/gcc/config/riscv/riscv.cc
+index 4939d9964db..17f09a331ad 100644
+--- a/gcc/config/riscv/riscv.cc
++++ b/gcc/config/riscv/riscv.cc
+@@ -126,7 +126,7 @@ struct GTY(())  riscv_frame_info {
+ };
+ 
+ enum riscv_privilege_levels {
+-  UNKNOWN_MODE, USER_MODE, SUPERVISOR_MODE, MACHINE_MODE
++  UNKNOWN_MODE, USER_MODE, SUPERVISOR_MODE, MACHINE_MODE, WCH_FAST_MODE
+ };
+ 
+ struct GTY(())  machine_function {
+@@ -3320,11 +3320,11 @@ riscv_handle_type_attribute (tree *node ATTRIBUTE_UNUSED, tree name, tree args,
+ 
+ 	  string = TREE_STRING_POINTER (cst);
+ 	  if (strcmp (string, "user") && strcmp (string, "supervisor")
+-	      && strcmp (string, "machine"))
++	      && strcmp (string, "machine") && strcmp(string, "WCH-Interrupt-fast"))
+ 	    {
+ 	      warning (OPT_Wattributes,
+ 		       "argument to %qE attribute is not %<\"user\"%>, %<\"supervisor\"%>, "
+-		       "or %<\"machine\"%>", name);
++		       "%<\"machine\"%> or %<\"WCH-Interrupt-fast\"%>", name);
+ 	      *no_add_attrs = true;
+ 	    }
+ 	}
+@@ -3879,6 +3879,14 @@ riscv_frame_set (rtx mem, rtx reg)
+   return set;
+ }
+ 
++/* Return true if WCH fast interrupt hardware saves register REGNO */
++static bool
++riscv_wch_fast_interrupt_saved_reg (unsigned int regno)
++{
++	return call_used_or_fixed_reg_p(regno) || regno == RETURN_ADDR_REGNUM;
++}
++
++
+ /* Return true if the current function must save register REGNO.  */
+ 
+ static bool
+@@ -3888,6 +3896,16 @@ riscv_save_reg_p (unsigned int regno)
+   bool might_clobber = crtl->saves_all_registers
+ 		       || df_regs_ever_live_p (regno);
+ 
++  /* WCH Fast interrupts are hardware-saved.
++   *
++   * If this is a WCH fast mode interrupt, and if the register is one of
++   * the caller-saved set, or ra (which is what WCH saves for us), then we can
++   * rely on hardware to save the register */
++  if (cfun->machine->interrupt_handler_p
++      && cfun->machine->interrupt_mode == WCH_FAST_MODE
++      && riscv_wch_fast_interrupt_saved_reg(regno))
++	return false;
++
+   if (call_saved && might_clobber)
+     return true;
+ 
+@@ -4000,6 +4018,8 @@ riscv_compute_frame_info (void)
+ 
+   /* In an interrupt function, if we have a large frame, then we need to
+      save/restore t0.  We check for this before clearing the frame struct.  */
++
++  // TODO OPT - does this matter? T0 is theoretically restored for us; can we skip cleanup?
+   if (cfun->machine->interrupt_handler_p)
+     {
+       HOST_WIDE_INT step1 = riscv_first_stack_step (frame);
+@@ -4603,7 +4623,7 @@ riscv_expand_epilogue (int style)
+ 
+       gcc_assert (mode != UNKNOWN_MODE);
+ 
+-      if (mode == MACHINE_MODE)
++      if (mode == MACHINE_MODE || mode == WCH_FAST_MODE)
+ 	emit_jump_insn (gen_riscv_mret ());
+       else if (mode == SUPERVISOR_MODE)
+ 	emit_jump_insn (gen_riscv_sret ());
+@@ -4619,6 +4639,13 @@ riscv_expand_epilogue (int style)
+ bool
+ riscv_epilogue_uses (unsigned int regno)
+ {
++  /* The WCH hardware will restore some regs in a fast interrupt
++   * so those regs are dead */
++  if (epilogue_completed && cfun->machine->interrupt_handler_p
++      && cfun->machine->interrupt_mode == WCH_FAST_MODE
++      && riscv_wch_fast_interrupt_saved_reg (regno))
++	return false;
++
+   if (regno == RETURN_ADDR_REGNUM)
+     return true;
+ 
+@@ -5348,6 +5375,8 @@ riscv_get_interrupt_type (tree decl)
+ 	return USER_MODE;
+       else if (!strcmp (string, "supervisor"))
+ 	return SUPERVISOR_MODE;
++      else if (!strcmp (string, "WCH-Interrupt-fast"))
++	return WCH_FAST_MODE;
+       else /* Must be "machine".  */
+ 	return MACHINE_MODE;
+     }
+@@ -5499,6 +5528,12 @@ bool
+ riscv_hard_regno_rename_ok (unsigned from_regno ATTRIBUTE_UNUSED,
+ 			    unsigned to_regno)
+ {
++  /* For WCH fast interrupts, TO_REG may also be any of the hardware saved registers */
++  if (cfun->machine->interrupt_handler_p
++      && cfun->machine->interrupt_mode == WCH_FAST_MODE
++      && riscv_wch_fast_interrupt_saved_reg (to_regno))
++    return true;
++
+   /* Interrupt functions can only use registers that have already been
+      saved by the prologue, even if they would normally be
+      call-clobbered.  */
