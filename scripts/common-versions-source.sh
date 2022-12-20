@@ -234,7 +234,7 @@ function build_versions()
       build_cross_binutils
 
       # -----------------------------------------------------------------------
-
+      GCC_PATCH_FILE_NAME="gcc-${GCC_VERSION}.patch.diff"
       # Download GCC earlier, to have time to run the multilib generator.
       download_cross_gcc
       generate_multilib_file
