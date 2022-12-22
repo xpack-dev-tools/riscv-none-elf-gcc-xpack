@@ -348,14 +348,14 @@ xpm run docker-link-deps --config linux-arm64 -C ~/Work/riscv-none-elf-gcc-xpack
 xpm run docker-build-develop --config linux-arm64 -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
-About 3h50 later, the output of the build script is a compressed
+About 3h30 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-xpack.git/build/linux-arm64/deploy
-total 169440
--rw-rw-rw- 1 root root 94181557 Aug 21 05:04 xpack-riscv-none-elf-gcc-11.3.1-1.1-linux-arm64.tar.gz
--rw-rw-rw- 1 root root      106 Aug 21 05:04 xpack-riscv-none-elf-gcc-11.3.1-1.1-linux-arm64.tar.gz.sha
+total 97516
+-rw-r--r-- 1 root root 99851493 Dec 22 13:23 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm64.tar.gz
+-rw-r--r-- 1 root root      119 Dec 22 13:23 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm64.tar.gz.sha
 ```
 
 #### Arm GNU/Linux 32-bit
@@ -379,14 +379,14 @@ xpm run docker-link-deps --config linux-arm -C ~/Work/riscv-none-elf-gcc-xpack.g
 xpm run docker-build-develop --config linux-arm -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
-About 3h40 later, the output of the build script is a compressed
+About 3h20 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-xpack.git/build/linux-arm/deploy
-total 97460
--rw-r--r-- 1 ilg ilg 99793275 Dec 11 15:51 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm64.tar.gz
--rw-r--r-- 1 ilg ilg      120 Dec 11 15:51 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm64.tar.gz.sha
+total 91992
+-rw-r--r-- 1 root root 94192764 Dec 22 13:14 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm.tar.gz
+-rw-r--r-- 1 root root      117 Dec 22 13:14 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm.tar.gz.sha
 ```
 
 ### Files cache
@@ -477,11 +477,11 @@ These commands use the `xpack-develop` branch of this repo.
 
 The full builds take about 14 hours (3h10 without multilib):
 
-- `xbbmi`: 6h20 (1h10)
-- `xbbma`: 2h41 (30m)
-- `xbbli`: 3h30 (including Windows) (52m)
-- `xbbla64`: 12h51 (3h05)
-- `xbbla32`: 13h30 (3h10)
+- `xbbmi`: 6h20 (1h00)
+- `xbbma`: 2h41 (23m)
+- `xbbli`: 3h30 (including Windows) (35m Linux, 29m Windows)
+- `xbbla64`: 12h51 (3h27)
+- `xbbla32`: 13h30 (3h20)
 
 The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
