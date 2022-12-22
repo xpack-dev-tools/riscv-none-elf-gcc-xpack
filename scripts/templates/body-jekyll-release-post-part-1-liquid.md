@@ -1,15 +1,15 @@
 ---
-title:  xPack GNU RISC-V Embedded GCC v{{ RELEASE_VERSION }} released
+title:  xPack GNU RISC-V Embedded GCC v{{ XBB_RELEASE_VERSION }} released
 
 TODO: select one summary
 
-summary: "Version **{{ RELEASE_VERSION }}** is a maintenance release; it ...."
+summary: "Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release; it ...."
 
-summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the GNU GCC release."
+summary: "Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the GNU GCC release."
 
-version: "{{ RELEASE_VERSION }}"
+version: "{{ XBB_RELEASE_VERSION }}"
 npm_subversion: 1
-download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v{{ RELEASE_VERSION }}/
+download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v{{ XBB_RELEASE_VERSION }}/
 
 date:   {{ RELEASE_DATE }}
 
@@ -103,7 +103,7 @@ identify binaries installed with
 
 ### Uninstall
 
-To remove the links from the current project:
+To remove the links created by xpm in the current project:
 
 ```sh
 cd my-project
