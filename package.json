@@ -102,7 +102,7 @@
       "riscv-none-elf-strip": "./.content/bin/riscv-none-elf-strip"
     },
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^0.11.35"
+      "@xpack-dev-tools/xbb-helper": "^0.11.36"
     },
     "properties": {
       "appName": "GNU RISC-V Embedded GCC",
