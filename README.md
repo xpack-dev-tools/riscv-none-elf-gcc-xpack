@@ -1,7 +1,7 @@
-[![GitHub package.json version](https://img.shields.io/github/package-json/v/xpack-dev-tools/riscv-none-embed-gcc-xpack)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/package.json)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xpack-dev-tools/riscv-none-embed-gcc-xpack)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/)
-[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/riscv-none-embed-gcc.svg?color=blue)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-embed-gcc/)
-[![license](https://img.shields.io/github/license/xpack-dev-tools/riscv-none-embed-gcc-xpack)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/LICENSE)
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/xpack-dev-tools/riscv-none-elf-gcc-xpack)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/blob/xpack/package.json)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xpack-dev-tools/riscv-none-elf-gcc-xpack)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
+[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/riscv-none-elf-gcc.svg?color=blue)](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc/)
+[![license](https://img.shields.io/github/license/xpack-dev-tools/riscv-none-elf-gcc-xpack)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/blob/xpack/LICENSE)
 
 ## The xPack GNU RISC-V Embedded GCC
 
@@ -235,7 +235,7 @@ with caution, and prefer exact matches, like `12.2.0-2.1`.
 ## Maintainer info
 
 For maintainer info, please see the
-[README-MAINTAINER](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/README-MAINTAINER.md)
+[README-MAINTAINER](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/blob/xpack/README-MAINTAINER.md)
 
 ## Support
 
@@ -261,7 +261,7 @@ corresponding licenses are available in the installed
   - latest xPack release
 [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-elf-gcc-xpack/latest/total.svg)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
   - all xPack releases [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-elf-gcc-xpack/total.svg)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
-  - previous `riscv-none-embed-gcc` releases [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/total.svg)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/)
+  - previous `riscv-none-elf-gcc` releases [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-elf-gcc-xpack/total.svg)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
   - [individual file counters](https://somsubhra.github.io/github-release-stats/?username=xpack-dev-tools&repository=riscv-none-elf-gcc-xpack) (grouped per release)
 - npmjs.com [`@xpack-dev-tools/riscv-none-elf-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc/) xPack
   - latest release, per month

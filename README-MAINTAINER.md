@@ -1,31 +1,31 @@
-[![license](https://img.shields.io/github/license/xpack-dev-tools/riscv-none-embed-gcc-xpack)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/blob/xpack/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/xpack-dev-tools/riscv-none-embed-gcc-xpack.svg)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/issues/)
-[![GitHub pulls](https://img.shields.io/github/issues-pr/xpack-dev-tools/riscv-none-embed-gcc-xpack.svg)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/pulls)
+[![license](https://img.shields.io/github/license/xpack-dev-tools/riscv-none-elf-gcc-xpack)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/blob/xpack/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/xpack-dev-tools/riscv-none-elf-gcc-xpack.svg)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/issues/)
+[![GitHub pulls](https://img.shields.io/github/issues-pr/xpack-dev-tools/riscv-none-elf-gcc-xpack.svg)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/pulls)
 
 # Maintainer info
 
 The project is hosted on GitHub:
 
-- <https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git>
+- <https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git>
 
 To clone the stable branch (`xpack`), run the following commands in a
 terminal (on Windows use the _Git Bash_ console):
 
 ```sh
-rm -rf ~/Work/riscv-none-embed-gcc-xpack.git && \
-git clone https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
-  ~/Work/riscv-none-embed-gcc-xpack.git
+rm -rf ~/Work/riscv-none-elf-gcc-xpack.git && \
+git clone https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git \
+  ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
 For development purposes, clone the `xpack-develop` branch:
 
 ```sh
-rm -rf ~/Work/riscv-none-embed-gcc-xpack.git && \
+rm -rf ~/Work/riscv-none-elf-gcc-xpack.git && \
 mkdir -p ~/Work && \
 git clone \
   --branch xpack-develop \
-  https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack.git \
-  ~/Work/riscv-none-embed-gcc-xpack.git
+  https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git \
+  ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
 Same for the **helper** and link it to the central xPacks store:
@@ -43,7 +43,7 @@ xpm link -C ~/Work/xbb-helper-xpack.git
 Or, if the repos were already cloned:
 
 ```sh
-git -C ~/Work/riscv-none-embed-gcc-xpack.git pull
+git -C ~/Work/riscv-none-elf-gcc-xpack.git pull
 
 git -C ~/Work/xbb-helper-xpack.git pull
 xpm link -C ~/Work/xbb-helper-xpack.git
@@ -152,9 +152,9 @@ For Intel macOS, first run the build on the development machine
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/riscv-none-embed-gcc-xpack.git pull
+git -C ~/Work/riscv-none-elf-gcc-xpack.git pull
 
-xpm run deep-clean -C ~/Work/riscv-none-embed-gcc-xpack.git
+xpm run deep-clean -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
 If the helper is also under development and needs changes,
@@ -167,7 +167,7 @@ git -C ~/Work/xbb-helper-xpack.git pull
 Install project dependencies:
 
 ```sh
-xpm install -C ~/Work/riscv-none-embed-gcc-xpack.git
+xpm install -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
 If the writable helper is used,
@@ -176,22 +176,22 @@ link it in the place of the read-only package:
 ```sh
 xpm link -C ~/Work/xbb-helper-xpack.git
 
-xpm run link-deps -C ~/Work/riscv-none-embed-gcc-xpack.git
+xpm run link-deps -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
 For repeated builds, clean the build folder and install de
 build configuration dependencies:
 
 ```sh
-xpm run deep-clean --config darwin-x64  -C ~/Work/riscv-none-embed-gcc-xpack.git
+xpm run deep-clean --config darwin-x64  -C ~/Work/riscv-none-elf-gcc-xpack.git
 
-xpm install --config darwin-x64 -C ~/Work/riscv-none-embed-gcc-xpack.git
+xpm install --config darwin-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
 Run the native build:
 
 ```sh
-caffeinate xpm run build-develop --config darwin-x64 -C ~/Work/riscv-none-embed-gcc-xpack.git
+caffeinate xpm run build-develop --config darwin-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
 The build takes about 1h30 (without multilibs).
@@ -209,25 +209,25 @@ caffeinate ssh xbbmi
 Repeat the same steps as before.
 
 ```sh
-git -C ~/Work/riscv-none-embed-gcc-xpack.git pull && \
-xpm run deep-clean -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm install -C ~/Work/riscv-none-embed-gcc-xpack.git && \
+git -C ~/Work/riscv-none-elf-gcc-xpack.git pull && \
+xpm run deep-clean -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm install -C ~/Work/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xbb-helper-xpack.git pull && \
 xpm link -C ~/Work/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm run deep-clean --config darwin-x64  -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm install --config darwin-x64 -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-caffeinate xpm run build-develop --config darwin-x64 -C ~/Work/riscv-none-embed-gcc-xpack.git
+xpm run link-deps -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm run deep-clean --config darwin-x64  -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm install --config darwin-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+caffeinate xpm run build-develop --config darwin-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
 About 2h21 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/riscv-none-embed-gcc-xpack.git/build/darwin-x64/deploy
+$ ls -l ~/Work/riscv-none-elf-gcc-xpack.git/build/darwin-x64/deploy
 total 196816
--rw-r--r--  1 ilg  staff  96097205 Dec 11 00:07 xpack-riscv-none-embed-gcc-12.2.0-2-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff       119 Dec 11 00:07 xpack-riscv-none-embed-gcc-12.2.0-2-darwin-x64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  96097205 Dec 11 00:07 xpack-riscv-none-elf-gcc-12.2.0-2-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff       119 Dec 11 00:07 xpack-riscv-none-elf-gcc-12.2.0-2-darwin-x64.tar.gz.sha
 ```
 
 #### Apple Silicon macOS
@@ -243,25 +243,25 @@ caffeinate ssh xbbma
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/riscv-none-embed-gcc-xpack.git pull && \
-xpm run deep-clean -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm install -C ~/Work/riscv-none-embed-gcc-xpack.git && \
+git -C ~/Work/riscv-none-elf-gcc-xpack.git pull && \
+xpm run deep-clean -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm install -C ~/Work/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xbb-helper-xpack.git pull && \
 xpm link -C ~/Work/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm run deep-clean --config darwin-arm64  -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm install --config darwin-arm64 -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-caffeinate xpm run build-develop --config darwin-arm64 -C ~/Work/riscv-none-embed-gcc-xpack.git
+xpm run link-deps -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm run deep-clean --config darwin-arm64  -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm install --config darwin-arm64 -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+caffeinate xpm run build-develop --config darwin-arm64 -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
 About 30 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/riscv-none-embed-gcc-xpack.git/build/darwin-arm64/deploy
+$ ls -l ~/Work/riscv-none-elf-gcc-xpack.git/build/darwin-arm64/deploy
 total 198336
--rw-r--r--  1 ilg  staff  89834866 Dec 10 19:30 xpack-riscv-none-embed-gcc-12.2.0-2-darwin-arm64.tar.gz
--rw-r--r--  1 ilg  staff       121 Dec 10 19:30 xpack-riscv-none-embed-gcc-12.2.0-2-darwin-arm64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  89834866 Dec 10 19:30 xpack-riscv-none-elf-gcc-12.2.0-2-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff       121 Dec 10 19:30 xpack-riscv-none-elf-gcc-12.2.0-2-darwin-arm64.tar.gz.sha
 ```
 
 #### Intel GNU/Linux
@@ -278,23 +278,23 @@ caffeinate ssh xbbli
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/riscv-none-embed-gcc-xpack.git pull && \
-xpm run deep-clean -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm run deep-clean --config linux-x64 -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm run docker-prepare --config linux-x64 -C ~/Work/riscv-none-embed-gcc-xpack.git && \
+git -C ~/Work/riscv-none-elf-gcc-xpack.git pull && \
+xpm run deep-clean -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm run deep-clean --config linux-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-prepare --config linux-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xbb-helper-xpack.git pull && \
-xpm run docker-link-deps --config linux-x64 -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm run docker-build-develop --config linux-x64 -C ~/Work/riscv-none-embed-gcc-xpack.git
+xpm run docker-link-deps --config linux-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-build-develop --config linux-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
 About 35 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/riscv-none-embed-gcc-xpack.git/build/linux-x64/deploy
+$ ls -l ~/Work/riscv-none-elf-gcc-xpack.git/build/linux-x64/deploy
 total 100248
--rw-r--r-- 1 ilg ilg 102647164 Dec 10 17:19 xpack-riscv-none-embed-gcc-12.2.0-2-linux-x64.tar.gz
--rw-r--r-- 1 ilg ilg       118 Dec 10 17:19 xpack-riscv-none-embed-gcc-12.2.0-2-linux-x64.tar.gz.sha
+-rw-r--r-- 1 ilg ilg 102647164 Dec 10 17:19 xpack-riscv-none-elf-gcc-12.2.0-2-linux-x64.tar.gz
+-rw-r--r-- 1 ilg ilg       118 Dec 10 17:19 xpack-riscv-none-elf-gcc-12.2.0-2-linux-x64.tar.gz.sha
 ```
 
 ##### Build the Windows binaries
@@ -302,20 +302,20 @@ total 100248
 Clean the build folder and prepare the docker container:
 
 ```sh
-xpm run deep-clean --config win32-x64 -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm run docker-prepare --config win32-x64 -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm run docker-link-deps --config win32-x64 -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm run docker-build-develop --config win32-x64 -C ~/Work/riscv-none-embed-gcc-xpack.git
+xpm run deep-clean --config win32-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-prepare --config win32-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-link-deps --config win32-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-build-develop --config win32-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
 About 30 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/riscv-none-embed-gcc-xpack.git/build/win32-x64/deploy
+$ ls -l ~/Work/riscv-none-elf-gcc-xpack.git/build/win32-x64/deploy
 total 101784
--rw-r--r-- 1 ilg ilg 104214825 Dec 10 14:37 xpack-riscv-none-embed-gcc-12.2.0-2-win32-x64.zip
--rw-r--r-- 1 ilg ilg       115 Dec 10 14:37 xpack-riscv-none-embed-gcc-12.2.0-2-win32-x64.zip.sha
+-rw-r--r-- 1 ilg ilg 104214825 Dec 10 14:37 xpack-riscv-none-elf-gcc-12.2.0-2-win32-x64.zip
+-rw-r--r-- 1 ilg ilg       115 Dec 10 14:37 xpack-riscv-none-elf-gcc-12.2.0-2-win32-x64.zip.sha
 ```
 
 #### Arm GNU/Linux 64-bit
@@ -330,23 +330,23 @@ caffeinate ssh xbbla64
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/riscv-none-embed-gcc-xpack.git pull && \
-xpm run deep-clean -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm run deep-clean --config linux-arm64 -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm run docker-prepare --config linux-arm64 -C ~/Work/riscv-none-embed-gcc-xpack.git && \
+git -C ~/Work/riscv-none-elf-gcc-xpack.git pull && \
+xpm run deep-clean -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm run deep-clean --config linux-arm64 -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-prepare --config linux-arm64 -C ~/Work/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xbb-helper-xpack.git pull && \
-xpm run docker-link-deps --config linux-arm64 -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm run docker-build-develop --config linux-arm64 -C ~/Work/riscv-none-embed-gcc-xpack.git
+xpm run docker-link-deps --config linux-arm64 -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-build-develop --config linux-arm64 -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
 About 3h50 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/riscv-none-embed-gcc-xpack.git/build/linux-arm64/deploy
+$ ls -l ~/Work/riscv-none-elf-gcc-xpack.git/build/linux-arm64/deploy
 total 169440
--rw-rw-rw- 1 root root 94181557 Aug 21 05:04 xpack-riscv-none-embed-gcc-11.3.1-1.1-linux-arm64.tar.gz
--rw-rw-rw- 1 root root      106 Aug 21 05:04 xpack-riscv-none-embed-gcc-11.3.1-1.1-linux-arm64.tar.gz.sha
+-rw-rw-rw- 1 root root 94181557 Aug 21 05:04 xpack-riscv-none-elf-gcc-11.3.1-1.1-linux-arm64.tar.gz
+-rw-rw-rw- 1 root root      106 Aug 21 05:04 xpack-riscv-none-elf-gcc-11.3.1-1.1-linux-arm64.tar.gz.sha
 ```
 
 #### Arm GNU/Linux 32-bit
@@ -361,23 +361,23 @@ caffeinate ssh xbbla32
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/riscv-none-embed-gcc-xpack.git pull && \
-xpm run deep-clean -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm run deep-clean --config linux-arm -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm run docker-prepare --config linux-arm -C ~/Work/riscv-none-embed-gcc-xpack.git && \
+git -C ~/Work/riscv-none-elf-gcc-xpack.git pull && \
+xpm run deep-clean -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm run deep-clean --config linux-arm -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-prepare --config linux-arm -C ~/Work/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xbb-helper-xpack.git pull && \
-xpm run docker-link-deps --config linux-arm -C ~/Work/riscv-none-embed-gcc-xpack.git && \
-xpm run docker-build-develop --config linux-arm -C ~/Work/riscv-none-embed-gcc-xpack.git
+xpm run docker-link-deps --config linux-arm -C ~/Work/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-build-develop --config linux-arm -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
 About 3h40 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/riscv-none-embed-gcc-xpack.git/build/linux-arm/deploy
+$ ls -l ~/Work/riscv-none-elf-gcc-xpack.git/build/linux-arm/deploy
 total 97460
--rw-r--r-- 1 ilg ilg 99793275 Dec 11 15:51 xpack-riscv-none-embed-gcc-12.2.0-2-linux-arm64.tar.gz
--rw-r--r-- 1 ilg ilg      120 Dec 11 15:51 xpack-riscv-none-embed-gcc-12.2.0-2-linux-arm64.tar.gz.sha
+-rw-r--r-- 1 ilg ilg 99793275 Dec 11 15:51 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm64.tar.gz
+-rw-r--r-- 1 ilg ilg      120 Dec 11 15:51 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm64.tar.gz.sha
 ```
 
 ### Files cache
