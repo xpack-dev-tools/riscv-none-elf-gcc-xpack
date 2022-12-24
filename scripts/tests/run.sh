@@ -13,16 +13,13 @@ function tests_run_all()
 {
   local test_bin_path="$1"
 
-  # XBB_GCC_VERSION="$(echo "${XBB_RELEASE_VERSION}" | sed -e 's|-.*||')"
-  # XBB_GCC_VERSION_MAJOR=$(echo ${XBB_GCC_VERSION} | sed -e 's|\([0-9][0-9]*\)\..*|\1|')
+  binutils_cross_test "${test_bin_path}" "${XBB_APPLICATION_TARGET_TRIPLET}"
 
-  test_binutils_cross "${test_bin_path}" "${XBB_APPLICATION_TARGET_TRIPLET}"
+  gcc_cross_test "${test_bin_path}" "${XBB_APPLICATION_TARGET_TRIPLET}"
 
-  test_cross_gcc "${test_bin_path}" "${XBB_APPLICATION_TARGET_TRIPLET}"
+  gdb_cross_test "${test_bin_path}" "${XBB_APPLICATION_TARGET_TRIPLET}"
 
-  test_cross_gdb "${test_bin_path}" "${XBB_APPLICATION_TARGET_TRIPLET}"
-
-  test_cross_gdb "${test_bin_path}" "${XBB_APPLICATION_TARGET_TRIPLET}" "-py3"
+  gdb_cross_test "${test_bin_path}" "${XBB_APPLICATION_TARGET_TRIPLET}" "-py3"
 }
 
 # -----------------------------------------------------------------------------

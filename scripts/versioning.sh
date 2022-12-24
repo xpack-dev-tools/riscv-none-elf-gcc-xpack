@@ -9,7 +9,7 @@
 
 # -----------------------------------------------------------------------------
 
-function build_application_versioned_components()
+function application_build_versioned_components()
 {
   # This definition also enables building newlib-nano.
   XBB_NEWLIB_NANO_SUFFIX="-nano"
@@ -220,9 +220,9 @@ function build_application_versioned_components()
       echo
       echo "# Building a bootstrap compiler..."
 
-      build_cross_gcc_dependencies
+      gcc_cross_build_dependencies
 
-      build_cross_gcc_all "${XBB_APPLICATION_TARGET_TRIPLET}"
+      gcc_cross_build_all "${XBB_APPLICATION_TARGET_TRIPLET}"
     fi
 
     # -------------------------------------------------------------------------
@@ -231,7 +231,7 @@ function build_application_versioned_components()
     xbb_reset_env
     xbb_set_target "requested"
 
-    build_cross_gcc_dependencies
+    gcc_cross_build_dependencies
 
     # -------------------------------------------------------------------------
     # GDB dependencies
@@ -274,7 +274,7 @@ function build_application_versioned_components()
     # https://www.openssl.org/source/
     XBB_OPENSSL_VERSION="1.1.1q"
 
-    build_cross_gdb_dependencies
+    gdb_cross_build_dependencies
 
     # -------------------------------------------------------------------------
     # Build the application binaries.
@@ -285,32 +285,32 @@ function build_application_versioned_components()
     # -------------------------------------------------------------------------
 
     # Download GCC earlier, to have time to run the multilib generator.
-    cross_gcc_download
-    cross_gcc_generate_riscv_multilib_file
+    gcc_cross_download
+    gcc_cross_generate_riscv_multilib_file
 
     # -------------------------------------------------------------------------
 
     if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
     then
-      build_binutils_cross "${XBB_BINUTILS_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
+      binutils_cross_build "${XBB_BINUTILS_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
 
       # As usual, for Windows things require more innovtive solutions.
       # In this case the libraries are copied from the bootstrap,
       # and only the executables are build for Windows.
-      cross_gcc_copy_linux_libs "${XBB_APPLICATION_TARGET_TRIPLET}"
+      gcc_cross_copy_linux_libs "${XBB_APPLICATION_TARGET_TRIPLET}"
 
       (
         # To access the bootstrap compiler.
         xbb_activate_installed_bin
 
-        build_cross_gcc_final "${XBB_GCC_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
+        gcc_cross_build_final "${XBB_GCC_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
       )
     else
       # For macOS & GNU/Linux build the toolchain natively.
-      build_cross_gcc_all "${XBB_APPLICATION_TARGET_TRIPLET}"
+      gcc_cross_build_all "${XBB_APPLICATION_TARGET_TRIPLET}"
     fi
 
-    build_cross_gdb "${XBB_APPLICATION_TARGET_TRIPLET}" ""
+    gdb_cross_build "${XBB_APPLICATION_TARGET_TRIPLET}" ""
 
     if [ "${XBB_WITH_GDB_PY3}" == "y" ]
     then
@@ -325,7 +325,7 @@ function build_application_versioned_components()
         python3_copy_syslibs
       fi
 
-      build_cross_gdb "${XBB_APPLICATION_TARGET_TRIPLET}" "-py3"
+      gdb_cross_build "${XBB_APPLICATION_TARGET_TRIPLET}" "-py3"
     fi
 
     # -------------------------------------------------------------------------
@@ -336,14 +336,14 @@ function build_application_versioned_components()
 
   # ---------------------------------------------------------------------------
 
-  cross_gcc_tidy_up
+  gcc_cross_tidy_up
 
   if [ "${XBB_REQUESTED_HOST_PLATFORM}" != "win32" ]
   then
-    cross_gcc_strip_libs "${XBB_APPLICATION_TARGET_TRIPLET}"
+    gcc_cross_strip_libs "${XBB_APPLICATION_TARGET_TRIPLET}"
   fi
 
-  cross_gcc_final_tunings
+  gcc_cross_final_tunings
 
 }
 
