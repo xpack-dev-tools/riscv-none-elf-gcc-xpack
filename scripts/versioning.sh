@@ -145,7 +145,7 @@ function application_build_versioned_components()
     XBB_GCC_ARCHIVE_URL="https://ftp.gnu.org/gnu/gcc/gcc-${XBB_GCC_VERSION}/${XBB_GCC_ARCHIVE_NAME}"
 
     # The Apple Silicon host patches are already in for 12.x.
-    # GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.patch.diff"
+    # GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.git.patch"
     # check_patch "${GCC_PATCH_FILE_NAME}"
 
     # https://www.sourceware.org/ftp/newlib/index.html
@@ -168,7 +168,7 @@ function application_build_versioned_components()
     XBB_GDB_ARCHIVE_URL="https://ftp.gnu.org/gnu/gdb/${XBB_GDB_ARCHIVE_NAME}"
 
     # Mandatory, otherwise gdb-py3 is not relocatable.
-    XBB_GDB_PATCH_FILE_NAME="gdb-${XBB_GDB_VERSION}-cross.patch.diff"
+    XBB_GDB_PATCH_FILE_NAME="gdb-${XBB_GDB_VERSION}-cross.git.patch"
     check_patch "${XBB_GDB_PATCH_FILE_NAME}"
 
     # https://www.python.org/ftp/python/
