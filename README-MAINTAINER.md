@@ -229,7 +229,7 @@ xpm install --config darwin-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git
 caffeinate xpm run build-develop --config darwin-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
-About 0h55 later, the output of the build script is a compressed
+About 55 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
@@ -296,7 +296,7 @@ xpm run docker-link-deps --config linux-x64 -C ~/Work/riscv-none-elf-gcc-xpack.g
 xpm run docker-build-develop --config linux-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
-About 35 minutes later, the output of the build script is a compressed
+About 30 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
