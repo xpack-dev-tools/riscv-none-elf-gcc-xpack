@@ -430,7 +430,7 @@ caffeinate ssh xbbla64
 caffeinate ssh xbbla32
 ```
 
-Start the runner on all machines:
+Start the runners on all machines:
 
 ```sh
 screen -S ga
