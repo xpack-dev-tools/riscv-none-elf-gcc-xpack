@@ -352,7 +352,7 @@ xpm run docker-link-deps --config linux-arm64 -C ~/Work/riscv-none-elf-gcc-xpack
 xpm run docker-build-develop --config linux-arm64 -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
-About 3h30 later, the output of the build script is a compressed
+About 3h25 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
@@ -385,7 +385,7 @@ xpm run docker-link-deps --config linux-arm -C ~/Work/riscv-none-elf-gcc-xpack.g
 xpm run docker-build-develop --config linux-arm -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
-About 3h20 later, the output of the build script is a compressed
+About 3h14 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
