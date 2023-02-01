@@ -29,7 +29,7 @@ declare -a XBB_APPLICATION_COMMON_DEPENDENCIES=( zlib gmp mpfr mpc isl libiconv 
 
 # Normally should be commented out. Enable it only during tests,
 # to save some build time.
-XBB_APPLICATION_WITHOUT_MULTILIB="y"
+# XBB_APPLICATION_WITHOUT_MULTILIB="y"
 
 # -----------------------------------------------------------------------------
 
