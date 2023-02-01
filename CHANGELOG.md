@@ -3,10 +3,115 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-02-01
+
+* c36d84d re-generate workflows
+* f155e53 package.json: bump deps
+* 78170a8 body-github: update
+
+## 2023-01-28
+
+* 510891f versioning.sh: use versioning functions
+* 84d1d0e README-MAINTAINER remove caffeinate xpm
+
+## 2023-01-27
+
+* 32dc3be package.json: reorder scripts
+
+## 2023-01-24
+
+* be2b39d README updates
+
+## 2023-01-22
+
+* b87ac3f README update
+
+## 2023-01-09
+
+* d79d5e2 package.json: bump deps
+* 4f843f4 package.json: loglevel info
+
+## 2023-01-02
+
+* 6f34aa2 package.json: add gcc to windows deps
+
+## 2023-01-01
+
+* 6e58c9c package.json: pass xpm version & loglevel
+* df11079 package.json: add cmake & ninja deps
+* 8a73584 application.sh: add zstd dep
+* 194d2be README update
+
+## 2022-12-30
+
+* 165fe7b README-MAINTAINER: xpm run install
+* 464d1e7 package.json: bump deps
+* 7e6b7a2 versioning.sh: regexp
+
+## 2022-12-27
+
+* 9bfda03 README update
+* c590f81 re-generate from templates
+
+## 2022-12-26
+
+* 96666cb README updates
+
+## 2022-12-25
+
+* 0c36073 README update
+* 70fbc54 versioning.sh: remove explicit xbb_set_executables_install_path
+* 53d118c package.json: add m4 dep
+
+## 2022-12-24
+
+* 1cb8259 CHANGELOG update
+* 478efd9 versioning.sh: explicit set_executables
+* 0b788ee package.json: bump deps
+* e66dea4 versioning.sh: update for .git.patch
+* 0f730c3 rename functions
+
 ## 2022-12-22
 
 * v12.2.0-2 prepared
-* update for XBB v5.0.0
+* 440702a README update
+* 7329dcb README update
+* bf145b8 package.json: bump deps
+* d1bcb78 update to riscv-none-elf-gcc
+* cddd52e update for xbb v5.x; VERSION 12.2.0-2
+
+## 2022-11-18
+
+* 48a50ee .vscode/settings.json: watcherExclude
+
+## 2022-11-16
+
+* af94a53 remove submodule
+
+## 2022-10-04
+
+* e52ef1c README-RELEASE update for bullet lists in CHANGELOG
+
+## 2022-09-25
+
+* 7ca133f README-RELEASE update
+
+## 2022-09-17
+
+* 6165a3c README-BUILD update
+
+## 2022-09-03
+
+* ba13b3c READMEs updates
+
+## 2022-09-01
+
+* 99caaaa zypper -q --no-gpg-checks in
+
+## 2022-08-31
+
+* 941fa7d body-jekyll update
+* 4809915 README-RELEASE update
 
 ## 2022-08-29
 
