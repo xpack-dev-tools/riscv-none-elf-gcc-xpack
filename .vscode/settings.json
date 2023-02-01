@@ -81,6 +81,7 @@
     "libz",
     "linux",
     "liquidjs",
+    "loglevel",
     "mabi",
     "mcmodel",
     "medany",
@@ -118,6 +119,7 @@
     "xbbmi",
     "xpack",
     "xpacks",
-    "zicsr"
+    "zicsr",
+    "zstd"
   ]
 }
