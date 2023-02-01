@@ -116,7 +116,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/12.2.
 │   ├── riscv-none-elf-elfedit
 │   ├── riscv-none-elf-g++
 │   ├── riscv-none-elf-gcc
-│   ├── riscv-none-elf-gcc-12.1.0
+│   ├── riscv-none-elf-gcc-12.2.0
 │   ├── riscv-none-elf-gcc-ar
 │   ├── riscv-none-elf-gcc-nm
 │   ├── riscv-none-elf-gcc-ranlib
@@ -155,10 +155,12 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/12.2.
 │   └── python3.10
 ├── libexec
 │   ├── gcc
+│   ├── libbz2.1.0.8.dylib
 │   ├── libcrypt.2.dylib
 │   ├── libcrypto.1.1.dylib
+│   ├── libexpat.1.8.8.dylib
+│   ├── libexpat.1.dylib -> libexpat.1.8.8.dylib
 │   ├── libffi.8.dylib
-│   ├── libgcc_s.1.dylib
 │   ├── libgmp.10.dylib
 │   ├── libiconv.2.dylib
 │   ├── libisl.23.dylib
@@ -172,19 +174,18 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/12.2.
 │   ├── libreadline.8.dylib -> libreadline.8.1.dylib
 │   ├── libsqlite3.0.dylib
 │   ├── libssl.1.1.dylib
-│   ├── libstdc++.6.dylib
 │   ├── libz.1.2.12.dylib
-│   └── libz.1.dylib -> libz.1.2.12.dylib
+│   ├── libz.1.dylib -> libz.1.2.12.dylib
+│   └── libzstd.1.5.2.dylib
 ├── riscv-none-elf
 │   ├── bin
 │   ├── include
 │   ├── lib
 │   └── share
 └── share
-    ├── doc
-    └── gcc-12.1.0
+    └── gcc-12.2.0
 
-21 directories, 57 files
+20 directories, 59 files
 ```
 
 No other files are installed in any system folders or other locations.
