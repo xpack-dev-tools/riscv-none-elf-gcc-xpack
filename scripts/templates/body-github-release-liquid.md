@@ -1,6 +1,6 @@
 ![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-elf-gcc-xpack/v{{ XBB_RELEASE_VERSION }}/total.svg)
 
-Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release of the **xPack RISC-V Embedded GCC** package; it fixes... (TODO: edit).
+Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release of the **xPack RISC-V Embedded GCC** package; it fixes <...>.
 
 Or (TODO: edit!):
 
