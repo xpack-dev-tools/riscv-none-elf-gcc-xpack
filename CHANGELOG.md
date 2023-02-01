@@ -5,6 +5,13 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-02-01
 
+* 42bded9 package.json: bump deps
+* fbb1293 README update
+* b8b5cd4 versioning.sh: default XBB_APPLICATION_WITHOUT_MULTILIB
+* fcea885 README update
+* 4a1c10e .vscode/settings.json: ignoreWords
+* e190d10 CHANGELOG update
+* 250aa07 .vscode/settings.json: ignoreWords
 * c36d84d re-generate workflows
 * f155e53 package.json: bump deps
 * 78170a8 body-github: update
