@@ -233,9 +233,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-xpack.git/build/darwin-x64/deploy
-total 197472
--rw-r--r--  1 ilg  staff  93749538 Dec 22 11:29 xpack-riscv-none-elf-gcc-12.2.0-2-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff       118 Dec 22 11:29 xpack-riscv-none-elf-gcc-12.2.0-2-darwin-x64.tar.gz.sha
+total 197288
+-rw-r--r--  1 ilg  staff  93798413 Feb  1 12:52 xpack-riscv-none-elf-gcc-12.2.0-2-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff       118 Feb  1 12:52 xpack-riscv-none-elf-gcc-12.2.0-2-darwin-x64.tar.gz.sha
 ```
 
 #### Apple Silicon macOS
@@ -266,9 +266,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-xpack.git/build/darwin-arm64/deploy
-total 196912
--rw-r--r--  1 ilg  staff  87669872 Dec 22 10:56 xpack-riscv-none-elf-gcc-12.2.0-2-darwin-arm64.tar.gz
--rw-r--r--  1 ilg  staff       120 Dec 22 10:56 xpack-riscv-none-elf-gcc-12.2.0-2-darwin-arm64.tar.gz.sha
+total 196792
+-rw-r--r--  1 ilg  staff  90622384 Feb  1 12:11 xpack-riscv-none-elf-gcc-12.2.0-2-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff       120 Feb  1 12:11 xpack-riscv-none-elf-gcc-12.2.0-2-darwin-arm64.tar.gz.sha
 ```
 
 #### Intel GNU/Linux
@@ -301,9 +301,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-xpack.git/build/linux-x64/deploy
-total 101832
--rw-r--r-- 1 ilg ilg 104271035 Dec 22 07:26 xpack-riscv-none-elf-gcc-12.2.0-2-linux-x64.tar.gz
--rw-r--r-- 1 ilg ilg       117 Dec 22 07:26 xpack-riscv-none-elf-gcc-12.2.0-2-linux-x64.tar.gz.sha
+total 102308
+-rw-r--r-- 1 ilg ilg 104756842 Feb  1 10:19 xpack-riscv-none-elf-gcc-12.2.0-2-linux-x64.tar.gz
+-rw-r--r-- 1 ilg ilg       117 Feb  1 10:19 xpack-riscv-none-elf-gcc-12.2.0-2-linux-x64.tar.gz.sha
 ```
 
 ##### Build the Windows binaries
@@ -322,14 +322,14 @@ xpm run docker-link-deps --config win32-x64 -C ~/Work/riscv-none-elf-gcc-xpack.g
 xpm run docker-build-develop --config win32-x64 -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
-About 25 minutes later, the output of the build script is a compressed
+About 30 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-xpack.git/build/win32-x64/deploy
-total 106836
--rw-r--r-- 1 ilg ilg 109395284 Dec 22 08:56 xpack-riscv-none-elf-gcc-12.2.0-2-win32-x64.zip
--rw-r--r-- 1 ilg ilg       114 Dec 22 08:56 xpack-riscv-none-elf-gcc-12.2.0-2-win32-x64.zip.sha
+total 109320
+-rw-r--r-- 1 ilg ilg 111937715 Feb  1 10:48 xpack-riscv-none-elf-gcc-12.2.0-2-win32-x64.zip
+-rw-r--r-- 1 ilg ilg       114 Feb  1 10:48 xpack-riscv-none-elf-gcc-12.2.0-2-win32-x64.zip.sha
 ```
 
 #### Arm GNU/Linux 64-bit
@@ -355,14 +355,14 @@ xpm run docker-link-deps --config linux-arm64 -C ~/Work/riscv-none-elf-gcc-xpack
 xpm run docker-build-develop --config linux-arm64 -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
-About 3h25 later, the output of the build script is a compressed
+About 3h30 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-xpack.git/build/linux-arm64/deploy
-total 97516
--rw-r--r-- 1 root root 99851493 Dec 22 13:23 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm64.tar.gz
--rw-r--r-- 1 root root      119 Dec 22 13:23 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm64.tar.gz.sha
+total 98020
+-rw-r--r-- 1 ilg ilg 100361089 Feb  1 13:16 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm64.tar.gz
+-rw-r--r-- 1 ilg ilg       119 Feb  1 13:16 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm64.tar.gz.sha
 ```
 
 #### Arm GNU/Linux 32-bit
@@ -387,14 +387,14 @@ xpm run docker-link-deps --config linux-arm -C ~/Work/riscv-none-elf-gcc-xpack.g
 xpm run docker-build-develop --config linux-arm -C ~/Work/riscv-none-elf-gcc-xpack.git
 ```
 
-About 3h14 later, the output of the build script is a compressed
+About 3h15 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/riscv-none-elf-gcc-xpack.git/build/linux-arm/deploy
-total 91992
--rw-r--r-- 1 root root 94192764 Dec 22 13:14 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm.tar.gz
--rw-r--r-- 1 root root      117 Dec 22 13:14 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm.tar.gz.sha
+total 92456
+-rw-r--r-- 1 ilg ilg 94666972 Feb  1 13:04 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm.tar.gz
+-rw-r--r-- 1 ilg ilg      117 Feb  1 13:04 xpack-riscv-none-elf-gcc-12.2.0-2-linux-arm.tar.gz.sha
 ```
 
 ### Files cache
