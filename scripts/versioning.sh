@@ -48,7 +48,7 @@ function application_build_versioned_components()
 
     # -------------------------------------------------------------------------
 
-    if [ "${XBB_APPLICATION_WITHOUT_MULTILIB}" != "y" ]
+    if [ "${XBB_APPLICATION_WITHOUT_MULTILIB:-""}" != "y" ]
     then
       # The SiFive list from 10.2 with a lot of non-c extras.
       # (including `rv32imaf-ilp32f--`).
