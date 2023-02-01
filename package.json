@@ -102,7 +102,7 @@
       "riscv-none-elf-strip": "./.content/bin/riscv-none-elf-strip"
     },
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^1.4.3"
+      "@xpack-dev-tools/xbb-helper": "^1.4.4"
     },
     "properties": {
       "appName": "GNU RISC-V Embedded GCC",
@@ -249,7 +249,7 @@
         "devDependencies": {
           "@xpack-dev-tools/clang": "15.0.7-2.1",
           "@xpack-dev-tools/realpath": "9.1.0-2.1",
-          "@xpack-dev-tools/sed": "4.9.0-1.1"
+          "@xpack-dev-tools/sed": "4.9.0-2.1"
         },
         "actions": {
           "build": "caffeinate {{ properties.commandBashBuild }}",
