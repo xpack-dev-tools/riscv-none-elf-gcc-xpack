@@ -5,6 +5,9 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-02-02
 
+* v12.2.0-2.1 published on npmjs.com
+* 7b678a7 package.json: update urls for 12.2.0-2 release
+* 724f31a CHANGELOG update
 * v12.2.0-2 released
 * d69fbb9 README update
 * cf48ec7 versioning.sh: move generate multilib earlier
