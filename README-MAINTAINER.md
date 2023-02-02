@@ -483,11 +483,11 @@ page.
 
 These commands use the `xpack-develop` branch of this repo.
 
-The full builds take about 14 hours (3h10 without multilib):
+The full builds take about 14 hours (3h30 without multilib):
 
 - `xbbmi`: 6h20 (1h00)
 - `xbbma`: 2h41 (23m)
-- `xbbli`: 3h30 (including Windows) (35m Linux, 29m Windows)
+- `xbbli`: 3h30 (3h30 Linux, 3h30 Windows; without multi-lib: 37m Linux, 33m Windows)
 - `xbbla64`: 12h51 (3h27)
 - `xbbla32`: 13h30 (3h20)
 
