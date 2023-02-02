@@ -3,8 +3,18 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-02-02
+
+* v12.2.0-2 released
+* d69fbb9 README update
+* cf48ec7 versioning.sh: move generate multilib earlier
+* 04d272a README update
+* b700e4b README update
+
 ## 2023-02-01
 
+* d68b924 application.sh: enable multilib
+* 7c32336 CHANGELOG update
 * 42bded9 package.json: bump deps
 * fbb1293 README update
 * b8b5cd4 versioning.sh: default XBB_APPLICATION_WITHOUT_MULTILIB
