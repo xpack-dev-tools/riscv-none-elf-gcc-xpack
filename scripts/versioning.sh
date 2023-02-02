@@ -213,6 +213,12 @@ function application_build_versioned_components()
     XBB_ZSTD_VERSION="1.5.2"
 
     # -------------------------------------------------------------------------
+
+    # Download GCC earlier, to have time to run the multilib generator.
+    gcc_cross_download
+    gcc_cross_generate_riscv_multilib_file
+
+    # -------------------------------------------------------------------------
     # Build the native dependencies.
 
     if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
@@ -281,12 +287,6 @@ function application_build_versioned_components()
 
     xbb_set_executables_install_path "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
     xbb_set_libraries_install_path "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
-
-    # -------------------------------------------------------------------------
-
-    # Download GCC earlier, to have time to run the multilib generator.
-    gcc_cross_download
-    gcc_cross_generate_riscv_multilib_file
 
     # -------------------------------------------------------------------------
 
