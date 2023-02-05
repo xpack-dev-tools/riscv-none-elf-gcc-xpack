@@ -147,7 +147,7 @@ triggered via the VS Code graphical interface, using the
 
 #### Temporarily disable multilib
 
-In the `scripts.application.sh` enable the `WITHOUT_MULTILIB="y"` definition.
+In the `scripts/application.sh` enable the `WITHOUT_MULTILIB="y"` definition.
 
 #### Patches
 
@@ -461,6 +461,11 @@ For `xbbli` & `xbbla64` start two runners:
 
 From here it'll be cloned on the production machines.
 
+### Check for disk space
+
+Check if the build machines have enough free space and eventually
+do some cleanups.
+
 ### Manually trigger the build GitHub Actions
 
 To trigger the GitHub Actions builds, use the xPack actions:
@@ -505,11 +510,11 @@ To trigger the GitHub Actions builds, use the same xPack actions as before.
 
 ## Durations & results
 
-The full builds take about 14 hours (3h30 without multilib):
+The full builds take about 14 hours (3h30 without multi-libs):
 
 - `xbbmi`: 6h20 (1h00)
-- `xbbma`: 2h22 (23m)
-- `xbbli`: 2h51 (2h49 Linux, 2h51 Windows; without multi-lib: 37m Linux, 33m Windows)
+- `xbbma`: 2h22 (0h23)
+- `xbbli`: 2h51 (2h49 Linux, 2h51 Windows; without multi-libs: 0h37 Linux, 0h33 Windows)
 - `xbbla64`: 13h33 (3h30)
 - `xbbla32`: 14h00 (3h15)
 

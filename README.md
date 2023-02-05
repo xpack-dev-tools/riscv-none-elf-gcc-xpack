@@ -68,7 +68,7 @@ a dependency for a project is quite easy:
 cd my-project
 xpm init # Only at first use.
 
-xpm install @xpack-dev-tools/riscv-none-elf-gcc@latest
+xpm install @xpack-dev-tools/riscv-none-elf-gcc@latest --verbose
 
 ls -l xpacks/.bin
 ```
@@ -92,7 +92,7 @@ For xPacks aware tools, like the **Eclipse Embedded C/C++ plug-ins**,
 it is also possible to install GNU RISC-V Embedded GCC globally, in the user home folder:
 
 ```sh
-xpm install --global @xpack-dev-tools/riscv-none-elf-gcc@latest
+xpm install --global @xpack-dev-tools/riscv-none-elf-gcc@latest --verbose
 ```
 
 Eclipse will automatically
