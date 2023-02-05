@@ -5,7 +5,6 @@
   "main": "",
   "scripts": {
     "npm-install": "npm install",
-    "git-log": "git log --pretty='%cd * %h %s' --date=short",
     "npm-pack": "npm pack",
     "npm-version-patch": "npm version patch",
     "npm-version-minor": "npm version minor",
@@ -131,6 +130,7 @@
       "git-pull-helper": [
         "git -C ${HOME}/Work/xbb-helper-xpack.git pull"
       ],
+      "git-log": "git log --pretty='%cd * %h %s' --date=short",
       "generate-workflows": [
         "mkdir -p .github/workflows/",
         "cp xpacks/xpack-dev-tools-xbb-helper/templates/body-github-pre-releases-test.md .github/workflows/",
