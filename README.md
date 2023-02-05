@@ -103,8 +103,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/12.2.0-2/.content/
-/Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/12.2.0-2/.content/
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/12.2.0-3/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/12.2.0-3/.content/
 ├── README.md
 ├── bin
 │   ├── riscv-none-elf-addr2line
@@ -222,16 +222,16 @@ For more details please read the
 ### Versioning
 
 The version strings used by the GCC project are three number strings
-like `12.1.0`; to this string the xPack distribution adds a four number,
+like `12.2.0`; to this string the xPack distribution adds a four number,
 but since semver allows only three numbers, all additional ones can
 be added only as pre-release strings, separated by a dash,
-like `12.2.0-2`.
+like `12.2.0-3`.
 When published as a npm package, the version gets
-a fifth number, like `12.2.0-2.1`.
+a fifth number, like `12.2.0-3.1`.
 
 Since adherence of third party packages to semver is not guaranteed,
-it is recommended to use semver expressions like `^12.1.0` and `~12.1.0`
-with caution, and prefer exact matches, like `12.2.0-2.1`.
+it is recommended to use semver expressions like `^12.2.0` and `~12.2.0`
+with caution, and prefer exact matches, like `12.2.0-3.1`.
 
 ## Maintainer info
 
