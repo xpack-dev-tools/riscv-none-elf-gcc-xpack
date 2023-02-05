@@ -43,7 +43,7 @@ function application_build_versioned_components()
   XBB_GCC_VERSION_MAJOR=$(xbb_get_version_major "${XBB_GCC_VERSION}")
 
   # In reverse chronological order.
-  if [[ ${XBB_RELEASE_VERSION} =~ 12[.][2][.]0-[12] ]]
+  if [[ ${XBB_RELEASE_VERSION} =~ 12[.][2][.]0-.* ]]
   then
 
     # -------------------------------------------------------------------------
