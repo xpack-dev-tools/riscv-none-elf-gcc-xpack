@@ -3,12 +3,23 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-02-06
+
+* v12.2.0-3 released
+
 ## 2023-02-05
 
-* v12.2.0-3 prepared
+* 1737182 versioning.sh: generic 12.2.0-*
+* f7004aa prepare v12.2.0-3
+* 6e5cf97 READMEs updates
+* 237ac27 package.json update
+* a91d022 package.json: bump deps
+* af8c867 body-jekyll update
 
 ## 2023-02-02
 
+* 016d97e 12.2.0-2.1
+* a52b28d CHANGELOG: publish npm v12.2.0-2.1
 * v12.2.0-2.1 published on npmjs.com
 * 7b678a7 package.json: update urls for 12.2.0-2 release
 * 724f31a CHANGELOG update
