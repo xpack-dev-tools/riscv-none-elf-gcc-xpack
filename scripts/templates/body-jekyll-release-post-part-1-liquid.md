@@ -3,12 +3,19 @@ title:  xPack GNU RISC-V Embedded GCC v{{ XBB_RELEASE_VERSION }} released
 
 TODO: select one summary
 
-summary: "Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release; it ...."
+summary: "Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release; it fixes <...>."
 
 summary: "Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the GNU GCC release."
 
+gcc_version: "12.2.0"
+binutils_version: "2.38"
+newlib_version: "4.2.0"
+gdb_version: "12.1"
+python_version: "3.10"
+
 version: "{{ XBB_RELEASE_VERSION }}"
-npm_subversion: 1
+npm_subversion: "1"
+
 download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v{{ XBB_RELEASE_VERSION }}/
 
 date:   {{ RELEASE_DATE }}
@@ -79,7 +86,7 @@ a dependency for a project is quite easy:
 cd my-project
 xpm init # Only at first use.
 
-xpm install @xpack-dev-tools/riscv-none-elf-gcc@latest
+xpm install @xpack-dev-tools/riscv-none-elf-gcc@latest --verbose
 
 ls -l xpacks/.bin
 ```
@@ -87,14 +94,14 @@ ls -l xpacks/.bin
 To install this specific version, use:
 
 ```sh
-xpm install @xpack-dev-tools/riscv-none-elf-gcc@{% raw %}{{ page.version }}.{{ page.npm_subversion }}{% endraw %}
+xpm install @xpack-dev-tools/riscv-none-elf-gcc@{% raw %}{{ page.version }}.{{ page.npm_subversion }}{% endraw %} --verbose
 ```
 
 For xPacks aware tools, like the **Eclipse Embedded C/C++ plug-ins**,
 it is also possible to install GNU RISC-V Embedded GCC globally, in the user home folder.
 
 ```sh
-xpm install --global @xpack-dev-tools/riscv-none-elf-gcc@latest
+xpm install --global @xpack-dev-tools/riscv-none-elf-gcc@latest --verbose
 ```
 
 Eclipse will automatically
@@ -122,11 +129,11 @@ xpm uninstall --global @xpack-dev-tools/riscv-none-elf-gcc
 The xPack GNU RISC-V Embedded GCC use the official sources,
 with no functional changes:
 
-- GCC 12.2.0
-- binutils 2.38
-- gdb 12.1
-- newlib 4.2.0.20211231
-- python 3.10.4
+- GCC {% raw %}{{ page.gcc_version }}{% endraw %}
+- binutils {% raw %}{{ page.binutils_version }}{% endraw %}
+- newlib {% raw %}{{ page.newlib_version }}{% endraw %}
+- gdb {% raw %}{{ page.gdb_version }}{% endraw %}
+- python {% raw %}{{ page.python_version }}{% endraw %}
 
 ## Supported libraries
 
@@ -245,7 +252,7 @@ be compiled with
 
 Support for Python scripting was added to GDB. This distribution provides
 a separate binary, `riscv-none-elf-gdb-py3` with
-support for **Python 3**.
+support for **Python {% raw %}{{ page.python_version }}{% endraw %}**.
 
 The Python 3 run-time is included, so GDB does not need any version of
 Python to be installed, and is insensitive to the presence of other
