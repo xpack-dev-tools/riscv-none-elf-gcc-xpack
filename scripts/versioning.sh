@@ -187,14 +187,14 @@ function application_build_versioned_components()
     # https://ftp.gnu.org/pub/gnu/libiconv/
     XBB_LIBICONV_VERSION="1.16"
 
-    # http://zlib.net/fossils/
+    # https://zlib.net/fossils/
     XBB_ZLIB_VERSION="1.2.12"
 
     # https://gmplib.org/download/gmp/
     # Arm: In `gmp-h.in` search for `__GNU_MP_VERSION`.
     XBB_GMP_VERSION="6.2.1"
 
-    # http://www.mpfr.org/history.html
+    # https://www.mpfr.org/history.html
     # Arm: In `VERSION`.
     XBB_MPFR_VERSION="4.1.0"
 
@@ -247,7 +247,7 @@ function application_build_versioned_components()
     # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1
     XBB_EXPAT_VERSION="2.4.8"
 
-    # http://ftp.gnu.org/pub/gnu/gettext/
+    # https://ftp.gnu.org/pub/gnu/gettext/
     XBB_GETTEXT_VERSION="0.21"
 
     # https://github.com/telmich/gpm/tags
