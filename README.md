@@ -11,11 +11,11 @@ binary distribution, intended for reproducible builds.
 In addition to the the binary archives and the package meta data,
 this project also includes the build scripts.
 
-### Deprecation notice
+### Upgrade notice
 
 This project replaces the deprecated
 [`xpack-dev-tools/riscv-none-embed-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack)
-project, which followed the SiFive releases.
+project, which followed the SiFive releases; upgrade your projects to get further updates.
 
 ## Overview
 
