@@ -86,7 +86,7 @@ a development dependency for a project is quite easy:
 
 ```sh
 cd my-project
-xpm init # Only at first use.
+xpm init # Add a package.json if not already present
 
 xpm install @xpack-dev-tools/riscv-none-elf-gcc@latest --verbose
 
@@ -120,7 +120,7 @@ cd my-project
 xpm uninstall @xpack-dev-tools/riscv-none-elf-gcc
 ```
 
-To completely remove the package from the global store:
+To completely remove the package from the central xPack store:
 
 ```sh
 xpm uninstall --global @xpack-dev-tools/riscv-none-elf-gcc
