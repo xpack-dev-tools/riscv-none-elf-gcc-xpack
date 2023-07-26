@@ -35,26 +35,26 @@ To clone the stable branch (`xpack`), run the following commands in a
 terminal (on Windows use the _Git Bash_ console):
 
 ```sh
-rm -rf ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
+rm -rf ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 git clone https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git \
-  ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+  ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 For development purposes, clone the `xpack-develop` branch:
 
 ```sh
-rm -rf ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-mkdir -p ~/Work/xpacks && \
+rm -rf ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+mkdir -p ~/Work/xpack-dev-tools && \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git \
-  ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+  ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 Or, if the repo was already cloned:
 
 ```sh
-git -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git pull
+git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull
 ```
 
 ## Get helper sources
@@ -63,20 +63,20 @@ The project has a dependency to a common **helper**; clone the
 `xpack-develop` branch and link it to the central xPacks store:
 
 ```sh
-rm -rf ~/Work/xpacks/xbb-helper-xpack.git && \
-mkdir -p ~/Work/xpacks && \
+rm -rf ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
+mkdir -p ~/Work/xpack-dev-tools && \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/xbb-helper-xpack.git \
-  ~/Work/xpacks/xbb-helper-xpack.git && \
-xpm link -C ~/Work/xpacks/xbb-helper-xpack.git
+  ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
 ```
 
 Or, if the repo was already cloned:
 
 ```sh
-git -C ~/Work/xpacks/xbb-helper-xpack.git pull
-xpm link -C ~/Work/xpacks/xbb-helper-xpack.git
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
 ```
 
 ## Release schedule
@@ -177,46 +177,46 @@ For Intel macOS, first run the build on the development machine
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git pull
+git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull
 
-xpm run deep-clean -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+xpm run deep-clean -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 If the helper is also under development and needs changes,
 update it too:
 
 ```sh
-git -C ~/Work/xpacks/xbb-helper-xpack.git pull
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
 ```
 
 Install project dependencies:
 
 ```sh
-xpm run install -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 If the writable helper is used,
 link it in the place of the read-only package:
 
 ```sh
-xpm link -C ~/Work/xpacks/xbb-helper-xpack.git
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
 
-xpm run link-deps -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 For repeated builds, clean the build folder and install de
 build configuration dependencies:
 
 ```sh
-xpm run deep-clean --config darwin-x64  -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+xpm run deep-clean --config darwin-x64  -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 
-xpm install --config darwin-x64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 Run the native build:
 
 ```sh
-xpm run build-develop --config darwin-x64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+xpm run build-develop --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 The build takes about 1h30 (without multilibs).
@@ -234,21 +234,21 @@ caffeinate ssh xbbmi
 Repeat the same steps as before.
 
 ```sh
-git -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git pull && \
-xpm run install -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-git -C ~/Work/xpacks/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xpacks/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm run deep-clean --config darwin-x64  -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm install --config darwin-x64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
-xpm run build-develop --config darwin-x64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
+xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
+xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm run deep-clean --config darwin-x64  -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run build-develop --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 About 55 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/build/darwin-x64/deploy
+$ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/darwin-x64/deploy
 total 197288
 -rw-r--r--  1 ilg  staff  93798413 Feb  1 12:52 xpack-riscv-none-elf-gcc-12.2.0-3-darwin-x64.tar.gz
 -rw-r--r--  1 ilg  staff       118 Feb  1 12:52 xpack-riscv-none-elf-gcc-12.2.0-3-darwin-x64.tar.gz.sha
@@ -267,21 +267,21 @@ caffeinate ssh xbbma
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git pull && \
-xpm run install -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-git -C ~/Work/xpacks/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xpacks/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm run deep-clean --config darwin-arm64  -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm install --config darwin-arm64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
-xpm run build-develop --config darwin-arm64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
+xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
+xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm run deep-clean --config darwin-arm64  -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm install --config darwin-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run build-develop --config darwin-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 About 25 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/build/darwin-arm64/deploy
+$ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/darwin-arm64/deploy
 total 196792
 -rw-r--r--  1 ilg  staff  90622384 Feb  1 12:11 xpack-riscv-none-elf-gcc-12.2.0-3-darwin-arm64.tar.gz
 -rw-r--r--  1 ilg  staff       120 Feb  1 12:11 xpack-riscv-none-elf-gcc-12.2.0-3-darwin-arm64.tar.gz.sha
@@ -301,22 +301,22 @@ caffeinate ssh xbbli
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git pull && \
-xpm run install -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-git -C ~/Work/xpacks/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xpacks/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm run deep-clean --config linux-x64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-prepare --config linux-x64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-link-deps --config linux-x64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
-xpm run docker-build-develop --config linux-x64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
+xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
+xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm run deep-clean --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-prepare --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-link-deps --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run docker-build-develop --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 About 30 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/build/linux-x64/deploy
+$ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-x64/deploy
 total 102308
 -rw-r--r-- 1 ilg ilg 104756842 Feb  1 10:19 xpack-riscv-none-elf-gcc-12.2.0-3-linux-x64.tar.gz
 -rw-r--r-- 1 ilg ilg       117 Feb  1 10:19 xpack-riscv-none-elf-gcc-12.2.0-3-linux-x64.tar.gz.sha
@@ -327,22 +327,22 @@ total 102308
 Clean the build folder and prepare the docker container:
 
 ```sh
-git -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git pull && \
-xpm run install -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-git -C ~/Work/xpacks/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xpacks/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm run deep-clean --config win32-x64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-prepare --config win32-x64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-link-deps --config win32-x64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
-xpm run docker-build-develop --config win32-x64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
+xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
+xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm run deep-clean --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-prepare --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-link-deps --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run docker-build-develop --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 About 30 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/build/win32-x64/deploy
+$ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/win32-x64/deploy
 total 109320
 -rw-r--r-- 1 ilg ilg 111937715 Feb  1 10:48 xpack-riscv-none-elf-gcc-12.2.0-3-win32-x64.zip
 -rw-r--r-- 1 ilg ilg       114 Feb  1 10:48 xpack-riscv-none-elf-gcc-12.2.0-3-win32-x64.zip.sha
@@ -360,22 +360,22 @@ caffeinate ssh xbbla64
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git pull && \
-xpm run install -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-git -C ~/Work/xpacks/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xpacks/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm run deep-clean --config linux-arm64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-prepare --config linux-arm64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-link-deps --config linux-arm64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
-xpm run docker-build-develop --config linux-arm64 -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
+xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
+xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm run deep-clean --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-prepare --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-link-deps --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run docker-build-develop --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 About 3h30 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/build/linux-arm64/deploy
+$ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-arm64/deploy
 total 98020
 -rw-r--r-- 1 ilg ilg 100361089 Feb  1 13:16 xpack-riscv-none-elf-gcc-12.2.0-3-linux-arm64.tar.gz
 -rw-r--r-- 1 ilg ilg       119 Feb  1 13:16 xpack-riscv-none-elf-gcc-12.2.0-3-linux-arm64.tar.gz.sha
@@ -393,21 +393,21 @@ caffeinate ssh xbbla32
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git pull && \
-xpm run install -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm run link-deps -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
+git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
+xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 
-xpm run deep-clean --config linux-arm -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-prepare --config linux-arm -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-link-deps --config linux-arm -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
-xpm run docker-build-develop --config linux-arm -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+xpm run deep-clean --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-prepare --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm run docker-link-deps --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run docker-build-develop --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 About 3h15 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/build/linux-arm/deploy
+$ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-arm/deploy
 total 92456
 -rw-r--r-- 1 ilg ilg 94666972 Feb  1 13:04 xpack-riscv-none-elf-gcc-12.2.0-3-linux-arm.tar.gz
 -rw-r--r-- 1 ilg ilg      117 Feb  1 13:04 xpack-riscv-none-elf-gcc-12.2.0-3-linux-arm.tar.gz.sha
@@ -495,11 +495,11 @@ To trigger the GitHub Actions builds, use the xPack actions:
 This is equivalent to:
 
 ```sh
-bash ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbli
-bash ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla64
-bash ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla32
-bash ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbmi
-bash ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbma
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbli
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla64
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla32
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbmi
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbma
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -569,9 +569,9 @@ To trigger the GitHub Actions tests, use the xPack actions:
 These are equivalent to:
 
 ```sh
-bash ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-test-prime.sh
-bash ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-test-docker-linux-intel.sh
-bash ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-test-docker-linux-arm.sh
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-test-prime.sh
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-test-docker-linux-intel.sh
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-test-docker-linux-arm.sh
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -594,7 +594,7 @@ To trigger the Travis test, use the xPack action:
 This is equivalent to:
 
 ```sh
-bash ~/Work/xpacks/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-travis-macos.sh
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-travis-macos.sh
 ```
 
 This script requires the `TRAVIS_COM_TOKEN` variable to be present
@@ -609,9 +609,9 @@ To download the pre-released archive for the specific platform
 and run the tests, use:
 
 ```sh
-git -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git pull
-xpm run install -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
-xpm run test-pre-release -C ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull
+xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run test-pre-release -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 For even more tests, on each platform (MacOS, GNU/Linux, Windows),
@@ -631,12 +631,12 @@ xattr -cr ${HOME}/Downloads/xpack-*
 - clone this repo locally; on Windows use the Git console
 
 ```sh
-rm -rf ~/Work/xpacks/riscv-none-elf-gcc-xpack.git && \
-mkdir -p ~/Work/xpacks && \
+rm -rf ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+mkdir -p ~/Work/xpack-dev-tools && \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git \
-  ~/Work/xpacks/riscv-none-elf-gcc-xpack.git
+  ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
 - in a separate workspace, Import → General → Existing Projects into Workspace
