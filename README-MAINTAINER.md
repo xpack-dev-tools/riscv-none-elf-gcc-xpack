@@ -9,21 +9,30 @@
 The build scripts run on GNU/Linux and macOS. The Windows binaries are
 generated on Intel GNU/Linux, using [mingw-w64](https://mingw-w64.org).
 
-For GNU/Linux the prerequisites are:
+For GNU/Linux, the prerequisites are:
 
-- `npm` (shipped with Node.js; installed via nvm, not the system package manager)
-- `xpm` (installed via `npm`)
-- `docker`
+- `curl` (installed via the system package manager)
 - `git` (installed via the system package manager)
-
-For macOS the prerequisites are:
-
-- `npm` (shipped with Node.js; installed via nvm)
+- `docker` (preferably a recent one, installed from **docker.com**)
+- `npm` (shipped with Node.js; installed via **nvm**, **not**
+  the system package manager)
 - `xpm` (installed via `npm`)
-- the Command Line Tools
+
+For macOS, the prerequisites are:
+
+- `npm` (shipped with Node.js; installed via **nvm**)
+- `xpm` (installed via `npm`)
+- the **Command Line Tools** from Apple
 
 For details on installing them, please read the
-[XBB prerequisites page](https://xpack.github.io/xbb/prerequisites/).
+[XBB prerequisites](https://xpack.github.io/xbb/prerequisites/) page.
+
+If you already have a functional configuration from a previous run,
+it is recommended to update **xpm**:
+
+```sh
+npm install --location=global xpm@latest
+```
 
 ## Get project sources
 
@@ -332,6 +341,7 @@ xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
 xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
 xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+\
 xpm run deep-clean --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run docker-prepare --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run docker-link-deps --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
@@ -453,7 +463,18 @@ caffeinate ssh xbbla64
 caffeinate ssh xbbla32
 ```
 
-Start the runners on all machines:
+For `xbbli` & `xbbla64` start two runners:
+
+```sh
+screen -S ga
+
+~/actions-runners/xpack-dev-tools/1/run.sh &
+~/actions-runners/xpack-dev-tools/2/run.sh &
+
+# Ctrl-a Ctrl-d
+```
+
+On all other machines start a single runner:
 
 ```sh
 screen -S ga
@@ -461,13 +482,6 @@ screen -S ga
 ~/actions-runners/xpack-dev-tools/run.sh &
 
 # Ctrl-a Ctrl-d
-```
-
-For `xbbli` & `xbbla64` start two runners:
-
-```sh
-~/actions-runners/xpack-dev-tools/1/run.sh &
-~/actions-runners/xpack-dev-tools/2/run.sh &
 ```
 
 ### Push the build scripts
@@ -545,20 +559,6 @@ The resulting binaries are available for testing from
 ### CI tests
 
 The automation is provided by GitHub Actions.
-
-On the macOS machine (`xbbmi`) open a ssh sessions to the Arm/Linux
-test machine `xbbla`:
-
-```sh
-caffeinate ssh xbbla
-```
-
-Start both runners (to allow the 32/64-bit tests to run in parallel):
-
-```sh
-~/actions-runners/xpack-dev-tools/1/run.sh &
-~/actions-runners/xpack-dev-tools/2/run.sh &
-```
 
 To trigger the GitHub Actions tests, use the xPack actions:
 
