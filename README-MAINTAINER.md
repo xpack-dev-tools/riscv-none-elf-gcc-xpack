@@ -423,6 +423,16 @@ total 92456
 -rw-r--r-- 1 ilg ilg      117 Feb  1 13:04 xpack-riscv-none-elf-gcc-12.2.0-3-linux-arm.tar.gz.sha
 ```
 
+### Build a debug version
+
+In some cases it is necessary to run a debug session in the binaries,
+or even in the libraries functions.
+
+For these cases, the build script accepts the `--debug` options.
+
+There are also xPack actions that use this option (`build-develop-debug`
+and `docker-build-develop-debug`).
+
 ### Files cache
 
 The XBB build scripts use a local cache such that files are downloaded only
