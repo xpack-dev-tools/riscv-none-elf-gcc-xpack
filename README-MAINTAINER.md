@@ -228,6 +228,12 @@ Run the native build:
 xpm run build-develop --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
+For a debug build:
+
+```sh
+xpm run build-develop-debug --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+```
+
 The build takes about 1h30 (without multilibs).
 
 When functional, push the `xpack-develop` branch to GitHub.
