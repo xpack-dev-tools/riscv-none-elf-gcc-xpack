@@ -212,6 +212,25 @@ function application_build_versioned_components()
     # https://github.com/facebook/zstd/releases
     XBB_ZSTD_VERSION="1.5.5" # "1.5.2"
 
+    # https://ftp.gnu.org/gnu/ncurses/
+    XBB_NCURSES_VERSION="6.4" # "6.3"
+
+    # https://github.com/westes/texinfo/releases
+    XBB_TEXINFO_VERSION="7.0.3"
+
+    # -------------------------------------------------------------------------
+
+    libiconv_build "${XBB_LIBICONV_VERSION}"
+
+    (
+      XBB_NCURSES_DISABLE_WIDEC="y"
+
+      ncurses_build "${XBB_NCURSES_VERSION}"
+    )
+
+    # Requires libiconf & ncurses.
+    texinfo_build "${XBB_TEXINFO_VERSION}"
+
     # -------------------------------------------------------------------------
 
     # Download GCC earlier, to have time to run the multilib generator.
@@ -261,9 +280,6 @@ function application_build_versioned_components()
     # https://github.com/telmich/gpm/tags
     # https://github.com/xpack-dev-tools/gpm/tags
     XBB_GPM_VERSION="1.20.7-1"
-
-    # https://ftp.gnu.org/gnu/ncurses/
-    XBB_NCURSES_VERSION="6.4" # "6.3"
 
     # https://ftp.gnu.org/gnu/readline/
     XBB_READLINE_VERSION="8.2" # "8.1"
