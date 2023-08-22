@@ -395,7 +395,6 @@ Update the build scripts (or clone them at the first use):
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-
 xpm run deep-clean --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run docker-prepare --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run docker-link-deps --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
