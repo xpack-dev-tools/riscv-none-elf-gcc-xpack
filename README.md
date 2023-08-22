@@ -31,6 +31,7 @@ The binaries can be installed automatically as **binary xPacks** or manually as
 
 This distribution plans to follow the official
 [GNU](https://gcc.gnu.org/releases.html) release schedule.
+To save some time, the initial X.1 release will be skipped.
 
 ## User info
 
@@ -107,8 +108,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/12.2.0-3/.content/
-/Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/12.2.0-3/.content/
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/13.2.0-1/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/13.2.0-1/.content/
 ├── README.md
 ├── bin
 │   ├── riscv-none-elf-addr2line
@@ -120,7 +121,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/12.2.
 │   ├── riscv-none-elf-elfedit
 │   ├── riscv-none-elf-g++
 │   ├── riscv-none-elf-gcc
-│   ├── riscv-none-elf-gcc-12.2.0
+│   ├── riscv-none-elf-gcc-13.2.0
 │   ├── riscv-none-elf-gcc-ar
 │   ├── riscv-none-elf-gcc-nm
 │   ├── riscv-none-elf-gcc-ranlib
@@ -187,7 +188,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/12.2.
 │   ├── lib
 │   └── share
 └── share
-    └── gcc-12.2.0
+    └── gcc-13.2.0
 
 20 directories, 59 files
 ```
@@ -226,16 +227,16 @@ For more details please read the
 ### Versioning
 
 The version strings used by the GCC project are three number strings
-like `12.2.0`; to this string the xPack distribution adds a four number,
+like `13.2.0`; to this string the xPack distribution adds a four number,
 but since semver allows only three numbers, all additional ones can
 be added only as pre-release strings, separated by a dash,
-like `12.2.0-3`.
+like `13.2.0-1`.
 When published as a npm package, the version gets
-a fifth number, like `12.2.0-3.1`.
+a fifth number, like `13.2.0-1.1`.
 
 Since adherence of third party packages to semver is not guaranteed,
-it is recommended to use semver expressions like `^12.2.0` and `~12.2.0`
-with caution, and prefer exact matches, like `12.2.0-3.1`.
+it is recommended to use semver expressions like `^13.2.0` and `~13.2.0`
+with caution, and prefer exact matches, like `13.2.0-1.1`.
 
 ## Maintainer info
 

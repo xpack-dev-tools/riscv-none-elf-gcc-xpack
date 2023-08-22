@@ -3,9 +3,104 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-08-22
+
+* v13.2.0-1 prepared
+* f26ee16 package.json: xpack-dev-tools-build
+* c5f50ce package.json: bump deps
+* c5b6bc4 application.sh: libunistring
+* 48bac93 .vscode/settings.json: ignoreWords
+* 02d0546 dot.*ignore update
+* 8f05df2 re-generate workflows
+
+## 2023-08-21
+
+* 1b2504a READMEs update
+* 6e1ba48 package.json: bump deps
+
+## 2023-08-19
+
+* 23efc36 READMEs update
+* ea3671e package.json: bump deps
+
+## 2023-08-15
+
+* 0db5223 .vscode/settings.json ignoreWords
+* 82bb360 re-generate workflows
+* efef1e0 README-MAINTAINER rename xbbla
+* b178031 package.json: rename xbbla
+* 61b0d48 package.json: bump deps
+* 974cb7d READMEs update
+* f3cad74 package.json: bump deps
+
+## 2023-08-04
+
+* 1d208b6 READMEs update
+* 1d03265 READMEs update
+* 6d69e86 package.json: add build-develop-debug
+* da3137a READMEs update
+
+## 2023-08-03
+
+* 66c7118 package.json: reorder build actions
+* 9ae12df READMEs update
+* deb8bd8 package.json: bump deps
+
+## 2023-07-28
+
+* 4d672fc READMEs update
+* 1d60ca3 package.json: bump deps
+* 7e51b64 package.json: liquidjs --context --template
+* 3105430 scripts cosmetics
+* 64a66ed re-generate workflows
+* bef1e64 READMEs update
+* 6a8da5d package.json: minXpm 0.16.3 & @xpack-dev-tools/xbb-helper
+* 39adf5a READMEs update
+* d39bedb package.json: bump deps
+
+## 2023-07-26
+
+* 7259417 package.json: move scripts to actions
+* be5d986 package.json: update xpack-dev-tools path
+* 1e78388 READMEs update xpack-dev-tools path
+* 135757d body-jekyll update
+* 62bf949 READMEs update
+
+## 2023-07-17
+
+* 47cc05b README update
+* 73ed07d package.json: bump deps
+
+## 2023-03-25
+
+* 2fd6aea READMEs update
+* 57b0800 READMEs update prerequisites
+* 781760f package.json: mkdir -pv cache
+
+## 2023-02-22
+
+* c91bb34 READMEs update
+
+## 2023-02-14
+
+* 3a59f3d body-jekyll update
+
+## 2023-02-10
+
+* 4cccae5 package.json: update Work/xpacks
+* ab9826c READMEs update
+
+## 2023-02-07
+
+* 0c558da READMEs update
+* 109479b tests/package.json: update contributors url
+* 320412c versioning.sh: update for https
+* 6663494 body-jekyll update
+
 ## 2023-02-06
 
-* v12.2.0-3.1 published on npmjs.com
+* 2c9c518 12.2.0-3.1
+* fb96f25 CHANGELOG: publish npm v12.2.0-3.1
 * f8c71d3 package.json: update urls for 12.2.0-3 release
 * 539de45 CHANGELOG update
 * v12.2.0-3 released

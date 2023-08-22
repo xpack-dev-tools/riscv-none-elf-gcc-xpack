@@ -90,8 +90,10 @@ xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
 
 ## Release schedule
 
-The xPack GNU RISC-V Embedded GCC release schedule will follow the
-[GNU](https://gcc.gnu.org/releases.html) release schedule.
+The xPack GNU RISC-V Embedded GCC release schedule will generally follow the
+[GNU](https://gcc.gnu.org/releases.html) release schedule. To save some
+time, the initial X.1 release will be skipped. Updates for previous releases
+are also planned (like X-1.3, X-2.4, X-3.5).
 
 ## How to make new releases
 
@@ -119,14 +121,9 @@ update the dependencies in `package.json`.
 
 ### Identify the main GCC version
 
-Determine the GCC version (like `12.2.0`) and update the `scripts/VERSION`
-file; the format is `12.2.0-3`. The fourth digit is the number of the
+Determine the GCC version (like `13.2.0`) and update the `scripts/VERSION`
+file; the format is `13.2.0-1`. The fourth digit is the number of the
 the xPack GNU RISC-V Embedded GCC release number of this version.
-
-### Update versions in `README` files
-
-- update version in `README-MAINTAINER.md`
-- update version in `README.md`
 
 ### Fix possible open issues
 
@@ -134,7 +131,7 @@ Check GitHub issues and pull requests:
 
 - <https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/issues/>
 
-and fix them; assign them to a milestone (like `12.2.0-3`).
+and fix them; assign them to a milestone (like `13.2.0-1`).
 
 ### Check `README.md`
 
@@ -142,12 +139,24 @@ Normally `README.md` should not need changes, but better check.
 Information related to the new version should not be included here,
 but in the version specific release page.
 
+### Update versions in `README` files
+
+Update both full 5 numbers (`13.2.0-1.1`) and short 3 numbers (`13.2.0`)
+versions in:
+
+- update version in `README-MAINTAINER.md`
+- update version in `README.md`
+
+### Update version in `package.json` to a pre-release
+
+Use a new version, suffixed by `.pre`.
+
 ### Update `CHANGELOG.md`
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
-- add a new entry like _* v12.2.0-3 prepared_
-- commit with a message like _prepare v12.2.0-3_
+- add a new entry like _* v13.2.0-1 prepared_
+- commit with a message like _prepare v13.2.0-1_
 
 ### Update the version specific code
 
@@ -172,7 +181,8 @@ triggered via the VS Code graphical interface, using the
 
 #### Temporarily disable multilib
 
-In the `scripts/application.sh` enable the `WITHOUT_MULTILIB="y"` definition.
+To save some time in the first builds,
+in the `scripts/application.sh` enable the `WITHOUT_MULTILIB="y"` definition.
 
 #### Patches
 
@@ -234,7 +244,7 @@ For a debug build:
 xpm run build-develop-debug --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-The build takes about 1h30 (without multilibs).
+The build takes about 1h30 (with reduced multi-libs).
 
 When functional, push the `xpack-develop` branch to GitHub.
 
@@ -265,8 +275,8 @@ archive and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/darwin-x64/deploy
 total 197288
--rw-r--r--  1 ilg  staff  93798413 Feb  1 12:52 xpack-riscv-none-elf-gcc-12.2.0-3-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff       118 Feb  1 12:52 xpack-riscv-none-elf-gcc-12.2.0-3-darwin-x64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  93798413 Feb  1 12:52 xpack-riscv-none-elf-gcc-13.2.0-1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff       118 Feb  1 12:52 xpack-riscv-none-elf-gcc-13.2.0-1-darwin-x64.tar.gz.sha
 ```
 
 #### Apple Silicon macOS
@@ -298,8 +308,8 @@ archive and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/darwin-arm64/deploy
 total 196792
--rw-r--r--  1 ilg  staff  90622384 Feb  1 12:11 xpack-riscv-none-elf-gcc-12.2.0-3-darwin-arm64.tar.gz
--rw-r--r--  1 ilg  staff       120 Feb  1 12:11 xpack-riscv-none-elf-gcc-12.2.0-3-darwin-arm64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  90622384 Feb  1 12:11 xpack-riscv-none-elf-gcc-13.2.0-1-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff       120 Feb  1 12:11 xpack-riscv-none-elf-gcc-13.2.0-1-darwin-arm64.tar.gz.sha
 ```
 
 #### Intel GNU/Linux
@@ -333,8 +343,8 @@ archive and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-x64/deploy
 total 102308
--rw-r--r-- 1 ilg ilg 104756842 Feb  1 10:19 xpack-riscv-none-elf-gcc-12.2.0-3-linux-x64.tar.gz
--rw-r--r-- 1 ilg ilg       117 Feb  1 10:19 xpack-riscv-none-elf-gcc-12.2.0-3-linux-x64.tar.gz.sha
+-rw-r--r-- 1 ilg ilg 104756842 Feb  1 10:19 xpack-riscv-none-elf-gcc-13.2.0-1-linux-x64.tar.gz
+-rw-r--r-- 1 ilg ilg       117 Feb  1 10:19 xpack-riscv-none-elf-gcc-13.2.0-1-linux-x64.tar.gz.sha
 ```
 
 ##### Build the Windows binaries
@@ -360,8 +370,8 @@ archive and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/win32-x64/deploy
 total 109320
--rw-r--r-- 1 ilg ilg 111937715 Feb  1 10:48 xpack-riscv-none-elf-gcc-12.2.0-3-win32-x64.zip
--rw-r--r-- 1 ilg ilg       114 Feb  1 10:48 xpack-riscv-none-elf-gcc-12.2.0-3-win32-x64.zip.sha
+-rw-r--r-- 1 ilg ilg 111937715 Feb  1 10:48 xpack-riscv-none-elf-gcc-13.2.0-1-win32-x64.zip
+-rw-r--r-- 1 ilg ilg       114 Feb  1 10:48 xpack-riscv-none-elf-gcc-13.2.0-1-win32-x64.zip.sha
 ```
 
 #### Arm GNU/Linux 64-bit
@@ -393,8 +403,8 @@ archive and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-arm64/deploy
 total 98020
--rw-r--r-- 1 ilg ilg 100361089 Feb  1 13:16 xpack-riscv-none-elf-gcc-12.2.0-3-linux-arm64.tar.gz
--rw-r--r-- 1 ilg ilg       119 Feb  1 13:16 xpack-riscv-none-elf-gcc-12.2.0-3-linux-arm64.tar.gz.sha
+-rw-r--r-- 1 ilg ilg 100361089 Feb  1 13:16 xpack-riscv-none-elf-gcc-13.2.0-1-linux-arm64.tar.gz
+-rw-r--r-- 1 ilg ilg       119 Feb  1 13:16 xpack-riscv-none-elf-gcc-13.2.0-1-linux-arm64.tar.gz.sha
 ```
 
 #### Arm GNU/Linux 32-bit
@@ -425,8 +435,8 @@ archive and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-arm/deploy
 total 92456
--rw-r--r-- 1 ilg ilg 94666972 Feb  1 13:04 xpack-riscv-none-elf-gcc-12.2.0-3-linux-arm.tar.gz
--rw-r--r-- 1 ilg ilg      117 Feb  1 13:04 xpack-riscv-none-elf-gcc-12.2.0-3-linux-arm.tar.gz.sha
+-rw-r--r-- 1 ilg ilg 94666972 Feb  1 13:04 xpack-riscv-none-elf-gcc-13.2.0-1-linux-arm.tar.gz
+-rw-r--r-- 1 ilg ilg      117 Feb  1 13:04 xpack-riscv-none-elf-gcc-13.2.0-1-linux-arm.tar.gz.sha
 ```
 
 ### Update README-MAINTAINER listing output
@@ -468,11 +478,13 @@ place them in the XBB cache (`Work/cache`) and restart the build.
 
 The automation is provided by GitHub Actions and three self-hosted runners.
 
-### Temporarily disable multi-lib
+### Do a test run without the multi-libs
 
 It is recommended to do **a first run without the multi-libs**
-(see the `application.sh` file), test it,
-and, when ready, rerun the full build.
+(see the `application.sh` file), **test** it,
+and, when ready, rerun the full build (no kidding,
+this usually saves time, given that a full build takes
+more than half day).
 
 ### Generate the GitHub workflows
 
@@ -583,7 +595,7 @@ The full builds take about 14 hours (3h30 without multi-libs):
 
 - `xbbmi`: 6h20 (1h00)
 - `xbbma`: 2h22 (0h23)
-- `xbbli`: 2h51 (2h49 Linux, 2h51 Windows; without multi-libs: 0h37 Linux, 0h33 Windows)
+- `xbbli`: 2h49 (0h37) Linux, 2h51 (0h33) Windows
 - `xbbla`: 13h33 (3h30)
 - `xbbla32`: 14h00 (3h15)
 
@@ -678,6 +690,13 @@ git clone \
   ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
+- check version:
+
+```sh
+.../riscv-none-elf-gcc-13.2.0-1.1/bin/riscv-none-elf-gcc --version
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 13.2.0
+```
+
 - in a separate workspace, Import → General → Existing Projects into Workspace
   the Eclipse projects available in the
   `tests/eclipse` folder of the build repo; more details in the
@@ -702,7 +721,7 @@ git clone \
 
 ## Create a new GitHub pre-release draft
 
-- in `CHANGELOG.md`, add the release date and a message like _* v12.2.0-3 released_
+- in `CHANGELOG.md`, add the release date and a message like _* v13.2.0-1 released_
 - commit with _CHANGELOG update_
 - check and possibly update the `templates/body-github-release-liquid.md`
 - push the `xpack-develop` branch
@@ -713,8 +732,8 @@ The workflows results and logs are available from the
 
 The result is a
 [draft pre-release](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
-tagged like **v12.2.0-3** (mind the dash in the middle!) and
-named like **xPack GNU RISC-V Embedded GCC v12.2.0-3** (mind the dash),
+tagged like **v13.2.0-1** (mind the dash in the middle!) and
+named like **xPack GNU RISC-V Embedded GCC v13.2.0-1** (mind the dash),
 with all binaries attached.
 
 - edit the draft and attach it to the `xpack-develop` branch (important!)
@@ -737,7 +756,7 @@ If any, refer to closed
 ## Update the preview Web
 
 - commit the `develop` branch of `xpack/web-jekyll` GitHub repo;
-  use a message like _xPack GNU RISC-V Embedded GCC v12.2.0-3 released_
+  use a message like _xPack GNU RISC-V Embedded GCC v13.2.0-1 released_
 - push to GitHub
 - wait for the GitHub Pages build to complete
 - the preview web is <https://xpack.github.io/web-preview/news/>
@@ -778,18 +797,18 @@ watching this project.
 - compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
 - commit all changes, use a message like
-  _package.json: update urls for 12.2.0-3 release_ (without _v_)
+  _package.json: update urls for 13.2.0-1 release_ (without _v_)
 
 ## Publish on the npmjs.com server
 
 - select the `xpack-develop` branch
 - check the latest commits `npm run git-log`
-- update `CHANGELOG.md`, add a line like _* v12.2.0-3.1 published on npmjs.com_
-- commit with a message like _CHANGELOG: publish npm v12.2.0-3.1_
+- update `CHANGELOG.md`, add a line like _* v13.2.0-1.1 published on npmjs.com_
+- commit with a message like _CHANGELOG: publish npm v13.2.0-1.1_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
-- `npm version 12.2.0-3.1`; the first 4 numbers are the same as the
+- `npm version 13.2.0-1.1`; the first 4 numbers are the same as the
   GitHub release; the fifth number is the npm specific version
 - the commits and the tag should have been pushed by the `postversion` script;
   if not, push them with `git push origin --tags`
@@ -818,12 +837,12 @@ The tests results are available from the
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc`
-- `npm dist-tag add @xpack-dev-tools/riscv-none-elf-gcc@12.2.0-3.1 latest`
+- `npm dist-tag add @xpack-dev-tools/riscv-none-elf-gcc@13.2.0-1.1 latest`
 - `npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc`
 
 In case the previous version is not functional and needs to be unpublished:
 
-- `npm unpublish @xpack-dev-tools/riscv-none-elf-gcc@12.2.0-3.1`
+- `npm unpublish @xpack-dev-tools/riscv-none-elf-gcc@13.2.0-1.1`
 
 ## Update the Web
 
@@ -845,7 +864,7 @@ In case the previous version is not functional and needs to be unpublished:
 
 - in a separate browser windows, open [TweetDeck](https://tweetdeck.twitter.com/)
 - using the `@xpack_project` account
-- paste the release name like **xPack GNU RISC-V Embedded GCC v12.2.0-3 released**
+- paste the release name like **xPack GNU RISC-V Embedded GCC v13.2.0-1 released**
 - paste the link to the Web page
   [release](https://xpack.github.io/riscv-none-elf-gcc/releases/)
 - click the **Tweet** button
@@ -873,9 +892,9 @@ Add a new topic in the **Announcements** category of the
 [RISC-V forums]<https://groups.google.com/a/groups.riscv.org/g/sw-dev>).
 
 ```console
-Subject: xPack GNU RISC-V Embedded GCC v12.2.0-3 released
+Subject: xPack GNU RISC-V Embedded GCC v13.2.0-1 released
 
-Version 12.2.0-3 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the GNU GCC release.
+Version 13.2.0-1 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the GNU GCC release.
 
 https://xpack.github.io/blog/2022/05/14/riscv-none-elf-gcc-v11-3-0-1-released/
 ```
