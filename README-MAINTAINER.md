@@ -198,43 +198,16 @@ Update the build scripts (or clone them at the first use):
 ```sh
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull
 
-xpm run deep-clean -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
-```
-
-If the helper is also under development and needs changes,
-update it too:
-
-```sh
-git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
-```
-
-Install project dependencies:
-
-```sh
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
-```
 
-If the writable helper is used,
-link it in the place of the read-only package:
-
-```sh
-xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
-
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
 xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
-```
 
-For repeated builds, clean the build folder and install de
-build configuration dependencies:
-
-```sh
-xpm run deep-clean --config darwin-x64  -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+# For backup overhead reasons, on the development machine
+# the builds happen on a separate Work folder.
+rm -rf ~/Work/xpack-dev-tools-build/riscv-none-elf-gcc-[0-9]*-*
 
 xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
-```
-
-Run the native build:
-
-```sh
 xpm run build-develop --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
