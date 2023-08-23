@@ -242,14 +242,14 @@ xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpa
 xpm run build-develop --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 55 minutes later, the output of the build script is a compressed
+About 1h12 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/darwin-x64/deploy
-total 197288
--rw-r--r--  1 ilg  staff  93798413 Feb  1 12:52 xpack-riscv-none-elf-gcc-13.2.0-1-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff       118 Feb  1 12:52 xpack-riscv-none-elf-gcc-13.2.0-1-darwin-x64.tar.gz.sha
+total 262456
+-rw-r--r--  1 ilg  staff  131934771 Aug 23 01:57 xpack-riscv-none-elf-gcc-13.2.0-1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        118 Aug 23 01:57 xpack-riscv-none-elf-gcc-13.2.0-1-darwin-x64.tar.gz.sha
 ```
 
 #### Apple Silicon macOS
@@ -275,14 +275,14 @@ xpm install --config darwin-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-x
 xpm run build-develop --config darwin-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 25 minutes later, the output of the build script is a compressed
+About 37 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/darwin-arm64/deploy
-total 196792
--rw-r--r--  1 ilg  staff  90622384 Feb  1 12:11 xpack-riscv-none-elf-gcc-13.2.0-1-darwin-arm64.tar.gz
--rw-r--r--  1 ilg  staff       120 Feb  1 12:11 xpack-riscv-none-elf-gcc-13.2.0-1-darwin-arm64.tar.gz.sha
+total 263048
+-rw-r--r--  1 ilg  staff  128160032 Aug 23 01:22 xpack-riscv-none-elf-gcc-13.2.0-1-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff        120 Aug 23 01:22 xpack-riscv-none-elf-gcc-13.2.0-1-darwin-arm64.tar.gz.sha
 ```
 
 #### Intel GNU/Linux
@@ -310,14 +310,14 @@ xpm run docker-link-deps --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none
 xpm run docker-build-develop --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 30 minutes later, the output of the build script is a compressed
+About 46 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-x64/deploy
-total 102308
--rw-r--r-- 1 ilg ilg 104756842 Feb  1 10:19 xpack-riscv-none-elf-gcc-13.2.0-1-linux-x64.tar.gz
--rw-r--r-- 1 ilg ilg       117 Feb  1 10:19 xpack-riscv-none-elf-gcc-13.2.0-1-linux-x64.tar.gz.sha
+total 138680
+-rw-r--r-- 1 ilg ilg 142003499 Aug 22 23:14 xpack-riscv-none-elf-gcc-13.2.0-1-linux-x64.tar.gz
+-rw-r--r-- 1 ilg ilg       117 Aug 22 23:14 xpack-riscv-none-elf-gcc-13.2.0-1-linux-x64.tar.gz.sha
 ```
 
 ##### Build the Windows binaries
@@ -337,14 +337,14 @@ xpm run docker-link-deps --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none
 xpm run docker-build-develop --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 30 minutes later, the output of the build script is a compressed
+About 38 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/win32-x64/deploy
-total 109320
--rw-r--r-- 1 ilg ilg 111937715 Feb  1 10:48 xpack-riscv-none-elf-gcc-13.2.0-1-win32-x64.zip
--rw-r--r-- 1 ilg ilg       114 Feb  1 10:48 xpack-riscv-none-elf-gcc-13.2.0-1-win32-x64.zip.sha
+total 150400
+-rw-r--r-- 1 ilg ilg 153999860 Aug 22 23:06 xpack-riscv-none-elf-gcc-13.2.0-1-win32-x64.zip
+-rw-r--r-- 1 ilg ilg       114 Aug 22 23:06 xpack-riscv-none-elf-gcc-13.2.0-1-win32-x64.zip.sha
 ```
 
 #### Arm GNU/Linux 64-bit
@@ -370,14 +370,14 @@ xpm run docker-link-deps --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-no
 xpm run docker-build-develop --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 3h30 later, the output of the build script is a compressed
+About 5h02 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-arm64/deploy
-total 98020
--rw-r--r-- 1 ilg ilg 100361089 Feb  1 13:16 xpack-riscv-none-elf-gcc-13.2.0-1-linux-arm64.tar.gz
--rw-r--r-- 1 ilg ilg       119 Feb  1 13:16 xpack-riscv-none-elf-gcc-13.2.0-1-linux-arm64.tar.gz.sha
+total 135604
+-rw-r--r-- 1 ilg ilg 138853247 Aug 22 19:26 xpack-riscv-none-elf-gcc-13.2.0-1-linux-arm64.tar.gz
+-rw-r--r-- 1 ilg ilg       119 Aug 22 19:26 xpack-riscv-none-elf-gcc-13.2.0-1-linux-arm64.tar.gz.sha
 ```
 
 #### Arm GNU/Linux 32-bit
@@ -401,14 +401,14 @@ xpm run docker-link-deps --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none
 xpm run docker-build-develop --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 3h15 later, the output of the build script is a compressed
+About 4h51 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-arm/deploy
-total 92456
--rw-r--r-- 1 ilg ilg 94666972 Feb  1 13:04 xpack-riscv-none-elf-gcc-13.2.0-1-linux-arm.tar.gz
--rw-r--r-- 1 ilg ilg      117 Feb  1 13:04 xpack-riscv-none-elf-gcc-13.2.0-1-linux-arm.tar.gz.sha
+total 129736
+-rw-r--r-- 1 ilg ilg 132843190 Aug 22 19:15 xpack-riscv-none-elf-gcc-13.2.0-1-linux-arm.tar.gz
+-rw-r--r-- 1 ilg ilg       117 Aug 22 19:15 xpack-riscv-none-elf-gcc-13.2.0-1-linux-arm.tar.gz.sha
 ```
 
 ### Update README-MAINTAINER listing output

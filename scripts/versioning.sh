@@ -58,71 +58,72 @@ function application_build_versioned_components()
         # DO NOT add the combination that is already given as the default!
         # rv32imac-ilp32-- \
 
+        # The `zicsr*zifencei` seems redundant for GCC 13.
         XBB_GCC_MULTILIB_LIST=${XBB_GCC_MULTILIB_LIST:-"\
-          rv32e-ilp32e-- \
-          rv32ea-ilp32e-- \
-          rv32eac-ilp32e-- \
-          rv32ec-ilp32e-- \
-          rv32em-ilp32e-- \
-          rv32ema-ilp32e-- \
-          rv32emac-ilp32e-- \
-          rv32emc-ilp32e-- \
+          rv32e-ilp32e--zicsr*zifencei \
+          rv32ea-ilp32e--zicsr*zifencei \
+          rv32eac-ilp32e--zicsr*zifencei \
+          rv32ec-ilp32e--zicsr*zifencei \
+          rv32em-ilp32e--zicsr*zifencei \
+          rv32ema-ilp32e--zicsr*zifencei \
+          rv32emac-ilp32e--zicsr*zifencei \
+          rv32emc-ilp32e--zicsr*zifencei \
           \
-          rv32i-ilp32-- \
-          rv32ia-ilp32-- \
-          rv32iac-ilp32-- \
-          rv32iaf-ilp32f-- \
-          rv32iafc-ilp32f-- \
-          rv32iafd-ilp32d-- \
-          rv32iafdc-ilp32d-- \
-          rv32ic-ilp32-- \
-          rv32if-ilp32f-- \
-          rv32ifc-ilp32f-- \
-          rv32ifd-ilp32d-- \
-          rv32ifdc-ilp32d-- \
-          rv32im-ilp32-- \
-          rv32ima-ilp32-- \
-          rv32imaf-ilp32f-- \
-          rv32imafc-ilp32f-- \
-          rv32imafd-ilp32d-- \
-          rv32imafdc-ilp32d-- \
-          rv32imc-ilp32-- \
-          rv32imf-ilp32f-- \
-          rv32imfc-ilp32f-- \
-          rv32imfd-ilp32d-- \
-          rv32imfdc-ilp32d-- \
+          rv32i-ilp32--zicsr*zifencei \
+          rv32ia-ilp32--zicsr*zifencei \
+          rv32iac-ilp32--zicsr*zifencei \
+          rv32iaf-ilp32f--zicsr*zifencei \
+          rv32iafc-ilp32f--zicsr*zifencei \
+          rv32iafd-ilp32d--zicsr*zifencei \
+          rv32iafdc-ilp32d--zicsr*zifencei \
+          rv32ic-ilp32--zicsr*zifencei \
+          rv32if-ilp32f--zicsr*zifencei \
+          rv32ifc-ilp32f--zicsr*zifencei \
+          rv32ifd-ilp32d--zicsr*zifencei \
+          rv32ifdc-ilp32d--zicsr*zifencei \
+          rv32im-ilp32--zicsr*zifencei \
+          rv32ima-ilp32--zicsr*zifencei \
+          rv32imaf-ilp32f--zicsr*zifencei \
+          rv32imafc-ilp32f--zicsr*zifencei \
+          rv32imafd-ilp32d--zicsr*zifencei \
+          rv32imafdc-ilp32d--zicsr*zifencei \
+          rv32imc-ilp32--zicsr*zifencei \
+          rv32imf-ilp32f--zicsr*zifencei \
+          rv32imfc-ilp32f--zicsr*zifencei \
+          rv32imfd-ilp32d--zicsr*zifencei \
+          rv32imfdc-ilp32d--zicsr*zifencei \
           \
-          rv64i-lp64-- \
-          rv64ia-lp64-- \
-          rv64iac-lp64-- \
-          rv64iaf-lp64f-- \
-          rv64iafc-lp64f-- \
-          rv64iafd-lp64d-- \
-          rv64iafdc-lp64d-- \
-          rv64ic-lp64-- \
-          rv64if-lp64f-- \
-          rv64ifc-lp64f-- \
-          rv64ifd-lp64d-- \
-          rv64ifdc-lp64d-- \
-          rv64im-lp64-- \
-          rv64ima-lp64-- \
-          rv64imac-lp64-- \
-          rv64imaf-lp64f-- \
-          rv64imafc-lp64f-- \
-          rv64imafd-lp64d-- \
-          rv64imafdc-lp64d-- \
-          rv64imc-lp64-- \
-          rv64imf-lp64f-- \
-          rv64imfc-lp64f-- \
-          rv64imfd-lp64d-- \
-          rv64imfdc-lp64d-- \
+          rv64i-lp64--zicsr*zifencei \
+          rv64ia-lp64--zicsr*zifencei \
+          rv64iac-lp64--zicsr*zifencei \
+          rv64iaf-lp64f--zicsr*zifencei \
+          rv64iafc-lp64f--zicsr*zifencei \
+          rv64iafd-lp64d--zicsr*zifencei \
+          rv64iafdc-lp64d--zicsr*zifencei \
+          rv64ic-lp64--zicsr*zifencei \
+          rv64if-lp64f--zicsr*zifencei \
+          rv64ifc-lp64f--zicsr*zifencei \
+          rv64ifd-lp64d--zicsr*zifencei \
+          rv64ifdc-lp64d--zicsr*zifencei \
+          rv64im-lp64--zicsr*zifencei \
+          rv64ima-lp64--zicsr*zifencei \
+          rv64imac-lp64--zicsr*zifencei \
+          rv64imaf-lp64f--zicsr*zifencei \
+          rv64imafc-lp64f--zicsr*zifencei \
+          rv64imafd-lp64d--zicsr*zifencei \
+          rv64imafdc-lp64d--zicsr*zifencei \
+          rv64imc-lp64--zicsr*zifencei \
+          rv64imf-lp64f--zicsr*zifencei \
+          rv64imfc-lp64f--zicsr*zifencei \
+          rv64imfd-lp64d--zicsr*zifencei \
+          rv64imfdc-lp64d--zicsr*zifencei \
         "}
       else
         # Short list used during development to save time.
         # Skip: rv32imac-ilp32-- (see above).
         XBB_GCC_MULTILIB_LIST=${XBB_GCC_MULTILIB_LIST:-"\
           rv32emac-ilp32e-- \
-          rv32ima-ilp32-- \
+          rv32ima-ilp32--zicsr*zifencei \
           rv64imac-lp64-- \
         "}
       fi
