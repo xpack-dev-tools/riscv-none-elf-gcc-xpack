@@ -59,7 +59,7 @@ function application_build_versioned_components()
         # DO NOT add the combination that is already given as the default!
         # rv32imac-ilp32-- \
 
-        # The `zicsr*zifencei` seems redundant for GCC 13, but are
+        # The `zicsr*zifencei` seem redundant for GCC 13, but are
         # important for GCC 12.
         XBB_GCC_MULTILIB_LIST=${XBB_GCC_MULTILIB_LIST:-"\
           rv32e-ilp32e--zicsr*zifencei \
