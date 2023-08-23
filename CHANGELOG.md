@@ -3,9 +3,26 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-08-23
+
+* v13.2.0-1 released
+* cc4bbf2 application.sh: comment out _WITHOUT_MULTILIB
+* 22fc653 versioning.sh: add support for 12.3.0
+* 4918d48 README update
+* 81c663f README update
+* 55e3880 application.sh: temporarily WITHOUT_MULTILIB="y"
+* aacb615 .npmignore update
+* 00eb6a9 package.json: bump deps
+* bdfb151 .vscode/settings.json: ignoreWords
+* cd43cb9 versioning.sh: explicit zicsr*zifencei
+* 5c6d1c0 README update
+
 ## 2023-08-22
 
-* v13.2.0-1 prepared
+* 7d1a7e8 revert texinfo to local package
+* 15c6b71 README update
+* a56b3b7 README update
+* 081f12e prepare v13.2.0-1
 * f26ee16 package.json: xpack-dev-tools-build
 * c5f50ce package.json: bump deps
 * c5b6bc4 application.sh: libunistring
