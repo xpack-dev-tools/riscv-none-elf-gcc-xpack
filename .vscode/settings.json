@@ -80,6 +80,7 @@
     "libreadline",
     "libsqlite",
     "libstdc",
+    "libunistring",
     "libz",
     "libzstd",
     "linux",
