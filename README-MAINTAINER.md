@@ -547,20 +547,6 @@ page.
 
 These commands use the `xpack-develop` branch of this repo.
 
-### Re-enable multi-lib
-
-- comment out `XBB_APPLICATION_WITHOUT_MULTILIB` in `application.sh`
-- commit and push the repo
-
-#### Test multilib builds
-
-Multilib builds take too long to run tests on all platforms,
-run them only on the fast machines, like `xbbma` and `xbbli`.
-
-### Manually trigger the multilib build GitHub Actions
-
-To trigger the GitHub Actions builds, use the same xPack actions as before.
-
 ## Durations & results
 
 The full builds take about 14 hours (3h30 without multi-libs):
@@ -625,6 +611,14 @@ in the environment.
 
 The test results are available from
 [Travis CI](https://app.travis-ci.com/github/xpack-dev-tools/riscv-none-elf-gcc-xpack/builds/).
+
+### Re-enable multi-lib, build and test again
+
+Once the simple build passed tests, enable multi-lib and rerun:
+
+- comment out `XBB_APPLICATION_WITHOUT_MULTILIB` in `application.sh`
+- commit and push the `xpack-develop` branch to the repo
+- go back to _Push the build scripts_, build and test again.
 
 ### Manual tests
 
