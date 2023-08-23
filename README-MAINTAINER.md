@@ -92,8 +92,10 @@ xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
 
 The xPack GNU RISC-V Embedded GCC release schedule will generally follow the
 [GNU](https://gcc.gnu.org/releases.html) release schedule. To save some
-time, the initial X.1 release will be skipped. Updates for previous releases
-are also planned (like X-1.3, X-2.4, X-3.5).
+time, the initial X.1 release will be skipped. Updates for previous releases,
+like (X-1).3, (X-2).4, (X-3).5, are also planned.
+The builds will be performed after all these releases will be available
+(tentatively in August-September).
 
 ## How to make new releases
 
@@ -549,13 +551,13 @@ These commands use the `xpack-develop` branch of this repo.
 
 ## Durations & results
 
-The full builds take about 14 hours (3h30 without multi-libs):
+The full builds take about 15 hours (4h24 without multi-libs):
 
-- `xbbmi`: 6h20 (1h04)
-- `xbbma`: 2h22 (0h33)
-- `xbbli`: 2h49 (0h41) Linux, 2h51 (0h33) Windows
-- `xbbla`: 13h33 (4h24)
-- `xbbla32`: 14h00 (4h17)
+- `xbbmi`: 5h15 (1h04) (nuc)
+- `xbbma`: 2h35 (0h33)
+- `xbbli`: 2h52 (0h41) Linux, 2h49 (0h33) Windows
+- `xbbla`: 13h33- (4h24)
+- `xbbla32`: 14h00- (4h17)
 
 The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.

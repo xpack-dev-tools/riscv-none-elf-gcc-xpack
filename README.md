@@ -32,6 +32,8 @@ The binaries can be installed automatically as **binary xPacks** or manually as
 This distribution plans to follow the official
 [GNU](https://gcc.gnu.org/releases.html) release schedule.
 To save some time, the initial X.1 release will be skipped.
+Updates for previous releases,
+like (X-1).3, (X-2).4, (X-3).5, are also planned.
 
 ## User info
 
