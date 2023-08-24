@@ -556,8 +556,8 @@ The full builds take about 15 hours (4h24 without multi-libs):
 - `xbbmi`: 5h15 (1h04) (nuc)
 - `xbbma`: 2h35 (0h33)
 - `xbbli`: 2h52 (0h41) Linux, 2h49 (0h33) Windows
-- `xbbla`: 13h33- (4h24)
-- `xbbla32`: 14h00- (4h17)
+- `xbbla`: 16h56 (4h24)
+- `xbbla32`: 16h09 (4h17)
 
 The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
