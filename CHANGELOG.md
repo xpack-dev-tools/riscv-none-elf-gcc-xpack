@@ -3,9 +3,16 @@
 
 Entries in this file are in reverse chronological order.
 
-## 2023-08-23
+## 2023-08-24
 
 * v13.2.0-1 released
+* d6fe1ec READMEs updates
+
+## 2023-08-23
+
+* 8f9583a versioning.sh: fix typo
+* 9ed0e45 versioning.sh: comments update
+* 32aa983 CHANGELOG update
 * cc4bbf2 application.sh: comment out _WITHOUT_MULTILIB
 * 22fc653 versioning.sh: add support for 12.3.0
 * 4918d48 README update
