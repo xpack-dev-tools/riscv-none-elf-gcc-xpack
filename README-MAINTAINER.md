@@ -143,7 +143,7 @@ but in the version specific release page.
 
 ### Update versions in `README` files
 
-Update both full 5 numbers (`13.2.0-1.1`) and short 3 numbers (`13.2.0`)
+Update both full 5 numbers (`13.2.0-1.2`) and short 3 numbers (`13.2.0`)
 versions in:
 
 - update version in `README-MAINTAINER.md`
@@ -661,7 +661,7 @@ git clone \
 - check version:
 
 ```sh
-.../riscv-none-elf-gcc-13.2.0-1.1/bin/riscv-none-elf-gcc --version
+.../riscv-none-elf-gcc-13.2.0-1.2/bin/riscv-none-elf-gcc --version
 riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 13.2.0
 ```
 
@@ -771,12 +771,12 @@ watching this project.
 
 - select the `xpack-develop` branch
 - check the latest commits `npm run git-log`
-- update `CHANGELOG.md`, add a line like _* v13.2.0-1.1 published on npmjs.com_
-- commit with a message like _CHANGELOG: publish npm v13.2.0-1.1_
+- update `CHANGELOG.md`, add a line like _* v13.2.0-1.2 published on npmjs.com_
+- commit with a message like _CHANGELOG: publish npm v13.2.0-1.2_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
-- `npm version 13.2.0-1.1`; the first 4 numbers are the same as the
+- `npm version 13.2.0-1.2`; the first 4 numbers are the same as the
   GitHub release; the fifth number is the npm specific version
 - the commits and the tag should have been pushed by the `postversion` script;
   if not, push them with `git push origin --tags`
@@ -805,12 +805,12 @@ The tests results are available from the
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc`
-- `npm dist-tag add @xpack-dev-tools/riscv-none-elf-gcc@13.2.0-1.1 latest`
+- `npm dist-tag add @xpack-dev-tools/riscv-none-elf-gcc@13.2.0-1.2 latest`
 - `npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc`
 
 In case the previous version is not functional and needs to be unpublished:
 
-- `npm unpublish @xpack-dev-tools/riscv-none-elf-gcc@13.2.0-1.1`
+- `npm unpublish @xpack-dev-tools/riscv-none-elf-gcc@13.2.0-1.2`
 
 ## Update the Web
 
