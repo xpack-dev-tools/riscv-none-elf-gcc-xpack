@@ -7,11 +7,11 @@ summary: "Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release; it fix
 
 summary: "Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the GNU GCC release."
 
-gcc_version: "12.2.0"
-binutils_version: "2.38"
-newlib_version: "4.2.0"
-gdb_version: "12.1"
-python_version: "3.10"
+gcc_version: "13.2.0"
+binutils_version: "2.41"
+newlib_version: "4.3.0"
+gdb_version: "13.2"
+python_version: "3.11.4"
 
 version: "{{ XBB_RELEASE_VERSION }}"
 npm_subversion: "1"
