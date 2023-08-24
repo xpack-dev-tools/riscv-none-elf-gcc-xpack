@@ -5,7 +5,11 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-08-24
 
-* v13.2.0-1 released
+* v13.2.0-1.1 published on npmjs.com
+* 21aae1e templates/jekyll update
+* 3f188eb templates/jekyll update
+* 494f925 README update
+* 94e9dc8 CHANGELOG update
 * d6fe1ec READMEs updates
 
 ## 2023-08-23
