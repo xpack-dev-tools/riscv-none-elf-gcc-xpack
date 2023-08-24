@@ -5,7 +5,10 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-08-24
 
-* v12.3.0-1 prepared
+* 1c654f2 README update
+* c14558a application.sh: re-enable multilib
+* 6f69c96 application.sh: temporary WITHOUT_MULTILIB="y"
+* b15a351 prepare v12.3.0-1
 * 961d106 13.2.0-1.2
 * 7a9d95c prepare v13.2.0-1.2
 * 1c37e91 package.json: update urls for 13.2.0-1 release
