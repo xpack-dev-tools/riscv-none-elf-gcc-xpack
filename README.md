@@ -234,11 +234,11 @@ but since semver allows only three numbers, all additional ones can
 be added only as pre-release strings, separated by a dash,
 like `12.3.0-1`.
 When published as a npm package, the version gets
-a fifth number, like `12.3.0-1.2`.
+a fifth number, like `12.3.0-1.1`.
 
 Since adherence of third party packages to semver is not guaranteed,
 it is recommended to use semver expressions like `^12.3.0` and `~12.3.0`
-with caution, and prefer exact matches, like `12.3.0-1.2`.
+with caution, and prefer exact matches, like `12.3.0-1.1`.
 
 ## Maintainer info
 

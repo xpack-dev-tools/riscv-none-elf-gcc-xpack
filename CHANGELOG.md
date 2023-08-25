@@ -3,9 +3,14 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-08-25
+
+* v12.3.0-1.1 published on npmjs.com
+* 7dba1ee package.json: update urls for 12.3.0-1 release
+* 075e53a CHANGELOG update
+
 ## 2023-08-24
 
-* v12.3.0-1 released
 * 3d76a92 CHANGELOG update
 * 1c654f2 README update
 * c14558a application.sh: re-enable multilib
