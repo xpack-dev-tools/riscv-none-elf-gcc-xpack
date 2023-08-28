@@ -203,13 +203,12 @@ git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
+
 xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 
-# For backup overhead reasons, on the development machine
-# the builds happen on a separate Work folder.
-rm -rf ~/Work/xpack-dev-tools-build/riscv-none-elf-gcc-[0-9]*-*
-
-xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run deep-clean --config darwin-x64  -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run build-develop --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
@@ -239,8 +238,9 @@ xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
 xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
 xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+\
 xpm run deep-clean --config darwin-x64  -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run build-develop --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
@@ -272,8 +272,9 @@ xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
 xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
 xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+\
 xpm run deep-clean --config darwin-arm64  -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm install --config darwin-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm install --config darwin-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run build-develop --config darwin-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
@@ -306,9 +307,10 @@ xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
 xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
 xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+\
 xpm run deep-clean --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run docker-prepare --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-link-deps --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run docker-link-deps --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run docker-build-develop --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
@@ -335,7 +337,7 @@ xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 \
 xpm run deep-clean --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run docker-prepare --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-link-deps --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run docker-link-deps --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run docker-build-develop --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
@@ -366,9 +368,10 @@ xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
 xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
 xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+\
 xpm run deep-clean --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run docker-prepare --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-link-deps --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run docker-link-deps --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run docker-build-develop --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
@@ -397,9 +400,10 @@ Update the build scripts (or clone them at the first use):
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+\
 xpm run deep-clean --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run docker-prepare --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-link-deps --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run docker-link-deps --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 xpm run docker-build-develop --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
