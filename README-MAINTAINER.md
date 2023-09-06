@@ -129,7 +129,7 @@ versions in:
 
 ### Update version in `package.json` to a pre-release
 
-Use a new version, suffixed by `.pre`.
+Use the new version, suffixed by `pre`, like `12.3.0-1.pre`.
 
 ### Update `CHANGELOG.md`
 
@@ -173,9 +173,8 @@ Possibly add binutils & gdb patches.
 For Intel macOS, first run the build on the development machine
 (`wksi`, a recent macOS):
 
-Update the build scripts (or clone them at the first use):
-
 ```sh
+# Update the build scripts.
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull
 
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
