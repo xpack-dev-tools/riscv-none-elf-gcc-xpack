@@ -22,10 +22,12 @@ comments: true
 
 date:   {{ RELEASE_DATE }}
 
+# For Jekyll releases selection.
 categories:
   - releases
   - riscv-none-elf-gcc
 
+# For navigation; use scripts/createtag.sh in Jekyll.
 tags:
   - releases
   - riscv
