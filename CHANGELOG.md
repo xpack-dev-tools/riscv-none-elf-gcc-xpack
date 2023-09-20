@@ -3,9 +3,50 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-09-18
+
+* v12.3.0-2 prepared
+
+## 2023-09-11
+
+* e518287 package.json: bump deps
+
+## 2023-09-08
+
+* eb45645 package.json: bump deps
+* bb14277 package.json 13.2.0-1.1
+* 3d516cd VERSION 13.2.0-1
+* d4ff753 versioning.sh: define XBB_GCC_PATCH_FILE_NAME
+
+## 2023-09-06
+
+* 194ed42 application.sh: temporarily disable multi-lib
+* 9503db9 package.json: bump deps
+* a58cd71 READMEs update
+* abff9a5 body-jekyll update
+
+## 2023-09-05
+
+* ca60e8c re-generate workflows
+* cf4e0e2 READMEs update
+* b55878d package.json: bump deps
+
+## 2023-09-03
+
+* 4fe3ec7 package.json: bump deps
+
+## 2023-08-29
+
+* cb62e6b versioning.sh: explain new makeinfo needed
+
+## 2023-08-28
+
+* 1501334 READMEs update
+
 ## 2023-08-25
 
-* v12.3.0-1.1 published on npmjs.com
+2023-08-25 * 522a594 12.3.0-1.1
+2023-08-25 * 53940f7 CHANGELOG: publish npm v12.3.0-1.1
 * 7dba1ee package.json: update urls for 12.3.0-1 release
 * 075e53a CHANGELOG update
 
