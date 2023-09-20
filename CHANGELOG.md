@@ -3,9 +3,15 @@
 
 Entries in this file are in reverse chronological order.
 
-## 2023-09-18
+2023-09-20
 
-* v12.3.0-2 prepared
+* f253f93 package.json: bump deps
+* 7084c2a prepare v12.3.0-2
+
+## 2023-09-16
+
+* fbfada7 package.json: add linux32
+* 7f47c0b body-jekyll update
 
 ## 2023-09-11
 
