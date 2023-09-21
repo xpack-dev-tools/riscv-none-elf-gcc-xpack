@@ -3,8 +3,9 @@
 
 Entries in this file are in reverse chronological order.
 
-2023-09-20
+## 2023-09-20
 
+* 06a1a40 CHANGELOG update
 * f253f93 package.json: bump deps
 * 7084c2a prepare v12.3.0-2
 
