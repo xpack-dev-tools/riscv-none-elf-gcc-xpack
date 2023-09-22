@@ -5,7 +5,9 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-09-22
 
-* v12.3.0-2 released
+* v12.3.0-2.1 published on npmjs.com
+* 9897a00 package.json: update urls for 12.3.0-2 release
+* 814fef2 CHANGELOG update
 * ec2fa5c application.sh: re-enable multi-lib
 * 3bf3e64 CHANGELOG update
 
