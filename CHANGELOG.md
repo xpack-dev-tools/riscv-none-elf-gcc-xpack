@@ -3,6 +3,12 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-09-22
+
+* v12.3.0-2 released
+* ec2fa5c application.sh: re-enable multi-lib
+* 3bf3e64 CHANGELOG update
+
 ## 2023-09-20
 
 * 06a1a40 CHANGELOG update
