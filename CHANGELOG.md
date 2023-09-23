@@ -3,9 +3,15 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-09-24
+
+* v13.2.0-2 prepared
+
 ## 2023-09-22
 
-* v12.3.0-2.1 published on npmjs.com
+* 30a1436 application.sh: disable multi-lib
+* abeaea7 12.3.0-2.1
+* aeeda57 CHANGELOG: publish npm v12.3.0-2.1
 * 9897a00 package.json: update urls for 12.3.0-2 release
 * 814fef2 CHANGELOG update
 * ec2fa5c application.sh: re-enable multi-lib
