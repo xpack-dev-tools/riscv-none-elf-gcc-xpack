@@ -5,7 +5,8 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-09-24
 
-* v13.2.0-2 prepared
+* 8d98b3f application.sh: re-enable multi-lib
+* a6a009f prepare v13.2.0-2
 
 ## 2023-09-22
 
