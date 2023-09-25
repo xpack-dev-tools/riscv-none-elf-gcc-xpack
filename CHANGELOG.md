@@ -3,6 +3,10 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-09-25
+
+* v13.2.0-2 released
+
 ## 2023-09-24
 
 * 8d98b3f application.sh: re-enable multi-lib
