@@ -148,10 +148,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/13.2.
 │   ├── riscv-none-elf-strings
 │   └── riscv-none-elf-strip
 ├── distro-info
-│   ├── CHANGELOG.md
-│   ├── licenses
-│   ├── patches
-│   └── scripts
+│   └── licenses
 ├── include
 │   └── gdb
 ├── lib
@@ -159,14 +156,14 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/13.2.
 │   ├── gcc
 │   ├── libcc1.0.so
 │   ├── libcc1.so -> libcc1.0.so
-│   └── python3.10
+│   └── python3.11
 ├── libexec
 │   ├── gcc
 │   ├── libbz2.1.0.8.dylib
 │   ├── libcrypt.2.dylib
 │   ├── libcrypto.1.1.dylib
-│   ├── libexpat.1.8.8.dylib
-│   ├── libexpat.1.dylib -> libexpat.1.8.8.dylib
+│   ├── libexpat.1.8.10.dylib
+│   ├── libexpat.1.dylib -> libexpat.1.8.10.dylib
 │   ├── libffi.8.dylib
 │   ├── libgmp.10.dylib
 │   ├── libiconv.2.dylib
@@ -176,14 +173,14 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/13.2.
 │   ├── libmpfr.6.dylib
 │   ├── libncurses.6.dylib
 │   ├── libpanel.6.dylib
-│   ├── libpython3.10.dylib
-│   ├── libreadline.8.1.dylib
-│   ├── libreadline.8.dylib -> libreadline.8.1.dylib
+│   ├── libpython3.11.dylib
+│   ├── libreadline.8.2.dylib
+│   ├── libreadline.8.dylib -> libreadline.8.2.dylib
 │   ├── libsqlite3.0.dylib
 │   ├── libssl.1.1.dylib
-│   ├── libz.1.2.12.dylib
-│   ├── libz.1.dylib -> libz.1.2.12.dylib
-│   └── libzstd.1.5.2.dylib
+│   ├── libz.1.2.13.dylib
+│   ├── libz.1.dylib -> libz.1.2.13.dylib
+│   └── libzstd.1.5.5.dylib
 ├── riscv-none-elf
 │   ├── bin
 │   ├── include
@@ -192,7 +189,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/13.2.
 └── share
     └── gcc-13.2.0
 
-20 directories, 59 files
+19 directories, 58 files
 ```
 
 No other files are installed in any system folders or other locations.
