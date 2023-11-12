@@ -215,7 +215,7 @@ function application_build_versioned_components()
     # https://sourceforge.net/projects/lzmautils/files/
     XBB_XZ_VERSION="5.4.4" # "5.2.5"
 
-    # https://github.com/facebook/zstd/releases
+    # https://github.com/facebook/zstd/tags
     XBB_ZSTD_VERSION="1.5.5" # "1.5.2"
 
     # https://ftp.gnu.org/gnu/ncurses/
