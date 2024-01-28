@@ -1,33 +1,36 @@
 ### Disclaimer
 
 The xPack GNU RISC-V Embedded GCC is only a binary distribution of
-the **SiFive RISC-V GNU Embedded Toolchain**,
+the GNU GCC,
 and does not intend to add new functionality, or to fix existing problems.
 
 If you have questions/suggestions related to the procedure used to
 build/publish the binary distribution, continue reading the next sections.
 
 If you have problems related to RISC-V GCC functionality, please use the
-official [SiFive Forums](https://forums.sifive.com/).
+official GCC support channels.
 
 ### Prerequisites
 
 Before entering a new ticket, please consider the following:
 
-- [ ] read the documentation pages carefully (`share/doc/pdf/gcc/gcc.pdf`)
-- [ ] check the [xPack Forums](https://www.tapatalk.com/groups/xpack/) for similar problems
+- [ ] read the GCC documentation pages carefully
+- [ ] check the [GitHub Discussions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/discussions) for similar problems
 - [ ] check the [GitHub Issues](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/issues/)
 
 If you still could not find an answer, if you have interesting use
 cases, if you have custom configurations, and generally if you have
 any experience that you would like to share with others, use the
-[xPack Forums](https://www.tapatalk.com/groups/xpack/), the
-GNU RISC-V Embedded GCC section.
+[GitHub Discussions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/discussions).
 
 If you are convinced that you identified a bug related to the binary
 distribution, not to GNU RISC-V Embedded GCC itself (if you have doubts,
 use the forum), or you have a pertinent suggestion how to enhance the
 xPack GNU RISC-V Embedded GCC distribution, continue and register a new issue.
+
+Remove the above explanatory sections before continuing.
+
+---
 
 ### Description
 
@@ -53,4 +56,4 @@ identify your problem.
 
 ---
 
-Note: Remove unnecessary text after reading, before entering your ticket.
+DO NOT enter your ticket with the Disclaimer and Prerequisites explanations!
