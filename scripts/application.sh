@@ -37,6 +37,8 @@ XBB_APPLICATION_TARGET_TRIPLET=${XBB_APPLICATION_TARGET_TRIPLET:-"riscv-none-elf
 XBB_APPLICATION_GCC_ARCH=${XBB_APPLICATION_GCC_ARCH:-"rv32imac"}
 XBB_APPLICATION_GCC_ABI=${XBB_APPLICATION_GCC_ABI:-"ilp32"}
 
+# XBB_APPLICATION_GCC_MULTILIB_LIST=" ... "
+
 # -----------------------------------------------------------------------------
 
 XBB_GITHUB_ORG="${XBB_GITHUB_ORG:-"xpack-dev-tools"}"

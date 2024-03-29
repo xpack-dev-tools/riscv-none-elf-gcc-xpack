@@ -61,7 +61,7 @@ function application_build_versioned_components()
 
         # The `zicsr*zifencei` seem redundant for GCC 13, but are
         # important for GCC 12.
-        XBB_GCC_MULTILIB_LIST=${XBB_GCC_MULTILIB_LIST:-"\
+        XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
           rv32e-ilp32e--zicsr*zifencei \
           rv32ea-ilp32e--zicsr*zifencei \
           rv32eac-ilp32e--zicsr*zifencei \
@@ -123,7 +123,7 @@ function application_build_versioned_components()
       else
         # Short list used during development to save time.
         # Skip: rv32imac-ilp32-- (see above).
-        XBB_GCC_MULTILIB_LIST=${XBB_GCC_MULTILIB_LIST:-"\
+        XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
           rv32emac-ilp32e-- \
           rv32ima-ilp32--zicsr*zifencei \
           rv64imac-lp64-- \
@@ -374,7 +374,7 @@ function application_build_versioned_components()
         # DO NOT add the combination that is already given as the default!
         # rv32imac-ilp32-- \
 
-        XBB_GCC_MULTILIB_LIST=${XBB_GCC_MULTILIB_LIST:-"\
+        XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
           rv32e-ilp32e-- \
           rv32ea-ilp32e-- \
           rv32eac-ilp32e-- \
@@ -436,7 +436,7 @@ function application_build_versioned_components()
       else
         # Short list used during development to save time.
         # Skip: rv32imac-ilp32-- (see above).
-        XBB_GCC_MULTILIB_LIST=${XBB_GCC_MULTILIB_LIST:-"\
+        XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
           rv32emac-ilp32e-- \
           rv32ima-ilp32-- \
           rv64imac-lp64-- \
