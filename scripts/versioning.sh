@@ -213,6 +213,7 @@ function application_build_versioned_components()
     XBB_ISL_VERSION="0.26" # "0.24"
 
     # https://sourceforge.net/projects/lzmautils/files/
+    # Avoid 5.6.[01]!
     XBB_XZ_VERSION="5.4.4" # "5.2.5"
 
     # https://github.com/facebook/zstd/tags
