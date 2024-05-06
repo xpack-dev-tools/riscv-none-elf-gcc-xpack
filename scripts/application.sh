@@ -27,6 +27,9 @@ declare -a XBB_APPLICATION_COMMON_DEPENDENCIES=( texinfo zlib gmp mpfr mpc isl l
 
 XBB_APPLICATION_HAS_FLEX_PACKAGE="y"
 
+# XBB_APPLICATION_BOOTSTRAP_ONLY="y"
+
+XBB_APPLICATION_TEST_PRERELEASE="y"
 
 # -----------------------------------------------------------------------------
 
