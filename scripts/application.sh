@@ -25,6 +25,9 @@ XBB_APPLICATION_DESCRIPTION="${XBB_APPLICATION_DISTRO_NAME} ${XBB_APPLICATION_NA
 declare -a XBB_APPLICATION_DEPENDENCIES=( )
 declare -a XBB_APPLICATION_COMMON_DEPENDENCIES=( texinfo zlib gmp mpfr mpc isl libiconv xz zstd binutils-cross gcc-cross newlib-cross expat libunistring gettext gpm ncurses readline bzip2 libffi mpdecimal sqlite libxcrypt openssl python3 gdb-cross )
 
+XBB_APPLICATION_HAS_FLEX_PACKAGE="y"
+
+
 # -----------------------------------------------------------------------------
 
 # Normally should be commented out. Enable it only during tests,
