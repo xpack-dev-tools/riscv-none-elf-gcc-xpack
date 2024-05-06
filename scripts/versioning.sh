@@ -11,6 +11,10 @@
 
 function application_build_versioned_components()
 {
+  export XBB_GCC_VERSION="$(xbb_strip_version_pre_release "${XBB_RELEASE_VERSION}")"
+  export XBB_GCC_VERSION_MAJOR=$(xbb_get_version_major "${XBB_GCC_VERSION}")
+  export XBB_GCC_VERSION_MINOR=$(xbb_get_version_minor "${XBB_GCC_VERSION}")
+
   # This definition also enables building newlib-nano.
   XBB_NEWLIB_NANO_SUFFIX="-nano"
 
@@ -36,9 +40,6 @@ function application_build_versioned_components()
   XBB_WITH_GDB_PY3=""
 
   # ---------------------------------------------------------------------------
-
-  XBB_GCC_VERSION="$(xbb_strip_version_pre_release "${XBB_RELEASE_VERSION}")"
-  XBB_GCC_VERSION_MAJOR=$(xbb_get_version_major "${XBB_GCC_VERSION}")
 
   # In reverse chronological order.
   if [[ ${XBB_RELEASE_VERSION} =~ 13[.][2][.]0-.* ]] ||
