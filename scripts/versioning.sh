@@ -196,7 +196,7 @@ function application_build_versioned_components()
     # 3.12.2 fails with `libreadline.so.7: undefined symbol: UP`
     # https://stackoverflow.com/questions/46881581/libreadline-so-7-undefined-symbol-up
     # TODO: investigate
-    export XBB_PYTHON3_VERSION="3.11.4" # "3.12.2" # "3.11.4" # "3.10.4"
+    export XBB_PYTHON3_VERSION="3.11.8" # "3.11.4"
     export XBB_PYTHON3_VERSION_MAJOR=$(xbb_get_version_major "${XBB_PYTHON3_VERSION}")
     export XBB_PYTHON3_VERSION_MINOR=$(xbb_get_version_minor "${XBB_PYTHON3_VERSION}")
 
