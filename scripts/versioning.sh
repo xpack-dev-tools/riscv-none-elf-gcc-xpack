@@ -42,8 +42,8 @@ function application_build_versioned_components()
   # ---------------------------------------------------------------------------
 
   # In reverse chronological order.
-  if [[ ${XBB_RELEASE_VERSION} =~ 12[.][4][.]0-.* ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 13[.][3][.]0-.* ]] || \
+  if [[ ${XBB_RELEASE_VERSION} =~ 12[.][4][.].*-.* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 13[.][3][.].*-.* ]] || \
      [[ ${XBB_RELEASE_VERSION} =~ 14[.][012][.].*-.* ]]
   then
 
@@ -207,7 +207,7 @@ function application_build_versioned_components()
     XBB_LIBICONV_VERSION="1.17"
 
     # https://zlib.net/fossils/
-    XBB_ZLIB_VERSION="1.3.1" # "1.2.13" # "1.2.12"
+    XBB_ZLIB_VERSION="1.3.1" # "1.2.13"
 
     # https://gmplib.org/download/gmp/
     # Arm: In `gmp-h.in` search for `__GNU_MP_VERSION`.
@@ -291,8 +291,8 @@ function application_build_versioned_components()
     gcc_cross_build_common
 
     # -------------------------------------------------------------------------
-  elif [[ ${XBB_RELEASE_VERSION} =~ 12[.][3][.]0-.* ]] || \
-       [[ ${XBB_RELEASE_VERSION} =~ 13[.][2][.]0-.* ]]
+  elif [[ ${XBB_RELEASE_VERSION} =~ 12[.][3][.].*-.* ]] || \
+       [[ ${XBB_RELEASE_VERSION} =~ 13[.][2][.].*-.* ]]
   then
 
     # -------------------------------------------------------------------------
@@ -525,7 +525,7 @@ function application_build_versioned_components()
     gcc_cross_build_common
 
     # -------------------------------------------------------------------------
-  elif [[ ${XBB_RELEASE_VERSION} =~ 12[.][2][.]0-.* ]]
+  elif [[ ${XBB_RELEASE_VERSION} =~ 12[.][2][.].*-.* ]]
   then
 
     # -------------------------------------------------------------------------
