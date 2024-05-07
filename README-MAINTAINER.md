@@ -211,6 +211,7 @@ caffeinate ssh xbbmi
 Repeat the same steps as before.
 
 ```sh
+rm -rf ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json && \
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
