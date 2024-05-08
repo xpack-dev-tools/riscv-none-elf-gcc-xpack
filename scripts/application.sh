@@ -32,6 +32,8 @@ XBB_APPLICATION_HAS_FLEX_PACKAGE="y"
 # To download from the dedicated git branch instead of the released archive.
 # XBB_APPLICATION_TEST_PRERELEASE="y"
 
+XBB_APPLICATION_USE_GCC_FOR_GCC_ON_MACOS="y"
+
 # -----------------------------------------------------------------------------
 
 # Normally should be commented out. Enable it only during tests,
