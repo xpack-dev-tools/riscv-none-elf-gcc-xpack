@@ -42,7 +42,8 @@ function application_build_versioned_components()
   # ---------------------------------------------------------------------------
 
   # In reverse chronological order.
-  if [[ ${XBB_RELEASE_VERSION} =~ 12[.][4][.].*-.* ]] || \
+  if [[ ${XBB_RELEASE_VERSION} =~ 11[.][5][.].*-.* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 12[.][4][.].*-.* ]] || \
      [[ ${XBB_RELEASE_VERSION} =~ 13[.][3][.].*-.* ]] || \
      [[ ${XBB_RELEASE_VERSION} =~ 14[.][012][.].*-.* ]]
   then
