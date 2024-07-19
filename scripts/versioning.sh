@@ -41,23 +41,11 @@ function application_build_versioned_components()
 
   # ---------------------------------------------------------------------------
 
-  # In reverse chronological order.
-  if [[ ${XBB_RELEASE_VERSION} =~ 11[.][5][.].*-.* ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 12[.][4][.].*-.* ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 13[.][3][.].*-.* ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 14[.][012][.].*-.* ]]
+  if [[ ${XBB_RELEASE_VERSION} =~ 11[.].*[.].*-.* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 12[.].*[.].*-.* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 13[.].*[.].*-.* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 14[.].*[.].*-.* ]]
   then
-
-    # -------------------------------------------------------------------------
-
-    if [ "${XBB_APPLICATION_TEST_PRERELEASE:-""}" == "y" ]
-    then
-      # https://github.com/gcc-mirror/gcc
-      XBB_GCC_GIT_URL="https://github.com/gcc-mirror/gcc.git"
-      XBB_GCC_GIT_BRANCH="releases/gcc-${XBB_GCC_VERSION_MAJOR}"
-    fi
-
-    # -------------------------------------------------------------------------
 
     if [ "${XBB_APPLICATION_WITHOUT_MULTILIB:-""}" != "y" ]
     then
@@ -141,6 +129,28 @@ function application_build_versioned_components()
       fi
     fi
 
+  fi
+
+  # ---------------------------------------------------------------------------
+
+  # In reverse chronological order.
+  if [[ ${XBB_RELEASE_VERSION} =~ 11[.][5][.].*-.* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 12[.][4][.].*-.* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 13[.][3][.].*-.* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 14[.][012][.].*-.* ]]
+  then
+
+    # -------------------------------------------------------------------------
+
+    if [ "${XBB_APPLICATION_TEST_PRERELEASE:-""}" == "y" ]
+    then
+      # https://github.com/gcc-mirror/gcc
+      XBB_GCC_GIT_URL="https://github.com/gcc-mirror/gcc.git"
+      XBB_GCC_GIT_BRANCH="releases/gcc-${XBB_GCC_VERSION_MAJOR}"
+    fi
+
+    # -------------------------------------------------------------------------
+
     # https://ftp.gnu.org/gnu/binutils/
     # https://ftp.gnu.org/gnu/binutils/binutils-2.40.tar.xz
 
@@ -179,7 +189,7 @@ function application_build_versioned_components()
     # https://ftp.gnu.org/gnu/gdb/gdb-13.2.tar.xz
 
     # PATCH!
-    XBB_GDB_VERSION="14.2" # "13.2"
+    XBB_GDB_VERSION="15.1" # "14.2" # "13.2"
     XBB_GDB_SRC_FOLDER_NAME="gdb-${XBB_GDB_VERSION}"
     XBB_GDB_ARCHIVE_NAME="${XBB_GDB_SRC_FOLDER_NAME}.tar.xz"
     XBB_GDB_ARCHIVE_URL="https://ftp.gnu.org/gnu/gdb/${XBB_GDB_ARCHIVE_NAME}"
@@ -225,7 +235,7 @@ function application_build_versioned_components()
 
     # https://sourceforge.net/projects/lzmautils/files/
     # Avoid 5.6.[01]!
-    XBB_XZ_VERSION="5.4.6" # "5.4.4"
+    XBB_XZ_VERSION="5.4.7" # "5.4.4"
 
     # https://github.com/facebook/zstd/tags
     XBB_ZSTD_VERSION="1.5.6" # "1.5.5"
@@ -248,7 +258,7 @@ function application_build_versioned_components()
     XBB_LIBUNISTRING_VERSION="1.2" # "1.1"
 
     # https://ftp.gnu.org/pub/gnu/gettext/
-    XBB_GETTEXT_VERSION="0.22"
+    XBB_GETTEXT_VERSION="0.22.5"
 
     # https://github.com/telmich/gpm/tags
     # https://github.com/xpack-dev-tools/gpm/tags
@@ -268,7 +278,7 @@ function application_build_versioned_components()
 
     # Required by a Python 3 module.
     # https://www.sqlite.org/download.html
-    XBB_SQLITE_VERSION="3400100" # "3380200"
+    XBB_SQLITE_VERSION="3460000" # "3400100" # "3380200"
     XBB_SQLITE_YEAR="2024"
 
     # Replacement for the old libcrypt.so.1; required by Python 3.
@@ -276,7 +286,7 @@ function application_build_versioned_components()
     XBB_LIBXCRYPT_VERSION="4.4.36"
 
     # https://www.openssl.org/source/
-    XBB_OPENSSL_VERSION="3.3.0" # "1.1.1v"
+    XBB_OPENSSL_VERSION="3.3.1" # "3.3.0" # "1.1.1v"
 
     # -------------------------------------------------------------------------
 
@@ -294,88 +304,6 @@ function application_build_versioned_components()
   then
 
     # -------------------------------------------------------------------------
-
-    if [ "${XBB_APPLICATION_WITHOUT_MULTILIB:-""}" != "y" ]
-    then
-      # The SiFive list from 10.2 with a lot of non-c extras.
-      # (including `rv32imaf-ilp32f--`).
-      if [ "${XBB_IS_DEVELOP}" != "y" ]
-      then
-
-        # DO NOT add the combination that is already given as the default!
-        # rv32imac-ilp32-- \
-
-        # The `zicsr*zifencei` seem redundant for GCC 13, but are
-        # important for GCC 12.
-        XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
-          rv32e-ilp32e--zicsr*zifencei \
-          rv32ea-ilp32e--zicsr*zifencei \
-          rv32eac-ilp32e--zicsr*zifencei \
-          rv32ec-ilp32e--zicsr*zifencei \
-          rv32em-ilp32e--zicsr*zifencei \
-          rv32ema-ilp32e--zicsr*zifencei \
-          rv32emac-ilp32e--zicsr*zifencei \
-          rv32emc-ilp32e--zicsr*zifencei \
-          \
-          rv32i-ilp32--zicsr*zifencei \
-          rv32ia-ilp32--zicsr*zifencei \
-          rv32iac-ilp32--zicsr*zifencei \
-          rv32iaf-ilp32f--zicsr*zifencei \
-          rv32iafc-ilp32f--zicsr*zifencei \
-          rv32iafd-ilp32d--zicsr*zifencei \
-          rv32iafdc-ilp32d--zicsr*zifencei \
-          rv32ic-ilp32--zicsr*zifencei \
-          rv32if-ilp32f--zicsr*zifencei \
-          rv32ifc-ilp32f--zicsr*zifencei \
-          rv32ifd-ilp32d--zicsr*zifencei \
-          rv32ifdc-ilp32d--zicsr*zifencei \
-          rv32im-ilp32--zicsr*zifencei \
-          rv32ima-ilp32--zicsr*zifencei \
-          rv32imaf-ilp32f--zicsr*zifencei \
-          rv32imafc-ilp32f--zicsr*zifencei \
-          rv32imafd-ilp32d--zicsr*zifencei \
-          rv32imafdc-ilp32d--zicsr*zifencei \
-          rv32imc-ilp32--zicsr*zifencei \
-          rv32imf-ilp32f--zicsr*zifencei \
-          rv32imfc-ilp32f--zicsr*zifencei \
-          rv32imfd-ilp32d--zicsr*zifencei \
-          rv32imfdc-ilp32d--zicsr*zifencei \
-          \
-          rv64i-lp64--zicsr*zifencei \
-          rv64ia-lp64--zicsr*zifencei \
-          rv64iac-lp64--zicsr*zifencei \
-          rv64iaf-lp64f--zicsr*zifencei \
-          rv64iafc-lp64f--zicsr*zifencei \
-          rv64iafd-lp64d--zicsr*zifencei \
-          rv64iafdc-lp64d--zicsr*zifencei \
-          rv64ic-lp64--zicsr*zifencei \
-          rv64if-lp64f--zicsr*zifencei \
-          rv64ifc-lp64f--zicsr*zifencei \
-          rv64ifd-lp64d--zicsr*zifencei \
-          rv64ifdc-lp64d--zicsr*zifencei \
-          rv64im-lp64--zicsr*zifencei \
-          rv64ima-lp64--zicsr*zifencei \
-          rv64imac-lp64--zicsr*zifencei \
-          rv64imaf-lp64f--zicsr*zifencei \
-          rv64imafc-lp64f--zicsr*zifencei \
-          rv64imafd-lp64d--zicsr*zifencei \
-          rv64imafdc-lp64d--zicsr*zifencei \
-          rv64imc-lp64--zicsr*zifencei \
-          rv64imf-lp64f--zicsr*zifencei \
-          rv64imfc-lp64f--zicsr*zifencei \
-          rv64imfd-lp64d--zicsr*zifencei \
-          rv64imfdc-lp64d--zicsr*zifencei \
-        "}
-      else
-        # Short list used during development to save time.
-        # Skip: rv32imac-ilp32-- (see above).
-        XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
-          rv32emac-ilp32e-- \
-          rv32ima-ilp32--zicsr*zifencei \
-          rv64imac-lp64-- \
-        "}
-      fi
-    fi
 
     # https://ftp.gnu.org/gnu/binutils/
     # https://ftp.gnu.org/gnu/binutils/binutils-2.40.tar.xz
