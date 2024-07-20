@@ -385,6 +385,8 @@ Update the build scripts (or clone them at the first use):
 rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json && \
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
 xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 \
 xpm run deep-clean --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
