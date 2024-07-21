@@ -198,7 +198,7 @@ For a debug build:
 xpm run build-develop-debug --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-The build takes about 1h30 (with reduced multi-libs).
+The build takes about 114 minutes (1h54) (with reduced multi-libs).
 
 When functional, push the `xpack-develop` branch to GitHub.
 
@@ -225,7 +225,7 @@ xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpa
 xpm run build-develop --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 1h12 later, the output of the build script is a compressed
+About 86 minutes (1h26) later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
@@ -260,7 +260,7 @@ xpm install --config darwin-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-x
 xpm run build-develop --config darwin-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 37 minutes later, the output of the build script is a compressed
+About 51 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
@@ -297,7 +297,7 @@ xpm run docker-link-deps --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none
 xpm run docker-build-develop --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 46 minutes later, the output of the build script is a compressed
+About 57 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
@@ -325,7 +325,7 @@ xpm run docker-link-deps --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none
 xpm run docker-build-develop --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 38 minutes later, the output of the build script is a compressed
+About 43 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
@@ -360,7 +360,7 @@ xpm run docker-link-deps --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-no
 xpm run docker-build-develop --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 5h02 later, the output of the build script is a compressed
+About 373 minutes (6h13) later (98 minutes, 1h38m on ampere), the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
@@ -395,7 +395,7 @@ xpm run docker-link-deps --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none
 xpm run docker-build-develop --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 4h51 later, the output of the build script is a compressed
+About 362 minutes (6h02) later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
