@@ -134,10 +134,30 @@ function application_build_versioned_components()
   # ---------------------------------------------------------------------------
 
   # In reverse chronological order.
-  if [[ ${XBB_RELEASE_VERSION} =~ 11[.][5][.].*-.* ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 12[.][4][.].*-.* ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 13[.][3][.].*-.* ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 14[.][012][.].*-.* ]]
+  if [[ ${XBB_RELEASE_VERSION} =~ 12[.][5][.].*-.* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 13[.][4][.].*-.* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 14[.][3][.].*-.* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 15[.][012][.].*-.* ]]
+  then
+
+    # Starting with GCC 15, no more cross patches.
+    if [ "${XBB_HOST_PLATFORM}" == "darwin" ]
+    then
+      # For macOS use Iain's branch.
+      XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross-darwin.git.patch"
+    else
+      # For the mingw abort() patch.
+      XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}.git.patch"
+    fi
+
+    # TODO
+    echo "Unsupported ${XBB_APPLICATION_LOWER_CASE_NAME} version ${XBB_RELEASE_VERSION}"
+    exit 1
+
+  elif [[ ${XBB_RELEASE_VERSION} =~ 11[.][5][.].*-.* ]] || \
+       [[ ${XBB_RELEASE_VERSION} =~ 12[.][4][.].*-.* ]] || \
+       [[ ${XBB_RELEASE_VERSION} =~ 13[.][3][.].*-.* ]] || \
+       [[ ${XBB_RELEASE_VERSION} =~ 14[.][012][.].*-.* ]]
   then
 
     # -------------------------------------------------------------------------
