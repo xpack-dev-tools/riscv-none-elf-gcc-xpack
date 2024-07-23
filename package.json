@@ -1,6 +1,6 @@
 {
   "name": "@xpack-dev-tools/riscv-none-elf-gcc",
-  "version": "13.2.0-2.1",
+  "version": "14.1.0-1.1.pre",
   "description": "A binary xPack with the GNU RISC-V Embedded GCC executables",
   "main": "",
   "scripts": {
@@ -97,7 +97,7 @@
       "riscv-none-elf-strip": "./.content/bin/riscv-none-elf-strip"
     },
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^2.0.1"
+      "@xpack-dev-tools/xbb-helper": "^2.1.37"
     },
     "properties": {
       "appName": "GNU RISC-V Embedded GCC",
@@ -107,8 +107,8 @@
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "buildFolderRelativePathPosix": "{{ 'build' | path_posix_join: configuration.name | downcase }}",
       "commandBashBuild": "bash {{ properties.dbg }} scripts/build.sh --target {{ configuration.name }} --build-folder {{ properties.buildFolderRelativePathPosix }}",
-      "xpm-version": "next",
-      "xpm-install-loglevel": "trace",
+      "xpm-version": "0.18.0",
+      "xpm-install-loglevel": "info",
       "dbg": ""
     },
     "actions": {
@@ -134,29 +134,29 @@
       "generate-workflows": [
         "mkdir -p .github/workflows/",
         "cp xpacks/@xpack-dev-tools/xbb-helper/templates/body-github-pre-releases-test.md .github/workflows/",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/build-liquid.yml > .github/workflows/build-all.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/build-xbbli-liquid.yml > .github/workflows/build-xbbli.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/build-xbbla32-liquid.yml > .github/workflows/build-xbbla32.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/build-xbbla-liquid.yml > .github/workflows/build-xbbla.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/build-xbbmi-liquid.yml > .github/workflows/build-xbbmi.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/build-xbbma-liquid.yml > .github/workflows/build-xbbma.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/test-prime-liquid.yml > .github/workflows/test-prime.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/test-docker-linux-intel-liquid.yml > .github/workflows/test-docker-linux-intel.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/test-docker-linux-arm-liquid.yml > .github/workflows/test-docker-linux-arm.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/publish-release-liquid.yml > .github/workflows/publish-release.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/test-xpm-liquid.yml  > .github/workflows/test-xpm.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/deep-clean-liquid.yml  > .github/workflows/deep-clean.yml",
+        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/build-darwin-x64-liquid.yml --output .github/workflows/build-darwin-x64.yml",
+        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/build-darwin-arm64-liquid.yml --output .github/workflows/build-darwin-arm64.yml",
+        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/build-linux-x64-liquid.yml --output .github/workflows/build-linux-x64.yml",
+        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/build-win32-x64-liquid.yml --output .github/workflows/build-win32-x64.yml",
+        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/build-linux-arm-liquid.yml --output .github/workflows/build-linux-arm.yml",
+        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/build-linux-arm64-liquid.yml --output .github/workflows/build-linux-arm64.yml",
+        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/test-prime-liquid.yml --output .github/workflows/test-prime.yml",
+        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/test-docker-linux-intel-liquid.yml --output .github/workflows/test-docker-linux-intel.yml",
+        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/test-docker-linux-arm-liquid.yml --output .github/workflows/test-docker-linux-arm.yml",
+        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/publish-release-liquid.yml --output .github/workflows/publish-release.yml",
+        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/test-xpm-liquid.yml  --output .github/workflows/test-xpm.yml",
+        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/deep-clean-liquid.yml  --output .github/workflows/deep-clean.yml",
         "cp xpacks/@xpack-dev-tools/xbb-helper/templates/dot.gitignore .gitignore",
         "cp xpacks/@xpack-dev-tools/xbb-helper/templates/dot.npmignore .npmignore",
         "cp xpacks/@xpack-dev-tools/xbb-helper/templates/build.sh scripts/",
         "cp xpacks/@xpack-dev-tools/xbb-helper/templates/test.sh scripts/"
       ],
-      "trigger-workflow-build-all": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
-      "trigger-workflow-build-xbbmi": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbmi --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
-      "trigger-workflow-build-xbbma": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbma --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
-      "trigger-workflow-build-xbbli": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbli --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
-      "trigger-workflow-build-xbbla": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
-      "trigger-workflow-build-xbbla32": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla32 --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
+      "trigger-workflow-build-darwin-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-x64.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
+      "trigger-workflow-build-darwin-arm64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-arm64.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
+      "trigger-workflow-build-linux-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-x64.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
+      "trigger-workflow-build-win32-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-win32-x64.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
+      "trigger-workflow-build-linux-arm64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-arm64.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
+      "trigger-workflow-build-linux-arm": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-arm.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
       "trigger-workflow-test-prime": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-prime.sh",
       "trigger-workflow-test-docker-linux-intel": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-docker-linux-intel.sh",
       "trigger-workflow-test-docker-linux-arm": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-docker-linux-arm.sh",
@@ -218,9 +218,9 @@
             "mkdir -pv ${HOME}/.local/xPacks ${HOME}/.cache/xPacks ${HOME}/Work/cache",
             "mkdir -pv ${HOME}/.wine",
             "docker rm --force {{ properties.containerName }}",
-            "docker create --name {{ properties.containerName }} --tty --hostname docker --volume $(pwd):$(pwd) --volume ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git:${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git --volume ${HOME}/.cache/xPacks:${HOME}/.cache/xPacks --volume ${HOME}/Work/cache:${HOME}/Work/cache --volume ${HOME}/.wine:${HOME}/.wine --workdir $(pwd) {{ properties.dockerImage }}",
+            "docker create --name {{ properties.containerName }} --tty --hostname docker --env XBB_ENVIRONMENT_SKIP_CHECKS=${XBB_ENVIRONMENT_SKIP_CHECKS:-} --volume $(pwd):$(pwd) --volume ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git:${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git --volume ${HOME}/.cache/xPacks:${HOME}/.cache/xPacks --volume ${HOME}/Work/cache:${HOME}/Work/cache --volume ${HOME}/.wine:${HOME}/.wine --workdir $(pwd) {{ properties.dockerImage }}",
             "docker start {{ properties.containerName }}",
-            "docker exec {{ properties.containerName }} {{ properties.force32 }} npm install --location=global xpm@latest",
+            "docker exec {{ properties.containerName }} {{ properties.force32 }} npm install --location=global xpm@{{ properties.xpm-version }}",
             "docker exec {{ properties.containerName }} {{ properties.force32 }} userdel node",
             "docker exec {{ properties.containerName }} {{ properties.force32 }} groupadd --gid $(id -g) --force $(id -gn)",
             "docker exec {{ properties.containerName }} {{ properties.force32 }} useradd --home-dir ${HOME} --uid $(id -u) --gid $(id -g) $(id -un) --create-home",
@@ -282,7 +282,7 @@
           "common-docker"
         ],
         "devDependencies": {
-          "@xpack-dev-tools/gcc": "13.2.0-1.1",
+          "@xpack-dev-tools/gcc": "13.2.0-2.1",
           "@xpack-dev-tools/patchelf": "0.18.0-1.1"
         },
         "properties": {
@@ -313,7 +313,7 @@
           "common-docker"
         ],
         "devDependencies": {
-          "@xpack-dev-tools/gcc": "13.2.0-1.1",
+          "@xpack-dev-tools/gcc": "13.2.0-2.1",
           "@xpack-dev-tools/mingw-w64-gcc": "13.2.0-1.1",
           "@xpack-dev-tools/wine": "8.0.2-1.1"
         },

@@ -101,8 +101,8 @@ update the dependencies in `package.json`.
 
 ### Identify the main GCC version
 
-Determine the GCC version (like `13.2.0`) and update the `scripts/VERSION`
-file; the format is `13.2.0-2`. The fourth digit is the number of the
+Determine the GCC version (like `14.1.0`) and update the `scripts/VERSION`
+file; the format is `14.1.0-1`. The fourth digit is the number of the
 the xPack GNU RISC-V Embedded GCC release number of this version.
 
 ### Fix possible open issues
@@ -111,7 +111,7 @@ Check GitHub issues and pull requests:
 
 - <https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/issues/>
 
-and fix them; assign them to a milestone (like `13.2.0-2`).
+and fix them; assign them to a milestone (like `14.1.0-1`).
 
 ### Check `README.md`
 
@@ -121,7 +121,7 @@ but in the version specific release page.
 
 ### Update versions in `README` files
 
-Update both full 5 numbers (`13.2.0-2.1`) and short 3 numbers (`13.2.0`)
+Update both full 5 numbers (`14.1.0-1.1`) and short 3 numbers (`14.1.0`)
 versions in:
 
 - update version in `README-MAINTAINER.md`
@@ -129,14 +129,14 @@ versions in:
 
 ### Update version in `package.json` to a pre-release
 
-Use the new version, suffixed by `pre`, like `13.2.0-2.pre`.
+Use the new version, suffixed by `pre`, like `14.1.0-1.pre`.
 
 ### Update `CHANGELOG.md`
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
-- add a new entry like _* v13.2.0-2 prepared_
-- commit with a message like _prepare v13.2.0-2_
+- add a new entry like _* v14.1.0-1 prepared_
+- commit with a message like _prepare v14.1.0-1_
 
 ### Update the version specific code
 
@@ -174,7 +174,10 @@ For Intel macOS, first run the build on the development machine
 (`wksi`, a recent macOS):
 
 ```sh
+export XBB_ENVIRONMENT_SKIP_CHECKS="y"
+
 # Update the build scripts.
+rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull
 
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
@@ -195,7 +198,7 @@ For a debug build:
 xpm run build-develop-debug --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-The build takes about 1h30 (with reduced multi-libs).
+The build takes about 114 minutes (1h54) (with reduced multi-libs).
 
 When functional, push the `xpack-develop` branch to GitHub.
 
@@ -210,6 +213,7 @@ caffeinate ssh xbbmi
 Repeat the same steps as before.
 
 ```sh
+rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json && \
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
@@ -221,14 +225,14 @@ xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpa
 xpm run build-develop --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 1h12 later, the output of the build script is a compressed
+About 86 minutes (1h26) later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/darwin-x64/deploy
 total 262456
--rw-r--r--  1 ilg  staff  131934771 Aug 23 01:57 xpack-riscv-none-elf-gcc-13.2.0-2-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        118 Aug 23 01:57 xpack-riscv-none-elf-gcc-13.2.0-2-darwin-x64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  131934771 Aug 23 01:57 xpack-riscv-none-elf-gcc-14.1.0-1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        118 Aug 23 01:57 xpack-riscv-none-elf-gcc-14.1.0-1-darwin-x64.tar.gz.sha
 ```
 
 #### Apple Silicon macOS
@@ -244,6 +248,7 @@ caffeinate ssh xbbma
 Update the build scripts (or clone them at the first use):
 
 ```sh
+rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json && \
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
@@ -255,14 +260,14 @@ xpm install --config darwin-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-x
 xpm run build-develop --config darwin-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 37 minutes later, the output of the build script is a compressed
+About 51 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/darwin-arm64/deploy
 total 263048
--rw-r--r--  1 ilg  staff  128160032 Aug 23 01:22 xpack-riscv-none-elf-gcc-13.2.0-2-darwin-arm64.tar.gz
--rw-r--r--  1 ilg  staff        120 Aug 23 01:22 xpack-riscv-none-elf-gcc-13.2.0-2-darwin-arm64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  128160032 Aug 23 01:22 xpack-riscv-none-elf-gcc-14.1.0-1-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff        120 Aug 23 01:22 xpack-riscv-none-elf-gcc-14.1.0-1-darwin-arm64.tar.gz.sha
 ```
 
 #### Intel GNU/Linux
@@ -279,6 +284,7 @@ caffeinate ssh xbbli
 Update the build scripts (or clone them at the first use):
 
 ```sh
+rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json && \
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
@@ -291,14 +297,14 @@ xpm run docker-link-deps --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none
 xpm run docker-build-develop --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 46 minutes later, the output of the build script is a compressed
+About 57 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-x64/deploy
 total 138680
--rw-r--r-- 1 ilg ilg 142003499 Aug 22 23:14 xpack-riscv-none-elf-gcc-13.2.0-2-linux-x64.tar.gz
--rw-r--r-- 1 ilg ilg       117 Aug 22 23:14 xpack-riscv-none-elf-gcc-13.2.0-2-linux-x64.tar.gz.sha
+-rw-r--r-- 1 ilg ilg 142003499 Aug 22 23:14 xpack-riscv-none-elf-gcc-14.1.0-1-linux-x64.tar.gz
+-rw-r--r-- 1 ilg ilg       117 Aug 22 23:14 xpack-riscv-none-elf-gcc-14.1.0-1-linux-x64.tar.gz.sha
 ```
 
 ##### Build the Intel Windows binaries
@@ -306,6 +312,7 @@ total 138680
 Clean the build folder and prepare the docker container:
 
 ```sh
+rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json && \
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
@@ -318,14 +325,14 @@ xpm run docker-link-deps --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none
 xpm run docker-build-develop --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 38 minutes later, the output of the build script is a compressed
+About 43 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/win32-x64/deploy
 total 150400
--rw-r--r-- 1 ilg ilg 153999860 Aug 22 23:06 xpack-riscv-none-elf-gcc-13.2.0-2-win32-x64.zip
--rw-r--r-- 1 ilg ilg       114 Aug 22 23:06 xpack-riscv-none-elf-gcc-13.2.0-2-win32-x64.zip.sha
+-rw-r--r-- 1 ilg ilg 153999860 Aug 22 23:06 xpack-riscv-none-elf-gcc-14.1.0-1-win32-x64.zip
+-rw-r--r-- 1 ilg ilg       114 Aug 22 23:06 xpack-riscv-none-elf-gcc-14.1.0-1-win32-x64.zip.sha
 ```
 
 #### Arm GNU/Linux 64-bit
@@ -340,6 +347,7 @@ caffeinate ssh xbbla
 Update the build scripts (or clone them at the first use):
 
 ```sh
+rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json && \
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
@@ -352,14 +360,14 @@ xpm run docker-link-deps --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-no
 xpm run docker-build-develop --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 5h02 later, the output of the build script is a compressed
+About 373 minutes (6h13) later (98 minutes, 1h38m on ampere), the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-arm64/deploy
 total 135604
--rw-r--r-- 1 ilg ilg 138853247 Aug 22 19:26 xpack-riscv-none-elf-gcc-13.2.0-2-linux-arm64.tar.gz
--rw-r--r-- 1 ilg ilg       119 Aug 22 19:26 xpack-riscv-none-elf-gcc-13.2.0-2-linux-arm64.tar.gz.sha
+-rw-r--r-- 1 ilg ilg 138853247 Aug 22 19:26 xpack-riscv-none-elf-gcc-14.1.0-1-linux-arm64.tar.gz
+-rw-r--r-- 1 ilg ilg       119 Aug 22 19:26 xpack-riscv-none-elf-gcc-14.1.0-1-linux-arm64.tar.gz.sha
 ```
 
 #### Arm GNU/Linux 32-bit
@@ -374,8 +382,11 @@ caffeinate ssh xbbla32
 Update the build scripts (or clone them at the first use):
 
 ```sh
+rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json && \
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
 xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 \
 xpm run deep-clean --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
@@ -384,14 +395,14 @@ xpm run docker-link-deps --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none
 xpm run docker-build-develop --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-About 4h51 later, the output of the build script is a compressed
+About 362 minutes (6h02) later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-arm/deploy
 total 129736
--rw-r--r-- 1 ilg ilg 132843190 Aug 22 19:15 xpack-riscv-none-elf-gcc-13.2.0-2-linux-arm.tar.gz
--rw-r--r-- 1 ilg ilg       117 Aug 22 19:15 xpack-riscv-none-elf-gcc-13.2.0-2-linux-arm.tar.gz.sha
+-rw-r--r-- 1 ilg ilg 132843190 Aug 22 19:15 xpack-riscv-none-elf-gcc-14.1.0-1-linux-arm.tar.gz
+-rw-r--r-- 1 ilg ilg       117 Aug 22 19:15 xpack-riscv-none-elf-gcc-14.1.0-1-linux-arm.tar.gz.sha
 ```
 
 ### Update README-MAINTAINER listing output
@@ -506,20 +517,22 @@ rm -rf ~/Work/xpack-dev-tools/*/build
 
 To trigger the GitHub Actions builds, use the xPack actions:
 
-- `trigger-workflow-build-xbbmi`
-- `trigger-workflow-build-xbbma`
-- `trigger-workflow-build-xbbli`
-- `trigger-workflow-build-xbbla`
-- `trigger-workflow-build-xbbla32`
+- `trigger-workflow-build-darwin-x64`
+- `trigger-workflow-build-darwin-arm64`
+- `trigger-workflow-build-linux-x64`
+- `trigger-workflow-build-win32-x64`
+- `trigger-workflow-build-linux-arm64`
+- `trigger-workflow-build-linux-arm`
 
-This is equivalent to:
+These are equivalent to:
 
 ```sh
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbmi
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbma
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbli
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla32
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-x64.yml
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-arm64.yml
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-x64.yml
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-win32-x64.yml
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-arm64.yml
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-arm.yml
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -642,8 +655,8 @@ git clone \
 - check version:
 
 ```sh
-.../riscv-none-elf-gcc-13.2.0-2.1/bin/riscv-none-elf-gcc --version
-riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 13.2.0
+.../riscv-none-elf-gcc-14.1.0-1.1/bin/riscv-none-elf-gcc --version
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 14.1.0
 ```
 
 - in a separate workspace, Import → General → Existing Projects into Workspace
@@ -670,7 +683,7 @@ riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 13.2.0
 
 ## Create a new GitHub pre-release draft
 
-- in `CHANGELOG.md`, add the release date and a message like _* v13.2.0-2 released_
+- in `CHANGELOG.md`, add the release date and a message like _* v14.1.0-1 released_
 - commit with _CHANGELOG update_
 - check and possibly update the `templates/body-github-release-liquid.md`
 - push the `xpack-develop` branch
@@ -681,8 +694,8 @@ The workflows results and logs are available from the
 
 The result is a
 [draft pre-release](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
-tagged like **v13.2.0-2** (mind the dash in the middle!) and
-named like **xPack GNU RISC-V Embedded GCC v13.2.0-2** (mind the dash),
+tagged like **v14.1.0-1** (mind the dash in the middle!) and
+named like **xPack GNU RISC-V Embedded GCC v14.1.0-1** (mind the dash),
 with all binaries attached.
 
 - edit the draft and attach it to the `xpack-develop` branch (important!)
@@ -705,7 +718,7 @@ If any, refer to closed
 ## Update the preview Web
 
 - commit the `develop` branch of `xpack/web-jekyll` GitHub repo;
-  use a message like _xPack GNU RISC-V Embedded GCC v13.2.0-2 released_
+  use a message like _xPack GNU RISC-V Embedded GCC v14.1.0-1 released_
 - push to GitHub
 - wait for the GitHub Pages build to complete
 - the preview web is <https://xpack.github.io/web-preview/news/>
@@ -746,18 +759,18 @@ watching this project.
 - compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
 - commit all changes, use a message like
-  _package.json: update urls for 13.2.0-2 release_ (without _v_)
+  _package.json: update urls for 14.1.0-1 release_ (without _v_)
 
 ## Publish on the npmjs.com server
 
 - select the `xpack-develop` branch
 - check the latest commits `npm run git-log`
-- update `CHANGELOG.md`, add a line like _* v13.2.0-2.1 published on npmjs.com_
-- commit with a message like _CHANGELOG: publish npm v13.2.0-2.1_
+- update `CHANGELOG.md`, add a line like _* v14.1.0-1.1 published on npmjs.com_
+- commit with a message like _CHANGELOG: publish npm v14.1.0-1.1_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
-- `npm version 13.2.0-2.1`; the first 4 numbers are the same as the
+- `npm version 14.1.0-1.1`; the first 4 numbers are the same as the
   GitHub release; the fifth number is the npm specific version
 - the commits and the tag should have been pushed by the `postversion` script;
   if not, push them with `git push origin --tags`
@@ -786,12 +799,12 @@ The tests results are available from the
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc`
-- `npm dist-tag add @xpack-dev-tools/riscv-none-elf-gcc@13.2.0-2.1 latest`
+- `npm dist-tag add @xpack-dev-tools/riscv-none-elf-gcc@14.1.0-1.1 latest`
 - `npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc`
 
 In case the previous version is not functional and needs to be unpublished:
 
-- `npm unpublish @xpack-dev-tools/riscv-none-elf-gcc@13.2.0-2.1`
+- `npm unpublish @xpack-dev-tools/riscv-none-elf-gcc@14.1.0-1.1`
 
 ## Update the Web
 
@@ -811,9 +824,9 @@ In case the previous version is not functional and needs to be unpublished:
 
 ## Share on Twitter
 
-- in a separate browser windows, open [TweetDeck](https://tweetdeck.twitter.com/)
+- in a separate browser windows, open [X/Twitter](https://twitter.com)
 - using the `@xpack_project` account
-- paste the release name like **xPack GNU RISC-V Embedded GCC v13.2.0-2 released**
+- paste the release name like **xPack GNU RISC-V Embedded GCC v14.1.0-1 released**
 - paste the link to the Web page
   [release](https://xpack.github.io/riscv-none-elf-gcc/releases/)
 - click the **Tweet** button
@@ -841,9 +854,9 @@ Add a new topic in the **Announcements** category of the
 [RISC-V forums]<https://groups.google.com/a/groups.riscv.org/g/sw-dev>).
 
 ```console
-Subject: xPack GNU RISC-V Embedded GCC v13.2.0-2 released
+Subject: xPack GNU RISC-V Embedded GCC v14.1.0-1 released
 
-Version 13.2.0-2 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the GNU GCC release.
+Version 14.1.0-1 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the GNU GCC release.
 
 https://xpack.github.io/blog/2022/05/14/riscv-none-elf-gcc-v11-3-0-1-released/
 ```

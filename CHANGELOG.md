@@ -3,9 +3,159 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-07-23
+
+* v14.1.0-1 prepared
+* f82dd88 package.json: bump deps
+* bda45b2 VERSION 14.1.0-1
+* 5f32698 VERSION 13.3.0-1
+* 878bee2 VERSION 12.4.0-1
+
+## 2024-07-22
+
+* 655fa7e versioning.sh: add support for 15.x & co
+* 1db6d1d versioning.sh: all macOS use darwin branches
+* 19cfe5d package.json: bump deps
+* 2e51c41 versioning.sh: use cross.git on all except macos for 11.5
+
+## 2024-07-21
+
+* 0987e97 VERSION 11.5.0-1
+* 0a1afe9 VERSION 12.4.0-1
+* a78b498 README update
+* 591bd20 VERSION 13.3.0-1
+
+## 2024-07-20
+
+* c182e2a README update
+
+## 2024-07-19
+
+* 2d879f9 application.sh: re-enable multilib
+* f0e6d1f prepare v14.1.0-1
+* cb2592d package.json: bump deps
+* 7751cc6 .npmignore update
+* 15e03bc scripts: update from template
+* f963507 templates/jekyll update
+* 6aca757 re-generate workflows
+
+## 2024-06-18
+
+* 1f735e6 READMEs update
+
+## 2024-06-17
+
+* 8ae3fbe package.json: rework generate workflows
+* 2bcc848 package.json: bump deps
+* afe3b9b application.sh: update
+
+## 2024-05-23
+
+* e1c6097 package.json: clang 16.0.6-1.1
+
+## 2024-05-20
+
+* a653187 package.json: remove gcc from darwin
+* 8a6df10 versioning.sh: unify -cross.git.patch
+* 9379baa Revert "versioning.sh: unify -cross.git.patch"
+
+## 2024-05-19
+
+* 4cb7ecc versioning.sh: unify -cross.git.patch
+
+## 2024-05-18
+
+* 4d6f175 versioning.sh: add version 11.5
+* 7139474 READMEs update
+* a235aeb package.json: XBB_ENVIRONMENT_SKIP_CHECKS
+
+## 2024-05-16
+
+* 23fa248 READMEs update
+* 8581752 application.sh: no need for USE_GCC_FOR_GCC_ON_MACOS
+
+## 2024-05-09
+
+* f4f2e9f USE_GCC_FOR_GCC_ON_MACOS="y"
+* 1105bbb package.json: add gcc to macOS
+
+## 2024-05-08
+
+* c9bd0cd README update
+
+## 2024-05-07
+
+* fd204fc README update
+* 10618ce README update
+* 471249b application.sh: 14.1 no longer pre-release
+* 972686a versioning.sh: python 3.12.2
+* 364ec29 VERSION 14.1.0
+* add5ace versioning.sh: version regex
+* 3132305 versioning.sh: python 3.11.8
+
+## 2024-05-06
+
+* 8187433 VERSION 14.0.1-1
+* f5b9177 versioning.sh: add 14.*
+* 82df9f6 versioning.sh: use gcc_cross_build_common
+* 1b48206 versioning.sh: compute XBB_GCC_VERSION_MINOR
+* a811dce application.sh: add BOOTSTRAP_ONLY
+* c8e47e6 application.sh: HAS_FLEX_PACKAGE="y"
+* 2d92101 versioning.sh: no need for DISABLE_WIDEC="y"
+
+## 2024-05-02
+
+* c6b3a44 package.json: clang 17.0.6-1.1
+
+## 2024-04-22
+
+* ecdf79c package.json: bump deps
+* eaf5129 versioning.sh: avoid xz 5.6
+
+## 2024-03-29
+
+* f3f776f use XBB_APPLICATION_GCC_MULTILIB_LIST
+
+## 2024-03-22
+
+* 32e55bc package.json: xpm-version 0.18.0
+
+## 2024-03-08
+
+* c4198bf package.json: xpm-version 0.18.0
+
+## 2024-03-07
+
+* da26c6d package.json: xpm-version 0.18.0
+* 41f97e8 package.json: bump
+
+## 2024-03-06
+
+* 0a31021 body-jekyll update
+* 5c04a4b package.json: bump deps
+
+## 2024-01-28
+
+* 671428f ISSUE_TEMPLATE.md update
+* 58c6c79 package.json: bump deps
+* d1b89ad README update
+
+## 2023-12-03
+
+* cacff03 package.json: bump deps
+* e93a14a re-generate workflows
+
+## 2023-11-12
+
+* 6b366bf package.json: bump deps
+* b128a4f versioning.sh cosmetics
+
 ## 2023-09-25
 
-* v13.2.0-2.1 published on npmjs.com
+* 69ffceb body-jekyll update
+* 773afc8 application.sh: disable multilib
+* 89ccdda 13.2.0-2.1
+* 9a9b525 CHANGELOG: publish npm v13.2.0-2.1
 * 43a97a9 package.json: update urls for 13.2.0-2 release
 * d7f3d7d README update
 * f715330 CHANGELOG update
