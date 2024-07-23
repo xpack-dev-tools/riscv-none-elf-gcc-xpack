@@ -491,6 +491,10 @@ screen -S ga
 # Ctrl-a Ctrl-d
 ```
 
+Check if the runners are active:
+
+- <https://github.com/organizations/xpack-dev-tools/settings/actions/runners>
+
 ### Push the build scripts
 
 - push the `xpack-develop` branch to GitHub
@@ -547,11 +551,12 @@ These commands use the `xpack-develop` branch of this repo.
 
 The full builds take about 17 hours (4h24 without multi-libs):
 
-- `xbbmi`: 5h13 (1h04) (nuc)
-- `xbbma`: 2h37 (0h33)
-- `xbbli`: 3h18 (0h41) Linux, 3h17 (0h33) Windows
-- `xbbla`: 17h04 (4h24)
-- `xbbla32`: 16h05 (4h17)
+- `darwin-x64`: 5h13 (1h04) (nuc)
+- `darwin-arm64`: 2h37 (0h33)
+- `linux-x64`: 3h18 (0h41) (amd)
+- `win32-x64`: 3h17 (0h33) (amd)
+- `linux-arm64`: 17h04 (4h24) (rpi4)
+- `linux-arm`: 16h05 (4h17) (rpi4)
 
 The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
