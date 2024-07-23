@@ -551,12 +551,12 @@ These commands use the `xpack-develop` branch of this repo.
 
 The full builds take about 17 hours (4h24 without multi-libs):
 
-- `darwin-x64`: 5h13 (1h04) (nuc)
-- `darwin-arm64`: 2h37 (0h33)
-- `linux-x64`: 3h18 (0h41) (amd)
-- `win32-x64`: 3h17 (0h33) (amd)
-- `linux-arm64`: 17h04 (4h24) (rpi4)
-- `linux-arm`: 16h05 (4h17) (rpi4)
+- `darwin-x64`: 5h13 (1h27) (nuc)
+- `darwin-arm64`: 2h37 (0h48) (m1)
+- `linux-x64`: 3h18 (1h06) (amd)
+- `win32-x64`: 3h17 (1h01) (amd)
+- `linux-arm64`: 17h04 (6h58) (rpi4)
+- `linux-arm`: 16h05 (6h24) (rpi4)
 
 The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
