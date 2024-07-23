@@ -3,9 +3,36 @@
 
 Entries in this file are in reverse chronological order.
 
-## 2024-07-19
+## 2024-07-23
 
 * v14.1.0-1 prepared
+* f82dd88 package.json: bump deps
+* bda45b2 VERSION 14.1.0-1
+* 5f32698 VERSION 13.3.0-1
+* 878bee2 VERSION 12.4.0-1
+
+## 2024-07-22
+
+* 655fa7e versioning.sh: add support for 15.x & co
+* 1db6d1d versioning.sh: all macOS use darwin branches
+* 19cfe5d package.json: bump deps
+* 2e51c41 versioning.sh: use cross.git on all except macos for 11.5
+
+## 2024-07-21
+
+* 0987e97 VERSION 11.5.0-1
+* 0a1afe9 VERSION 12.4.0-1
+* a78b498 README update
+* 591bd20 VERSION 13.3.0-1
+
+## 2024-07-20
+
+* c182e2a README update
+
+## 2024-07-19
+
+* 2d879f9 application.sh: re-enable multilib
+* f0e6d1f prepare v14.1.0-1
 * cb2592d package.json: bump deps
 * 7751cc6 .npmignore update
 * 15e03bc scripts: update from template
