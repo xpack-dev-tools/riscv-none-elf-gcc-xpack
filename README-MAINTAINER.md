@@ -549,7 +549,7 @@ These commands use the `xpack-develop` branch of this repo.
 
 ## Durations & results
 
-The full builds take about 17 hours (4h24 without multi-libs):
+The full builds take about 17 hours (7 hours without multi-libs):
 
 - `darwin-x64`: 5h13 (1h27) (nuc)
 - `darwin-arm64`: 2h37 (0h48) (m1)
