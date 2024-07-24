@@ -3,9 +3,26 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-07-24
+
+_* v14.1.0-1 released
+* 5825d56 package.json: update actions
+* 715f283 package.json: bump deps
+
 ## 2024-07-23
 
-* v14.1.0-1 prepared
+* 6afae95 re-generate workflows
+* 62bc86d README update
+* 23d42c8 README update
+* 5b38eb2 application.sh: enable multilib
+* 75320ee READMEs update
+* c4be153 Merge commit '1f31f3794db958b67d1b4a8482b17ae1d217148d' into xpack
+* 1f31f37 package.json: loglevel info
+* 47b208b package.json: bump deps
+* 5bd25e6 re-generate workflows
+* a67b071 package.json: update generate-workflows
+* 1cee8ab application.sh: temporarily disable multilib for first run
+* 44db722 prepare v14.1.0-1
 * f82dd88 package.json: bump deps
 * bda45b2 VERSION 14.1.0-1
 * 5f32698 VERSION 13.3.0-1
