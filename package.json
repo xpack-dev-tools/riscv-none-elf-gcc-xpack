@@ -33,32 +33,32 @@
     "minimumXpmRequired": "0.16.3",
     "binaries": {
       "destination": "./.content",
-      "baseUrl": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v14.1.0-1",
+      "baseUrl": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v13.3.0-1",
       "skip": 1,
       "platforms": {
         "darwin-arm64": {
-          "fileName": "xpack-riscv-none-elf-gcc-14.1.0-1-darwin-arm64.tar.gz",
-          "sha256": "35f817c91c32678e7c9292b737e4b5c87234d1fa28d2f72b7222541ac6672183"
+          "fileName": "xpack-riscv-none-elf-gcc-13.3.0-1-darwin-arm64.tar.gz",
+          "sha256": "b4616e83cc03db32de961ce6bd7703c4bc3ed4f71c1acd4143d25f6d8fb23eda"
         },
         "darwin-x64": {
-          "fileName": "xpack-riscv-none-elf-gcc-14.1.0-1-darwin-x64.tar.gz",
-          "sha256": "758c6f31a33b6753d580a7eaf081b36ac51b6f4c73ba28382738abed183bcc91"
+          "fileName": "xpack-riscv-none-elf-gcc-13.3.0-1-darwin-x64.tar.gz",
+          "sha256": "050c7e22dc9651ce5f82f082554ec190b59223708ca0c03d4fecca93d8e7afc0"
         },
         "linux-arm64": {
-          "fileName": "xpack-riscv-none-elf-gcc-14.1.0-1-linux-arm64.tar.gz",
-          "sha256": "14aee09079a78d6b84bba0022d8fba0821ecd85dd723a335eda8b9f89792733e"
+          "fileName": "xpack-riscv-none-elf-gcc-13.3.0-1-linux-arm64.tar.gz",
+          "sha256": "29cdee7d06abc0ad57f4ec74059aca6349042f2a8a98ba4501c186990210590c"
         },
         "linux-arm": {
-          "fileName": "xpack-riscv-none-elf-gcc-14.1.0-1-linux-arm.tar.gz",
-          "sha256": "38078de0495cee1f3ea59f68a157a561505cb97bee6f3aa4431361e32e708685"
+          "fileName": "xpack-riscv-none-elf-gcc-13.3.0-1-linux-arm.tar.gz",
+          "sha256": "ef742938c406b315d5d167f73e90b285d065869690166baa0f89955928b8f36d"
         },
         "linux-x64": {
-          "fileName": "xpack-riscv-none-elf-gcc-14.1.0-1-linux-x64.tar.gz",
-          "sha256": "eb6d3b4923e680349e74c0de2f21dbc03141dc45b8665da2a784d0ff4b0df9ef"
+          "fileName": "xpack-riscv-none-elf-gcc-13.3.0-1-linux-x64.tar.gz",
+          "sha256": "5386d1a7b261d37a6c34e644fc01ed2562132a9fae3e314083f64ad5e8cceb16"
         },
         "win32-x64": {
-          "fileName": "xpack-riscv-none-elf-gcc-14.1.0-1-win32-x64.zip",
-          "sha256": "3acfcef274c01cf20557a60562125089aa1a5384f49407904d67bd85cd263d75"
+          "fileName": "xpack-riscv-none-elf-gcc-13.3.0-1-win32-x64.zip",
+          "sha256": "6e8549a9340c7722a7031959c9ff63bab353e1860b42c433ed05a0b55189a72b"
         }
       }
     },
