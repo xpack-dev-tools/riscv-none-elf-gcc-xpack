@@ -101,8 +101,8 @@ update the dependencies in `package.json`.
 
 ### Identify the main GCC version
 
-Determine the GCC version (like `13.3.0`) and update the `scripts/VERSION`
-file; the format is `13.3.0-1`. The fourth digit is the number of the
+Determine the GCC version (like `12.4.0`) and update the `scripts/VERSION`
+file; the format is `12.4.0-1`. The fourth digit is the number of the
 the xPack GNU RISC-V Embedded GCC release number of this version.
 
 ### Fix possible open issues
@@ -111,7 +111,7 @@ Check GitHub issues and pull requests:
 
 - <https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/issues/>
 
-and fix them; assign them to a milestone (like `13.3.0-1`).
+and fix them; assign them to a milestone (like `12.4.0-1`).
 
 ### Check `README.md`
 
@@ -121,7 +121,7 @@ but in the version specific release page.
 
 ### Update versions in `README` files
 
-Update both full 5 numbers (`13.3.0-1.1`) and short 3 numbers (`13.3.0`)
+Update both full 5 numbers (`12.4.0-1.1`) and short 3 numbers (`12.4.0`)
 versions in:
 
 - update version in `README-MAINTAINER.md`
@@ -129,14 +129,14 @@ versions in:
 
 ### Update version in `package.json` to a pre-release
 
-Use the new version, suffixed by `pre`, like `13.3.0-1.pre`.
+Use the new version, suffixed by `pre`, like `12.4.0-1.pre`.
 
 ### Update `CHANGELOG.md`
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
-- add a new entry like _* v13.3.0-1 prepared_
-- commit with a message like _prepare v13.3.0-1_
+- add a new entry like _* v12.4.0-1 prepared_
+- commit with a message like _prepare v12.4.0-1_
 
 ### Update the version specific code
 
@@ -231,8 +231,8 @@ archive and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/darwin-x64/deploy
 total 262456
--rw-r--r--  1 ilg  staff  131934771 Aug 23 01:57 xpack-riscv-none-elf-gcc-13.3.0-1-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        118 Aug 23 01:57 xpack-riscv-none-elf-gcc-13.3.0-1-darwin-x64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  131934771 Aug 23 01:57 xpack-riscv-none-elf-gcc-12.4.0-1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        118 Aug 23 01:57 xpack-riscv-none-elf-gcc-12.4.0-1-darwin-x64.tar.gz.sha
 ```
 
 #### Apple Silicon macOS
@@ -266,8 +266,8 @@ archive and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/darwin-arm64/deploy
 total 263048
--rw-r--r--  1 ilg  staff  128160032 Aug 23 01:22 xpack-riscv-none-elf-gcc-13.3.0-1-darwin-arm64.tar.gz
--rw-r--r--  1 ilg  staff        120 Aug 23 01:22 xpack-riscv-none-elf-gcc-13.3.0-1-darwin-arm64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  128160032 Aug 23 01:22 xpack-riscv-none-elf-gcc-12.4.0-1-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff        120 Aug 23 01:22 xpack-riscv-none-elf-gcc-12.4.0-1-darwin-arm64.tar.gz.sha
 ```
 
 #### Intel GNU/Linux
@@ -303,8 +303,8 @@ archive and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-x64/deploy
 total 138680
--rw-r--r-- 1 ilg ilg 142003499 Aug 22 23:14 xpack-riscv-none-elf-gcc-13.3.0-1-linux-x64.tar.gz
--rw-r--r-- 1 ilg ilg       117 Aug 22 23:14 xpack-riscv-none-elf-gcc-13.3.0-1-linux-x64.tar.gz.sha
+-rw-r--r-- 1 ilg ilg 142003499 Aug 22 23:14 xpack-riscv-none-elf-gcc-12.4.0-1-linux-x64.tar.gz
+-rw-r--r-- 1 ilg ilg       117 Aug 22 23:14 xpack-riscv-none-elf-gcc-12.4.0-1-linux-x64.tar.gz.sha
 ```
 
 ##### Build the Intel Windows binaries
@@ -331,8 +331,8 @@ archive and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/win32-x64/deploy
 total 150400
--rw-r--r-- 1 ilg ilg 153999860 Aug 22 23:06 xpack-riscv-none-elf-gcc-13.3.0-1-win32-x64.zip
--rw-r--r-- 1 ilg ilg       114 Aug 22 23:06 xpack-riscv-none-elf-gcc-13.3.0-1-win32-x64.zip.sha
+-rw-r--r-- 1 ilg ilg 153999860 Aug 22 23:06 xpack-riscv-none-elf-gcc-12.4.0-1-win32-x64.zip
+-rw-r--r-- 1 ilg ilg       114 Aug 22 23:06 xpack-riscv-none-elf-gcc-12.4.0-1-win32-x64.zip.sha
 ```
 
 #### Arm GNU/Linux 64-bit
@@ -366,8 +366,8 @@ archive and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-arm64/deploy
 total 135604
--rw-r--r-- 1 ilg ilg 138853247 Aug 22 19:26 xpack-riscv-none-elf-gcc-13.3.0-1-linux-arm64.tar.gz
--rw-r--r-- 1 ilg ilg       119 Aug 22 19:26 xpack-riscv-none-elf-gcc-13.3.0-1-linux-arm64.tar.gz.sha
+-rw-r--r-- 1 ilg ilg 138853247 Aug 22 19:26 xpack-riscv-none-elf-gcc-12.4.0-1-linux-arm64.tar.gz
+-rw-r--r-- 1 ilg ilg       119 Aug 22 19:26 xpack-riscv-none-elf-gcc-12.4.0-1-linux-arm64.tar.gz.sha
 ```
 
 #### Arm GNU/Linux 32-bit
@@ -401,8 +401,8 @@ archive and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build/linux-arm/deploy
 total 129736
--rw-r--r-- 1 ilg ilg 132843190 Aug 22 19:15 xpack-riscv-none-elf-gcc-13.3.0-1-linux-arm.tar.gz
--rw-r--r-- 1 ilg ilg       117 Aug 22 19:15 xpack-riscv-none-elf-gcc-13.3.0-1-linux-arm.tar.gz.sha
+-rw-r--r-- 1 ilg ilg 132843190 Aug 22 19:15 xpack-riscv-none-elf-gcc-12.4.0-1-linux-arm.tar.gz
+-rw-r--r-- 1 ilg ilg       117 Aug 22 19:15 xpack-riscv-none-elf-gcc-12.4.0-1-linux-arm.tar.gz.sha
 ```
 
 ### Update README-MAINTAINER listing output
@@ -660,8 +660,8 @@ git clone \
 - check version:
 
 ```sh
-.../riscv-none-elf-gcc-13.3.0-1.1/bin/riscv-none-elf-gcc --version
-riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 13.3.0
+.../riscv-none-elf-gcc-12.4.0-1.1/bin/riscv-none-elf-gcc --version
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 12.4.0
 ```
 
 - in a separate workspace, Import → General → Existing Projects into Workspace
@@ -688,7 +688,7 @@ riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 13.3.0
 
 ## Create a new GitHub pre-release draft
 
-- in `CHANGELOG.md`, add the release date and a message like _* v13.3.0-1 released_
+- in `CHANGELOG.md`, add the release date and a message like _* v12.4.0-1 released_
 - commit with _CHANGELOG update_
 - check and possibly update the `templates/body-github-release-liquid.md`
 - push the `xpack-develop` branch
@@ -699,8 +699,8 @@ The workflows results and logs are available from the
 
 The result is a
 [draft pre-release](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
-tagged like **v13.3.0-1** (mind the dash in the middle!) and
-named like **xPack GNU RISC-V Embedded GCC v13.3.0-1** (mind the dash),
+tagged like **v12.4.0-1** (mind the dash in the middle!) and
+named like **xPack GNU RISC-V Embedded GCC v12.4.0-1** (mind the dash),
 with all binaries attached.
 
 - edit the draft and attach it to the `xpack-develop` branch (important!)
@@ -723,7 +723,7 @@ If any, refer to closed
 ## Update the preview Web
 
 - commit the `develop` branch of `xpack/web-jekyll` GitHub repo;
-  use a message like _xPack GNU RISC-V Embedded GCC v13.3.0-1 released_
+  use a message like _xPack GNU RISC-V Embedded GCC v12.4.0-1 released_
 - push to GitHub
 - wait for the GitHub Pages build to complete
 - the preview web is <https://xpack.github.io/web-preview/news/>
@@ -764,18 +764,18 @@ watching this project.
 - compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
 - commit all changes, use a message like
-  _package.json: update urls for 13.3.0-1 release_ (without _v_)
+  _package.json: update urls for 12.4.0-1 release_ (without _v_)
 
 ## Publish on the npmjs.com server
 
 - select the `xpack-develop` branch
 - check the latest commits `npm run git-log`
-- update `CHANGELOG.md`, add a line like _* v13.3.0-1.1 published on npmjs.com_
-- commit with a message like _CHANGELOG: publish npm v13.3.0-1.1_
+- update `CHANGELOG.md`, add a line like _* v12.4.0-1.1 published on npmjs.com_
+- commit with a message like _CHANGELOG: publish npm v12.4.0-1.1_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
-- `npm version 13.3.0-1.1`; the first 4 numbers are the same as the
+- `npm version 12.4.0-1.1`; the first 4 numbers are the same as the
   GitHub release; the fifth number is the npm specific version
 - the commits and the tag should have been pushed by the `postversion` script;
   if not, push them with `git push origin --tags`
@@ -804,12 +804,12 @@ The tests results are available from the
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc`
-- `npm dist-tag add @xpack-dev-tools/riscv-none-elf-gcc@13.3.0-1.1 latest`
+- `npm dist-tag add @xpack-dev-tools/riscv-none-elf-gcc@12.4.0-1.1 latest`
 - `npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc`
 
 In case the previous version is not functional and needs to be unpublished:
 
-- `npm unpublish @xpack-dev-tools/riscv-none-elf-gcc@13.3.0-1.1`
+- `npm unpublish @xpack-dev-tools/riscv-none-elf-gcc@12.4.0-1.1`
 
 ## Update the Web
 
@@ -831,7 +831,7 @@ In case the previous version is not functional and needs to be unpublished:
 
 - in a separate browser windows, open [X/Twitter](https://twitter.com)
 - using the `@xpack_project` account
-- paste the release name like **xPack GNU RISC-V Embedded GCC v13.3.0-1 released**
+- paste the release name like **xPack GNU RISC-V Embedded GCC v12.4.0-1 released**
 - paste the link to the Web page
   [release](https://xpack.github.io/riscv-none-elf-gcc/releases/)
 - click the **Tweet** button
@@ -859,9 +859,9 @@ Add a new topic in the **Announcements** category of the
 [RISC-V forums]<https://groups.google.com/a/groups.riscv.org/g/sw-dev>).
 
 ```console
-Subject: xPack GNU RISC-V Embedded GCC v13.3.0-1 released
+Subject: xPack GNU RISC-V Embedded GCC v12.4.0-1 released
 
-Version 13.3.0-1 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the GNU GCC release.
+Version 12.4.0-1 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the GNU GCC release.
 
 https://xpack.github.io/blog/2022/05/14/riscv-none-elf-gcc-v11-3-0-1-released/
 ```

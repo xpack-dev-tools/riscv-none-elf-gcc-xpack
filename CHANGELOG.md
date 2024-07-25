@@ -5,8 +5,12 @@ Entries in this file are in reverse chronological order.
 
 ## 2024-07-25
 
-* v13.3.0-1.1 published on npmjs.com
-* v13.3.0-1 released
+* v12.4.0-1 prepared
+* 560d88c 13.3.0-1.1
+* e70c457 CHANGELOG: publish npm v13.3.0-1.1
+* 39d760e package.json: update urls for 13.3.0-1 release
+* bb4bfae templates/jekyll fix typo
+* 2ae1da3 CHANGELOG update
 * ca6043d package.json: website-* actions
 * 8ed1a3e versioning.sh: add 'light' list
 * e2fcf63 prepare v13.3.0-1
