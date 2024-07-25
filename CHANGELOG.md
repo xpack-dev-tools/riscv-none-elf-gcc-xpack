@@ -3,6 +3,13 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-07-25
+
+* v13.3.0-1 released
+* ca6043d package.json: website-* actions
+* 8ed1a3e versioning.sh: add 'light' list
+* e2fcf63 prepare v13.3.0-1
+
 ## 2024-07-24
 
 * v13.3.0-1 prepared
