@@ -59,6 +59,14 @@ function application_build_versioned_components()
 
         # The `zicsr*zifencei` seem redundant for GCC 13, but are
         # important for GCC 12.
+
+        # Future 'light' releases should include
+        # - rv32imac, rv64imafdc: for QEMU tests
+        # - rv32imac: for SiFive HiFive1 (16K RAM only!)
+        # - rv32imac, rv32imacf: for WCH QingKe V4 series (xw!)
+        # like CH32V20[38]*, CH32V30[357]*
+        # https://www.wch-ic.com/downloads/QingKeV4_Processor_Manual_PDF.html
+
         XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
           rv32e-ilp32e--zicsr*zifencei \
           rv32ea-ilp32e--zicsr*zifencei \
