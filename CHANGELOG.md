@@ -5,6 +5,7 @@ Entries in this file are in reverse chronological order.
 
 ## 2024-07-26
 
+* v12.4.0-1.1 published on npmjs.com
 * v12.4.0-1 released
 
 ## 2024-07-25
