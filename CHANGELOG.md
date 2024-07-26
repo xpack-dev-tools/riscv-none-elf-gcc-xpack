@@ -3,9 +3,13 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-07-26
+
+* v12.4.0-1 released
+
 ## 2024-07-25
 
-* v12.4.0-1 prepared
+* c980df8 prepare v12.4.0-1
 * 560d88c 13.3.0-1.1
 * e70c457 CHANGELOG: publish npm v13.3.0-1.1
 * 39d760e package.json: update urls for 13.3.0-1 release
