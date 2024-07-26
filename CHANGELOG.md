@@ -5,8 +5,11 @@ Entries in this file are in reverse chronological order.
 
 ## 2024-07-26
 
-* v12.4.0-1.1 published on npmjs.com
-* v12.4.0-1 released
+* v11.5.0-1 prepared
+* 72edb20 12.4.0-1.1
+* 64113a4 CHANGELOG: publish npm v12.4.0-1.1
+* 40d5f35 package.json: update urls for 12.4.0-1 release
+* b6029f0 CHANGELOG update
 
 ## 2024-07-25
 
