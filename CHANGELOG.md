@@ -3,9 +3,15 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-07-27
+
+* v11.5.0-1 released
+* 8f90a4d versioning.sh: update multi-lib to Debian riscv64-unknown-elf-gcc
+* 3213ac3 templates/jekyll updates
+
 ## 2024-07-26
 
-* v11.5.0-1 prepared
+* e396277 prepare v11.5.0-1
 * 72edb20 12.4.0-1.1
 * 64113a4 CHANGELOG: publish npm v12.4.0-1.1
 * 40d5f35 package.json: update urls for 12.4.0-1 release
