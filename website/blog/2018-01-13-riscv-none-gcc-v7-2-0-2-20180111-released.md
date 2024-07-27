@@ -1,0 +1,87 @@
+---
+title:  GNU MCU Eclipse RISC-V Embedded GCC v7.2.0-2-20180111 released
+
+date: 2018-01-13 03:30:00 +0300
+
+authors: ilg-ul
+
+# To be listed in the Releases page.
+tags:
+  - releases
+
+# ----- Custom properties -----------------------------------------------------
+
+download_url: https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases/tag/v7.2.0-2-20180110/
+
+---
+
+Version **7.2.0-2-20180111** is a maintenance release of **GNU MCU Eclipse RISC-V Embedded GCC**; it updates to the latest RISC-V sources and the build process was improved, to support even older GNU/Linux machines and processors.
+
+<!-- truncate -->
+
+<p><a href={ frontMatter.download_url }>Binary files »</a></p>
+
+## Compliance
+
+All **GNU MCU Eclipse RISC-V Embedded GCC** releases are based on the official [RISC-V source files](https://github.com/riscv/riscv-gcc) maintained by [SiFive](https://www.sifive.com).
+
+The current version is based on the following commits:
+
+- the [riscv/riscv-gcc](https://github.com/riscv/riscv-gcc) project, commit [5bf0f1d](https://github.com/gnu-mcu-eclipse/riscv-none-gcc/commit/5bf0f1db0ed4dd3e0cdd9395e7b258234ac976d9) from from Jan 8th, 2018
+- the [riscv/riscv-binutils-gdb](https://github.com/riscv/riscv-binutils-gdb) project, commit [5d812b7](https://github.com/gnu-mcu-eclipse/riscv-binutils-gdb/commit/5d812b72c943d8cfa08d67baed73d1a64eb943e7) from Jan 9th, 2018
+- the [riscv/riscv-newlib](https://github.com/riscv/riscv-newlib) project, commit [32a3de0](https://github.com/gnu-mcu-eclipse/riscv-newlib/commit/32a3de0bba1535fc1ca0d8dfae147d1dacaf0979) from Dec 21st, 2017
+
+## Improvements
+
+All architectures, ABIs and libraries supported by the `riscv64-unknown-elf` toolchain are also supported, with the following improvements:
+
+* a newer `newlib` was included, which supports the 'underscore' syscall functions
+* the mandatory reference to `libgloss` in the linker configuration was removed
+* the `march=rv32imaf/mabi=ilp32f` library was added to the list of multi-libs
+* support for `newlib-nano` was added
+* the standard documentation, in PDF and HTML, was added
+
+## Binaries
+
+Binaries for **Windows**, **macOS** and **GNU/Linux** are provided.
+
+The GNU/Linux binaries were built on two CentOS 6 Docker images (32/64-bit), and run on any distribution based on CentOS 6 or later.
+
+The Windows binaries were built with mingw-w64, and run on any reasonably recent **i686** and **x86_64** Windows machines.
+
+Instructions on how to install the binaries are available in the [Install Guide](/docs/install/).
+
+The toolchain is also available as an [xPack](https://www.npmjs.com/package/@gnu-mcu-eclipse/riscv-none-gcc) and can be conveniently installed with [`xpm`](https://www.npmjs.com/package/xpm):
+
+```sh
+xpm install --global @gnu-mcu-eclipse/riscv-none-gcc
+```
+
+This installs the latest available version.
+
+For better control and repeatability, the build scripts use Docker containers; all files required during builds are available as a separate [gnu-mcu-eclipse/riscv-none-gcc-build](https://github.com/gnu-mcu-eclipse/riscv-none-gcc-build) project.
+
+## Known problems
+
+* none
+
+## Checksums
+
+The SHA-256 hashes for the files are:
+
+```txt
+dd4dddb50bed32d17962fec44e8c4a5d6f038f28bc967263ce3d2da84ee86412 ?
+gnu-mcu-eclipse-riscv-none-gcc-7.2.0-2-20180111-2230-centos32.tgz
+
+59c85a06c17e9c6942185b60fc105dd77f1c67c04e3fd5fe6de325be7bdf0c97 ?
+gnu-mcu-eclipse-riscv-none-gcc-7.2.0-2-20180111-2230-centos64.tgz
+
+97b3bb5f77656f48010b833424f7b08f27cb54db0cab2b4366d4ff0726e31a4a ?
+gnu-mcu-eclipse-riscv-none-gcc-7.2.0-2-20180111-2230-osx.tgz
+
+884f94156612bf01e69c6e5f209ee4460c46f275f4127120eaf102a919fa55f2 ?
+gnu-mcu-eclipse-riscv-none-gcc-7.2.0-2-20180111-2230-win32.zip
+
+251cbd8d446a36c62bcafe6d2daa88d8972c70d8b8aecd2b1eecac601c08239a ?
+gnu-mcu-eclipse-riscv-none-gcc-7.2.0-2-20180111-2230-win64.zip
+```

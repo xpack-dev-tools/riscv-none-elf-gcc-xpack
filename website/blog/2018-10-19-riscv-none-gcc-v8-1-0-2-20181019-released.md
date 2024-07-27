@@ -1,0 +1,117 @@
+---
+title:  GNU MCU Eclipse RISC-V Embedded GCC v8.1.0-2-20181019 released
+
+date: 2018-10-19 14:42:00 +0300
+
+authors: ilg-ul
+
+# To be listed in the Releases page.
+tags:
+  - releases
+
+# ----- Custom properties -----------------------------------------------------
+
+download_url: https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases/tag/v8.1.0-2-20181019/
+
+---
+
+Version **8.1.0-2-20181019** is a maintenance release of **GNU MCU Eclipse
+RISC-V Embedded GCC**.
+
+<!-- truncate -->
+
+<p><a href={ frontMatter.download_url }>Binary files »</a></p>
+
+## Compliance
+
+This release closely follows the official
+[RISC-V distribution](https://github.com/riscv/riscv-gcc) maintained by
+[SiFive](https://www.sifive.com).
+
+It is more or less similar to the 20180928 release, except support for
+SiFive specific CLIC interrupts, which was not included.
+
+The following commits were used:
+
+- the [riscv/riscv-gcc](https://github.com/riscv/riscv-gcc) project,
+branch `riscv-gcc-8.1.0`, commit
+[3c148a7e6ea](https://github.com/gnu-mcu-eclipse/riscv-none-gcc/commit/3c148a7e6ea1379e3a8e8b5350ec03a72e5d4137)
+from from July 3rd, 2018
+- the [riscv/riscv-binutils-gdb](https://github.com/riscv/riscv-binutils-gdb)
+project, branch `riscv-binutils-2.30`, commit
+[0d2fb1b7ff](https://github.com/gnu-mcu-eclipse/riscv-binutils-gdb/commit/0d2fb1b7ff9b94e40352306f1f8857b863c6f787)
+from Aug 11th, 2018
+- the [riscv/riscv-newlib](https://github.com/riscv/riscv-newlib) project,
+commit [77e11e180](https://github.com/gnu-mcu-eclipse/riscv-newlib/commit/77e11e1800f57cac7f5468b2bd064100a44755d4)
+from July 12th, 2018
+
+GDB is a bit special, since it is only partly upstreamed and the RISC-V repos
+are no longer updated, so the current build uses
+`git://sourceware.org/git/binutils-gdb.git`, the `7dd36a6f1c` commit from
+Aug 23rd, 2018 (same as the SiFive release).
+
+## Improvements
+
+All architectures, ABIs and libraries supported by the `riscv64-unknown-elf`
+toolchain are also supported, with the following improvements:
+
+* a newer `newlib` was included, which supports the 'underscore' syscall functions
+* the mandatory reference to `libgloss` in the linker configuration was removed
+* the `march=rv32imaf/mabi=ilp32f` library was added to the list of multi-libs
+* support for `newlib-nano` was added
+* the standard documentation, in PDF and HTML, was added
+
+## Binaries
+
+Binaries for **Windows**, **macOS** and **GNU/Linux** are provided.
+
+The GNU/Linux binaries were built on two CentOS 6 Docker images (32/64-bit),
+and run on any distribution based on CentOS 6 or later.
+
+The Windows binaries were built with mingw-w64, and run on any reasonably
+recent **i686** and **x86_64** Windows machines.
+
+Instructions on how to install the binaries are available in the
+[How to install the RISC-V toolchain?](/riscv-none-embed-gcc/install/)
+page.
+
+The toolchain is also available as an
+[xPack](https://www.npmjs.com/package/@gnu-mcu-eclipse/riscv-none-gcc)
+and can be conveniently installed with
+[`xpm`](https://www.npmjs.com/package/xpm):
+
+```sh
+xpm install --global @gnu-mcu-eclipse/riscv-none-gcc
+```
+
+This installs the latest available version.
+
+For better control and repeatability, the build scripts use Docker
+containers; all files required during builds are available as a separate
+[gnu-mcu-eclipse/riscv-none-gcc-build](https://github.com/gnu-mcu-eclipse/riscv-none-gcc-build)
+project.
+
+## Known problems
+
+* none.
+
+## Checksums
+
+The SHA-256 hashes for the files are:
+
+```txt
+9938d66410f1eaf797fc717d678bfca219e0fbc53589f05e7d9339d1ebf150ea ?
+gnu-mcu-eclipse-riscv-none-gcc-8.1.0-2-20181019-0952-centos32.tgz
+
+6a165c9dee9d4f49cf137a18352a69b9627dc224fc841b01dcf9f0c66eed4bf0 ?
+gnu-mcu-eclipse-riscv-none-gcc-8.1.0-2-20181019-0952-centos64.tgz
+
+996eae452610113ead3bb35fa768046fc50f2861798cbdcbf00c79058c582d80 ?
+gnu-mcu-eclipse-riscv-none-gcc-8.1.0-2-20181019-0952-macos.tgz
+
+02e43e075ff829cc4b02361d30a51c816c11a1c7f4d44a5c087a8e5a2e9998a4 ?
+gnu-mcu-eclipse-riscv-none-gcc-8.1.0-2-20181019-0952-win32.zip
+
+bd2cd40a13175f8bfd01595d55f565d8a433ef92341e4afe18a9b521a91cdc74 ?
+gnu-mcu-eclipse-riscv-none-gcc-8.1.0-2-20181019-0952-win64.zip
+```

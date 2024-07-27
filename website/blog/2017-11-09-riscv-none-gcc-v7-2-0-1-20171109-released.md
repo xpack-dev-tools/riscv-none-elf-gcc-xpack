@@ -1,0 +1,161 @@
+---
+title:  GNU MCU Eclipse RISC-V Embedded GCC v7.2.0-1-20171109 released
+
+date: 2017-11-09 10:28:00 +0300
+
+authors: ilg-ul
+
+# To be listed in the Releases page.
+tags:
+  - releases
+
+# ----- Custom properties -----------------------------------------------------
+
+download_url: https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases/tag/v7.2.0-1-20171109/
+
+---
+
+Version **7.2.0-1-20171109** is a new release of **GNU MCU Eclipse RISC-V Embedded GCC**; the main improvement is in GDB, which no longer returns the 4096 CSRs together with the general registers. In contrast to the `riscv64-unknown-elf` toolchain, this toolchain is clearly intended for bare-metal embedded applications; for this it was necessary to  update to the latest newlib 2.5 release which uses 'underscore' syscall functions and to **remove the mandatory use of libgloss**.
+
+To avoid any confusions with the `riscv64-unknown-elf` toolchain, this toolchain was renamed to the more appropriate `riscv-none-embedded-`.
+
+<!-- truncate -->
+
+<p><a href={ frontMatter.download_url }>Binary files »</a></p>
+
+## Compliance
+
+All **GNU MCU Eclipse RISC-V Embedded GCC** releases are based on the official [RISC-V source files](https://github.com/riscv/riscv-gcc) maintained by [SiFive](https://www.sifive.com).
+
+The current version is based on project [riscv/riscv-gnu-toolchain](https://github.com/riscv/riscv-gnu-toolchain), tag v20171107 (commit [f5fae1c](https://github.com/riscv/riscv-gnu-toolchain/tree/v20171107)) from Nov 7th, which depends on the following:
+
+- the [riscv/riscv-gcc](https://github.com/riscv/riscv-gcc) project, commit [b731149](https://github.com/riscv/riscv-gcc/commit/b731149757b93ddc80e6e4b5483a6931d5f9ad60) from from Nov 7th, 2017
+- the [riscv/riscv-binutils-gdb](https://github.com/riscv/riscv-binutils-gdb) project, commit [d0176cb](https://github.com/riscv/riscv-binutils-gdb/commit/d0176cb1653b2dd3849861453ee90a52caefa95a) from Nov 8th, 2017
+
+A newer commit was used for newlib:
+
+- the [riscv/riscv-newlib](https://github.com/riscv/riscv-newlib) project, commit [ccd8a0a](https://github.com/riscv/riscv-newlib/commit/f2ab66c9c1c90f74959ff47394b74dfaacdb125f) from Nov 5th, 2017
+
+The supported architectures (`-march=`) are:
+
+* `rv32i[m][a][f[d]][c]`
+* `rv32g[c]`
+* `rv64i[m][a][f[d]][c]`
+* `rv64g[c]`
+
+The supported ABIs (`-mabi=`) are:
+
+* `ilp32` (32-bit, soft-float)
+* `ilp32f` (32-bit with single-precision in registers and double in memory, niche use only)
+* `ilp32d` (32-bit, hard-float)
+* `lp64` (64-bit long and pointers, soft-float)
+* `lp64f` (64-bit long and pointers, with single-precision in registers and double in memory, niche use only)
+* `lp64d` (64-bit long and pointers, hard-float).
+
+The supported libraries are (in parenthesis are combinations that reuse simpler libraries):
+
+```console
+march=rv32i/mabi=ilp32 (march.rv32ic/mabi.ilp32)
+march=rv32im/mabi=ilp32 (march.rv32imc/mabi.ilp32)
+march=rv32iac/mabi=ilp32
+march=rv32imac/mabi=ilp32
+march=rv32imaf/mabi=ilp32f <-- New
+march=rv32imafc/mabi=ilp32f (march.rv32imafdc/mabi.ilp32f, march.rv32gc/mabi.ilp32f)
+march=rv64imac/mabi=lp64
+march=rv64imafdc/mabi=lp64d (march.rv64gc/mabi.lp64d)
+```
+
+Please note that, although all combinations of `march/mabi` are supported by the compiler, not all of them have libraries.
+
+## Improvements
+
+Compared to the original RISC-V `riscv64-unknown-elf` toolchain, the following improvements can be noted:
+
+* GDB was patched to no longer returns the 4096 CSRs together with the general registers
+* a newer `newlib` was included, which supports the 'underscore' syscall functions
+* the mandatory reference to `libgloss` in the linker configuration was removed
+* the `march=rv32imaf/mabi=ilp32f` library was added to the list of multi-libs
+* support for `newlib-nano` was added
+* the standard documentation, in PDF and HTML, was added
+
+## newlib-nano
+
+Currently **GNU MCU Eclipse RISC-V Embedded GCC** is the only RISC-V toolchain that provides support for **newlib-nano**, using the `--specs=nano.specs` option.
+
+If no syscalls are needed, `--specs=nosys.specs` can be used at link time to provide empty implementations for the POSIX system calls.
+
+The _nano_ versions of the libraries are configured with simplified implementations for `printf()` and `malloc()`; in addition they are compiled with `-Os`, while the regular versions are compiled with `-O2`.
+
+## 'Underscore' newlib syscalls
+
+The initial RISC-V newlib was erroneously configured to directly call system functions via their direct names (like `write()`), assuming they are implemented via kernel traps in `libgloss`.
+
+The latest newlib 2.5.0 for RISC-V fixed this, and switched to the usual newlib configuration, which uses 'underscore' functions (like `_write()`) that must be defined by the application to implement the system calls.
+
+This change is welcome, since it brings the RISC-V toolchain in line with other toolchains, like `arm-none-eabi`.
+
+Unfortunately this change breaks the builds for the initial SiFive SDK samples, which implements the direct function names in the `libwrap` library. To fix them, `libwrap` should no longer be used, the `--wrap` options should no longer be passed to the linker, and several functions (like `_write()`, `_istty()`, ...) must be implemented by the application.
+
+## libgloss
+
+For RISC-V, this library implements all syscalls via kernel traps; on other platforms (like ARM) it is used for semihosting.
+
+The **GNU MCU Eclipse RISC-V Embedded GCC** toolchain no longer links automatically `libgloss`; however  `libgloss` is still available in the distribution and applications that need to access a kernel can include it using the usual `-lgloss` link option.
+
+## Documentation
+
+Another addition compared to the official distribution is the presence of the documentation files, including the PDF manuals for all tools.
+
+## Binaries
+
+Binaries for **Windows**, **macOS** and **GNU/Linux** are provided. For Windows and macOS, separate installable and plain archives are provided. For Windows and GNU/Linux, both 32/64-bit binaries are provided.
+
+Instructions on how to install them are available in the [Install Guide](/docs/install/).
+
+The toolchain is also available as an [xPack](https://www.npmjs.com/package/@gnu-mcu-eclipse/riscv-none-gcc) and can be conveniently installed with [`xpm`](https://www.npmjs.com/package/xpm):
+
+```sh
+xpm install --global @gnu-mcu-eclipse/riscv-none-gcc
+```
+
+This installs the latest available version.
+
+For better control and repeatability, the build scripts use Docker containers; all files required during builds are available as a separate [gnu-mcu-eclipse/riscv-none-gcc-build](https://github.com/gnu-mcu-eclipse/riscv-none-gcc-build) project.
+
+## Known problems
+
+### Running on old processors
+
+[2018-01-10] It was recently discovered that the GNU/Linux binaries do not run on machines equipped with an older processor, even if they run a recent GNU/Linux distribution. Windows binaries seem not affected. macOS binaries may be affected, but Mac machines use more or less recent processors.
+
+The problem was identified to be related to the build configuration, which allowed some optimizations specific to the modern processor used on the build machine. The build script was fixed to avoid specific optimizations, and the new binaries should run on any i686/x86_64 processor or newer.
+
+## Checksums
+
+The SHA-256 hashes for the files are:
+
+```txt
+76456d07cd5c2a5984dbcf9f1fb73ac3e5f2399a6b8db13bffd8516cfa934483 ?
+gnu-mcu-eclipse-riscv-none-gcc-7.2.0-1-20171109-1926-debian32.tgz
+
+bc1686df845f95e2e6178a6ce611ae178bced496fd221093f520d1b80fcbb057 ?
+gnu-mcu-eclipse-riscv-none-gcc-7.2.0-1-20171109-1926-debian64.tgz
+
+1ae0169a4ac2f6c68fc748fba81bb06924a7b1f46726d7b4a5104a5270084186 ?
+gnu-mcu-eclipse-riscv-none-gcc-7.2.0-1-20171109-1926-osx.pkg
+
+417ccec04684b28b5173a251d873b6ec2d1523ed53665efa551a643a32b9c0a9 ?
+gnu-mcu-eclipse-riscv-none-gcc-7.2.0-1-20171109-1926-osx.tgz
+
+b73511f03a9528eeb7913f4b3624c7eda66db0c6d49d051027262cbc7cb80710 ?
+gnu-mcu-eclipse-riscv-none-gcc-7.2.0-1-20171109-1926-win32-setup.exe
+
+4d5024e3c2ab0d3062d7e2c23fa97ddef546cc9e4b90ef4c2cb8e596817b2d0d ?
+gnu-mcu-eclipse-riscv-none-gcc-7.2.0-1-20171109-1926-win32.zip
+
+ef444ab35fa80ece2122c93cbc320aab1822f05f717bcda44b5018b6a550a10e ?
+gnu-mcu-eclipse-riscv-none-gcc-7.2.0-1-20171109-1926-win64-setup.exe
+
+a5d21ecd039c6050a2a05ba9704cfca96880df47ac0d9e208780c461611c5a71 ?
+gnu-mcu-eclipse-riscv-none-gcc-7.2.0-1-20171109-1926-win64.zip
+```

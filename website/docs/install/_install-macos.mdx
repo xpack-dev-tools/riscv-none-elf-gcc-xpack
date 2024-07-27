@@ -1,0 +1,150 @@
+
+import CodeBlock from '@theme/CodeBlock';
+
+import customField from '@site/src/libs/customField';
+
+import AutomatedInstall from './_common/_automated-install.mdx';
+import AutomatedUninstall from './_common/_automated-uninstall.mdx';
+import ManualInstall from './_common/_manual-install.mdx';
+import ManualInstallMacOS from './_common/_manual-install-macos.mdx';
+import ManualInstallInfo from './_common/_manual-info.mdx';
+
+{/* ------------------------------------------------------------------------ */}
+
+<AutomatedInstall label={ props.label }/>
+
+<details>
+<summary>PATH setup</summary>
+
+In order to access the GNU RISC-V Embedded GCC binaries installed in
+the central xPacks store,
+the project build configurations need a PATH adjustment:
+
+<CodeBlock language="sh"> {
+`export PATH=$HOME/Library/xPacks/\@pack-dev-tools/riscv-none-elf-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }/.content/bin:$PATH`
+} </CodeBlock>
+</details>
+
+<details>
+<summary>Folder hierarchy</summary>
+
+After install, the package creates a folder hierarchy like the following
+(only the first two depth levels are shown):
+
+<CodeBlock language="console"> {
+`$ tree -L 2 ~/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }/.content/
+├── README.md
+├── bin
+│   ├── riscv-none-elf-addr2line
+│   ├── riscv-none-elf-ar
+│   ├── riscv-none-elf-as
+│   ├── riscv-none-elf-c++
+│   ├── riscv-none-elf-c++filt
+│   ├── riscv-none-elf-cpp
+│   ├── riscv-none-elf-elfedit
+│   ├── riscv-none-elf-g++
+│   ├── riscv-none-elf-gcc
+│   ├── riscv-none-elf-gcc-${ customField('upstreamVersion') }
+│   ├── riscv-none-elf-gcc-ar
+│   ├── riscv-none-elf-gcc-nm
+│   ├── riscv-none-elf-gcc-ranlib
+│   ├── riscv-none-elf-gcov
+│   ├── riscv-none-elf-gcov-dump
+│   ├── riscv-none-elf-gcov-tool
+│   ├── riscv-none-elf-gdb
+│   ├── riscv-none-elf-gdb-add-index
+│   ├── riscv-none-elf-gdb-add-index-py3
+│   ├── riscv-none-elf-gdb-py3
+│   ├── riscv-none-elf-gfortran
+│   ├── riscv-none-elf-gprof
+│   ├── riscv-none-elf-ld
+│   ├── riscv-none-elf-ld.bfd
+│   ├── riscv-none-elf-lto-dump
+│   ├── riscv-none-elf-nm
+│   ├── riscv-none-elf-objcopy
+│   ├── riscv-none-elf-objdump
+│   ├── riscv-none-elf-ranlib
+│   ├── riscv-none-elf-readelf
+│   ├── riscv-none-elf-size
+│   ├── riscv-none-elf-strings
+│   └── riscv-none-elf-strip
+├── distro-info
+│   └── licenses
+├── include
+│   └── gdb
+├── lib
+│   ├── bfd-plugins
+│   ├── gcc
+│   ├── libcc1.0.so
+│   ├── libcc1.so -> libcc1.0.so
+│   └── python3.12
+├── libexec
+│   ├── gcc
+│   ├── libbz2.1.0.8.dylib
+│   ├── libc++.1.0.dylib
+│   ├── libc++abi.1.0.dylib
+│   ├── libcrypt.2.dylib
+│   ├── libcrypto.3.dylib
+│   ├── libexpat.1.9.2.dylib
+│   ├── libexpat.1.dylib -> libexpat.1.9.2.dylib
+│   ├── libffi.8.dylib
+│   ├── libgmp.10.dylib
+│   ├── libiconv.2.dylib
+│   ├── libisl.23.dylib
+│   ├── liblzma.5.dylib
+│   ├── libmpc.3.dylib
+│   ├── libmpfr.6.dylib
+│   ├── libncurses.6.dylib
+│   ├── libpanel.6.dylib
+│   ├── libpython3.12.dylib
+│   ├── libreadline.8.2.dylib
+│   ├── libreadline.8.dylib -> libreadline.8.2.dylib
+│   ├── libsqlite3.0.dylib
+│   ├── libssl.3.dylib
+│   ├── libz.1.3.1.dylib
+│   ├── libz.1.dylib -> libz.1.3.1.dylib
+│   ├── libzstd.1.5.6.dylib
+│   └── libzstd.1.dylib -> libzstd.1.5.6.dylib
+├── riscv-none-elf
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
+└── share
+    └── gcc-${ customField('upstreamVersion') }
+
+19 directories, 61 files`
+} </CodeBlock>
+
+</details>
+
+No other files are installed in any system folders or other locations.
+
+<AutomatedUninstall/>
+
+### Quick test
+
+To check if the GNU RISC-V Embedded GCC installed by **xpm** starts properly, use something like:
+
+<CodeBlock language="console"> {
+`$ ~/Library/xPacks/@xpack-dev-tools/riscv-none-elf-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }/.content/bin/riscv-none-elf-gcc --version
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ${ customField('upstreamVersion') }`
+} </CodeBlock>
+
+<ManualInstall/>
+
+<ManualInstallMacOS/>
+
+<ManualInstallInfo/>
+
+The result is a structure identical to the above.
+
+### Quick test
+
+To check if the GNU RISC-V Embedded GCC installed manually starts properly, use something like:
+
+<CodeBlock language="console"> {
+`$ ~/Library/xPacks/riscv-none-elf-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }/bin/riscv-none-elf-gcc --version
+${ customField('upstreamVersion') }`
+} </CodeBlock>
