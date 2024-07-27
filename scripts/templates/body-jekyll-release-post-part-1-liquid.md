@@ -20,7 +20,7 @@ download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releas
 
 comments: true
 
-date:   {{ RELEASE_DATE }}
+date: {{ RELEASE_DATE }}
 
 # For Jekyll releases selection.
 categories:
