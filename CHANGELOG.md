@@ -5,7 +5,10 @@ Entries in this file are in reverse chronological order.
 
 ## 2024-07-27
 
-* v11.5.0-1 released
+* v11.5.0-1.1 published on npmjs.com
+* d0422db package.json: update urls for 11.5.0-1 release
+* 86c291d templates/jekyll updates
+* d8e8814 CHANGELOG update
 * 8f90a4d versioning.sh: update multi-lib to Debian riscv64-unknown-elf-gcc
 * 3213ac3 templates/jekyll updates
 
