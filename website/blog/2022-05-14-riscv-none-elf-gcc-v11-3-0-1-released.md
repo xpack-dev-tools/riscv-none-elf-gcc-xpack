@@ -70,8 +70,7 @@ The binary files are available from <a href={ frontMatter.download_url }>GitHub 
 ## Install
 
 The full details of installing the **xPack GNU RISC-V Embedded GCC**
-on various platforms are presented in the separate
-[Install Guide](/docs/install/) page.
+on various platforms are presented in the [Install Guide](/docs/install/).
 
 ## Compliance
 

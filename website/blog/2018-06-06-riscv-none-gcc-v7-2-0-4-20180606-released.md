@@ -66,8 +66,7 @@ The Windows binaries were built with mingw-w64, and run on any reasonably
 recent **i686** and **x86_64** Windows machines.
 
 Instructions on how to install the binaries are available in the
-[How to install the RISC-V toolchain?](/riscv-none-embed-gcc/install/)
-page.
+[Install Guide](/docs/install/).
 
 The toolchain is also available as an
 [xPack](https://www.npmjs.com/package/@gnu-mcu-eclipse/riscv-none-gcc)
