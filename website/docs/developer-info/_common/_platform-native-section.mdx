@@ -30,7 +30,8 @@ To prepare the native build on { platforms[props.platform].machineName }:
 xpm install --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git`
 } </CodeBlock>
 
-or, with the writable helper:
+<details>
+<summary>... or, with the writable helper ...</summary>
 
 <CodeBlock language="sh"> {
 `xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \\
@@ -38,16 +39,18 @@ xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \\
 xpm install --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git`
 } </CodeBlock>
 
+</details>
+
 To run the build:
 
 <CodeBlock language="sh"> {
 `xpm run build --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git`
 } </CodeBlock>
 
-or, for more verbosity:
+or, for more verbosity, invoke the development build:
 
 <CodeBlock language="sh"> {
-`xpm run build-develop --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git`
+`xpm run build-development --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git`
 } </CodeBlock>
 
 { durations[ props.platform ] }, the output of the build script is a compressed
@@ -59,6 +62,6 @@ archive and its SHA signature, created in the `deploy` folder:
 To rerun the build, invoke the deep-clean action and repeat from install:
 
 <CodeBlock language="sh"> {
-`xpm run deep-clean --config { props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git`
+`xpm run deep-clean --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git`
 } </CodeBlock>
 
