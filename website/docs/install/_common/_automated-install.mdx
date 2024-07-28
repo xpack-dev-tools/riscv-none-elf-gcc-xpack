@@ -99,7 +99,7 @@ without creating local <LinksVsForwarders isWindows={ props.isWindows }/>
 Upon initial use, ensure that a `package.json` file is present in the
 project root folder.
 
-This can be achieved by running `xpm init` in the desired folder
+This can be achieved by running `xpm init` in the desired project folder
 (substitute `my-project` accordingly):
 
 ```sh
@@ -116,7 +116,7 @@ The next step is to install the
 `xpm install @xpack-dev-tools/riscv-none-elf-gcc@latest --verbose`
 } </CodeBlock>
 
-The main result is a set of <LinksVsForwarders isWindows={ props.isWindows }/>:
+The main result is a set of <LinksVsForwarders isWindows={ props.isWindows }/> in the `.bin` folder:
 
 <CodeBlock language="console"> {
 `${ props.isWindows === 'True' ? 'dir xpacks\\.bin' : 'ls -l xpacks/.bin' }`
