@@ -49,7 +49,7 @@ The GNU/Linux binaries were built on two CentOS 6 Docker images (32/64-bit), and
 
 The Windows binaries were built with mingw-w64, and run on any reasonably recent **i686** and **x86_64** Windows machines.
 
-Instructions on how to install the binaries are available in the [Install Guide](/docs/install/).
+Instructions on how to install the binaries are available in the project [README](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack).
 
 The toolchain is also available as an [xPack](https://www.npmjs.com/package/@gnu-mcu-eclipse/riscv-none-gcc) and can be conveniently installed with [`xpm`](https://www.npmjs.com/package/xpm):
 

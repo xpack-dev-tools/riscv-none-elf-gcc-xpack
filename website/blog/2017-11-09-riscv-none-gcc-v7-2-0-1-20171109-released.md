@@ -110,7 +110,7 @@ Another addition compared to the official distribution is the presence of the do
 
 Binaries for **Windows**, **macOS** and **GNU/Linux** are provided. For Windows and macOS, separate installable and plain archives are provided. For Windows and GNU/Linux, both 32/64-bit binaries are provided.
 
-Instructions on how to install them are available in the [Install Guide](/docs/install/).
+Instructions on how to install them are available in the project [README](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack).
 
 The toolchain is also available as an [xPack](https://www.npmjs.com/package/@gnu-mcu-eclipse/riscv-none-gcc) and can be conveniently installed with [`xpm`](https://www.npmjs.com/package/xpm):
 
