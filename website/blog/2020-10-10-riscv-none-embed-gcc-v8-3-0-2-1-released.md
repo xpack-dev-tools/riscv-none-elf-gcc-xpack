@@ -38,7 +38,7 @@ by setting `DT_RPATH` instead of `DT_RUNPATH` (see below).
 
 ## Download
 
-The binary files are available from GitHub [releases]({ frontMatter.download_url }).
+The binary files are available from <a href={ frontMatter.download_url }>GitHub Releases</a>.
 
 ## Install
 
