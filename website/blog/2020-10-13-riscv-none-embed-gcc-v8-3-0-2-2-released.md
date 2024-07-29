@@ -24,7 +24,7 @@ Version **8.3.0-2.2** is a maintenance release of the **xPack GNU RISC-V Embedde
 
 import Image from '@theme/IdealImage';
 
-[The xPack GNU RISC-V Embedded GCC](https://xpack.github.io/dev-tools/riscv-none-embed-gcc/)
+[The xPack GNU RISC-V Embedded GCC](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack)
 is the **xPack** distribution of the
 [SiFive RISC-V GCC](https://github.com/sifive/freedom-tools/releases).
 

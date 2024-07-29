@@ -26,7 +26,7 @@ Version **10.1.0-1.2** is a maintenance release; it fixes the missing multi-libs
 
 import Image from '@theme/IdealImage';
 
-[The xPack GNU RISC-V Embedded GCC](https://xpack.github.io/dev-tools/riscv-none-embed-gcc/)
+[The xPack GNU RISC-V Embedded GCC](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack)
 is a standalone cross-platform binary distribution of the
 [SiFive RISC-V GCC](https://github.com/sifive/freedom-tools/releases).
 

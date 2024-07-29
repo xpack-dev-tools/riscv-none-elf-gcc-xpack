@@ -30,7 +30,7 @@ Version **12.2.0-3** is a maintenance release, built with the latest build scrip
 
 import Image from '@theme/IdealImage';
 
-[The xPack GNU RISC-V Embedded GCC](https://xpack.github.io/dev-tools/riscv-none-elf-gcc/)
+[The xPack GNU RISC-V Embedded GCC](https://xpack-dev-tools.github.io/riscv-none-elf-gcc-xpack)
 is a standalone cross-platform binary distribution of the
 [GNU GCC](https://gcc.gnu.org/releases.html).
 
