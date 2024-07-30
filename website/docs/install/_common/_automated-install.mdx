@@ -17,6 +17,25 @@ is by using the **binary xPack**, available
 as <a href={ `https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc` }><code>@xpack-dev-tools/riscv-none-elf-gcc</code></a> from
 the [`npmjs.com`](https://www.npmjs.com) registry.
 
+<details>
+<summary>xPacks 101</summary>
+
+While the initial appearance may seem complex, utilizing xPacks is,
+in fact, straightforward. The design rationale is to automate common
+steps in software development, in this case the installation of dependencies.
+
+xPacks are standard archives that are extracted into separate folders
+within the project. If the xPacks contain executables, symbolic
+links to these executables are created in a `.bin` folder,
+eliminating the need to add multiple folders to the `PATH`.
+
+Given that some binary xPacks, such as toolchains, can be quite large,
+the archives are extracted only once into a central/global location to
+conserve space. In projects, instead of duplicating these files, symbolic
+links are created.
+
+</details>
+
 ### Prerequisites
 
 The only requirement for an automated install is a recent
