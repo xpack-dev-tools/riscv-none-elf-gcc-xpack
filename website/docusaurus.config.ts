@@ -160,7 +160,7 @@ const config: Config = {
               to: '/docs/user-info'
             },
             {
-              label: 'Help Center',
+              label: 'Help Centre',
               to: '/docs/support'
             },
             {
