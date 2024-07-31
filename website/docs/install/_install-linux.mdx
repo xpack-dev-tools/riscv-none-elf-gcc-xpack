@@ -25,6 +25,52 @@ the project build configurations need a PATH adjustment:
 } </CodeBlock>
 </details>
 
+<AutomatedUninstall/>
+
+### Quick test
+
+To check if the GNU RISC-V Embedded GCC installed by **xpm** starts properly, use something like:
+
+<CodeBlock language="console"> {
+`$ ~/.local/xPacks/@xpack-dev-tools/riscv-none-elf-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }/.content/bin/riscv-none-elf-gcc --version
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ${ customField('upstreamVersion') }`
+} </CodeBlock>
+
+<ManualInstall/>
+
+<ManualInstallLinux/>
+
+<ManualInstallInfo/>
+
+<details>
+<summary>PATH setup</summary>
+
+With all binary tools installed in `xpacks/.bin`, the project build
+configurations need a single PATH adjustment:
+
+```sh
+export PATH=<...project-path...>/xpacks/.bin:$PATH
+```
+
+:::tip
+
+On Windows, when not using the Git console, adjust the syntax for the
+corresponding shell.
+
+:::
+</details>
+
+### Quick test
+
+To check if the GNU RISC-V Embedded GCC installed manually starts properly, use something like:
+
+<CodeBlock language="console"> {
+`$ ~/.local/xPacks/riscv-none-elf-gcc/xpack-riscv-none-elf-gcc-${ customField('upstreamVersion') }-${ customField('xpackSubversion') }/bin/riscv-none-elf-gcc --version
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ${ customField('upstreamVersion') }`
+} </CodeBlock>
+
+## Miscellaneous
+
 <details>
 <summary>Folder hierarchy</summary>
 
@@ -134,50 +180,4 @@ After install, the package creates a folder hierarchy like the following
 20 directories, 77 files`
 } </CodeBlock>
 
-No other files are installed in any system folders or other locations.
-
 </details>
-
-<AutomatedUninstall/>
-
-### Quick test
-
-To check if the GNU RISC-V Embedded GCC installed by **xpm** starts properly, use something like:
-
-<CodeBlock language="console"> {
-`$ ~/.local/xPacks/@xpack-dev-tools/riscv-none-elf-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }/.content/bin/riscv-none-elf-gcc --version
-riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ${ customField('upstreamVersion') }`
-} </CodeBlock>
-
-<ManualInstall/>
-
-<ManualInstallLinux/>
-
-<ManualInstallInfo/>
-
-<details>
-<summary>PATH setup</summary>
-
-With all binary tools installed in `xpacks/.bin`, the project build
-configurations need a single PATH adjustment:
-
-```sh
-export PATH=<...project-path...>/xpacks/.bin:$PATH
-```
-
-:::tip
-
-On Windows, when not using the Git console, adjust the syntax for the
-corresponding shell.
-
-:::
-</details>
-
-### Quick test
-
-To check if the GNU RISC-V Embedded GCC installed manually starts properly, use something like:
-
-<CodeBlock language="console"> {
-`$ ~/.local/xPacks/riscv-none-elf-gcc/xpack-riscv-none-elf-gcc-${ customField('upstreamVersion') }-${ customField('xpackSubversion') }/bin/riscv-none-elf-gcc --version
-riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ${ customField('upstreamVersion') }`
-} </CodeBlock>

@@ -193,8 +193,10 @@ export PATH=<...project-path...>/xpacks/.bin:$PATH
 
 { props.isWindows === 'True' ?
   <Admonition type="tip">
-    <p>When not using the Git console, adjust the syntax for the
-  corresponding shell.</p>
+    <p>This syntax is for the Git Bash console.
+      When using COMMAND.EXE or Power Shell,
+      adjust the syntax for the corresponding Windows specific shell.
+    </p>
   </Admonition>
  : ''
 }
@@ -206,10 +208,10 @@ export PATH=<...project-path...>/xpacks/.bin:$PATH
 The above `xpm install` command will do the following:
 
 * identify the platform specific archive for the latest available version
-  of GNU RISC-V Embedded GCC, download it in a cache and unpack
+  of GNU RISC-V Embedded GCC, download it into a cache and unpack
   it into a versioned folder
   in the **central xPacks store** (if not already there);
-  check the output of the `xpm` command for the actual
+  check the output of the `xpm install` command for the actual
   folder used on your platform;
 * create a local symbolic link
   like <code>xpacks/@xpack-dev-tools/riscv-none-elf-gcc</code> pointing to the
@@ -274,11 +276,13 @@ This is particularly useful for CI/CD environments.
 
 ### Install globally
 
-For older development environments (like the initial **Eclipse Embedded C/C++ plug-ins**; the current version also supports project installs),
+For older development environments,
 it is also possible to install GNU RISC-V Embedded GCC only globally in the **central
-xPacks store**, without any local <LinksVsForwarders isWindows={ props.isWindows }/>,
-assuming the development environments are capable of handling
-the paths themselves.
+xPacks store**, without any
+local <LinksVsForwarders isWindows={ props.isWindows }/>; it
+is the developer's responsibility to configure the path to the tools.
+
+No other files are installed in any system folders or other locations.
 
 <CodeBlock language="sh"> {
 `xpm install @xpack-dev-tools/riscv-none-elf-gcc@latest --global --verbose`

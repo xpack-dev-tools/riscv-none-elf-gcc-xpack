@@ -25,6 +25,36 @@ the project build configurations need a PATH adjustment:
 } </CodeBlock>
 </details>
 
+<AutomatedUninstall/>
+
+### Quick test
+
+To check if the GNU RISC-V Embedded GCC installed by **xpm** starts properly, use something like:
+
+<CodeBlock language="console"> {
+`$ ~/Library/xPacks/@xpack-dev-tools/riscv-none-elf-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }/.content/bin/riscv-none-elf-gcc --version
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ${ customField('upstreamVersion') }`
+} </CodeBlock>
+
+<ManualInstall/>
+
+<ManualInstallMacOS/>
+
+<ManualInstallInfo/>
+
+The result is a structure identical to the above.
+
+### Quick test
+
+To check if the GNU RISC-V Embedded GCC installed manually starts properly, use something like:
+
+<CodeBlock language="console"> {
+`$ ~/Library/xPacks/riscv-none-elf-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }/bin/riscv-none-elf-gcc --version
+${ customField('upstreamVersion') }`
+} </CodeBlock>
+
+## Miscellaneous
+
 <details>
 <summary>Folder hierarchy</summary>
 
@@ -118,33 +148,3 @@ After install, the package creates a folder hierarchy like the following
 } </CodeBlock>
 
 </details>
-
-No other files are installed in any system folders or other locations.
-
-<AutomatedUninstall/>
-
-### Quick test
-
-To check if the GNU RISC-V Embedded GCC installed by **xpm** starts properly, use something like:
-
-<CodeBlock language="console"> {
-`$ ~/Library/xPacks/@xpack-dev-tools/riscv-none-elf-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }/.content/bin/riscv-none-elf-gcc --version
-riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ${ customField('upstreamVersion') }`
-} </CodeBlock>
-
-<ManualInstall/>
-
-<ManualInstallMacOS/>
-
-<ManualInstallInfo/>
-
-The result is a structure identical to the above.
-
-### Quick test
-
-To check if the GNU RISC-V Embedded GCC installed manually starts properly, use something like:
-
-<CodeBlock language="console"> {
-`$ ~/Library/xPacks/riscv-none-elf-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }/bin/riscv-none-elf-gcc --version
-${ customField('upstreamVersion') }`
-} </CodeBlock>

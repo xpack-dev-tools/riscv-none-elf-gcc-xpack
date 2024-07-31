@@ -22,7 +22,7 @@ to use the **GNU RISC-V Embedded GCC** binaries in their workflows.
 ## riscv-none-elf-gcc
 
 After installing the toolchain, the result is a large set of programs
-prefixed by `riscv-none-elf-`. For those used with other RISC-V
+prefixed by `riscv-none-elf-`. For those used to other RISC-V
 toolchains, there is no `riscv64-` or `riscv32-` prefix since
 the word size is
 actually not needed, the RISC-V toolchain produces both 32/64-bit binaries,
@@ -30,8 +30,8 @@ based on `-march` and `-mabi`.
 
 ### `-march` and `-mabi`
 
-The RISC-V design is not a single architecture, but a family of
-architectures, with optional components, identified by letters.
+The RISC-V CPU is not defined as a single architecture, but as a family of
+architectures, with optional extensions, identified by letters.
 
 RISC-V ISA strings begin with either RV32I, RV32E, RV64I, or RV128I,
 the numerical value
@@ -42,16 +42,18 @@ indicating the register size in bits for the base integer ISA.
 - RV64I: A 64-bit flavour of RV32I where the general-purpose integer registers
   are 64-bit wide.
 
-In addition to these base ISAs, a handful of extensions have been
-specified. The extensions that have both been specified and are supported
-by the toolchain are:
+In addition to these base ISAs, a large number of extensions have been
+specified. The most used extensions that have both been specified
+and are supported by the toolchain are:
 
 - M: Integer Multiplication and Division
 - A: Atomics
 - F: Single-Precision Floating-Point
 - D: Double-Precision Floating-Point
 - C: 16-bit Compressed Instructions
-- G: General, a shortcut to IMAFD
+- Zicsr: Control and Status Register (CSR)
+- Zifencei: Instruction-Fetch Fence
+- G: General, a shortcut to IMAFD, Zicsr, Zifencei
 
 RISC-V ISA strings are defined by appending the supported extensions to the
 base ISA in the order listed above. For example, the RISC-V ISA with
@@ -64,9 +66,11 @@ There are some other extensions. For more details, please see
 [The RISC-V ISA Specification, Volume I: Unprivileged Spec](https://riscv.org/specifications/).
 
 In addition to controlling the instructions used by GCC during code
-generating, users can select from various ABIs (which define
-the calling convention and layout of objects in memory). Objects and
-libraries may only be linked together if they follow the same ABI.
+generation, users can select from various ABIs (which define
+the calling convention and layout of objects in memory).
+It is recommended for objects and
+libraries to follow the same ABI, and not rely on the toolchain
+logic for matching multilibs.
 
 RISC-V defines two integer ABIs and three floating-point ABIs, which
 together are treated as a single ABI string. The integer ABIs follow the
@@ -77,6 +81,9 @@ standard ABI naming scheme:
 - `lp64`: "long" and pointers are 64-bit long, while "int" is a 32-bit type.
   The other types remain the same as ilp32.
 
+Compilers also implement a `ilp32e` ABI for small embedded devices, but its
+standardisation status is not clear at this moment.
+
 while the floating-point ABIs are a RISC-V specific addition:
 
 - "" (the empty string): No floating-point arguments are passed in registers.
@@ -86,7 +93,7 @@ while the floating-point ABIs are a RISC-V specific addition:
 - `d`: 64-bit and smaller floating-point arguments are passed in registers.
   This ABI requires the D extension.
 
-Just like ISA strings, ABI strings are concatenated together and passed via
+ABI strings, possibly extended with `f` or `d`, are passed via
 the `-mabi` argument to GCC. For example:
 
 - `-march=rv32imafdc -mabi=ilp32d`: Hardware floating-point instructions can
@@ -128,14 +135,14 @@ Support for **newlib-nano** is available using the
 :::tip
 
 For better results, this option must be
-added to both compile and link time.
+added to both the compile and link steps.
 
 :::
 
 ### nosys.specs
 
 If no syscalls are needed, `--specs=nosys.specs` can be used at link
-time to provide empty implementations for the POSIX system calls.
+time to provide empty implementations of the POSIX system calls.
 
 ### `-mcmodel=medany`
 
@@ -146,7 +153,7 @@ compiled with `-Os -mcmodel=medany`.
 
 It is mandatory for the applications to
 be compiled with
-`-mcmodel=medany`, otherwise the link might fail.
+`-mcmodel=medany`, otherwise the link will fail.
 
 :::
 
@@ -172,13 +179,13 @@ versions.
 **The GNU RISC-V Embedded GCC** is fully integrated into
 [Eclipse Embedded CDT](https://eclipse-embed-cdt.github.io).
 
-Eclipse provides full support to configure the RISC-V projects,
+Eclipse provides full support for configure the RISC-V projects,
 both in the build and the debug phase.
 
 ## Automated testing
 
 In addition to integrating into regular development environments,
-like Eclipse, GNU RISC-V Embedded GCC can be used in building
+like Eclipse, GNU RISC-V Embedded GCC can be used for building
 unit tests, in CI/CD environments.
 
 ### CMake example
@@ -207,10 +214,10 @@ endif()
 
 :::
 
-To run the test, the semihosted application can be directed
+To run the test, the semihosted application can be directly
 executed by QEMU, which provides a good RISC-V emulation.
 
-An example of a unit test running on QEMU can be:
+An example of a unit test running on QEMU is:
 
 ```cmake
 if (ENABLE_UNIT_TEST)

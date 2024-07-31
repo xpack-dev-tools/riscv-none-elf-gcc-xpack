@@ -32,6 +32,34 @@ corresponding shell.
 :::
 </details>
 
+<AutomatedUninstall isWindows={ props.isWindows }/>
+
+### Quick test
+
+To check if the GNU RISC-V Embedded GCC installed by **xpm** starts properly, use something like:
+
+<CodeBlock language="console"> {
+`C:\\> %USERPROFILE%\\AppData\\Roaming\\xPacks\\@xpack-dev-tools\\riscv-none-elf-gcc\\${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }\\.content\\bin\\riscv-none-elf-gcc.exe --version
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ${ customField('upstreamVersion') }`
+} </CodeBlock>
+
+<ManualInstall/>
+
+<ManualInstallWindows/>
+
+<ManualInstallInfo/>
+
+### Quick test
+
+To check if the GNU RISC-V Embedded GCC installed manually starts properly, use something like:
+
+<CodeBlock language="console"> {
+`C:\\> %USERPROFILE%\\AppData\\Roaming\\xPacks\\riscv-none-elf-gcc\\xpack-riscv-none-elf-gcc-${ customField('upstreamVersion') }-${ customField('xpackSubversion') }\\bin\\riscv-none-elf-gcc.exe --version
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ${ customField('upstreamVersion') }`
+} </CodeBlock>
+
+## Miscellaneous
+
 <details>
 <summary>Folder hierarchy</summary>
 
@@ -164,32 +192,4 @@ Volume serial number is B02D-925C
 28 directories, 91 files`
 } </CodeBlock>
 
-No other files are installed in any system folders or other locations.
-
 </details>
-
-<AutomatedUninstall isWindows={ props.isWindows }/>
-
-### Quick test
-
-To check if the GNU RISC-V Embedded GCC installed by **xpm** starts properly, use something like:
-
-<CodeBlock language="console"> {
-`C:\\> %USERPROFILE%\\AppData\\Roaming\\xPacks\\@xpack-dev-tools\\riscv-none-elf-gcc\\${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }\\.content\\bin\\riscv-none-elf-gcc.exe --version
-riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ${ customField('upstreamVersion') }`
-} </CodeBlock>
-
-<ManualInstall/>
-
-<ManualInstallWindows/>
-
-<ManualInstallInfo/>
-
-### Quick test
-
-To check if the GNU RISC-V Embedded GCC installed manually starts properly, use something like:
-
-<CodeBlock language="console"> {
-`C:\\> %USERPROFILE%\\AppData\\Roaming\\xPacks\\riscv-none-elf-gcc\\xpack-riscv-none-elf-gcc-${ customField('upstreamVersion') }-${ customField('xpackSubversion') }\\bin\\riscv-none-elf-gcc.exe --version
-riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ${ customField('upstreamVersion') }`
-} </CodeBlock>
