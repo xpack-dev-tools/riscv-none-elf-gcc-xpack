@@ -27,7 +27,7 @@ is set in the environment, it should not interfere with the xPack binaries.
 
 Please note that previous versions, up to mid-2020, used `DT_RUNPATH`, which
 has a priority lower than `LD_LIBRARY_PATH`; setting `LD_LIBRARY_PATH`
-in the environment overrode `DT_RUNPATH`, resulting in failures to loader_path
+in the environment overrode `DT_RUNPATH`, resulting in failures to load
 the libraries.
 
 ### `@rpath` and `@loader_path`
