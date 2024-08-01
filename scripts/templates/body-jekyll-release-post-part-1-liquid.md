@@ -1,11 +1,15 @@
 ---
 title:  xPack GNU RISC-V Embedded GCC v{{ XBB_RELEASE_VERSION }} released
 
-TODO: select one summary
+date: {{ RELEASE_DATE }}
 
-summary: "Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release; it fixes <...>."
+authors: ilg-ul
 
-summary: "Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the GNU GCC release."
+# To be listed in the Releases page.
+tags:
+  - releases
+
+# ----- Custom properties -----------------------------------------------------
 
 gcc_version: "14.1.0"
 binutils_version: "2.42"
@@ -18,33 +22,25 @@ npm_subversion: "1"
 
 download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v{{ XBB_RELEASE_VERSION }}/
 
-comments: true
-
-date: {{ RELEASE_DATE }}
-
-# For Jekyll releases selection.
-categories:
-  - releases
-  - riscv-none-elf-gcc
-
-# For navigation; use scripts/createtag.sh in Jekyll.
-tags:
-  - releases
-  - riscv
-  - riscv-none-elf-gcc
-  - gcc
-  - binaries
-  - c++
-
 ---
 
-[The xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-elf-gcc/)
-is a standalone cross-platform binary distribution of the
-[GNU GCC](https://gcc.gnu.org/releases.html).
+TODO: select one summary
 
-There are separate binaries for **Windows** (Intel 64-bit),
-**macOS** (Intel 64-bit)
-and **GNU/Linux** (Intel 64-bit, Arm 32/64-bit).
+Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release; it fixes <...>.
+
+Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the GNU GCC release.
+
+<!-- truncate -->
+
+import Image from '@theme/IdealImage';
+
+[The xPack GNU RISC-V Embedded GCC](/)
+is a standalone cross-platform binary distribution of
+[GNU GCC](https://gcc.gnu.org/releases.html) for embedded RISC-V.
+
+There are separate binaries for **Windows** (x64),
+**macOS** (x64 and arm64)
+and **GNU/Linux** (x64, arm64 and arm).
 
 {% raw %}{% include note.html content="The main targets for the GNU/Linux Arm
 binaries are the **Raspberry Pi** class devices (armv7l and aarch64;
@@ -52,92 +48,37 @@ armv6 is not supported)." %}{% endraw %}
 
 ## Download
 
-The binary files are available from GitHub [Releases]({% raw %}{{ page.download_url }}{% endraw %}).
+The binary files are available from <a href={ frontMatter.download_url }>GitHub Releases</a>.
 
 ## Prerequisites
 
-- GNU/Linux Intel 64-bit: any system with **GLIBC 2.27** or higher
-  (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
+- GNU/Linux x64: any system with **GLIBC 2.27** or higher
+  (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 or later,
   Fedora 29 or later, etc)
-- GNU/Linux Arm 32/64-bit: any system with **GLIBC 2.27** or higher
-  (like Raspberry Pi OS, Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
-  Fedora 29 or later, etc)
-- Intel Windows 64-bit: Windows 7 with the Universal C Runtime
+- GNU/Linux Arm 64/32-bit: any system with **GLIBC 2.27** or higher
+  (like Raspberry Pi OS, Ubuntu 18 or later, Debian 10 or later,
+  RedHat 8 or later, Fedora 29 or later, etc)
+- Windows x64: Windows 7 with the Universal C Runtime
   ([UCRT](https://support.microsoft.com/en-us/topic/update-for-universal-c-runtime-in-windows-c0514201-7fe6-95a3-b0a5-287930f3560c)),
   Windows 8, Windows 10
-- Intel macOS 64-bit: 10.13 or later
-- Apple Silicon macOS 64-bit: 11.6 or later
+- macOS x64: 10.13 or later
+- macOS arm64: 11.6 or later
 
 ## Install
 
 The full details of installing the **xPack GNU RISC-V Embedded GCC**
-on various platforms are presented in the separate
-[Install]({% raw %}{{ site.baseurl }}{% endraw %}/dev-tools/riscv-none-elf-gcc/install/) page.
-
-### Easy install
-
-The easiest way to install GNU RISC-V Embedded GCC is with
-[`xpm`]({% raw %}{{ site.baseurl }}{% endraw %}/xpm/)
-by using the **binary xPack**, available as
-[`@xpack-dev-tools/riscv-none-elf-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc)
-from the [`npmjs.com`](https://www.npmjs.com) registry.
-
-With the `xpm` tool available, installing
-the latest version of the package and adding it as
-a development dependency for a project is quite easy:
-
-```sh
-cd my-project
-xpm init # Add a package.json if not already present
-
-xpm install @xpack-dev-tools/riscv-none-elf-gcc@latest --verbose
-
-ls -l xpacks/.bin
-```
-
-To install this specific version, use:
-
-```sh
-xpm install @xpack-dev-tools/riscv-none-elf-gcc@{% raw %}{{ page.version }}.{{ page.npm_subversion }}{% endraw %} --verbose
-```
-
-For xPacks aware tools, like the **Eclipse Embedded C/C++ plug-ins**,
-it is also possible to install GNU RISC-V Embedded GCC globally, in the user home folder.
-
-```sh
-xpm install --global @xpack-dev-tools/riscv-none-elf-gcc@latest --verbose
-```
-
-Eclipse will automatically
-identify binaries installed with
-`xpm` and provide a convenient method to manage paths.
-
-### Uninstall
-
-To remove the links created by xpm in the current project:
-
-```sh
-cd my-project
-
-xpm uninstall @xpack-dev-tools/riscv-none-elf-gcc
-```
-
-To completely remove the package from the central xPack store:
-
-```sh
-xpm uninstall --global @xpack-dev-tools/riscv-none-elf-gcc
-```
+on various platforms are presented in the [Install Guide](/docs/install/).
 
 ## Compliance
 
 The xPack GNU RISC-V Embedded GCC uses the official sources,
 with no functional changes:
 
-- GCC {% raw %}{{ page.gcc_version }}{% endraw %}
-- binutils {% raw %}{{ page.binutils_version }}{% endraw %}
-- newlib {% raw %}{{ page.newlib_version }}{% endraw %}
-- gdb {% raw %}{{ page.gdb_version }}{% endraw %}
-- python {% raw %}{{ page.python_version }}{% endraw %}
+- GCC { frontMatter.gcc_version }
+- binutils { frontMatter.binutils_version }
+- newlib { frontMatter.newlib_version }
+- gdb { frontMatter.gdb_version }
+- python { frontMatter.python_version }
 
 ## Supported libraries
 
@@ -228,14 +169,14 @@ The solution is to add `_zicsr` and/or `_zifencei` to the
 `-march` option, e.g. `-march=rv32imac` becomes
 `-march=rv32imac_zicsr_zifencei`.
 
-In Eclipse, until the GUI will be updated, select the *Toolchain Default*
+In Eclipse, until the GUI is updated, select the *Toolchain Default*
 for _Architecture_ and
 enter the new string separately as _Other target flags_.
 
 ### newlib-nano
 
 Support for **newlib-nano** is available using the
-`--specs=nano.specs` option. For better results, this option must be
+`--specs=nano.specs` option. For best results, this option must be
 added to both compile and link time.
 
 ### nosys.specs
@@ -250,17 +191,17 @@ compiled with `-Os -mcmodel=medany`.
 
 {% raw %}{% include important.html content="It is mandatory for the applications to
 be compiled with
-`-mcmodel=medany`, otherwise the link might fail." %}{% endraw %}
+`-mcmodel=medany`, otherwise the link will fail." %}{% endraw %}
 
 ### Python
 
 Support for Python scripting was added to GDB. This distribution provides
 a separate binary, `riscv-none-elf-gdb-py3` with
-support for **Python {% raw %}{{ page.python_version }}{% endraw %}**.
+support for **Python { frontMatter.python_version }**.
 
-The Python 3 run-time is included, so GDB does not need any version of
-Python to be installed, and is insensitive to the presence of other
-versions.
+The Python 3 runtime is included, so GDB does not need any version of
+Python to be installed, and is not impacted by the presence of other
+versions installed on the system.
 
 ### Text User Interface (TUI)
 
@@ -281,36 +222,6 @@ the distribution.
 
 - due to the large number of libraries, the archive is >500 MB.
 
-## Shared libraries
-
-On all platforms the packages are standalone, and expect only the standard
-runtime to be present on the host.
-
-All dependencies that are build as shared libraries are copied locally
-in the `libexec` folder (or in the same folder as the executable for Windows).
-
-### `DT_RPATH` and `LD_LIBRARY_PATH`
-
-On GNU/Linux the binaries are adjusted to use a relative path:
-
-```console
-$ readelf -d library.so | grep runpath
- 0x000000000000001d (RPATH)            Library rpath: [$ORIGIN]
-```
-
-In the GNU ld.so search strategy, the `DT_RPATH` has
-the highest priority, higher than `LD_LIBRARY_PATH`, so if this later one
-is set in the environment, it should not interfere with the xPack binaries.
-
-Please note that previous versions, up to mid-2020, used `DT_RUNPATH`, which
-has a priority lower than `LD_LIBRARY_PATH`, and does not tolerate setting
-it in the environment.
-
-### `@rpath` and `@loader_path`
-
-Similarly, on macOS, the binaries are adjusted with `install_name_tool` to use a
-relative path.
-
 ## Documentation
 
 The original GNU GCC documentation is available
@@ -325,7 +236,7 @@ of build environments based on slightly older distributions, that should be
 compatible with most recent systems.
 
 For the prerequisites and more details on the build procedure, please see the
-[How to build](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/blob/xpack/README-BUILD.md) page.
+[Maintainer Info](/docs/maintainer-info/) page.
 
 ## CI tests
 
