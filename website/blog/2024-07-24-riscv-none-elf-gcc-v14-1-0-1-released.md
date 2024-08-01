@@ -30,13 +30,13 @@ Version **14.1.0-1** is a new release; it follows the GNU GCC release.
 
 import Image from '@theme/IdealImage';
 
-[The xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-elf-gcc/)
-is a standalone cross-platform binary distribution of the
-[GNU GCC](https://gcc.gnu.org/releases.html).
+[The xPack GNU RISC-V Embedded GCC](/)
+is a standalone cross-platform binary distribution of
+[GNU GCC](https://gcc.gnu.org/releases.html) for embedded RISC-V.
 
-There are separate binaries for **Windows** (Intel 64-bit),
-**macOS** (Intel 64-bit)
-and **GNU/Linux** (Intel 64-bit, Arm 32/64-bit).
+There are separate binaries for **Windows** (x64),
+**macOS** (x64 and arm64)
+and **GNU/Linux** (x64, arm64 and arm).
 
 :::note Raspberry Pi
 
@@ -52,17 +52,17 @@ The binary files are available from <a href={ frontMatter.download_url }>GitHub 
 
 ## Prerequisites
 
-- GNU/Linux Intel 64-bit: any system with **GLIBC 2.27** or higher
-  (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
+- GNU/Linux x64: any system with **GLIBC 2.27** or higher
+  (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 or later,
   Fedora 29 or later, etc)
-- GNU/Linux Arm 32/64-bit: any system with **GLIBC 2.27** or higher
-  (like Raspberry Pi OS, Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
-  Fedora 29 or later, etc)
-- Intel Windows 64-bit: Windows 7 with the Universal C Runtime
+- GNU/Linux Arm 64/32-bit: any system with **GLIBC 2.27** or higher
+  (like Raspberry Pi OS, Ubuntu 18 or later, Debian 10 or later,
+  RedHat 8 or later, Fedora 29 or later, etc)
+- Windows x64: Windows 7 with the Universal C Runtime
   ([UCRT](https://support.microsoft.com/en-us/topic/update-for-universal-c-runtime-in-windows-c0514201-7fe6-95a3-b0a5-287930f3560c)),
   Windows 8, Windows 10
-- Intel macOS 64-bit: 10.13 or later
-- Apple Silicon macOS 64-bit: 11.6 or later
+- macOS x64: 10.13 or later
+- macOS arm64: 11.6 or later
 
 ## Install
 
@@ -169,14 +169,14 @@ The solution is to add `_zicsr` and/or `_zifencei` to the
 `-march` option, e.g. `-march=rv32imac` becomes
 `-march=rv32imac_zicsr_zifencei`.
 
-In Eclipse, until the GUI will be updated, select the *Toolchain Default*
+In Eclipse, until the GUI is updated, select the *Toolchain Default*
 for _Architecture_ and
 enter the new string separately as _Other target flags_.
 
 ### newlib-nano
 
 Support for **newlib-nano** is available using the
-`--specs=nano.specs` option. For better results, this option must be
+`--specs=nano.specs` option. For best results, this option must be
 added to both compile and link time.
 
 ### nosys.specs
@@ -193,7 +193,7 @@ compiled with `-Os -mcmodel=medany`.
 
 It is mandatory for the applications to
 be compiled with
-`-mcmodel=medany`, otherwise the link might fail.
+`-mcmodel=medany`, otherwise the link will fail.
 
 :::
 
@@ -203,9 +203,9 @@ Support for Python scripting was added to GDB. This distribution provides
 a separate binary, `riscv-none-elf-gdb-py3` with
 support for **Python { frontMatter.python_version }**.
 
-The Python 3 run-time is included, so GDB does not need any version of
-Python to be installed, and is insensitive to the presence of other
-versions.
+The Python 3 runtime is included, so GDB does not need any version of
+Python to be installed, and is not impacted by the presence of other
+versions installed on the system.
 
 ### Text User Interface (TUI)
 

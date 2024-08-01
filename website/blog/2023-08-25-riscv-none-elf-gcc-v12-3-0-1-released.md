@@ -30,7 +30,7 @@ Version **12.3.0-1** is a new release; it follows the GNU GCC release. It also a
 
 import Image from '@theme/IdealImage';
 
-[The xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-elf-gcc/)
+[The xPack GNU RISC-V Embedded GCC](/)
 is a standalone cross-platform binary distribution of the
 [GNU GCC](https://gcc.gnu.org/releases.html).
 
