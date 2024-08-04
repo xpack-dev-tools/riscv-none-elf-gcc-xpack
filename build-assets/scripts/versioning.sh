@@ -51,7 +51,7 @@ function application_build_versioned_components()
     then
       # The SiFive list from 10.2 with a lot of non-c extras.
       # (including `rv32imaf-ilp32f--`).
-      if [ "${XBB_IS_DEVELOP}" != "y" ]
+      if [ "${XBB_IS_DEVELOPMENT}" != "y" ]
       then
 
         # DO NOT add the combination that is already given as the default!
@@ -538,7 +538,7 @@ function application_build_versioned_components()
     then
       # The SiFive list from 10.2 with a lot of non-c extras.
       # (including `rv32imaf-ilp32f--`).
-      if [ "${XBB_IS_DEVELOP}" != "y" ]
+      if [ "${XBB_IS_DEVELOPMENT}" != "y" ]
       then
 
         # DO NOT add the combination that is already given as the default!

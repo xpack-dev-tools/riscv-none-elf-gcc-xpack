@@ -4,7 +4,7 @@
 #
 # This file is part of the xPack distribution.
 #   (https://xpack.github.io)
-# Copyright (c) 2022 Liviu Ionescu.
+# Copyright (c) 2020 Liviu Ionescu.
 #
 # Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
@@ -30,22 +30,24 @@ IFS=$'\n\t'
 # -----------------------------------------------------------------------------
 # Identify the script location, to reach, for example, the helper scripts.
 
-build_script_path="$0"
-if [[ "${build_script_path}" != /* ]]
+script_path="$0"
+if [[ "${script_path}" != /* ]]
 then
   # Make relative path absolute.
-  build_script_path="$(pwd)/$0"
+  script_path="$(pwd)/$0"
 fi
 
-script_folder_path="$(dirname "${build_script_path}")"
+script_name="$(basename "${script_path}")"
+
+script_folder_path="$(dirname "${script_path}")"
 script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
-# Build the application.
+# Run the application tests.
 
 scripts_folder_path="${script_folder_path}"
 root_folder_path="$(dirname ${script_folder_path})"
-if [ "$(basename "${root_folder}")" == "build-assets" ]
+if [ "$(basename "${root_folder_path}")" == "build-assets" ]
 then
   project_folder_path="$(dirname "${root_folder_path}")"
 else
@@ -54,14 +56,32 @@ fi
 
 helper_folder_path="${root_folder_path}/xpacks/@xpack-dev-tools/xbb-helper"
 
+tests_folder_path="$(dirname "${scripts_folder_path}")/tests"
+
+# -----------------------------------------------------------------------------
+
+export XBB_WHILE_RUNNING_SEPARATE_TESTS="y"
+
+# -----------------------------------------------------------------------------
+# Options must be parsed as early as possible, being used even in application.sh.
+
+source "${helper_folder_path}/build-scripts/test-parse-options.sh"
+
+tests_parse_options "$@"
+
 # -----------------------------------------------------------------------------
 
 source "${scripts_folder_path}/application.sh"
 
 # Common definitions.
-source "${helper_folder_path}/build-scripts/build-common.sh"
+source "${helper_folder_path}/build-scripts/test-common.sh"
 
-source "${scripts_folder_path}/versioning.sh"
+# Possibly override common definitions.
+source "${scripts_folder_path}/tests/run.sh"
+if [ -f "${scripts_folder_path}/tests/update.sh" ]
+then
+  source "${scripts_folder_path}/tests/update.sh"
+fi
 
 if [ ${#XBB_APPLICATION_COMMON_DEPENDENCIES[@]} -ne 0 ]
 then
@@ -83,11 +103,9 @@ fi
 
 # -----------------------------------------------------------------------------
 
-help_message="    bash $0 [--win] [--debug] [--develop] [--jobs N] [--help]"
-build_common_parse_options "${help_message}" "$@"
+tests_perform_common
 
-build_common_run
-
+# Completed successfully.
 exit 0
 
 # -----------------------------------------------------------------------------
