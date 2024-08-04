@@ -179,7 +179,7 @@
           "@xpack-dev-tools/patchelf": "0.18.0-1.1"
         },
         "properties": {
-          "dockerImage": "ilegeul/ubuntu:amd64-18.04-xbb-v5.1.1"
+          "dockerImage": "ilegeul/ubuntu:amd64-18.04-xbb-v5.2.2"
         }
       },
       "linux-arm64": {
@@ -187,7 +187,7 @@
           "linux-x64"
         ],
         "properties": {
-          "dockerImage": "ilegeul/ubuntu:arm64v8-18.04-xbb-v5.1.1"
+          "dockerImage": "ilegeul/ubuntu:arm64v8-18.04-xbb-v5.2.2"
         }
       },
       "linux-arm": {
@@ -211,7 +211,7 @@
           "@xpack-dev-tools/wine": "8.0.2-1.1"
         },
         "properties": {
-          "dockerImage": "ilegeul/ubuntu:amd64-18.04-xbb-v5.1.1"
+          "dockerImage": "ilegeul/ubuntu:amd64-18.04-xbb-v5.2.2"
         },
         "actions": {
           "build": "{{ properties.commandBashBuild }} --windows",
