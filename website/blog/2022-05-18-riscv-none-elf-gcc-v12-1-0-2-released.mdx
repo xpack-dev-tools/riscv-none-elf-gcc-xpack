@@ -1,7 +1,7 @@
 ---
-title:  xPack GNU RISC-V Embedded GCC v12.2.0-3 released
+title:  xPack GNU RISC-V Embedded GCC v12.1.0-2 released
 
-date: 2023-02-05 23:47:30 +0200
+date: 2022-05-18 10:14:19 +0300
 
 authors: ilg-ul
 
@@ -11,20 +11,14 @@ tags:
 
 # ----- Custom properties -----------------------------------------------------
 
-gcc_version: "12.2.0"
-binutils_version: "2.38"
-newlib_version: "4.2.0"
-gdb_version: "12.1"
-python_version: "3.10"
+version: 12.1.0-2
+npm_subversion: 1
 
-version: "12.2.0-3"
-npm_subversion: "1"
-
-download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v12.2.0-3/
+download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v12.1.0-2/
 
 ---
 
-Version **12.2.0-3** is a maintenance release, built with the latest build scripts.
+Version **12.1.0-2** is a new release; it adds support for size optimised C++ system libraries in the nano variant of newlib.
 
 <!-- truncate -->
 
@@ -53,10 +47,10 @@ The binary files are available from <a href={ frontMatter.download_url }>GitHub 
 ## Prerequisites
 
 - GNU/Linux Intel 64-bit: any system with **GLIBC 2.27** or higher
-  (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
+  (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 or later,
   Fedora 29 or later, etc)
 - GNU/Linux Arm 32/64-bit: any system with **GLIBC 2.27** or higher
-  (like Raspberry Pi OS, Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
+  (like Raspberry Pi OS, Ubuntu 18 or later, Debian 10 or later, RedHat 8 or later,
   Fedora 29 or later, etc)
 - Intel Windows 64-bit: Windows 7 with the Universal C Runtime
   ([UCRT](https://support.microsoft.com/en-us/topic/update-for-universal-c-runtime-in-windows-c0514201-7fe6-95a3-b0a5-287930f3560c)),
@@ -74,11 +68,11 @@ on various platforms are presented in the [Install Guide](/docs/install/).
 The xPack GNU RISC-V Embedded GCC uses the official sources,
 with no functional changes:
 
-- GCC { frontMatter.gcc_version }
-- binutils { frontMatter.binutils_version }
-- newlib { frontMatter.newlib_version }
-- gdb { frontMatter.gdb_version }
-- python { frontMatter.python_version }
+- GCC 12.1.0
+- binutils 2.38
+- gdb 12.1
+- newlib 4.2.0.20211231
+- python 3.10.4
 
 ## Supported libraries
 
@@ -201,7 +195,7 @@ be compiled with
 
 Support for Python scripting was added to GDB. This distribution provides
 a separate binary, `riscv-none-elf-gdb-py3` with
-support for **Python { frontMatter.python_version }**.
+support for **Python 3**.
 
 The Python 3 run-time is included, so GDB does not need any version of
 Python to be installed, and is insensitive to the presence of other
@@ -269,23 +263,23 @@ build, not the compiler functionality.
 The SHA-256 hashes for the files are:
 
 ```txt
-56967546a79f9f8034d755fd3df409f4c6ab64cb4a84ef0f6f881f8348e20f37
-xpack-riscv-none-elf-gcc-12.2.0-3-darwin-arm64.tar.gz
+e3532f8cc17969da85dd615108c5b2826eecacc7f003c0ba5914c03e3160af1c
+xpack-riscv-none-elf-gcc-12.1.0-2-darwin-arm64.tar.gz
 
-f277d63d7540f50a57cc1df98911a5721e824f84ad22da37d81fa044bab18126
-xpack-riscv-none-elf-gcc-12.2.0-3-darwin-x64.tar.gz
+39bd9eb7df484309fb1c725ae806b16589b8d90f273419b2a41e4017886b2176
+xpack-riscv-none-elf-gcc-12.1.0-2-darwin-x64.tar.gz
 
-c94fdee4726ff6ed5b61a294765469eb0073fbcb5a7c7379ade42397a6fda1cf
-xpack-riscv-none-elf-gcc-12.2.0-3-linux-arm.tar.gz
+b6145dcface0ed90954ebff1fea9596bb7a6c5ce7c13d87f0340946c0e0411f3
+xpack-riscv-none-elf-gcc-12.1.0-2-linux-arm.tar.gz
 
-64c70bb0b817bb9d9a700015bbb66450a7f238649346dd680bc897c783c68fb5
-xpack-riscv-none-elf-gcc-12.2.0-3-linux-arm64.tar.gz
+66a81676aff6051d6e602f336f6c8ae9ca4dec483b45adbbf747dc022768653e
+xpack-riscv-none-elf-gcc-12.1.0-2-linux-arm64.tar.gz
 
-0bb5f0c6a36f5197888fcd176e3734ec5b74167b5a631883f72ae3cbd47a97c3
-xpack-riscv-none-elf-gcc-12.2.0-3-linux-x64.tar.gz
+0df95d28487b5e55eb48c487bfc8951a23ef97080a8621dd4109586f51dc177e
+xpack-riscv-none-elf-gcc-12.1.0-2-linux-x64.tar.gz
 
-ced0ba39ed89048f176c9c93174b170443d2dbe669e9a6ddb92c3cfde689578e
-xpack-riscv-none-elf-gcc-12.2.0-3-win32-x64.zip
+ab2a596d00a4436192b80381b4b9bc1e6962de5699b4a494c4f476216963983d
+xpack-riscv-none-elf-gcc-12.1.0-2-win32-x64.zip
 
 ```
 

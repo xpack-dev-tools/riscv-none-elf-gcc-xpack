@@ -1,4 +1,8 @@
 ---
+
+# DO NOT EDIT!
+# Automatically generated from xbb-helper/templates/docusaurus/common.
+
 title: Information for xPack GNU RISC-V Embedded GCC maintainers
 
 date: 2024-07-12 20:11:00 +0300
@@ -8,6 +12,20 @@ date: 2024-07-12 20:11:00 +0300
 import CodeBlock from '@theme/CodeBlock';
 
 import customField from '@site/src/libs/customField';
+
+import MoreRepos from './_more-repos.mdx';
+import ReleaseSchedule from './_release-schedule.mdx';
+import CheckUpstreamRelease from './_check-upstream-release.mdx'
+import UpdateVersionSpecific from './_update-version-specific.mdx'
+import CiDurations from './_ci-durations.mdx'
+import FunctionalTests from './_functional-tests.mdx'
+import ShareCustom from './_share-custom.mdx'
+
+import { durations } from './_durations.mdx'
+import Patches from './_patches.mdx'
+
+import PlatformNativeBuild from './_common/_platform-native-build.mdx'
+import PlatformDockerBuild from './_common/_platform-docker-build.mdx'
 
 {/* ------------------------------------------------------------------------ */}
 
@@ -19,16 +37,10 @@ This page is intended for those who maintain
 **xPack GNU RISC-V Embedded GCC**
 and documents how to make new releases.
 
-:::note
-
-The content of this page is still work in progress and will be updated shortly.
-
-:::
-
 ## Prerequisites
 
 The build scripts run on GNU/Linux and macOS. The Windows binaries are
-generated on x86_64 GNU/Linux, using [mingw-w64](https://mingw-w64.org).
+compiled on x64 GNU/Linux, using [mingw-w64](https://mingw-w64.org).
 
 For details on installing the prerequisites, please read the
 [XBB prerequisites page](https://xpack.github.io/xbb/prerequisites/).
@@ -39,7 +51,7 @@ The project is hosted on GitHub:
 
 - https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 
-To clone the stable branch (`xpack`), run the following commands in a
+To clone the **stable** branch (`xpack`), run the following commands in a
 terminal (on Windows use the _Git Bash_ console):
 
 ```sh
@@ -48,13 +60,13 @@ git clone https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git \
   ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-For development purposes, clone the `xpack-develop` branch:
+For **development** purposes, clone the `xpack-development` branch:
 
 ```sh
 rm -rf ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
 mkdir -p ~/Work/xpack-dev-tools && \
 git clone \
-  --branch xpack-develop \
+  --branch xpack-development \
   https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git \
   ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
@@ -65,18 +77,19 @@ Or, if the repo was already cloned:
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull
 ```
 
-## Get helper sources
+## Get the writable helper sources
 
 The project has a dependency to a common **helper**, that is
-normally installed as a read-only dependency; for development
-purposes, to be able to make changes to the helper, clone the
-`xpack-develop` branch and link it to the central xPacks store:
+normally installed as a read-only dependency; for **development
+purposes**, to be able to make changes to the scripts located inside the helper,
+clone the `xpack-development` branch and link it to
+the central xPacks store:
 
 ```sh
 rm -rf ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
 mkdir -p ~/Work/xpack-dev-tools && \
 git clone \
-  --branch xpack-develop \
+  --branch xpack-development \
   https://github.com/xpack-dev-tools/xbb-helper-xpack.git \
   ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
 xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
@@ -89,56 +102,37 @@ git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
 xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
 ```
 
-Other repositories in use are:
+<MoreRepos/>
 
-- TODO
+<ReleaseSchedule/>
 
-## Release schedule
-
-TODO
-
-## How to make new releases
+## Prepare the new releases
 
 Before starting the build, perform some checks and tweaks.
 
 ### Download the build scripts
 
-The build scripts are available in the `scripts` folder of the
+The build scripts are available in the `build-assets/scripts` folder of the
 [`xpack-dev-tools/riscv-none-elf-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack)
 Git repo.
 
-To download them on a new machine, clone the `xpack-develop` branch,
+To download them on a new machine, clone the `xpack-development` branch,
 as seen above.
 
 ### Check Git
 
 In the `xpack-dev-tools/riscv-none-elf-gcc-xpack` Git repo:
 
-- switch to the `xpack-develop` branch
+- switch to the `xpack-development` branch
 - pull new changes
 - if needed, merge the `xpack` branch
-
-No need to add a tag here, it'll be added when the release is created.
 
 ### Update helper & other dependencies
 
 Check the latest versions at https://github.com/xpack-dev-tools/ and
-update the dependencies in `package.json`.
+update the dependencies in `build-assets/package.json`.
 
-### Check the latest upstream release
-
-The current release must be announced in TODO.
-Compare the latest tag with the current xPack
-[release](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases).
-If necessary, update the triplet, otherwise increase the fourth number,
-as below.
-
-### Increase the version
-
-Determine the version (like <code>{ customField('upstreamVersion') }</code>) and update the `scripts/VERSION`
-file; the format is <code>{ customField('upstreamVersion') }-{ customField('xpackSubversion') }</code>. The fourth number is the xPack release number
-of this version. A fifth number will be added to the version in `package.json`
-when the package is published to the `npm` server.
+<CheckUpstreamRelease/>
 
 ### Fix possible open issues
 
@@ -148,82 +142,89 @@ Check GitHub issues and pull requests:
 
 and fix them; assign them to a milestone (like <code>{ customField('upstreamVersion') }-{ customField('xpackSubversion') }</code>).
 
-### Check `README.md`
+### Increase the version and update VERSION
 
-Normally `README.md` should not need changes, but better check.
-Information related to the new version should not be included here,
-but in the version specific release page.
+Determine the version (like <code>{ customField('upstreamVersion') }</code>)
+and update the `build-assets/scripts/VERSION` file; the format
+is <code>{ customField('upstreamVersion') }-{ customField('xpackSubversion') }</code>.
+The fourth number is the xPack release number
+of this version. A fifth number will be added to the version in `package.json`
+when the package is published to the `npm` server.
 
-### Update versions in `README` files
+### Update the version in top `package.json` to a pre-release
 
-- update version in `README-MAINTAINER.md`
-- update version in `README.md`
+Use the new version, suffixed by `.pre`,
+like <code>{ customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }.pre</code>.
 
-### Update version in `package.json` to a pre-release
+### Restart local web server
 
-Use the new version, suffixed by `.pre`, like <code>{ customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }.pre</code>.
+Execute the npm script `start` in the website sub-project,
+or run the following in a terminal:
+
+```sh
+(cd ~/Work/xpack-dev-tools/xbb-helper-xpack.git/website; npm run start)
+```
+
+Navigate to the **Maintainer Info** page.
+
+<UpdateVersionSpecific/>
 
 ### Update `CHANGELOG.md`
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
-- add a new entry like _* v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } prepared_
-- commit with a message like _prepare v{ customField('upstreamVersion') }-{ customField('xpackSubversion') }_
+- add a new entry like _**\* v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } prepared**_
+- commit with a message like _**prepare v{ customField('upstreamVersion') }-{ customField('xpackSubversion') }**_
 
-### Update the version specific code
-
-- open the `scripts/versioning.sh` file
-- add a new `if` with the new version before the existing code
-- TODO
-
-## Build
+## Run the development builds
 
 The builds currently run on 5 dedicated machines (x64 GNU/Linux,
 arm64 GNU/Linux, arm GNU/Linux, x64 macOS and arm64 macOS).
 
-### Development run the build scripts
-
 Before the real build, run test builds on all platforms.
 
-#### Visual Studio Code
+### Visual Studio Code
 
 All actions are defined as **xPack actions** and can be conveniently
 triggered via the VS Code graphical interface, using the
 [xPack extension](https://marketplace.visualstudio.com/items?itemName=ilg-vscode.xpack).
 
-#### x86_64 macOS
+<Patches/>
 
-For x86_64 macOS, first run the build on the development machine
+### Build the x64 macOS binaries
+
+For x64 macOS, first run the build on the development machine
 (`wksi`, a recent macOS):
 
 ```sh
 export XBB_ENVIRONMENT_SKIP_CHECKS="y"
+```
 
-# Update the build scripts.
+```sh
 rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull
 
-xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
 
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
 xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
 
-xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
 
-xpm run deep-clean --config darwin-x64  -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run build-development --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run deep-clean --config darwin-x64  -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \
+xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \
+xpm run build-development --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
 ```
 
 For a debug build:
 
 ```sh
-xpm run build-development-debug --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run build-development-debug --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
 ```
 
-The build takes about 7 minutes.
+The build takes { durations["work"] }.
 
-When functional, push the `xpack-develop` branch to GitHub.
+When functional, push the `xpack-development` branch to GitHub.
 
 Run the native build on the production machine
 (`xbbmi`, an older macOS);
@@ -233,28 +234,9 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh xbbmi
 ```
 
-Repeat the same steps as before.
+<PlatformNativeBuild platform="darwin-x64"/>
 
-```sh
-rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json && \
-git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
-xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-\
-xpm run deep-clean --config darwin-x64  -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run build-development --config darwin-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
-```
-
-Several minutes later, the output of the build script is a compressed
-archive and its SHA signature, created in the `deploy` folder:
-
-* <code>xpack-riscv-none-elf-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-darwin-x64.tar.gz</code>
-* <code>xpack-riscv-none-elf-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-darwin-x64.tar.gz.sha</code>
-
-#### arm64 macOS
+### Build the arm64 macOS binaries
 
 Run the native build on the production machine
 (`xbbma`, an older macOS);
@@ -264,28 +246,9 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh xbbma
 ```
 
-Update the build scripts (or clone them at the first use):
+<PlatformNativeBuild platform="darwin-arm64"/>
 
-```sh
-rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json && \
-git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
-xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-\
-xpm run deep-clean --config darwin-arm64  -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm install --config darwin-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run build-development --config darwin-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
-```
-
-Several minutes later, the output of the build script is a compressed
-archive and its SHA signature, created in the `deploy` folder:
-
-* <code>xpack-riscv-none-elf-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-darwin-arm64.tar.gz</code>
-* <code>xpack-riscv-none-elf-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-darwin-arm64.tar.gz.sha</code>
-
-#### x86_64 GNU/Linux
+### Build the x64 GNU/Linux binaries
 
 Run the docker build on the production machine (`xbbli`);
 start a VS Code remote session, or connect with a terminal:
@@ -294,55 +257,20 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh xbbli
 ```
 
-##### Build the x86_64 GNU/Linux binaries
+<PlatformDockerBuild platform="linux-x64"/>
 
-Update the build scripts (or clone them at the first use):
+### Build the x64 Windows binaries
 
-```sh
-rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json && \
-git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
-xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-\
-xpm run deep-clean --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-prepare --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-link-deps --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-build-development --config linux-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
-```
-
-Several minutes later, the output of the build script is a compressed
-archive and its SHA signature, created in the `deploy` folder:
-
-* <code>xpack-riscv-none-elf-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-linux-x64.tar.gz</code>
-* <code>xpack-riscv-none-elf-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-linux-x64.tar.gz.sha</code>
-
-##### Build the x86_64 Windows binaries
-
-Clean the build folder and prepare the docker container:
+Run the docker build on the production machine (`xbbli`);
+start a VS Code remote session, or connect with a terminal:
 
 ```sh
-rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json && \
-git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
-xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-\
-xpm run deep-clean --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-prepare --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-link-deps --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-build-development --config win32-x64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+caffeinate ssh xbbli
 ```
 
-Several minutes later, the output of the build script is a compressed
-archive and its SHA signature, created in the `deploy` folder:
+<PlatformDockerBuild platform="win32-x64"/>
 
-* <code>xpack-riscv-none-elf-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-win32-x64.zip</code>
-* <code>xpack-riscv-none-elf-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-win32-x64.zip.sha</code>
-
-#### Arm GNU/Linux 64-bit
+### Build the arm64 GNU/Linux binaries
 
 Run the docker build on the production machine (`xbbla`);
 start a VS Code remote session, or connect with a terminal:
@@ -351,29 +279,9 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh xbbla
 ```
 
-Update the build scripts (or clone them at the first use):
+<PlatformDockerBuild platform="linux-arm64"/>
 
-```sh
-rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json && \
-git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
-xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-\
-xpm run deep-clean --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-prepare --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-link-deps --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-build-development --config linux-arm64 -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
-```
-
-About 10 minutes later (3 minutes on ampere), the output of the build script is a compressed
-archive and its SHA signature, created in the `deploy` folder:
-
-* <code>xpack-riscv-none-elf-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-linux-arm64.tar.gz</code>
-* <code>xpack-riscv-none-elf-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-linux-arm64.tar.gz.sha</code>
-
-#### Arm GNU/Linux 32-bit
+### Build the arm GNU/Linux (32-bit) binaries
 
 Run the docker build on the production machine (`xbbla32`);
 start a VS Code remote session, or connect with a terminal:
@@ -382,31 +290,24 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh xbbla32
 ```
 
-Update the build scripts (or clone them at the first use):
+<PlatformDockerBuild platform="linux-arm"/>
 
-```sh
-rm -f ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/package-lock.json && \
-git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull && \
-xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-\
-xpm run deep-clean --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-prepare --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-link-deps --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
-xpm run docker-build-development --config linux-arm -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
-```
+### Update the trees in the Install Guide page
 
-About 10 minutes later, the output of the build script is a compressed
-archive and its SHA signature, created in the `deploy` folder:
+Copy the trees displayed at the end of the test builds and paste to
+**Folder hierarchy** section in the web files:
 
-* <code>xpack-riscv-none-elf-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-linux-arm.tar.gz</code>
-* <code>xpack-riscv-none-elf-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-linux-arm.tar.gz.sha</code>
+- `website/docs/install/_install-linux.mdx`
+- `website/docs/install/_install-macos.mdx`
+- `website/docs/install/_install-windows.mdx`
 
-### Update README-MAINTAINER listing output
+:::tip
 
-- check and possibly update the `ls -l` output in README-MAINTAINER
+macOS does not have a `tree` command; either compile it from
+[sources](https://github.com/Old-Man-Programmer/tree), or install it
+via HomeBrew, and make a link to `/usr/local/bin`.
+
+:::
 
 ### Update the list of links in package.json
 
@@ -438,7 +339,7 @@ locations (like
 https://github.com/xpack-dev-tools/files-cache/tree/master/libs),
 place them in the XBB cache (`Work/cache`) and restart the build.
 
-## Run the CI build
+## Run the CI/CD builds
 
 The automation is provided by GitHub Actions and three self-hosted runners.
 
@@ -483,24 +384,28 @@ screen -S ga
 
 ### Push the build scripts
 
-- push the `xpack-develop` branch to GitHub
+- push the `xpack-development` branch to GitHub
 - possibly push the helper project too
 
 From here it'll be cloned on the production machines.
 
 ### Publish helper
 
-Publish a new release of the helper and update the reference in `package.json`.
+Publish a new release of the helper and update the reference
+in `build-assets/package.json`.
 
 ### Check for disk space
 
 Check if the build machines have enough free space and eventually
-do some cleanups (`df -BG -H /` on Linux, `df -gH /` on macOS).
+do some cleanups
+
+- GNU/Linux: `df -BG -H /`
+- macOS: `df -gH /`
 
 To remove previous builds, use:
 
 ```sh
-rm -rf ~/Work/xpack-dev-tools/*/build
+rm -rf ~/Work/xpack-dev-tools/*/build-assets/build ~/Work/xpack-dev-tools/*/build
 ```
 
 ### Manually trigger the build GitHub Actions
@@ -517,12 +422,12 @@ To trigger the GitHub Actions builds, use the xPack actions:
 These are equivalent to:
 
 ```sh
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-x64.yml
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-arm64.yml
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-x64.yml
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-win32-x64.yml
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-arm64.yml
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-arm.yml
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-x64.yml
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-arm64.yml
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-x64.yml
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-win32-x64.yml
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-arm64.yml
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-arm.yml
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -531,25 +436,19 @@ Settings → Action →
 [Secrets](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/settings/secrets/actions)
 page.
 
-These commands use the `xpack-develop` branch of this repo.
+These commands use the `xpack-development` branch of this repo.
 
-## Durations & results
+### Durations & resulting binaries
 
-The builds take about 10 minutes to complete:
-
-- `xbbmi`: 5 min
-- `xbbma`: 4 min
-- `xbbli`: 5 min (4 min Linux, 5 min Windows)
-- `xbbla`: 11 min
-- `xbbla32`: 11 min
+<CiDurations/>
 
 The workflow result and logs are available from the
-[Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
+[GitHub Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
 
 The resulting binaries are available for testing from
 [pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/).
 
-## Testing
+## Run the tests
 
 ### CI tests
 
@@ -564,22 +463,22 @@ To trigger the GitHub Actions tests, use the xPack actions:
 These are equivalent to:
 
 ```sh
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-prime.sh
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-docker-linux-intel.sh
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-docker-linux-arm.sh
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-prime.sh
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-docker-linux-intel.sh
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-docker-linux-arm.sh
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
 in the environment.
 
-These actions use the `xpack-develop` branch of this repo and the
+These actions use the `xpack-development` branch of this repo and the
 [pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/)
 binaries.
 
 The tests results are available from the
-[Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
+[GitHub Actions](https://github.com/xpack-dev-tools/openocd-xpack/actions/) page.
 
-Since GitHub Actions provides a single version of macOS, the
+Since GitHub Actions provides a single version of a macOS runner, the
 multi-version macOS tests run on Travis.
 
 To trigger the Travis test, use the xPack action:
@@ -589,7 +488,7 @@ To trigger the Travis test, use the xPack action:
 This is equivalent to:
 
 ```sh
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-travis-macos.sh
+bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-travis-macos.sh
 ```
 
 This script requires the `TRAVIS_COM_TOKEN` variable to be present
@@ -605,8 +504,8 @@ and run the tests, use:
 
 ```sh
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull
-xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
-xpm run test-pre-release -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
+xpm run test-pre-release -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
 ```
 
 For even more tests, on each platform (MacOS, GNU/Linux, Windows),
@@ -620,68 +519,22 @@ On macOS, remove the `com.apple.quarantine` flag:
 xattr -cr ${HOME}/Downloads/xpack-*
 ```
 
-Functional tests cannot run on CI since they require physical hardware.
+<FunctionalTests/>
 
-For the simplest functional case, plug a common board like the
-STM32F4DISCOVERY into an USB port, start the program and check
-if the CPU is identified.
+## Publish the release
 
-Note: If this is the first time riscv-none-elf-gcc is executed, on GNU/Linux
-it is necessary
-to configure the rights, otherwise LIBUSB will issue the _libusb_open
-failed: LIBUSB_ERROR_ACCESS_ error.
+### Create a new GitHub pre-release draft
 
-<CodeBlock language="sh"> {
-`sudo cp ~/Downloads/xpack-riscv-none-elf-gcc-${ customField('upstreamVersion') }-${ customField('xpackSubversion') }/contrib/60-riscv-none-elf-gcc.rules /etc/udev/rules.d
-sudo udevadm control --reload-rules`
-} </CodeBlock>
-
-Then it is possible to start riscv-none-elf-gcc:
-
-<CodeBlock language="console"> {
-`$ .../xpack-riscv-none-elf-gcc-${ customField('upstreamVersion') }-${ customField('xpackSubversion') }/bin/riscv-none-elf-gcc -f "board/stm32f4discovery.cfg"
-xPack Open On-Chip Debugger ${ customField('upstreamVersion') }-01004-g9ea7f3d64-dirty
-Licensed under GNU GPL v2
-For bug reports, read
-	https://riscv-none-elf-gcc.org/doc/doxygen/bugs.html
-Info : The selected transport took over low-level target control. The results might differ compared to plain JTAG/SWD
-srst_only separate srst_nogate srst_open_drain connect_deassert_srst
-
-Info : Listening on port 6666 for tcl connections
-Info : Listening on port 4444 for telnet connections
-Info : clock speed 2000 kHz
-Info : STLINK V2J39S0 (API v2) VID:PID 0483:3748
-Info : Target voltage: 2.901598
-Info : [stm32f4x.cpu] Cortex-M4 r0p1 processor detected
-Info : [stm32f4x.cpu] target has 6 breakpoints, 4 watchpoints
-Info : starting gdb server for stm32f4x.cpu on 3333
-Info : Listening on port 3333 for gdb connections
-[stm32f4x.cpu] halted due to breakpoint, current mode: Handler HardFault
-xPSR: 0x61000003 pc: 0x080002d6 msp: 0x2001ff78
-^C
-shutdown command invoked`
-} </CodeBlock>
-
-Note: on recent macOS systems it might be necessary to allow individual
-programs to run.
-
-For a more thorough test, run a debug session with
-the Eclipse STM32F4DISCOVERY blinky test
-available in the xpack-arm-none-eabi-riscv-none-elf-gcc package, which uses
-the `-f "board/stm32f4discovery.cfg"` configuration file
-(import the `arm-f4b-fs` project and start the `arm-f4b-fs-debug-oocd`
-launcher).
-
-## Create a new GitHub pre-release draft
-
-- in `CHANGELOG.md`, add the release date and a message like _* v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } released_
-- commit with _CHANGELOG update_
-- check and possibly update the `templates/body-github-release-liquid.md`
-- push the `xpack-develop` branch
-- run the xPack action `trigger-workflow-publish-release`
+- in `CHANGELOG.md`, add the release date and a message
+  like _**\* v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } released**_
+- commit with _**CHANGELOG update**_
+- check and possibly update the `build-assets/templates/body-github-release-liquid.mdx`
+- push the `xpack-development` branch
+- run the xPack action
+  - **`trigger-workflow-publish-release`**
 
 The workflow result and logs are available from the
-[Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
+[GitHub Actions](https://github.com/xpack-dev-tools/openocd-xpack/actions/) page.
 
 The result is a
 [draft pre-release](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
@@ -689,37 +542,22 @@ tagged like **v{ customField('upstreamVersion') }-{ customField('xpackSubversion
 named like **xPack GNU RISC-V Embedded GCC v{ customField('upstreamVersion') }-{ customField('xpackSubversion') }** (mind the dash),
 with all binaries attached.
 
-- edit the draft and attach it to the `xpack-develop` branch (important!)
+- edit the draft and attach it to the `xpack-development` branch (important!)
 - save the draft (do **not** publish yet!)
 
-## Prepare a new blog post
+### Prepare a new blog post
 
-- check and possibly update the `templates/body-jekyll-release-*-liquid.md`
-- run the xPack action `generate-jekyll-post`; this will leave a file
-on the Desktop.
+- check and possibly update the `build-assets/templates/body-blog-release-*-liquid.md`
+- run the xPack action
+  - **`generate-website-blog-post`**; this will add a file
+in the `website/blog` folder.
+- edit the front matter properties
+- select the summary
 
-In the `xpack/web-jekyll` GitHub repo:
+### Create the GitHub pre-release
 
-- select the `develop` branch
-- copy the new file to `_posts/releases/riscv-none-elf-gcc`
-
-If any, refer to closed
-[issues](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/issues/).
-
-## Update the preview Web
-
-- commit the `develop` branch of `xpack/web-jekyll` GitHub repo;
-  use a message like _xPack GNU RISC-V Embedded GCC v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } released_
-- push to GitHub
-- wait for the GitHub Pages build to complete
-- the preview web is https://xpack.github.io/web-preview/news/
-
-## Create the pre-release
-
-- go to the GitHub [Releases](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/) page
+- go to the [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/) page
 - perform the final edits and check if everything is fine
-- temporarily fill in the _Continue Reading »_ with the URL of the
-  web-preview release
 - **keep the pre-release button enabled**
 - do not enable Discussions yet
 - publish the release
@@ -727,65 +565,63 @@ If any, refer to closed
 Note: at this moment the system should send a notification to all clients
 watching this project.
 
-## Update the READMEs listings and examples
+### Update the web install page
 
-- check and possibly update the output of `tree -L 2` in README
-- check and possibly update the output of the `--version` runs in README-MAINTAINER
+- check and possibly update the output of the `--version` runs in `website/docs/install/_install-*.mdx`
 - commit changes
 
-## Check the list of links in package.json
+### Check the list of links in package.json
 
 - open the `package.json` file
 - check if the links in the `bin` property cover the actual binaries
 - if necessary, also check on Windows
 
-## Update package.json binaries
+### Update the package.json list of binaries
 
-- select the `xpack-develop` branch
-- run the xPack action `update-package-binaries`
-- open the `package.json` file
+- select the `xpack-development` branch
+- run the xPack action
+  - **`update-package-binaries`**
+- open the top `package.json` file
 - check the `baseUrl:` it should match the file URLs (including the tag/version);
   no terminating `/` is required
 - from the release, check the SHA & file names
 - compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
 - commit all changes, use a message like
-  _package.json: update urls for { customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') } release_ (without _v_)
+  _**package.json: update urls for { customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') } release**_ (without _v_)
 
-## Publish on the npmjs.com server
+### Publish on the npmjs.com server
 
-- select the `xpack-develop` branch
+- select the `xpack-development` branch
 - check the latest commits `npm run git-log`
-- update `CHANGELOG.md`, add a line like _* v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } published on npmjs.com_
-- commit with a message like _CHANGELOG: publish npm v{ customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }_
+- update `CHANGELOG.md`, add a line like _**\* v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } published on npmjs.com**_
+- commit with a message like _**CHANGELOG: publish npm v{ customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }**_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
-- <code>npm version { customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }</code>; the first 4 numbers are the same as the
+- <code><b>npm version { customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }</b></code>; the first 4 numbers are the same as the
   GitHub release; the fifth number is the npm specific version
 - the commits and the tag should have been pushed by the `postversion` script;
   if not, push them with `git push origin --tags`
-- `npm publish --tag next` (use `npm publish --access public`
+- **`npm publish --tag next`** (use `npm publish --access public`
   when publishing for the first time; add the `next` tag)
 
 After a few moments the version will be visible at:
 
 - https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc?activeTab=versions
 
-## Test if the binaries can be installed with xpm
+### Test if the binaries can be installed with xpm
 
-Run the xPack action `trigger-workflow-test-xpm`, this
-will install the package via `xpm install` on all supported platforms.
+Run the xPack action
+
+- **`trigger-workflow-test-xpm`**
+
+This will install the package via `xpm install` on all supported platforms.
 
 The tests results are available from the
-[Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
+[GitHub Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
 
-## Update the repo
-
-- merge `xpack-develop` into `xpack`
-- push to GitHub
-
-## Tag the npm package as `latest`
+### Tag the npm package as `latest`
 
 When the release is considered stable, promote it as `latest`:
 
@@ -797,55 +633,64 @@ In case the previous version is not functional and needs to be unpublished:
 
 - <code>npm unpublish @xpack-dev-tools/riscv-none-elf-gcc@{ customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }</code>
 
-## Update the Web
+### Update the repo & publish the website
 
-- in the `master` branch, merge the `develop` branch
-- wait for the GitHub Pages build to complete
-- the result is in https://xpack.github.io/news/
+- merge `xpack-development` into `xpack`
+- push to GitHub
+
+At this moment the website is also generated.
+
+- the result is in https://xpack-dev-tools.github.io/riscv-none-elf-gcc-xpack/blog/
 - remember the post URL, since it must be updated in the release page
 
-## Create the final GitHub release
+### Create the final GitHub release
 
-- go to the GitHub [Releases](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/) page
+- go to the [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/) page
 - check the download counter, it should match the number of tests
-- add a link to the Web page `[Continue reading »]()`; use an same blog URL
+- add a link to the Web blog `[Continue reading »]()`; use an same blog URL
 - remove the _tests only_ notice
 - **disable** the **pre-release** button
 - click the **Update Release** button
 
-## Share on Twitter
-
-- in a separate browser windows, open [X/Twitter](https://twitter.com)
-- using the `@xpack_project` account
-- paste the release name like **xPack GNU RISC-V Embedded GCC v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } released**
-- paste the link to the Web page
-  [release](/blog/)
-- click the **Tweet** button
-
-## Check SourceForge mirror
+### Check SourceForge mirror
 
 - https://sourceforge.net/projects/riscv-none-elf-gcc-xpack/files/
 
-## Remove the pre-release binaries
+## Cleanups
+
+### Remove the pre-release binaries
 
 - go to https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/
 - remove the test binaries
 
-## Clean the work area
+### Clean the work area
 
-Run the xPack action `trigger-workflow-deep-clean`, this
-will remove the build folders on all supported platforms.
+Run the xPack action
+
+  - **`trigger-workflow-deep-clean`**
+
+This will remove the build folders on all self-hosted runners.
 
 The results are available from the
-[Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
+[GitHub Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
 
-## Download analytics
+## Share on Twitter
+
+- in a separate browser windows, open [X/Twitter](https://twitter.com)
+- using the **`@xpack_project`** account
+- paste the release name like _**xPack GNU RISC-V Embedded GCC v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } released**_
+- paste the link to the blog post
+  [release](https://xpack.github.io/riscv-none-elf-gcc/releases/)
+- click the **Tweet** button
+
+<ShareCustom/>
+
+## Analytics
 
 - GitHub [`xpack-dev-tools/riscv-none-elf-gcc-xpack`](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/) repo
   - latest xPack release
 [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-elf-gcc-xpack/latest/total.svg)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
   - all xPack releases [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-elf-gcc-xpack/total.svg)](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
-  - previous GNU MCU Eclipse all releases [![Github All Releases](https://img.shields.io/github/downloads/gnu-mcu-eclipse/riscv-none-elf-gcc/total.svg)](https://github.com/gnu-mcu-eclipse/riscv-none-elf-gcc/releases/)
   - [individual file counters](https://somsubhra.github.io/github-release-stats/?username=xpack-dev-tools&repository=riscv-none-elf-gcc-xpack) (grouped per release)
 - npmjs.com [`@xpack-dev-tools/riscv-none-elf-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc/) xPack
   - latest release, per month

@@ -1,7 +1,7 @@
 ---
-title:  xPack GNU RISC-V Embedded GCC v13.2.0-2 released
+title:  xPack GNU RISC-V Embedded GCC v12.3.0-1 released
 
-date: 2023-09-25 06:37:55 +0300
+date: 2023-08-25 09:53:20 +0300
 
 authors: ilg-ul
 
@@ -11,26 +11,26 @@ tags:
 
 # ----- Custom properties -----------------------------------------------------
 
-gcc_version: "13.2.0"
+gcc_version: "12.3.0"
 binutils_version: "2.41"
 newlib_version: "4.3.0"
 gdb_version: "13.2"
 python_version: "3.11.4"
 
-version: "13.2.0-2"
+version: "12.3.0-1"
 npm_subversion: "1"
 
-download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v13.2.0-2/
+download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v12.3.0-1/
 
 ---
 
-Version **13.2.0-2** is a maintenance release; it fixes the GNU/Linux GDB issues with loading ELF files.
+Version **12.3.0-1** is a new release; it follows the GNU GCC release. It also adds the optional zicsr and zifencei to the multi-lib definitions.
 
 <!-- truncate -->
 
 import Image from '@theme/IdealImage';
 
-[The xPack GNU RISC-V Embedded GCC](/)
+[The xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-elf-gcc/)
 is a standalone cross-platform binary distribution of the
 [GNU GCC](https://gcc.gnu.org/releases.html).
 
@@ -53,10 +53,10 @@ The binary files are available from <a href={ frontMatter.download_url }>GitHub 
 ## Prerequisites
 
 - GNU/Linux Intel 64-bit: any system with **GLIBC 2.27** or higher
-  (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
+  (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 or later,
   Fedora 29 or later, etc)
 - GNU/Linux Arm 32/64-bit: any system with **GLIBC 2.27** or higher
-  (like Raspberry Pi OS, Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
+  (like Raspberry Pi OS, Ubuntu 18 or later, Debian 10 or later, RedHat 8 or later,
   Fedora 29 or later, etc)
 - Intel Windows 64-bit: Windows 7 with the Universal C Runtime
   ([UCRT](https://support.microsoft.com/en-us/topic/update-for-universal-c-runtime-in-windows-c0514201-7fe6-95a3-b0a5-287930f3560c)),
@@ -220,9 +220,7 @@ TUI is not available on Windows
 
 ## Bug fixes
 
-- [[#22](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/issues/22)]
-  due to a an issue in the build scripts, on GNU/Linux,
-  the `riscv-none-elf-gdb` was built without ELF support; fixed
+- none
 
 ## Enhancements
 
@@ -230,6 +228,9 @@ TUI is not available on Windows
 
 ## Known problems
 
+- [[#22](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/issues/22)]
+  due to a an issue in the build scripts, the `riscv-none-elf-gdb` was
+  built without ELF support (the Windows binaries are ok); will be fixed soon
 - due to the large number of libraries, the archive is >500 MB.
 
 ## Documentation
@@ -267,23 +268,23 @@ build, not the compiler functionality.
 The SHA-256 hashes for the files are:
 
 ```txt
-dfe3123e5e5093b165eaaf18401b802cbb8697f5ec9b0f5cfd99c45e848fd8a7
-xpack-riscv-none-elf-gcc-13.2.0-2-darwin-arm64.tar.gz
+54150de972a3e28dee14fc341f5c46f3d25654ac66a23e8e295f68ec8171648a
+xpack-riscv-none-elf-gcc-12.3.0-1-darwin-arm64.tar.gz
 
-72e65bcad6360eb059096a0fb77f3e3e6c618b1281b89648056c95d1b2749466
-xpack-riscv-none-elf-gcc-13.2.0-2-darwin-x64.tar.gz
+65d50dd2a87f4fd707d4859d4278a8eb01a6bfbba59ed07b5fbf7051a19ae4db
+xpack-riscv-none-elf-gcc-12.3.0-1-darwin-x64.tar.gz
 
-29a876dbab0b770e20bcbb81d6de0802a81608e7d049e5f79b18c28b1a83c1d6
-xpack-riscv-none-elf-gcc-13.2.0-2-linux-arm.tar.gz
+e2a93406ab874a78d012a13513d767824849b455ef7b5981c0fe2451be609ce4
+xpack-riscv-none-elf-gcc-12.3.0-1-linux-arm.tar.gz
 
-1c981c611a38dfe5af902089aed570d4dd501eb4ed88d801043e59ab9a62a86a
-xpack-riscv-none-elf-gcc-13.2.0-2-linux-arm64.tar.gz
+6dfb0390838ea37beab031d426e56ca707f0e7b3ec7fea987e4c1ff748b6d3f1
+xpack-riscv-none-elf-gcc-12.3.0-1-linux-arm64.tar.gz
 
-52545afb900200fbf65fe05f7ce7090b8a42c64091f4f5d43cae6bb68ea2434a
-xpack-riscv-none-elf-gcc-13.2.0-2-linux-x64.tar.gz
+0a7f71150e7b284a01ef739a17a32bafce5db43c012d734d57be5a8c2e2b57b6
+xpack-riscv-none-elf-gcc-12.3.0-1-linux-x64.tar.gz
 
-28ce9f0cfa09f8d4c638a59fb4e17e3f61c80c47e46f11b2ba505a2a3db602f8
-xpack-riscv-none-elf-gcc-13.2.0-2-win32-x64.zip
+58f3274a990815b87a29e64560dc57c192f9a45b1effc1106f607a50b7f6ccf0
+xpack-riscv-none-elf-gcc-12.3.0-1-win32-x64.zip
 
 ```
 

@@ -1,0 +1,262 @@
+
+{/* ------------------------------------------------------------------------ */}
+
+## riscv-none-elf-gcc
+
+After installing the toolchain, the result is a large set of programs
+prefixed by `riscv-none-elf-`. For those used to other RISC-V
+toolchains, there is no `riscv64-` or `riscv32-` prefix since
+the word size is
+actually not needed, the RISC-V toolchain produces both 32/64-bit binaries,
+based on `-march` and `-mabi`.
+
+### `-march` and `-mabi`
+
+The RISC-V CPU is not defined as a single architecture, but as a family of
+architectures, with optional extensions, identified by letters.
+
+RISC-V ISA strings begin with either RV32I, RV32E, RV64I, or RV128I,
+the numerical value
+indicating the register size in bits for the base integer ISA.
+
+- RV32I: A load-store ISA with 32 general-purpose integer registers of 32-bit
+- RV32E: An embedded flavour of RV32I with only 16 integer registers of 32-bit
+- RV64I: A 64-bit flavour of RV32I where the general-purpose integer registers
+  are 64-bit wide.
+
+In addition to these base ISAs, a large number of extensions have been
+specified. The most used extensions that have both been specified
+and are supported by the toolchain are:
+
+- M: Integer Multiplication and Division
+- A: Atomics
+- F: Single-Precision Floating-Point
+- D: Double-Precision Floating-Point
+- C: 16-bit Compressed Instructions
+- Zicsr: Control and Status Register (CSR)
+- Zifencei: Instruction-Fetch Fence
+- G: General, a shortcut to IMAFD, Zicsr, Zifencei
+
+RISC-V ISA strings are defined by appending the supported extensions to the
+base ISA in the order listed above. For example, the RISC-V ISA with
+32-bit integer registers and the instructions to for multiplication would
+be denoted as "RV32IM". Users can control the set of instructions that GCC
+uses when generating assembly code by passing the lower-case ISA string to
+the `-march` GCC option: for example `-march=rv32imac`.
+
+There are some other extensions. For more details, please see
+[The RISC-V ISA Specification, Volume I: Unprivileged Spec](https://riscv.org/specifications/).
+
+In addition to controlling the instructions used by GCC during code
+generation, users can select from various ABIs (which define
+the calling convention and layout of objects in memory).
+It is recommended for objects and
+libraries to follow the same ABI, and not rely on the toolchain
+logic for matching multilibs.
+
+RISC-V defines two integer ABIs and three floating-point ABIs, which
+together are treated as a single ABI string. The integer ABIs follow the
+standard ABI naming scheme:
+
+- `ilp32`: "int", "long", and pointers are all 32-bit long. "long long" is
+  a 64-bit type, "char" is 8-bit, and "short" is 16-bit.
+- `lp64`: "long" and pointers are 64-bit long, while "int" is a 32-bit type.
+  The other types remain the same as ilp32.
+
+Compilers also implement a `ilp32e` ABI for small embedded devices, but its
+standardisation status is not clear at this moment.
+
+while the floating-point ABIs are a RISC-V specific addition:
+
+- "" (the empty string): No floating-point arguments are passed in registers.
+- `f`: 32-bit and smaller floating-point arguments are passed in registers.
+  This ABI requires the F extension, as without F there are no
+  floating-point registers.
+- `d`: 64-bit and smaller floating-point arguments are passed in registers.
+  This ABI requires the D extension.
+
+ABI strings, possibly extended with `f` or `d`, are passed via
+the `-mabi` argument to GCC. For example:
+
+- `-march=rv32imafdc -mabi=ilp32d`: Hardware floating-point instructions can
+  be generated and floating-point arguments are passed in registers. This
+  is like the `-mfloat-abi=hard` option to Arm's GCC.
+- `-march=rv32imac -mabi=ilp32`: No floating-point instructions can be
+  generated and no floating-point arguments are passed in registers. This
+  is like the `-mfloat-abi=soft` argument to Arm's GCC.
+- `-march=rv32imafdc -mabi=ilp32`: Hardware floating-point instructions can
+  be generated, but no floating-point arguments will be passed in
+  registers. This is like the `-mfloat-abi=softfp` argument to Arm's GCC,
+  and is usually used when interfacing with soft-float binaries on a
+  hard-float system.
+- `-march=rv32imac -mabi=ilp32d`: Illegal, as the ABI requires floating-point
+  arguments are passed in registers but the ISA defines no floating-point
+  registers to pass them in.
+
+### `_zicsr` and `_zifencei`
+
+Starting with 12.x, the GCC compiler
+implemented the new RISC-V ISA, which introduces an incompatibility with
+early compilers,
+therefore it is possible that builds will throw error messages
+like _unrecognized opcode `csrr`_.
+
+The reason is that csr read/write (`csrr*`/`csrw*`)
+instructions and `fence.i` instruction were separated from the `I`
+extension, becoming two standalone extensions: `Zicsr` and `Zifencei`.
+
+The solution is to add `_zicsr` and/or `_zifencei` to the
+`-march` option, e.g. `-march=rv32imac` becomes
+`-march=rv32imac_zicsr_zifencei`.
+
+### newlib-nano
+
+Support for **newlib-nano** is available using the
+`--specs=nano.specs` option.
+
+:::tip
+
+For better results, this option must be
+added to both the compile and link steps.
+
+:::
+
+### nosys.specs
+
+If no syscalls are needed, `--specs=nosys.specs` can be used at link
+time to provide empty implementations of the POSIX system calls.
+
+### `-mcmodel=medany`
+
+The libraries are compiled with `-O2 -mcmodel=medany`. The nano version is
+compiled with `-Os -mcmodel=medany`.
+
+:::caution
+
+It is mandatory for the applications to
+be compiled with
+`-mcmodel=medany`, otherwise the link will fail.
+
+:::
+
+### Multiple libraries
+
+Due to the large number of architectures and ABIs defined for RISC-V, not all
+possible combinations are actually available.
+
+Please check the release for the actual list.
+
+## Python
+
+Support for Python scripting was added to GDB. This distribution provides
+a separate binary, `riscv-none-elf-gdb-py3` with
+support for **Python**.
+
+The Python 3 run-time is included, so GDB does not need any version of
+Python to be installed, and is insensitive to the presence of other
+versions.
+
+## Integration with Eclipse
+
+**The GNU RISC-V Embedded GCC** is fully integrated into
+[Eclipse Embedded CDT](https://eclipse-embed-cdt.github.io).
+
+Eclipse provides full support for configure the RISC-V projects,
+both in the build and the debug phase.
+
+## Automated testing
+
+In addition to integrating into regular development environments,
+like Eclipse, GNU RISC-V Embedded GCC can be used for building
+unit tests, in CI/CD environments.
+
+### CMake example
+
+The easiest way to build automated tests is with CMake in xPack applications.
+
+For CMake cross-build projects, it is necessary to pass a
+`-D CMAKE_TOOLCHAIN_FILE`
+with the path to the toolchain definition.
+
+A possible such file is
+[riscv-none-elf-gcc.cmake](https://github.com/micro-os-plus/build-helper-xpack/blob/xpack/cmake/toolchains/riscv-none-elf-gcc.cmake), part of the
+[µOS++](https://micro-os-plus.github.io)
+build [helper](https://github.com/micro-os-plus/build-helper-xpack/).
+
+:::tip Windows
+
+Since on Windows the xPack OpenOCD uses `.cmd` forwarders, it is necessary
+to explicitly define the extension, later used when invoking `openocd`:
+
+```cmake
+if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Windows")
+  set(extension ".cmd")
+endif()
+```
+
+:::
+
+To run the test, the semihosted application can be directly
+executed by QEMU, which provides a good RISC-V emulation.
+
+An example of a unit test running on QEMU is:
+
+```cmake
+if (ENABLE_UNIT_TEST)
+
+  add_executable(unit-test)
+  set_target_properties(unit-test PROPERTIES OUTPUT_NAME "unit-test")
+
+  // ... definitions to build the application with semihosting support ...
+
+  add_test(
+    NAME "unit-test"
+
+    COMMAND qemu-system-riscv32${extension}
+    --machine virt
+    --cpu rv32
+    --kernel unit-test.elf
+    --nographic
+    -smp 1
+    -bios none
+    -d unimp,guest_errors
+    --semihosting-config enable=on,target=native,arg=unit-test
+  )
+
+endif ()
+```
+
+In an xPack application, the tests can be invoked by running an xPack action,
+like this:
+
+```sh
+xpm run test
+```
+
+This asssumes that in `package.json` there is an action named `test`
+and that all required tools were previously installed:
+
+```json
+{
+  "...": "...",
+
+  "xpack": {
+    "actions": {
+      "...": "...",
+      "test": "ctest -V"
+    },
+    "devDependencies": {
+      "@xpack-dev-tools/cmake": "3.26.5-1.1",
+      "@xpack-dev-tools/ninja-build": "1.11.1-3.1",
+      "@xpack-dev-tools/qemu-riscv": "8.2.2-1.1",
+      "@xpack-dev-tools/riscv-none-elf-gcc": "12.3.1-1.2.1"
+    }
+  }
+}
+```
+
+The xPack action runs the defined command (`ctest -V` in this case)
+in an environment where `xpacks/.bin` is prepended to the PATH, so
+the tools installed locally by **xpm** are available and prefered to
+possibly other similar tools installed in the system, thus
+achieving a good reproducibility.

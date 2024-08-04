@@ -10,58 +10,45 @@ import { durations } from '../_durations.mdx'
 
 {/* Arguments: props.platform */}
 
-export const platforms = {
-    "darwin-x64": {
-        sectionName: 'x64 macOS',
-        machineName: 'an Intel Mac'
-    },
-    "darwin-arm64": {
-        sectionName: 'arm64 macOS',
-        machineName: 'an Apple Silicon Mac'
-    }
-}
-
-#### Build the { platforms[props.platform].sectionName } binaries
-
-To prepare the native build on { platforms[props.platform].machineName }:
+To prepare the native build:
 
 <CodeBlock language="sh"> {
-`xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \\
-xpm install --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git`
+`xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \\
+xpm install --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets`
 } </CodeBlock>
 
 <details>
 <summary>... or, with the writable helper ...</summary>
 
 <CodeBlock language="sh"> {
-`xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \\
-xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \\
-xpm install --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git`
+`xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \\
+xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \\
+xpm install --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets`
 } </CodeBlock>
 
 </details>
 
-To run the build:
+To run the native build:
 
 <CodeBlock language="sh"> {
-`xpm run build --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git`
+`xpm run build --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets`
 } </CodeBlock>
 
-or, for more verbosity, invoke the development build:
+or, for more verbosity, run the similar development build:
 
 <CodeBlock language="sh"> {
-`xpm run build-development --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git`
+`xpm run build-development --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets`
 } </CodeBlock>
 
 { durations[ props.platform ] }, the output of the build script is a compressed
-archive and its SHA signature, created in the `deploy` folder:
+archive and its SHA signature, created in
+the <code>buils-assets/build/{ props.platform }/deploy</code> folder:
 
 * <code>xpack-riscv-none-elf-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-{ props.platform }.tar.gz</code>
 * <code>xpack-riscv-none-elf-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-{ props.platform }.tar.gz.sha</code>
 
-To rerun the build, invoke the deep-clean action and repeat from install:
+To rerun the build, invoke the **deep-clean** action and repeat from install:
 
 <CodeBlock language="sh"> {
-`xpm run deep-clean --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git`
+`xpm run deep-clean --config ${ props.platform } -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets`
 } </CodeBlock>
-

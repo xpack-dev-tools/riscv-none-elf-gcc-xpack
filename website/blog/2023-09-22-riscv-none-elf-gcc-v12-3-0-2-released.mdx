@@ -1,7 +1,7 @@
 ---
-title:  xPack GNU RISC-V Embedded GCC v13.3.0-1 released
+title:  xPack GNU RISC-V Embedded GCC v12.3.0-2 released
 
-date: 2024-07-25 18:52:07 +0300
+date: 2023-09-22 23:26:50 +0300
 
 authors: ilg-ul
 
@@ -11,26 +11,26 @@ tags:
 
 # ----- Custom properties -----------------------------------------------------
 
-gcc_version: "13.3.0"
-binutils_version: "2.42"
-newlib_version: "4.4.0"
-gdb_version: "15.1"
-python_version: "3.12.2"
+gcc_version: "12.3.0"
+binutils_version: "2.41"
+newlib_version: "4.3.0"
+gdb_version: "13.2"
+python_version: "3.11.4"
 
-version: "13.3.0-1"
+version: "12.3.0-2"
 npm_subversion: "1"
 
-download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v13.3.0-1/
+download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v12.3.0-2/
 
 ---
 
-Version **13.3.0-1** is a new release; it follows the GNU GCC release.
+Version **12.3.0-2** is a maintenance release; it fixes the GNU/Linux GDB issues with loading ELF files.
 
 <!-- truncate -->
 
 import Image from '@theme/IdealImage';
 
-[The xPack GNU RISC-V Embedded GCC](/)
+[The xPack GNU RISC-V Embedded GCC](https://xpack.github.io/riscv-none-elf-gcc/)
 is a standalone cross-platform binary distribution of the
 [GNU GCC](https://gcc.gnu.org/releases.html).
 
@@ -53,10 +53,10 @@ The binary files are available from <a href={ frontMatter.download_url }>GitHub 
 ## Prerequisites
 
 - GNU/Linux Intel 64-bit: any system with **GLIBC 2.27** or higher
-  (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
+  (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 or later,
   Fedora 29 or later, etc)
 - GNU/Linux Arm 32/64-bit: any system with **GLIBC 2.27** or higher
-  (like Raspberry Pi OS, Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
+  (like Raspberry Pi OS, Ubuntu 18 or later, Debian 10 or later, RedHat 8 or later,
   Fedora 29 or later, etc)
 - Intel Windows 64-bit: Windows 7 with the Universal C Runtime
   ([UCRT](https://support.microsoft.com/en-us/topic/update-for-universal-c-runtime-in-windows-c0514201-7fe6-95a3-b0a5-287930f3560c)),
@@ -220,7 +220,9 @@ TUI is not available on Windows
 
 ## Bug fixes
 
-- none
+- [[#22](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/issues/22)]
+  due to a an issue in the build scripts, on GNU/Linux,
+  the `riscv-none-elf-gdb` was built without ELF support; fixed
 
 ## Enhancements
 
@@ -265,46 +267,39 @@ build, not the compiler functionality.
 The SHA-256 hashes for the files are:
 
 ```txt
-b4616e83cc03db32de961ce6bd7703c4bc3ed4f71c1acd4143d25f6d8fb23eda
-xpack-riscv-none-elf-gcc-13.3.0-1-darwin-arm64.tar.gz
+211f85c5a577069032982dfba1244af513ae2d075e1ee43bddf03bcd8673c02f
+xpack-riscv-none-elf-gcc-12.3.0-2-darwin-arm64.tar.gz
 
-050c7e22dc9651ce5f82f082554ec190b59223708ca0c03d4fecca93d8e7afc0
-xpack-riscv-none-elf-gcc-13.3.0-1-darwin-x64.tar.gz
+ef312ce2d7cfd7e667ca10f0ce7a3f0805c0c02e159cedeb9448bff7de236bcb
+xpack-riscv-none-elf-gcc-12.3.0-2-darwin-x64.tar.gz
 
-ef742938c406b315d5d167f73e90b285d065869690166baa0f89955928b8f36d
-xpack-riscv-none-elf-gcc-13.3.0-1-linux-arm.tar.gz
+79d7859b8ab7ead40bd34a0ea14d063f02ada92cc24c8ef98416681008bb2bce
+xpack-riscv-none-elf-gcc-12.3.0-2-linux-arm.tar.gz
 
-29cdee7d06abc0ad57f4ec74059aca6349042f2a8a98ba4501c186990210590c
-xpack-riscv-none-elf-gcc-13.3.0-1-linux-arm64.tar.gz
+09343a15feafa1b370436d806dc4efba5bce02586ef7f317a894c16615213c27
+xpack-riscv-none-elf-gcc-12.3.0-2-linux-arm64.tar.gz
 
-5386d1a7b261d37a6c34e644fc01ed2562132a9fae3e314083f64ad5e8cceb16
-xpack-riscv-none-elf-gcc-13.3.0-1-linux-x64.tar.gz
+9921d63c04611954af016b9ca74cd52c1ccb832800d321d67e4e651f16146d16
+xpack-riscv-none-elf-gcc-12.3.0-2-linux-x64.tar.gz
 
-6e8549a9340c7722a7031959c9ff63bab353e1860b42c433ed05a0b55189a72b
-xpack-riscv-none-elf-gcc-13.3.0-1-win32-x64.zip
+87e851ebda6a179e988a33b58593c00e13f6edc55c3c73f913d28f10ab983653
+xpack-riscv-none-elf-gcc-12.3.0-2-win32-x64.zip
 
 ```
 
 ## Deprecation notices
 
-### Linux minimum requirements
-
-The minimum requirement is **GLIBC 2.27**, available starting
-with Ubuntu 18, Debian 10 and RedHat 8.
-Support for RedHat 7 was dropped in 2022.
-
 ### 32-bit support
 
 Support for 32-bit Intel Linux and Intel Windows was
-dropped in 2022.
+dropped in 2022. Support for 32-bit Arm Linux (armv7l) will be preserved
+for a while, due to the large user base of 32-bit Raspberry Pi systems.
 
-### Pre-deprecation notice for 32-bit Arm Linux
+### Linux minimum requirements
 
-Due to the large user base of 32-bit Raspberry Pi systems,
-support for 32-bit Arm Linux (armv7l) will be preserved
-for a little while, but expect it to be dropped by 2025,
-so it is recommended to consider an upgrade to a RPi 4 or 5 with
-at least 4 GB (preferably 8 GB) of RAM.
+Support for RedHat 7 was dropped in 2022 and the
+minimum requirement was raised to GLIBC 2.27, available starting
+with Ubuntu 18, Debian 10 and RedHat 8.
 
 ## Pre-deprecation notice for Ubuntu 18.04
 
