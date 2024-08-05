@@ -3,9 +3,71 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-08-05
+
+* v14.2.0-1 prepared
+* 2823b48 website: re-generate commons
+* ef3e8e0 website: rework install
+
+## 2024-08-04
+
+* e8a8585 templates: rename body-blog-*
+* dd112cb website re-generate commons
+* bdd8d5f build-assets/package.json update docker 5.2.2
+* 8327d24 website: regenerate
+* aae472f separate build-assets
+
+## 2024-08-02
+
+* 7e0b358 website: re-generate commons
+
+## 2024-08-01
+
+* 6471c40 re-generate workflows & scripts
+* 648c51e website: re-generate commons
+* ad5e24f website re-generate common
+* af4d091 website update
+* 667e416 website updates
+* 167c712 templates/jekyll updates
+
+## 2024-07-31
+
+* 6593660 website: re-generate commons
+* 0339a24 website: re-generate commons
+* 30c21ba website: re-generate commons
+* 1d57632 website re-generate with tommy's suggestions
+* c08e932 website: install updates
+* 7d8ca0e re-generate workflows for fetch-depth: 0
+* 66f4fb2 components/LinksVsForwarders cosmetics
+
+## 2024-07-30
+
+* 9141cec website updates
+
+## 2024-07-29
+
+* d36b1af website: re-generate common
+* 7a4e6bf website: fix links to deprecated -embed- project
+* b537d87 website: re-generate posts
+* 1f029cb website: re-generate posts
+
+## 2024-07-28
+
+* a393286 re-generate website commons
+* 907d002 re-generate website
+* c044a0c rename build-development*
+* 6a90d8c website updates
+* 1b6094a website: fix post substitutions
+* a5ba8e3 website: regenerate blog posts
+
 ## 2024-07-27
 
-* v11.5.0-1.1 published on npmjs.com
+* 5e4ac33 website: add content
+* 6d56081 package.json: add actions, bump deps
+* 8c9c9a9 prepare 14.1.0
+* b7384ca prepare 14.1.0
+* 8e3b11b 11.5.0-1.1
+* c8a1837 CHANGELOG: publish npm v11.5.0-1.1
 * d0422db package.json: update urls for 11.5.0-1 release
 * 86c291d templates/jekyll updates
 * d8e8814 CHANGELOG update
