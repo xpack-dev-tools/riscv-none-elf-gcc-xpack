@@ -196,6 +196,18 @@ cd my-project
 xpm init
 ```
 
+<details>
+<summary>Under the hood</summary>
+
+The main purpose of `xpm init` is to create a `package.json` file, if not
+already present.
+
+In addition to `name` & `version`, the minimal `package.json` must
+include a property named `xpacks`, even empty. This property is
+mandatory to identify the package as an **xPack**.
+
+</details>
+
 ### Install into the project
 
 The next step is to install the
@@ -446,6 +458,40 @@ To completely remove the package from the central xPack store:
 <CodeBlock language="sh"> {
 `xpm uninstall --global @xpack-dev-tools/riscv-none-elf-gcc --verbose`
 } </CodeBlock>
+
+<details>
+<summary>Clean-ups</summary>
+
+For a thorough clean-up, please note that **xpm** uses only two folders:
+
+<Tabs groupId="operating-systems">
+<TabItem value="windows" label="Windows" default>
+
+- `%APPDATA%\Roaming\xPacks`
+- `%APPDATA%\Local\Caches\xPacks`
+
+</TabItem>
+<TabItem value="macos" label="macOS">
+
+- `${HOME}/Library/xPacks`
+- `${HOME}/Library/Caches/xPacks`
+
+</TabItem>
+<TabItem value="linux" label="GNU/Linux">
+
+- `${HOME}/.local/xPacks`
+- `${HOME}/.cache/xPacks`
+
+</TabItem>
+</Tabs>
+
+They can be removed at any time and space reclaimed;
+**xpm** will recreate them on new installs.
+
+However, projects linking to the central xPack store will fail with
+broken paths.
+
+</details>
 
 <AutomaticInstallQuickTest/>
 
