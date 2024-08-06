@@ -33,6 +33,11 @@ Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the GNU GCC r
 <!-- truncate -->
 
 import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
+
+import Prerequisites from './_common/_prerequisites-glib-2.27.mdx'
+import DeprecationNotices from './_common/_deprecation-notices-glib-2.27.mdx'
+import DownloadAnalytics from './_common/_download-analytics.mdx'
 
 [The xPack GNU RISC-V Embedded GCC](/)
 is a standalone cross-platform binary distribution of
@@ -42,31 +47,24 @@ There are separate binaries for **Windows** (x64),
 **macOS** (x64 and arm64)
 and **GNU/Linux** (x64, arm64 and arm).
 
-{% raw %}{% include note.html content="The main targets for the GNU/Linux Arm
+:::note Raspberry Pi
+
+The main targets for the GNU/Linux Arm
 binaries are the **Raspberry Pi** class devices (armv7l and aarch64;
-armv6 is not supported)." %}{% endraw %}
+armv6 is not supported).
+
+:::
 
 ## Download
 
-The binary files are available from <a href={ frontMatter.download_url }>GitHub Releases</a>.
+The binary files can be downloaded automatically with **xpm** or manually
+from <a href={ frontMatter.download_url }>GitHub Releases</a>.
 
-## Prerequisites
-
-- GNU/Linux x64: any system with **GLIBC 2.27** or higher
-  (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 or later,
-  Fedora 29 or later, etc)
-- GNU/Linux Arm 64/32-bit: any system with **GLIBC 2.27** or higher
-  (like Raspberry Pi OS, Ubuntu 18 or later, Debian 10 or later,
-  RedHat 8 or later, Fedora 29 or later, etc)
-- Windows x64: Windows 7 with the Universal C Runtime
-  ([UCRT](https://support.microsoft.com/en-us/topic/update-for-universal-c-runtime-in-windows-c0514201-7fe6-95a3-b0a5-287930f3560c)),
-  Windows 8, Windows 10
-- macOS x64: 10.13 or later
-- macOS arm64: 11.6 or later
+<Prerequisites/>
 
 ## Install
 
-The full details of installing the **xPack GNU RISC-V Embedded GCC**
+The full details of installing the **xPack GNU RISC-V Embedded GCC**
 on various platforms are presented in the [Install Guide](/docs/install/).
 
 ## Compliance
@@ -149,66 +147,6 @@ rv64imfdc_zicsr/lp64d;@march=rv64imfdc_zicsr@mabi=lp64d
 ## Changes
 
 Compared to the upstream GNU release, there are no functional changes.
-
-### risc-none-elf-gcc
-
-For compliance reasons, starting with 11.x, the name of the toolchain
-was updated to `risc-none-elf-gcc`.
-
-### RISC-V ISA updates
-
-Compared to previous releases, starting from 12.x, the compiler
-implements the new RISC-V ISA, which introduces an incompatibility issue,
-and builds might throw error messages like _unrecognized opcode `csrr`_.
-
-The reason is that csr read/write (`csrr*`/`csrw*`)
-instructions and `fence.i` instruction were separated from the `I`
-extension, becoming two standalone extensions: `Zicsr` and `Zifencei`.
-
-The solution is to add `_zicsr` and/or `_zifencei` to the
-`-march` option, e.g. `-march=rv32imac` becomes
-`-march=rv32imac_zicsr_zifencei`.
-
-In Eclipse, until the GUI is updated, select the *Toolchain Default*
-for _Architecture_ and
-enter the new string separately as _Other target flags_.
-
-### newlib-nano
-
-Support for **newlib-nano** is available using the
-`--specs=nano.specs` option. For best results, this option must be
-added to both compile and link time.
-
-### nosys.specs
-
-If no syscalls are needed, `--specs=nosys.specs` can be used at link
-time to provide empty implementations for the POSIX system calls.
-
-### -mcmodel=medany
-
-The libraries are compiled with `-O2 -mcmodel=medany`. The nano version is
-compiled with `-Os -mcmodel=medany`.
-
-{% raw %}{% include important.html content="It is mandatory for the applications to
-be compiled with
-`-mcmodel=medany`, otherwise the link will fail." %}{% endraw %}
-
-### Python
-
-Support for Python scripting was added to GDB. This distribution provides
-a separate binary, `riscv-none-elf-gdb-py3` with
-support for **Python { frontMatter.python_version }**.
-
-The Python 3 runtime is included, so GDB does not need any version of
-Python to be installed, and is not impacted by the presence of other
-versions installed on the system.
-
-### Text User Interface (TUI)
-
-Support for TUI was added to GDB. The `ncurses` library was added to
-the distribution.
-
-{% raw %}{% include note.html content="TUI is not available on Windows." %}{% endraw %}
 
 ## Bug fixes
 
