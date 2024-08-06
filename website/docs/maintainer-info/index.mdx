@@ -384,7 +384,8 @@ caffeinate ssh xbbla
 caffeinate ssh xbbla32
 ```
 
-Start the runner inside a `screen` session:
+Create a `screen` session, to provide a persistent standard output for
+the runners:
 
 ```sh
 screen -S ga
@@ -392,7 +393,7 @@ screen -S ga
 
 To quit it, use `# Ctrl-a Ctrl-d`.
 
-For `xbbli` & `xbbla` start two runners:
+For `xbbli` & `xbbla`, which have more memory, start two runners:
 
 ```sh
 ~/actions-runners/xpack-dev-tools/1/run.sh &
@@ -419,10 +420,7 @@ killall Runner.Listener
 
 ### Check the status of the runners
 
-The status of all self-hosted runners is available at:
-
-- https://github.com/organizations/xpack-dev-tools/settings/actions/runners
-
+The status of all self-hosted runners is available at the [GitHub Runners](https://github.com/organizations/xpack-dev-tools/settings/actions/runners) page.
 
 ### Publish the helper
 
@@ -474,25 +472,15 @@ GitHub workflow files.
 
 To trigger the GitHub Actions builds, use the xPack actions:
 
-- `trigger-workflow-build-darwin-x64`
-- `trigger-workflow-build-darwin-arm64`
-- `trigger-workflow-build-linux-x64`
-- `trigger-workflow-build-win32-x64`
-- `trigger-workflow-build-linux-arm64`
-- `trigger-workflow-build-linux-arm`
+- **`trigger-workflow-build-darwin-x64`**
+- **`trigger-workflow-build-darwin-arm64`**
+- **`trigger-workflow-build-linux-x64`**
+- **`trigger-workflow-build-win32-x64`**
+- **`trigger-workflow-build-linux-arm64`**
+- **`trigger-workflow-build-linux-arm`**
 
-These are equivalent to:
-
-```sh
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-x64.yml
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-arm64.yml
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-x64.yml
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-win32-x64.yml
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-arm64.yml
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-arm.yml
-```
-
-These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
+The scripts behind these actions require the `GITHUB_API_DISPATCH_TOKEN`
+variable to be present
 in the environment, and the organization `PUBLISH_TOKEN` to be visible in the
 Settings → Action →
 [Secrets](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/settings/secrets/actions)
@@ -512,25 +500,17 @@ The resulting binaries are available for testing from
 
 ## Run the tests
 
-### CI tests
+### Automated tests
 
 The automation is provided by GitHub Actions.
 
 To trigger the GitHub Actions tests, use the xPack actions:
 
-- `trigger-workflow-test-prime`
-- `trigger-workflow-test-docker-linux-intel`
-- `trigger-workflow-test-docker-linux-arm`
+- **`trigger-workflow-test-prime`**
+- **`trigger-workflow-test-docker-linux-intel`**
+- **`trigger-workflow-test-docker-linux-arm`**
 
-These are equivalent to:
-
-```sh
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-prime.sh
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-docker-linux-intel.sh
-bash ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-docker-linux-arm.sh
-```
-
-These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
+The scripts behind these accesible require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
 in the environment.
 
 These actions use the `xpack-development` branch of this repo and the
@@ -540,12 +520,12 @@ binaries.
 The tests results are available from the
 [GitHub Actions](https://github.com/xpack-dev-tools/openocd-xpack/actions/) page.
 
-Since GitHub Actions provides a single version of a macOS runner, the
-multi-version macOS tests run on Travis.
+Since GitHub Actions provides a limited range of versions for the macOS
+runner, the multi-version macOS tests run on Travis.
 
 To trigger the Travis test, use the xPack action:
 
-- `trigger-travis-macos`
+- **`trigger-travis-macos`**
 
 This is equivalent to:
 
@@ -591,7 +571,7 @@ xattr -cr ${HOME}/Downloads/xpack-*
   like _**\* v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } released**_
 - commit with _**CHANGELOG update**_
 - check and possibly update the `build-assets/templates/body-github-release-liquid.mdx`
-- push the `xpack-development` branch
+- push the `xpack-development` branch to GitHub
 - run the xPack action
   - **`trigger-workflow-publish-release`**
 
@@ -664,7 +644,7 @@ watching this project.
 - <code><b>npm version { customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }</b></code>; the first 4 numbers are the same as the
   GitHub release; the fifth number is the npm specific version
 - the commits and the tag should have been pushed by the `postversion` script;
-  if not, push them with `git push origin --tags`
+  if not, push them with `git push origin --tags` to GitHub
 - **`npm publish --tag next`** (use `npm publish --access public`
   when publishing for the first time; add the `next` tag)
 
@@ -698,7 +678,7 @@ In case the previous version is not functional and needs to be unpublished:
 ### Update the repo & publish the website
 
 - merge `xpack-development` into `xpack`
-- push to GitHub
+- push the `xpack` branch to GitHub
 
 At this moment the website is also generated.
 
