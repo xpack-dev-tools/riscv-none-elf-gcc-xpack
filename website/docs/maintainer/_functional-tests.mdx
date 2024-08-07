@@ -1,0 +1,46 @@
+
+{/* ------------------------------------------------------------------------ */}
+
+
+- rename the version
+  folder, by replacing a dash with a space; this will test paths with spaces;
+  on Windows the current paths always use spaces, so renaming is not needed
+- clone this repo locally; on Windows use the Git console
+
+```sh
+rm -rf ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+mkdir -p ~/Work/xpack-dev-tools && \
+git clone \
+  --branch xpack-develop \
+  https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git \
+  ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+```
+
+- check version:
+
+```sh
+.../riscv-none-elf-gcc-14.1.0-1.1/bin/riscv-none-elf-gcc --version
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 14.1.0
+```
+
+- in a separate workspace, Import → General → Existing Projects into Workspace
+  the Eclipse projects available in the
+  `tests/eclipse` folder of the build repo; more details in the
+  [README.md](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/blob/xpack/tests/eclipse/README.md)
+- define the **Eclipse** → **Preferences...** → **MCU** →
+  **Workspace RISC-V Toolchain path** to use the `Downloads`
+  temporary location
+- to test the compiler: for all projects
+  - remove all build folders, or **Clean all**
+  - build all configs, with the hammer, in `riscv-h1b-fs`
+  - build all configs, with the hammer, in `riscv-h1b-fs-lib`; this should
+    also run the builds in `riscv-static-lib`
+- to test the debugger: for all OpenOCD debug configurations
+  - start the OpenOCD debug session,
+  - single step a few lines (Step Over)
+  - start continuous run (Resume)
+  - halt (Suspend)
+  - start (Resume)
+  - stop (Terminate)
+  - (don't miss the LTO cases, since in the past they had problems)
+- to test the Python debugger, start it with `--version`
