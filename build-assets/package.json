@@ -13,6 +13,7 @@
       "appName": "GNU RISC-V Embedded GCC",
       "appLcName": "riscv-none-elf-gcc",
       "platforms": "all",
+      "showDeprecatedRiscvGccAnalytics": "true",
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "buildFolderRelativePathPosix": "{{ 'build' | path_posix_join: configuration.name | downcase }}",
       "commandBashBuild": "bash {{ properties.dbg }} scripts/build.sh --target {{ configuration.name }} --build-folder {{ properties.buildFolderRelativePathPosix }}",
