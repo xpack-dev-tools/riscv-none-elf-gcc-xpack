@@ -644,16 +644,15 @@ watching this project.
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
-- <code><b>npm version { customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }</b></code>; the first 4 numbers are the same as the
+- <code><b>npm version { customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }</b></code> - the first 4 numbers are the same as the
   GitHub release; the fifth number is the npm specific version
 - the commits and the tag should have been pushed by the `postversion` script;
   if not, push them with `git push origin --tags` to GitHub
 - **`npm publish --tag next`** (use `npm publish --access public`
   when publishing for the first time; add the `next` tag)
 
-After a few moments the version will be visible at:
-
-- https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc?activeTab=versions
+After a few moments the version will be visible at
+<a href="https://www.npmjs.com/package/@xpack-dev-tools/riscv-none-elf-gcc?activeTab=versions">npmjs.com</a>.
 
 ### Test if the binaries can be installed with xpm
 
@@ -670,13 +669,17 @@ The tests results are available from the
 
 When the release is considered stable, promote it as `latest`:
 
-- <code>npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc</code>
-- <code>npm dist-tag add @xpack-dev-tools/riscv-none-elf-gcc@{ customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') } latest</code>
-- <code>npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc</code>
+<CodeBlock language="sh"> {
+`npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc
+npm dist-tag add @xpack-dev-tools/riscv-none-elf-gcc@${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') } latest
+npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc`
+} </CodeBlock>
 
 In case the previous version is not functional and needs to be unpublished:
 
-- <code>npm unpublish @xpack-dev-tools/riscv-none-elf-gcc@{ customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }</code>
+<CodeBlock language="sh"> {
+`npm unpublish @xpack-dev-tools/riscv-none-elf-gcc@${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }`
+} </CodeBlock>
 
 ### Update the repo & publish the website
 
