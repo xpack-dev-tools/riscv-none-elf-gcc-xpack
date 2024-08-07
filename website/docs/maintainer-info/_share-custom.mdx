@@ -1,17 +1,25 @@
 
 {/* ------------------------------------------------------------------------ */}
 
-## Announce to RISC-V community
+import CodeBlock from '@theme/CodeBlock';
+
+import customField from '@site/src/libs/customField';
+
+## Announce to the RISC-V community
 
 Add a new topic in the **Announcements** category of the
 [RISC-V forums](https://groups.google.com/a/groups.riscv.org/g/sw-dev).
 
-```console
-Subject: xPack GNU RISC-V Embedded GCC v14.1.0-1 released
+Copy/paste from [GitHub Releases](https://github.com/xpack-dev-tools/riscv-none-elf-gcc/).
 
-Version 14.1.0-1 is a new release of the xPack GNU RISC-V Embedded GCC; it follows the GNU GCC release.
+<CodeBlock language="console"> {
+`Subject: xPack GNU RISC-V Embedded GCC v${ customField('upstreamVersion') }-${ customField('xpackSubversion') } released
 
-https://xpack.github.io/blog/2022/05/14/riscv-none-elf-gcc-v11-3-0-1-released/
-```
+Version ${ customField('upstreamVersion') }-${ customField('xpackSubversion') } is a new release of the xPack GNU RISC-V Embedded GCC; it follows the GNU GCC release.
+
+- https://xpack-dev-tools.github.io/riscv-none-elf-gcc-xpack/blog/YYYY/MM/DD/riscv-none-elf-gcc-vNN-N-N-N-released/
+
+Updates for the previous versions (13.3, 12.4 & 11.5) were also released.`
+} </CodeBlock>
 
 Update the link to the actual blog post.
