@@ -151,9 +151,21 @@ const config: Config = {
           //     to: '/docs/newDoc2',
           //     from: ['/docs/oldDocFrom2019', '/docs/legacyDocFrom2016'],
           //   },
+          {
+            to: '/docs/developer',
+            from: '/docs/developer-info'
+          },
+          {
+            to: '/docs/maintainer',
+            from: '/docs/maintainer-info'
+          },
+          {
+            to: '/docs/user',
+            from: '/docs/user-info'
+          }
         ],
         createRedirects(existingPath) {
-          // logger.info(existingPath);
+          logger.info(existingPath);
           //   if (existingPath.includes('/evenimente')) {
           //     // logger.info(`to ${existingPath} from ${existingPath.replace('/evenimente', '/events')}`);
           //     // Redirect from /events/X to /evenimente/X
