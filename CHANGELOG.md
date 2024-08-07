@@ -3,9 +3,25 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-08-07
+
+* v14.2.0-1 released
+* 6d03403 website: _github-action-durations.mdx update
+
+## 2024-08-06
+
+* ed0f81a build-assets/templates updates
+* f63fa9f website: user-info add TUI section
+* 6e736a2 website: rename _github-actions-durations.mdx
+* 9ce0c2c website: re-generate commons
+* f924dfe website: re-generate blog
+* ef2500a versioning.sh: restore large multilibs
+* c08012c website re-generate commons
+* 2c8320c build-assets/package.json: bump deps
+
 ## 2024-08-05
 
-* v14.2.0-1 prepared
+* 62bf204 prepare v14.2.0-1
 * 2823b48 website: re-generate commons
 * ef3e8e0 website: rework install
 
