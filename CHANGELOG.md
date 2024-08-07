@@ -5,7 +5,16 @@ Entries in this file are in reverse chronological order.
 
 ## 2024-08-07
 
-* v14.2.0-1 released
+* v14.2.0-1 published on npmjs.com
+* 9e5f26b website: re-generate commons
+* 1754dea package.json: update urls for 14.2.0-1.1 release
+* 17a2386 blog post release 14.2.0-1 published
+* 03c591d website: re-generate commons
+* 40784cc templates: rename body-blog-release*.mdx
+* 1d8eebc build-assets/package.json: showDeprecatedRiscvGccAnalytics
+* 59f3ddc build-assets/package.json: updates
+* 30d1f6b templates/body-blog* update
+* 28fb941 CHANGELOG update
 * 6d03403 website: _github-action-durations.mdx update
 
 ## 2024-08-06
