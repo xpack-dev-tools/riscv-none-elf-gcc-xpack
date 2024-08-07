@@ -11,7 +11,7 @@ tags:
 
 # ----- Custom properties -----------------------------------------------------
 
-gcc_version: "14.1.0"
+gcc_version: "14.2.0"
 binutils_version: "2.42"
 newlib_version: "4.4.0"
 gdb_version: "15.1"
