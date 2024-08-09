@@ -125,7 +125,10 @@ In the `xpack-dev-tools/riscv-none-elf-gcc-xpack` Git repo:
 
 - switch to the `xpack-development` branch
 - pull new changes
-- if needed, merge the `xpack` branch
+- if needed, merge the `website` branch
+
+The `xpack` branch should be unchanged since the previous release
+and will be updated when the new release is out.
 
 ### Update helper & other dependencies
 
@@ -749,15 +752,31 @@ Validate the web site content in a local build via the npm `build` script:
 npm --prefix website run build
 ```
 
-### Update the repo & publish the website
+### Publish the website
+
+- merge `xpack-development` into `website`
+- push the `website` branch to GitHub
+
+At this moment an automated GitHub Action will generate and publish the website.
+
+- the new release blog post is
+in https://xpack-dev-tools.github.io/riscv-none-elf-gcc-xpack/blog/
+- remember the post URL, since it must be used to update the release page
+and the X/Twitter announcement
+
+The `website` branch may be subsequently updated, as long as the
+version in `package.json` is not changed.
+
+### Update the repo main branch
 
 - merge `xpack-development` into `xpack`
 - push the `xpack` branch to GitHub
 
-At this moment the website is also generated.
+:::note
 
-- the result is in https://xpack-dev-tools.github.io/riscv-none-elf-gcc-xpack/blog/
-- remember the post URL, since it must be updated in the release page
+Avoid further updates to the `xpack` branch until the next release.
+
+:::
 
 ### Create the final GitHub release
 
