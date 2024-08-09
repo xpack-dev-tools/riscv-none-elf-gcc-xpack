@@ -18,7 +18,7 @@ import ReleaseSchedule from './_release-schedule.mdx';
 import CheckUpstreamRelease from './_check-upstream-release.mdx'
 import UpdateVersionSpecific from './_update-version-specific.mdx'
 import GitHubActionsDurations from './_github-actions-durations.mdx'
-import FunctionalTests from './_functional-tests.mdx'
+import MoreTests from './_more-tests.mdx'
 import ShareCustom from './_share-custom.mdx'
 
 import { developmentDurations } from './_development-durations.mdx'
@@ -326,7 +326,7 @@ Copy the trees displayed at the end of the test builds and paste to
 - `website/docs/install/_miscellaneous.mdx`
 
 Replace **{ customField('upstreamVersion') }** with
-`${ customField('upstreamVersion') }` (there must be 6 occurences).
+`${ customField('upstreamVersion') }`.
 
 :::tip
 
@@ -505,8 +505,11 @@ These commands use the `xpack-development` branch of this repo.
 
 <GitHubActionsDurations/>
 
-The workflow result and logs are available from the
+The workflow results and logs are available from the
 [GitHub Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
+
+Update the values in `website/docs/maintainer/_github-actions-durations.mdx`
+with those shown by GitHub Actions.
 
 The resulting binaries are available for testing from
 [pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/).
@@ -518,8 +521,6 @@ The resulting binaries are available for testing from
 The automation is provided by GitHub Actions.
 
 To trigger the GitHub Actions tests, run the xPack actions:
-
-use the xPack actions:
 
 - **trigger-workflow-test-prime**
 - **trigger-workflow-test-docker-linux-x64**
@@ -540,6 +541,11 @@ binaries.
 
 The tests results are available from the
 [GitHub Actions](https://github.com/xpack-dev-tools/openocd-xpack/actions/) page.
+
+After running the prime tests, download the test results and compare
+with previous runs.
+
+#### More macOS tests
 
 Since GitHub Actions provides a limited range of versions for the macOS
 runner, the multi-version macOS tests run on Travis.
@@ -578,7 +584,7 @@ On macOS, remove the `com.apple.quarantine` flag:
 xattr -cr ${HOME}/Downloads/xpack-*
 ```
 
-<FunctionalTests/>
+<MoreTests/>
 
 ## Publish the release
 
@@ -709,6 +715,16 @@ This will install the package via `xpm install` on all supported platforms.
 The tests results are available from the
 [GitHub Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
 
+### Copy the test results
+
+For the toolchain projects, download the `test-report.zip` file, unzip it
+and copy the markdown file to `website/docs/tests`.
+
+Edit the `website/docs/tests/index.md` file to add the
+new page.
+
+Commit with _**website: add tests results**_.
+
 ### Tag the npm package as `latest`
 
 When the release is considered stable, promote it as `latest`:
@@ -724,6 +740,14 @@ In case the previous version is not functional and needs to be unpublished:
 <CodeBlock language="sh"> {
 `npm unpublish @xpack-dev-tools/riscv-none-elf-gcc@${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }`
 } </CodeBlock>
+
+### Build the static website locally
+
+Validate the web site content in a local build via the npm `build` script:
+
+```sh
+npm --prefix website run build
+```
 
 ### Update the repo & publish the website
 
