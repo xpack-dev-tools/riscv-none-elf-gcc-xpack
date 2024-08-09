@@ -19,7 +19,7 @@ on:
   push:
     # ... on the xpack branch ...
     branches:
-      - 'xpack'
+      - 'website'
     # ... skip tags only ...
     tags-ignore:
       - '**'
