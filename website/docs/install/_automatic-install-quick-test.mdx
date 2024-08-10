@@ -1,38 +1,16 @@
-import CodeBlock from '@theme/CodeBlock';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
-import customField from '@site/src/libs/customField';
+import AutomaticInstallQuickTest from './_common/_automatic-install-quick-test.mdx'
+
+export const appName = 'GNU RISC-V Embedded GCC';
+export const appLcName = 'riscv-none-elf-gcc';
+export const programName = 'riscv-none-elf-gcc';
+export const branding = 'riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ';
 
 {/* ------------------------------------------------------------------------ */}
 
-### Quick test
-
-To check if the GNU RISC-V Embedded GCC installed by **xpm** starts properly, use something like:
-
-<Tabs groupId="operating-systems">
-<TabItem value="windows" label="Windows" default>
-
-<CodeBlock language="console"> {
-`C:\\> %USERPROFILE%\\AppData\\Roaming\\xPacks\\@xpack-dev-tools\\{{ appLcName }}\\${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }\\.content\\bin\\riscv-none-elf-gcc.exe --version
-riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ${ customField('upstreamVersion') }`
-} </CodeBlock>
-
-</TabItem>
-<TabItem value="macos" label="macOS">
-
-<CodeBlock language="console"> {
-`$ ~/Library/xPacks/@xpack-dev-tools/riscv-none-elf-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }/.content/bin/riscv-none-elf-gcc --version
-riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ${ customField('upstreamVersion') }`
-} </CodeBlock>
-
-</TabItem>
-<TabItem value="linux" label="GNU/Linux">
-
-<CodeBlock language="console"> {
-`$ ~/.local/xPacks/@xpack-dev-tools/riscv-none-elf-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }/.content/bin/riscv-none-elf-gcc --version
-riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ${ customField('upstreamVersion') }`
-} </CodeBlock>
-
-</TabItem>
-</Tabs>
+<AutomaticInstallQuickTest
+  appName={ appName }
+  appLcName={ appLcName }
+  programName={ programName }
+  branding={ branding }
+/>
