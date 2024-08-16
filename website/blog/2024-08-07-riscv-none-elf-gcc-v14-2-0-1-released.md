@@ -40,8 +40,7 @@ is a standalone cross-platform binary distribution of
 [GNU GCC](https://gcc.gnu.org/releases.html) for embedded RISC-V.
 
 There are separate binaries for **Windows** (x64),
-**macOS** (x64 and arm64)
-and **GNU/Linux** (x64, arm64 and arm).
+**macOS** (x64 and arm64) and **GNU/Linux** (x64, arm64 and arm).
 
 :::note Raspberry Pi
 
@@ -158,8 +157,8 @@ Compared to the upstream GNU release, there are no functional changes.
 
 ## Documentation
 
-The original GNU GCC documentation is available
-[online](https://gcc.gnu.org/onlinedocs/).
+The original GNU Arm Embedded GCC documentation is available from the
+[GCC online documentation](https://gcc.gnu.org/onlinedocs/) web site.
 
 ## Build
 

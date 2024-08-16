@@ -1,4 +1,6 @@
 
+import customField from '@site/src/libs/customField';
+
 {/* ------------------------------------------------------------------------ */}
 
 ## riscv-none-elf-gcc
@@ -161,7 +163,7 @@ TUI is not available on Windows
 
 Support for Python scripting was added to GDB. This distribution provides
 a separate binary, `riscv-none-elf-gdb-py3` with
-support for **Python**.
+support for **Python {customField('python_version')}**.
 
 The Python 3 run-time is included, so GDB does not need any version of
 Python to be installed, and is insensitive to the presence of other

@@ -49,7 +49,7 @@ Due to memory limitations during the build, there is no Arm 32-bit image.
 
 ## Download
 
-The binary files are available from <a href={ frontMatter.download_url }>GitHub Releases</a>.
+The binary files are available from <a href={frontMatter.download_url}>GitHub Releases</a>.
 
 ## Prerequisites
 
@@ -62,7 +62,7 @@ The binary files are available from <a href={ frontMatter.download_url }>GitHub 
 - Intel Windows 32/64-bit: Windows 7 with the Universal C Runtime
   ([UCRT](https://support.microsoft.com/en-us/topic/update-for-universal-c-runtime-in-windows-c0514201-7fe6-95a3-b0a5-287930f3560c)),
   Windows 8, Windows 10
-- Intel macOS 64-bit: 10.13 or later
+- x64 macOS: 10.13 or later
 
 ## Install
 
@@ -77,7 +77,7 @@ with as little differences as possible.
 
 The current version is based on:
 
-- SiFive RISC-V GCC release **{ frontMatter.sifive_version }** from { frontMatter.sifive_date },
+- SiFive RISC-V GCC release **{frontMatter.sifive_version}** from {frontMatter.sifive_date},
 and includes the SiFive extensions, including the RVV vector support.
 
 ## Supported libraries
@@ -376,7 +376,7 @@ with Ubuntu 18 and RedHat 8.
 ## Download analytics
 
 - GitHub [xpack-dev-tools/riscv-none-embed-gcc-xpack](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/)
-  - this release <a href={ `https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/v${ frontMatter.version }/` } ><Image img={ `https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-elf-gcc-xpack/v${ frontMatter.version }/total.svg` } alt='Github Release' /></a>
+  - this release <a href={`https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/v${frontMatter.version}/`} ><Image img={`https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-elf-gcc-xpack/v${frontMatter.version}/total.svg`} alt='Github Release' /></a>
   - all xPack releases [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/total.svg)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/)
   - all GNU MCU Eclipse releases [![Github All Releases](https://img.shields.io/github/downloads/gnu-mcu-eclipse/riscv-none-gcc/total.svg)](https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases/)
   - [individual file counters](https://somsubhra.github.io/github-release-stats/?username=xpack-dev-tools&repository=riscv-none-embed-gcc-xpack) (grouped per release)
