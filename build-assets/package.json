@@ -7,7 +7,7 @@
   "xpack": {
     "minimumXpmRequired": "0.16.3",
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^3.0.7"
+      "@xpack-dev-tools/xbb-helper": "^3.0.10"
     },
     "properties": {
       "appName": "GNU RISC-V Embedded GCC",
@@ -15,6 +15,12 @@
       "platforms": "all",
       "customFields": {
         "showDeprecatedRiscvGccAnalytics": "true",
+        "gdbVersionMajor": "15",
+        "gdbVersionMinor": "1",
+        "binutilsVersionMajor": "2",
+        "binutilsVersionMinor": "42",
+        "pythonVersion": "3.12.2",
+        "newlibVersion": "4.4.0"
       },
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "buildFolderRelativePathPosix": "{{ 'build' | path_posix_join: configuration.name | downcase }}",
