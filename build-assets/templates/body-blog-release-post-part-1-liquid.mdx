@@ -11,11 +11,11 @@ tags:
 
 # ----- Custom properties -----------------------------------------------------
 
-gcc_version: "14.2.0"
-binutils_version: "2.42"
-newlib_version: "4.4.0"
-gdb_version: "15.1"
-python_version: "3.12.2"
+gcc_version: "{{upstreamVersion}}"
+binutils_version: "{{customFields.binutilsVersionMajor}}.{{customFields.binutilsVersionMinor}}"
+gdb_version: "{{customFields.gdbVersionMajor}}.{{customFields.gdbVersionMinor}}"
+newlib_version: "{{customFields.newlibVersion}}"
+python_version: "{{customFields.pythonVersion}}"
 
 version: "{{ XBB_RELEASE_VERSION }}"
 npm_subversion: "1"
@@ -162,8 +162,8 @@ Compared to the upstream GNU release, there are no functional changes.
 
 ## Documentation
 
-The original GNU GCC documentation is available
-[online](https://gcc.gnu.org/onlinedocs/).
+The original GNU Arm Embedded GCC documentation is available from the
+[GCC online documentation](https://gcc.gnu.org/onlinedocs/) web site.
 
 ## Build
 
