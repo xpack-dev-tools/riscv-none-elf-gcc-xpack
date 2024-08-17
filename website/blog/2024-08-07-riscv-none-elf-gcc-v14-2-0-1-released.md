@@ -53,7 +53,7 @@ armv6 is not supported).
 ## Download
 
 The binary files can be downloaded automatically with **xpm** or manually
-from <a href={ frontMatter.download_url }>GitHub Releases</a>.
+from <a href={frontMatter.download_url}>GitHub Releases</a>.
 
 <Prerequisites/>
 
@@ -67,11 +67,11 @@ on various platforms are presented in the [Install Guide](/docs/install/).
 The xPack GNU RISC-V Embedded GCC uses the official sources,
 with no functional changes:
 
-- GCC { frontMatter.gcc_version }
-- binutils { frontMatter.binutils_version }
-- newlib { frontMatter.newlib_version }
-- gdb { frontMatter.gdb_version }
-- python { frontMatter.python_version }
+- GCC {frontMatter.gcc_version}
+- binutils {frontMatter.binutils_version}
+- newlib {frontMatter.newlib_version}
+- gdb {frontMatter.gdb_version}
+- python {frontMatter.python_version}
 
 ## Supported libraries
 
@@ -212,4 +212,4 @@ xpack-riscv-none-elf-gcc-14.2.0-1-win32-x64.zip
 
 <DeprecationNotices/>
 
-<DownloadAnalytics version={ frontMatter.version }/>
+<DownloadAnalytics version={frontMatter.version}/>

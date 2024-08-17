@@ -1,16 +1,12 @@
+import customField from '@site/src/libs/customField';
 
 import AutomaticInstallQuickTest from './_common/_automatic-install-quick-test.mdx'
-
-export const appName = 'GNU RISC-V Embedded GCC';
-export const appLcName = 'riscv-none-elf-gcc';
-export const programName = 'riscv-none-elf-gcc';
-export const branding = 'riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ';
 
 {/* ------------------------------------------------------------------------ */}
 
 <AutomaticInstallQuickTest
-  appName={ appName }
-  appLcName={ appLcName }
-  programName={ programName }
-  branding={ branding }
+  appName={customField('appName')}
+  appLcName={customField('appLcName')}
+  programName={customField('programName')}
+  branding={customField('branding')}
 />
