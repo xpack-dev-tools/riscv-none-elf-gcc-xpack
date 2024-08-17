@@ -1,7 +1,7 @@
 ---
-title:  xPack GNU RISC-V Embedded GCC v{{ XBB_RELEASE_VERSION }} released
+title:  xPack GNU RISC-V Embedded GCC v{{releaseVersion}} released
 
-date: {{ RELEASE_DATE }}
+date: {{releaseDate}}
 
 authors: ilg-ul
 
@@ -17,18 +17,18 @@ gdb_version: "{{customFields.gdbVersionMajor}}.{{customFields.gdbVersionMinor}}"
 newlib_version: "{{customFields.newlibVersion}}"
 python_version: "{{customFields.pythonVersion}}"
 
-version: "{{ XBB_RELEASE_VERSION }}"
+version: "{{releaseVersion}}"
 npm_subversion: "1"
 
-download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v{{ XBB_RELEASE_VERSION }}/
+download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v{{releaseVersion}}/
 
 ---
 
 TODO: select one summary
 
-Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release; it fixes <...>.
+Version **{{releaseVersion}}** is a maintenance release; it fixes ...
 
-Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the GNU GCC release.
+Version **{{releaseVersion}}** is a new release; it follows the GNU GCC release.
 
 <!-- truncate -->
 
@@ -58,7 +58,7 @@ armv6 is not supported).
 ## Download
 
 The binary files can be downloaded automatically with **xpm** or manually
-from <a href={ frontMatter.download_url }>GitHub Releases</a>.
+from <a href={frontMatter.download_url}>GitHub Releases</a>.
 
 <Prerequisites/>
 
@@ -72,11 +72,11 @@ on various platforms are presented in the [Install Guide](/docs/install/).
 The xPack GNU RISC-V Embedded GCC uses the official sources,
 with no functional changes:
 
-- GCC { frontMatter.gcc_version }
-- binutils { frontMatter.binutils_version }
-- newlib { frontMatter.newlib_version }
-- gdb { frontMatter.gdb_version }
-- python { frontMatter.python_version }
+- GCC {frontMatter.gcc_version}
+- binutils {frontMatter.binutils_version}
+- newlib {frontMatter.newlib_version}
+- gdb {frontMatter.gdb_version}
+- python {frontMatter.python_version}
 
 ## Supported libraries
 
