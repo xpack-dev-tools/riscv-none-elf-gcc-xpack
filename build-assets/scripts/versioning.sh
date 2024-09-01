@@ -41,120 +41,12 @@ function application_build_versioned_components()
 
   # ---------------------------------------------------------------------------
 
-  if [[ ${XBB_RELEASE_VERSION} =~ 12[.][5][.].*-.* ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 13[.][45][.].*-.* ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 14[.][3-5][.].*-.* ]]
-     [[ ${XBB_RELEASE_VERSION} =~ 15[.][0-5][.].*-.* ]]
+  # All releases up to 14.2.*-1 used the extended list.
+  if [[ ${XBB_RELEASE_VERSION} =~ 11[.][1-5][.].*-.* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 12[.][1-4][.].*-.* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 13[.][1-3][.].*-.* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 14[.][012][.].*-.* ]]
   then
-
-    if [ "${XBB_APPLICATION_WITHOUT_MULTILIB:-""}" != "y" ]
-    then
-      # The SiFive list from 10.2 with a lot of non-c extras.
-      # (including `rv32imaf-ilp32f--`).
-      if [ "${XBB_IS_DEVELOPMENT}" != "y" ]
-      then
-
-        # DO NOT add the combination that is already given as the default!
-        # rv32imac-ilp32-- \
-
-        # The `zicsr*zifencei` seem redundant for GCC 13, but are
-        # important for GCC 12.
-
-        # Possible future 'light' releases should include:
-        # - rv32imac, rv64imafdc: for QEMU tests
-        # - rv32imac: for SiFive HiFive1 (16K RAM only!)
-        # - rv32ec: for the small WCH CH32V003
-        # - rv32imac, rv32imacf: for WCH QingKe V4 series (xw!)
-        # like CH32V20[38]*, CH32V30[357]*
-        # https://www.wch-ic.com/downloads/QingKeV4_Processor_Manual_PDF.html
-
-        # https://codeberg.org/20-100/Awesome_RISC-V/src/branch/master/RISC-V_MCU_development_boards.pdf
-
-        # https://www.gigadevice.com/product/mcu/risc-v
-        # https://www.renesas.com/us/en/products/microcontrollers-microprocessors/risc-v/product-selector
-        # https://products.espressif.com/#/product-selector?language=en&names=
-
-        # Debian 12 $ riscv64-unknown-elf-gcc -print-multi-lib
-        # rv32e/ilp32e;@march=rv32e@mabi=ilp32e
-        # rv32ea/ilp32e;@march=rv32ea@mabi=ilp32e
-        # rv32em/ilp32e;@march=rv32em@mabi=ilp32e
-        # rv32eac/ilp32e;@march=rv32eac@mabi=ilp32e
-        # rv32emac/ilp32e;@march=rv32emac@mabi=ilp32e
-        # rv32i/ilp32;@march=rv32i@mabi=ilp32
-        # rv32ia/ilp32;@march=rv32ia@mabi=ilp32
-        # rv32im/ilp32;@march=rv32im@mabi=ilp32
-        # rv32if/ilp32f;@march=rv32if@mabi=ilp32f
-        # rv32ifd/ilp32d;@march=rv32ifd@mabi=ilp32d
-        # rv32iaf/ilp32f;@march=rv32iaf@mabi=ilp32f
-        # rv32iafd/ilp32d;@march=rv32iafd@mabi=ilp32d
-        # rv32imf/ilp32f;@march=rv32imf@mabi=ilp32f
-        # rv32imfd/ilp32d;@march=rv32imfd@mabi=ilp32d
-        # rv32iac/ilp32;@march=rv32iac@mabi=ilp32
-        # rv32imac/ilp32;@march=rv32imac@mabi=ilp32
-        # rv32imafc/ilp32f;@march=rv32imafc@mabi=ilp32f
-        # rv32imafdc/ilp32d;@march=rv32imafdc@mabi=ilp32d
-        # rv64i/lp64;@march=rv64i@mabi=lp64
-        # rv64ia/lp64;@march=rv64ia@mabi=lp64
-        # rv64im/lp64;@march=rv64im@mabi=lp64
-        # rv64if/lp64f;@march=rv64if@mabi=lp64f
-        # rv64ifd/lp64d;@march=rv64ifd@mabi=lp64d
-        # rv64iaf/lp64f;@march=rv64iaf@mabi=lp64f
-        # rv64iafd/lp64d;@march=rv64iafd@mabi=lp64d
-        # rv64imf/lp64f;@march=rv64imf@mabi=lp64f
-        # rv64iac/lp64;@march=rv64iac@mabi=lp64
-        # rv64imac/lp64;@march=rv64imac@mabi=lp64
-        # rv64imafc/lp64f;@march=rv64imafc@mabi=lp64f
-
-        XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
-        rv32e-ilp32e--zicsr*zifencei \
-        rv32ea-ilp32e--zicsr*zifencei \
-        rv32eac-ilp32e--zicsr*zifencei \
-        rv32em-ilp32e--zicsr*zifencei \
-        rv32emac-ilp32e--zicsr*zifencei \
-        \
-        rv32-ilp32--zicsr*zifencei \
-        rv32ia-ilp32--zicsr*zifencei \
-        rv32iac-ilp32--zicsr*zifencei \
-        rv32iaf-ilp32f--zicsr*zifencei \
-        rv32iafd-ilp32d--zicsr*zifencei \
-        rv32im-ilp32--zicsr*zifencei \
-        rv32imac-ilp32--zicsr*zifencei \
-        rv32imafc-ilp32f--zicsr*zifencei \
-        rv32imafdc-ilp32d--zicsr*zifencei \
-        rv32imf-ilp32f--zicsr*zifencei \
-        rv32imfd-ilp32d--zicsr*zifencei \
-        rv32if-ilp32f--zicsr*zifencei \
-        rv32ifd-ilp32d--zicsr*zifencei \
-        \
-        rv64i-lp64--zicsr*zifencei \
-        rv64ia-lp64--zicsr*zifencei \
-        rv64iac-lp64--zicsr*zifencei \
-        rv64iaf-lp64f--zicsr*zifencei \
-        rv64iafd-lp64d--zicsr*zifencei \
-        rv64im-lp64--zicsr*zifencei \
-        rv64imac-lp64--zicsr*zifencei \
-        rv64imafc-lp64f--zicsr*zifencei \
-        rv64imf-lp64f--zicsr*zifencei \
-        rv64if-lp64f--zicsr*zifencei \
-        rv64ifd-lp64d--zicsr*zifencei \
-        "}
-      else
-        # Short list used during development to save time.
-        # Skip: rv32imac-ilp32-- (see above).
-        XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
-          rv32emac-ilp32e-- \
-          rv32ima-ilp32--zicsr*zifencei \
-          rv64imac-lp64-- \
-        "}
-      fi
-    fi
-
-  elif [[ ${XBB_RELEASE_VERSION} =~ 11[.][1-5][.].*-.* ]] || \
-       [[ ${XBB_RELEASE_VERSION} =~ 12[.][1-4][.].*-.* ]] || \
-       [[ ${XBB_RELEASE_VERSION} =~ 13[.][1-3][.].*-.* ]] || \
-       [[ ${XBB_RELEASE_VERSION} =~ 14[.][012][.].*-.* ]]
-  then
-
     if [ "${XBB_APPLICATION_WITHOUT_MULTILIB:-""}" != "y" ]
     then
       # The SiFive list from 10.2 with a lot of non-c extras.
@@ -238,7 +130,103 @@ function application_build_versioned_components()
         "}
       fi
     fi
+  else
+    # Releases from 14.2.*-2 up use the Debian list.
+    if [ "${XBB_APPLICATION_WITHOUT_MULTILIB:-""}" != "y" ]
+    then
+      if true # [ "${XBB_IS_DEVELOPMENT}" != "y" ]
+      then
+        # Possible future 'light' releases should include:
+        # - rv32imac, rv64imafdc: for QEMU tests
+        # - rv32imac: for SiFive HiFive1 (16K RAM only!)
+        # - rv32ec: for the small WCH CH32V003
+        # - rv32imac, rv32imacf: for WCH QingKe V4 series (xw!)
+        # like CH32V20[38]*, CH32V30[357]*
+        # https://www.wch-ic.com/downloads/QingKeV4_Processor_Manual_PDF.html
 
+        # https://codeberg.org/20-100/Awesome_RISC-V/src/branch/master/RISC-V_MCU_development_boards.pdf
+
+        # https://www.gigadevice.com/product/mcu/risc-v
+        # https://www.renesas.com/us/en/products/microcontrollers-microprocessors/risc-v/product-selector
+        # https://products.espressif.com/#/product-selector?language=en&names=
+
+        # --with-arch=rv64imafdc
+        # Debian 12 $ riscv64-unknown-elf-gcc -print-multi-lib
+        # rv32e/ilp32e;@march=rv32e@mabi=ilp32e
+        # rv32ea/ilp32e;@march=rv32ea@mabi=ilp32e
+        # rv32em/ilp32e;@march=rv32em@mabi=ilp32e
+        # rv32eac/ilp32e;@march=rv32eac@mabi=ilp32e
+        # rv32emac/ilp32e;@march=rv32emac@mabi=ilp32e
+        # rv32i/ilp32;@march=rv32i@mabi=ilp32
+        # rv32ia/ilp32;@march=rv32ia@mabi=ilp32
+        # rv32im/ilp32;@march=rv32im@mabi=ilp32
+        # rv32if/ilp32f;@march=rv32if@mabi=ilp32f
+        # rv32ifd/ilp32d;@march=rv32ifd@mabi=ilp32d
+        # rv32iaf/ilp32f;@march=rv32iaf@mabi=ilp32f
+        # rv32iafd/ilp32d;@march=rv32iafd@mabi=ilp32d
+        # rv32imf/ilp32f;@march=rv32imf@mabi=ilp32f
+        # rv32imfd/ilp32d;@march=rv32imfd@mabi=ilp32d
+        # rv32iac/ilp32;@march=rv32iac@mabi=ilp32
+        # rv32imac/ilp32;@march=rv32imac@mabi=ilp32
+        # rv32imafc/ilp32f;@march=rv32imafc@mabi=ilp32f
+        # rv32imafdc/ilp32d;@march=rv32imafdc@mabi=ilp32d
+        # rv64i/lp64;@march=rv64i@mabi=lp64
+        # rv64ia/lp64;@march=rv64ia@mabi=lp64
+        # rv64im/lp64;@march=rv64im@mabi=lp64
+        # rv64if/lp64f;@march=rv64if@mabi=lp64f
+        # rv64ifd/lp64d;@march=rv64ifd@mabi=lp64d
+        # rv64iaf/lp64f;@march=rv64iaf@mabi=lp64f
+        # rv64iafd/lp64d;@march=rv64iafd@mabi=lp64d
+        # rv64imf/lp64f;@march=rv64imf@mabi=lp64f
+        # rv64iac/lp64;@march=rv64iac@mabi=lp64
+        # rv64imac/lp64;@march=rv64imac@mabi=lp64
+        # rv64imafc/lp64f;@march=rv64imafc@mabi=lp64f
+
+        # ./multilib-generator rv32e-ilp32e--c rv32ea-ilp32e--m rv32em-ilp32e--c rv32eac-ilp32e-- rv32emac-ilp32e-- rv32i-ilp32--c rv32ia-ilp32--m rv32im-ilp32--c rv32if-ilp32f-rv32ifd-c rv32iaf-ilp32f-rv32imaf,rv32iafc-d rv32imf-ilp32f-rv32imfd-c rv32iac-ilp32-- rv32imac-ilp32-- rv32imafc-ilp32f-rv32imafdc- rv32ifd-ilp32d--c rv32imfd-ilp32d--c rv32iafd-ilp32d-rv32imafd,rv32iafdc- rv32imafdc-ilp32d-- rv64i-lp64--c rv64ia-lp64--m rv64im-lp64--c rv64if-lp64f-rv64ifd-c rv64iaf-lp64f-rv64imaf,rv64iafc-d rv64imf-lp64f-rv64imfd-c rv64iac-lp64-- rv64imac-lp64-- rv64imafc-lp64f-rv64imafdc- rv64ifd-lp64d--m,c rv64iafd-lp64d-rv64imafd,rv64iafdc- rv64imafdc-lp64d--
+
+        # Default rv32imac-ilp32--
+        XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
+          rv32e-ilp32e--c \
+          rv32ea-ilp32e--m \
+          rv32em-ilp32e--c \
+          rv32eac-ilp32e-- \
+          rv32emac-ilp32e-- \
+          \
+          rv32i-ilp32--c \
+          rv32ia-ilp32--m \
+          rv32im-ilp32--c \
+          rv32if-ilp32f-rv32ifd-c \
+          rv32iaf-ilp32f-rv32imaf,rv32iafc-d \
+          rv32imf-ilp32f-rv32imfd-c \
+          rv32iac-ilp32-- \
+          rv32imac-ilp32-- \
+          rv32imafc-ilp32f-rv32imafdc- \
+          rv32ifd-ilp32d--c \
+          rv32imfd-ilp32d--c \
+          rv32iafd-ilp32d-rv32imafd,rv32iafdc- \
+          rv32imafdc-ilp32d-- \
+          \
+          rv64i-lp64--c \
+          rv64ia-lp64--m \
+          rv64im-lp64--c \
+          rv64if-lp64f-rv64ifd-c \
+          rv64iaf-lp64f-rv64imaf,rv64iafc-d \
+          rv64imf-lp64f-rv64imfd-c \
+          rv64iac-lp64-- rv64imac-lp64-- \
+          rv64imafc-lp64f-rv64imafdc- \
+          rv64ifd-lp64d--m,c \
+          rv64iafd-lp64d-rv64imafd,rv64iafdc- \
+          rv64imafdc-lp64d-- \
+        "}
+      else
+        # Short list used during development to save time.
+        XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
+          rv32emac-ilp32e-- \
+          rv32imac-ilp32-- \
+          rv64imac-lp64-- \
+        "}
+      fi
+    fi
   fi
 
   # ---------------------------------------------------------------------------
