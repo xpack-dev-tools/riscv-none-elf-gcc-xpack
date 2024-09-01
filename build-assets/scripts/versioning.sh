@@ -51,7 +51,7 @@ function application_build_versioned_components()
      [[ ${XBB_RELEASE_VERSION} =~ 13[.][1-3][.].*-[1] ]] || \
      [[ ${XBB_RELEASE_VERSION} =~ 14[.][012][.].*-[1] ]]
   then
-    exit 1
+    # exit 1
     if [ "${XBB_APPLICATION_WITHOUT_MULTILIB:-""}" != "y" ]
     then
       # The SiFive list from 10.2 with a lot of non-c extras.
