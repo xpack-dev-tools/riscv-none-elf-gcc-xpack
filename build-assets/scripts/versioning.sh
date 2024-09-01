@@ -139,7 +139,7 @@ function application_build_versioned_components()
     # Releases from 14.2.*-2 up (September 2024) use the Debian list.
     if [ "${XBB_APPLICATION_WITHOUT_MULTILIB:-""}" != "y" ]
     then
-      if true # [ "${XBB_IS_DEVELOPMENT}" != "y" ]
+      if [ "${XBB_IS_DEVELOPMENT}" != "y" ]
       then
         # Possible future 'light' releases should include:
         # - rv32imac, rv64imafdc: for QEMU tests
