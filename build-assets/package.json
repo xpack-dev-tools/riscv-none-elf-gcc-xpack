@@ -20,7 +20,7 @@
         "gdbVersionMajor": "15",
         "gdbVersionMinor": "1",
         "binutilsVersionMajor": "2",
-        "binutilsVersionMinor": "42",
+        "binutilsVersionMinor": "43.1",
         "pythonVersion": "3.12.2",
         "newlibVersion": "4.4.0"
       },
