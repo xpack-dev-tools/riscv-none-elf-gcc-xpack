@@ -5,6 +5,16 @@ Entries in this file are in reverse chronological order.
 
 ## 2024-09-01
 
+* 29244bc build-assets/package.json bump deps
+* 9268bfb versioning.sh: revert full multi-libs for non-development release
+* 3f8710a versioning.sh: use binutils 2.43.1 for *-2
+* a82e341 versioning.sh: use explicit [0-9]* in regexps
+* 90be503 VERSIon 11.5.0-2
+* 7bcda4d versioning.sh: verbose Debian multi-libs list
+* e0677d4 versioning.sh: re-enable legacy multi-libs
+* a05f95b versioning.sh: fix the regexps to select multi-libs
+* 6302965 prepare 14.2.0-2.1
+* efdd023 prepare 14.2.0-2.1
 * d7058ed versioning.sh: rework Debian multi-libs
 * 5066d15 build-assets/package.json bump deps
 * 4cfc487 re-generate workflows
