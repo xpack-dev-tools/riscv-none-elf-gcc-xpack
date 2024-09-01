@@ -3,9 +3,70 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-09-01
+
+* d7058ed versioning.sh: rework Debian multi-libs
+* 5066d15 build-assets/package.json bump deps
+* 4cfc487 re-generate workflows
+
+## 2024-08-17
+
+* 05a1a1c website update
+* 2f10939 build-assets/package.json update
+* cda763e templates updates
+* 9c44f8e re-generate workflows
+
+## 2024-08-16
+
+* 2dcc859 templates/body-github: update
+* 096fd18 re-generate workflows
+* 9618e6e build-assets/package.json: bump deps
+* 6f5b446 templates updates
+* 0b0781c website: re-generate commons
+
+## 2024-08-14
+
+* f0c0d88 build-assets/package.json: updates
+
+## 2024-08-10
+
+* 40cb89e website: re-generate commons
+* cae1704 website: re-generate commons
+* fd79dbe website: update commons
+* 892f21a website: rework install quick tests
+
+## 2024-08-09
+
+* b62dad1 website update
+* 7c1de16 re-generate workflows
+* c84eac9 website: re-generate commons
+* 729c232 re-generate workflows
+* 56aeddb website updates
+* 927e31d package.json: git+https
+* 7ce1200 build-assets/package.json: bump deps
+* 689bdc9 templates/body-blog* update
+* 3a1e272 website: regenerate posts
+
 ## 2024-08-07
 
-* v14.2.0-1 published on npmjs.com
+* ed81631 website: re-generate commons
+* 970b59f website: re-generate commons
+* 8331b5f build-assets/package.json: bump deps
+* 6a7b48f website: re-generate commons
+* 5cb5a83 website: remove '-info'
+* 71cd9ee templates/body-blog-* update /maintainer/ path
+* 5151349 website: re-generate commons
+* 2873d3d website: re-generate commons
+* c4e2bcd README updates
+* ccaf861 website: maintainer-info _functional-tests.mdx
+* 45e9138 website: re-generate commons
+* 769dfe1 website: update maintainer-info
+* 6ddc975 website: re-generate commons
+* 8bd18d3 build-assets/package.json: updates
+* d9e3b76 website: re-generate commons
+* 9a376ce 14.2.0-1.1
+* 05d0fba build-assets/package.json: updates
+* e612b76 CHANGELOG: publish npm v14.2.0-1.1
 * 9e5f26b website: re-generate commons
 * 1754dea package.json: update urls for 14.2.0-1.1 release
 * 17a2386 blog post release 14.2.0-1 published
