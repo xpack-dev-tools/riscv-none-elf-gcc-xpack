@@ -279,8 +279,13 @@ function application_build_versioned_components()
     # https://ftp.gnu.org/gnu/binutils/
     # https://ftp.gnu.org/gnu/binutils/binutils-2.40.tar.xz
 
-    # Note "2.41" requires a newer makeinfo
-    XBB_BINUTILS_VERSION="2.42" # "2.41"
+    if [[ ${XBB_RELEASE_VERSION} =~ [0-9]*[.][0-9]*[.][0-9]*-1 ]]
+    then
+      # Note "2.41" and later require a newer makeinfo.
+      XBB_BINUTILS_VERSION="2.42" # "2.41"
+    else
+      XBB_BINUTILS_VERSION="2.43.1" # "2.42"
+    fi
 
     XBB_BINUTILS_SRC_FOLDER_NAME="binutils-${XBB_BINUTILS_VERSION}"
     XBB_BINUTILS_ARCHIVE_NAME="binutils-${XBB_BINUTILS_VERSION}.tar.xz"
