@@ -42,16 +42,16 @@ function application_build_versioned_components()
   # ---------------------------------------------------------------------------
 
   # All releases up to 14.2.*-1 used the extended list.
-  if [[ ${XBB_RELEASE_VERSION} =~ 11[.][1-5][.].*-[1] ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 12[.][1][.].*-[2] ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 12[.][2][.].*-[23] ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 12[.][3][.].*-[23] ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 12[.][1-4][.].*-[1] ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 13[.][2][.].*-[2] ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 13[.][1-3][.].*-[1] ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 14[.][012][.].*-[1] ]]
+  if [[ ${XBB_RELEASE_VERSION} =~ 11[.][1-5][.][0-9]*-[1] ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 12[.][1][.][0-9]*-[2] ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 12[.][2][.][0-9]*-[23] ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 12[.][3][.][0-9]*-[23] ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 12[.][1-4][.][0-9]*-[1] ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 13[.][2][.][0-9]*-[2] ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 13[.][1-3][.][0-9]*-[1] ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 14[.][012][.][0-9]*-[1] ]]
   then
-    # exit 1
+    exit 1 # Temporarily, to catch errors while working on *-2.
     if [ "${XBB_APPLICATION_WITHOUT_MULTILIB:-""}" != "y" ]
     then
       # The SiFive list from 10.2 with a lot of non-c extras.
@@ -239,10 +239,10 @@ function application_build_versioned_components()
   # ---------------------------------------------------------------------------
 
   # In reverse chronological order.
-  if [[ ${XBB_RELEASE_VERSION} =~ 12[.][5][.].*-.* ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 13[.][4][.].*-.* ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 14[.][3][.].*-.* ]] || \
-     [[ ${XBB_RELEASE_VERSION} =~ 15[.][012][.].*-.* ]]
+  if [[ ${XBB_RELEASE_VERSION} =~ 12[.][5][.][0-9]*-[0-9]* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 13[.][4][.][0-9]*-[0-9]* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 14[.][3][.][0-9]*-[0-9]* ]] || \
+     [[ ${XBB_RELEASE_VERSION} =~ 15[.][012][.][0-9]*-[0-9]* ]]
   then
 
     # Starting with GCC 15, no more cross patches.
@@ -259,10 +259,10 @@ function application_build_versioned_components()
     echo "Unsupported ${XBB_APPLICATION_LOWER_CASE_NAME} version ${XBB_RELEASE_VERSION}"
     exit 1
 
-  elif [[ ${XBB_RELEASE_VERSION} =~ 11[.][5][.].*-.* ]] || \
-       [[ ${XBB_RELEASE_VERSION} =~ 12[.][4][.].*-.* ]] || \
-       [[ ${XBB_RELEASE_VERSION} =~ 13[.][3][.].*-.* ]] || \
-       [[ ${XBB_RELEASE_VERSION} =~ 14[.][012][.].*-.* ]]
+  elif [[ ${XBB_RELEASE_VERSION} =~ 11[.][5][.][0-9]*-[0-9]* ]] || \
+       [[ ${XBB_RELEASE_VERSION} =~ 12[.][4][.][0-9]*-[0-9]* ]] || \
+       [[ ${XBB_RELEASE_VERSION} =~ 13[.][3][.][0-9]*-[0-9]* ]] || \
+       [[ ${XBB_RELEASE_VERSION} =~ 14[.][012][.][0-9]*-[0-9]* ]]
   then
 
     # -------------------------------------------------------------------------
@@ -430,8 +430,8 @@ function application_build_versioned_components()
     gcc_cross_build_common
 
     # -------------------------------------------------------------------------
-  elif [[ ${XBB_RELEASE_VERSION} =~ 12[.][3][.].*-.* ]] || \
-       [[ ${XBB_RELEASE_VERSION} =~ 13[.][2][.].*-.* ]]
+  elif [[ ${XBB_RELEASE_VERSION} =~ 12[.][3][.][0-9]*-[0-9]* ]] || \
+       [[ ${XBB_RELEASE_VERSION} =~ 13[.][2][.][0-9]*-[0-9]* ]]
   then
 
     # -------------------------------------------------------------------------
@@ -582,7 +582,7 @@ function application_build_versioned_components()
     gcc_cross_build_common
 
     # -------------------------------------------------------------------------
-  elif [[ ${XBB_RELEASE_VERSION} =~ 12[.][2][.].*-.* ]]
+  elif [[ ${XBB_RELEASE_VERSION} =~ 12[.][2][.][0-9]*-[0-9]* ]]
   then
 
     # -------------------------------------------------------------------------
