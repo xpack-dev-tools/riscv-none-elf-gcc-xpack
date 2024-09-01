@@ -5,6 +5,7 @@ Entries in this file are in reverse chronological order.
 
 ## 2024-09-01
 
+* v11.5.0-2 prepared
 * 29244bc build-assets/package.json bump deps
 * 9268bfb versioning.sh: revert full multi-libs for non-development release
 * 3f8710a versioning.sh: use binutils 2.43.1 for *-2
