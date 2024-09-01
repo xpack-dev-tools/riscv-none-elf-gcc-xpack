@@ -223,6 +223,8 @@ function application_build_versioned_components()
           rv64iafd-lp64d-rv64imafd,rv64iafdc- \
           rv64imafdc-lp64d-- \
         "}
+        echo
+        echo "Use Debian multi-libs: ${XBB_GCC_MULTILIB_LIST}"
       else
         # Short list used during development to save time.
         XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
