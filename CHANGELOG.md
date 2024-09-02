@@ -5,6 +5,7 @@ Entries in this file are in reverse chronological order.
 
 ## 2024-09-02
 
+* v12.4.0-2 prepared
 * 800eab6 re-generate workflows
 * 52cb338 11.5.0-2.1
 * ce2b945 CHANGELOG: publish npm v11.5.0-2.1
