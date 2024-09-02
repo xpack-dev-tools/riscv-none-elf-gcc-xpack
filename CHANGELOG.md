@@ -3,9 +3,16 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-09-02
+
+* v11.5.0-2 released
+* d5c8910 website re-generate commons
+
 ## 2024-09-01
 
-* v11.5.0-2 prepared
+* 6f3fba8 CHANGELOG update
+* 9396894 build-assets/package.json customFields update
+* 1a7edab prepare 11.5.0-2
 * 29244bc build-assets/package.json bump deps
 * 9268bfb versioning.sh: revert full multi-libs for non-development release
 * 3f8710a versioning.sh: use binutils 2.43.1 for *-2
