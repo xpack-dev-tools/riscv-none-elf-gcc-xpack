@@ -5,7 +5,9 @@ Entries in this file are in reverse chronological order.
 
 ## 2024-09-02
 
-* v11.5.0-2 published on npmjs.com
+* 800eab6 re-generate workflows
+* 52cb338 11.5.0-2.1
+* ce2b945 CHANGELOG: publish npm v11.5.0-2.1
 * 934a44e package.json: update urls for 11.5.0-2.1 release
 * 8695c29 build-assets/templates update
 * c4ad880 blog post release 11.5.0-2 published
