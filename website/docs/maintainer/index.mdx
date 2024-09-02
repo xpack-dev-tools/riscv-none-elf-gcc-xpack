@@ -608,7 +608,7 @@ These actions use the `xpack-development` branch of this repo and the
 binaries.
 
 The tests results are available from the
-[GitHub Actions](https://github.com/xpack-dev-tools/openocd-xpack/actions/) page.
+[GitHub Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
 
 After running the prime tests, download the test results and compare
 with previous runs.
@@ -670,7 +670,7 @@ xpm run trigger-workflow-publish-release -C ~/Work/xpack-dev-tools/riscv-none-el
 ```
 
 The workflow result and logs are available from the
-[GitHub Actions](https://github.com/xpack-dev-tools/openocd-xpack/actions/) page.
+[GitHub Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/) page.
 
 The result is a
 [draft pre-release](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/)
@@ -752,10 +752,10 @@ xpm run update-package-binaries -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpa
 
 - the commits and the tag should have been pushed by the `postversion` script;
   if not, push them with `git push origin --tags` to GitHub
-- publish and add the `next` tag:
+- publish and add the `test` tag:
 
 ```sh
-npm publish --tag next
+npm publish --tag test
 ```
 
 - when publishing for the first time, use:
