@@ -33,7 +33,7 @@ on:
       package-version:
         description: 'The semver of the npm release'
         required: false
-        default: 'next'
+        default: 'test'
       version:
         description: 'The GitHub release version'
         required: false
