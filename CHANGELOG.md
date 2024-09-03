@@ -3,9 +3,14 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-09-03
+
+* v13.3.0-2 released
+* 2d00807 website: github durations update
+
 ## 2024-09-02
 
-* v13.3.0-2 prepared
+* 3443b7b prepare v13.3.0-2
 * 974ed9b 12.4.0-2.1
 * ca64ba3 CHANGELOG: publish npm v12.4.0-2.1
 * 86fe4a3 package.json: update urls for 12.4.0-2.1 release
