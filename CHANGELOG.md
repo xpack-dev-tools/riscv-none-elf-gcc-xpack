@@ -5,6 +5,9 @@ Entries in this file are in reverse chronological order.
 
 ## 2024-09-03
 
+* v14.2.0-2 prepared
+* 53c35fb 13.3.0-2.1
+* dd89f14 CHANGELOG: publish npm v13.3.0-2.1
 * eae81d9 package.json: update urls for 13.3.0-2.1 release
 * b1abbe0 blog post release 13.3.0-2 published
 * 5ab066d CHANGELOG update
