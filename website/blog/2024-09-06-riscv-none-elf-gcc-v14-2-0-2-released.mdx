@@ -1,0 +1,196 @@
+---
+title:  xPack GNU RISC-V Embedded GCC v14.2.0-2 released
+
+date: 2024-09-06 08:36:59 +0300
+
+authors: ilg-ul
+
+# To be listed in the Releases page.
+tags:
+  - releases
+
+# ----- Custom properties -----------------------------------------------------
+
+gcc_version: "14.2.0"
+binutils_version: "2.43.1"
+gdb_version: "15.1"
+newlib_version: "4.4.0"
+python_version: "3.12.2"
+
+version: "14.2.0-2"
+npm_subversion: "1"
+
+download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v14.2.0-2/
+
+---
+
+Version **14.2.0-2** is a maintenance release; it updates to the latest binutils 2.43.1 (to add support for the `Zcmp` extension) and the Debian multi-libs.
+
+<!-- truncate -->
+
+import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
+
+import Prerequisites from './_common/_prerequisites-glib-2.27.mdx'
+import DeprecationNotices from './_common/_deprecation-notices-glib-2.27.mdx'
+import DownloadAnalytics from './_common/_download-analytics.mdx'
+
+The [xPack GNU RISC-V Embedded GCC](/)
+is a standalone cross-platform binary distribution of
+[GNU GCC](https://gcc.gnu.org/releases.html) for embedded RISC-V.
+
+There are separate binaries for **Windows** (x64),
+**macOS** (x64 and arm64)
+and **GNU/Linux** (x64, arm64 and arm).
+
+:::note Raspberry Pi
+
+The main targets for the GNU/Linux Arm
+binaries are the **Raspberry Pi** class devices (armv7l and aarch64;
+armv6 is not supported).
+
+:::
+
+## Download
+
+The binary files can be downloaded automatically with **xpm** or manually
+from <a href={frontMatter.download_url}>GitHub Releases</a>.
+
+<Prerequisites/>
+
+## Install
+
+The full details of installing the **xPack GNU RISC-V Embedded GCC**
+on various platforms are presented in the [Install Guide](/docs/install/).
+
+## Compliance
+
+The xPack GNU RISC-V Embedded GCC uses the official sources,
+with no functional changes:
+
+- GCC {frontMatter.gcc_version}
+- binutils {frontMatter.binutils_version}
+- newlib {frontMatter.newlib_version}
+- gdb {frontMatter.gdb_version}
+- python {frontMatter.python_version}
+
+## Supported libraries
+
+The default architecture/ABI pair is `rv32imac/ilp32`.
+
+The other supported libraries are:
+
+```console
+$ riscv-none-elf-gcc -print-multi-lib
+.;
+rv32e/ilp32e;@march=rv32e@mabi=ilp32e
+rv32ea/ilp32e;@march=rv32ea@mabi=ilp32e
+rv32em/ilp32e;@march=rv32em@mabi=ilp32e
+rv32eac/ilp32e;@march=rv32eac@mabi=ilp32e
+rv32emac/ilp32e;@march=rv32emac@mabi=ilp32e
+rv32i/ilp32;@march=rv32i@mabi=ilp32
+rv32ia/ilp32;@march=rv32ia@mabi=ilp32
+rv32im/ilp32;@march=rv32im@mabi=ilp32
+rv32if_zicsr/ilp32f;@march=rv32if_zicsr@mabi=ilp32f
+rv32ifd_zicsr/ilp32d;@march=rv32ifd_zicsr@mabi=ilp32d
+rv32iaf_zicsr/ilp32f;@march=rv32iaf_zicsr@mabi=ilp32f
+rv32iafd_zicsr/ilp32d;@march=rv32iafd_zicsr@mabi=ilp32d
+rv32imf_zicsr/ilp32f;@march=rv32imf_zicsr@mabi=ilp32f
+rv32imfd_zicsr/ilp32d;@march=rv32imfd_zicsr@mabi=ilp32d
+rv32iac/ilp32;@march=rv32iac@mabi=ilp32
+rv32imafc_zicsr/ilp32f;@march=rv32imafc_zicsr@mabi=ilp32f
+rv32imafdc_zicsr/ilp32d;@march=rv32imafdc_zicsr@mabi=ilp32d
+rv64i/lp64;@march=rv64i@mabi=lp64
+rv64ia/lp64;@march=rv64ia@mabi=lp64
+rv64im/lp64;@march=rv64im@mabi=lp64
+rv64if_zicsr/lp64f;@march=rv64if_zicsr@mabi=lp64f
+rv64ifd_zicsr/lp64d;@march=rv64ifd_zicsr@mabi=lp64d
+rv64iaf_zicsr/lp64f;@march=rv64iaf_zicsr@mabi=lp64f
+rv64iafd_zicsr/lp64d;@march=rv64iafd_zicsr@mabi=lp64d
+rv64imf_zicsr/lp64f;@march=rv64imf_zicsr@mabi=lp64f
+rv64iac/lp64;@march=rv64iac@mabi=lp64
+rv64imac/lp64;@march=rv64imac@mabi=lp64
+rv64imafc_zicsr/lp64f;@march=rv64imafc_zicsr@mabi=lp64f
+rv64imafdc_zicsr/lp64d;@march=rv64imafdc_zicsr@mabi=lp64d
+```
+
+:::note
+
+This list is inspired by the Debian `riscv64-unknown-elf-gcc` supported multi-libs.
+
+:::
+
+## Changes
+
+Compared to the upstream GNU release, there are no functional changes.
+
+## Bug fixes
+
+- none
+
+## Enhancements
+
+- none
+
+## Known problems
+
+- due to the large number of libraries, the archive is >500 MB.
+
+## Documentation
+
+The original GNU Arm Embedded GCC documentation is available from the
+[GCC online documentation](https://gcc.gnu.org/onlinedocs/) web site.
+
+## Build
+
+The binaries for all supported platforms
+(Windows, macOS and GNU/Linux) were built using the
+[xPack Build Box (XBB)](https://xpack.github.io/xbb/), a set
+of build environments based on slightly older distributions, that should be
+compatible with most recent systems.
+
+For the prerequisites and more details on the build procedure, please see the
+[Maintainer Info](/docs/maintainer/) page.
+
+## CI tests
+
+Before publishing, a set of simple tests were performed on an exhaustive
+set of platforms. The results are available from:
+
+- [GitHub Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/)
+- [Travis CI](https://app.travis-ci.com/github/xpack-dev-tools/riscv-none-elf-gcc-xpack/builds/)
+
+## Tests
+
+The binaries were tested on a variety of platforms,
+but mainly to check the integrity of the
+build, not the compiler functionality.
+
+## Checksums
+
+The SHA-256 hashes for the files are:
+
+```txt
+7a0e1ab5be053761cab354feade92e803e47eea841585a1df127820dcf33bea4
+xpack-riscv-none-elf-gcc-14.2.0-2-darwin-arm64.tar.gz
+
+f6930ecadda7a5b37c8557534e2d7a44da5601129fafa17e4e36020f778c9e1a
+xpack-riscv-none-elf-gcc-14.2.0-2-darwin-x64.tar.gz
+
+16a797c25e3bc1aeb056472b357731cae38378fe52bde75b11abf23eecfd14b9
+xpack-riscv-none-elf-gcc-14.2.0-2-linux-arm.tar.gz
+
+e1348fdd679131510f610a9aa42ec4e5d6bceb40115df4b57a44cb7186a7caa7
+xpack-riscv-none-elf-gcc-14.2.0-2-linux-arm64.tar.gz
+
+0ab93937aab882c3a69f63eff4fe8fc6e360e4a23776004fa116ad692e699d23
+xpack-riscv-none-elf-gcc-14.2.0-2-linux-x64.tar.gz
+
+30f44bbea58954c1679528a0ebba6cc117671f78412267f85dcee4cdc029c477
+xpack-riscv-none-elf-gcc-14.2.0-2-win32-x64.zip
+
+```
+
+<DeprecationNotices/>
+
+<DownloadAnalytics version={frontMatter.version}/>
