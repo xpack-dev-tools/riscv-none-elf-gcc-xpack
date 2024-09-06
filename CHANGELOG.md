@@ -3,9 +3,16 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-09-06
+
+* v14.2.0-2 released
+* 77ca2f5 website: re-generate commons
+* 3b7fa7b website: update durations
+
 ## 2024-09-03
 
-* v14.2.0-2 prepared
+* 2cf5319 prepare v14.2.0-2
+* 53c35fb 13.3.0-2.1
 * 53c35fb 13.3.0-2.1
 * dd89f14 CHANGELOG: publish npm v13.3.0-2.1
 * eae81d9 package.json: update urls for 13.3.0-2.1 release
