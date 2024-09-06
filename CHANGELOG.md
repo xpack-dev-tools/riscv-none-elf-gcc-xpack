@@ -5,7 +5,10 @@ Entries in this file are in reverse chronological order.
 
 ## 2024-09-06
 
-* v14.2.0-2 released
+* v14.2.0-2 published on npmjs.com
+* 6cc099e package.json: update urls for 14.2.0-2.1 release
+* 40ea670 blog post release 14.2.0-2 published
+* 3fce7bb CHANGELOG update
 * 77ca2f5 website: re-generate commons
 * 3b7fa7b website: update durations
 
