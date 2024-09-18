@@ -61,6 +61,13 @@ function getCustomFields() {
     upstreamVersion = xpackSemver;
   }
 
+  const websiteFilePath = path.join(path.dirname(path.dirname(pwd)), 'website', 'package.json');
+  // logger.info(filePath);
+  const websiteFileContent = fs.readFileSync(websiteFilePath);
+  const websitePackageJson = JSON.parse(websiteFileContent.toString());
+
+  const docusaurusVersion = websitePackageJson.dependencies['@docusaurus/core'].replace ('^', '');
+
   return {
     appName: rootPackageJson.xpack.properties.appName,
     appLcName: rootPackageJson.xpack.properties.appLcName,
@@ -70,6 +77,7 @@ function getCustomFields() {
     xpackSubversion,
     npmSubversion,
     upstreamVersion,
+    docusaurusVersion,
     ...customFields,
   }
 }
