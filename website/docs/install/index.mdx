@@ -21,6 +21,7 @@ import LinksVsForwarders from '@site/src/components/LinksVsForwarders'
 
 import AutomaticInstallQuickTest from './_automatic-install-quick-test.mdx'
 import ManualInstallQuickTest from './_manual-install-quick-test.mdx'
+import FolderHierarchies from './_folder-hierarchies.mdx'
 import Miscellaneous from './_miscellaneous.mdx'
 import Testing from './_testing.mdx';
 
@@ -355,7 +356,7 @@ The result looks like this:
     "dependencies": {},
     "devDependencies": {
       "@xpack-dev-tools/riscv-none-elf-gcc": {
-        "specifier": "${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')}",
+        "specifier": "${customField('xpackVersion')}.${customField('npmSubversion')}",
         "local": "link",
         "platforms": "all"
       }
@@ -399,7 +400,6 @@ install the packages globally will fail with _already installed_.
 
 :::
 
-
 <details>
 <summary>PATH setup</summary>
 
@@ -412,7 +412,7 @@ the project build configurations need a PATH adjustment:
 <TabItem value="windows" label="Windows" default>
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/AppData/Roaming/xPacks/\@pack-dev-tools/riscv-none-elf-gcc /${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')}/.content/bin:$PATH
+`export PATH=$HOME/AppData/Roaming/xPacks/\@pack-dev-tools/riscv-none-elf-gcc/${customField('xpackVersion')}.${customField('npmSubversion')}/.content/bin:$PATH
 `} </CodeBlock>
 
 :::tip
@@ -427,7 +427,7 @@ corresponding shell.
 <TabItem value="macos" label="macOS">
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/Library/xPacks/\@pack-dev-tools/riscv-none-elf-gcc /${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')}/.content/bin:$PATH
+`export PATH=$HOME/Library/xPacks/\@pack-dev-tools/riscv-none-elf-gcc/${customField('xpackVersion')}.${customField('npmSubversion')}/.content/bin:$PATH
 `} </CodeBlock>
 
 </TabItem>
@@ -435,7 +435,7 @@ corresponding shell.
 <TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/.local/xPacks/@xpack-dev-tools/riscv-none-elf-gcc /${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')}/.content/bin:$PATH
+`export PATH=$HOME/.local/xPacks/@xpack-dev-tools/riscv-none-elf-gcc/${customField('xpackVersion')}.${customField('npmSubversion')}/.content/bin:$PATH
 `} </CodeBlock>
 
 </TabItem>
@@ -443,7 +443,6 @@ corresponding shell.
 </Tabs>
 
 </details>
-
 
 ### Uninstall
 
@@ -532,7 +531,7 @@ The Windows versions of **xPack GNU RISC-V Embedded GCC**
 are packed as `.zip` files.
 Download the latest version named like:
 
-* <code>xpack-riscv-none-elf-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}-win32-x64.zip</code>
+- <code>xpack-riscv-none-elf-gcc-{customField('xpackVersion')}-win32-x64.zip</code>
 
 :::note
 
@@ -547,7 +546,7 @@ unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>%USERPROFILE%\\AppData\\Roaming\\xPacks\\riscv-none-elf-gcc</code> folder, for
-example <code>C:\\Users\\ilg\\AppData\\Roaming\\xPacks\\riscv-none-elf-gcc\\xpack-riscv-none-elf-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}</code>.
+example <code>C:\\Users\\ilg\\AppData\\Roaming\\xPacks\\riscv-none-elf-gcc\\xpack-riscv-none-elf-gcc-{customField('xpackVersion')}</code>.
 
 :::note
 
@@ -564,8 +563,7 @@ The macOS versions of **xPack GNU RISC-V Embedded GCC**
 are packed as `.tar.gz` archives.
 Download the latest version named like:
 
-* <code>xpack-riscv-none-elf-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}-darwin-x64.tar.gz</code>
-* <code>xpack-riscv-none-elf-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}-darwin-arm64.tar.gz</code>
+- <code>xpack-riscv-none-elf-gcc-{customField('xpackVersion')}-darwin-x64.tar.gz</code>- <code>xpack-riscv-none-elf-gcc-{customField('xpackVersion')}-darwin-arm64.tar.gz</code>
 
 :::note
 
@@ -579,14 +577,14 @@ unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>~/Library/xPacks/riscv-none-elf-gcc</code> folder, for
-example <code>/Users/ilg/Library/xPacks/riscv-none-elf-gcc/xpack-riscv-none-elf-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}</code>:
+example <code>/Users/ilg/Library/xPacks/riscv-none-elf-gcc/xpack-riscv-none-elf-gcc-{customField('xpackVersion')}</code>:
 
 <CodeBlock language="console"> {
 `mkdir -p ~/Library/xPacks/riscv-none-elf-gcc
 cd ~/Library/xPacks/riscv-none-elf-gcc
 
-tar xvf ~/Downloads/xpack-riscv-none-elf-gcc-${customField('upstreamVersion')}-${customField('xpackSubversion')}-darwin-x64.tar.gz
-chmod -R -w xpack-riscv-none-elf-gcc-${customField('upstreamVersion')}-${customField('xpackSubversion')}
+tar xvf ~/Downloads/xpack-riscv-none-elf-gcc-${customField('xpackVersion')}-darwin-x64.tar.gz
+chmod -R -w xpack-riscv-none-elf-gcc-${customField('xpackVersion')}
 `} </CodeBlock>
 
 </TabItem>
@@ -597,9 +595,7 @@ The GNU/Linux versions of **xPack GNU RISC-V Embedded GCC**
 are packed as `.tar.gz` archives.
 Download the latest version named like:
 
-* <code>xpack-riscv-none-elf-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}-darwin-x64.tar.gz</code>
-* <code>xpack-riscv-none-elf-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}-darwin-arm64.tar.gz</code>
-* <code>xpack-riscv-none-elf-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}-darwin-arm.tar.gz</code>
+- <code>xpack-riscv-none-elf-gcc-{customField('xpackVersion')}-linux-x64.tar.gz</code>- <code>xpack-riscv-none-elf-gcc-{customField('xpackVersion')}-linux-arm64.tar.gz</code>- <code>xpack-riscv-none-elf-gcc-{customField('xpackVersion')}-linux-arm.tar.gz</code>
 
 :::note
 
@@ -613,14 +609,14 @@ unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>~/.local/xPacks/riscv-none-elf-gcc</code> folder, for
-example <code>/home/ilg/.local/xPacks/riscv-none-elf-gcc/xpack-riscv-none-elf-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}</code>:
+example <code>/home/ilg/.local/xPacks/riscv-none-elf-gcc/xpack-riscv-none-elf-gcc-{customField('xpackVersion')}</code>:
 
 <CodeBlock language="console"> {
 `mkdir -p ~/.local/xPacks/riscv-none-elf-gcc
 cd ~/.local/xPacks/riscv-none-elf-gcc
 
-tar xvf ~/Downloads/xpack-riscv-none-elf-gcc-${customField('upstreamVersion')}-${customField('xpackSubversion')}-linux-x64.tar.gz
-chmod -R -w xpack-riscv-none-elf-gcc-${customField('upstreamVersion')}-${customField('xpackSubversion')}
+tar xvf ~/Downloads/xpack-riscv-none-elf-gcc-${customField('xpackVersion')}-linux-x64.tar.gz
+chmod -R -w xpack-riscv-none-elf-gcc-${customField('xpackVersion')}
 `} </CodeBlock>
 
 </TabItem>
@@ -637,6 +633,8 @@ and `.content` to store the unpacked archive.
 :::
 
 <ManualInstallQuickTest/>
+
+<FolderHierarchies/>
 
 <Miscellaneous/>
 
