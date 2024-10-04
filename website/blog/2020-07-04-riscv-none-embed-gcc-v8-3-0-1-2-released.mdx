@@ -23,6 +23,7 @@ Version **8.3.0-1.2** is a maintenance release of the **xPack GNU RISC-V Embedde
 <!-- truncate -->
 
 import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
 
 This is the **xPack** distribution of the
 [SiFive RISC-V GCC](https://github.com/sifive/freedom-tools/releases).
@@ -39,8 +40,14 @@ The binary files are available from <a href={frontMatter.download_url}>GitHub Re
 
 ## Install
 
+The easiest way to install this specific version, is by using **xpm**:
+
+<CodeBlock language="console"> {
+`xpm install @xpack-dev-tools/riscv-none-elf-gcc@${frontMatter.version}.${frontMatter.npm_subversion} -verbose
+`} </CodeBlock>
+
 The full details of installing the **xPack GNU RISC-V Embedded GCC** on
-various platforms are presented in the project [README](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack).
+various platforms can be found in the [Install Guide](/docs/install/).
 
 ## Compliance
 
@@ -149,7 +156,9 @@ compiled with `-Os -mcmodel=medany`.
 
 It is mandatory for the applications to
 be compiled with
-`-mcmodel=medany`, otherwise the link will fail." %}
+`-mcmodel=medany`, otherwise the link will fail.
+
+:::
 
 ## Python
 

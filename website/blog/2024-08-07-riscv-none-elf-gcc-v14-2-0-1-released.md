@@ -59,8 +59,14 @@ from <a href={frontMatter.download_url}>GitHub Releases</a>.
 
 ## Install
 
+The easiest way to install this specific version, is by using **xpm**:
+
+<CodeBlock language="console"> {
+`xpm install @xpack-dev-tools/riscv-none-elf-gcc@${frontMatter.version}.${frontMatter.npm_subversion} -verbose
+`} </CodeBlock>
+
 The full details of installing the **xPack GNU RISC-V Embedded GCC**
-on various platforms are presented in the [Install Guide](/docs/install/).
+on various platforms can be found in the [Install Guide](/docs/install/).
 
 ## Compliance
 
