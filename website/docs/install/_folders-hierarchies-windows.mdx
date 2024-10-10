@@ -1,0 +1,131 @@
+import CodeBlock from '@theme/CodeBlock';
+
+import customField from '@site/src/libs/customField';
+
+{/* ------------------------------------------------------------------------ */}
+
+<CodeBlock language="console"> {
+`C:\> tree /f %USERPROFILE%\\AppData\\Roaming\\xPacks\\@xpack-dev-tools\\riscv-none-elf-gcc\\${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }\\.content
+Folder PATH listing
+Volume serial number is B02D-925C
+├── README.md
+├── bin
+│   ├── DLLs
+│   ├── libgcc_s_seh-1.dll
+│   ├── libgmp-10.dll
+│   ├── libmpc-3.dll
+│   ├── libmpfr-6.dll
+│   ├── libstdc++-6.dll
+│   ├── libwinpthread-1.dll
+│   ├── libzstd.dll
+│   ├── python312.dll
+│   ├── python312.zip
+│   ├── riscv-none-elf-addr2line.exe
+│   ├── riscv-none-elf-ar.exe
+│   ├── riscv-none-elf-as.exe
+│   ├── riscv-none-elf-c++.exe
+│   ├── riscv-none-elf-c++filt.exe
+│   ├── riscv-none-elf-cpp.exe
+│   ├── riscv-none-elf-elfedit.exe
+│   ├── riscv-none-elf-g++.exe
+│   ├── riscv-none-elf-gcc-${ customField('upstreamVersion') }.exe
+│   ├── riscv-none-elf-gcc-ar.exe
+│   ├── riscv-none-elf-gcc-nm.exe
+│   ├── riscv-none-elf-gcc-ranlib.exe
+│   ├── riscv-none-elf-gcc.exe
+│   ├── riscv-none-elf-gcov-dump.exe
+│   ├── riscv-none-elf-gcov-tool.exe
+│   ├── riscv-none-elf-gcov.exe
+│   ├── riscv-none-elf-gdb-add-index
+│   ├── riscv-none-elf-gdb-add-index-py3
+│   ├── riscv-none-elf-gdb-py3.exe
+│   ├── riscv-none-elf-gdb.exe
+│   ├── riscv-none-elf-gfortran.exe
+│   ├── riscv-none-elf-gprof.exe
+│   ├── riscv-none-elf-ld.bfd.exe
+│   ├── riscv-none-elf-ld.exe
+│   ├── riscv-none-elf-lto-dump.exe
+│   ├── riscv-none-elf-nm.exe
+│   ├── riscv-none-elf-objcopy.exe
+│   ├── riscv-none-elf-objdump.exe
+│   ├── riscv-none-elf-ranlib.exe
+│   ├── riscv-none-elf-readelf.exe
+│   ├── riscv-none-elf-size.exe
+│   ├── riscv-none-elf-strings.exe
+│   └── riscv-none-elf-strip.exe
+├── distro-info
+│   └── licenses
+├── include
+│   ├── curses.h
+│   ├── cursesapp.h
+│   ├── cursesf.h
+│   ├── cursesm.h
+│   ├── cursesp.h
+│   ├── cursesw.h
+│   ├── cursslk.h
+│   ├── eti.h
+│   ├── etip.h
+│   ├── form.h
+│   ├── gdb
+│   ├── gmp.h
+│   ├── gmpxx.h
+│   ├── iconv.h
+│   ├── isl
+│   ├── libcharset.h
+│   ├── localcharset.h
+│   ├── lzma
+│   ├── lzma.h
+│   ├── menu.h
+│   ├── mpc.h
+│   ├── mpf2mpfr.h
+│   ├── mpfr.h
+│   ├── ncurses_dll.h
+│   ├── panel.h
+│   ├── term.h
+│   ├── term_entry.h
+│   ├── termcap.h
+│   ├── unctrl.h
+│   ├── zconf.h
+│   ├── zdict.h
+│   ├── zlib.h
+│   ├── zstd.h
+│   └── zstd_errors.h
+├── lib
+│   ├── bfd-plugins
+│   ├── cmake
+│   ├── gcc
+│   ├── libcharset.a
+│   ├── libform.a
+│   ├── libgmp.a
+│   ├── libgmpxx.a
+│   ├── libiconv.a
+│   ├── libisl.a
+│   ├── libisl.so.23.3.0-gdb.py
+│   ├── liblzma.a
+│   ├── libmenu.a
+│   ├── libmpc.a
+│   ├── libmpfr.a
+│   ├── libncurses++.a
+│   ├── libncurses.a
+│   ├── libpanel.a
+│   ├── libz.a
+│   ├── libzstd.a
+│   ├── libzstd.so.1.5.6
+│   ├── pkgconfig
+│   └── texinfo
+├── libexec
+│   └── gcc
+├── riscv-none-elf
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
+└── share
+    ├── doc
+    ├── gcc-${ customField('upstreamVersion') }
+    ├── info
+    ├── man
+    └── texinfo
+
+27 directories, 91 files
+`} </CodeBlock>
