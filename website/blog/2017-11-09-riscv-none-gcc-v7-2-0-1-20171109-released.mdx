@@ -1,5 +1,10 @@
 ---
-title:  GNU MCU Eclipse RISC-V Embedded GCC v7.2.0-1-20171109 released
+title: GNU MCU Eclipse RISC-V Embedded GCC v7.2.0-1-20171109 released
+description: Version 7.2.0-1-20171109 is a new release of GNU MCU Eclipse RISC-V Embedded GCC.
+keywords:
+  - xpack
+  - riscv-none-elf-gcc
+  - release
 
 date: 2017-11-09 10:28:00 +0300
 
@@ -11,9 +16,17 @@ tags:
 
 # ----- Custom properties -----------------------------------------------------
 
+app_name: "GNU MCU Eclipse RISC-V Embedded GCC"
+
 download_url: https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases/tag/v7.2.0-1-20171109/
 
 ---
+
+<head><title>{frontMatter.title}</title></head>
+
+Version **7.2.0-1-20171109** is a new release.
+
+<!-- truncate -->
 
 Version **7.2.0-1-20171109** is a new release of **GNU MCU Eclipse RISC-V Embedded GCC**; the main improvement is in GDB, which no longer returns the 4096 CSRs together with the general registers. In contrast to the `riscv64-unknown-elf` toolchain, this toolchain is clearly intended for bare-metal embedded applications; for this it was necessary to  update to the latest newlib 2.5 release which uses 'underscore' syscall functions and to **remove the mandatory use of libgloss**.
 
