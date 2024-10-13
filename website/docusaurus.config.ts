@@ -82,7 +82,8 @@ logger.info(customFields);
 const config: Config = {
   title: 'xPack GNU RISC-V Embedded GCC',
   tagline: 'A binary distribution of GNU RISC-V Embedded GCC',
-  favicon: 'img/favicon.ico',
+  // Explicitly set in headTags.
+  // favicon: '/img/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://xpack-dev-tools.github.io',
@@ -235,9 +236,58 @@ const config: Config = {
     './src/plugins/SelectReleasesPlugin',
   ],
 
+  // https://docusaurus.io/docs/api/docusaurus-config#headTags
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/png',
+        href: '/riscv-none-elf-gcc/favicons/favicon-48x48.png',
+        sizes: '48x48'
+      }
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/svg+xml',
+        href: '/riscv-none-elf-gcc/favicons/favicon.svg'
+      }
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'shortcut icon',
+        href: '/riscv-none-elf-gcc/favicons/favicon.ico'
+      }
+    },
+    {
+      // This might also go to themeConfig.metadata.
+      tagName: 'meta',
+      attributes: {
+        name: 'apple-mobile-web-app-title',
+        content: 'xPack'
+      }
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'manifest',
+        href: '/riscv-none-elf-gcc/favicons/site.webmanifest'
+      }
+    }
+  ],
+  // https://docusaurus.io/docs/seo
   themeConfig: {
     // Replace with your project's social card
     // image: 'img/docusaurus-social-card.jpg',
+    metadata: [
+      {
+        name: 'keywords',
+        content: 'xpack, binary, development, tools, riscv-none-elf-gcc'
+      }
+    ],
     navbar: {
        // overriden by i18n/en/docusaurus-theme-classic.
       title: 'The xPack Binary Development Tools',
