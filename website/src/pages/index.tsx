@@ -42,7 +42,7 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout 
-      title={`Hello from riscv-none-elf-gcc`}
+      title={`Welcome to riscv-none-elf-gcc`}
       description="A binary package with the riscv-none-elf-gcc executables">
       <HomepageHeader />
       <main>
