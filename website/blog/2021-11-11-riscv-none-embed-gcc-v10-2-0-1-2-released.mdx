@@ -1,5 +1,6 @@
 ---
 title: xPack GNU RISC-V Embedded GCC v10.2.0-1.2 released
+seo_title: Version 10.2.0-1.2 released
 description: Version 10.2.0-1.2 is a maintenance release of xPack GNU RISC-V Embedded GCC.
 keywords:
   - xpack
@@ -25,17 +26,15 @@ download_url: https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/rele
 
 ---
 
-<head>
-  <title>{frontMatter.title}</title>
-  <meta property="og:title" content={frontMatter.title} />
-</head>
+import {PageMetadata} from '@docusaurus/theme-common';
+import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
 
 Version **10.2.0-1.2** is a maintenance release; it expands the multi-libs with non-C (compressed) configurations.
 
 <!-- truncate -->
 
-import Image from '@theme/IdealImage';
-import CodeBlock from '@theme/CodeBlock';
+<PageMetadata title={frontMatter.seo_title} />
 
 The [xPack GNU RISC-V Embedded GCC](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack)
 is a standalone cross-platform binary distribution of the

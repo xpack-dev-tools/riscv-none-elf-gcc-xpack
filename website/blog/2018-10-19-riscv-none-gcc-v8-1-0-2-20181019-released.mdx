@@ -1,5 +1,6 @@
 ---
 title: GNU MCU Eclipse RISC-V Embedded GCC v8.1.0-2-20181019 released
+seo_title: Version 8.1.0-2-20181019 released
 description: Version 8.1.0-2-20181019 is a maintenance release of GNU MCU Eclipse RISC-V Embedded GCC.
 keywords:
   - xpack
@@ -16,27 +17,23 @@ tags:
 
 # ----- Custom properties -----------------------------------------------------
 
-app_name: "GNU MCU Eclipse RISC-V Embedded GCC"
-
 download_url: https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases/tag/v8.1.0-2-20181019/
 
 ---
 
-<head>
-  <title>{frontMatter.title}</title>
-  <meta property="og:title" content={frontMatter.title} />
-</head>
+import {PageMetadata} from '@docusaurus/theme-common';
+import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
 
-Version **8.1.0-2-20181019** is a maintenance release.
-
-<!-- truncate -->
-
-Version **8.1.0-2-20181019** is a maintenance release of **GNU MCU Eclipse
-RISC-V Embedded GCC**.
+Version **8.1.0-2-20181019** is a maintenance release of **GNU MCU Eclipse RISC-V Embedded GCC**.
 
 <!-- truncate -->
 
-<p><a href={frontMatter.download_url}>Binary files »</a></p>
+<PageMetadata title={frontMatter.seo_title} />
+
+## Download
+
+The binary files are available from <a href={frontMatter.download_url}>GitHub Releases</a>.
 
 ## Compliance
 

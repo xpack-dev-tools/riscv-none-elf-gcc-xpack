@@ -1,5 +1,6 @@
 ---
 title: xPack GNU RISC-V Embedded GCC v8.3.0-1.2 released
+seo_title: Version 8.3.0-1.2 released
 description: Version 8.3.0-1.2 is a maintenance release of xPack GNU RISC-V Embedded GCC.
 keywords:
   - xpack
@@ -23,17 +24,15 @@ download_url: https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/rele
 
 ---
 
-<head>
-  <title>{frontMatter.title}</title>
-  <meta property="og:title" content={frontMatter.title} />
-</head>
+import {PageMetadata} from '@docusaurus/theme-common';
+import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
 
 Version **8.3.0-1.2** is a maintenance release of the **xPack GNU RISC-V Embedded GCC**, that packs the SiFive release from August 2019, and **adds support for running on Arm platforms**, like **Raspberry Pi**.
 
 <!-- truncate -->
 
-import Image from '@theme/IdealImage';
-import CodeBlock from '@theme/CodeBlock';
+<PageMetadata title={frontMatter.seo_title} />
 
 This is the **xPack** distribution of the
 [SiFive RISC-V GCC](https://github.com/sifive/freedom-tools/releases).

@@ -1,5 +1,6 @@
 ---
 title: xPack GNU RISC-V Embedded GCC v8.3.0-2.1 released
+seo_title: Version 8.3.0-2.1 released
 description: Version 8.3.0-2.1 is a new release of xPack GNU RISC-V Embedded GCC.
 keywords:
   - xpack
@@ -23,17 +24,15 @@ download_url: https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/rele
 
 ---
 
-<head>
-  <title>{frontMatter.title}</title>
-  <meta property="og:title" content={frontMatter.title} />
-</head>
+import {PageMetadata} from '@docusaurus/theme-common';
+import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
 
 Version **8.3.0-2.1** is a new release of the **xPack GNU RISC-V Embedded GCC**, following SiFive release 2020.04.0 from August 2020; it also changes to use **DT_RPATH** to make the binaries immune to custom LD_LIBRARY_PATH.
 
 <!-- truncate -->
 
-import Image from '@theme/IdealImage';
-import CodeBlock from '@theme/CodeBlock';
+<PageMetadata title={frontMatter.seo_title} />
 
 This is the **xPack** distribution of the
 [SiFive RISC-V GCC](https://github.com/sifive/freedom-tools/releases).

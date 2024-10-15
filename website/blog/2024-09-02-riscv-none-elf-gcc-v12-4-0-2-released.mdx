@@ -29,18 +29,19 @@ download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releas
 
 ---
 
-<head><title>{frontMatter.title}</title></head>
-
-Version **12.4.0-2** is a maintenance release; it updates to the latest binutils 2.43.1 and the Debian multi-libs.
-
-<!-- truncate -->
-
+import {PageMetadata} from '@docusaurus/theme-common';
 import Image from '@theme/IdealImage';
 import CodeBlock from '@theme/CodeBlock';
 
 import Prerequisites from './_common/_prerequisites-glib-2.27.mdx'
 import DeprecationNotices from './_common/_deprecation-notices-glib-2.27.mdx'
 import DownloadAnalytics from './_common/_download-analytics.mdx'
+
+Version **12.4.0-2** is a maintenance release; it updates to the latest binutils 2.43.1 and the Debian multi-libs.
+
+<!-- truncate -->
+
+<PageMetadata title={frontMatter.seo_title} />
 
 The [xPack GNU RISC-V Embedded GCC](/)
 is a standalone cross-platform binary distribution of

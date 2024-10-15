@@ -1,5 +1,6 @@
 ---
 title: GNU MCU Eclipse RISC-V Embedded GCC v7.1.1-1-20170702-* released
+seo_title: Version 7.1.1-1-20170702-* released
 description: Version 7.1.1-1-20170702-0625 is the first release of GNU MCU Eclipse RISC-V Embedded GCC.
 keywords:
   - xpack
@@ -16,26 +17,23 @@ tags:
 
 # ----- Custom properties -----------------------------------------------------
 
-app_name: "GNU MCU Eclipse RISC-V Embedded GCC"
-
 download_url: https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases/tag/v7.1.1-1-20170702-0625/
 
 ---
 
-<head>
-  <title>{frontMatter.title}</title>
-  <meta property="og:title" content={frontMatter.title} />
-</head>
+import {PageMetadata} from '@docusaurus/theme-common';
+import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
 
-Version **7.1.1-1-20170702-0625** is the first release.
-
-<!-- truncate -->
-
-Version **7.1.1-1-20170702-0625** is the first **GNU MCU Eclipse RISC-V Embedded GCC** release. It includes binaries for Windows, macOS and GNU/Linux.
+Version **7.1.1-1-20170702-0625** is the first release of **GNU MCU Eclipse RISC-V Embedded GCC**. It includes binaries for Windows, macOS and GNU/Linux.
 
 <!-- truncate -->
 
-<p><a href={frontMatter.download_url}>Binary files »</a></p>
+<PageMetadata title={frontMatter.seo_title} />
+
+## Download
+
+The binary files are available from <a href={frontMatter.download_url}>GitHub Releases</a>.
 
 ## Compliance
 

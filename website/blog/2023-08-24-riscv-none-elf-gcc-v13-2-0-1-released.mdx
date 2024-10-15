@@ -1,5 +1,6 @@
 ---
 title: xPack GNU RISC-V Embedded GCC v13.2.0-1 released
+seo_title: Version 13.2.0-1 released
 description: Version 13.2.0-1 is a new release of xPack GNU RISC-V Embedded GCC.
 keywords:
   - xpack
@@ -29,17 +30,15 @@ download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releas
 
 ---
 
-<head>
-  <title>{frontMatter.title}</title>
-  <meta property="og:title" content={frontMatter.title} />
-</head>
+import {PageMetadata} from '@docusaurus/theme-common';
+import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
 
 Version **13.2.0-1** is a new release; it follows the GNU GCC release.
 
 <!-- truncate -->
 
-import Image from '@theme/IdealImage';
-import CodeBlock from '@theme/CodeBlock';
+<PageMetadata title={frontMatter.seo_title} />
 
 The [xPack GNU RISC-V Embedded GCC](https://xpack-dev-tools.github.io/riscv-none-elf-gcc-xpack/)
 is a standalone cross-platform binary distribution of the
