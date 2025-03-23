@@ -106,6 +106,7 @@
   "topConfig": {
     "descriptiveName": "GNU RISC-V Embedded GCC",
     "permalinkName": "riscv-none-elf-gcc",
+    "skipCiTests": "true",
     "useSelfHostedRunners": "true"
   },
   "engines": {
