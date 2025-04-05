@@ -47,18 +47,22 @@
             name="riscv-none-elf-gcc"
             threshold=0 # 16383 # (50%)10000
 
-            download_sourceforge_2024 "${name}" "14.2.0-3"  ${threshold}
-            download_sourceforge_2024 "${name}" "13.3.0-2"  ${threshold}
-            download_sourceforge_2024 "${name}" "12.4.0-2"  ${threshold}
-            download_sourceforge_2024 "${name}" "11.5.0-2"  ${threshold}
-            download_sourceforge_2024 "${name}" "12.4.0-1"  ${threshold}
-            download_sourceforge_2024 "${name}" "13.3.0-1"  ${threshold}
-            download_sourceforge_2024 "${name}" "14.1.0-1"  ${threshold}
+            # 2024
+            platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
+            # download_sourceforge_2024 "${name}" "14.2.0-3" ${threshold} "${platforms}"
+            # download_sourceforge_2024 "${name}" "13.3.0-2" ${threshold} "${platforms}"
+            # download_sourceforge_2024 "${name}" "12.4.0-2" ${threshold} "${platforms}"
+            # download_sourceforge_2024 "${name}" "11.5.0-2" ${threshold} "${platforms}"
+            # download_sourceforge_2024 "${name}" "12.4.0-1" ${threshold} "${platforms}"
+            # download_sourceforge_2024 "${name}" "13.3.0-1" ${threshold} "${platforms}"
+            # download_sourceforge_2024 "${name}" "14.1.0-1" ${threshold} "${platforms}"
 
-            download_sourceforge_2023 "${name}" "13.2.0-2"  ${threshold}
-            download_sourceforge_2022 "${name}" "12.3.0-2"  ${threshold}
-            download_sourceforge_2022 "${name}" "13.2.0-1"  ${threshold}
-            download_sourceforge_2022 "${name}" "12.2.0-3"  ${threshold}
+            # 2023
+            platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
+            # download_sourceforge_2023 "${name}" "13.2.0-2" ${threshold} "${platforms}"
 
-            download_sourceforge_2022 "${name}" "12.1.0-2"  ${threshold}
-            download_sourceforge_2022 "${name}" "11.3.0-1"  ${threshold}
+            # 2022
+            platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
+            # download_sourceforge_2022 "${name}" "12.3.0-2" ${threshold} "${platforms}"
+
+            download_sourceforge_2022 "${name}" "11.3.0-1" ${threshold} "${platforms}"
