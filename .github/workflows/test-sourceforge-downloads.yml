@@ -45,7 +45,7 @@
 
             # https://sourceforge.net/projects/riscv-none-elf-gcc-xpack/files/
             name="riscv-none-elf-gcc"
-            threshold=16383 # (50%)10000
+            threshold=16383 # (50%)
 
             # 2024
             platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
