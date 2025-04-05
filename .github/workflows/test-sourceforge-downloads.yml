@@ -47,8 +47,12 @@
             name="riscv-none-elf-gcc"
             threshold=16383 # (50%)
 
-            # 2024
+            # 2025
+            platforms="win32-x64,linux-x64,linux-arm64,darwin-x64,darwin-arm64"
+
+            # 2024-2022
             platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
+
             download_sourceforge "${name}" "14.2.0-3" ${threshold} "${platforms}"
             download_sourceforge "${name}" "13.3.0-2" ${threshold} "${platforms}"
             download_sourceforge "${name}" "12.4.0-2" ${threshold} "${platforms}"
@@ -56,13 +60,6 @@
             download_sourceforge "${name}" "12.4.0-1" ${threshold} "${platforms}"
             download_sourceforge "${name}" "13.3.0-1" ${threshold} "${platforms}"
             download_sourceforge "${name}" "14.1.0-1" ${threshold} "${platforms}"
-
-            # 2023
-            platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
             download_sourceforge "${name}" "13.2.0-2" ${threshold} "${platforms}"
-
-            # 2022
-            platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
             download_sourceforge "${name}" "12.3.0-2" ${threshold} "${platforms}"
-
             download_sourceforge "${name}" "11.3.0-1" ${threshold} "${platforms}"
