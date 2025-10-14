@@ -385,8 +385,8 @@ function application_build_versioned_components()
 
     # -------------------------------------------------------------------------
 
-    # https://ftp.gnu.org/gnu/binutils/
-    # https://ftp.gnu.org/gnu/binutils/binutils-2.40.tar.xz
+    # https://ftpmirror.gnu.org/gnu/binutils/
+    # https://ftpmirror.gnu.org/gnu/binutils/binutils-2.40.tar.xz
 
     if [[ ${XBB_RELEASE_VERSION} =~ [0-9]*[.][0-9]*[.][0-9]*-1 ]]
     then
@@ -398,14 +398,14 @@ function application_build_versioned_components()
 
     XBB_BINUTILS_SRC_FOLDER_NAME="binutils-${XBB_BINUTILS_VERSION}"
     XBB_BINUTILS_ARCHIVE_NAME="binutils-${XBB_BINUTILS_VERSION}.tar.xz"
-    XBB_BINUTILS_ARCHIVE_URL="https://ftp.gnu.org/gnu/binutils/${XBB_BINUTILS_ARCHIVE_NAME}"
+    XBB_BINUTILS_ARCHIVE_URL="https://ftpmirror.gnu.org/gnu/binutils/${XBB_BINUTILS_ARCHIVE_NAME}"
 
     XBB_BINUTILS_PATCH_FILE_NAME="binutils-${XBB_BINUTILS_VERSION}.patch"
 
     # XBB_GCC_VERSION computer from XBB_RELEASE_VERSION
     XBB_GCC_SRC_FOLDER_NAME="gcc-${XBB_GCC_VERSION}"
     XBB_GCC_ARCHIVE_NAME="${XBB_GCC_SRC_FOLDER_NAME}.tar.xz"
-    XBB_GCC_ARCHIVE_URL="https://ftp.gnu.org/gnu/gcc/gcc-${XBB_GCC_VERSION}/${XBB_GCC_ARCHIVE_NAME}"
+    XBB_GCC_ARCHIVE_URL="https://ftpmirror.gnu.org/gnu/gcc/gcc-${XBB_GCC_VERSION}/${XBB_GCC_ARCHIVE_NAME}"
 
     if [ "${XBB_HOST_PLATFORM}" == "darwin" ]
     then
@@ -430,14 +430,14 @@ function application_build_versioned_components()
 
     XBB_ENABLE_NEWLIB_RISCV_NANO_CXX_PATCH="y"
 
-    # https://ftp.gnu.org/gnu/gdb/
-    # https://ftp.gnu.org/gnu/gdb/gdb-13.2.tar.xz
+    # https://ftpmirror.gnu.org/gnu/gdb/
+    # https://ftpmirror.gnu.org/gnu/gdb/gdb-13.2.tar.xz
 
     # PATCH!
     XBB_GDB_VERSION="15.1" # "14.2" # "13.2"
     XBB_GDB_SRC_FOLDER_NAME="gdb-${XBB_GDB_VERSION}"
     XBB_GDB_ARCHIVE_NAME="${XBB_GDB_SRC_FOLDER_NAME}.tar.xz"
-    XBB_GDB_ARCHIVE_URL="https://ftp.gnu.org/gnu/gdb/${XBB_GDB_ARCHIVE_NAME}"
+    XBB_GDB_ARCHIVE_URL="https://ftpmirror.gnu.org/gnu/gdb/${XBB_GDB_ARCHIVE_NAME}"
 
     # Mandatory, otherwise gdb-py3 is not relocatable.
     XBB_GDB_PATCH_FILE_NAME="gdb-${XBB_GDB_VERSION}-cross.git.patch"
@@ -485,10 +485,10 @@ function application_build_versioned_components()
     # https://github.com/facebook/zstd/tags
     XBB_ZSTD_VERSION="1.5.6" # "1.5.5"
 
-    # https://ftp.gnu.org/gnu/ncurses/
+    # https://ftpmirror.gnu.org/gnu/ncurses/
     XBB_NCURSES_VERSION="6.5" # "6.4"
 
-    # https://ftp.gnu.org/gnu/texinfo/
+    # https://ftpmirror.gnu.org/gnu/texinfo/
     XBB_TEXINFO_VERSION="7.1" # "7.0.3"
 
     # -------------------------------------------------------------------------
@@ -499,7 +499,7 @@ function application_build_versioned_components()
     # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1
     XBB_EXPAT_VERSION="2.6.2" # "2.5.0"
 
-    # https://ftp.gnu.org/gnu/libunistring/
+    # https://ftpmirror.gnu.org/gnu/libunistring/
     XBB_LIBUNISTRING_VERSION="1.2" # "1.1"
 
     # https://ftp.gnu.org/pub/gnu/gettext/
@@ -509,7 +509,7 @@ function application_build_versioned_components()
     # https://github.com/xpack-dev-tools/gpm/tags
     XBB_GPM_VERSION="1.20.7-1"
 
-    # https://ftp.gnu.org/gnu/readline/
+    # https://ftpmirror.gnu.org/gnu/readline/
     XBB_READLINE_VERSION="8.2"
 
     # https://sourceware.org/pub/bzip2/
@@ -557,22 +557,22 @@ function application_build_versioned_components()
 
     # -------------------------------------------------------------------------
 
-    # https://ftp.gnu.org/gnu/binutils/
-    # https://ftp.gnu.org/gnu/binutils/binutils-2.40.tar.xz
+    # https://ftpmirror.gnu.org/gnu/binutils/
+    # https://ftpmirror.gnu.org/gnu/binutils/binutils-2.40.tar.xz
 
     # Note "2.41" requires a newer makeinfo
     XBB_BINUTILS_VERSION="2.41" # "2.38"
 
     XBB_BINUTILS_SRC_FOLDER_NAME="binutils-${XBB_BINUTILS_VERSION}"
     XBB_BINUTILS_ARCHIVE_NAME="binutils-${XBB_BINUTILS_VERSION}.tar.xz"
-    XBB_BINUTILS_ARCHIVE_URL="https://ftp.gnu.org/gnu/binutils/${XBB_BINUTILS_ARCHIVE_NAME}"
+    XBB_BINUTILS_ARCHIVE_URL="https://ftpmirror.gnu.org/gnu/binutils/${XBB_BINUTILS_ARCHIVE_NAME}"
 
     XBB_BINUTILS_PATCH_FILE_NAME="binutils-${XBB_BINUTILS_VERSION}.patch"
 
     # XBB_GCC_VERSION computer from XBB_RELEASE_VERSION
     XBB_GCC_SRC_FOLDER_NAME="gcc-${XBB_GCC_VERSION}"
     XBB_GCC_ARCHIVE_NAME="${XBB_GCC_SRC_FOLDER_NAME}.tar.xz"
-    XBB_GCC_ARCHIVE_URL="https://ftp.gnu.org/gnu/gcc/gcc-${XBB_GCC_VERSION}/${XBB_GCC_ARCHIVE_NAME}"
+    XBB_GCC_ARCHIVE_URL="https://ftpmirror.gnu.org/gnu/gcc/gcc-${XBB_GCC_VERSION}/${XBB_GCC_ARCHIVE_NAME}"
 
     # For the mingw abort() patch.
     XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.git.patch"
@@ -591,13 +591,13 @@ function application_build_versioned_components()
 
     XBB_ENABLE_NEWLIB_RISCV_NANO_CXX_PATCH="y"
 
-    # https://ftp.gnu.org/gnu/gdb/
-    # https://ftp.gnu.org/gnu/gdb/gdb-13.2.tar.xz
+    # https://ftpmirror.gnu.org/gnu/gdb/
+    # https://ftpmirror.gnu.org/gnu/gdb/gdb-13.2.tar.xz
 
     XBB_GDB_VERSION="13.2" # "12.1"
     XBB_GDB_SRC_FOLDER_NAME="gdb-${XBB_GDB_VERSION}"
     XBB_GDB_ARCHIVE_NAME="${XBB_GDB_SRC_FOLDER_NAME}.tar.xz"
-    XBB_GDB_ARCHIVE_URL="https://ftp.gnu.org/gnu/gdb/${XBB_GDB_ARCHIVE_NAME}"
+    XBB_GDB_ARCHIVE_URL="https://ftpmirror.gnu.org/gnu/gdb/${XBB_GDB_ARCHIVE_NAME}"
 
     # Mandatory, otherwise gdb-py3 is not relocatable.
     XBB_GDB_PATCH_FILE_NAME="gdb-${XBB_GDB_VERSION}-cross.git.patch"
@@ -645,7 +645,7 @@ function application_build_versioned_components()
     # https://github.com/facebook/zstd/tags
     XBB_ZSTD_VERSION="1.5.5" # "1.5.2"
 
-    # https://ftp.gnu.org/gnu/ncurses/
+    # https://ftpmirror.gnu.org/gnu/ncurses/
     XBB_NCURSES_VERSION="6.4" # "6.3"
 
     # https://github.com/westes/texinfo/releases
@@ -659,7 +659,7 @@ function application_build_versioned_components()
     # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1
     XBB_EXPAT_VERSION="2.5.0" # "2.4.8"
 
-    # https://ftp.gnu.org/gnu/libunistring/
+    # https://ftpmirror.gnu.org/gnu/libunistring/
     XBB_LIBUNISTRING_VERSION="1.1"
 
     # https://ftp.gnu.org/pub/gnu/gettext/
@@ -669,7 +669,7 @@ function application_build_versioned_components()
     # https://github.com/xpack-dev-tools/gpm/tags
     XBB_GPM_VERSION="1.20.7-1"
 
-    # https://ftp.gnu.org/gnu/readline/
+    # https://ftpmirror.gnu.org/gnu/readline/
     XBB_READLINE_VERSION="8.2" # "8.1"
 
     # https://sourceware.org/pub/bzip2/
@@ -788,21 +788,21 @@ function application_build_versioned_components()
       fi
     fi
 
-    # https://ftp.gnu.org/gnu/binutils/
-    # https://ftp.gnu.org/gnu/binutils/binutils-2.38.tar.xz
+    # https://ftpmirror.gnu.org/gnu/binutils/
+    # https://ftpmirror.gnu.org/gnu/binutils/binutils-2.38.tar.xz
 
     XBB_BINUTILS_VERSION="2.38"
 
     XBB_BINUTILS_SRC_FOLDER_NAME="binutils-${XBB_BINUTILS_VERSION}"
     XBB_BINUTILS_ARCHIVE_NAME="binutils-${XBB_BINUTILS_VERSION}.tar.xz"
-    XBB_BINUTILS_ARCHIVE_URL="https://ftp.gnu.org/gnu/binutils/${XBB_BINUTILS_ARCHIVE_NAME}"
+    XBB_BINUTILS_ARCHIVE_URL="https://ftpmirror.gnu.org/gnu/binutils/${XBB_BINUTILS_ARCHIVE_NAME}"
 
     XBB_BINUTILS_PATCH_FILE_NAME="binutils-${XBB_BINUTILS_VERSION}.patch"
 
     # XBB_GCC_VERSION computer from XBB_RELEASE_VERSION
     XBB_GCC_SRC_FOLDER_NAME="gcc-${XBB_GCC_VERSION}"
     XBB_GCC_ARCHIVE_NAME="${XBB_GCC_SRC_FOLDER_NAME}.tar.xz"
-    XBB_GCC_ARCHIVE_URL="https://ftp.gnu.org/gnu/gcc/gcc-${XBB_GCC_VERSION}/${XBB_GCC_ARCHIVE_NAME}"
+    XBB_GCC_ARCHIVE_URL="https://ftpmirror.gnu.org/gnu/gcc/gcc-${XBB_GCC_VERSION}/${XBB_GCC_ARCHIVE_NAME}"
 
     # The Apple Silicon host patches are already in for 12.x.
     # GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.git.patch"
@@ -818,14 +818,14 @@ function application_build_versioned_components()
 
     XBB_ENABLE_NEWLIB_RISCV_NANO_CXX_PATCH="y"
 
-    # https://ftp.gnu.org/gnu/gdb/
-    # https://ftp.gnu.org/gnu/gdb/gdb-11.2.tar.xz
-    # https://ftp.gnu.org/gnu/gdb/gdb-12.1.tar.xz
+    # https://ftpmirror.gnu.org/gnu/gdb/
+    # https://ftpmirror.gnu.org/gnu/gdb/gdb-11.2.tar.xz
+    # https://ftpmirror.gnu.org/gnu/gdb/gdb-12.1.tar.xz
 
     XBB_GDB_VERSION="12.1" # "11.2"
     XBB_GDB_SRC_FOLDER_NAME="gdb-${XBB_GDB_VERSION}"
     XBB_GDB_ARCHIVE_NAME="${XBB_GDB_SRC_FOLDER_NAME}.tar.xz"
-    XBB_GDB_ARCHIVE_URL="https://ftp.gnu.org/gnu/gdb/${XBB_GDB_ARCHIVE_NAME}"
+    XBB_GDB_ARCHIVE_URL="https://ftpmirror.gnu.org/gnu/gdb/${XBB_GDB_ARCHIVE_NAME}"
 
     # Mandatory, otherwise gdb-py3 is not relocatable.
     XBB_GDB_PATCH_FILE_NAME="gdb-${XBB_GDB_VERSION}-cross.git.patch"
@@ -887,10 +887,10 @@ function application_build_versioned_components()
     # https://github.com/xpack-dev-tools/gpm/tags
     XBB_GPM_VERSION="1.20.7-1"
 
-    # https://ftp.gnu.org/gnu/ncurses/
+    # https://ftpmirror.gnu.org/gnu/ncurses/
     XBB_NCURSES_VERSION="6.3"
 
-    # https://ftp.gnu.org/gnu/readline/
+    # https://ftpmirror.gnu.org/gnu/readline/
     XBB_READLINE_VERSION="8.1"
 
     # https://sourceware.org/pub/bzip2/

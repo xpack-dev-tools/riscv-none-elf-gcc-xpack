@@ -104,12 +104,13 @@
     "liquidjs": "^10.19.1"
   },
   "topConfig": {
-    "descriptiveName": "GNU RISC-V Embedded GCC",
+    "descriptiveName": "xPack GNU RISC-V Embedded GCC",
+    "upstreamDescriptiveName": "GNU RISC-V Embedded GCC",
     "permalinkName": "riscv-none-elf-gcc",
     "skipCiTests": "true",
     "useSelfHostedRunners": "true"
   },
   "engines": {
-    "node": " >=18.0.0"
+    "node": " >=20.0"
   }
 }
