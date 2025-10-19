@@ -269,24 +269,18 @@ jobs:
           ref: ${{github.event.inputs.helper-git-ref}}
           fetch-depth: 3
 
-      # Every fourth release. 29, 33, 37, 41, 45, 49...
+      # From 29 to the latest, with one intermediate. 29, 35, 41...
       - name: 'Fedora 41 arm64'
         uses: docker://fedora:41
         with:
           entrypoint: /bin/bash
           args: /github/workspace/build-assets/scripts/test.sh --image fedora:41 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
 
-      - name: 'Fedora 37 arm64'
-        uses: docker://fedora:37
+      - name: 'Fedora 35 arm64'
+        uses: docker://fedora:35
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/build-assets/scripts/test.sh --image fedora:37 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
-
-      - name: 'Fedora 33 arm64'
-        uses: docker://fedora:33
-        with:
-          entrypoint: /bin/bash
-          args: /github/workspace/build-assets/scripts/test.sh --image fedora:33 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
+          args: /github/workspace/build-assets/scripts/test.sh --image fedora:35 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
 
       - name: 'Fedora 29 arm64'
         uses: docker://fedora:29

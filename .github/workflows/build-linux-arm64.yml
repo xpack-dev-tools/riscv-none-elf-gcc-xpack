@@ -112,6 +112,9 @@ jobs:
           xpm install --loglevel ${{github.event.inputs.xpm_install_loglevel}} ${{github.event.inputs.xpm_install_options}} -C build-assets
           xpm run docker-prepare --config linux-arm64 --loglevel ${{github.event.inputs.xpm_install_loglevel}} ${{github.event.inputs.xpm_install_options}} -C build-assets
           xpm run docker-build --config linux-arm64 -C build-assets
+
+      - name: 'Show results'
+        run: |
           ls -l build-assets/build/linux-arm64/application
           ls -l build-assets/build/linux-arm64/deploy
 

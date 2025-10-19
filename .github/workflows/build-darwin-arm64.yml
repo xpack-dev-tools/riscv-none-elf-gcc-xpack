@@ -129,6 +129,9 @@ jobs:
           xpm install --loglevel ${{github.event.inputs.xpm_install_loglevel}} ${{github.event.inputs.xpm_install_options}} -C build-assets
           xpm install --config darwin-arm64 --loglevel ${{github.event.inputs.xpm_install_loglevel}} ${{github.event.inputs.xpm_install_options}} -C build-assets
           xpm run build --config darwin-arm64 -C build-assets
+
+      - name: 'Show results'
+        run: |
           ls -l build-assets/build/darwin-arm64/application
           ls -l build-assets/build/darwin-arm64/deploy
 
