@@ -47,7 +47,6 @@ const config: Config = {
 
   onBrokenAnchors: 'throw',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'throw',
 
   onDuplicateRoutes: 'throw',
 
@@ -64,7 +63,10 @@ const config: Config = {
   },
 
   markdown: {
-    format: 'detect'
+    format: 'detect',
+    hooks: {
+        onBrokenMarkdownLinks: 'throw'
+    }
   },
 
   plugins: [
