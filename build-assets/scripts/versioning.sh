@@ -9,6 +9,110 @@
 
 # -----------------------------------------------------------------------------
 
+function set_multilib_list() {
+  # Releases from 14.2.*-3 up (December 2024) use the Debian list,
+  # with two more combinations:
+  # - rv32ec-ilp32e
+  # - rv32imc-ilp32
+
+  if [ "${XBB_APPLICATION_WITHOUT_MULTILIB:-""}" != "y" ]
+  then
+    if [ "${XBB_IS_DEVELOPMENT}" != "y" ]
+    then
+
+      # $ docker run -it debian:13
+      # $ apt-get update
+      # $ apt-get install -y gcc-riscv64-unknown-elf
+      # $ riscv64-unknown-elf-gcc -print-multi-lib
+      # .; (--with-arch=rv64imafdc)
+      # rv32e/ilp32e;@march=rv32e@mabi=ilp32e
+      # rv32ea/ilp32e;@march=rv32ea@mabi=ilp32e
+      # rv32em/ilp32e;@march=rv32em@mabi=ilp32e
+      # rv32eac/ilp32e;@march=rv32eac@mabi=ilp32e
+      # rv32emac/ilp32e;@march=rv32emac@mabi=ilp32e
+      # rv32i/ilp32;@march=rv32i@mabi=ilp32
+      # rv32ia/ilp32;@march=rv32ia@mabi=ilp32
+      # rv32im/ilp32;@march=rv32im@mabi=ilp32
+      # rv32if/ilp32f;@march=rv32if@mabi=ilp32f
+      # rv32ifd/ilp32d;@march=rv32ifd@mabi=ilp32d
+      # rv32iaf/ilp32f;@march=rv32iaf@mabi=ilp32f
+      # rv32iafd/ilp32d;@march=rv32iafd@mabi=ilp32d
+      # rv32imf/ilp32f;@march=rv32imf@mabi=ilp32f
+      # rv32imfd/ilp32d;@march=rv32imfd@mabi=ilp32d
+      # rv32iac/ilp32;@march=rv32iac@mabi=ilp32
+      # rv32imac/ilp32;@march=rv32imac@mabi=ilp32
+      # rv32imafc/ilp32f;@march=rv32imafc@mabi=ilp32f
+      # rv32imafdc/ilp32d;@march=rv32imafdc@mabi=ilp32d
+      # rv64i/lp64;@march=rv64i@mabi=lp64
+      # rv64ia/lp64;@march=rv64ia@mabi=lp64
+      # rv64im/lp64;@march=rv64im@mabi=lp64
+      # rv64if/lp64f;@march=rv64if@mabi=lp64f
+      # rv64ifd/lp64d;@march=rv64ifd@mabi=lp64d
+      # rv64iaf/lp64f;@march=rv64iaf@mabi=lp64f
+      # rv64iafd/lp64d;@march=rv64iafd@mabi=lp64d
+      # rv64imf/lp64f;@march=rv64imf@mabi=lp64f
+      # rv64iac/lp64;@march=rv64iac@mabi=lp64
+      # rv64imac/lp64;@march=rv64imac@mabi=lp64
+      # rv64imafc/lp64f;@march=rv64imafc@mabi=lp64f
+
+      # https://packages.debian.org/stable/devel/gcc-riscv64-unknown-elf
+      # https://packages.debian.org/source/trixie/gcc-riscv64-unknown-elf
+      # http://deb.debian.org/debian/pool/main/g/gcc-riscv64-unknown-elf/gcc-riscv64-unknown-elf_19.tar.xz
+      # debian/patches/0002-Add-more-multi-lib-for-rv32-and-rv64.patch
+
+      # (14.2.0+19)
+      # ./multilib-generator rv32e-ilp32e--c rv32ea-ilp32e--m rv32em-ilp32e--c rv32eac-ilp32e-- rv32emac-ilp32e-- rv32i-ilp32--c rv32ia-ilp32--m rv32im-ilp32--c rv32if-ilp32f-rv32ifd-c rv32iaf-ilp32f-rv32imaf,rv32iafc-d rv32imf-ilp32f-rv32imfd-c rv32iac-ilp32-- rv32imac-ilp32-- rv32imafc-ilp32f-rv32imafdc- rv32ifd-ilp32d--c rv32imfd-ilp32d--c rv32iafd-ilp32d-rv32imafd,rv32iafdc- rv32imafdc-ilp32d-- rv64i-lp64--c rv64ia-lp64--m rv64im-lp64--c rv64if-lp64f-rv64ifd-c rv64iaf-lp64f-rv64imaf,rv64iafc-d rv64imf-lp64f-rv64imfd-c rv64iac-lp64-- rv64imac-lp64-- rv64imafc-lp64f-rv64imafdc- rv64ifd-lp64d--m,c rv64iafd-lp64d-rv64imafd,rv64iafdc- rv64imafdc-lp64d--
+
+      # Default rv32imac-ilp32--
+      XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
+        rv32e-ilp32e-- \
+        rv32ec-ilp32e-- \
+        rv32ea-ilp32e--m \
+        rv32em-ilp32e--c \
+        rv32eac-ilp32e-- \
+        rv32emac-ilp32e-- \
+        \
+        rv32i-ilp32--c \
+        rv32ia-ilp32--m \
+        rv32im-ilp32-- \
+        rv32imc-ilp32-- \
+        rv32if-ilp32f-rv32ifd-c \
+        rv32iaf-ilp32f-rv32imaf,rv32iafc-d \
+        rv32imf-ilp32f-rv32imfd-c \
+        rv32iac-ilp32-- \
+        rv32imac-ilp32-- \
+        rv32imafc-ilp32f-rv32imafdc- \
+        rv32ifd-ilp32d--c \
+        rv32imfd-ilp32d--c \
+        rv32iafd-ilp32d-rv32imafd,rv32iafdc- \
+        rv32imafdc-ilp32d-- \
+        \
+        rv64i-lp64--c \
+        rv64ia-lp64--m \
+        rv64im-lp64--c \
+        rv64if-lp64f-rv64ifd-c \
+        rv64iaf-lp64f-rv64imaf,rv64iafc-d \
+        rv64imf-lp64f-rv64imfd-c \
+        rv64iac-lp64-- \
+        rv64imac-lp64-- \
+        rv64imafc-lp64f-rv64imafdc- \
+        rv64ifd-lp64d--m,c \
+        rv64iafd-lp64d-rv64imafd,rv64iafdc- \
+        rv64imafdc-lp64d-- \
+      "}
+      echo
+      echo "Use Debian multi-libs + rv32ec + rv32imc: ${XBB_GCC_MULTILIB_LIST}"
+    else
+      # Short list used during development to save time.
+      XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
+        rv32emac-ilp32e-- \
+        rv32imac-ilp32-- \
+        rv64imac-lp64-- \
+      "}
+    fi
+  fi
+}
+
 function application_build_versioned_components()
 {
   export XBB_GCC_VERSION="$(xbb_strip_version_pre_release "${XBB_RELEASE_VERSION}")"
@@ -65,108 +169,7 @@ function application_build_versioned_components()
      [[ ${XBB_RELEASE_VERSION} =~ 15[.][012][.][0-9]*-[0-9]* ]]
   then
 
-
-    # Releases from 14.2.*-3 up (December 2024) use the Debian list,
-    # with two more combinations:
-    # - rv32ec-ilp32e
-    # - rv32imc-ilp32
-
-    if [ "${XBB_APPLICATION_WITHOUT_MULTILIB:-""}" != "y" ]
-    then
-      if [ "${XBB_IS_DEVELOPMENT}" != "y" ]
-      then
-
-        # $ docker run -it debian:13
-        # $ apt-get update
-        # $ apt-get install -y gcc-riscv64-unknown-elf
-        # $ riscv64-unknown-elf-gcc -print-multi-lib
-        # .; (--with-arch=rv64imafdc)
-        # rv32e/ilp32e;@march=rv32e@mabi=ilp32e
-        # rv32ea/ilp32e;@march=rv32ea@mabi=ilp32e
-        # rv32em/ilp32e;@march=rv32em@mabi=ilp32e
-        # rv32eac/ilp32e;@march=rv32eac@mabi=ilp32e
-        # rv32emac/ilp32e;@march=rv32emac@mabi=ilp32e
-        # rv32i/ilp32;@march=rv32i@mabi=ilp32
-        # rv32ia/ilp32;@march=rv32ia@mabi=ilp32
-        # rv32im/ilp32;@march=rv32im@mabi=ilp32
-        # rv32if/ilp32f;@march=rv32if@mabi=ilp32f
-        # rv32ifd/ilp32d;@march=rv32ifd@mabi=ilp32d
-        # rv32iaf/ilp32f;@march=rv32iaf@mabi=ilp32f
-        # rv32iafd/ilp32d;@march=rv32iafd@mabi=ilp32d
-        # rv32imf/ilp32f;@march=rv32imf@mabi=ilp32f
-        # rv32imfd/ilp32d;@march=rv32imfd@mabi=ilp32d
-        # rv32iac/ilp32;@march=rv32iac@mabi=ilp32
-        # rv32imac/ilp32;@march=rv32imac@mabi=ilp32
-        # rv32imafc/ilp32f;@march=rv32imafc@mabi=ilp32f
-        # rv32imafdc/ilp32d;@march=rv32imafdc@mabi=ilp32d
-        # rv64i/lp64;@march=rv64i@mabi=lp64
-        # rv64ia/lp64;@march=rv64ia@mabi=lp64
-        # rv64im/lp64;@march=rv64im@mabi=lp64
-        # rv64if/lp64f;@march=rv64if@mabi=lp64f
-        # rv64ifd/lp64d;@march=rv64ifd@mabi=lp64d
-        # rv64iaf/lp64f;@march=rv64iaf@mabi=lp64f
-        # rv64iafd/lp64d;@march=rv64iafd@mabi=lp64d
-        # rv64imf/lp64f;@march=rv64imf@mabi=lp64f
-        # rv64iac/lp64;@march=rv64iac@mabi=lp64
-        # rv64imac/lp64;@march=rv64imac@mabi=lp64
-        # rv64imafc/lp64f;@march=rv64imafc@mabi=lp64f
-
-        # https://packages.debian.org/stable/devel/gcc-riscv64-unknown-elf
-        # https://packages.debian.org/source/trixie/gcc-riscv64-unknown-elf
-        # http://deb.debian.org/debian/pool/main/g/gcc-riscv64-unknown-elf/gcc-riscv64-unknown-elf_19.tar.xz
-        # debian/patches/0002-Add-more-multi-lib-for-rv32-and-rv64.patch
-
-        # (14.2.0+19)
-        # ./multilib-generator rv32e-ilp32e--c rv32ea-ilp32e--m rv32em-ilp32e--c rv32eac-ilp32e-- rv32emac-ilp32e-- rv32i-ilp32--c rv32ia-ilp32--m rv32im-ilp32--c rv32if-ilp32f-rv32ifd-c rv32iaf-ilp32f-rv32imaf,rv32iafc-d rv32imf-ilp32f-rv32imfd-c rv32iac-ilp32-- rv32imac-ilp32-- rv32imafc-ilp32f-rv32imafdc- rv32ifd-ilp32d--c rv32imfd-ilp32d--c rv32iafd-ilp32d-rv32imafd,rv32iafdc- rv32imafdc-ilp32d-- rv64i-lp64--c rv64ia-lp64--m rv64im-lp64--c rv64if-lp64f-rv64ifd-c rv64iaf-lp64f-rv64imaf,rv64iafc-d rv64imf-lp64f-rv64imfd-c rv64iac-lp64-- rv64imac-lp64-- rv64imafc-lp64f-rv64imafdc- rv64ifd-lp64d--m,c rv64iafd-lp64d-rv64imafd,rv64iafdc- rv64imafdc-lp64d--
-
-        # Default rv32imac-ilp32--
-        XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
-          rv32e-ilp32e-- \
-          rv32ec-ilp32e-- \
-          rv32ea-ilp32e--m \
-          rv32em-ilp32e--c \
-          rv32eac-ilp32e-- \
-          rv32emac-ilp32e-- \
-          \
-          rv32i-ilp32--c \
-          rv32ia-ilp32--m \
-          rv32im-ilp32-- \
-          rv32imc-ilp32-- \
-          rv32if-ilp32f-rv32ifd-c \
-          rv32iaf-ilp32f-rv32imaf,rv32iafc-d \
-          rv32imf-ilp32f-rv32imfd-c \
-          rv32iac-ilp32-- \
-          rv32imac-ilp32-- \
-          rv32imafc-ilp32f-rv32imafdc- \
-          rv32ifd-ilp32d--c \
-          rv32imfd-ilp32d--c \
-          rv32iafd-ilp32d-rv32imafd,rv32iafdc- \
-          rv32imafdc-ilp32d-- \
-          \
-          rv64i-lp64--c \
-          rv64ia-lp64--m \
-          rv64im-lp64--c \
-          rv64if-lp64f-rv64ifd-c \
-          rv64iaf-lp64f-rv64imaf,rv64iafc-d \
-          rv64imf-lp64f-rv64imfd-c \
-          rv64iac-lp64-- \
-          rv64imac-lp64-- \
-          rv64imafc-lp64f-rv64imafdc- \
-          rv64ifd-lp64d--m,c \
-          rv64iafd-lp64d-rv64imafd,rv64iafdc- \
-          rv64imafdc-lp64d-- \
-        "}
-        echo
-        echo "Use Debian multi-libs + rv32ec + rv32imc: ${XBB_GCC_MULTILIB_LIST}"
-      else
-        # Short list used during development to save time.
-        XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
-          rv32emac-ilp32e-- \
-          rv32imac-ilp32-- \
-          rv64imac-lp64-- \
-        "}
-      fi
-    fi
+    set_multilib_list
 
     # Starting with GCC 15, no more cross patches.
     if [ "${XBB_HOST_PLATFORM}" == "darwin" ]
@@ -517,7 +520,8 @@ function application_build_versioned_components()
             rv64if-lp64f-rv64ifd-c \
             rv64iaf-lp64f-rv64imaf,rv64iafc-d \
             rv64imf-lp64f-rv64imfd-c \
-            rv64iac-lp64-- rv64imac-lp64-- \
+            rv64iac-lp64-- \
+            rv64imac-lp64-- \
             rv64imafc-lp64f-rv64imafdc- \
             rv64ifd-lp64d--m,c \
             rv64iafd-lp64d-rv64imafd,rv64iafdc- \
@@ -535,96 +539,7 @@ function application_build_versioned_components()
         fi
       fi
     else
-      # Releases from 14.2.*-3 up (December 2024) use the Debian list,
-      # with two more combinations:
-      # - rv32ec-ilp32e
-      # - rv32imc-ilp32
-
-      if [ "${XBB_APPLICATION_WITHOUT_MULTILIB:-""}" != "y" ]
-      then
-        if [ "${XBB_IS_DEVELOPMENT}" != "y" ]
-        then
-          # --with-arch=rv64imafdc
-          # Debian 12 $ riscv64-unknown-elf-gcc -print-multi-lib
-          # rv32e/ilp32e;@march=rv32e@mabi=ilp32e
-          # rv32ea/ilp32e;@march=rv32ea@mabi=ilp32e
-          # rv32em/ilp32e;@march=rv32em@mabi=ilp32e
-          # rv32eac/ilp32e;@march=rv32eac@mabi=ilp32e
-          # rv32emac/ilp32e;@march=rv32emac@mabi=ilp32e
-          # rv32i/ilp32;@march=rv32i@mabi=ilp32
-          # rv32ia/ilp32;@march=rv32ia@mabi=ilp32
-          # rv32im/ilp32;@march=rv32im@mabi=ilp32
-          # rv32if/ilp32f;@march=rv32if@mabi=ilp32f
-          # rv32ifd/ilp32d;@march=rv32ifd@mabi=ilp32d
-          # rv32iaf/ilp32f;@march=rv32iaf@mabi=ilp32f
-          # rv32iafd/ilp32d;@march=rv32iafd@mabi=ilp32d
-          # rv32imf/ilp32f;@march=rv32imf@mabi=ilp32f
-          # rv32imfd/ilp32d;@march=rv32imfd@mabi=ilp32d
-          # rv32iac/ilp32;@march=rv32iac@mabi=ilp32
-          # rv32imac/ilp32;@march=rv32imac@mabi=ilp32
-          # rv32imafc/ilp32f;@march=rv32imafc@mabi=ilp32f
-          # rv32imafdc/ilp32d;@march=rv32imafdc@mabi=ilp32d
-          # rv64i/lp64;@march=rv64i@mabi=lp64
-          # rv64ia/lp64;@march=rv64ia@mabi=lp64
-          # rv64im/lp64;@march=rv64im@mabi=lp64
-          # rv64if/lp64f;@march=rv64if@mabi=lp64f
-          # rv64ifd/lp64d;@march=rv64ifd@mabi=lp64d
-          # rv64iaf/lp64f;@march=rv64iaf@mabi=lp64f
-          # rv64iafd/lp64d;@march=rv64iafd@mabi=lp64d
-          # rv64imf/lp64f;@march=rv64imf@mabi=lp64f
-          # rv64iac/lp64;@march=rv64iac@mabi=lp64
-          # rv64imac/lp64;@march=rv64imac@mabi=lp64
-          # rv64imafc/lp64f;@march=rv64imafc@mabi=lp64f
-
-          # ./multilib-generator rv32e-ilp32e--c rv32ea-ilp32e--m rv32em-ilp32e--c rv32eac-ilp32e-- rv32emac-ilp32e-- rv32i-ilp32--c rv32ia-ilp32--m rv32im-ilp32--c rv32if-ilp32f-rv32ifd-c rv32iaf-ilp32f-rv32imaf,rv32iafc-d rv32imf-ilp32f-rv32imfd-c rv32iac-ilp32-- rv32imac-ilp32-- rv32imafc-ilp32f-rv32imafdc- rv32ifd-ilp32d--c rv32imfd-ilp32d--c rv32iafd-ilp32d-rv32imafd,rv32iafdc- rv32imafdc-ilp32d-- rv64i-lp64--c rv64ia-lp64--m rv64im-lp64--c rv64if-lp64f-rv64ifd-c rv64iaf-lp64f-rv64imaf,rv64iafc-d rv64imf-lp64f-rv64imfd-c rv64iac-lp64-- rv64imac-lp64-- rv64imafc-lp64f-rv64imafdc- rv64ifd-lp64d--m,c rv64iafd-lp64d-rv64imafd,rv64iafdc- rv64imafdc-lp64d--
-
-          # Default rv32imac-ilp32--
-          XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
-            rv32e-ilp32e-- \
-            rv32ec-ilp32e-- \
-            rv32ea-ilp32e--m \
-            rv32em-ilp32e--c \
-            rv32eac-ilp32e-- \
-            rv32emac-ilp32e-- \
-            \
-            rv32i-ilp32--c \
-            rv32ia-ilp32--m \
-            rv32im-ilp32-- \
-            rv32imc-ilp32-- \
-            rv32if-ilp32f-rv32ifd-c \
-            rv32iaf-ilp32f-rv32imaf,rv32iafc-d \
-            rv32imf-ilp32f-rv32imfd-c \
-            rv32iac-ilp32-- \
-            rv32imac-ilp32-- \
-            rv32imafc-ilp32f-rv32imafdc- \
-            rv32ifd-ilp32d--c \
-            rv32imfd-ilp32d--c \
-            rv32iafd-ilp32d-rv32imafd,rv32iafdc- \
-            rv32imafdc-ilp32d-- \
-            \
-            rv64i-lp64--c \
-            rv64ia-lp64--m \
-            rv64im-lp64--c \
-            rv64if-lp64f-rv64ifd-c \
-            rv64iaf-lp64f-rv64imaf,rv64iafc-d \
-            rv64imf-lp64f-rv64imfd-c \
-            rv64iac-lp64-- rv64imac-lp64-- \
-            rv64imafc-lp64f-rv64imafdc- \
-            rv64ifd-lp64d--m,c \
-            rv64iafd-lp64d-rv64imafd,rv64iafdc- \
-            rv64imafdc-lp64d-- \
-          "}
-          echo
-          echo "Use Debian multi-libs + rv32ec + rv32imc: ${XBB_GCC_MULTILIB_LIST}"
-        else
-          # Short list used during development to save time.
-          XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
-            rv32emac-ilp32e-- \
-            rv32imac-ilp32-- \
-            rv64imac-lp64-- \
-          "}
-        fi
-      fi
+      set_multilib_list
     fi
 
     # -------------------------------------------------------------------------
