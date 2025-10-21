@@ -3,8 +3,17 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2025-10-21
+
+* v14.3.0-1 prepared
+* c4e4c82 website updates
+* 3c357e7 package.json bump deps
+* ae97ef9 versioning.sh debian 13 -print-multi-lib
+* aae7032 package.json bump gcc deps
+
 ## 2025-10-20
 
+* dbd2cf4 prepare v15.2.0-1
 * v15.2.0-1 prepared
 
 ## 2025-10-19

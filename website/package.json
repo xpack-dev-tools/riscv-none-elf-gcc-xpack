@@ -77,12 +77,12 @@
     "branding": "riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ",
     "isGccToolchain": "true",
     "showDeprecatedRiscvGccAnalytics": "true",
-    "gdbVersionMajor": "15",
-    "gdbVersionMinor": "1",
+    "gdbVersionMajor": "16",
+    "gdbVersionMinor": "3",
     "binutilsVersionMajor": "2",
-    "binutilsVersionMinor": "43.1",
-    "pythonVersion": "3.12.2",
-    "newlibVersion": "4.4.0",
+    "binutilsVersionMinor": "45",
+    "pythonVersion": "3.13.7",
+    "newlibVersion": "4.5.0",
     "shareOnTwitter": "true"
   },
   "engines": {
