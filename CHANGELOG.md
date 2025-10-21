@@ -5,6 +5,8 @@ Entries in this file are in reverse chronological order.
 
 ## 2025-10-21
 
+* v12.5.0-1 prepared
+* fc2220a prepare v13.4.0-1
 * v13.4.0-1 prepared
 * b0c6128 versioning.sh: group defs in set_multilib_list()
 * 77ff974 prepare v14.3.0-1
