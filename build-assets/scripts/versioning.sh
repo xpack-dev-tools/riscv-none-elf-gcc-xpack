@@ -106,10 +106,8 @@ function set_multilib_list() {
       # Short list used during development to save time.
       # Keep it in sync with the tested combinations in `gcc-cross.sh`.
       XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
-        rv32e-ilp32e-- \
-        rv32emac-ilp32e-- \
-        rv32i-ilp32-- \
-        rv32imac-ilp32-- \
+        rv32e-ilp32e-rv32ema-c \
+        rv32i-ilp32-rv32ima-c \
         rv64i-lp64-- \
         rv64imafdc-lp64d-- \
       "}
