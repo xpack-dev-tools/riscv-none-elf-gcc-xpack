@@ -13,7 +13,7 @@
   "xpack": {
     "minimumXpmRequired": "0.20.5",
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "github:xpack-dev-tools/xbb-helper-xpack#v4.3.12"
+      "@xpack-dev-tools/xbb-helper": "github:xpack-dev-tools/xbb-helper-xpack#v4.3.13"
     },
     "properties": {
       "platforms": "all",
@@ -172,7 +172,7 @@
           "common-docker"
         ],
         "devDependencies": {
-          "@xpack-dev-tools/gcc": "14.2.0-2.1",
+          "@xpack-dev-tools/gcc": "15.2.0-1.1",
           "@xpack-dev-tools/patchelf": "0.18.0-1.1"
         },
         "properties": {
@@ -203,8 +203,8 @@
           "common-docker"
         ],
         "devDependencies": {
-          "@xpack-dev-tools/gcc": "14.2.0-2.1",
-          "@xpack-dev-tools/mingw-w64-gcc": "14.2.0-1.1",
+          "@xpack-dev-tools/gcc": "15.2.0-1.1",
+          "@xpack-dev-tools/mingw-w64-gcc": "15.2.0-2.1",
           "@xpack-dev-tools/wine": "10.0.0-1.1"
         },
         "properties": {
