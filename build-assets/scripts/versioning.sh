@@ -104,10 +104,14 @@ function set_multilib_list() {
       echo "Use Debian multi-libs + rv32ec + rv32imc: ${XBB_GCC_MULTILIB_LIST}"
     else
       # Short list used during development to save time.
+      # Keep it in sync with the tested combinations in `gcc-cross.sh`.
       XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
+        rv32e-ilp32e-- \
         rv32emac-ilp32e-- \
+        rv32i-ilp32-- \
         rv32imac-ilp32-- \
-        rv64imac-lp64-- \
+        rv64i-lp64-- \
+        rv64imafdc-lp64d-- \
       "}
     fi
   fi
