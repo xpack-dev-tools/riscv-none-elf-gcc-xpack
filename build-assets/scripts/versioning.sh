@@ -76,8 +76,11 @@ function application_build_versioned_components()
       if [ "${XBB_IS_DEVELOPMENT}" != "y" ]
       then
 
-        # --with-arch=rv64imafdc
-        # Debian 12 $ riscv64-unknown-elf-gcc -print-multi-lib
+        # $ docker run -it debian:13
+        # $ apt-get update
+        # $ apt-get install -y gcc-riscv64-unknown-elf
+        # $ riscv64-unknown-elf-gcc -print-multi-lib
+        # .; (--with-arch=rv64imafdc)
         # rv32e/ilp32e;@march=rv32e@mabi=ilp32e
         # rv32ea/ilp32e;@march=rv32ea@mabi=ilp32e
         # rv32em/ilp32e;@march=rv32em@mabi=ilp32e
