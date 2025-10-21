@@ -38,7 +38,7 @@ function HomepageHeader() {
         </span>
         </p>
         <div className={styles.installWithCopy}>
-          <InstallWithCopy>xpm install @xpack-dev-tools/riscv-none-elf-gcc@14.3.0-1.1 --verbose</InstallWithCopy>
+          <InstallWithCopy>xpm install @xpack-dev-tools/riscv-none-elf-gcc@13.4.0-1.1 --verbose</InstallWithCopy>
         </div>
       </div>
     </header>
