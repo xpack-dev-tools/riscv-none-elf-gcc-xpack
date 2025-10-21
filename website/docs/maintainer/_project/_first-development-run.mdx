@@ -5,7 +5,12 @@ import FirstDevelopmentRunGCC from '../_common/_first-development-run-gcc.mdx';
 
 <FirstDevelopmentRunGCC />
 
-### XBB_APPLICATION_WITHOUT_MULTILIB
+### Simplified multilibs
 
-Since building the multilibs takes a long time, do a first run with the `XBB_APPLICATION_WITHOUT_MULTILIB` environment variable set to `"y"`
-to skip the multilibs build (in `build-assets/scripts/application.sh`).
+Since building the full multilibs takes a long time,
+development builds use a simplified multilibs configuration
+with only essential libraries.
+
+It is also possible to fully disable multilibs using the
+`XBB_APPLICATION_WITHOUT_MULTILIB` environment variable set to `"y"`.
+
