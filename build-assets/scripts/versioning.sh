@@ -108,7 +108,7 @@ function set_multilib_list() {
       XBB_GCC_MULTILIB_LIST=${XBB_APPLICATION_GCC_MULTILIB_LIST:-"\
         rv32e-ilp32e-rv32ema-c \
         rv32i-ilp32-rv32ima-c \
-        rv64i-lp64-- \
+        rv64i-lp64--c \
         rv64imafdc-lp64d-- \
       "}
     fi
