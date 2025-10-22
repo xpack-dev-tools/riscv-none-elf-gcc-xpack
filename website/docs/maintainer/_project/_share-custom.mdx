@@ -4,6 +4,7 @@
 import CodeBlock from '@theme/CodeBlock';
 
 import customField from '@site/src/libs/customField';
+import versionMajor from '@site/src/libs/versionMajor';
 
 ## Announce to the RISC-V community
 
@@ -19,7 +20,7 @@ Version ${ customField('upstreamVersion') }-${ customField('xpackSubversion') } 
 
 - https://xpack-dev-tools.github.io/riscv-none-elf-gcc-xpack/blog/YYYY/MM/DD/riscv-none-elf-gcc-vNN-N-N-N-released/
 
-Updates for the previous versions (13.3, 12.4 & 11.5) were also released.
+Updates for the previous versions (${versionMajor() - 1}.3, ${versionMajor() - 2}.4 & ${versionMajor() - 3}.5) were also released.
 `} </CodeBlock>
 
 Update the link to the actual blog post.
