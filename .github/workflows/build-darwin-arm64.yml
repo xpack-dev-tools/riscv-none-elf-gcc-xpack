@@ -69,7 +69,7 @@ jobs:
   darwin-arm64-build:
     name: 'darwin-arm64 riscv-none-elf-gcc ${{github.event.inputs.version}} build'
     timeout-minutes: 2880 # 2 days
-    runs-on: macos-15
+    runs-on: [self-hosted, macos, apple]
     env:
       XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET: '11.0'
     steps:
@@ -162,6 +162,10 @@ jobs:
           tag: 'test'
           token: ${{secrets.PUBLISH_TOKEN}}
 
+      - name: 'Rename working area'
+        # For just in case absolute paths remain unprocessed.
+        run: mv -v build-assets/build build-assets/build-$(date -u +%Y%m%d-%H%M%S)
+
   darwin-arm64-test:
     name: 'darwin-arm64 riscv-none-elf-gcc ${{github.event.inputs.version}} test'
     # https://github.com/actions/runner-images/blob/main/images/macos/macos-15-Readme.md
@@ -176,6 +180,7 @@ jobs:
           df -gH /
           ls -lA /Library/Developer/CommandLineTools/SDKs || true
           ls -lA /Applications
+          sudo xcode-select --switch /Applications/Xcode_16.4.app
           xcode-select --print-path
           xcodebuild -version || true
           pkgutil --pkg-info=com.apple.pkg.CLTools_Executables || true

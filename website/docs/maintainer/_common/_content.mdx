@@ -154,6 +154,19 @@ triggered via the VS Code graphical interface, utilising the
 
 <ProjectPatches/>
 
+### Restart the Docker daemons
+
+If, for any reason, the Docker builds need to be cancelled, it is very
+likely that some processes will continue to execute in the background.
+
+To completely terminate them, and ensure that Docker executes
+from a clean slate, restart the Docker daemons on all GNU/Linux
+machines:
+
+```sh
+sudo systemctl restart docker
+```
+
 ### Verify if both projects are pushed
 
 Verify that both the **current project** and the **helper** are
@@ -330,7 +343,71 @@ place them in the XBB cache (`Work/cache`) and restart the build.
 
 ## Execute the production builds
 
-The automation is provided by GitHub Actions on GitHub-hosted runners.
+The automation is provided by GitHub Actions and three self-hosted runners
+(the GitHub hosted runners do not have the necessary resources).
+
+### Start the self-hosted runners
+
+If the runners have expired (more than 2 weeks since last use), execute the
+`github-runner-configure.sh` script to reconfigure them. This script
+is available in the `xbb-helper` and
+requires `GITHUB_API_XPACK_DEV_TOOLS_RUNNERS_TOKEN` to be present.
+
+- On the development machine (`wksi`) open
+SSH sessions to the build machines (`xbbli`, `xbbmi`, `xbbma`, `ampere`):
+
+```sh
+caffeinate ssh xbbli
+caffeinate ssh xbbmi
+caffeinate ssh xbbma
+caffeinate ssh ampere
+```
+
+Create a `screen` session, to provide a persistent standard output for
+the runners:
+
+```sh
+screen -S ga
+```
+
+To exit it, use `# Ctrl-a Ctrl-d`.
+
+For `xbbli` & `ampere`, which have additional memory, start two runners:
+
+```sh
+~/actions-runners/xpack-dev-tools/1/run.sh &
+~/actions-runners/xpack-dev-tools/2/run.sh &
+```
+
+For the macOS x64 runners, ensure the deployment target is defined:
+
+```sh
+unset WORK_FOLDER_PATH
+export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET="11.0"
+~/actions-runners/xpack-dev-tools/run.sh &
+```
+
+On all other machines, start the runner with:
+
+```sh
+~/actions-runners/xpack-dev-tools/run.sh &
+```
+
+To check the status of the runners locally:
+
+```sh
+ps -a | grep 'Runner.Listener'
+```
+
+To terminate them:
+
+```sh
+killall Runner.Listener
+```
+
+### Check the status of the runners
+
+The status of all self-hosted runners is available at the [GitHub Runners](https://github.com/organizations/xpack-dev-tools/settings/actions/runners) page.
 
 ### Publish the helper
 
@@ -342,6 +419,49 @@ In `templates/_xpack-dev-tools/build-assets/package-merge-liquid.json`, update t
 to `"@xpack-dev-tools/xbb-helper":`.
 
 <CommonGenerateTopCommons />
+
+### Check for disk space
+
+Verify that the build machines have sufficient free space and perform
+cleanup operations as necessary:
+
+```sh
+xpm run check-space -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
+```
+
+This is equivalent to executing a `df` command.
+
+<Tabs groupId="operating-systems">
+
+<TabItem value="macos" label="macOS">
+
+```
+df -gH /
+```
+
+</TabItem>
+
+<TabItem value="linux" label="GNU/Linux">
+
+```sh
+df -BG -H /
+```
+
+</TabItem>
+
+</Tabs>
+
+To free the space utilised by all previous builds of all `xpack-dev-tools` packages:
+
+```sh
+xpm run clear-all-projects-builds -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
+```
+
+This is equivalent to executing a comprehensive `rm` to remove the `build` folders:
+
+```sh
+rm -rf ~/Work/xpack-dev-tools/*/build-assets/build
+```
 
 ### Commit and push
 
@@ -438,11 +558,6 @@ git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
 xpm run test-pre-release -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
 ```
-
-:::caution
-Since the builds were performed on the latest GitHub macOS runners,
-it is strongly recommended to also execute the tests on an older macOS 11 machine.
-:::
 
 For additional tests, on each platform,
 download the archive from
@@ -565,6 +680,19 @@ The test results are available from the
 
 - Navigate to https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/
 - Remove the test binaries
+
+### Clean the work area
+
+Execute the **trigger-workflow-deep-clean** xpm action:
+
+```sh
+xpm run trigger-workflow-deep-clean -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
+```
+
+This will remove the build folders on all self-hosted runners.
+
+The results are available from the
+[GitHub Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions) page.
 
 <CommonCloseOpenIssues />
 

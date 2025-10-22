@@ -69,7 +69,7 @@ jobs:
   win32-x64-build:
     name: 'win32-x64 riscv-none-elf-gcc ${{github.event.inputs.version}} build'
     timeout-minutes: 2880 # 2 days
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, linux, x64, xbbliw]
     defaults:
       run:
         shell: bash
@@ -95,6 +95,11 @@ jobs:
           echo "$(which node): $(node --version)"
           echo "$(which npm): $(npm --version)"
           echo "$(which xpm): $(xpm --version)"
+
+      - name: 'Clean working area' # Mandatory for self-hosted runners.
+        run: |
+          chmod -Rf a+w * || true
+          rm -rf * .git*
 
       - name: 'Checkout project'
         uses: actions/checkout@v1 # v1 for old Git
@@ -139,6 +144,10 @@ jobs:
           repo: 'pre-releases'
           tag: 'test'
           token: ${{secrets.PUBLISH_TOKEN}}
+
+      - name: 'Rename working area'
+        # For just in case absolute paths remain unprocessed.
+        run: echo mv -v build-assets/build build-assets/build-$(date -u +%Y%m%d-%H%M%S)
 
   win32-x64-test:
     name: 'win32-x64 riscv-none-elf-gcc ${{github.event.inputs.version}} test'
