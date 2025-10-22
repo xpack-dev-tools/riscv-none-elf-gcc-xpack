@@ -114,10 +114,6 @@ jobs:
 
       - name: 'Remove Homebrew'
         uses: xpack/remove-homebrew-action@v1
-      - name: 'Clean working area' # Mandatory for self-hosted runners.
-        run: |
-          chmod -Rf a+w * || true
-          rm -rf * .git*
 
       # https://github.com/actions/checkout
       - name: 'Checkout project'
@@ -164,11 +160,6 @@ jobs:
 
       - name: 'Remove Homebrew'
         uses: xpack/remove-homebrew-action@v1
-
-      - name: 'Clean working area' # Mandatory for self-hosted runners.
-        run: |
-          chmod -Rf a+w * || true
-          rm -rf * .git*
 
       # https://github.com/actions/checkout
       - name: 'Checkout project'

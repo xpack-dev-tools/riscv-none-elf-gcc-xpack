@@ -108,7 +108,7 @@
     "upstreamDescriptiveName": "GNU RISC-V Embedded GCC",
     "permalinkName": "riscv-none-elf-gcc",
     "skipCiTests": "true",
-    "useSelfHostedRunners": "true"
+    "useSelfHostedRunners": "false"
   },
   "engines": {
     "node": " >=20.0"

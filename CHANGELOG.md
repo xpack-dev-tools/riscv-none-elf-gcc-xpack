@@ -3,8 +3,21 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2025-10-22
+
+* v12.5.0-1 prepared
+* 210a74b website update
+* 77c3b63 website: update folder hierarchies
+* 2de7111 website: update development durations
+* 46e881d versioning.sh update development multilibs
+* a08764b website update
+
 ## 2025-10-21
 
+* 5ea1290 versioning.sh update development multilibs
+* ce5238c versioning.sh update development multilibs
+* 5b8b231 application.sh enable multilibs
+* bd4fc2d prepare v12.5.0-1
 * v12.5.0-1 prepared
 * fc2220a prepare v13.4.0-1
 * v13.4.0-1 prepared
