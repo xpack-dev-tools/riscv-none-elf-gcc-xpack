@@ -31,6 +31,8 @@ import customField from '@site/src/libs/customField';
 │   ├── riscv-none-elf-gdb-py3
 │   ├── riscv-none-elf-gfortran
 │   ├── riscv-none-elf-gprof
+│   ├── riscv-none-elf-gstack
+│   ├── riscv-none-elf-gstack-py3
 │   ├── riscv-none-elf-ld
 │   ├── riscv-none-elf-ld.bfd
 │   ├── riscv-none-elf-lto-dump
@@ -51,35 +53,37 @@ import customField from '@site/src/libs/customField';
 │   ├── gcc
 │   ├── libcc1.0.so
 │   ├── libcc1.so -> libcc1.0.so
-│   └── python3.12
+│   └── python3.13
 ├── libexec
 │   ├── gcc
 │   ├── libbz2.1.0.8.dylib
 │   ├── libc++.1.0.dylib
 │   ├── libc++abi.1.0.dylib
-│   ├── libcrypt.2.dylib
 │   ├── libcrypto.3.dylib
-│   ├── libexpat.1.9.2.dylib
-│   ├── libexpat.1.dylib -> libexpat.1.9.2.dylib
+│   ├── libexpat.1.11.1.dylib
+│   ├── libexpat.1.dylib -> libexpat.1.11.1.dylib
 │   ├── libffi.8.dylib
 │   ├── libgmp.10.dylib
 │   ├── libiconv.2.dylib
 │   ├── libisl.23.dylib
 │   ├── liblzma.5.dylib
 │   ├── libmpc.3.dylib
+│   ├── libmpdec.4.0.1.dylib
+│   ├── libmpdec.4.dylib -> libmpdec.4.0.1.dylib
 │   ├── libmpfr.6.dylib
-│   ├── libncurses.6.dylib
-│   ├── libpanel.6.dylib
-│   ├── libpython3.12.dylib
-│   ├── libreadline.8.2.dylib
-│   ├── libreadline.8.dylib -> libreadline.8.2.dylib
-│   ├── libsqlite3.0.dylib
+│   ├── libncursesw.6.dylib
+│   ├── libpanelw.6.dylib
+│   ├── libpython3.13.dylib
+│   ├── libreadline.8.3.dylib
+│   ├── libreadline.8.dylib -> libreadline.8.3.dylib
+│   ├── libsqlite3.3.50.4.dylib
+│   ├── libsqlite3.dylib -> libsqlite3.3.50.4.dylib
 │   ├── libssl.3.dylib
 │   ├── libunwind.1.0.dylib
 │   ├── libz.1.3.1.dylib
 │   ├── libz.1.dylib -> libz.1.3.1.dylib
-│   ├── libzstd.1.5.6.dylib
-│   └── libzstd.1.dylib -> libzstd.1.5.6.dylib
+│   ├── libzstd.1.5.7.dylib
+│   └── libzstd.1.dylib -> libzstd.1.5.7.dylib
 ├── riscv-none-elf
 │   ├── bin
 │   ├── include
@@ -88,5 +92,5 @@ import customField from '@site/src/libs/customField';
 └── share
     └── gcc-${ customField('upstreamVersion') }
 
-19 directories, 62 files
+19 directories, 66 files
 `} </CodeBlock>

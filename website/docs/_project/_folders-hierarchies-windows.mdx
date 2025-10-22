@@ -15,11 +15,11 @@ Volume serial number is B02D-925C
 │   ├── libgmp-10.dll
 │   ├── libmpc-3.dll
 │   ├── libmpfr-6.dll
+│   ├── libncursesw6.dll
 │   ├── libstdc++-6.dll
-│   ├── libwinpthread-1.dll
 │   ├── libzstd.dll
-│   ├── python312.dll
-│   ├── python312.zip
+│   ├── python313.dll
+│   ├── python313.zip
 │   ├── riscv-none-elf-addr2line.exe
 │   ├── riscv-none-elf-ar.exe
 │   ├── riscv-none-elf-as.exe
@@ -42,6 +42,8 @@ Volume serial number is B02D-925C
 │   ├── riscv-none-elf-gdb.exe
 │   ├── riscv-none-elf-gfortran.exe
 │   ├── riscv-none-elf-gprof.exe
+│   ├── riscv-none-elf-gstack
+│   ├── riscv-none-elf-gstack-py3
 │   ├── riscv-none-elf-ld.bfd.exe
 │   ├── riscv-none-elf-ld.exe
 │   ├── riscv-none-elf-lto-dump.exe
@@ -56,16 +58,6 @@ Volume serial number is B02D-925C
 ├── distro-info
 │   └── licenses
 ├── include
-│   ├── curses.h
-│   ├── cursesapp.h
-│   ├── cursesf.h
-│   ├── cursesm.h
-│   ├── cursesp.h
-│   ├── cursesw.h
-│   ├── cursslk.h
-│   ├── eti.h
-│   ├── etip.h
-│   ├── form.h
 │   ├── gdb
 │   ├── gmp.h
 │   ├── gmpxx.h
@@ -75,16 +67,10 @@ Volume serial number is B02D-925C
 │   ├── localcharset.h
 │   ├── lzma
 │   ├── lzma.h
-│   ├── menu.h
 │   ├── mpc.h
 │   ├── mpf2mpfr.h
 │   ├── mpfr.h
-│   ├── ncurses_dll.h
-│   ├── panel.h
-│   ├── term.h
-│   ├── term_entry.h
-│   ├── termcap.h
-│   ├── unctrl.h
+│   ├── ncursesw
 │   ├── zconf.h
 │   ├── zdict.h
 │   ├── zlib.h
@@ -95,24 +81,24 @@ Volume serial number is B02D-925C
 │   ├── cmake
 │   ├── gcc
 │   ├── libcharset.a
-│   ├── libform.a
+│   ├── libformw.a
 │   ├── libgmp.a
 │   ├── libgmpxx.a
 │   ├── libiconv.a
 │   ├── libisl.a
-│   ├── libisl.so.23.3.0-gdb.py
+│   ├── libisl.so.23.4.0-gdb.py
 │   ├── liblzma.a
-│   ├── libmenu.a
+│   ├── libmenuw.a
 │   ├── libmpc.a
 │   ├── libmpfr.a
-│   ├── libncurses++.a
-│   ├── libncurses.a
-│   ├── libpanel.a
+│   ├── libncurses++w.a
+│   ├── libncursesw.a
+│   ├── libpanelw.a
 │   ├── libz.a
 │   ├── libzstd.a
-│   ├── libzstd.so.1.5.6
+│   ├── libzstd.so.1.5.7
 │   ├── pkgconfig
-│   └── texinfo
+│   └── texi2any
 ├── libexec
 │   └── gcc
 ├── riscv-none-elf
@@ -125,7 +111,8 @@ Volume serial number is B02D-925C
     ├── gcc-${ customField('upstreamVersion') }
     ├── info
     ├── man
+    ├── texi2any
     └── texinfo
 
-27 directories, 91 files
+29 directories, 76 files
 `} </CodeBlock>
