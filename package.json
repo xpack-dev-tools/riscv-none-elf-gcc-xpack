@@ -1,6 +1,6 @@
 {
   "name": "@xpack-dev-tools/riscv-none-elf-gcc",
-  "version": "12.5.0-1.1",
+  "version": "13.4.0-1.1.pre",
   "description": "A binary xpm package with the GNU RISC-V Embedded GCC executables",
   "main": "",
   "scripts": {

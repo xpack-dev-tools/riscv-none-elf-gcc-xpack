@@ -5,6 +5,12 @@ Entries in this file are in reverse chronological order.
 
 ## 2025-10-22
 
+* v13.4.0-1 prepared
+* 8855524 _share-custom.mdx update
+* 9545a42 revert deep-clean.yml
+* 16b2ef7 website fix post title
+* 9263fad 12.5.0-1.1
+* d3476a8 CHANGELOG: publish npm v12.5.0-1.1
 * v12.5.0-1.1 published on npmjs.com
 * c709b04 package.json: update URLs for 12.5.0-1.1 release
 * 223fe5f website: blog post release 12.5.0-1.1 published
