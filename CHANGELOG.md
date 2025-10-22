@@ -5,6 +5,11 @@ Entries in this file are in reverse chronological order.
 
 ## 2025-10-22
 
+* v12.5.0-1 released
+* e4f61eb website: update actions durations
+* a9b7993 re-generate commons
+* e2aafee package.json reorder actions
+* 10524f8 prepare v12.5.0-1
 * v12.5.0-1 prepared
 * 210a74b website update
 * 77c3b63 website: update folder hierarchies
