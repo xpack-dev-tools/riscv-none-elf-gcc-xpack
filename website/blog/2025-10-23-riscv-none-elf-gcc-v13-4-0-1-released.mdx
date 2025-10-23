@@ -1,14 +1,14 @@
 ---
 
-title: xPack GNU RISC-V Embedded GCC v12.5.0-1 released
-seo_title: Version 12.5.0-1 released
-description: Version 12.5.0-1 is a new release.
+title: xPack GNU RISC-V Embedded GCC v13.4.0-1 released
+seo_title: Version 13.4.0-1 released
+description: Version 13.4.0-1 is a new release.
 keywords:
   - xpack
   - riscv-none-elf-gcc
   - release
 
-date: 2025-10-22 22:45:19 +0300
+date: 2025-10-23 06:33:18 +0300
 
 authors: ilg-ul
 
@@ -18,16 +18,16 @@ tags:
 
 # ----- Custom properties -----------------------------------------------------
 
-gcc_version: "12.5.0"
+gcc_version: "13.4.0"
 binutils_version: "2.45"
 gdb_version: "16.3"
 newlib_version: "4.5.0"
 python_version: "3.13.7"
 
-version: "12.5.0-1"
+version: "13.4.0-1"
 npm_subversion: "1"
 
-download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v12.5.0-1/
+download_url: https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v13.4.0-1/
 
 ---
 
@@ -43,7 +43,7 @@ import Prerequisites from './_common/_prerequisites-glib-2.28.mdx';
 import DeprecationNotices from './_common/_deprecation-notices-glib-2.28.mdx';
 import DownloadAnalytics from './_common/_download-analytics.mdx';
 
-Version **12.5.0-1.1** is a new release; it follows the GNU GCC release.
+Version **13.4.0-1.1** is a new release; it follows the GNU GCC release.
 
 <!-- truncate -->
 
@@ -80,7 +80,7 @@ The easiest way to install this specific version, is by using **xpm**:
 `xpm install @xpack-dev-tools/riscv-none-elf-gcc@${frontMatter.version}.${frontMatter.npm_subversion} -verbose
 `} </CodeBlock>
 
-Comprehensive instructions for installing **xPack GNU RISC-V Embedded GCC** on different platforms
+Comprehensive instructions for installing **xPack xPack GNU RISC-V Embedded GCC** on different platforms
 can be found in the [Install Guide](/docs/install/).
 
 ## Compliance
@@ -194,20 +194,20 @@ build, not the compiler functionality.
 The SHA-256 hashes for the files are:
 
 ```txt
-47331601bd7c87cf6d0b7090f381b184773e8e55113106cacbc401f4b7c7cd99
-xpack-riscv-none-elf-gcc-12.5.0-1-darwin-arm64.tar.gz
+4b35ba81bbcf3944ca346cd51f81f3628ab6e3207bf813aaf5d1c70f1406f4ab
+xpack-riscv-none-elf-gcc-13.4.0-1-darwin-arm64.tar.gz
 
-a77eab69083b77cb5abfef7335093f16fc08bda569365d4699670de44b85d3d9
-xpack-riscv-none-elf-gcc-12.5.0-1-darwin-x64.tar.gz
+35a036ba11338b010ea8143dc91bebdefb10daf9c189befd442ac74c2f568847
+xpack-riscv-none-elf-gcc-13.4.0-1-darwin-x64.tar.gz
 
-d508790fc3acc5ee801b9e63fd0f5aa622ec9d95472157e65e7c59861fb8f053
-xpack-riscv-none-elf-gcc-12.5.0-1-linux-arm64.tar.gz
+ecb74ef00346147bb0d9b78fed6249122473911af1f9b518b873580b8d7a749a
+xpack-riscv-none-elf-gcc-13.4.0-1-linux-arm64.tar.gz
 
-624fae17fb5dfaa0d8a9f8b345c9831cca9e06322a34254342a19eea61915e82
-xpack-riscv-none-elf-gcc-12.5.0-1-linux-x64.tar.gz
+2f669492e131906f21641de3ed5cb808d17eff2716b551c73651fe6650565a5f
+xpack-riscv-none-elf-gcc-13.4.0-1-linux-x64.tar.gz
 
-e23444e1058bac566f1f19f08fc27c06e3281aa5adc01586b197202fc3e6522b
-xpack-riscv-none-elf-gcc-12.5.0-1-win32-x64.zip
+6246ee0dd83215c0eef2d348c16b4270dcdf876705c81f3848c853c7b3a735b4
+xpack-riscv-none-elf-gcc-13.4.0-1-win32-x64.zip
 
 ```
 
@@ -226,122 +226,6 @@ Folder PATH listing
 Volume serial number is B02D-925C
 ├── README.md
 ├── bin
-│   ├── DLLs
-│   ├── libgcc_s_seh-1.dll
-│   ├── libgmp-10.dll
-│   ├── libmpc-3.dll
-│   ├── libmpfr-6.dll
-│   ├── libncursesw6.dll
-│   ├── libstdc++-6.dll
-│   ├── libzstd.dll
-│   ├── python313.dll
-│   ├── python313.zip
-│   ├── riscv-none-elf-addr2line.exe
-│   ├── riscv-none-elf-ar.exe
-│   ├── riscv-none-elf-as.exe
-│   ├── riscv-none-elf-c++.exe
-│   ├── riscv-none-elf-c++filt.exe
-│   ├── riscv-none-elf-cpp.exe
-│   ├── riscv-none-elf-elfedit.exe
-│   ├── riscv-none-elf-g++.exe
-│   ├── riscv-none-elf-gcc-12.5.0.exe
-│   ├── riscv-none-elf-gcc-ar.exe
-│   ├── riscv-none-elf-gcc-nm.exe
-│   ├── riscv-none-elf-gcc-ranlib.exe
-│   ├── riscv-none-elf-gcc.exe
-│   ├── riscv-none-elf-gcov-dump.exe
-│   ├── riscv-none-elf-gcov-tool.exe
-│   ├── riscv-none-elf-gcov.exe
-│   ├── riscv-none-elf-gdb-add-index
-│   ├── riscv-none-elf-gdb-add-index-py3
-│   ├── riscv-none-elf-gdb-py3.exe
-│   ├── riscv-none-elf-gdb.exe
-│   ├── riscv-none-elf-gfortran.exe
-│   ├── riscv-none-elf-gprof.exe
-│   ├── riscv-none-elf-gstack
-│   ├── riscv-none-elf-gstack-py3
-│   ├── riscv-none-elf-ld.bfd.exe
-│   ├── riscv-none-elf-ld.exe
-│   ├── riscv-none-elf-lto-dump.exe
-│   ├── riscv-none-elf-nm.exe
-│   ├── riscv-none-elf-objcopy.exe
-│   ├── riscv-none-elf-objdump.exe
-│   ├── riscv-none-elf-ranlib.exe
-│   ├── riscv-none-elf-readelf.exe
-│   ├── riscv-none-elf-size.exe
-│   ├── riscv-none-elf-strings.exe
-│   └── riscv-none-elf-strip.exe
-├── distro-info
-│   └── licenses
-├── include
-│   ├── gdb
-│   ├── gmp.h
-│   ├── gmpxx.h
-│   ├── iconv.h
-│   ├── isl
-│   ├── libcharset.h
-│   ├── localcharset.h
-│   ├── lzma
-│   ├── lzma.h
-│   ├── mpc.h
-│   ├── mpf2mpfr.h
-│   ├── mpfr.h
-│   ├── ncursesw
-│   ├── zconf.h
-│   ├── zdict.h
-│   ├── zlib.h
-│   ├── zstd.h
-│   └── zstd_errors.h
-├── lib
-│   ├── bfd-plugins
-│   ├── cmake
-│   ├── gcc
-│   ├── libcharset.a
-│   ├── libformw.a
-│   ├── libgmp.a
-│   ├── libgmpxx.a
-│   ├── libiconv.a
-│   ├── libisl.a
-│   ├── libisl.so.23.4.0-gdb.py
-│   ├── liblzma.a
-│   ├── libmenuw.a
-│   ├── libmpc.a
-│   ├── libmpfr.a
-│   ├── libncurses++w.a
-│   ├── libncursesw.a
-│   ├── libpanelw.a
-│   ├── libz.a
-│   ├── libzstd.a
-│   ├── libzstd.so.1.5.7
-│   ├── pkgconfig
-│   └── texi2any
-├── libexec
-│   └── gcc
-├── riscv-none-elf
-│   ├── bin
-│   ├── include
-│   ├── lib
-│   └── share
-└── share
-    ├── doc
-    ├── gcc-12.5.0
-    ├── info
-    ├── man
-    ├── texi2any
-    └── texinfo
-
-29 directories, 76 files
-`} </CodeBlock>
-
-</TabItem>
-
-<TabItem value="macos" label="macOS">
-
-<CodeBlock language="console"> {
-`$ tree -L 2 ~/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
-/Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
-├── README.md
-├── bin
 │   ├── riscv-none-elf-addr2line
 │   ├── riscv-none-elf-ar
 │   ├── riscv-none-elf-as
@@ -351,102 +235,7 @@ Volume serial number is B02D-925C
 │   ├── riscv-none-elf-elfedit
 │   ├── riscv-none-elf-g++
 │   ├── riscv-none-elf-gcc
-│   ├── riscv-none-elf-gcc-12.5.0
-│   ├── riscv-none-elf-gcc-ar
-│   ├── riscv-none-elf-gcc-nm
-│   ├── riscv-none-elf-gcc-ranlib
-│   ├── riscv-none-elf-gcov
-│   ├── riscv-none-elf-gcov-dump
-│   ├── riscv-none-elf-gcov-tool
-│   ├── riscv-none-elf-gdb
-│   ├── riscv-none-elf-gdb-add-index
-│   ├── riscv-none-elf-gdb-add-index-py3
-│   ├── riscv-none-elf-gdb-py3
-│   ├── riscv-none-elf-gfortran
-│   ├── riscv-none-elf-gprof
-│   ├── riscv-none-elf-gstack
-│   ├── riscv-none-elf-gstack-py3
-│   ├── riscv-none-elf-ld
-│   ├── riscv-none-elf-ld.bfd
-│   ├── riscv-none-elf-lto-dump
-│   ├── riscv-none-elf-nm
-│   ├── riscv-none-elf-objcopy
-│   ├── riscv-none-elf-objdump
-│   ├── riscv-none-elf-ranlib
-│   ├── riscv-none-elf-readelf
-│   ├── riscv-none-elf-size
-│   ├── riscv-none-elf-strings
-│   └── riscv-none-elf-strip
-├── distro-info
-│   └── licenses
-├── include
-│   └── gdb
-├── lib
-│   ├── bfd-plugins
-│   ├── gcc
-│   ├── libcc1.0.so
-│   ├── libcc1.so -> libcc1.0.so
-│   └── python3.13
-├── libexec
-│   ├── gcc
-│   ├── libbz2.1.0.8.dylib
-│   ├── libc++.1.0.dylib
-│   ├── libc++abi.1.0.dylib
-│   ├── libcrypto.3.dylib
-│   ├── libexpat.1.11.1.dylib
-│   ├── libexpat.1.dylib -> libexpat.1.11.1.dylib
-│   ├── libffi.8.dylib
-│   ├── libgmp.10.dylib
-│   ├── libiconv.2.dylib
-│   ├── libisl.23.dylib
-│   ├── liblzma.5.dylib
-│   ├── libmpc.3.dylib
-│   ├── libmpdec.4.0.1.dylib
-│   ├── libmpdec.4.dylib -> libmpdec.4.0.1.dylib
-│   ├── libmpfr.6.dylib
-│   ├── libncursesw.6.dylib
-│   ├── libpanelw.6.dylib
-│   ├── libpython3.13.dylib
-│   ├── libreadline.8.3.dylib
-│   ├── libreadline.8.dylib -> libreadline.8.3.dylib
-│   ├── libsqlite3.3.50.4.dylib
-│   ├── libsqlite3.dylib -> libsqlite3.3.50.4.dylib
-│   ├── libssl.3.dylib
-│   ├── libunwind.1.0.dylib
-│   ├── libz.1.3.1.dylib
-│   ├── libz.1.dylib -> libz.1.3.1.dylib
-│   ├── libzstd.1.5.7.dylib
-│   └── libzstd.1.dylib -> libzstd.1.5.7.dylib
-├── riscv-none-elf
-│   ├── bin
-│   ├── include
-│   ├── lib
-│   └── share
-└── share
-    └── gcc-12.5.0
-
-19 directories, 66 files
-`} </CodeBlock>
-
-</TabItem>
-
-<TabItem value="linux" label="GNU/Linux">
-
-<CodeBlock language="console"> {
-`$ tree -L 2 ~/.local/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
-/home/ilg/.local/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
-├── README.md
-├── bin
-│   ├── riscv-none-elf-addr2line
-│   ├── riscv-none-elf-ar
-│   ├── riscv-none-elf-as
-│   ├── riscv-none-elf-c++
-│   ├── riscv-none-elf-c++filt
-│   ├── riscv-none-elf-cpp
-│   ├── riscv-none-elf-elfedit
-│   ├── riscv-none-elf-g++
-│   ├── riscv-none-elf-gcc
-│   ├── riscv-none-elf-gcc-12.5.0
+│   ├── riscv-none-elf-gcc-13.4.0
 │   ├── riscv-none-elf-gcc-ar
 │   ├── riscv-none-elf-gcc-nm
 │   ├── riscv-none-elf-gcc-ranlib
@@ -530,7 +319,209 @@ Volume serial number is B02D-925C
 │   ├── lib
 │   └── share
 └── share
-    └── gcc-12.5.0
+    └── gcc-13.4.0
+
+19 directories, 77 files
+`} </CodeBlock>
+
+</TabItem>
+
+<TabItem value="macos" label="macOS">
+
+<CodeBlock language="console"> {
+`$ tree -L 2 ~/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
+├── bin
+│   ├── riscv-none-elf-addr2line
+│   ├── riscv-none-elf-ar
+│   ├── riscv-none-elf-as
+│   ├── riscv-none-elf-c++
+│   ├── riscv-none-elf-c++filt
+│   ├── riscv-none-elf-cpp
+│   ├── riscv-none-elf-elfedit
+│   ├── riscv-none-elf-g++
+│   ├── riscv-none-elf-gcc
+│   ├── riscv-none-elf-gcc-13.4.0
+│   ├── riscv-none-elf-gcc-ar
+│   ├── riscv-none-elf-gcc-nm
+│   ├── riscv-none-elf-gcc-ranlib
+│   ├── riscv-none-elf-gcov
+│   ├── riscv-none-elf-gcov-dump
+│   ├── riscv-none-elf-gcov-tool
+│   ├── riscv-none-elf-gdb
+│   ├── riscv-none-elf-gdb-add-index
+│   ├── riscv-none-elf-gdb-add-index-py3
+│   ├── riscv-none-elf-gdb-py3
+│   ├── riscv-none-elf-gfortran
+│   ├── riscv-none-elf-gprof
+│   ├── riscv-none-elf-gstack
+│   ├── riscv-none-elf-gstack-py3
+│   ├── riscv-none-elf-ld
+│   ├── riscv-none-elf-ld.bfd
+│   ├── riscv-none-elf-lto-dump
+│   ├── riscv-none-elf-nm
+│   ├── riscv-none-elf-objcopy
+│   ├── riscv-none-elf-objdump
+│   ├── riscv-none-elf-ranlib
+│   ├── riscv-none-elf-readelf
+│   ├── riscv-none-elf-size
+│   ├── riscv-none-elf-strings
+│   └── riscv-none-elf-strip
+├── distro-info
+│   └── licenses
+├── include
+│   └── gdb
+├── lib
+│   ├── bfd-plugins
+│   ├── gcc
+│   ├── libcc1.0.so
+│   ├── libcc1.so -> libcc1.0.so
+│   └── python3.13
+├── libexec
+│   ├── gcc
+│   ├── libbz2.1.0.8.dylib
+│   ├── libc++.1.0.dylib
+│   ├── libc++abi.1.0.dylib
+│   ├── libcrypto.3.dylib
+│   ├── libexpat.1.11.1.dylib
+│   ├── libexpat.1.dylib -> libexpat.1.11.1.dylib
+│   ├── libffi.8.dylib
+│   ├── libgmp.10.dylib
+│   ├── libiconv.2.dylib
+│   ├── libisl.23.dylib
+│   ├── liblzma.5.dylib
+│   ├── libmpc.3.dylib
+│   ├── libmpdec.4.0.1.dylib
+│   ├── libmpdec.4.dylib -> libmpdec.4.0.1.dylib
+│   ├── libmpfr.6.dylib
+│   ├── libncursesw.6.dylib
+│   ├── libpanelw.6.dylib
+│   ├── libpython3.13.dylib
+│   ├── libreadline.8.3.dylib
+│   ├── libreadline.8.dylib -> libreadline.8.3.dylib
+│   ├── libsqlite3.3.50.4.dylib
+│   ├── libsqlite3.dylib -> libsqlite3.3.50.4.dylib
+│   ├── libssl.3.dylib
+│   ├── libunwind.1.0.dylib
+│   ├── libz.1.3.1.dylib
+│   ├── libz.1.dylib -> libz.1.3.1.dylib
+│   ├── libzstd.1.5.7.dylib
+│   └── libzstd.1.dylib -> libzstd.1.5.7.dylib
+├── README.md
+├── riscv-none-elf
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
+└── share
+    └── gcc-13.4.0
+
+19 directories, 66 files
+`} </CodeBlock>
+
+</TabItem>
+
+<TabItem value="linux" label="GNU/Linux">
+
+<CodeBlock language="console"> {
+`$ tree -L 2 ~/.local/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
+/home/ilg/.local/xPacks/\@xpack-dev-tools/riscv-none-elf-gcc/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
+├── README.md
+├── bin
+│   ├── riscv-none-elf-addr2line
+│   ├── riscv-none-elf-ar
+│   ├── riscv-none-elf-as
+│   ├── riscv-none-elf-c++
+│   ├── riscv-none-elf-c++filt
+│   ├── riscv-none-elf-cpp
+│   ├── riscv-none-elf-elfedit
+│   ├── riscv-none-elf-g++
+│   ├── riscv-none-elf-gcc
+│   ├── riscv-none-elf-gcc-13.4.0
+│   ├── riscv-none-elf-gcc-ar
+│   ├── riscv-none-elf-gcc-nm
+│   ├── riscv-none-elf-gcc-ranlib
+│   ├── riscv-none-elf-gcov
+│   ├── riscv-none-elf-gcov-dump
+│   ├── riscv-none-elf-gcov-tool
+│   ├── riscv-none-elf-gdb
+│   ├── riscv-none-elf-gdb-add-index
+│   ├── riscv-none-elf-gdb-add-index-py3
+│   ├── riscv-none-elf-gdb-py3
+│   ├── riscv-none-elf-gfortran
+│   ├── riscv-none-elf-gprof
+│   ├── riscv-none-elf-gstack
+│   ├── riscv-none-elf-gstack-py3
+│   ├── riscv-none-elf-ld
+│   ├── riscv-none-elf-ld.bfd
+│   ├── riscv-none-elf-lto-dump
+│   ├── riscv-none-elf-nm
+│   ├── riscv-none-elf-objcopy
+│   ├── riscv-none-elf-objdump
+│   ├── riscv-none-elf-ranlib
+│   ├── riscv-none-elf-readelf
+│   ├── riscv-none-elf-size
+│   ├── riscv-none-elf-strings
+│   └── riscv-none-elf-strip
+├── distro-info
+│   └── licenses
+├── include
+│   └── gdb
+├── lib
+│   ├── bfd-plugins
+│   ├── gcc
+│   └── python3.13
+├── lib64
+│   ├── libcc1.so -> libcc1.so.0.0.0
+│   ├── libcc1.so.0 -> libcc1.so.0.0.0
+│   └── libcc1.so.0.0.0
+├── libexec
+│   ├── gcc
+│   ├── libcrypto.so.3
+│   ├── libexpat.so.1 -> libexpat.so.1.11.1
+│   ├── libexpat.so.1.11.1
+│   ├── libffi.so.8 -> libffi.so.8.2.0
+│   ├── libffi.so.8.2.0
+│   ├── libfl.so.2 -> libfl.so.2.0.0
+│   ├── libfl.so.2.0.0
+│   ├── libgcc_s.so.1
+│   ├── libgmp.so.10 -> libgmp.so.10.5.0
+│   ├── libgmp.so.10.5.0
+│   ├── libiconv.so.2 -> libiconv.so.2.6.1
+│   ├── libiconv.so.2.6.1
+│   ├── libisl.so.23 -> libisl.so.23.4.0
+│   ├── libisl.so.23.4.0
+│   ├── liblzma.so.5 -> liblzma.so.5.8.1
+│   ├── liblzma.so.5.8.1
+│   ├── libmpc.so.3 -> libmpc.so.3.3.1
+│   ├── libmpc.so.3.3.1
+│   ├── libmpdec.so.4 -> libmpdec.so.4.0.1
+│   ├── libmpdec.so.4.0.1
+│   ├── libmpfr.so.6 -> libmpfr.so.6.2.2
+│   ├── libmpfr.so.6.2.2
+│   ├── libncursesw.so.6 -> libncursesw.so.6.5
+│   ├── libncursesw.so.6.5
+│   ├── libpanelw.so.6 -> libpanelw.so.6.5
+│   ├── libpanelw.so.6.5
+│   ├── libpython3.13.so.1.0
+│   ├── libreadline.so.8 -> libreadline.so.8.3
+│   ├── libreadline.so.8.3
+│   ├── libsqlite3.so -> libsqlite3.so.3.50.4
+│   ├── libsqlite3.so.3.50.4
+│   ├── libssl.so.3
+│   ├── libstdc++.so.6 -> libstdc++.so.6.0.34
+│   ├── libstdc++.so.6.0.34
+│   ├── libz.so.1 -> libz.so.1.3.1
+│   ├── libz.so.1.3.1
+│   ├── libzstd.so.1 -> libzstd.so.1.5.7
+│   └── libzstd.so.1.5.7
+├── riscv-none-elf
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
+└── share
+    └── gcc-13.4.0
 
 19 directories, 77 files
 `} </CodeBlock>
