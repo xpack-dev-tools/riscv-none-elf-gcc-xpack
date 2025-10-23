@@ -5,6 +5,10 @@ Entries in this file are in reverse chronological order.
 
 ## 2025-10-23
 
+* v14.3.0-1 released
+* 723aed4 website: update actions durations
+* 1d41413 website: update folder hierarchies
+* 31fbc98 prepare v13.4.0-1
 * v13.4.0-1 prepared
 * 7a25932 13.4.0-1.1
 * c0d75bd CHANGELOG: publish npm v13.4.0-1.1
