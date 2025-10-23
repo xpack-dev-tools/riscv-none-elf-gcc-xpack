@@ -87,7 +87,7 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 3
-          path: D:\b  # Use short path to avoid MinGW path length issues
+          path: D:\t  # Use short path to avoid MinGW path length issues
 
       - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
         uses: actions/checkout@v5
