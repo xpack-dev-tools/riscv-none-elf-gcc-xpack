@@ -66,13 +66,6 @@ jobs:
           Write-Host "Long Path Support enabled"
         shell: powershell
 
-      - name: 'Create short build path for MinGW compatibility'
-        run: |
-          # Create a very short path for build to avoid MinGW path length issues
-          mkdir D:\t
-          Write-Host "Created short build directory: D:\t"
-        shell: powershell
-
       - name: 'Show environment'
         run: |
           uname -a
@@ -87,18 +80,25 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 3
-          path: D:\t  # Use short path to avoid MinGW path length issues
 
       - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
         uses: actions/checkout@v5
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: D:\t\build-assets\xpacks\@xpack-dev-tools\xbb-helper
+          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{github.event.inputs.helper-git-ref}}
           fetch-depth: 3
 
+      - name: 'Create virtual drive for short paths'
+        run: |
+          # Create virtual drive B: pointing to current directory to shorten paths
+          subst B: ${{ github.workspace }}
+          dir B:\
+          echo "Virtual drive B: created pointing to workspace"
+        shell: cmd
+
       - name: 'Run ${{github.event.inputs.version}} native test'
-        working-directory: D:\t
+        working-directory: B:\
         run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}} --develop
 
 
