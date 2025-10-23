@@ -3,8 +3,15 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2025-10-23
+
+* v13.4.0-1 released
+* abc9bad website: update actions durations
+
 ## 2025-10-22
 
+* e275173 website update
+* d224e2b prepare v13.4.0-1
 * v13.4.0-1 prepared
 * 8855524 _share-custom.mdx update
 * 9545a42 revert deep-clean.yml
