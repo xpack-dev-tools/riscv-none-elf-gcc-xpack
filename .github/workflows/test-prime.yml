@@ -84,6 +84,6 @@ jobs:
           fetch-depth: 3
 
       - name: 'Run ${{github.event.inputs.version}} native test'
-        run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
+        run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}} --develop
 
 
