@@ -5,6 +5,10 @@ Entries in this file are in reverse chronological order.
 
 ## 2025-10-23
 
+* v15.2.0-1.1 published on npmjs.com
+* 1c09110 package.json: update URLs for 15.2.0-1.1 release
+* 933523a website: blog post release 15.2.0-1.1 published
+* 67154c0 CHANGELOG update
 * v15.2.0-1 released
 * b867264 website: update actions durations
 * b99ba98 re-generate workflows
