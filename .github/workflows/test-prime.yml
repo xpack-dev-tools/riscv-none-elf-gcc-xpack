@@ -53,19 +53,13 @@ jobs:
 
   win32-x64-test:
     name: 'win32-x64 riscv-none-elf-gcc ${{github.event.inputs.version}} test 2025'
-    runs-on: windows-2022
+    runs-on: windows-2025
     defaults:
       run:
         # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell
         shell: bash # for --
 
     steps:
-      - name: Enable Long Path Support
-        run: |
-          New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
-          Write-Host "Long Path Support enabled"
-        shell: powershell
-
       - name: 'Show environment'
         run: |
           uname -a
@@ -91,15 +85,12 @@ jobs:
 
       - name: 'Move workspace to short path for MinGW compatibility'
         run: |
-          REM Create short path directory
+          echo Creating D:\t short name folder...
           mkdir D:\t
-          echo Created D:\t directory
 
-          REM Move entire workspace to short path
           echo Moving workspace to D:\t...
           robocopy "%GITHUB_WORKSPACE%" "D:\t" /E /MOVE /NFL /NDL /NJH /NJS /NC /NS
 
-          REM Check if robocopy succeeded (exit codes 0-3 are success for robocopy)
           if %ERRORLEVEL% LEQ 3 (
             echo ✓ Workspace successfully moved to D:\t
             dir D:\t
@@ -111,15 +102,6 @@ jobs:
 
       - name: 'Run ${{github.event.inputs.version}} native test'
         working-directory: D:\t
-        env:
-          # Use short temp paths
-          TMP: D:/tmp
-          TEMP: D:/tmp
-          TMPDIR: D:/tmp
-        run: |
-          # Create temp directory
-          mkdir -p D:/tmp
-          # Run the test from the short path
-          bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}} --develop
-
+        # Run the test from the short path
+        run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
 
