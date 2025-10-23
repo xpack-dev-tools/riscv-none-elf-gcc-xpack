@@ -89,16 +89,37 @@ jobs:
           ref: ${{github.event.inputs.helper-git-ref}}
           fetch-depth: 3
 
-      - name: 'Create virtual drive for short paths'
+      - name: 'Move workspace to short path for MinGW compatibility'
         run: |
-          # Create virtual drive B: pointing to current directory to shorten paths
-          subst B: ${{ github.workspace }}
-          dir B:\
-          echo "Virtual drive B: created pointing to workspace"
-        shell: cmd
+          # Create short path directory
+          mkdir D:\t
+          echo "Created D:\t directory"
+
+          # Move entire workspace to short path
+          echo "Moving workspace from ${{ github.workspace }} to D:\t..."
+          robocopy "${{ github.workspace }}" "D:\t" /E /MOVE /NFL /NDL /NJH /NJS /NC /NS
+
+          # Verify the move
+          if [ -d "D:\t\build-assets" ]; then
+            echo "✓ Workspace successfully moved to D:\t"
+            ls -la D:\t
+          else
+            echo "✗ Failed to move workspace"
+            exit 1
+          fi
+        shell: bash
 
       - name: 'Run ${{github.event.inputs.version}} native test'
-        working-directory: B:\
-        run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}} --develop
+        working-directory: D:\t
+        env:
+          # Use short temp paths
+          TMP: D:/tmp
+          TEMP: D:/tmp
+          TMPDIR: D:/tmp
+        run: |
+          # Create temp directory
+          mkdir -p D:/tmp
+          # Run the test from the short path
+          bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}} --develop
 
 
