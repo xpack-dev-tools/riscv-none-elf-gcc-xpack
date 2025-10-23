@@ -5,6 +5,21 @@ Entries in this file are in reverse chronological order.
 
 ## 2025-10-23
 
+* v15.2.0-1 released
+* b867264 website: update actions durations
+* b99ba98 re-generate workflows
+* 6b03f63 re-generate workflows
+* 6879827 fix robocopy
+* 6736cf9 try robocopy
+* 6f59dc1 try subst B:
+* 0f7ffd6 try short path D:\t
+* 0397cb4 try short path D:\t
+* 2716167 try short path
+* 8c84ffc try another LongPathsEnabled
+* 24d3401 try with LongPathsEnabled
+* b22cd34 try --develop
+* 9cc4338 try windows-2022
+* 5ffdf4d prepare v15.2.0-1
 * v15.2.0-1 prepared
 * 0192fe7 14.3.0-1.1
 * 2de3e5e CHANGELOG: publish npm v14.3.0-1.1
