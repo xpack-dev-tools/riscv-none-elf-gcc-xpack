@@ -62,10 +62,8 @@ jobs:
     steps:
       - name: Enable Long Path Support
         run: |
-          # Enable long path support via registry
           New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
-          # Also enable for current process
-          Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1
+          Write-Host "Long Path Support enabled"
         shell: powershell
 
       - name: 'Show environment'
