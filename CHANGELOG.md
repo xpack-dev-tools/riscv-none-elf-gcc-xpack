@@ -5,6 +5,9 @@ Entries in this file are in reverse chronological order.
 
 ## 2025-10-23
 
+* v15.2.0-1 prepared
+* 0192fe7 14.3.0-1.1
+* 2de3e5e CHANGELOG: publish npm v14.3.0-1.1
 * v14.3.0-1.1 published on npmjs.com
 * 77cddcc package.json: update URLs for 14.3.0-1.1 release
 * e126748 website: blog post release 14.3.0-1.1 published
