@@ -5,6 +5,10 @@ Entries in this file are in reverse chronological order.
 
 ## 2025-10-23
 
+* v14.3.0-1.1 published on npmjs.com
+* 77cddcc package.json: update URLs for 14.3.0-1.1 release
+* e126748 website: blog post release 14.3.0-1.1 published
+* 13cc4b6 CHANGELOG update
 * v14.3.0-1 released
 * 723aed4 website: update actions durations
 * 1d41413 website: update folder hierarchies
