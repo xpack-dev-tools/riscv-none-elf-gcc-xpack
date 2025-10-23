@@ -91,23 +91,23 @@ jobs:
 
       - name: 'Move workspace to short path for MinGW compatibility'
         run: |
-          # Create short path directory
+          REM Create short path directory
           mkdir D:\t
-          echo "Created D:\t directory"
+          echo Created D:\t directory
 
-          # Move entire workspace to short path
-          echo "Moving workspace from ${{ github.workspace }} to D:\t..."
-          robocopy "${{ github.workspace }}" "D:\t" /E /MOVE /NFL /NDL /NJH /NJS /NC /NS
+          REM Move entire workspace to short path
+          echo Moving workspace to D:\t...
+          robocopy "%GITHUB_WORKSPACE%" "D:\t" /E /MOVE /NFL /NDL /NJH /NJS /NC /NS
 
-          # Verify the move
-          if [ -d "D:\t\build-assets" ]; then
-            echo "✓ Workspace successfully moved to D:\t"
-            ls -la D:\t
-          else
-            echo "✗ Failed to move workspace"
-            exit 1
-          fi
-        shell: bash
+          REM Check if robocopy succeeded (exit codes 0-3 are success for robocopy)
+          if %ERRORLEVEL% LEQ 3 (
+            echo ✓ Workspace successfully moved to D:\t
+            dir D:\t
+          ) else (
+            echo ✗ Failed to move workspace, robocopy exit code: %ERRORLEVEL%
+            exit /b 1
+          )
+        shell: cmd
 
       - name: 'Run ${{github.event.inputs.version}} native test'
         working-directory: D:\t
