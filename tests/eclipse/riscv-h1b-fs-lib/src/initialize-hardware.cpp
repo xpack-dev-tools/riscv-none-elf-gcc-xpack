@@ -1,7 +1,7 @@
 /*
  * This file is part of the µOS++ distribution.
  *   (https://github.com/micro-os-plus)
- * Copyright (c) 2017 Liviu Ionescu.
+ * Copyright (c) 2017-2025 Liviu Ionescu.
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -50,7 +50,7 @@ os_startup_initialize_hardware_early (void)
   PRCI->hfrosccfg |= SIFIVE_FE310_PRCI_HFROSCCFG_EN;
   // Run off 16 MHz Crystal for accuracy.
   PRCI->pllcfg |= (SIFIVE_FE310_PRCI_PLLCFG_REFSEL
-          | SIFIVE_FE310_PRCI_PLLCFG_BYPASS 
+          | SIFIVE_FE310_PRCI_PLLCFG_BYPASS
           | SIFIVE_FE310_PRCI_PLLCFG_SEL);
   // Turn off HFROSC to save power
   PRCI->hfrosccfg &= ~(SIFIVE_FE310_PRCI_HFROSCCFG_EN);
