@@ -48,7 +48,7 @@ jobs:
           # https://sourceforge.net/projects/riscv-none-elf-gcc-xpack/files/
           name="riscv-none-elf-gcc"
           # threshold=13107 # (60%, i.e. 32767 * (100-60)/100)
-          threshold=0 (100%)
+          threshold=0 # (100%)
 
           # 2025
           platforms="win32-x64,linux-x64,linux-arm64,darwin-x64,darwin-arm64"
