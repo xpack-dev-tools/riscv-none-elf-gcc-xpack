@@ -62,5 +62,5 @@ Eclipse menu -> Preferences... -> C/C++ -> Appearance and disable
 
 Unless otherwise mentioned, all **µOS++** components are provided
 **free of charge** under the terms of the
-[MIT License](https://opensource.org/licenses/MIT)
+[MIT License](https://opensource.org/licenses/mit)
 with all rights reserved to Liviu Ionescu.

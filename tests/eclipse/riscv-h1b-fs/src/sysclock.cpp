@@ -1,7 +1,7 @@
 /*
  * This file is part of the µOS++ distribution.
  *   (https://github.com/micro-os-plus)
- * Copyright (c) 2017 Liviu Ionescu.
+ * Copyright (c) 2017-2025 Liviu Ionescu.
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -51,7 +51,7 @@ os::sysclock::sleep_for (duration_t duration)
 
 // ----------------------------------------------------------------------------
 
-namespace os 
+namespace os
 {
   // Instantiate a static system clock object.
   class os::sysclock sysclock;

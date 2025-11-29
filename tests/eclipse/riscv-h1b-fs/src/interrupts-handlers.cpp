@@ -1,7 +1,7 @@
 /*
  * This file is part of the µOS++ distribution.
  *   (https://github.com/micro-os-plus)
- * Copyright (c) 2017 Liviu Ionescu.
+ * Copyright (c) 2017-2025 Liviu Ionescu.
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -44,7 +44,7 @@ using namespace os;
  * - `riscv_interrupt_handle_local_*`
  * - `riscv_interrupt_handle_global_*`
  *
- * Some definitions are part of the architecture package, some are part 
+ * Some definitions are part of the architecture package, some are part
  * of the device package.
  *
  * The system provides weak defaults for all handlers; to help debugging,
