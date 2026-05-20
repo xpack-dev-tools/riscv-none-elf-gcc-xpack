@@ -1,0 +1,13 @@
+{
+  "binutilsVersionMajor": "2",
+  "binutilsVersionMinor": "45",
+  "branding": "riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) ",
+  "gdbVersionMajor": "16",
+  "gdbVersionMinor": "3",
+  "newlibVersion": "4.5.0",
+  "programName": "riscv-none-elf-gcc",
+  "pythonVersion": "3.13.7",
+  "isGccToolchain": true,
+  "shareOnTwitter": true,
+  "showDeprecatedRiscvGccAnalytics": true
+}
