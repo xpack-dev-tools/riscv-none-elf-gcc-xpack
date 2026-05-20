@@ -1,0 +1,8 @@
+{
+  "descriptiveName": "xPack GNU RISC-V Embedded GCC",
+  "permalinkName": "riscv-none-elf-gcc",
+  "preferredName": "xPack GNU RISC-V Embedded GCC",
+  "upstreamDescriptiveName": "GNU RISC-V Embedded GCC",
+  "skipCiTests": true,
+  "useSelfHostedRunners": true
+}

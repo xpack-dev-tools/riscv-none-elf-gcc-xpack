@@ -2,7 +2,6 @@
   "name": "h1b-fs",
   "version": "1.0.0",
   "description": "An xPack with a blinky application running on HiFive1",
-  "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "xmake build -- all",
