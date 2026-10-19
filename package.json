@@ -92,7 +92,8 @@
   "$dependenciesUrls": {
     "del-cli": "https://www.npmjs.com/package/del-cli",
     "json": "https://www.npmjs.com/package/json",
-    "liquidjs": "https://www.npmjs.com/package/liquidjs"
+    "liquidjs": "https://www.npmjs.com/package/liquidjs",
+    "glob": "https://www.npmjs.com/package/glob"
   },
   "devDependencies": {
     "del-cli": "^7.0.0",
