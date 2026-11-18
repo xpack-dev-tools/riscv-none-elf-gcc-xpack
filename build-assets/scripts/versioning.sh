@@ -795,6 +795,7 @@ function application_build_versioned_components()
           rv64imaf-lp64f--zicsr*zifencei \
           rv64imafc-lp64f--zicsr*zifencei \
           rv64imafd-lp64d--zicsr*zifencei \
+          rv64imafdc-lp64--zicsr*zifencei \
           rv64imafdc-lp64d--zicsr*zifencei \
           rv64imc-lp64--zicsr*zifencei \
           rv64imf-lp64f--zicsr*zifencei \
