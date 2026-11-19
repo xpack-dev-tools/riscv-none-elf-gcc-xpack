@@ -1,5 +1,5 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/install/_common/_xpack-dev-tools/_content-liquid.mdx */}
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -25,7 +25,7 @@ import ProjectTesting from '../_project/_testing.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-The **xPack GNU RISC-V Embedded GCC** may be installed automatically, utilising the `xpm` command
+The **xPack GNU RISC-V Embedded GCC** may be installed automatically, using the `xpm` command
 (the recommended method), or manually, by downloading and unpacking one of the
 platform-specific archives.
 
@@ -42,16 +42,16 @@ the [`npmjs.com`](https://www.npmjs.com) registry.
 
 The only requirement for an automated installation is a recent
 [xpm](https://xpack.github.io/xpm/), which is a portable
-[Node.js](https://nodejs.org) command line application
+[Node.js](https://nodejs.org) command-line application
 that complements [npm](https://docs.npmjs.com)
 with several additional features specific to
 **C/C++ projects**.
 
 To install **xpm**,
 follow the instructions on the
-[xpm install](https://xpack.github.io/xpm/install/) page.
+**[xpm install](https://xpack.github.io/xpm/install/)** page.
 
-If already installed, it is always advisable to update it to the
+If already installed, it is recommended to update it to the
 latest version with:
 
 ```sh
@@ -60,10 +60,10 @@ npm install --location=global xpm@latest
 
 :::tip
 
-Although not mandated by **xpm**, it is also advisable to upgrade
+Although not mandated by **xpm**, it is also recommended to upgrade
 **npm** to the latest version, and
 **node** to a reasonably recent version (currently **npm** requires
-a **node** >=20.0).
+a **node** >=22.12).
 
 :::
 
@@ -129,7 +129,7 @@ copies of these tools, one for each project.
 Instead, **xpm** installs the binary packages only once
 into a user global store (a platform-dependent folder
 within the home folder), thereby conserving disk space when the same
-tools are utilised across multiple projects.
+tools are used across multiple projects.
 
 In order to allow the projects to access the binary tools installed within the
 user global store, instead of unpacking the archives in `xpacks`,
@@ -370,7 +370,7 @@ archives that may be installed in any location.
 The archives may be downloaded from
 the <a href={`https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases`}>GitHub Releases</a> pages.
 
-### Download & unpack {#manual-install-download-and-unpack}
+### Download and unpack {#manual-install-download-and-unpack}
 
 <Tabs groupId="operating-systems">
 
@@ -484,7 +484,7 @@ chmod -R -w xpack-riscv-none-elf-gcc-15.2.0-1
 
 For manual installations, the recommended
 installation location is slightly different from the folders created by `xpm install`,
-which utilise the `@xpack-dev-tools` scope to group different tools,
+which use the `@xpack-dev-tools` scope to group different tools,
 and `.content` to store the unpacked archive.
 
 :::

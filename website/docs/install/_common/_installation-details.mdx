@@ -1,5 +1,5 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/install/_common/_installation-details-liquid.mdx */}
 
 {/* ------------------------------------------------------------------------ */}
 
@@ -8,20 +8,20 @@
 
 The above `xpm install` command will perform the following:
 
-* identify the platform-specific archive for the desired version
+- identify the platform-specific archive for the desired version
   of @xpack-dev-tools/riscv-none-elf-gcc, download it into a cache and unpack
   it into a versioned folder
   within the **user's global xPacks store** (if not already present);
   check the output of the `xpm install` command for the actual
   folder used on your platform;
-* create a local symbolic link
+- create a local symbolic link
   such as <code>xpacks/@xpack-dev-tools/riscv-none-elf-gcc</code> pointing to the
-  versioned folder in the user's global xPacks store
-* add links/forwarders into
+  versioned folder in the user's global xPacks store;
+- add links/forwarders into
   the local `xpacks/.bin` folder, referring to the binaries in
   <code>xpacks/@xpack-dev-tools/riscv-none-elf-gcc/.content/bin</code>;
 
-* add <code>@xpack-dev-tools/riscv-none-elf-gcc</code> to
+- add <code>@xpack-dev-tools/riscv-none-elf-gcc</code> to
   `package.json` as a
   development dependency; this associates a specific version of xPack GNU RISC-V Embedded GCC with
   the current project (details below).
@@ -29,7 +29,7 @@ The above `xpm install` command will perform the following:
 :::tip
 
 The installation location may be configured using the
-`XPACKS_STORE_FOLDER` environment variable; for more details please refer to the
+`XPACKS_STORE_FOLDER` environment variable; for more details, see the
 [xpm folders](https://xpack.github.io/xpm/folders/) page.
 
 :::

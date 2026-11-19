@@ -1,20 +1,73 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/_common/_get-project-sources-liquid.mdx */}
 
 import BranchesDetails from './_branches-details.mdx'
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+export const OnlyForKind = (props) =>
+  props.kind === props.show ? <>{props.children}</> : null;
 
 {/* ------------------------------------------------------------------------ */}
 
 ## Obtain project sources
 
-The project is hosted on GitHub:
+The **@xpack-dev-tools/riscv-none-elf-gcc** project is hosted on GitHub:
 
 - https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 
 <BranchesDetails />
 
-To clone the stable branch (`xpack`), execute the following commands in a
-terminal (on Windows use the _Git Bash_ console):
+<OnlyForKind kind={props.kind} show="developer">
+
+<Tabs groupId="clone">
+
+<TabItem value="fork" label="Use Fork" default>
+
+To contribute **Pull Requests**, fork the project. For this, go to the
+GitHub project page and click on the
+**[Fork](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/fork)**
+button.
+
+:::tip
+
+To get all the branches of the repository, be sure to **disable** the
+**Copy the xpack branch only** option in the fork dialog.
+
+:::
+
+After creating the fork, the next step is to **clone the forked repository**.
+First set your GitHub account name:
+
+```sh
+USER_ACCOUNT_ID=<your-account>
+```
+
+Then clone the `xpack-development` branch:
+
+```sh
+rm -rf ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
+mkdir -p ~/Work/xpack-dev-tools && \
+git clone \
+  --branch xpack-development \
+  https://github.com/${USER_ACCOUNT_ID}/riscv-none-elf-gcc-xpack.git \
+  ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+```
+
+:::tip
+
+After making changes, be sure to direct the Pull Requests to the
+`xpack-development` branch, otherwise they may be rejected.
+
+:::
+
+</TabItem>
+
+<TabItem value="original" label="Use Original">
+
+If Pull Requests are not intended, you can directly clone the
+`xpack` branch of the original repository:
 
 ```sh
 rm -rf ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
@@ -25,8 +78,19 @@ git clone \
   ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-<details>
-<summary>For development purposes, clone the `xpack-development` branch.</summary>
+To work from the development branch instead, clone `xpack-development`
+from the original repository.
+
+</TabItem>
+
+</Tabs>
+
+</OnlyForKind>
+
+<OnlyForKind kind={props.kind} show="maintainer">
+
+Clone the
+`xpack-development` branch of the original repository:
 
 ```sh
 rm -rf ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git && \
@@ -37,39 +101,73 @@ git clone \
   ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-</details>
+</OnlyForKind>
 
-Alternatively, if the repository has already been cloned:
+If the repository has already been cloned, update it with:
 
 ```sh
 git -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git pull
 ```
 
-:::tip
+<details>
+<summary>What are npm/xpm links?</summary>
 
-To contribute Pull Requests, fork the project and ensure the **Copy the master branch only** is **disabled**.
+By default, to prevent inadvertent changes, xpm dependencies are
+installed in read-only folders with filtered content; developer-related
+files are not installed.
 
-Utilise the `xpack-development` branch and ensure you contribute the
-Pull Requests back to the `xpack-development` branch.
+However, during development, it is convenient to maintain a writable
+instance of the code to enable changes in parallel with the parent
+project.
 
-:::
+Therefore, during development, if this project is used as a dependency
+of another project, it is convenient to use the full version of the
+project and make changes directly in the local development folder.
 
-## Add links for development
+The mechanism xpm uses for this is called _linking_, and is similar
+to the npm link mechanism.
 
-During development, it is convenient to maintain a writable instance of the
-library to enable changes in parallel with the parent project.
+The process has two steps:
 
-To facilitate the use of a writable instance of this library in other
-projects, add a link from the user's global xPacks store to this local
-development folder:
+1. Tell the global xpm configuration where the local development
+   folder is located.
+2. Tell the top project to use the linked development folder
+   instead of the installed read-only dependency.
+
+The first step requires executing the `xpm link` command in the
+local development folder, as shown below:
 
 ```sh
 xpm link -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
 ```
 
-And in the projects referring it:
+The result is the creation of a symbolic link in the global xPacks
+store pointing to the local development folder.
+
+For example:
+
+```console
+% ls -l xPacks/xpack-dev-tools/riscv-none-elf-gcc-xpack/.link
+lrwxr-xr-x  1 ilg  staff  75 Oct 26 21:57 xPacks/xpack-dev-tools/riscv-none-elf-gcc-xpack/.link -> /Users/ilg/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+```
+
+For the second step, in the top project, instead of adding the
+dependency by installing it, run the command to link it:
 
 ```sh
 xpm link @xpack-dev-tools/riscv-none-elf-gcc
 ```
 
+Similarly, this project, which uses multiple xpm dependencies, can also
+benefit from linking them during development.
+
+For this, clone each xpm dependency in a local folder and run the
+`xpm link` command in each cloned folder, as described above.
+
+Then, in the `tests` folder, run `xpm link <dependency>` for each linked
+dependency.
+
+As a shortcut, the configuration provides `link-dependencies` xpm actions
+that link multiple dependencies at once.
+
+</details>

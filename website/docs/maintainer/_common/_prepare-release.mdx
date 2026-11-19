@@ -1,17 +1,21 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/maintainer/_common/_prepare-release-liquid.mdx */}
 
 {/* ------------------------------------------------------------------------ */}
 
 ### Prepare the release
 
-- Switch to the `xpack-development` branch
-- If there are changes, **commit** all changes to the `xpack-development` branch
-- Check the latest commits `npm run git-log`
-- Update `CHANGELOG.md`, add a line such as _**\* v15.2.0-1.1 published on npmjs.com**_
+- Switch to the `xpack-development` branch (`git checkout xpack-development`)
+- If there are changes, **commit** them to the `xpack-development` branch
+- Update the latest commits with `npm run update-changelog`
+- Update `CHANGELOG.md`; add a line such as _**\* v15.2.0-1.1 published on npmjs.com**_
 - **Commit** with the message _**CHANGELOG: publish npm v15.2.0-1.1**_
 - Check the list of files included in the npm package:
   ```sh
   npm run npm-pack
   ```
-- Possibly update `.npmignore`
+- If the list is not correct, fix `.npmignore`; since this file is generated,
+  change its template in the helper project and regenerate it with the
+  **generate-top-commons** npm script
+- Redo `npm install` to ensure `package-lock.json` is up-to-date
+- Redo `npm run npm-link-helpers` to update to the linked helpers

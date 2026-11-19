@@ -1,5 +1,5 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/_common/_prerequisites-liquid.mdx */}
 
 import CodeBlock from '@theme/CodeBlock';
 
@@ -10,19 +10,42 @@ import CodeBlock from '@theme/CodeBlock';
 **@xpack-dev-tools/riscv-none-elf-gcc** is
 a portable Node.js module;
 development can be
-conducted on macOS, GNU/Linux and Windows (although some npm scripts
-must be executed within a Git Bash terminal).
+conducted on **macOS**, **GNU/Linux**, and **Windows**.
 
 The prerequisites are:
 
 - git
+- curl
 - node >= {props.nodeVersion || 'N.N.N'}
-- npm
+- npm / xpm
 
 
-To ensure compatibility with older node versions, it is preferable to revert to an older one:
+To check the compatibility with the oldest supported node version, switch to it:
 
 <CodeBlock language="console"> {
 `nvm use --lts ${props.nodeVersionMajor || 'NN'}
 code
 `} </CodeBlock>
+
+## Install xpm
+
+[`xpm`](https://xpack.github.io/xpm/) is also a portable
+[Node.js](https://nodejs.org/) command-line application that can be
+installed with `npm`.
+
+On macOS and GNU/Linux, if you followed the _Quick instructions_ in the
+Prerequisites page,
+it is already installed. Otherwise, to install it, follow the steps in the
+**[xpm install](https://xpack.github.io/xpm/install/)** page.
+
+As a shortcut, run the following command:
+
+```sh
+npm install --location=global xpm@latest
+```
+
+To check the result of the installation, run:
+
+```sh
+xpm --version
+```

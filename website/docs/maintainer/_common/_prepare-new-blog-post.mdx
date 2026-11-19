@@ -1,5 +1,5 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/maintainer/_common/_prepare-new-blog-post-liquid.mdx */}
 
 {/* ------------------------------------------------------------------------ */}
 
@@ -12,9 +12,15 @@
   ```
 - Fix the TODO in the front matter `description` property (select maintenance vs. new release)
 - Fix the TODO in the summary (select maintenance vs. new release)
-- Add entries in the **Bug fixes**; utilise the following syntax
+- In the relevant sections (**Major changes**, **Bug fixes**, **Enhancements**), replace the `- None.` placeholder with entries; to link to GitHub issues, use:
   ```
-  - [[#N](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/issues/N)]:
+  - [[#N](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/issues/N)]: Title
   ```
+- If compatibility notices were added for the release, move their details
+  from the **Getting Started** category to a **Detailed changes** section at
+  the end of the blog post, with the `{#details}` anchor
+  (`## Detailed changes {#details}`), and replace the notice with a summary
+  of no more than three sentences, which links to that section
+  (`/blog/YYYY/MM/DD/<post>/#details`)
 - Copy/paste the **folder hierarchies** from the `website/docs/_project/_folders-hierarchies-*.mdx` files
 - **Commit** with the message _**website: blog post release 15.2.0-1.1 published**_

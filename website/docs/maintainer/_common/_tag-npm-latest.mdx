@@ -1,5 +1,5 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/maintainer/_common/_tag-npm-latest-liquid.mdx */}
 
 import CodeBlock from '@theme/CodeBlock';
 
@@ -27,7 +27,15 @@ Check the result:
 `npm dist-tag ls @xpack-dev-tools/riscv-none-elf-gcc
 `} </CodeBlock>
 
-Should the release prove problematic and require unpublishing:
+Should the release prove problematic, deprecate it, so that the users get a
+warning when they install it; the version remains available:
+
+<CodeBlock language="sh"> {
+`npm deprecate @xpack-dev-tools/riscv-none-elf-gcc@15.2.0-1.1 "<reason>"
+`} </CodeBlock>
+
+npm allows unpublishing a version only within 72 hours of its publication, so
+this should be used only for a release published by mistake:
 
 <CodeBlock language="sh"> {
 `npm unpublish @xpack-dev-tools/riscv-none-elf-gcc@15.2.0-1.1

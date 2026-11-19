@@ -1,28 +1,35 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/_common/_code-formatting-liquid.mdx */}
 
 {/* ------------------------------------------------------------------------ */}
 
 ## Code formatting
 
-For formatting style, the library employs a
+For formatting style, the project employs a
 [.clang-format](https://clang.llvm.org/docs/ClangFormat.html)
-configuration file based on the GNU style.
+configuration file based on the GNU style, in the `maintenance/config` folder.
 
-Code formatting is performed using `clang-format --style=file`, either manually
-via a script, or automatically through Visual Studio Code, or the Eclipse
-CppStyle plug-in.
+The source files are formatted with the `clang-format` xpm action,
+which runs `clang-format` with that configuration on the C and C++ files of
+the project:
+
+```sh
+xpm run clang-format -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git
+```
+
+Similarly, the `cmake-format` and `jsonc-format` actions format the CMake and
+the JSONC files.
 
 :::info
 
-Visual Studio Code can directly utilise the `.clang-format` file within the
-**Format Document** command.
+The `clang-format` program is installed by `xpm install`, as a development
+dependency of the project, in the `xpacks/.bin` folder.
 
 :::
 
 :::tip
 
-Always reformat the source files that have been modified before committing
-them to the repository.
+Always **reformat** the modified source files before committing them.
+Enabling format-on-save in your editor makes this automatic.
 
 :::

@@ -1,5 +1,5 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/_common/_manual-tests-liquid.mdx */}
 
 import CommonXpmCleanUps from '@site/docs/_common/_xpm-clean-ups.mdx';
 
@@ -10,12 +10,12 @@ import CommonXpmCleanUps from '@site/docs/_common/_xpm-clean-ups.mdx';
 There are predefined xpm actions available to manually execute various
 tests on the local development machine.
 
-It is recommended to commence by performing some clean-ups (not necessary
-following the initial `git clone`):
+Start with a clean-up (not needed after the initial `git clone`):
 
 ```sh
 npm --prefix ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/tests install
-xpm run deep-clean -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/tests
+npm --prefix ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/tests run deep-clean
+npm --prefix ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/tests install
 ```
 
 :::tip
@@ -26,12 +26,16 @@ can be relatively large, up to several hundred megabytes.
 
 :::
 
+#### Native system compiler tests
+
 To execute the tests with the system compiler (usually not available on Windows):
 
 ```sh
 xpm run install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/tests
 xpm run test -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/tests
 ```
+
+#### More native and QEMU tests
 
 To execute a selection of tests with the latest versions of toolchains:
 
@@ -58,14 +62,15 @@ xpm run test-all -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/tests
 
 Executing all tests may require several gigabytes of space.
 
-To clean up the tests folder, utilise:
+To clean up the tests folder, use:
 
 ```sh
 npm --prefix ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/tests install
-xpm run deep-clean -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/tests
+npm --prefix ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/tests run deep-clean
+npm --prefix ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/tests install
 ```
 
-A considerable amount of space may also be utilised by the toolchains.
+A considerable amount of space may also be used by the toolchains.
 When no longer required, they can be removed with `xpm uninstall`.
 
 <details>

@@ -1,35 +1,10 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/maintainer/_common/_update-changelog-liquid.mdx */}
 
 {/* ------------------------------------------------------------------------ */}
 
 ### Update `CHANGELOG.md`
 
-- Open the `CHANGELOG.md` file
-- Check if all previously fixed issues are included
-- Check the latest commits `npm run git-log`; if necessary, copy/paste lines,
-  group by dates and edit them using the regular expressions below
-- To convert the dates into headings, change from:
-  ```txt
-
-
-  ([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]) [*]
-  ```
-  to:
-  ```txt
-
-
-  ## $1
-
-  *
-  ```
-- To remove the remaining dates, change from:
-  ```txt
-  ^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [*]
-  ```
-  to:
-  ```txt
-  *
-  ```
+- Run `npm run update-changelog`; this should update the `CHANGELOG.md` file with the latest changes
 - Add a new entry such as _**\* v15.2.0-1 prepared**_
-- **Commit** with the message _**prepare v15.2.0-1**_
+- **Commit** with the message _**CHANGELOG: prepare v15.2.0-1**_

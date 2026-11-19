@@ -1,5 +1,5 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/developer/_common/_xpack-dev-tools/_platform-docker-section-liquid.mdx */}
 
 import CodeBlock from '@theme/CodeBlock';
 
@@ -9,7 +9,7 @@ import {developmentDurations} from '@site/docs/_project/_development-durations.m
 
 {/* Arguments: props.platform */}
 
-{props.platform === "win32-x64" ? ( <p>The Windows builds execute on GNU/Linux, utilising <a href="https://mingw-w64.org">mingw-w64</a>.</p> ) : ''}
+{props.platform === "win32-x64" ? ( <p>The Windows builds execute on GNU/Linux, using <a href="https://mingw-w64.org">mingw-w64</a>.</p> ) : ''}
 
 To prepare the docker build:
 
@@ -25,9 +25,9 @@ xpm run docker-prepare --config ${props.platform} -C ~/Work/xpack-dev-tools/risc
 <CodeBlock language="sh"> {
 `npm --prefix ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets  install && \\
 xpm install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \\
-xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \\
+xpm run link-helper -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \\
 xpm run docker-prepare --config ${props.platform} -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \\
-xpm run docker-link-deps --config ${props.platform} -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
+xpm run docker-link-helper --config ${props.platform} -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
 `} </CodeBlock>
 
 </details>

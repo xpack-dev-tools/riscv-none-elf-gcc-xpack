@@ -1,33 +1,31 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/_common/_publish-website-liquid.mdx */}
 
 {/* ------------------------------------------------------------------------ */}
 
 ### Publish the website
 
 The website deployment is performed automatically when pushing to the
-`website` branch, utilising a dedicated workflow in
+`website` branch, using a dedicated workflow in
 [GitHub Actions](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/workflows/publish-github-pages.yml).
 
 - Open https://xpack-dev-tools.github.io/riscv-none-elf-gcc-xpack/docs/maintainer/#publish-the-website in a separate window
 - **Stop** the local web server
 - Switch to the `website` branch
-- run the `npm install` command, to ensure `package-lock.json` is up to date
-- **Rebase** the `xpack-development` branch onto the `website` branch
+- **Run** the `npm install` command, to ensure `package-lock.json` is up to date
+- **Rebase** the `website` branch onto the `xpack-development` branch (`git rebase xpack-development`)
 - **Push** the `website` branch to GitHub
   :::info
-  At this point, an automated forwarding GitHub Action will trigger 
-  a GitHub Action in the separate project to generate and publish 
+  At this point, an automated forwarding GitHub Action will trigger
+  a GitHub Action in the separate project to generate and publish
   the [website](https://xpack-dev-tools.github.io/riscv-none-elf-gcc-xpack/).
   :::
 - Check out the `xpack-development` branch
-- **Wait** for the publication to complete 
-- check [GitHub Pages](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/workflows/publish-github-pages.yml) workflow
+- **Wait** for the publication to complete
+- **Check** the [GitHub Pages](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/actions/workflows/publish-github-pages.yml) workflow
 - **Refresh** the web page
-- The new release blog post is available
-at https://xpack-dev-tools.github.io/riscv-none-elf-gcc-xpack/blog/
-- Record the post URL, as it must be used to update the release page
-and the X/Twitter announcement
+- **Open** the new release blog post, available at https://xpack-dev-tools.github.io/riscv-none-elf-gcc-xpack/blog/
+- **Record** the post URL, as it must be used to update the release page and the X/Twitter announcement
 
 The `website` branch may be subsequently updated, provided the
 version in `package.json` remains unchanged.

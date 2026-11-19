@@ -1,5 +1,5 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/developer/_common/_xpack-dev-tools/_content-liquid.mdx */}
 
 {/* ------------------------------------------------------------------------ */}
 
@@ -19,7 +19,7 @@ import ProjectMore from '../_project/_more.mdx';
 <details>
 <summary>The xPack Build Box</summary>
 
-The build scripts in this project utilise the **xPack Build Box** (**XBB**)
+The build scripts in this project use the **xPack Build Box** (**XBB**)
 tools, which require the usual native development tools
 (packaged as a Docker image for GNU/Linux builds), complemented with
 several binary packages, installed with `xpm` as development dependencies.
@@ -110,7 +110,7 @@ The build configurations are defined in the `package.json` file, within the
 
 
 To request **xpm** to perform a specific action on a given build configuration,
-utilise the `--config <name>` option.
+use the `--config <name>` option.
 
 For example:
 
@@ -141,7 +141,7 @@ The actions are defined in the `package.json` file, within the
 
 :::tip
 
-For those who, for various reasons, cannot utilise **xpm**, it is
+For those who, for various reasons, cannot use **xpm**, it is
 perfectly possible to manually adjust the PATH and to invoke the
 sequence of commands in order, just that it is more tedious,
 since multiple substitutions must be performed to compose the
@@ -167,13 +167,13 @@ invoked via a single mouse click, for example:
 ## Prerequisites
 
 The build scripts execute on GNU/Linux and macOS. The Windows binaries are
-compiled on GNU/Linux, utilising [mingw-w64](https://mingw-w64.org).
+compiled on GNU/Linux, using [mingw-w64](https://mingw-w64.org).
 
 For details on installing the prerequisites, please read the
-[Build Prerequisites](https://xpack-dev-tools.github.io/docs/developer/install/prerequisites/)
+**[Build Prerequisites](https://xpack-dev-tools.github.io/docs/developer/install/prerequisites/)**
 page.
 
-<CommonGetProjectSources />
+<CommonGetProjectSources kind="developer" />
 
 <details>
 <summary>Get the writable helper sources (optional, for development purposes)</summary>
@@ -194,7 +194,7 @@ git clone \
 xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
 ```
 
-For more details on how a writable helper may be utilised via
+For more details on how a writable helper may be used via
 `xpm link`, please refer to the
 [XBB](https://xpack.github.io/xbb/#writable-helper-scripts) documentation.
 
@@ -255,13 +255,13 @@ In some cases it is necessary to execute a debug session with the binaries.
 
 For these cases, the build script accepts the `--debug` options.
 
-There are also xpm actions that utilise this option (`build-development-debug`
+There are also xpm actions that use this option (`build-development-debug`
 and `docker-build-development-debug`).
 
-### Utilise a local cache
+### Use a local cache
 
-The XBB build scripts utilise a local cache such that files are downloaded only
-during the first execution, later executions being able to utilise the cached files.
+The XBB build scripts use a local cache such that files are downloaded only
+during the first execution, later executions being able to use the cached files.
 
 However, occasionally some servers may not be available, and the builds
 may fail.

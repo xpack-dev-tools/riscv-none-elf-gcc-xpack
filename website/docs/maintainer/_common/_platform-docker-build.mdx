@@ -1,5 +1,5 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/maintainer/_common/_xpack-dev-tools/_platform-docker-build-liquid.mdx */}
 
 import CodeBlock from '@theme/CodeBlock';
 
@@ -13,7 +13,7 @@ To check the available space:
 xpm run check-space -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
 ```
 
-To free the space utilised by all previous builds of all `xpack-dev-tools` packages:
+To free the space used by all previous builds of all `xpack-dev-tools` packages:
 
 ```sh
 xpm run clear-all-projects-builds -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
@@ -29,11 +29,11 @@ npm --prefix ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets  i
 xpm install -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \\
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \\
 xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \\
-xpm run link-deps -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \\
+xpm run link-helper -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \\
 \\
 xpm run deep-clean --config ${props.platform}  -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \\
 xpm run docker-prepare --config ${props.platform} -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \\
-xpm run docker-link-deps --config ${props.platform} -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \\
+xpm run docker-link-helper --config ${props.platform} -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets && \\
 xpm run docker-build-development --config ${props.platform} -C ~/Work/xpack-dev-tools/riscv-none-elf-gcc-xpack.git/build-assets
 `} </CodeBlock>
 

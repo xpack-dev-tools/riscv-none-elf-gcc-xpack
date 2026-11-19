@@ -1,5 +1,5 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/user/_common/_xpack-dev-tools/_libraries-and-rpath-liquid.mdx */}
 
 {/* ------------------------------------------------------------------------ */}
 
@@ -13,7 +13,7 @@ to the `libexec` folder (or to the same folder as the executable for Windows).
 
 ### `DT_RPATH` and `LD_LIBRARY_PATH`
 
-On GNU/Linux the binaries are adjusted to utilise a relative path:
+On GNU/Linux the binaries are adjusted to use a relative path:
 
 ```console
 $ readelf -d library.so | grep rpath
@@ -24,7 +24,7 @@ In the GNU `ld.so` search strategy, the `DT_RPATH` has
 the highest priority, higher than `LD_LIBRARY_PATH`, so if the latter
 is set in the environment, it should not interfere with the xPack binaries.
 
-Please note that previous versions, up to mid-2020, utilised `DT_RUNPATH`, which
+Please note that previous versions, up to mid-2020, used `DT_RUNPATH`, which
 has a priority lower than `LD_LIBRARY_PATH`; setting `LD_LIBRARY_PATH`
 in the environment overrode `DT_RUNPATH`, resulting in failures to load
 the libraries.
@@ -32,4 +32,4 @@ the libraries.
 ### `@rpath` and `@loader_path`
 
 Similarly, on macOS, the binaries are adjusted with `install_name_tool`
-(part of CLT) to utilise a relative path.
+(part of CLT) to use a relative path.

@@ -1,18 +1,9 @@
-{/* DO NOT EDIT! */}
-{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+{/* DO NOT EDIT! Automatically generated from template file: */}
+{/* docusaurus-template-liquid/templates/common/docs/_common/_get-helper-sources-details-liquid.mdx */}
 
 import CodeBlock from '@theme/CodeBlock';
 
 {/* ------------------------------------------------------------------------ */}
-
-<details>
-<summary>Obtain the writable helper sources (optional, for development purposes)</summary>
-
-The project has a dependency on a common helper, which is normally installed
-as a read-only dependency; for development purposes, to enable modifications
-to the scripts located within the helper, clone the
-<code>{props.helperBranchName}</code> branch and link it to the
-user's global xPacks store:
 
 <CodeBlock language="sh"> {
 `rm -rf ~/Work/${props.helperOrganizationName}/${props.helperProjectName}.git && \\
@@ -29,11 +20,9 @@ Alternatively, if the repository has already been cloned:
 `git -C ~/Work/${props.helperOrganizationName}/${props.helperProjectName}.git pull
 `} </CodeBlock>
 
-If a writable instance of this library is required in another project,
-add a link from the user's global xPacks store to it:
+Tell the global npm configuration where the local development
+folder is located (_link_ the project):
 
 <CodeBlock language="sh"> {
-`xpm link -C ~/Work/${props.helperOrganizationName}/${props.helperProjectName}.git
+`npm --prefix ~/Work/${props.helperOrganizationName}/${props.helperProjectName}.git link
 `} </CodeBlock>
-
-</details>
