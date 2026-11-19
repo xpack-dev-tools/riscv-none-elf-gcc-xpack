@@ -83,7 +83,7 @@ jobs:
   # The ubuntu:12.04 image fails to update.
   ubuntu-x64:
     name: 'x64 riscv-none-elf-gcc ${{github.event.inputs.version}} test on Ubuntu stable'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: 'Show environment'
@@ -131,7 +131,7 @@ jobs:
   # https://hub.docker.com/_/debian
   debian-x64:
     name: 'x64 riscv-none-elf-gcc ${{github.event.inputs.version}} test on Debian stable'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: 'Show environment'
@@ -180,7 +180,7 @@ jobs:
   # For `-static` to work, explicit static packages must be present.
   redhat-x64:
     name: 'x64 riscv-none-elf-gcc ${{github.event.inputs.version}} test on RedHat stable'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: 'Show environment'
@@ -217,7 +217,7 @@ jobs:
   # `-static` disabled, there is no static libc.a.
   fedora-x64:
     name: 'x64 riscv-none-elf-gcc ${{github.event.inputs.version}} test on Fedora stable'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: 'Show environment'
@@ -267,7 +267,7 @@ jobs:
   # `-static` disabled, there is no static libc.a.
   opensuse-x64:
     name: 'x64 riscv-none-elf-gcc ${{github.event.inputs.version}} test on OpenSUSE stable'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: 'Show environment'
@@ -307,7 +307,7 @@ jobs:
 
   ubuntu-x64-latest:
     name: 'x64 riscv-none-elf-gcc ${{github.event.inputs.version}} test on Ubuntu latest'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: 'Show environment'
@@ -342,7 +342,7 @@ jobs:
 
   debian-x64-latest:
     name: 'x64 riscv-none-elf-gcc ${{github.event.inputs.version}} test on Debian latest'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: 'Show environment'
@@ -391,7 +391,7 @@ jobs:
   # `-static` disabled, there is no static libc.a.
   fedora-x64-latest:
     name: 'x64 riscv-none-elf-gcc ${{github.event.inputs.version}} test on Fedora latest'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: 'Show environment'
@@ -426,7 +426,7 @@ jobs:
   # - https://hub.docker.com/r/opensuse/tumbleweed
   opensuse-x64-latest:
     name: 'x64 riscv-none-elf-gcc ${{github.event.inputs.version}} test on OpenSUSE latest'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: 'Show environment'
@@ -466,7 +466,7 @@ jobs:
   # - https://hub.docker.com/_/archlinux
   arch-x64-latest:
     name: 'x64 riscv-none-elf-gcc ${{github.event.inputs.version}} test on Arch latest'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: 'Show environment'

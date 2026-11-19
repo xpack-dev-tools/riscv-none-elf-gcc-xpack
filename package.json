@@ -96,22 +96,25 @@
     "glob": "https://www.npmjs.com/package/glob"
   },
   "devDependencies": {
-    "del-cli": "^7.0.0",
+    "del-cli": "^8.0.1",
     "json": "^11.0.0",
-    "liquidjs": "^10.27.0",
-    "glob": "^13.0.6"
+    "liquidjs": "^10.30.1",
+    "glob": "^14.0.6"
   },
   "scripts": {
     "generate-top-commons": "node node_modules/@xpack/npm-packages-helper/maintenance/scripts/generate-top-commons.mjs --xpack-dev-tools",
     "npm-install": "npm install",
-    "npm-link-helpers": "npm link @xpack/npm-packages-helper @xpack/docusaurus-template-liquid",
+    "npm-link-helper": "npm link @xpack/npm-packages-helper",
     "npm-outdated": "npm outdated",
     "npm-pack": "npm pack",
     "npm-link": "npm link",
     "deep-clean": "del-cli node_modules package-lock.json *.tgz",
-    "postversion": "git push origin --all && git push origin --tags"
+    "postversion": "git push origin --all && git push origin --tags",
+    "git-log": "git log --pretty='%cd * %h %s' --date=short",
+    "update-changelog": "node maintenance/scripts/update-changelog.mjs CHANGELOG.md",
+    "git-pull-helper": "git -C ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git pull"
   },
   "engines": {
-    "node": ">=20.0"
+    "node": ">=22.12"
   }
 }

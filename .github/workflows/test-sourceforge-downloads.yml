@@ -40,7 +40,7 @@ jobs:
           set -e
 
           # The script is in the xbb-helper-xpack repo.
-          source maintenance-scripts/download-sourceforge-source.sh
+          source maintenance/scripts/download-sourceforge-source.sh
 
           date
 
@@ -80,4 +80,3 @@ jobs:
           download_sourceforge "${name}" "13.2.0-2" ${threshold} "${platforms}"
           download_sourceforge "${name}" "12.3.0-2" ${threshold} "${platforms}"
           download_sourceforge "${name}" "11.3.0-1" ${threshold} "${platforms}"
-

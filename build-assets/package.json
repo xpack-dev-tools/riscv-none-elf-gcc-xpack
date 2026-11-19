@@ -5,16 +5,14 @@
   "scripts": {
     "deep-clean": "del-cli node_modules package-lock.json",
     "npm-install": "npm install",
-    "npm-outdated": "npm outdated",
-    "git-log": "git -C .. log --pretty='%cd * %h %s' --date=short",
-    "git-pull-helper": "git -C ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git pull"
+    "npm-outdated": "npm outdated"
   },
   "bundleDependencies": [],
   "$devDependenciesUrls": [
     "https://www.npmjs.com/package/liquidjs"
   ],
   "devDependencies": {
-    "del-cli": "^7.0.0",
+    "del-cli": "^8.0.1",
     "liquidjs": "^10.23.0"
   },
   "xpack": {
@@ -27,7 +25,7 @@
       "buildFolderRelativePath": "{{'build' | path_join: configuration.name | to_filename | downcase}}",
       "buildFolderRelativePathPosix": "{{'build' | path_posix_join: configuration.name | downcase}}",
       "commandBashBuild": "bash {{properties.dbg}} scripts/build.sh --target {{configuration.name}} --build-folder {{properties.buildFolderRelativePathPosix}}",
-      "xpm-version": "0.20.5",
+      "xpm-version": "0.23.3",
       "xpm-install-loglevel": "info",
       "dbg": ""
     },
@@ -40,7 +38,7 @@
         "npm install",
         "xpm install"
       ],
-      "link-deps": [
+      "link-helper": [
         "xpm link @xpack-dev-tools/xbb-helper"
       ],
       "check-space": "{% if os.platform == 'darwin' %}df -gH /{% else %}df -BG -H /{% endif %}",
@@ -122,9 +120,9 @@
             "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} xpm install",
             "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} xpm install --config {{configuration.name}}"
           ],
-          "docker-link-deps": [
+          "docker-link-helper": [
             "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} xpm link -C ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git",
-            "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} xpm run link-deps"
+            "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} xpm run link-helper"
           ],
           "docker-build": [
             "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} xpm run build --config {{configuration.name}}"

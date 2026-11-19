@@ -63,7 +63,7 @@ jobs:
       name: github-pages
       url: ${{steps.deployment.outputs.page_url}}
     # https://github.com/actions/runner-images
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: Checkout

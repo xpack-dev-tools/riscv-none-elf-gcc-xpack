@@ -153,7 +153,7 @@ jobs:
 
   linux-arm64-test:
     name: 'linux-arm64 riscv-none-elf-gcc ${{github.event.inputs.version}} test'
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-26.04-arm
     needs: [linux-arm64-build]
 
     steps:
